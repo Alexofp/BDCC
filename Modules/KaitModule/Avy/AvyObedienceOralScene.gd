@@ -272,8 +272,203 @@ func _run():
 
 		saynn("[say=pc]You're gonna stop whining like a stupid bitch.. and you're gonna do exactly what I tell you to do, like a proper fucking whore. Do you hear me?[/say]")
 
-		saynn("Her breath catches. Her ears flatten. A subtle nod.")
+		saynn("Her breath catches. Her ears flatten as she does a subtle nod.")
 
+		saynn("[say=pc]Good. I'm not gonna make you do something that you can't do.[/say]")
+
+		saynn("You shift the chair closer and put both of your hands on the sides of her head, trapping her in your grip.")
+
+		saynn("[say=pc]Open wide.[/say]")
+
+		saynn("Avy complies, her jaw dropping open, the tongue resting on her teeth.")
+
+		addButton("Continue", "See what happens next", "bj_in")
+	if(state == "bj_in"):
+		playAnimation(StageScene.ChairOral, "suckinside", {pc="pc", npc="avy", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You push her head onto your cock, letting the tip go past her lips.. but not too deep. She makes a small yip.")
+
+		saynn("[say=pc]Now use your tongue. Lick the underside. And suck.[/say]")
+
+		saynn("She obeys, doing it awkwardly.. but at least she is trying. Her tongue begins sliding along your shaft. Her lips close around your member as she does a small bob of her head, her mouth producing a wet, sucking noise.")
+
+		saynn("[say=pc]That's it. Good little whore. More.[/say]")
+
+		saynn("You start to guide her head, pulling her deeper onto your dick each time. Avy suddenly gags as you hit the back of her throat.. but you hold her there for a second before pulling back.")
+
+		saynn("[say=avy]Ghk.. f-fuck..[/say]")
+
+		saynn("[say=pc]Breathe through your nose. But even if you start choking or gagging, just let it happen. It makes your throat clench which feels really fucking good for me.[/say]")
+
+		saynn("[say=avy]..I know..[/say]")
+
+		saynn("You push her again, a little deeper. Her throat opens more.. and lets the tip of your cock down it.. her inner walls hugging you so well. Saliva starts to drip down her chin while she keeps using her tongue, sliding it under your shaft and curling around it a bit.")
+
+		saynn("[say=pc]That's it. Good little slut. Taking it so well.[/say]")
+
+		saynn("You pull her close again, more of your member going down her throat, really testing her. Avy's eyes are getting wet behind the blindfold. After a few seconds, she starts choking again, her nostrils flaring, her throat getting so tight that you groan.")
+
+		saynn("[say=pc]Mhh.. good.. I'm gonna fuck your throat, try to keep up.[/say]")
+
+		saynn("[say=avy]Hh-hh-..? KHgh-h![/say]")
+
+		addButton("Continue", "See what happens next", "bj_fast")
+	if(state == "bj_fast"):
+		addCharacter("kait")
+		playAnimation(StageScene.ChairOral, "suckfast", {pc="pc", npc="avy", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Using that grip on Avy's head, you start sliding it along your length, going back and forth, thrusting shallowly at first but quickly picking up the pace and forcing her to deepthroat you.")
+
+		saynn("She is quick to start gagging with each push, her wet slurps and stifled grunts vibrate against your dick, sending jolts of pleasure through you.")
+
+		saynn("You feel some resistance from her, Avy is trying to pull away. But she can't, not while she is cuffed and blindfolded.")
+
+		saynn("[say=pc]Stop fighting it, just choke, like a dirty whore. You have a mouth full of cock, your drool is everywhere, this is exactly what you needed.[/say]")
+
+		saynn("Surprisingly, her resistance begins to fade. Your little slut just keeps enduring your onslaught, her tongue works clumsily but desperately, trying to please you.")
+
+		saynn("Sometimes, you pull back and slow, letting her gasp for air. But then you always push back in, burying your cock deep inside that tight throat. Looking from the side, her throat bulges on each thrust. She gags hard.. but you hold her there, letting her struggle. Then you give her some rest.")
+
+		saynn("[say=pc]Breathe.[/say]")
+
+		saynn("She inhales sharply through her nose, her chest moving fast. Her body is shaking.. but she is staying still, letting you use her.")
+
+		saynn("You start to fuck her mouth again, pulling her head along her length.")
+
+		saynn("And that's when Kait walks in..")
+
+		saynn("[say=kait]I heard a.. ohh..[/say]")
+
+		saynn("You shake your head softly at her.")
+
+		saynn("[say=pc]Tshh..[/say]")
+
+		saynn("It looks like Avy didn't hear any of that.. she is too busy sucking you off.")
+
+		saynn("Kait approaches you two, slowly and quietly, her smug expression says it all. She bites her lip as she watches Avy choke.")
+
+		saynn("During the next resting period, you actually pull your hands away from Avy's head, letting her do everything by itself. Avy just keeps going, her tongue sliding along your shaft, her lips sucking on the tip.")
+
+		saynn("[say=pc]You're such a good little cockslut, Avy.[/say]")
+
+		saynn("[say=avy]Mrr..[/say]")
+
+		saynn("That's when Kait suddenly starts patting the blindfolded foxy, using her hands to scritch behind her ears.")
+
+		saynn("[say=pc]Very good. I'm pretty close now.[/say]")
+
+		saynn("Kait smiles.. and suddenly starts pushing Avy's head, same way that you did before. The snow leopard is forcing Avy to go deeper and deeper on your {pc.penis}.. until her snout starts hitting your crotch.")
+
+		saynn("The way her throat clenches.. it makes you moan and pant. You're gonna cum any second now.")
+
+		saynn("Avy is whining.. but not fighting it. Her hips are shifting a lot, her own cock twitching and leaking pre onto the concrete.")
+
+		saynn("This is it..")
+
+		addButton("Continue", "See what happens next", "bj_cum")
+	if(state == "bj_cum"):
+		playAnimation(StageScene.ChairOral, "suckinside", {pc="pc", npc="avy", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("[say=pc]Fuck.. I'm gonna..[/say]")
+
+		saynn("Kait is quick to force Avy's head down onto your cock until her nose is pressed flush against your crotch again. You don't even finish the sentence before your member starts throbbing.. And then.. shooting the first hot jet of {pc.cum} down her throat!")
+
+		saynn("Avy gags hard, her whole body convulsing.. but Kait holds her in place.")
+
+		saynn("[say=avy]MMMPH-![/say]")
+
+		saynn("More spurts follow, thick and heavy. Avy's throat works frantically, clenching and trying to swallow. Her nostrils flare, sucking in desperate breaths.. before suddenly snorting, your seed leaking out through her nose as she chokes!")
+
+		saynn("[say=pc]Fuck.. take it all..[/say]")
+
+		saynn("Your hips are jerking with each spasm. Avy's muffled whines vibrate against you.. her tongue is still moving, trying to lap at your shaft even as she struggles to breathe.")
+
+		saynn("Kait's smug smile couldn't be any more wide, her fingers scritching behind Avy's ears.")
+
+		saynn("Avy's body trembles violently, tears streaming from under her blindfold. Drool and your jizz mix together and drip off of her chin, pooling on her chest..")
+
+		saynn("After Kait helps drain your balls, she offers you a cute blep.. before running away fast!")
+
+		addButton("Continue", "See what happens next", "bj_after")
+	if(state == "bj_after"):
+		playAnimation(StageScene.ChairOral, "tease", {pc="pc", npc="avy", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		removeCharacter("kait")
+		saynn("With nobody pushing Avy's head anymore, she escapes your messy cock! She starts gasping and coughing a lot, your seed trickling from her nostrils.")
+
+		saynn("You take off her blindfold, uncovering her dazed eyes. She is a complete mess, panting heavily while unable to focus on anything. Her tongue is out and drooling, her cheeks glowing red.")
+
+		saynn("[say=pc]..good girl.[/say]")
+
+		saynn("All she can do is weakly bump her forehead against your leg.")
+
+		saynn("[say=avy]..gr..[/say]")
+
+		saynn("Her voice is hoarse from the abuse. You see that she has some of that sticky stuff on her tongue still.")
+
+		saynn("[say=pc]Swallow, girl.[/say]")
+
+		saynn("Avy obeys, closing her mouth and swallowing audibly.. before showing you her empty mouth.")
+
+		saynn("[say=pc]Such a good girl.[/say]")
+
+		saynn("[say=avy]..mhh..[/say]")
+
+		saynn("She is swaying left and right, still trying to recover her breath. Looking down, you see a huge puddle of her pre on the concrete. She sure enjoyed it.")
+
+		addButton("Enough", "Time to wrap up now", "bj_wrapup")
+		addButton("Stroke her cock", "Help Avy cum as a reward", "helpAvyCum")
+	if(state == "bj_wrapup"):
+		playAnimation(StageScene.Duo, "stand", {npc="avy"})
+		addCharacter("avy")
+		saynn("A cute moan escapes her as you pull Avy's buttplug out.")
+
+		saynn("[say=avy]Ah..[/say]")
+
+		saynn("Then, you uncuff her and let her dress up. Slowly, she seems to be coming back to her senses. Her eyes don't look so spaced out anymore.")
+
+		saynn("[say=avy]Fuck.. my throat feels so sore now. My ass as well..[/say]")
+
+		saynn("[say=pc]I bet. You did well.[/say]")
+
+		saynn("[say=avy]..thanks. But also, fuck you..[/say]")
+
+		saynn("You chuckle.")
+
+		saynn("[say=pc]Mhm. You may go now.[/say]")
+
+		saynn("Avy squints.")
+
+		saynn("[say=avy]I know.[/say]")
+
+		saynn("She flexes her jaw.. and then steps out of the room.")
+
+		addButton("Continue", "See what happens next", "endscene_back")
+	if(state == "helpAvyCum"):
+		playAnimation(StageScene.BreastGroping, "stroke", {pc="pc", npc="avy", npcBodyState={naked=true, hard=true}, npcCum=true})
+		saynn("You decide that Avy deserves some reward for what she did today.")
+
+		saynn("And so you drop down to the floor and approach her from behind.")
+
+		saynn("[say=avy]Ah..[/say]")
+
+		saynn("Your hand lands on her canine cock and starts stroking it! The foxy is quick to start squirming under your touch, passionate moans suddenly start spilling out of her maw.")
+
+		saynn("[say=avy]Ahhh-.. ahh.. mhh.. hha.. ahh-..[/say]")
+
+		saynn("Her knot inflates. It doesn't take long before she throws her head back and cries out a moan of pleasure. Her cock starts shooting strings of thick seed all over the floor, her balls tensing up hard!")
+
+		saynn("You whisper into her ear.")
+
+		saynn("[say=pc]Good girl.. give it all to me, little slut..[/say]")
+
+		saynn("[say=avy]Ahh-hh.. f-fuck-k..[/say]")
+
+		saynn("You keep stroking her, forcing more and more of her seed out. Poor foxy keeps squirming and panting into the air, her dick still throbbing and shooting white lines.")
+
+		saynn("[say=pc]There we go..[/say]")
+
+		saynn("Only when her cock stops throbbing is when you stop completely.. letting her rest.")
+
+		saynn("Now.. it is enough for sure.")
+
+		addButton("Enough", "Time to wrap up now", "bj_wrapup")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -286,5 +481,26 @@ func _react(_action: String, _args):
 	if(_action == "avy_cuffed"):
 		putOn("avy", "blindfold")
 		putOn("avy", "inmatewristcuffs")
+
+	if(_action == "bj_fast"):
+		processTime(5*60)
+
+	if(_action == "bj_cum"):
+		getCharacter("avy").cummedInMouthBy("pc", FluidSource.Penis)
+		GM.pc.orgasmFrom("avy")
+
+	if(_action == "bj_after"):
+		putOff("avy", "blindfold")
+
+	if(_action == "bj_wrapup"):
+		putOff("avy", "inmatewristcuffs")
+
+	if(_action == "helpAvyCum"):
+		putOff("avy", "inmatewristcuffs")
+
+	if(_action == "endscene_back"):
+		aimCameraAndSetLocName(GM.pc.getLocation())
+		endScene()
+		return
 
 	setState(_action)
