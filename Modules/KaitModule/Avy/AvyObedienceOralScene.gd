@@ -168,7 +168,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "avy_cuffed")
 	if(state == "avy_cuffed"):
-		playAnimation(StageScene.Duo, "stand", {npc="avy", npcAction="kneel"})
+		playAnimation(StageScene.Duo, "stand", {npc="avy", npcAction="kneel", npcBodyState={naked=true, hard=true}})
 		saynn("After plugging Avy's ass, you pull back on her collar, making her kneel. Then you wrench her paws behind her back and cuff them together.")
 
 		saynn("[say=avy]..grr.. Is this really necessary..[/say]")
@@ -200,6 +200,206 @@ func _run():
 		addButton("Enough", "You had enough fun with her", "enough_start")
 		addButtonWithChecks("Blowjob", "Make her suck you off", "bj", [], [[ButtonChecks.HasReachablePenis]])
 		addButtonWithChecks("Pussy licking", "Make her lick you off", "pussylick", [], [[ButtonChecks.HasReachableVagina]])
+	if(state == "enough_start"):
+		playAnimation(StageScene.Duo, "stand", {npc="avy", npcBodyState={naked=true, hard=true}})
+		saynn("You give the foxy a few pats on the head. She doesn't seem to mind.")
+
+		saynn("[say=pc]Good. That should be enough for today.[/say]")
+
+		saynn("You begin to take off her blindfold and uncuff her paws.")
+
+		saynn("[say=avy]..this is it?..[/say]")
+
+		saynn("[say=pc]You want more, huh?[/say]")
+
+		saynn("You get behind her and grab the base of her buttplug, tugging on it.")
+
+		saynn("[say=avy]Eek.. mhh..[/say]")
+
+		saynn("One of your hands gropes her fluffy butt while the other one tugs on the plug more, making it shift inside Avy's ass back and forth, loosening it, making the muscles relax.")
+
+		saynn("[say=pc]Still want more?[/say]")
+
+		saynn("[say=avy]..fuck you.. p-pull it out already.[/say]")
+
+		saynn("And so you do, yanking the buttplug out with a satisfying wet 'plop'. The action makes Avy arch her back.")
+
+		saynn("[say=avy]Ah!..[/say]")
+
+		saynn("You give her ass a smack after that.")
+
+		saynn("[say=pc]Good little slut.[/say]")
+
+		saynn("She growls softly.")
+
+		saynn("[say=avy]Grr.. I dare you to say that again. I will break you in half.[/say]")
+
+		saynn("You move the buttplug to Avy's hard cock and catch some of her precum onto it before moving it close to her face, making sure she sees it.. and the thick bead of pre that's hanging off of it too. Her cheeks blush.")
+
+		saynn("[say=pc]Avy, you are a slut. I can say that as many times as you want.[/say]")
+
+		saynn("[say=avy]Hff.. fuck you.[/say]")
+
+		saynn("You nod.")
+
+		saynn("Avy grabs her clothes and starts putting them on. Her shorts are still bulging.")
+
+		saynn("Looks like the fun is over indeed.")
+
+		addButton("Continue", "See what happens next", "endscene_back")
+	if(state == "pussylick"):
+		playAnimation(StageScene.ChairOral, "tease", {pc="pc", npc="avy", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You get a chair and put it near Avy.. before taking a seat. Then you part your thighs slightly, exposing your wet, needy pussy slit to the dim light.")
+
+		saynn("Avy tilts her head slightly, her ears turning, trying to figure out what is happening. Her nostrils flare, catching your scent. Her jaw tightens.")
+
+		saynn("[say=avy]..that's your cunt, isn't it?[/say]")
+
+		saynn("[say=pc]Smart girl. Now get to work.[/say]")
+
+		saynn("She huffs, turning her face away.")
+
+		saynn("[say=avy]Fuck no.. I'm not gonna lick you out.[/say]")
+
+		saynn("[say=pc]Avy. I didn't ask.[/say]")
+
+		saynn("[say=avy]I don't care, I'm not a whore.[/say]")
+
+		saynn("She shifts uncomfortably on her knees, the plug is still inside her, making her do so.")
+
+		saynn("You catch her chin.")
+
+		saynn("[say=pc]At this very moment, you are a whore. My whore. And you're going to do what I say.[/say]")
+
+		saynn("She escapes your chin grip.. so you grab a fistful of her hairs instead. She helps as you yank her head forward, forcing her face inches from your slit.")
+
+		saynn("[say=pc]If you want this to end, say it now.[/say]")
+
+		saynn("You wait a few seconds, giving her all the time in the world to answer. But there is no reaction, Avy just growls softly.")
+
+		saynn("[say=pc]Open your mouth.[/say]")
+
+		saynn("[say=avy]..You're an asshole.[/say]")
+
+		saynn("[say=pc]I know. Open.[/say]")
+
+		saynn("Slowly, reluctantly, her jaw unclenches. Her lips part just a crack.. but her fangs are already showing.")
+
+		saynn("You guide her face closer, pressing her mouth against your folds. She flinches at the contact.")
+
+		saynn("[say=pc]Lick.[/say]")
+
+		saynn("She hesitates.. so you tighten your grip on her hair.")
+
+		saynn("[say=avy]..fine.[/say]")
+
+		saynn("Her tongue darts, doing a quick, flat lick across your outer lips, barely applying any pressure.")
+
+		saynn("[say=pc]Continue.[/say]")
+
+		saynn("She does it again, dragging her tongue along your slit a few times. She does it quite awkwardly. It's clear that she has no idea what she is doing.")
+
+		saynn("[say=avy]..this is so fucking weird.[/say]")
+
+		saynn("[say=pc]You're doing fine. Keep going.[/say]")
+
+		saynn("She presses her tongue against your clit, giving it a slow, stiff lick. You try to grind against her.. but she pulls back slightly, confused and annoyed.")
+
+		saynn("[say=avy]I can't.. I just can't do this.. I'm not a fucking whore, okay?..[/say]")
+
+		saynn("She shakes her head, turning away again. Her cheeks are burning red.")
+
+		saynn("[say=pc]Avy. Look at me.[/say]")
+
+		saynn("She can't, she is blindfolded. But she does turn her head toward you.")
+
+		saynn("[say=pc]You're gonna stop whining like a stupid bitch.. and you're gonna do exactly what I tell you to do, like a proper fucking whore. Do you hear me?[/say]")
+
+		saynn("Her breath catches. Her ears flatten as she does a subtle nod.")
+
+		saynn("[say=pc]Good. I'm not gonna make you do something that you can't do.[/say]")
+
+		saynn("You shift the chair closer and put both of your hands on the sides of her head, trapping her in your grip.")
+
+		saynn("[say=pc]Stick your tongue out.[/say]")
+
+		saynn("She complies, her tongue revealing itself, resting on her lower lip.")
+
+		addButton("Continue", "See what happens next", "pussylick_do")
+	if(state == "pussylick_do"):
+		playAnimation(StageScene.ChairOral, "lick", {pc="pc", npc="avy", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You pull her forward, pressing her tongue against your slit. The warmth of her mouth begins to spread across your folds.")
+
+		saynn("[say=pc]Now move your tongue. Up and down. All the way from my hole to my clit.[/say]")
+
+		saynn("After a second of delay, she obeys, dragging her tongue upward slowly. The motion is shaky.. but she is trying. Her tongue slides against your slick flesh, catching on your folds. It actually feels somewhat nice.")
+
+		saynn("[say=pc]That's it. Good little whore. Lick deeper.[/say]")
+
+		saynn("You press her face harder against you, making her tongue dip into your pussy entrance. She makes a small, surprised yip but keeps going, lapping awkwardly at your hole.")
+
+		saynn("[say=pc]Now put some focus on my clit. Right here.[/say]")
+
+		saynn("You guide her head until her tongue finds your sensitive bud. You shiver as she gives it a lick and a gentle suck.")
+
+		saynn("[say=pc]Keep doing that.. Fast.[/say]")
+
+		saynn("She obeys, flicking her tongue against your clit. A quiet moan escapes you.. your body squirms slightly under her.")
+
+		saynn("It feels good.. but you want more..")
+
+		saynn("[say=pc]Mmhh.. good.. gonna grind your face, try to keep up.[/say]")
+
+		saynn("[say=avy]Mm-?..[/say]")
+
+		addButton("Continue", "See what happens next", "pussylick_fast")
+	if(state == "pussylick_fast"):
+		playAnimation(StageScene.ChairOral, "lickfast", {pc="pc", npc="avy", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You get a better grip and begin to shove her face into your crotch more, your pussy grinding against her lips and snout.")
+
+		saynn("[say=pc]Mhh.. keep your tongue out, you dirty slut..[/say]")
+
+		saynn("You move your hips, meeting her motions. She still tries to lap away at your folds, her tongue swirling and prodding.. awkwardly but desperately. Her cock is leaking pre, twitching each time you moan.")
+
+		saynn("You feel the orgasm building in you.. your muscles tightening..")
+
+		saynn("[say=pc]I'm close.. ah.. don't stop.. don't you fucking stop.[/say]")
+
+		saynn("She doesn't, her tongue works furiously, her lips sucking on your clit when she can, her nose pressing against your mound, drowning in your juices. Her face is all wet with your scent, her blindfold too..")
+
+		saynn("[say=pc]Fuck.. Avy.. I'm gonna..[/say]")
+
+		saynn("You let out a cry of pleasure as your orgasm crashes through you. Your hips grinding against her mouth as multiple waves of ecstasy roll through your body. Your pussy pulses and squirts, shooting a fountain of juices into Avy's mouth.")
+
+		saynn("The foxy swallows what she can.. and keeps licking, lapping up everything you give her. You throw your head back and moan into the air.")
+
+		saynn("[say=pc]Ah.. f-fuck..[/say]")
+
+		saynn("A few more waves.. leave you shivering.")
+
+		addButton("Continue", "See what happens next", "pussylick_after")
+	if(state == "pussylick_after"):
+		playAnimation(StageScene.ChairOral, "tease", {pc="pc", npc="avy", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("When you finally relax, your grip on Avy's head loosens. She pulls back when that happens, gasping for air. Her face is covered in your juices.")
+
+		saynn("You take off her blindfold, uncovering her dazed eyes. She is a complete mess, panting heavily while unable to focus on anything. Her tongue is out and drooling, her cheeks glowing red.")
+
+		saynn("[say=pc]..good girl.[/say]")
+
+		saynn("All she can do is weakly bump her forehead against your leg.")
+
+		saynn("[say=avy]..gr..[/say]")
+
+		saynn("Despite her attempts at growling, she lets you pat her and scritch behind the ears.")
+
+		saynn("[say=pc]Such a good girl.[/say]")
+
+		saynn("[say=avy]..mhh..[/say]")
+
+		saynn("She is swaying left and right, still trying to recover her breath. Looking down, you see a huge puddle of her pre on the concrete. She sure enjoyed it too.")
+
+		addButton("Enough", "Time to wrap up now", "bj_wrapup")
+		addButton("Stroke her cock", "Help Avy cum as a reward", "helpAvyCum")
 	if(state == "bj"):
 		playAnimation(StageScene.ChairOral, "tease", {pc="pc", npc="avy", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("You get a chair and put it near Avy.. before taking a seat. Your {pc.penis} is exposed.. and quite hard from witnessing all the teasing that you did.")
@@ -481,6 +681,21 @@ func _react(_action: String, _args):
 	if(_action == "avy_cuffed"):
 		putOn("avy", "blindfold")
 		putOn("avy", "inmatewristcuffs")
+
+	if(_action == "enough_start"):
+		putOff("avy", "blindfold")
+		putOff("avy", "inmatewristcuffs")
+
+	if(_action == "pussylick_do"):
+		processTime(3*60)
+
+	if(_action == "pussylick_fast"):
+		processTime(3*60)
+		getCharacter("avy").cummedInMouthBy("pc", FluidSource.Vagina)
+		GM.pc.orgasmFrom("avy")
+
+	if(_action == "pussylick_after"):
+		putOff("avy", "blindfold")
 
 	if(_action == "bj_fast"):
 		processTime(5*60)
