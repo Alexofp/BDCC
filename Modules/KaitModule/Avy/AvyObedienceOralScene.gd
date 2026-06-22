@@ -378,6 +378,46 @@ func _run():
 		saynn("A few more waves.. leave you shivering.")
 
 		addButton("Continue", "See what happens next", "pussylick_after")
+		addButtonWithChecks("Mark her..", "Might as well try to mark her with your different scent too..", "pussylick_watersports", [], [[ButtonChecks.ContentEnabled, ContentType.Watersports]])
+	if(state == "pussylick_watersports"):
+		playAnimation(StageScene.ChairOral, "tease", {pc="pc", npc="avy", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You decide to be a bit.. mischievous. You got Avy right there, between your legs, pressed against your slit.. Why not take advantage of that.")
+
+		saynn("And so when you begin coming down from your orgasm, your grip on Avy's head doesn't loosen. Instead, you keep her in that position for a while longer.")
+
+		saynn("[say=avy]Mmhhh-?[/say]")
+
+		saynn("You wait for the urge to come.. and then just let go..")
+
+		saynn("[say=avy]MHH-H!![/say]")
+
+		saynn("A stream of your golden piss hits Avy's tongue. You moan as Avy is thrashing beneath you, doing her best to pull away.")
+
+		saynn("You empty some of your bladder into her mouth and onto her face.. but she manages to break free and pull away. You cut the stream short..")
+
+		saynn("She coughs and makes noises like she is about to puke.")
+
+		saynn("[say=avy]KGhh! B-BITCH!.. Kgh.. what the fuck are you doing.. you're stupid.. fucking.. blergh..[/say]")
+
+		saynn("[say=pc]My bad. I just thought that you'd make the perfect urinal.[/say]")
+
+		saynn("She growls and thrashes against her cuffs, trying to shake off her blindfold too.")
+
+		saynn("[say=avy]Fuck you.. f-fuck you..[/say]")
+
+		saynn("[say=pc]Chill. I see that you don't like it.[/say]")
+
+		saynn("[say=avy]Don't like it?! I fucking hated it! Take this shit off me![/say]")
+
+		saynn("[say=pc]Fine.[/say]")
+
+		saynn("As you unlock her cuffs, Avy shoves you away and rips her blindfold off before storming away, her clothes in her paws.")
+
+		saynn("[say=avy]Next time.. At least fucking ask.. you stupid bitch..[/say]")
+
+		saynn("Oh well. She deserved it. At least you still marked her a bit.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "pussylick_after"):
 		playAnimation(StageScene.ChairOral, "tease", {pc="pc", npc="avy", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("When you finally relax, your grip on Avy's head loosens. She pulls back when that happens, gasping for air. Her face is covered in your juices.")
@@ -587,6 +627,48 @@ func _run():
 		saynn("After Kait helps drain your balls, she offers you a cute blep.. before running away fast!")
 
 		addButton("Continue", "See what happens next", "bj_after")
+		addButtonWithChecks("Mark her..", "Might as well try to mark her with your different scent too..", "bj_watersports", [], [[ButtonChecks.ContentEnabled, ContentType.Watersports]])
+	if(state == "bj_watersports"):
+		playAnimation(StageScene.ChairOral, "tease", {pc="pc", npc="avy", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("With nobody pushing Avy's head anymore, she escapes your messy cock! She starts gasping and coughing a lot, your seed trickling from her nostrils.")
+
+		saynn("Then.. you decide to be a bit.. mischievous. You got Avy right there, between your legs, under your cock.. Why not take advantage of that.")
+
+		saynn("And so when you begin coming down from your orgasm, you get a grip on Avy's head again, your hand on the back of her head. Instead of letting her go, you keep her in that position for a while longer.")
+
+		saynn("[say=avy]Huh-?[/say]")
+
+		saynn("You wait for the urge to come.. and then just let go..")
+
+		saynn("[say=avy]MHH-H!![/say]")
+
+		saynn("A stream of your golden piss hits Avy's tongue. You moan as Avy is thrashing beneath you, doing her best to pull away.")
+
+		saynn("You empty some of your bladder into her mouth and onto her face.. but she manages to break free and pull away. You cut the stream short..")
+
+		saynn("She coughs and makes noises like she is about to puke.")
+
+		saynn("[say=avy]KGhh! B-BITCH!.. Kgh.. what the fuck are you doing.. you're stupid.. fucking.. blergh..[/say]")
+
+		saynn("[say=pc]My bad. I just thought that you'd make the perfect urinal.[/say]")
+
+		saynn("She growls and thrashes against her cuffs, trying to shake off her blindfold too.")
+
+		saynn("[say=avy]Fuck you.. f-fuck you..[/say]")
+
+		saynn("[say=pc]Chill. I see that you don't like it.[/say]")
+
+		saynn("[say=avy]Don't like it?! I fucking hated it! Take this shit off me![/say]")
+
+		saynn("[say=pc]Fine.[/say]")
+
+		saynn("As you unlock her cuffs, Avy shoves you away and rips her blindfold off before storming away, her clothes in her paws.")
+
+		saynn("[say=avy]Next time.. At least fucking ask.. you stupid bitch..[/say]")
+
+		saynn("Oh well. She deserved it. At least you still marked her a bit.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "bj_after"):
 		playAnimation(StageScene.ChairOral, "tease", {pc="pc", npc="avy", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		removeCharacter("kait")
@@ -697,6 +779,12 @@ func _react(_action: String, _args):
 	if(_action == "pussylick_after"):
 		putOff("avy", "blindfold")
 
+	if(_action == "pussylick_watersports"):
+		getCharacter("avy").cummedOnBy("pc", FluidSource.Pissing, 0.1)
+		getCharacter("avy").cummedInMouthBy("pc", FluidSource.Pissing, 0.2)
+		putOff("avy", "blindfold")
+		putOff("avy", "inmatewristcuffs")
+
 	if(_action == "bj_fast"):
 		processTime(5*60)
 
@@ -706,6 +794,12 @@ func _react(_action: String, _args):
 
 	if(_action == "bj_after"):
 		putOff("avy", "blindfold")
+
+	if(_action == "bj_watersports"):
+		getCharacter("avy").cummedOnBy("pc", FluidSource.Pissing, 0.1)
+		getCharacter("avy").cummedInMouthBy("pc", FluidSource.Pissing, 0.2)
+		putOff("avy", "blindfold")
+		putOff("avy", "inmatewristcuffs")
 
 	if(_action == "bj_wrapup"):
 		putOff("avy", "inmatewristcuffs")
