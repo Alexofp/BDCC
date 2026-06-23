@@ -9,6 +9,7 @@ func getFlags():
 		"joinedTeam": flag(FlagType.Bool), # PC joined Kait's team, we have committed to the dom main route
 		"caughtRahi": flag(FlagType.Bool), # Did we catch Rahi and bring her for recruiting
 		"introCompleted": flag(FlagType.Bool), # Did we recruit Rahi and got access to everything now
+		"didAvyDomIntro": flag(FlagType.Bool), # Did we do the Light Domination option with Avy
 		
 		"m1gotpills": flag(FlagType.Bool), # mission 1, did we receive painkillers from Avy? Not a mission flag because we only wanna receive them once
 	}
@@ -34,6 +35,7 @@ func _init():
 		"res://Modules/KaitModule/Avy/AvyObedienceLightDomScene.gd",
 		"res://Modules/KaitModule/Avy/AvyObedienceOralScene.gd",
 		"res://Modules/KaitModule/Avy/AvyLoveSexScene.gd",
+		"res://Modules/KaitModule/Avy/AvyLoveMenuScene.gd",
 	]
 	characters = [
 	]

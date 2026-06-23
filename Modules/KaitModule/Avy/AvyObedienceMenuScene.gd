@@ -26,6 +26,11 @@ func _run():
 		addButton("Never mind", "You changed your mind", "never_mind")
 		if (avyObedience >= 2):
 			addButton("Light domination", "(Obedience 2+) Try to dominate Avy and see what happens", "light_dom")
+		if (!getFlag("KaitModule.didAvyDomIntro")):
+			addDisabledButton("Oral sex", "You need to dominate Avy first before doing this!")
+		else:
+			if (avyObedience >= 2):
+				addButton("Oral sex", "(Obedience 2+) Dominate Avy further and make her serve as your cock sucker or a pussy licker", "oral_sex")
 	if(state == "never_mind"):
 		aimCameraAndSetLocName(GM.pc.getLocation())
 		saynn("[say=pc]I changed my mind.[/say]")
@@ -41,7 +46,12 @@ func _react(_action: String, _args):
 
 	if(_action == "light_dom"):
 		endScene()
+		setFlag("KaitModule.didAvyDomIntro", true)
 		runScene("AvyObedienceLightDomScene")
+
+	if(_action == "oral_sex"):
+		endScene()
+		runScene("AvyObedienceOralScene")
 
 	setState(_action)
 
