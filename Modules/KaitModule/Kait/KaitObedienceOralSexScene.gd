@@ -2,6 +2,7 @@ extends SceneBase
 
 var kmaster = "master"
 var kMaster = "Master"
+var usedStrapon = false
 
 func _init():
 	sceneID = "KaitObedienceOralSexScene"
@@ -173,6 +174,179 @@ func _run():
 
 		addButtonWithChecks("Blowjob", "Make Kait suck you off in this position!", "bj", [], [[ButtonChecks.HasReachablePenis]])
 		addButtonWithChecks("Pussy licking", "Make Kait lick your slit in this position!", "pussy_lick", [], [[ButtonChecks.HasReachableVagina]])
+	if(state == "bj"):
+		playAnimation(StageScene.SexOralTable, "suckinside", {pc="pc", npc="kait", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You"+str(" secure a strapon harness around your head and" if usedStrapon else "")+" position yourself near Kait's head. She can't see you but her ears do turn to try to find you. A muffled sound escapes her, a noise of curiosity.")
+
+		saynn(""+str("Your {pc.penis}.. already hard, the tip shy with precum. " if !usedStrapon else "")+"You grip the base and carefully guide it toward her open mouth, letting the head slide through the metal ring and press against her tongue.")
+
+		saynn("[say=kait]Mmm..[/say]")
+
+		saynn("Her tongue springs into action, sliding over the"+str(" rubber tip" if usedStrapon else " tip, catching a lonely drop of pre")+". She can't close her lips around you because of the ring but she still does her best, suckling at the head.")
+
+		saynn("You push forward slowly, more of your"+str(" shiny" if usedStrapon else "")+" shaft sliding past her teeth and tongue, bending against the back of her mouth and going down her throat..")
+
+		saynn("[say=kait]Mmmh.. hh..[/say]")
+
+		saynn("Her body begins to tense up, her bound hands clenching into fists. A few seconds later, she starts gagging, her throat suddenly spasming around your "+str("shaft" if !usedStrapon else "toy")+", warm and tight.")
+
+		saynn("You pull out a bit and pause, allowing her to calm down and adjust to you.")
+
+		saynn("You hear Kait taking a shaky breath through her nostrils, her inner walls begin to relax again. Her tongue starts curling around your"+str(" fake" if usedStrapon else "")+" member, teasing it.")
+
+		saynn("Slowly, you push in again, your "+str("cock" if !usedStrapon else "toy")+"'s tip pressing against the back of her mouth more.. going down her throat. She is holding a bit better this time. But soon the tension returns.. followed by a choked sound erupting from her throat. Tears begin to leak from under the blindfold.")
+
+		saynn("You pull back.")
+
+		saynn("[say=pc]Is this too much?[/say]")
+
+		saynn("She shakes her head, still with your"+str(" rubber" if usedStrapon else "")+" cock inside it. Her fists unclench to show some peace signs.")
+
+		saynn("[say=pc]Cute.[/say]")
+
+		saynn("She growls.. the vibrations feel quite nice.")
+
+		saynn("[say=pc]Ohh, you should keep doing that.[/say]")
+
+		saynn("[say=kait]Gr-r..[/say]")
+
+		saynn("Kait tenses her jaw.")
+
+		addButton("Continue", "See what happens next", "bj_sex")
+	if(state == "bj_sex"):
+		playAnimation(StageScene.SexOralTable, "suck", {pc="pc", npc="kait", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("[say=pc]Take it all now, girl.[/say]")
+
+		saynn("You withdraw until only the tip remains.. and then thrust forward again, stretching her throat. This time you don't stop, fucking her mouth slowly. She takes the first few thrusts okay but soon she starts gagging again, her throat getting tight around"+str(" you" if !usedStrapon else " the toy")+". Each pull lets her gasp for air quickly before you block it again.")
+
+		saynn("[say=kait]Gllk..! Hhkk..[/say]")
+
+		saynn("Her body is squirming against the cuffs, the metal chains clinking against the crate. Her perky tits bounce with each thrust, her dark nips looking stiff. That buttplug is probably shifting quite a lot inside her tailhole.. especially if it clenches just as much as her throat.")
+
+		saynn("You look down and notice her neck bulging, the outline of your "+str("cock" if !usedStrapon else "strapon")+" moving back and forth.")
+
+		saynn("[say=pc]Hm..[/say]")
+
+		saynn("[say=kait]Mhh?..[/say]")
+
+		saynn("You reach down and wrap your hand around her neck, feeling that bulge. You can feel her pulse. She squirms harder, her throat tightening further.. it makes you want to increase the pace.")
+
+		addButton("Continue", "See what happens next", "bj_fast")
+	if(state == "bj_fast"):
+		playAnimation(StageScene.SexOralTable, "suckfast", {pc="pc", npc="kait", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("And so you start thrusting faster. Harder. Your "+str("balls" if !usedStrapon else "hips")+" slap against her face. Kait's throat is making hot wet noises and slurps, her gagging becoming more desperate. Her tongue is still brushing against "+str("your" if !usedStrapon else "the")+" shaft.")
+
+		saynn("[say=kait]Hk.. ghk.. glk.. glkhh..[/say]")
+
+		if (!usedStrapon):
+			saynn("[say=pc]I'm sorry kitty, your throat feels too good.[/say]")
+
+		else:
+			saynn("[say=pc]I'm sorry kitty, this is too fun.[/say]")
+
+		saynn("Her digits show peace signs again.. much shakier versions of them.")
+
+		if (!usedStrapon):
+			saynn("Your balls begin to twitch. You're getting close fast.")
+
+			saynn("You grab her head with both hands and pound into her, not holding back. Your cock ravages her tight throat, making her choke on it, her body trembling.")
+
+			addButton("Cum inside!", "Stuff that throat", "bj_cum")
+		else:
+			saynn("Even though you don't feel a thing through the strapon.. it's still hot as fuck to be railing Kait's mouth.")
+
+			saynn("You grab her head with both hands and pound into her, not holding back. The rubber cock ravages her tight throat, making her choke on it, her body trembling.")
+
+			addButton("Last push!", "Stuff that throat", "bj_cum_strapon")
+	if(state == "bj_cum"):
+		playAnimation(StageScene.SexOralTable, "suckinside", {pc="pc", npc="kait", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		if (!usedStrapon):
+			saynn("And then it happens. You start grunting while your dick starts throbbing inside her.. tip exploding with waves of your seed.. one after another. Kait has no choice but to swallow as you give her no choice.. shooting your whole load deep down her throat. At the same time, her inner walls clench hard around you, milking every drop.")
+
+			saynn("[say=pc]Mghh.. fuck, this feels good.[/say]")
+
+			saynn("Poor kitty is working hard beneath you, her whole body is tensed up, her every muscle is screaming for oxygen. Oxygen that you're blocking with your pulsing member.")
+
+			saynn("[say=kait]Glk.. glk.. glk..[/say]")
+
+			saynn("Time to let the kitty breathe again.")
+
+		else:
+			saynn("And then, with the last push, you shove the whole rubber length inside.. and stay like that. Kait has no choice but to endure it, her inner walls clenching hard around the toy, trying to milk it.")
+
+			saynn("[say=pc]Yeah.. if this was a cock, it would have pumped your belly full.[/say]")
+
+			saynn("Poor kitty is working hard beneath you, her whole body is tensed up, her every muscle is screaming for oxygen. Oxygen that you're blocking with your strapon.")
+
+			saynn("[say=kait]Glk.. glk.. glk..[/say]")
+
+			saynn("Time to let the kitty breathe again.")
+
+		addButton("Continue", "See what happens next", "bj_after")
+	if(state == "bj_after"):
+		playAnimation(StageScene.SexOralTable, "tease", {pc="pc", npc="kait", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		if (!usedStrapon):
+			saynn("Finally, you pull out. Kait's mouth remains open, gasping, a trail of saliva and {pc.cum} connecting her lips to your messy cock. She coughs, her belly moves up and down fast.")
+
+			saynn("Slowly, she relaxes. There is some of your seed in her mouth still.. but she does her best to swallow it.")
+
+		else:
+			saynn("Finally, you pull out. Kait's mouth remains open, gasping, a trail of saliva connecting her lips to your wet rubber toy. She coughs, her belly moves up and down fast.")
+
+			saynn("Slowly, she relaxes.")
+
+		saynn("[say=kait]Hhhk.. haa.. h.h..[/say]")
+
+		saynn("You give her scritches and pats.. and hear the exhausted purr escaping her.")
+
+		saynn("[say=pc]Good girl. Very good girl.[/say]")
+
+		saynn("Kait is panting like hell still.. so you let her rest for a bit.")
+
+		addButton("Unlock her", "Let her get up", "bj_after_after")
+	if(state == "bj_after_after"):
+		playAnimation(StageScene.Duo, "stand", {npc="kait", npcBodyState={naked=true}})
+		saynn("After Kait has come back to her senses, you unlock all the restraints and help her get up.")
+
+		saynn("The first thing that you notice.. is a big wet puddle of her juices that she left on the crate. Her thighs are quite messy too.")
+
+		saynn("[say=pc]Looks like you liked it.[/say]")
+
+		saynn("[say=kait]Pff..[/say]")
+
+		saynn("She opens and closes her jaw a few times, trying to make the sore muscles wake up.")
+
+		saynn("[say=kait]That was.. a nice challenge.[/say]")
+
+		saynn("[say=pc]Challenge, huh?[/say]")
+
+		saynn("She puts on a tired smile.")
+
+		saynn("[say=kait]Yes, "+str(kmaster)+". Wait, you forgot one thing..[/say]")
+
+		saynn("She reaches behind herself.. under her tail.")
+
+		saynn("[say=kait]Mhh.. ah~..[/say]")
+
+		saynn("You hear cute moans from the snow leopard as she starts pulling something out, bit by bit.")
+
+		saynn("[say=kait]Fuck me.. it feels much bigger than it looks..[/say]")
+
+		saynn("Then, with a satisfying pop, she.. extracts.. the wet buttplug and presents it to you.")
+
+		saynn("[say=kait]Here. You forgot this.[/say]")
+
+		saynn("[say=pc]My bad.[/say]")
+
+		saynn("She raises her chin high.. and starts leaving the room.")
+
+		saynn("Then she returns and picks up her clothes.")
+
+		saynn("[say=kait]I need a shower..[/say]")
+
+		saynn("You let her have it.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -185,6 +359,25 @@ func _react(_action: String, _args):
 		putOn("kait", "inmatewristcuffs")
 		putOn("kait", "inmateanklecuffs")
 
+	if(_action == "bj_cum"):
+		getCharacter("kait").cummedInMouthBy("pc", FluidSource.Penis)
+		GM.pc.orgasmFrom("kait")
+
+	if(_action == "bj_cum_strapon"):
+		getCharacter("kait").cummedInMouthBy("pc", FluidSource.Strapon)
+		GM.pc.orgasmFrom("kait")
+		setState("bj_cum")
+		return
+
+	if(_action == "bj_after"):
+		processTime(5*60)
+
+	if(_action == "bj_after_after"):
+		putOff("kait", "ringgag")
+		putOff("kait", "blindfold")
+		putOff("kait", "inmatewristcuffs")
+		putOff("kait", "inmateanklecuffs")
+
 	setState(_action)
 
 func saveData():
@@ -192,6 +385,7 @@ func saveData():
 
 	data["kmaster"] = kmaster
 	data["kMaster"] = kMaster
+	data["usedStrapon"] = usedStrapon
 
 	return data
 
@@ -200,3 +394,4 @@ func loadData(data):
 
 	kmaster = SAVE.loadVar(data, "kmaster", "master")
 	kMaster = SAVE.loadVar(data, "kMaster", "Master")
+	usedStrapon = SAVE.loadVar(data, "usedStrapon", false)
