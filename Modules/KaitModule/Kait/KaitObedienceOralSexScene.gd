@@ -3,6 +3,7 @@ extends SceneBase
 var kmaster = "master"
 var kMaster = "Master"
 var usedStrapon = false
+var ppWatersports = false
 
 func _init():
 	sceneID = "KaitObedienceOralSexScene"
@@ -174,9 +175,14 @@ func _run():
 
 		addButtonWithChecks("Blowjob", "Make Kait suck you off in this position!", "bj", [], [[ButtonChecks.HasReachablePenis]])
 		addButtonWithChecks("Pussy licking", "Make Kait lick your slit in this position!", "pussy_lick", [], [[ButtonChecks.HasReachableVagina]])
+		if (!GM.pc.hasReachablePenis()):
+			addButton("BJ+strapon", "Make Kait suck you off while you're wearing a generic strapon", "bj_wear_strapon")
 	if(state == "bj"):
 		playAnimation(StageScene.SexOralTable, "suckinside", {pc="pc", npc="kait", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
-		saynn("You"+str(" secure a strapon harness around your head and" if usedStrapon else "")+" position yourself near Kait's head. She can't see you but her ears do turn to try to find you. A muffled sound escapes her, a noise of curiosity.")
+		if (usedStrapon):
+			saynn("You go ahead and fetch a strapon harness from the crate of toys. The first one that you have found.")
+
+		saynn(""+str("Then you secure it around your waist and" if usedStrapon else "You")+" position yourself near Kait's head. She can't see you but her ears do turn to try to find you. A muffled sound escapes her, a noise of curiosity.")
 
 		saynn(""+str("Your {pc.penis}.. already hard, the tip shy with precum. " if !usedStrapon else "")+"You grip the base and carefully guide it toward her open mouth, letting the head slide through the metal ring and press against her tongue.")
 
@@ -304,6 +310,7 @@ func _run():
 		saynn("Kait is panting like hell still.. so you let her rest for a bit.")
 
 		addButton("Unlock her", "Let her get up", "bj_after_after")
+		addButtonWithChecks("Watersports..", "Maybe she can help with your other need too..", "bj_watersports", [], [[ButtonChecks.ContentEnabled, ContentType.Watersports]])
 	if(state == "bj_after_after"):
 		playAnimation(StageScene.Duo, "stand", {npc="kait", npcBodyState={naked=true}})
 		saynn("After Kait has come back to her senses, you unlock all the restraints and help her get up.")
@@ -347,6 +354,228 @@ func _run():
 		saynn("You let her have it.")
 
 		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "pussy_lick"):
+		playAnimation(StageScene.SexOralTable, "hover", {pc="pc", npc="kait", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You move close, spreading your legs a bit so that you can position yourself above her head. Kait's round ears perk up as she senses you. Your {pc.masc} thighs brush against the sides of her head, your bare pussy hovering just above her open mouth.")
+
+		saynn("[say=pc]Stick your tongue out and lick.[/say]")
+
+		saynn("Kait extends her tongue through the metal ring and reaches it out until the tip finds your sensitive folds. The first touch makes you gasp softly. Her tongue is rough.. textured like sandpaper, sending little sparks of sensation through your folds.")
+
+		saynn("[say=kait]Mmmph..[/say]")
+
+		addButton("Continue", "See what happens next", "pussy_lick_action")
+	if(state == "pussy_lick_action"):
+		playAnimation(StageScene.SexOralTable, "lick", {pc="pc", npc="kait", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Kait starts exploring, her tongue dragging along your outer lips with long, slow strokes. All the tiny hooks that her tongue has makes you shiver, your hips instinctively pressing down a bit.")
+
+		saynn("[say=pc]Ahh.. that's it..[/say]")
+
+		saynn("Her tongue works its way between your folds, parting them and going between. Then it goes up and finds your clit, giving it a few flicks that send jolts of pleasure through your body.")
+
+		saynn("[say=kait]..mhh..[/say]")
+
+		saynn("She laps at your entrance next, catching all the arousal that your hot pussy is making. Her long feline tongue slides inside you briefly before dragging back up to your clit, making you moan and shiver more.")
+
+		saynn("[say=pc]Fuck.. your tongue is so good, kitty.[/say]")
+
+		addButton("Continue", "See what happens next", "pussy_lick_grind")
+	if(state == "pussy_lick_grind"):
+		playAnimation(StageScene.SexOralTable, "grind", {pc="pc", npc="kait", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You lower yourself more, sitting fully on her face now. Kait's snout is pressed against your clit as she works, her tongue exploring every bit of your pussy. She spreads your folds with her tongue again, lapping up your juices and flicking your clit in rapid strokes.")
+
+		saynn("[say=kait]Mmm.. mmmr-r..[/say]")
+
+		saynn("You can feel her purring.. the vibrations making you want to push it further. And so you start to move your hips, grinding against her face. Her tongue stays pressed against your slit as you slide back and forth.")
+
+		saynn("[say=pc]Yes.. like that..[/say]")
+
+		saynn("Kait's tongue finds a moment when you pause and dives deeper, curling inside you before dragging back up to circle your clit. It just makes you want to keep going again..")
+
+		saynn("You put your hands on her collar for support and grind her face more. Kait's tongue is everywhere.. lapping away.. flicking your little mound.. pushing inside you. Each stroke of her rough tongue is making you moan again.")
+
+		addButton("Continue", "See what happens next", "pussy_lick_cum")
+	if(state == "pussy_lick_cum"):
+		playAnimation(StageScene.SexOralTable, "grindfast", {pc="pc", npc="kait", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}, pcCum=true})
+		saynn("Kait is working her tongue desperately now, trying to keep up with your needy grinding. Your juices are all over her face, dripping down her chin and getting her fur all messy.")
+
+		saynn("[say=pc]I'm close.. don't stop..[/say]")
+
+		saynn("Your hips move faster, grinding against her rough tongue. Her nose rubs against your clit with each motion, huffing hot air over your sensitive spot.")
+
+		saynn("[say=kait]Mmm.. mmm!..[/say]")
+
+		saynn("And then it hits you. Your body tenses up hard.. a loud passionate moan escapes your lips as your orgasm crashes through you. Your pussy pulses against Kait's tongue.. before gushing juices into her open mouth. She catches it all greedily, her tongue still working, prolonging your pleasure.")
+
+		saynn("[say=pc]Ahh.. f-fuck.. Kait..![/say]")
+
+		saynn("You throw your head back and just let the ecstatic waves happen.. one after another.. really tiring you out.")
+
+		saynn("When the waves begin to subside, you still continue to grind through the aftershocks, your hips moving slowly now. Kait's tongue continues to lap at you, cleaning up the messy, her muffled sounds of contentment vibrating against your sensitive flesh.")
+
+		addButton("Continue", "See what happens next", "pussylick_after")
+	if(state == "pussylick_after"):
+		playAnimation(StageScene.SexOralTable, "hover", {pc="pc", npc="kait", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Finally, you lift yourself off her face. Kait's mouth remains open, her face covered in your juices. Her chest moves fast as she pants through her nostrils.")
+
+		saynn("[say=kait]Mmmhh..[/say]")
+
+		saynn("You reach down to stroke her cheek and give her some pats.")
+
+		saynn("[say=pc]Such a good girl. Very good girl.[/say]")
+
+		saynn("A purr rumbles from her throat.")
+
+		addButton("Unlock her", "Let her get up", "pussylick_after_after")
+		addButtonWithChecks("Watersports..", "Maybe she can help with your other need too..", "pussylick_watersports", [], [[ButtonChecks.ContentEnabled, ContentType.Watersports]])
+	if(state == "pussylick_after_after"):
+		playAnimation(StageScene.Duo, "stand", {npc="kait", npcBodyState={naked=true}})
+		saynn("You give Kait some time to calm then.. and then you unlock all the restraints and help her get up.")
+
+		saynn("The first thing that you notice.. is a big wet puddle of her juices that she left on the crate. Her thighs are quite messy too.")
+
+		saynn("[say=pc]Looks like you liked it.[/say]")
+
+		saynn("[say=kait]Pff..[/say]")
+
+		saynn("She opens and closes her jaw a few times, trying to make the sore muscles wake up.")
+
+		saynn("[say=kait]That was.. a nice challenge.[/say]")
+
+		saynn("[say=pc]Challenge, huh?[/say]")
+
+		saynn("She puts on a tired smile.")
+
+		saynn("[say=kait]Yes, "+str(kmaster)+". Wait, you forgot one thing..[/say]")
+
+		saynn("She reaches behind herself.. under her tail.")
+
+		saynn("[say=kait]Mhh.. ah~..[/say]")
+
+		saynn("You hear cute moans from the snow leopard as she starts pulling something out, bit by bit.")
+
+		saynn("[say=kait]Fuck me.. it feels much bigger than it looks..[/say]")
+
+		saynn("Then, with a satisfying pop, she.. extracts.. the wet buttplug and presents it to you.")
+
+		saynn("[say=kait]Here. You forgot this.[/say]")
+
+		saynn("[say=pc]My bad.[/say]")
+
+		saynn("She raises her chin high.. and starts leaving the room.")
+
+		saynn("Then she returns and picks up her clothes.")
+
+		saynn("[say=kait]I need a shower..[/say]")
+
+		saynn("You let her have it.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "pussylick_watersports"):
+		playAnimation(StageScene.SexOralTable, "tease", {pc="pc", npc="kait", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You were about to unlock Kait when a thought crossed your mind.. a very naughty one. You pause, your hand gently caressing her chin.")
+
+		saynn("[say=pc]Hm.. Kait. I have another need. Can you help me with it?[/say]")
+
+		saynn("A muffled noise of curiosity escapes her throat.")
+
+		saynn("[say=pc]I need to.. relieve myself. And I was thinking.. you could help.[/say]")
+
+		saynn("Her tail goes stiff for a moment. You can see her subtly shrugging.. as best as the chains allow.")
+
+		saynn("[say=pc]Is that a maybe?[/say]")
+
+		saynn("She nods..")
+
+		saynn("[say=pc]We can try then. If it's too much, I will stop.[/say]")
+
+		saynn("She nods more.")
+
+		if (!ppWatersports):
+			saynn("You reposition yourself above her head again, spreading your legs. Your bare pussy hovers just above her open mouth, the metal ring keeping her jaw wide.")
+
+		else:
+			saynn("You get close to her again, aligning your dick with her open mouth, the metal ring keeping her jaw wide.")
+
+		saynn("[say=pc]I will need you to just.. stay and let it happen. Be a good girl for me.[/say]")
+
+		saynn("A hesitant nod. Her tongue retreats back into her mouth, her lips twitching from any little noise.")
+
+		saynn("You relax, waiting for the urge to come. It takes a moment. Kait's ears begin to twitch nervously as well, her warm breath against your"+str(" folds" if !ppWatersports else " shaft")+".")
+
+		saynn("Then.. the urge comes.. and so you let go..")
+
+		addButton("Continue", "See what happens next", "pussylick_watersports_actually")
+	if(state == "pussylick_watersports_actually"):
+		playAnimation(StageScene.SexOralTable, "peefem" if !ppWatersports else "suckinside", {pc="pc", npc="kait", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("A warm stream of golden piss begins to "+str("trickle from your slit" if !ppWatersports else "rush from your cock's tip")+", splashing against Kait's tongue. She flinches, a muffled sound of surprise escaping her. The liquid starts pooling in her open mouth, the taste clearly isn't the best.")
+
+		saynn("[say=kait]Mmmph..[/say]")
+
+		saynn("You keep going.. keeping the stream steady and aimed directly into her mouth. Kait doesn't swallow, just letting the piss fill her mouth and start spilling over the corners of her lips, dripping down onto the crate below. Her nose wrinkles.")
+
+		saynn("[say=pc]Good girl.. taking it so well..[/say]")
+
+		saynn("Her ears flatten, cheeks glowing red. She holds still, letting the warm liquid pool and overflow. Yellow streams run down her neck, soaking into her fur, forcing your scent into it.")
+
+		saynn("Finally, the stream ends. You let out a satisfied sigh.")
+
+		saynn("[say=pc]That was perfect, Kait.[/say]")
+
+		saynn("You"+str(" lift yourself off her face" if !ppWatersports else " pull away")+". Kait's mouth is still full, her cheeks puffed out. She makes a distressed sound, unsure what to do now.")
+
+		saynn("[say=pc]You can spit it out.. or swallow.. whatever you prefer.[/say]")
+
+		saynn("She turns her head to the side and spits it all out. Her tongue rolls out, trying to get rid of the taste.")
+
+		saynn("[say=kait]Ugh.. mmph..[/say]")
+
+		saynn("You chuckle softly.")
+
+		saynn("[say=pc]That bad?[/say]")
+
+		saynn("She nods actively.")
+
+		saynn("Time to unlock her..")
+
+		addButton("Unlock her", "Let her get up", "pussylick_watersports_after")
+	if(state == "pussylick_watersports_after"):
+		playAnimation(StageScene.Duo, "stand", {npc="kait", npcBodyState={naked=true}})
+		saynn("You reach down and unlock all her restraints. When the ring gag and the cuffs come off, she immediately starts wiping her mouth.")
+
+		saynn("[say=kait]Urgh.. that's so.. fucking gross.. Bleh.. so gross.. the taste is just.. ugh..[/say]")
+
+		saynn("[say=pc]I'm sorry.[/say]")
+
+		saynn("She spits again.")
+
+		saynn("[say=kait]It's fine.. I mean.. I agreed, it was my fault. But seriously.. that's not something I'm used to.[/say]")
+
+		saynn("You help her to get up, her body is still trembling slightly.")
+
+		saynn("[say=pc]Does that mean no more of this for you?[/say]")
+
+		saynn("Kait is quiet for a moment, her cheeks blushing again.")
+
+		saynn("[say=kait]I didn't say that..[/say]")
+
+		saynn("She lets out a tired huff.")
+
+		saynn("[say=pc]You were very good, Kait.[/say]")
+
+		saynn("[say=kait]..thankies.. sorry for not.. swallowing..[/say]")
+
+		saynn("[say=pc]You didn't have to. I know it tastes bad.[/say]")
+
+		saynn("She nods.")
+
+		saynn("[say=kait]I'm gonna need a lo-o-ong shower.. and maybe mouthwash.. Lots of mouthwash.. I will have to bite the soap bar a few times I think..[/say]")
+
+		saynn("You chuckle as she carefully grabs her clothes and sprints away.")
+
+		saynn("You let her have her shower.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -358,6 +587,15 @@ func _react(_action: String, _args):
 		putOn("kait", "blindfold")
 		putOn("kait", "inmatewristcuffs")
 		putOn("kait", "inmateanklecuffs")
+
+	if(_action == "bj"):
+		usedStrapon = false
+
+	if(_action == "bj_wear_strapon"):
+		putOn("pc", "Strapon")
+		usedStrapon = true
+		setState("bj")
+		return
 
 	if(_action == "bj_cum"):
 		getCharacter("kait").cummedInMouthBy("pc", FluidSource.Penis)
@@ -371,8 +609,40 @@ func _react(_action: String, _args):
 
 	if(_action == "bj_after"):
 		processTime(5*60)
+		if(usedStrapon):
+			putOff("pc", "Strapon")
 
 	if(_action == "bj_after_after"):
+		putOff("kait", "ringgag")
+		putOff("kait", "blindfold")
+		putOff("kait", "inmatewristcuffs")
+		putOff("kait", "inmateanklecuffs")
+
+	if(_action == "bj_watersports"):
+		ppWatersports = GM.pc.hasReachablePenis()
+		setState("pussylick_watersports")
+		return
+
+	if(_action == "pussy_lick_cum"):
+		getCharacter("kait").cummedInMouthBy("pc", FluidSource.Vagina)
+		GM.pc.orgasmFrom("kait")
+
+	if(_action == "pussylick_after"):
+		processTime(5*60)
+
+	if(_action == "pussylick_after_after"):
+		putOff("kait", "ringgag")
+		putOff("kait", "blindfold")
+		putOff("kait", "inmatewristcuffs")
+		putOff("kait", "inmateanklecuffs")
+
+	if(_action == "pussylick_watersports"):
+		ppWatersports = false
+
+	if(_action == "pussylick_watersports_actually"):
+		getCharacter("kait").cummedInMouthBy("pc", FluidSource.Pissing)
+
+	if(_action == "pussylick_watersports_after"):
 		putOff("kait", "ringgag")
 		putOff("kait", "blindfold")
 		putOff("kait", "inmatewristcuffs")
@@ -386,6 +656,7 @@ func saveData():
 	data["kmaster"] = kmaster
 	data["kMaster"] = kMaster
 	data["usedStrapon"] = usedStrapon
+	data["ppWatersports"] = ppWatersports
 
 	return data
 
@@ -395,3 +666,4 @@ func loadData(data):
 	kmaster = SAVE.loadVar(data, "kmaster", "master")
 	kMaster = SAVE.loadVar(data, "kMaster", "Master")
 	usedStrapon = SAVE.loadVar(data, "usedStrapon", false)
+	ppWatersports = SAVE.loadVar(data, "ppWatersports", false)
