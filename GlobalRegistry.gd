@@ -224,6 +224,8 @@ var allSpecies: Dictionary = {}
 var items: Dictionary = {}
 var itemsRefs: Dictionary = {}
 var itemsByTag: Dictionary = {}
+var inventorySlots : Dictionary = {}
+var bodypartSlots : Dictionary = {}
 var buffs: Dictionary = {}
 var events: Dictionary = {}
 var modules: Dictionary = {}
@@ -1286,6 +1288,79 @@ func getItemIDsByTagSlow(tag):
 
 func getItemRefs():
 	return itemsRefs
+
+
+
+func registerInventorySlot(path: String):
+	var slot = load(path)
+	var slotObj = slot.new()
+	inventorySlots[slotObj.id] = slotObj
+
+func registerInventorySlotFolder(folder: String):
+	var dir = Directory.new()
+	if dir.open(folder) != OK:
+		Log.printerr("An error occurred when trying to access the path "+folder)
+		return
+	
+	dir.list_dir_begin()
+	var file_name = dir.get_next()
+	while file_name != "":
+		if dir.current_is_dir():
+			continue
+		
+		if(file_name.get_extension() == "gd"):
+			var full_path = folder.plus_file(file_name)
+			registerInventorySlot(full_path)
+		file_name = dir.get_next()
+	
+
+func getCustomInventorySlots() -> Dictionary:
+	return inventorySlots
+
+func getCustomInventorySlot(slot:String) -> CustomInventorySlot:
+	var slotobj = inventorySlots.get(slot)
+	if !slotobj:
+		Log.printerr("Error: No inventory slot with id '%s' found" % slot)
+	
+	return slotobj
+
+
+
+func registerBodypartSlot(path: String):
+	var slot = load(path)
+	var slotObj = slot.new()
+	bodypartSlots[slotObj.id] = slotObj
+
+func registerBodypartSlotFolder(folder: String):
+	var dir = Directory.new()
+	if dir.open(folder) != OK:
+		Log.printerr("An error occurred when trying to access the path "+folder)
+		return
+	
+	dir.list_dir_begin()
+	var file_name = dir.get_next()
+	while file_name != "":
+		if dir.current_is_dir():
+			continue
+		
+		if(file_name.get_extension() == "gd"):
+			var full_path = folder.plus_file(file_name)
+			registerBodypartSlot(full_path)
+		file_name = dir.get_next()
+	
+
+func getCustomBodypartSlots() -> Dictionary:
+	return bodypartSlots
+
+func getCustomBodypartSlot(slot:String) -> CustomBodypartSlot:
+	var slotobj = bodypartSlots.get(slot)
+	if !slotobj:
+		Log.printerr("Error: No bodypart slot with id '%s' found" % slot)
+	
+	return slotobj
+
+
+
 
 func registerBuff(path: String):
 	var item = load(path)
