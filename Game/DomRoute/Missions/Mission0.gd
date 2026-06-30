@@ -20,12 +20,14 @@ func _init():
 					effects = [
 						DECISION_EFFECT_KAIT_OBEDIENCE,
 					],
+					kaitLine = "Hey.. uh.. I should have asked before taking Rahi's leash, you're right.",
 				},
 				"allow": {
 					text = "Allowed it",
 					effects = [
 						DECISION_EFFECT_KAIT_LOVE,
 					],
+					kaitLine = "We got our own personal thief now. A pretty cute one at that. Can't wait to see her in action.",
 				},
 			},
 		}

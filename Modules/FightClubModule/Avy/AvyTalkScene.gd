@@ -18,24 +18,29 @@ func _run():
 	if(state == ""):
 		var pcRank = FightClubModule.getPCRank()
 		
+		var theUniqieLine:String = getFlag("KaitModule.avyApproach", "")
+		if (!theUniqieLine.empty()):
+			saynn("[say=avy]"+str(theUniqieLine)+"[/say]")
+
+			setFlag("KaitModule.avyApproach", "")
 		# (if fuck meat rank)
-		if(pcRank == FightClubRank.FuckMeat):
+		elif(pcRank == FightClubRank.FuckMeat):
 			saynn("[say=avy]So, ready to prove yourself, fuck meat?[/say]")
 
 		# (if failed hero rank)
-		if(pcRank == FightClubRank.FailedHero):
+		elif(pcRank == FightClubRank.FailedHero):
 			saynn("[say=avy]You’re making quite some noise for yourself, failed hero. Think you can handle the heat?[/say]")
 
 		# (if play toy rank)
-		if(pcRank == FightClubRank.PlayToy):
+		elif(pcRank == FightClubRank.PlayToy):
 			saynn("[say=avy]People like how you fight. Don’t get any wrong ideas though, you’re still just a play toy.[/say]")
 
 		# (if attention whore)
-		if(pcRank == FightClubRank.AttentionWhore):
+		elif(pcRank == FightClubRank.AttentionWhore):
 			saynn("[say=avy]Think you almost reached the top? Think twice, attention whore.[/say]")
 
 		# (if grand champion)
-		if(pcRank == FightClubRank.GrandChampion):
+		elif(pcRank == FightClubRank.GrandChampion):
 			saynn("[say=avy]Nobody stayed at the top for long, except for me. Enjoy it while it lasts.[/say]")
 
 		saynn("She shows you her notes:")
@@ -94,8 +99,8 @@ func _run():
 					addDisabledButton("Fight Avy", "You're not ready to do this! You know you gonna lose again.")
 			
 		addButton("Rematch", "Fight one of your defeated opponents again", "rematchmenu")
-		addButton("Leave", "Gotta go", "endthescene")
 		GM.ES.triggerRun(Trigger.TalkingToNPC, ["avy"])
+		addButton("Leave", "Gotta go", "endthescene")
 
 	if(state == "rematchmenu"):
 		saynn("Who do you wanna rematch?")

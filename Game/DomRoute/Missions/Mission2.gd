@@ -22,12 +22,16 @@ func _init():
 					effects = [
 						DECISION_EFFECT_KAIT_OBEDIENCE,
 					],
+					kaitLine = "What a fucking slut! Not Ferri I mean.. she is cute. I'm talking about Avy. Grr-r..",
+					avyLine = "Kait is so soft, you should bully her more. Just like I do.",
 				},
 				"stop": {
 					text = "No",
 					effects = [
 						DECISION_EFFECT_AVY_OBEDIENCE,
 					],
+					kaitLine = "You showed that bitch her place! Not Ferri I mean.. she is cute. I'm talking about Avy.",
+					avyLine = "I should have helped, I know, you don't have to rub it in again. I had a good reason, okay?",
 				},
 			},
 		}

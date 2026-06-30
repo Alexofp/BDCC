@@ -28,12 +28,16 @@ func _init():
 					effects = [
 						DECISION_EFFECT_AVY_LOVE,
 					],
+					kaitLine = "I asked Avy not to help me.. but she still could have done something!",
+					avyLine = "It was pretty fun to see that softie get wrecked.",
 				},
 				"kait": {
 					text = "Yes",
 					effects = [
 						DECISION_EFFECT_KAIT_LOVE,
 					],
+					kaitLine = "You saved me back there. Thanks.",
+					avyLine = "It would have been much more fun to see that slut getting wrecked. Whatever.",
 				},
 			},
 		}

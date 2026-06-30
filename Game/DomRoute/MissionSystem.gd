@@ -81,6 +81,47 @@ func getMissionStats() -> Array: # Check for secret missions?
 	
 	return result
 
+func didCompleteAllMainMissions() -> bool:
+	var totalMissionAmount:int = 0
+	var completedMissionAmount:int = 0
+	for missionID in GlobalRegistry.missions:
+		var theMission = GlobalRegistry.missions[missionID]
+		if(theMission.isDisabled()):
+			continue
+		if(!theMission.isSideMission()):
+			totalMissionAmount += 1
+			if(isCompleted(missionID)):
+				completedMissionAmount += 1
+#		else:
+#			totalSideMissionAmount += 1
+#			if(isCompleted(missionID)):
+#				completedSideMissionAmount += 1
+	
+	if(completedMissionAmount >= totalMissionAmount):
+		return true
+	return false
+
+func didCompleteAllSideMissions() -> bool:
+	var totalSideMissionAmount:int = 0
+	var completedSideMissionAmount:int = 0
+	for missionID in GlobalRegistry.missions:
+		var theMission = GlobalRegistry.missions[missionID]
+		if(theMission.isDisabled()):
+			continue
+		if(!theMission.isSideMission()):
+			pass
+#			totalMissionAmount += 1
+#			if(isCompleted(missionID)):
+#				completedMissionAmount += 1
+		else:
+			totalSideMissionAmount += 1
+			if(isCompleted(missionID)):
+				completedSideMissionAmount += 1
+	
+	if(completedSideMissionAmount >= totalSideMissionAmount):
+		return true
+	return false
+
 func isOnMission() -> bool:
 	if(!current.empty()):
 		return true
@@ -177,6 +218,7 @@ func restartCurrentMission(_resetStats:bool = true):
 	startMission(theMissionID, true, true, replayMode)
 
 func completeMission():
+	var oldDidCompleteAll := didCompleteAllMainMissions()
 	if(!isOnMission()):
 		assert(false, "TRYING TO MARK MISSION AS COMPLETED WHEN WE'RE NOT ON A MISSION")
 		return
@@ -189,6 +231,11 @@ func completeMission():
 	if(theMission):
 		theMission.giveRewardFinal(wasAlreadyCompleted)
 	
+	if(!oldDidCompleteAll && didCompleteAllMainMissions()):
+		GM.main.addMessage("You have completed all of the currently available main missions of this route! Next update will have more, hopefully.")
+		if(!didCompleteAllSideMissions()):
+			GM.main.addMessage("You can still do the side missions!")
+		
 func getDebugMissionList() -> Array:
 	var result:Array = []
 	for missionID in GlobalRegistry.missions:
@@ -233,11 +280,38 @@ func getFlag(_flagID:String, _default = null):
 	return getSpecificFlag(current, _flagID, _default)
 
 func setDecision(_flagID:String, _value):
+	var oldKaitLove := getKaitLove()
+	var oldKaitObedience := getKaitObedience()
+	var oldAvyLove := getAvyLove()
+	var oldAvyObedience := getAvyObedience()
+	
 	if(current.empty()):
 		Log.printerr("TRYING TO SET A MISSION DECISION WHILE NOT ON A MISSION.")
 		return
 	#var theMission = getMission()
 	setFlag(_flagID, _value)
+	
+	if(isOnMission()):
+		var theMission = GlobalRegistry.getMission(current)
+		if(theMission && theMission.decisions.has(_flagID)):
+			var theDecision:Dictionary = theMission.decisions[_flagID]
+			var theOutcomes:Dictionary = theDecision.get("outcomes", {})
+			if(theOutcomes.has(_value)):
+				var theOutcome:Dictionary = theOutcomes[_value]
+				
+				if(theOutcome.has("kaitLine")):
+					setKaitLine(theOutcome["kaitLine"])
+				if(theOutcome.has("avyLine")):
+					setAvyLine(theOutcome["avyLine"])
+	
+	if(oldKaitLove < 2 && getKaitLove() >= 2):
+		GM.main.addMessage("You've unlocked the first 'Love' scenes with Kait! Go talk with her when you can.")
+	if(oldKaitObedience < 2 && getKaitObedience() >= 2):
+		GM.main.addMessage("You've unlocked the first 'Obedience' scenes with Kait! Go talk with her when you can.")
+	if(oldAvyLove < 2 && getAvyLove() >= 2):
+		GM.main.addMessage("You've unlocked the first 'Love' scenes with Avy! Go talk with her when you can.")
+	if(oldAvyObedience < 2 && getAvyObedience() >= 2):
+		GM.main.addMessage("You've unlocked the first 'Obedience' scenes with Avy! Go talk with her when you can.")
 
 func isDoingMission(_id:String) -> bool:
 	return current == _id
@@ -267,7 +341,10 @@ func getAvyObedience() -> int:
 func getEffectValue(_effectID:int) -> int:
 	var result:int = 0
 	
-	for missionID in completed:
+	var theMissionIDsToCheck:Array = completed.keys()
+	if(isOnMission()):
+		theMissionIDsToCheck.append(current)
+	for missionID in theMissionIDsToCheck:
 		var theMission = GlobalRegistry.getMission(missionID)
 		if(!theMission):
 			continue
@@ -318,6 +395,12 @@ func resetMainRoute():
 	current = ""
 	completed.clear()
 	flags.clear()
+
+func setKaitLine(_text:String):
+	GM.main.setFlag("KaitModule.kaitApproach", _text)
+
+func setAvyLine(_text:String):
+	GM.main.setFlag("KaitModule.avyApproach", _text)
 
 func saveData() -> Dictionary:
 	return {

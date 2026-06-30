@@ -10,8 +10,12 @@ func getFlags():
 		"caughtRahi": flag(FlagType.Bool), # Did we catch Rahi and bring her for recruiting
 		"introCompleted": flag(FlagType.Bool), # Did we recruit Rahi and got access to everything now
 		"didAvyDomIntro": flag(FlagType.Bool), # Did we do the Light Domination option with Avy
+		"didKaitDomIntro": flag(FlagType.Bool), # Did we do the Light Domination option with Kait
 		
 		"m1gotpills": flag(FlagType.Bool), # mission 1, did we receive painkillers from Avy? Not a mission flag because we only wanna receive them once
+		
+		"kaitApproach": flag(FlagType.Text), # What Kait will say when you approach her. Will reset after
+		"avyApproach": flag(FlagType.Text), # What Avy will say when you approach her. Will reset after
 	}
 
 func _init():
@@ -41,6 +45,7 @@ func _init():
 		"res://Modules/KaitModule/Kait/KaitObedienceOralSexScene.gd",
 		"res://Modules/KaitModule/Kait/KaitLove69Scene.gd",
 		"res://Modules/KaitModule/Kait/KaitLoveFingerHerScene.gd",
+		"res://Modules/KaitModule/Kait/KaitTalkScene.gd",
 	]
 	characters = [
 	]
@@ -51,6 +56,7 @@ func _init():
 		"res://Modules/KaitModule/Chapter0/DomCh0KaitTalkEvent.gd",
 		"res://Modules/KaitModule/Chapter1/DomCh1RahiRecEvent.gd",
 		"res://Modules/KaitModule/Hideout/HideoutFunctionsEvent.gd",
+		"res://Modules/KaitModule/Avy/AvyLoveObedienceEvent.gd",
 	]
 	quests = [
 		"res://Modules/KaitModule/Chapter0/DomRouteIntroQuest.gd",

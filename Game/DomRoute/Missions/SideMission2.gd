@@ -21,12 +21,14 @@ func _init():
 					effects = [
 						DECISION_EFFECT_KAIT_LOVE,
 					],
+					kaitLine = "Can't believe I somehow walked around the whole prison naked. You could have stopped me!",
 				},
 				"strict": {
 					text = "Had a strict talk with Kait",
 					effects = [
 						DECISION_EFFECT_KAIT_OBEDIENCE,
 					],
+					kaitLine = "Can't believe I somehow walked around the whole prison naked. I guess it was worth it in the end.",
 				},
 			},
 		}

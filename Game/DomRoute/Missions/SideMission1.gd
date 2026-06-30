@@ -21,12 +21,14 @@ func _init():
 					effects = [
 						DECISION_EFFECT_AVY_LOVE,
 					],
+					avyLine = "Thanks for the help. I didn't really need it but who knows.",
 				},
 				"stopped": {
 					text = "Yes",
 					effects = [
 						DECISION_EFFECT_AVY_OBEDIENCE,
 					],
+					avyLine = "You gotta break some fingers sometimes.. Otherwise people don't pay. It's also fun, you know? Oh well.",
 				},
 			},
 		}
