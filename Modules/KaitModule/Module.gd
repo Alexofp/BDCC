@@ -40,6 +40,7 @@ func _init():
 		"res://Modules/KaitModule/Avy/AvyObedienceOralScene.gd",
 		"res://Modules/KaitModule/Avy/AvyLoveSexScene.gd",
 		"res://Modules/KaitModule/Avy/AvyLoveMenuScene.gd",
+		"res://Modules/KaitModule/Avy/AvyDomRouteChatScene.gd",
 		
 		"res://Modules/KaitModule/Kait/KaitObedienceLightDomScene.gd",
 		"res://Modules/KaitModule/Kait/KaitObedienceOralSexScene.gd",
