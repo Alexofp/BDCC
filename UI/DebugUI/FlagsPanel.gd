@@ -5,8 +5,9 @@ var flagPanelDividerScene = preload("res://UI/DebugUI/FlagPanelDivider.tscn")
 onready var flagEditWindow = $FlagEditWindow
 onready var filterEdit = $ScrollContainer/VBoxContainer/HBoxContainer/LineEdit
 
-export var addGameFlags = true
-export var addDatapackFlags = false
+export var addGameFlags := true
+export var addDatapackFlags := false
+export var addMissionFlags := false
 
 func updateFlags():
 	var filterText = filterEdit.text.to_lower()
@@ -29,7 +30,10 @@ func updateFlags():
 			var newflagpanelentry = flagPanelEntryScene.instance()
 			$ScrollContainer/VBoxContainer/VBoxContainer.add_child(newflagpanelentry)
 			newflagpanelentry.setNameAndValue(flagID+" ("+str(FlagType.getVisibleName(flagType))+")", flagValue)
+			newflagpanelentry.flagKind = FlagType.Kind.GameFlag
 			newflagpanelentry.flagID = flagID
+			newflagpanelentry.flagValue = flagValue
+			newflagpanelentry.flagType = flagType
 			var _ok = newflagpanelentry.connect("changeFlagButton", self, "onFlagChangeButton")
 
 		var modules = GlobalRegistry.getModules()
@@ -53,8 +57,11 @@ func updateFlags():
 				var newflagpanelentry = flagPanelEntryScene.instance()
 				$ScrollContainer/VBoxContainer/VBoxContainer.add_child(newflagpanelentry)
 				newflagpanelentry.setNameAndValue(flagID+" ("+str(FlagType.getVisibleName(flagType))+")", flagValue)
+				newflagpanelentry.flagKind = FlagType.Kind.GameFlag
 				newflagpanelentry.flagID = flagID
+				newflagpanelentry.flagValue = flagValue
 				newflagpanelentry.moduleID = moduleID
+				newflagpanelentry.flagType = flagType
 				var _ok = newflagpanelentry.connect("changeFlagButton", self, "onFlagChangeButton")
 	
 	if(addDatapackFlags):
@@ -76,10 +83,38 @@ func updateFlags():
 				var newflagpanelentry = flagPanelEntryScene.instance()
 				$ScrollContainer/VBoxContainer/VBoxContainer.add_child(newflagpanelentry)
 				newflagpanelentry.setNameAndValue(flagID+" ("+str(DatapackSceneVarType.getName(flagType))+")", flagValue)
+				newflagpanelentry.flagKind = FlagType.Kind.DatapackFlag
 				newflagpanelentry.flagID = flagID
+				newflagpanelentry.flagValue = flagValue
 				newflagpanelentry.moduleID = datapackID
-				var _ok = newflagpanelentry.connect("changeFlagButton", self, "onDatapackFlagChangeButton")
+				newflagpanelentry.flagType = DatapackSceneVarType.toFlagType(flagType)
+				var _ok = newflagpanelentry.connect("changeFlagButton", self, "onFlagChangeButton")
 	
+	if(addMissionFlags):
+		for theMissionID in GlobalRegistry.getMissions():
+			var theMission:MissionBase = GlobalRegistry.getMission(theMissionID)
+			addDivider(str(theMissionID)+" - "+str(theMission.getName()))
+			
+			var theFlags:Dictionary = theMission.getFlags()
+			for flagID in theFlags:
+				if(filterText != "" && !(filterText in flagID.to_lower())):
+					continue
+				
+				var theFlagEntry:Dictionary = theFlags[flagID]
+				var flagType:int = theFlagEntry["type"]
+				var flagValue = GM.main.MS.getSpecificFlag(theMissionID, flagID, null)
+				
+				var newflagpanelentry = flagPanelEntryScene.instance()
+				$ScrollContainer/VBoxContainer/VBoxContainer.add_child(newflagpanelentry)
+				newflagpanelentry.setNameAndValue(flagID+" ("+str(FlagType.getVisibleName(flagType))+")", flagValue)
+				newflagpanelentry.flagKind = FlagType.Kind.MissionFlag
+				newflagpanelentry.flagID = flagID
+				newflagpanelentry.flagValue = flagValue
+				newflagpanelentry.moduleID = theMissionID
+				newflagpanelentry.flagType = flagType
+				var _ok = newflagpanelentry.connect("changeFlagButton", self, "onFlagChangeButton")
+	
+				
 	
 func addDivider(text):
 	var flagPanelDividerObject = flagPanelDividerScene.instance()
@@ -95,44 +130,45 @@ func _on_FlagsPanel_visibility_changed():
 	if(visible):
 		updateFlags()
 
-func onFlagChangeButton(moduleID, flagID):
-	flagEditWindow.setFlag(moduleID, flagID)
+func onFlagChangeButton(flagKind, moduleID, flagID, flagType, flagValue):
+	flagEditWindow.setFlag(flagKind, moduleID, flagID, flagType, flagValue)
 	flagEditWindow.popup_centered()
 
-func onDatapackFlagChangeButton(moduleID, flagID):
-	flagEditWindow.setDatpackFlag(moduleID, flagID)
-	flagEditWindow.popup_centered()
+func _on_FlagEditWindow_clearFlag(flagKind, moduleID, flagID):
+	if(flagKind == FlagType.Kind.GameFlag):
+		if(moduleID == null || moduleID == ""):
+			GM.main.clearFlag(flagID)
+			Log.print("Cleared flag "+str(flagID))
+		else:
+			GM.main.clearModuleFlag(moduleID, flagID)
+			Log.print("Cleared flag "+str(flagID)+" in module "+str(moduleID))
+	elif(flagKind == FlagType.Kind.DatapackFlag):
+		GM.main.clearDatapackFlag(moduleID, flagID)
+		Log.print("Cleared flag "+str(flagID)+" in datapack "+str(moduleID))
+	elif(flagKind == FlagType.Kind.MissionFlag):
+		GM.main.MS.setSpecificFlag(moduleID, flagID, null)
+		Log.print("Cleared flag "+str(flagID)+" in mission "+str(moduleID))
 
-
-func _on_FlagEditWindow_clearFlag(moduleID, flagID):
-	if(moduleID == null || moduleID == ""):
-		GM.main.clearFlag(flagID)
-		Log.print("Cleared flag "+str(flagID))
-	else:
-		GM.main.clearModuleFlag(moduleID, flagID)
-		Log.print("Cleared flag "+str(flagID)+" in module "+str(moduleID))
 	updateFlags()
 
-func _on_FlagEditWindow_setFlagValue(moduleID, flagID, value):
-	if(moduleID == null || moduleID == ""):
-		GM.main.setFlag(flagID, value)
-		Log.print("Setting flag "+str(flagID)+" to "+str(value))
-	else:
-		GM.main.setModuleFlag(moduleID, flagID, value)
-		Log.print("Setting flag "+str(flagID)+" in module "+str(moduleID)+" to "+str(value))
+func _on_FlagEditWindow_setFlagValue(flagKind, moduleID, flagID, value):
+	if(flagKind == FlagType.Kind.GameFlag):
+		if(moduleID == null || moduleID == ""):
+			GM.main.setFlag(flagID, value)
+			Log.print("Setting flag "+str(flagID)+" to "+str(value))
+		else:
+			GM.main.setModuleFlag(moduleID, flagID, value)
+			Log.print("Setting flag "+str(flagID)+" in module "+str(moduleID)+" to "+str(value))
+	elif(flagKind == FlagType.Kind.DatapackFlag):
+		GM.main.setDatapackFlag(moduleID, flagID, value)
+		Log.print("Setting datapack flag "+str(flagID)+" in datapack "+str(moduleID)+" to "+str(value))
+	elif(flagKind == FlagType.Kind.MissionFlag):
+		GM.main.MS.setSpecificFlag(moduleID, flagID, value)
+		Log.print("Setting mission flag "+str(flagID)+" in mission "+str(moduleID)+" to "+str(value))
+	
 	updateFlags()
 
 
 func _on_LineEdit_text_entered(_new_text):
 	updateFlags()
 
-
-func _on_FlagEditWindow_setDatapackFlagValue(moduleID, flagID, value):
-	GM.main.setDatapackFlag(moduleID, flagID, value)
-	Log.print("Setting datapack flag "+str(flagID)+" in datapack "+str(moduleID)+" to "+str(value))
-	updateFlags()
-
-func _on_FlagEditWindow_clearDatapackFlag(moduleID, flagID):
-	GM.main.clearDatapackFlag(moduleID, flagID)
-	Log.print("Cleared flag "+str(flagID)+" in datapack "+str(moduleID))
-	updateFlags()

@@ -5,7 +5,6 @@
 [ext_resource path="res://Game/UI/Util/SmartScrollContainer.gd" type="Script" id=3]
 [ext_resource path="res://UI/DebugUI/FlagEditWindow.tscn" type="PackedScene" id=4]
 
-
 [node name="FlagsPanel" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -66,12 +65,9 @@ margin_right = 1280.0
 margin_bottom = 356.0
 
 [node name="FlagEditWindow" parent="." instance=ExtResource( 4 )]
-visible = false
 
 [connection signal="visibility_changed" from="." to="." method="_on_FlagsPanel_visibility_changed"]
 [connection signal="text_entered" from="ScrollContainer/VBoxContainer/HBoxContainer/LineEdit" to="." method="_on_LineEdit_text_entered"]
 [connection signal="pressed" from="ScrollContainer/VBoxContainer/HBoxContainer/Button" to="." method="_on_Button_pressed"]
-[connection signal="clearDatapackFlag" from="FlagEditWindow" to="." method="_on_FlagEditWindow_clearDatapackFlag"]
 [connection signal="clearFlag" from="FlagEditWindow" to="." method="_on_FlagEditWindow_clearFlag"]
-[connection signal="setDatapackFlagValue" from="FlagEditWindow" to="." method="_on_FlagEditWindow_setDatapackFlagValue"]
 [connection signal="setFlagValue" from="FlagEditWindow" to="." method="_on_FlagEditWindow_setFlagValue"]

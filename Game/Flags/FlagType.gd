@@ -9,6 +9,12 @@ enum {
 	Anything,
 }
 
+enum Kind {
+	GameFlag,
+	DatapackFlag,
+	MissionFlag,
+}
+
 static func getDefaultValue(flagType):
 	if(flagType == Bool):
 		return false

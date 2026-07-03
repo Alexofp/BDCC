@@ -17,20 +17,20 @@ margin_bottom = 720.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Debug Actions" parent="TabContainer" instance=ExtResource( 2 )]
+[node name="Actions" parent="TabContainer" instance=ExtResource( 2 )]
 margin_left = 4.0
 margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
 
-[node name="Game Flags" parent="TabContainer" instance=ExtResource( 1 )]
+[node name="Flags" parent="TabContainer" instance=ExtResource( 1 )]
 visible = false
 margin_left = 4.0
 margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
 
-[node name="Datapack Flags" parent="TabContainer" instance=ExtResource( 1 )]
+[node name="Datapacks" parent="TabContainer" instance=ExtResource( 1 )]
 visible = false
 margin_left = 4.0
 margin_top = 32.0
@@ -38,6 +38,15 @@ margin_right = -4.0
 margin_bottom = -4.0
 addGameFlags = false
 addDatapackFlags = true
+
+[node name="Missions" parent="TabContainer" instance=ExtResource( 1 )]
+visible = false
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+addGameFlags = false
+addMissionFlags = true
 
 [node name="Scenes Info" parent="TabContainer" instance=ExtResource( 3 )]
 visible = false
