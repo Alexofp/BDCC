@@ -93,11 +93,11 @@ func _run():
 
 		saynn("The bulldog frowns again and scratches his chin.")
 
-		saynn("[say=bulldog]Fifty creds.[/say]")
+		saynn("[say=bulldog]Fifteen creds.[/say]")
 
 		saynn("Oh.")
 
-		saynn("[say=pc]50 credits? That’s a lot.[/say]")
+		saynn("[say=pc]15 credits? That’s a lot.[/say]")
 
 		saynn("The guy shrugs. Well, that’s something.")
 

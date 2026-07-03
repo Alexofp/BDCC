@@ -168,6 +168,10 @@ func _react(_action: String, _args):
 	if(_action in ["talk", "name", "staff", "avy"]):
 		processTime(RNG.randi_range(5, 10) * 60)
 	
+	if(_action == "talk"):
+		runScene("AnsDomRouteChatScene")
+		return
+	
 	if(_action == "endthescene"):
 		endScene()
 		return

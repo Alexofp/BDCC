@@ -19,6 +19,8 @@ func _run():
 		addButton("Avy", "Ask him about Avy", "ask_avy")
 		addButton("Future", "Ask him about what he is gonna do if she gets out", "ask_future")
 		addButton("Earth", "Ask him about his home planet", "ask_planet")
+		if (getModule("KaitModule").hasHideoutAccess()):
+			addButton("Team", "Ask what he thinks about the hideout what you're doing", "ask_team")
 	if(state == "ask_ans"):
 		saynn("[say=pc]Can you tell me something about yourself?[/say]")
 
@@ -79,6 +81,16 @@ func _run():
 		saynn("[say=announcer]Different strokes for different folks. I guess I'm not a fan of people punching each other either. But people need to get it out of their system, one way or another. Without all of this, people get grumpy and restless. Then they get hostile and desperate.[/say]")
 
 		saynn("Makes sense.")
+
+		saynn("[say=pc]Do you think the staff knows about this arena?[/say]")
+
+		saynn("[say=announcer]I have little doubts that they do.[/say]")
+
+		saynn("[say=pc]Why didn't they do anything about it?[/say]")
+
+		saynn("[say=announcer]Your guess is as good as mine. Maybe they're afraid.[/say]")
+
+		saynn("It is the arena after all, it will have a lot of good fighters.")
 
 		addButton("Continue", "See what happens next", "")
 	if(state == "ask_avy"):
@@ -151,6 +163,24 @@ func _run():
 		saynn("[say=announcer]But also.. As you can see, I'm here now, in this prison. So not everything went as smoothly as I'd hoped. Apparently pimps are not welcome here, in space. Still, I'm happy that they're safe now, at least.[/say]")
 
 		saynn("Your connections only have so much reach it seems.")
+
+		addButton("Continue", "See what happens next", "")
+	if(state == "ask_team"):
+		saynn("[say=pc]What do you think about us trying to take over this prison?[/say]")
+
+		saynn("[say=announcer]I wouldn't join if I thought badly about it, baby. I think it must be done.[/say]")
+
+		saynn("[say=pc]You will probably lose your arena then.[/say]")
+
+		saynn("[say=announcer]Hah, the whole world is gonna become my arena then. So I'm not too attached to it. At least I'd like to think so.[/say]")
+
+		saynn("[say=pc]We're gonna overthrow the captain.[/say]")
+
+		saynn("[say=announcer]I'm not a fighter type. I wish we could talk it through.[/say]")
+
+		saynn("[say=pc]There is no talking it through, they have full power over us.[/say]")
+
+		saynn("[say=announcer]Indeed, that they do.[/say]")
 
 		addButton("Continue", "See what happens next", "")
 

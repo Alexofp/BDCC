@@ -43,6 +43,12 @@ func _run():
 		elif(pcRank == FightClubRank.GrandChampion):
 			saynn("[say=avy]Nobody stayed at the top for long, except for me. Enjoy it while it lasts.[/say]")
 
+		if (getModule("KaitModule").hasHideoutAccess()):
+			var theLove:int = GM.main.MS.getAvyLove()
+			var theObedience:int = GM.main.MS.getAvyObedience()
+			saynn("Avy's Love: "+str(theLove)+"\nAvy's Obedience: "+str(theObedience))
+			addButton("Talk", "Chat with her", "do_talk")
+
 		saynn("She shows you her notes:")
 
 		var showedPC = false
@@ -206,6 +212,10 @@ func _react(_action: String, _args):
 	if(_action == "do_fight_avy_second_time"):
 		runScene("AvyFinalArenaBattleScene")
 		endScene()
+		return
+		
+	if(_action == "do_talk"):
+		runScene("AvyDomRouteChatScene")
 		return
 	
 	if(_action == "endthescene"):

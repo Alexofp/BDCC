@@ -117,7 +117,7 @@ func _run():
 
 		saynn("The guy chuckles while waiting for his knot to deflate.")
 
-		saynn("[say=bulldog]Sure thing. You earned yourself a 25 credit discount.[/say]")
+		saynn("[say=bulldog]Sure thing. You earned yourself a 10 credit discount.[/say]")
 
 		saynn("[say=pc]Wai-.. What?[/say]")
 

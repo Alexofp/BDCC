@@ -21,7 +21,8 @@ func run(_triggerID, _args):
 			addDisabledButton("Mission Board", "You can't do this while you're recruiting someone")
 		else:
 			addButtonWithChecks("Mission Board", "Look at what missions you can do now!", "missionboard", [], [[ButtonChecks.NotLate]])
-			addButtonWithChecks("Kait", "Talk with the snow leopard!", "kaittalk", [], [[ButtonChecks.NotLate]])
+			if(!checkCharacterBusy("KaitBusy", "Seems like Kait isn't here", "Kait")):
+				addButtonWithChecks("Kait", "Talk with the snow leopard!", "kaittalk", [], [[ButtonChecks.NotLate]])
 	
 	if(theRoomID == "hideout_near_break_room" && isDoingRec):
 		var theRecName:String = GM.main.RCS.getRecruitName()

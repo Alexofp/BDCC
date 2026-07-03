@@ -30,16 +30,16 @@ func _run():
 
 		saynn("The guy turns more grumpy.")
 
-		saynn("[say=bulldog]Fifty creds.[/say]")
+		saynn("[say=bulldog]Fifteen creds.[/say]")
 		
-		if(GM.pc.getCredits() >= 50):
-			addButton("Pay 50 credits", "Give him your hard earned credits", "pay_50_credits")
+		if(GM.pc.getCredits() >= 15):
+			addButton("Pay 15 credits", "Give him your hard earned credits", "pay_15_credits")
 		else:
-			addDisabledButton("Pay 50 credits", "You don't have that much..")
+			addDisabledButton("Pay 15 credits", "You don't have that much..")
 		addButton("Naah", "You don't wanna pay", "")
 
-	if(state == "pay_50_credits"):
-		saynn("You pull out a credit chip that contains 50 credits and hand it to the guy. He quickly checks it and puts it away.")
+	if(state == "pay_15_credits"):
+		saynn("You pull out a credit chip that contains 15 credits and hand it to the guy. He quickly checks it and puts it away.")
 
 		saynn("[say=pc]What now?[/say]")
 
@@ -49,23 +49,23 @@ func _run():
 
 		addButton("Walk in", "See what this place is about", "walk_in")
 
-	if(state == "pay_25"):
+	if(state == "pay_5"):
 		# (after seducing)
 
-		saynn("[say=pc]So.. it was 20, wasn’t it?[/say]")
+		saynn("[say=pc]So.. it was two credits, wasn’t it?[/say]")
 
 		saynn("The guy chuckles.")
 
-		saynn("[say=bulldog]Don’t oversell yourself. Twenty five.[/say]")
+		saynn("[say=bulldog]Don’t oversell yourself. Five credits to enter.[/say]")
 
-		if(GM.pc.getCredits() >= 25):
-			addButton("Pay 25 credits", "Give him your hard earned credits", "pay_25_credits")
+		if(GM.pc.getCredits() >= 5):
+			addButton("Pay 5 credits", "Give him your hard earned credits", "pay_5_credits")
 		else:
-			addDisabledButton("Pay 25 credits", "You don't have that much..")
+			addDisabledButton("Pay 5 credits", "You don't have that much..")
 		addButton("Naah", "You don't wanna pay", "")
 
-	if(state == "pay_25_credits"):
-		saynn("You pull out a credit chip that contains 25 credits and hand it to the guy. He quickly checks it and puts it away.")
+	if(state == "pay_5_credits"):
+		saynn("You pull out a credit chip that contains 5 credits and hand it to the guy. He quickly checks it and puts it away.")
 
 		saynn("[say=pc]What now?[/say]")
 
@@ -122,10 +122,10 @@ func _react(_action: String, _args):
 		runScene("FightClubIntroScene")
 		return
 	
-	if(_action == "pay_50_credits"):
-		GM.pc.addCredits(-50)
-	if(_action == "pay_25_credits"):
-		GM.pc.addCredits(-25)
+	if(_action == "pay_15_credits"):
+		GM.pc.addCredits(-15)
+	if(_action == "pay_5_credits"):
+		GM.pc.addCredits(-5)
 	
 	if(_action == "sex?"):
 		runScene("BulldogSexScene")
@@ -137,7 +137,7 @@ func _react(_action: String, _args):
 		if(!getFlag("FightClubModule.BulldogSeduced")):
 			setState("pay")
 		else:
-			setState("pay_25")
+			setState("pay_5")
 		return
 	
 	if(_action == "startfight"):
@@ -163,7 +163,7 @@ func _react_scene_end(_tag, _result):
 		if(battlestate == "win"):
 			setState("if_won")
 			setFlag("FightClubModule.BulldogBeatenUp", true)
-			addExperienceToPlayer(100)
+			addExperienceToPlayer(50)
 		else:
 			setState("if_lost")
 			#addExperienceToPlayer(5)

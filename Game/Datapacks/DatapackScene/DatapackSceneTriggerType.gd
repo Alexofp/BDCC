@@ -165,6 +165,8 @@ static func getEditVars(triggerType):
 					"taviSlavery",
 					"kidlat",
 					"kidlatShop",
+					"kait",
+					"kaitIntro",
 				],
 			},
 		}

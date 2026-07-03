@@ -12,7 +12,6 @@ func run(_triggerID, _args):
 	
 	var theLove:int = GM.main.MS.getAvyLove()
 	var theObedience:int = GM.main.MS.getAvyObedience()
-	saynn("Avy's Love: "+str(theLove)+"\nAvy's Obedience: "+str(theObedience))
 	
 	if(theLove >= 2):
 		addButton("Sex", "See what lewd stuff you can do with Avy", "lovemenu")

@@ -33,6 +33,7 @@ func _run():
 			addButton("Dominate", "See what you can order Kait to do", "dom_menu")
 		else:
 			addDisabledButton("Dominate", "Kait's obedience must be above 2")
+		GM.ES.triggerRun(Trigger.TalkingToNPC, ["kait"])
 		addButton("Leave", "Enough chatting", "endthescene")
 	if(state == "sex_menu"):
 		saynn("What kind of sexual activity do you want to do with Kait?")
@@ -52,6 +53,8 @@ func _run():
 	if(state == "talk_menu"):
 		saynn("[say=pc]Can I ask you something?[/say]")
 
+		saynn("Her ears perk.")
+
 		saynn("[say=kait]Shoot. We have all the time in the world.[/say]")
 
 		addButton("Back", "Enough chat", "")
@@ -69,23 +72,25 @@ func _run():
 
 		saynn("[say=kait]Sure. Snow is always nice. It hides all the filth and mud.[/say]")
 
-		saynn("[say=pc]Lots of filth to be hidden?[/say]")
+		saynn("[say=pc]Is there a lot of filth to hide?[/say]")
 
-		saynn("[say=kait]You bet. When AlphaCorp came, it all went to shit.[/say]")
+		saynn("[say=kait]When AlphaCorp came, everything went to shit. So.. yeah.[/say]")
 
-		saynn("[say=pc]That happened recently?[/say]")
+		saynn("[say=pc]I bet.[/say]")
 
-		saynn("[say=kait]Yeah, AlphaCorp influence expands constantly. Empires always have to expand, you know. Otherwise they die. At least that's what the history books told us.[/say]")
+		saynn("[say=kait]AlphaCorp's influence expands non-stop. It's just an empire really. And empires always have to have victories. Otherwise they die.[/say]")
 
-		saynn("Nothing like a steady supply of victories on TV.")
+		saynn("Probably why there is so much propaganda on TV.")
 
-		saynn("[say=kait]That's not even the part that makes me mad. They divided us. AlphaCorp told us we have some fucking magic artifacts hidden in our mountains somewhere. And some of us believed these grifters. Ugh.[/say]")
+		saynn("[say=kait]That's not even the part that makes me mad. We had a chance! But they divided us. AlphaCorp told us we have some fucking magic artifacts hidden in our mountains somewhere. And some of us believed them.[/say]")
 
 		saynn("[say=pc]Sounds like a great reason to start a giant mining operation on your planet.[/say]")
 
-		saynn("[say=kait]And thus, dirt.[/say]")
+		saynn("[say=kait]And thus, filth.[/say]")
 
-		saynn("[say=pc]Maybe those magic artifacts do actually exist?[/say]")
+		saynn("A few seconds of silence.")
+
+		saynn("[say=pc]But maybe those magic artifacts do actually exist?[/say]")
 
 		saynn("She laughs.")
 
@@ -93,7 +98,7 @@ func _run():
 
 		saynn("She sighs.")
 
-		saynn("[say=kait]My parents got brainwashed by this propaganda. And that's when I knew that I had to leave. That became my dream.[/say]")
+		saynn("[say=kait]My parents got brainwashed by it all. And that's when I knew that I had to leave, as fast as I fucking could.[/say]")
 
 		saynn("[say=pc]Some dreams do come true.[/say]")
 
@@ -103,7 +108,7 @@ func _run():
 
 		saynn("You nod.")
 
-		saynn("[say=pc]What's your new dream?[/say]")
+		saynn("[say=pc]What do you want now?[/say]")
 
 		saynn("[say=kait]Leave. Again. Do as much damage as I can in the process.[/say]")
 
@@ -133,7 +138,7 @@ func _run():
 
 		saynn("Her whiskers twitch a bit, the corners of her mouth curling downwards, her tail wagging sporadically.")
 
-		saynn("[say=kait]Listen.. This whole system, it's all bullshit on top of bullshit. Everyone does what they wanna do, zero care for others. Everyone is a corrupt piece of shit.[/say]")
+		saynn("[say=kait]Listen.. This whole system, it's all bullshit on top of bullshit. Everyone does what they wanna do, zero care for others. Corrupt pieces of shit left and right.[/say]")
 
 		saynn("[say=pc]You tried to play by their rules and got burned.[/say]")
 
@@ -149,7 +154,7 @@ func _run():
 
 		saynn("Kait seems passionate about it.")
 
-		saynn("[say=pc]That will take a while.[/say]")
+		saynn("[say=pc]That will be hard.[/say]")
 
 		saynn("She shrugs, her expression softens.")
 
@@ -179,7 +184,7 @@ func _run():
 
 		saynn("[say=pc]Am I gonna be welcome on your little island?[/say]")
 
-		saynn("[say=kait]Are you a fed?[/say]")
+		saynn("[say=kait]Well, are you a corporate slave?[/say]")
 
 		saynn("[say=pc]Don't think so.[/say]")
 
@@ -197,7 +202,7 @@ func _run():
 
 		saynn("Kait squints and then chuckles.")
 
-		saynn("[say=kait]You're not a guard. You don't look like a corporate dog to me either.[/say]")
+		saynn("[say=kait]You're not a guard. You don't look like a corporate bitch to me either.[/say]")
 
 		saynn("[say=pc]I guess I have permission then.[/say]")
 
@@ -212,6 +217,18 @@ func _run():
 		saynn("[say=pc]Do you like breaking people?[/say]")
 
 		saynn("[say=kait]Necessary evil. I don't crave power. If AlphaCorp didn't force itself into my life, I would be giving exactly zero fucks about it.[/say]")
+
+		saynn("[say=pc]So you only started caring once it affected you.[/say]")
+
+		saynn("[say=kait]I just wanted to live in peace. Are you calling me a hypocrite?[/say]")
+
+		saynn("[say=pc]Making an observation.[/say]")
+
+		saynn("[say=kait]Yes, I'm not stupid enough to go against a whole ass intergalactic corporation on my own. My bad I guess.[/say]")
+
+		saynn("[say=pc]But now you have to.[/say]")
+
+		saynn("[say=kait]We all have to.[/say]")
 
 		addButton("Continue", "See what happens next", "talk_menu")
 	if(state == "ask_ans_avy"):
