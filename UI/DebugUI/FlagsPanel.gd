@@ -4,6 +4,8 @@ var flagPanelEntryScene = preload("res://UI/DebugUI/FlagPanelEntry.tscn")
 var flagPanelDividerScene = preload("res://UI/DebugUI/FlagPanelDivider.tscn")
 onready var flagEditWindow = $FlagEditWindow
 onready var filterEdit = $ScrollContainer/VBoxContainer/HBoxContainer/LineEdit
+var flagMissionCompletedScene = preload("res://UI/DebugUI/FlagMissionCompletedEntry.tscn")
+var flagMissionDecisionScene = preload("res://UI/DebugUI/FlagMissionDecisionEntry.tscn")
 
 export var addGameFlags := true
 export var addDatapackFlags := false
@@ -95,7 +97,26 @@ func updateFlags():
 			var theMission:MissionBase = GlobalRegistry.getMission(theMissionID)
 			addDivider(str(theMissionID)+" - "+str(theMission.getName()))
 			
+			var newCheckbox = flagMissionCompletedScene.instance()
+			$ScrollContainer/VBoxContainer/VBoxContainer.add_child(newCheckbox)
+			newCheckbox.setMission(theMissionID, GM.main.MS.isCompleted(theMissionID))
+			newCheckbox.connect("onCheckboxChanged", self, "onFlagMissionCompletedChanged")
+			
+#	decisions = {
+#		"helped": {
+#			name = "Helped Kait",
+#			outcomes = {
+#				"avy": {
+#					text = "No",
+#					effects = [
+#						DECISION_EFFECT_AVY_LOVE,
+#					],
+#					kaitLine = "I asked Avy not to help me.. but she still could have done something!",
+#					avyLine = "It was pretty fun to see that softie get wrecked.",
+#				},
+			
 			var theFlags:Dictionary = theMission.getFlags()
+			var theDecisions:Dictionary = theMission.decisions
 			for flagID in theFlags:
 				if(filterText != "" && !(filterText in flagID.to_lower())):
 					continue
@@ -104,17 +125,32 @@ func updateFlags():
 				var flagType:int = theFlagEntry["type"]
 				var flagValue = GM.main.MS.getSpecificFlag(theMissionID, flagID, null)
 				
-				var newflagpanelentry = flagPanelEntryScene.instance()
-				$ScrollContainer/VBoxContainer/VBoxContainer.add_child(newflagpanelentry)
-				newflagpanelentry.setNameAndValue(flagID+" ("+str(FlagType.getVisibleName(flagType))+")", flagValue)
-				newflagpanelentry.flagKind = FlagType.Kind.MissionFlag
-				newflagpanelentry.flagID = flagID
-				newflagpanelentry.flagValue = flagValue
-				newflagpanelentry.moduleID = theMissionID
-				newflagpanelentry.flagType = flagType
-				var _ok = newflagpanelentry.connect("changeFlagButton", self, "onFlagChangeButton")
-	
-				
+				if(!theDecisions.has(flagID)):
+					var newflagpanelentry = flagPanelEntryScene.instance()
+					$ScrollContainer/VBoxContainer/VBoxContainer.add_child(newflagpanelentry)
+					newflagpanelentry.setNameAndValue(flagID+" ("+str(FlagType.getVisibleName(flagType))+")", flagValue)
+					newflagpanelentry.flagKind = FlagType.Kind.MissionFlag
+					newflagpanelentry.flagID = flagID
+					newflagpanelentry.flagValue = flagValue
+					newflagpanelentry.moduleID = theMissionID
+					newflagpanelentry.flagType = flagType
+					var _ok = newflagpanelentry.connect("changeFlagButton", self, "onFlagChangeButton")
+				else:
+					var newMissionDecisionEntry = flagMissionDecisionScene.instance()
+					$ScrollContainer/VBoxContainer/VBoxContainer.add_child(newMissionDecisionEntry)
+					newMissionDecisionEntry.setDecision(theMissionID, flagID, theDecisions[flagID], flagValue)
+					var _ok = newMissionDecisionEntry.connect("onDecisionSelect", self, "onDecisionChange")
+
+func onDecisionChange(_missionID:String, _decisionID:String, _value):
+	GM.main.MS.setDecisionSpecific(_missionID, _decisionID, _value)
+	Log.print("Setting mission decision "+str(_decisionID)+" in mission "+str(_missionID)+" to "+str(_value))
+
+func onFlagMissionCompletedChanged(_missionID:String, _completed:bool):
+	GM.main.MS.setMissionCompleteStatus(_missionID, _completed)
+	if(_completed):
+		Log.print("Marking mission "+str(_missionID)+" as completed")
+	else:
+		Log.print("Marking mission "+str(_missionID)+" as not completed")
 	
 func addDivider(text):
 	var flagPanelDividerObject = flagPanelDividerScene.instance()

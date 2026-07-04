@@ -173,6 +173,12 @@ func startMission(_id:String, _runScene:bool = true, _announceIt:bool = true, _r
 func isCompleted(_missionID:String) -> bool:
 	return completed.has(_missionID)
 
+func setMissionCompleteStatus(_missionID:String, _completed:bool):
+	if(_completed):
+		completed[_missionID] = true
+	else:
+		completed.erase(_missionID)
+
 func canCancelCurrentMission() -> bool:
 	if(current.empty()):
 		return false
@@ -280,29 +286,30 @@ func getFlag(_flagID:String, _default = null):
 	return getSpecificFlag(current, _flagID, _default)
 
 func setDecision(_flagID:String, _value):
+	if(current.empty()):
+		Log.printerr("TRYING TO SET A MISSION DECISION WHILE NOT ON A MISSION.")
+		return
+	setDecisionSpecific(current, _flagID, _value)
+
+func setDecisionSpecific(_missionID:String, _flagID:String, _value):
 	var oldKaitLove := getKaitLove()
 	var oldKaitObedience := getKaitObedience()
 	var oldAvyLove := getAvyLove()
 	var oldAvyObedience := getAvyObedience()
 	
-	if(current.empty()):
-		Log.printerr("TRYING TO SET A MISSION DECISION WHILE NOT ON A MISSION.")
-		return
-	#var theMission = getMission()
-	setFlag(_flagID, _value)
+	setSpecificFlag(_missionID, _flagID, _value)
 	
-	if(isOnMission()):
-		var theMission = GlobalRegistry.getMission(current)
-		if(theMission && theMission.decisions.has(_flagID)):
-			var theDecision:Dictionary = theMission.decisions[_flagID]
-			var theOutcomes:Dictionary = theDecision.get("outcomes", {})
-			if(theOutcomes.has(_value)):
-				var theOutcome:Dictionary = theOutcomes[_value]
-				
-				if(theOutcome.has("kaitLine")):
-					setKaitLine(theOutcome["kaitLine"])
-				if(theOutcome.has("avyLine")):
-					setAvyLine(theOutcome["avyLine"])
+	var theMission = GlobalRegistry.getMission(_missionID)
+	if(theMission && theMission.decisions.has(_flagID)):
+		var theDecision:Dictionary = theMission.decisions[_flagID]
+		var theOutcomes:Dictionary = theDecision.get("outcomes", {})
+		if(theOutcomes.has(_value)):
+			var theOutcome:Dictionary = theOutcomes[_value]
+			
+			if(theOutcome.has("kaitLine")):
+				setKaitLine(theOutcome["kaitLine"])
+			if(theOutcome.has("avyLine")):
+				setAvyLine(theOutcome["avyLine"])
 	
 	if(oldKaitLove < 2 && getKaitLove() >= 2):
 		GM.main.addMessage("You've unlocked the first 'Love' scenes with Kait! Go talk with her when you can.")
