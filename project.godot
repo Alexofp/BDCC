@@ -289,6 +289,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/Computer/ComputerBase.gd"
 }, {
+"base": "Reference",
+"class": "ContentBoardEntryBase",
+"language": "GDScript",
+"path": "res://UI/ContentBoard/ContentBoardEntryBase.gd"
+}, {
 "base": "Object",
 "class": "ContentType",
 "language": "GDScript",
@@ -2046,6 +2051,7 @@ _global_script_class_icons={
 "CodeContex": "",
 "ColorUtils": "",
 "ComputerBase": "",
+"ContentBoardEntryBase": "",
 "ContentType": "",
 "CreatedInteraction": "",
 "CreatedInteractionAction": "",
@@ -2536,6 +2542,7 @@ common/enable_pause_aware_picking=true
 [rendering]
 
 quality/driver/fallback_to_gles2=true
+2d/snapping/use_gpu_pixel_snap=true
 vram_compression/import_etc=true
 gles2/compatibility/disable_half_float=true
 environment/default_clear_color=Color( 0.247059, 0.243137, 0.490196, 1 )

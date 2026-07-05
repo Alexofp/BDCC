@@ -296,6 +296,7 @@ var npcOwnerTraits:Dictionary = {}
 var recruits:Dictionary = {}
 var missions:Dictionary = {}
 var missionQuests:Dictionary = {}
+var contentBoardEntries:Dictionary = {}
 
 var bodypartStorageNode
 
@@ -718,6 +719,7 @@ func registerEverything():
 	registerNurseryTaskFolder("res://Game/Science/NurseryTasks/")
 	registerRecruitFolder("res://Game/DomRoute/Recruits/")
 	registerMissionFolder("res://Game/DomRoute/Missions/")
+	registerContentBoardEntryFolder("res://UI/ContentBoard/Entries/")
 	
 	emit_signal("loadingUpdate", 11.0/totalStages, "Sex scenes")
 	yield(get_tree(), "idle_frame")
@@ -2973,6 +2975,31 @@ func getMission(id: String):
 
 func getMissions():
 	return missions
+
+
+func registerContentBoardEntry(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	contentBoardEntries[object.id] = object
+
+func registerContentBoardEntryFolder(folder: String):
+	var scripts = getScriptsInFoldersRecursive(folder)
+	for scriptPath in scripts:
+		registerContentBoardEntry(scriptPath)
+
+func getContentBoardEntry(id: String):
+	if(contentBoardEntries.has(id)):
+		return contentBoardEntries[id]
+	else:
+		Log.printerr("ERROR: board entry with the id "+id+" wasn't found")
+		return null
+
+func getContentBoardEntries():
+	return contentBoardEntries
+
+
+
 
 
 

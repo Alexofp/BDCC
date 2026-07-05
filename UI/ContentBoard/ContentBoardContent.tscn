@@ -1,0 +1,94 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://UI/ContentBoard/ContentBoardCard.tscn" type="PackedScene" id=1]
+[ext_resource path="res://UI/ContentBoard/ContentBoardContent.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFontData" id=5]
+font_path = "res://Fonts/SourceCodePro/SourceCodePro-Regular.otf"
+
+[sub_resource type="DynamicFontData" id=3]
+font_path = "res://Fonts/DroidSansJapanese.woff2"
+
+[sub_resource type="DynamicFontData" id=4]
+font_path = "res://Fonts/DroidSansFallback.woff2"
+
+[sub_resource type="DynamicFontData" id=2]
+font_path = "res://Fonts/Titillium-Regular.otf"
+
+[sub_resource type="DynamicFont" id=6]
+size = 20
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = SubResource( 2 )
+fallback/0 = SubResource( 5 )
+fallback/1 = SubResource( 3 )
+fallback/2 = SubResource( 4 )
+
+[node name="ContentBoardContent" type="ColorRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -622.0
+margin_top = -319.0
+margin_right = 622.0
+margin_bottom = 319.0
+mouse_filter = 2
+color = Color( 0.384314, 0.380392, 0.647059, 1 )
+script = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 544.0
+margin_top = 13.0
+margin_right = 655.0
+margin_bottom = 33.0
+custom_fonts/font = SubResource( 6 )
+text = "Main Routes!"
+
+[node name="KaitRoute" parent="." instance=ExtResource( 1 )]
+margin_left = -283.0
+margin_top = -309.0
+margin_right = -135.0
+margin_bottom = -180.0
+contentID = "MainKait"
+contentName = "Kait Main Route"
+contentDesc = "Dominate the whole prison! A route for dominant players
+(work in progress)"
+
+[node name="TaviRoute" parent="." instance=ExtResource( 1 )]
+margin_left = -100.0
+margin_top = -268.0
+margin_right = 48.0
+margin_bottom = -139.0
+contentID = "MainTavi"
+contentName = "Tavi Main Route"
+contentDesc = "Become Tavi's sidekick and find a way to escape the prison together. A route for switch players."
+
+[node name="CaptainRoute" parent="." instance=ExtResource( 1 )]
+margin_left = 82.0
+margin_top = -294.0
+margin_right = 230.0
+margin_bottom = -165.0
+contentID = "MainCaptain"
+contentName = "Captain Route"
+contentDesc = "Become captain's most trusted inmate. A route for submissive players. (Planned)"
+
+[node name="Rahi" parent="." instance=ExtResource( 1 )]
+margin_left = -521.0
+margin_top = -61.0
+margin_right = -373.0
+margin_bottom = 38.0
+contentID = "Rahi"
+contentName = "Rahi"
+contentDesc = "Help a shy brown kitty with her drinking problem."
+
+[node name="Jacki" parent="." instance=ExtResource( 1 )]
+margin_left = -475.0
+margin_top = 85.0
+margin_right = -327.0
+margin_bottom = 184.0
+contentID = "Jacki"
+contentName = "Jacki Northstar"
+contentDesc = "Have fun with a kind wolfo that is wearing unique chastity piercings."
