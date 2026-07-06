@@ -7,11 +7,16 @@ var startMousePosition: Vector2 = Vector2(0, 0)
 onready var right_panel_canvas = $"%RightPanelCanvas"
 onready var content_board_info_panel = $"%ContentBoardInfoPanel"
 
+signal onClosePressed(_board)
+
 func _enter_tree():
 	get_node("/root").get_texture().flags = Texture.FLAG_FILTER
 
 #func _unhandled_input(event):
 func _input(event):
+	if(right_panel_canvas.visible):
+		return
+	
 	if event is InputEventMouseButton && event.button_index == BUTTON_MIDDLE:
 		camera_2d.zoom = Vector2.ONE
 		camera_2d.position = Vector2.ZERO
@@ -88,9 +93,19 @@ func _handle_drag(event: InputEventScreenDrag):
 		#camera3d.translate(Vector3(offsetTranslate.x * camera3d.size / 500.0, -offsetTranslate.y * camera3d.size / 500.0, 0.0))
 		camera_2d.translate(Vector2(offsetTranslate.x * camera_2d.zoom.x, offsetTranslate.y * camera_2d.zoom.y))
 
-func _on_ContentBoardContent_onCardPressed(_id:String):
+var selectedPanel = null
+
+func _on_ContentBoardContent_onCardPressed(_id:String, _panel):
 	right_panel_canvas.visible = true
 	content_board_info_panel.setEntry(_id)
+	_panel.setSelected(true)
+	selectedPanel = _panel
 
 func _on_ContentBoardInfoPanel_onClose():
 	right_panel_canvas.visible = false
+	if(selectedPanel):
+		selectedPanel.setSelected(false)
+		selectedPanel = null
+
+func _on_CloseButton_pressed():
+	emit_signal("onClosePressed", self)

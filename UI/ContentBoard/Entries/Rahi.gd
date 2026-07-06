@@ -8,3 +8,6 @@ func getName() -> String:
 
 func getDesc() -> String:
 	return "Meow meow fish cat meow"
+
+func getStatus() -> int:
+	return ContentBoardStatus.InProgress

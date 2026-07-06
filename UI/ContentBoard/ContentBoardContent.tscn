@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://UI/ContentBoard/ContentBoardCard.tscn" type="PackedScene" id=1]
 [ext_resource path="res://UI/ContentBoard/ContentBoardContent.gd" type="Script" id=2]
@@ -12,19 +12,84 @@ font_path = "res://Fonts/DroidSansJapanese.woff2"
 [sub_resource type="DynamicFontData" id=4]
 font_path = "res://Fonts/DroidSansFallback.woff2"
 
-[sub_resource type="DynamicFontData" id=2]
+[sub_resource type="DynamicFontData" id=6]
 font_path = "res://Fonts/Titillium-Regular.otf"
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=12]
 size = 20
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 use_mipmaps = true
 use_filter = true
-font_data = SubResource( 2 )
+font_data = SubResource( 6 )
 fallback/0 = SubResource( 5 )
 fallback/1 = SubResource( 3 )
 fallback/2 = SubResource( 4 )
+
+[sub_resource type="StyleBoxFlat" id=13]
+bg_color = Color( 0.741176, 0, 0, 1 )
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color( 0.0509804, 0.0431373, 0, 1 )
+border_blend = true
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id=14]
+bg_color = Color( 0.470588, 0, 0.537255, 1 )
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color( 0, 0.933333, 0.0784314, 1 )
+border_blend = true
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id=15]
+bg_color = Color( 0.0392157, 0.156863, 0.407843, 1 )
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color( 0.0705882, 0.0784314, 0.168627, 1 )
+border_blend = true
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id=16]
+bg_color = Color( 0.635294, 0.231373, 0.121569, 1 )
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color( 0.2, 0.0980392, 0, 1 )
+border_blend = true
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id=17]
+bg_color = Color( 0.0392157, 0.156863, 0.407843, 1 )
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color( 0.0705882, 0.0784314, 0.168627, 1 )
+border_blend = true
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 
 [node name="ContentBoardContent" type="ColorRect"]
 anchor_left = 0.5
@@ -44,33 +109,40 @@ margin_left = 544.0
 margin_top = 13.0
 margin_right = 655.0
 margin_bottom = 33.0
-custom_fonts/font = SubResource( 6 )
-text = "Main Routes!"
+custom_fonts/font = SubResource( 12 )
+text = "Main Routes"
 
 [node name="KaitRoute" parent="." instance=ExtResource( 1 )]
 margin_left = -283.0
 margin_top = -309.0
 margin_right = -135.0
 margin_bottom = -180.0
+custom_styles/panel = SubResource( 13 )
 contentID = "MainKait"
 contentName = "Kait Main Route"
 contentDesc = "Dominate the whole prison! A route for dominant players
 (work in progress)"
+bgColor = Color( 0.741176, 0, 0, 1 )
+borderColor = Color( 0.0509804, 0.0431373, 0, 1 )
 
 [node name="TaviRoute" parent="." instance=ExtResource( 1 )]
 margin_left = -100.0
 margin_top = -268.0
 margin_right = 48.0
 margin_bottom = -139.0
+custom_styles/panel = SubResource( 14 )
 contentID = "MainTavi"
 contentName = "Tavi Main Route"
 contentDesc = "Become Tavi's sidekick and find a way to escape the prison together. A route for switch players."
+bgColor = Color( 0.470588, 0, 0.537255, 1 )
+borderColor = Color( 0, 0.933333, 0.0784314, 1 )
 
 [node name="CaptainRoute" parent="." instance=ExtResource( 1 )]
 margin_left = 82.0
 margin_top = -294.0
 margin_right = 230.0
 margin_bottom = -165.0
+custom_styles/panel = SubResource( 15 )
 contentID = "MainCaptain"
 contentName = "Captain Route"
 contentDesc = "Become captain's most trusted inmate. A route for submissive players. (Planned)"
@@ -80,15 +152,19 @@ margin_left = -521.0
 margin_top = -61.0
 margin_right = -373.0
 margin_bottom = 38.0
+custom_styles/panel = SubResource( 16 )
 contentID = "Rahi"
 contentName = "Rahi"
 contentDesc = "Help a shy brown kitty with her drinking problem."
+bgColor = Color( 0.635294, 0.231373, 0.121569, 1 )
+borderColor = Color( 0.2, 0.0980392, 0, 1 )
 
 [node name="Jacki" parent="." instance=ExtResource( 1 )]
 margin_left = -475.0
 margin_top = 85.0
 margin_right = -327.0
 margin_bottom = 184.0
+custom_styles/panel = SubResource( 17 )
 contentID = "Jacki"
 contentName = "Jacki Northstar"
 contentDesc = "Have fun with a kind wolfo that is wearing unique chastity piercings."

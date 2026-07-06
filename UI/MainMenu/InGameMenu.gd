@@ -90,3 +90,13 @@ func _on_SexToyManagerButton_pressed():
 func onSexToyManagerUIClose(_ui:Control):
 	_ui.queue_free()
 	mainMenuScreen.visible = true
+
+func _on_ContentBoardButton_pressed():
+	var theBoard = load("res://UI/ContentBoard/ContentBoard.tscn").instance()
+	GM.ui.get_parent().add_child(theBoard)
+	theBoard.connect("onClosePressed", self, "onContentBoardClosePressed")
+	GM.ui.visible = false
+
+func onContentBoardClosePressed(_board):
+	_board.queue_free()
+	GM.ui.visible = true
