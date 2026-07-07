@@ -2415,6 +2415,20 @@ func hasCommittedToMainRoute() -> bool:
 	
 	return false
 
+func hasCommittedToTaviMainRoute() -> bool:
+	if(getFlag("TaviModule.Tavi_Quest2Completed", false)):
+		return true
+	return false
+func hasCommittedToKaitMainRoute() -> bool:
+	if(getFlag("KaitModule.joinedTeam", false)):
+		return true
+	return false
+func hasCommittedToCaptainMainRoute() -> bool:
+	# Change me when you add the new main route
+	#if(getFlag("KaitModule.joinedTeam", false)):
+	#	return true
+	return false
+
 # If we have gotten to any ending, we can restart the main route
 func canRestartMainRoute() -> bool:
 	return MRH.canRestartMainRoute()

@@ -7,14 +7,18 @@ const NotStarted := 2
 const InProgress := 3
 const Completed := 4
 const Impossible := 5
+const Cancelled := 6
+const Unavailable := 7
 
 const StatusToColor:Dictionary = {
 	Unknown: Color.red,
 	ConditionsNotMet: Color.orange,
-	NotStarted: Color.blue,
+	NotStarted: Color.lightblue,
 	InProgress: Color.yellow,
 	Completed: Color.green,
 	Impossible: Color.red,
+	Cancelled: Color.darkgray,
+	Unavailable: Color.gray,
 }
 const StatusToText:Dictionary = {
 	Unknown: "Unknown",
@@ -23,6 +27,8 @@ const StatusToText:Dictionary = {
 	InProgress: "In progress",
 	Completed: "Completed!",
 	Impossible: "Impossible",
+	Cancelled: "Cancelled",
+	Unavailable: "Unavailable",
 }
 
 static func getColor(_status:int) -> Color:

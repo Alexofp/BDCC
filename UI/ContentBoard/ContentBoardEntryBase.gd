@@ -6,8 +6,11 @@ var id:String = ""
 func getName() -> String:
 	return "Fill me"
 
-func getDesc() -> String:
+func getDesc(_isFull:bool) -> String:
 	return "Write the description here!"
+
+func getCompletedDesc() -> String:
+	return ""
 
 func getStartConditions() -> Array:
 	return [
@@ -33,3 +36,14 @@ func getFlag(_flagID:String, _default = null):
 	if(!GM.main):
 		return _default
 	return GM.main.getFlag(_flagID, _default)
+
+func completeIf(_flagID:String) -> int:
+	if(getFlag(_flagID, false)):
+		return ContentBoardCondition.Complete
+	return ContentBoardCondition.Incomplete
+
+func completeIfBool(_b:bool) -> int:
+	if(_b):
+		return ContentBoardCondition.Complete
+	return ContentBoardCondition.Incomplete
+	

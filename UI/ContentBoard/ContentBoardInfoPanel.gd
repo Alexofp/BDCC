@@ -30,7 +30,12 @@ func setEntry(_id:String):
 			return
 	
 	name_label.text = theBoardEntry.getName()
-	desc_label.bbcode_text = theBoardEntry.getDesc()
+	desc_label.bbcode_text = theBoardEntry.getDesc(true)
+	
+	if(theBoardEntry.isCompleted()):
+		var theCompleteText:String = theBoardEntry.getCompletedDesc()
+		if(!theCompleteText.empty()):
+			desc_label.bbcode_text += "\n\n"+theCompleteText
 	
 	var theStatus:int = theBoardEntry.getStatus()
 	status_label.text = ContentBoardStatus.getText(theStatus)
@@ -46,7 +51,9 @@ func setEntry(_id:String):
 		
 	cond_label.bbcode_text = Util.join(theReqTexts, "\n")
 		
-	progress_label.bbcode_text = theBoardEntry.getProgressText()
-	
 	var _didStart:bool = theBoardEntry.isStarted()
 	#how_to_progress_container.visible = _didStart
+	if(_didStart):
+		progress_label.bbcode_text = theBoardEntry.getProgressText()
+	else:
+		progress_label.bbcode_text = "-- Find a way to start this content first! --"

@@ -169,7 +169,7 @@ margin_bottom = 53.0
 [node name="Label" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/ConditionsContainer/VBoxContainer"]
 margin_right = 350.0
 margin_bottom = 20.0
-text = "Conditions"
+text = "Start conditions"
 align = 1
 
 [node name="CondLabel" type="RichTextLabel" parent="VBoxContainer/ScrollContainer/VBoxContainer/ConditionsContainer/VBoxContainer"]

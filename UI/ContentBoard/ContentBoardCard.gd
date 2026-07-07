@@ -49,7 +49,10 @@ func _ready():
 			var theStatus:int = theBoardEntry.getStatus()
 			status_label.text = ContentBoardStatus.getText(theStatus)
 			status_label["custom_colors/font_color"] = ContentBoardStatus.getColor(theStatus)
-
+			
+			name_label.text = theBoardEntry.getName()
+			desc_label.text = theBoardEntry.getDesc(false)
+			
 func updateColors():
 	var theStyle := preload("res://UI/ContentBoard/Util/ContentBoardCardStyle.tres").duplicate()
 	theStyle.bg_color = bgColor

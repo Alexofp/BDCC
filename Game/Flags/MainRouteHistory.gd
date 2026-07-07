@@ -51,6 +51,21 @@ func resetMainRoute(_ending:int=-1):
 		theModule.resetMainRoute()
 	GM.main.applyAllWorldEdits()
 
+func didCompleteTaviRouteBefore() -> bool:
+	for theEntry in history:
+		if(theEntry.ending == MainRouteEnding.TaviKillEnding):
+			return true
+		if(theEntry.ending == MainRouteEnding.TaviNoEnding):
+			return true
+		if(theEntry.ending == MainRouteEnding.TaviYesEnding):
+			return true
+	return false
+
+func didCompleteKaitRouteBefore() -> bool:
+	return false
+func didCompleteCaptainRouteBefore() -> bool:
+	return false
+
 func saveData() -> Dictionary:
 	var theEndings:Array = []
 	for theEnding in history:
