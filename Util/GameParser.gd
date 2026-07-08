@@ -86,14 +86,24 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array) -> Stri
 		return "[color=red]!RUNTIME ERROR NO CHARACTER FOUND "+_obj+"."+_command+" "+str(_args)+"![/color]"
 	if(_command == "theyre" && _args.size() == 0):
 		return object.theyre()
-	if(_command in ["youre", "youreTheyre"] && _args.size() == 0):
+	if(_command in ["youre"] && _args.size() == 0):
+		if(object.isPlayer()):
+			return "you're"
+		else:
+			return object.getName()+" is"
+	if(_command in ["youreTheyre"] && _args.size() == 0):
 		if(object.isPlayer()):
 			return "you're"
 		else:
 			return object.theyre()
 	if(_command == "theyve" && _args.size() == 0):
 		return object.theyve()
-	if(_command in ["youve", "youveTheyve"] && _args.size() == 0):
+	if(_command in ["youve"] && _args.size() == 0):
+		if(object.isPlayer()):
+			return "you've"
+		else:
+			return object.getName()+" has"
+	if(_command in ["youveTheyve"] && _args.size() == 0):
 		if(object.isPlayer()):
 			return "you've"
 		else:
@@ -235,7 +245,7 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array) -> Stri
 			return object.verbS(str(_args[0]))
 		if(_args.size() == 2):
 			return object.verbS(str(_args[0]), str(_args[1]))
-	if((_command == "yourself") && _args.size() == 0):
+	if((_command in ["yourself", "yourselfHimself", "yourselfThemself"]) && _args.size() == 0):
 		if(object.isPlayer()):
 			return "yourself"
 		return object.himselfHerself()
