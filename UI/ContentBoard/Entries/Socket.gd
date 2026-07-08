@@ -1,36 +1,36 @@
 extends ContentBoardEntryBase
 
 func _init():
-	id = "AlexRynard"
+	id = "Socket"
 	
 func getName() -> String:
-	return "Alex Rynard"
+	return "Socket"
 
 func getDesc(_isFull:bool) -> String:
 	if(_isFull):
-		return "Offer your company to a lonely engineer foxy guy who has trust issues. This content is focused around wholesome interactions and safe BDSM practices."
-	return "Offer your company to a lonely engineer foxy who has trust issues."
+		return "Meet a kind, easy-going fennec engineer with a very interesting outfit. Help her with her tasks all around the prison. Resist the temptations of doing lewd stuff with her out in the public.. or don't."
+	return "Meet a kind fennec engineer with an interesting outfit. Help her with her tasks all around the prison."
 
 func getKinks() -> Array:
 	return [
-		"Player is sub",
-		"BDSM",
-		"Soft submission",
-		"Sex machines",
-		"Milking",
+		"Player is dominant",
+		"Public sex",
+		"Public use",
+		"Free use",
+		"Stealth sex",
+		"Exhibitionism",
 		"Hypnosis",
-		"Sex (pc is bottom)",
 	]
 
 func getCompletedDesc() -> String:
-	return "You helped Alex become a better version of himself!"
+	if(getFlag("SocketModule.removedWombImplant", false)):
+		return "You helped Socket with all her tasks! You even removed her womb implant!"
+	return "You helped Socket with all her tasks!"
 
 func getStatus() -> int:
-	if(getFlag("AlexRynardModule.ch2FinalSceneHappened", false)):
+	if(getFlag("SocketModule.h5completed", false)):
 		return ContentBoardStatus.Completed
-	if(getFlag("AlexRynardModule.ch1StopAlexContent", false)):
-		return ContentBoardStatus.Cancelled
-	if(getFlag("AlexRynardModule.ch1IntroSceneHappened", false)):
+	if(getFlag("SocketModule.socketIntroduced", false)):
 		return ContentBoardStatus.InProgress
 	return ContentBoardStatus.ConditionsNotMet
 
@@ -40,8 +40,9 @@ func getStartConditions() -> Array:
 		[completeIf("PortalPantiesModule.Alex_FirstTimeTalked"), "Talk with Alex Rynard near the entrance to the mines."],
 		[completeIf("PortalPantiesModule.Panties_AskedAlex"), "Ask Alex Rynard if he can help you with credits."],
 		[completeIfBool(getFlag("PortalPantiesModule.Panties_FleshlightsReturnedToAlex", false) || getFlag("PortalPantiesModule.Panties_PcDenied", false)), "Complete the 'portal panties' task that Alex Rynard gives fully or decline him after trying them once."],
-		[completeIf("AlexRynardModule.ch1IntroSceneHappened"), "Ask Alex Rynard in the workshop if he is up for lewd stuff!"],
+		[completeIfBool(GM.pc.getSkillsHolder().getLevel() >= 10), "Reach level 10."],
+		[completeIf("SocketModule.socketIntroduced"), "Enter the workshop to meet Socket!"],
 	]
 
 func getProgressText() -> String:
-	return "Keep visiting Alex Rynard in the workshop and helping him."
+	return "Help Socket complete her tasks all around the prison."

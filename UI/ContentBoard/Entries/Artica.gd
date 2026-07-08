@@ -11,6 +11,21 @@ func getDesc(_isFull:bool) -> String:
 		return "Corrupt a very shy herm fluff named Artica Sparkle. This content has a big focus on corruption, pawplay, breeding, chastity and tentacles."
 	return "Corrupt a very shy herm fluff."
 
+func getKinks() -> Array:
+	return [
+		"Player is dominant",
+		"Corruption",
+		"Pawplay/Pawjobs",
+		"Breeding",
+		"Chastity (optional)",
+		"Hypnosis",
+		"Tentacles",
+		"Stretching",
+		"Autofellatio",
+		"Milking",
+		"Noncon (optional)",
+	]
+
 func getCompletedDesc() -> String:
 	if(getFlag("ArticaModule.LQArticaGotDreamCatcher")):
 		return "Artica is happy because you found her dream catcher! She is now yours!"

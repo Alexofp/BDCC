@@ -16,7 +16,7 @@ const StatusToColor:Dictionary = {
 	NotStarted: Color.lightblue,
 	InProgress: Color.yellow,
 	Completed: Color.green,
-	Impossible: Color.red,
+	Impossible: Color.darkred,
 	Cancelled: Color.darkgray,
 	Unavailable: Color.gray,
 }

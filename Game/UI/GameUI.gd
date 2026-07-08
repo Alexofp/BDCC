@@ -103,6 +103,12 @@ func _ready():
 		textOutput.selection_enabled = false
 	setIsRightHandedLayout(OPTIONS.isUILayoutRightHanded())
 	
+	connect("visibility_changed", self, "onVisChanged")
+	
+func onVisChanged():
+	playerPanel.setPCViewportVis(visible)
+	#print("Visibility changed: "+str(visible))
+	
 func say(text: String):
 	#textOutput.append_bbcode(gameParser.executeString(sayParser.processString(text)))
 	textOutput.bbcode_text += gameParser.executeString(sayParser.processString(text))

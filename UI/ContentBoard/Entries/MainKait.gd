@@ -11,6 +11,12 @@ func getDesc(_isFull:bool) -> String:
 		return "Dominate the whole prison together with your team! Break anyone who is gonna stand in your way. This route is designed for dominant players. (This route is not fully complete yet)"
 	return "Dominate the whole prison! Designed for dominant players.\n(work in progress)"
 
+func getKinks() -> Array:
+	return [
+		"Player is dominant",
+		"Every dominant kink",
+	]
+
 func getCompletedDesc() -> String:
 	return "You made the captain your bitch!"
 

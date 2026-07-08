@@ -9,6 +9,8 @@ onready var progress_label = $"%ProgressLabel"
 onready var status_label = $"%StatusLabel"
 onready var conditions_container = $"%ConditionsContainer"
 onready var how_to_progress_container = $"%HowToProgressContainer"
+onready var kinks_label = $"%KinksLabel"
+onready var kinks_panel = $"%KinksPanel"
 
 signal onClose
 
@@ -57,3 +59,7 @@ func setEntry(_id:String):
 		progress_label.bbcode_text = theBoardEntry.getProgressText()
 	else:
 		progress_label.bbcode_text = "-- Find a way to start this content first! --"
+	
+	var theKinks:Array = theBoardEntry.getKinks()
+	kinks_panel.visible = !theKinks.empty()
+	kinks_label.bbcode_text = Util.join(theKinks, "\n")

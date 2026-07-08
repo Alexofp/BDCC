@@ -11,6 +11,15 @@ func getDesc(_isFull:bool) -> String:
 		return "Become Tavi's sidekick and find a way to escape the prison together. This route is designed for switch players, ones who are okay with both, dominating and submitting."
 	return "Become Tavi's sidekick and find a way to escape the prison together. Designed for switch players."
 
+func getKinks() -> Array:
+	return [
+		"Player will dom and sub",
+		"Every kind of sex",
+		"BDSM",
+		"Corruption",
+		"Noncon (optional)",
+	]
+
 func getCompletedDesc() -> String:
 	if(getFlag("TaviModule.Ch7NoEnding")):
 		return "You have escaped the prison together with Tavi!"

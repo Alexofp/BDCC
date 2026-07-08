@@ -12,6 +12,9 @@ func getDesc(_isFull:bool) -> String:
 func getCompletedDesc() -> String:
 	return ""
 
+func getKinks() -> Array:
+	return []
+
 func getStartConditions() -> Array:
 	return [
 		[ContentBoardCondition.Incomplete, "Do a hecking meow"],

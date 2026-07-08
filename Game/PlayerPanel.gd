@@ -163,3 +163,7 @@ func _handle_drag(event: InputEventScreenDrag):
 		#offset -= drag_vector / 2 * zoom
 		var offsetTranslate :Vector2 = drag_vector# / 2.0 * camera3d.zoom
 		camera3d.translate(Vector3(offsetTranslate.x * camera3d.size / 500.0, -offsetTranslate.y * camera3d.size / 500.0, 0.0))
+
+func setPCViewportVis(_v:bool):
+	$ViewportWrapper.visible = _v
+	$ViewportWrapper/CustomViewportControl.ignoreEvents = !_v

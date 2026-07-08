@@ -11,6 +11,15 @@ func getDesc(_isFull:bool) -> String:
 		return "Have fun with a kind wolfo that is wearing unique chastity piercings that keep her pussy lips always shut. This content is focused around corruption and anal sex."
 	return "Have fun with a kind wolfo that is wearing unique chastity piercings."
 
+func getKinks() -> Array:
+	return [
+		"Player is dominant",
+		"Noncon/Stalking",
+		"Anal sex only (pc is top)",
+		"Hole stretching",
+		"Corruption",
+	]
+
 func getCompletedDesc() -> String:
 	if(getFlag("JackiModule.Jacki_ch2GotPussyFreed")):
 		return "Jacki is now yours! You have freed her pussy too!"

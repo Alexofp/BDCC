@@ -11,6 +11,19 @@ func getDesc(_isFull:bool) -> String:
 		return "Help a shy brown kitty with her drinking problem. Keep Rahi's body and mind occupied in order to help her cope."
 	return "Help a shy brown kitty with her drinking problem."
 
+func getKinks() -> Array:
+	return [
+		"Player is dominant",
+		"Vaginal sex/Breeding",
+		"Anal sex",
+		"Masochism (Rahi)",
+		"Role switch (Dom -> Sub)",
+		"Exhibitionism",
+		"Petplay",
+		"Prostitution/Sharing (optional)",
+		"Watersports (optional)",
+	]
+
 func getCompletedDesc() -> String:
 	if(getFlag("RahiModule.rahiMile7Proposed")):
 		return "Rahi is now your happy wife! Meow meow."
