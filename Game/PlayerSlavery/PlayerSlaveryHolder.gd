@@ -157,7 +157,10 @@ func getEndingsInfo(includeDesc:bool = true) -> String:
 		result.append("")
 		
 	return Util.join(result, "\n")
-	
+
+func didComplete(_slaveryID:String) -> bool:
+	return getUnlockedEndingsAmountOf(_slaveryID) > 0
+
 func saveData() -> Dictionary:
 	return {
 		storedCredits = storedCredits,

@@ -77,3 +77,6 @@ func doDebugUpdateStuff(_u:bool):
 
 func setSelected(_b:bool):
 	selection_container.visible = _b
+
+func getContentID() -> String:
+	return contentID

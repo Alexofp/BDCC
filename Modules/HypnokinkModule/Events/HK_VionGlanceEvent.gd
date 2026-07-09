@@ -13,7 +13,7 @@ func react(_triggerID, _args):
 		return
 	
 	if(WorldPopulation.Inmates in GM.pc.getLocationPopulation()):
-		var baseChance = 5
+		var baseChance:float = 5.0
 		
 		if(RNG.chance(baseChance)):
 			runScene("VionGlance")

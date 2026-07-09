@@ -2388,6 +2388,16 @@ func startPlayerSlavery(_slaveryID:String, storeInv:bool = false):
 		return
 	runScene(theStartSceneID)
 
+func isInPlayerSlavery() -> bool:
+	if(!PS):
+		return false
+	return true
+
+func isInSpecificPlayerSlavery(_id:String) -> bool:
+	if(!PS):
+		return false
+	return PS.id == _id
+
 func stopPlayerSlavery():
 	if(!PS):
 		return

@@ -289,6 +289,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/Computer/ComputerBase.gd"
 }, {
+"base": "Sprite",
+"class": "ContentAutoSprite",
+"language": "GDScript",
+"path": "res://UI/ContentBoard/Util/ContentSprite.gd"
+}, {
 "base": "Object",
 "class": "ContentBoardCondition",
 "language": "GDScript",
@@ -2061,6 +2066,7 @@ _global_script_class_icons={
 "CodeContex": "",
 "ColorUtils": "",
 "ComputerBase": "",
+"ContentAutoSprite": "",
 "ContentBoardCondition": "",
 "ContentBoardEntryBase": "",
 "ContentBoardStatus": "",
