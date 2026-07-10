@@ -1,10 +1,15 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://UI/ContentBoard/ContentBoardCard.tscn" type="PackedScene" id=1]
 [ext_resource path="res://UI/ContentBoard/ContentBoardContent.gd" type="Script" id=2]
 [ext_resource path="res://Images/SillyVersions/Rahi.png" type="Texture" id=3]
 [ext_resource path="res://UI/ContentBoard/Util/ContentSprite.gd" type="Script" id=4]
 [ext_resource path="res://Images/SillyVersions/AlexRynard.png" type="Texture" id=5]
+[ext_resource path="res://Images/SillyVersions/Kidlat.png" type="Texture" id=6]
+[ext_resource path="res://Images/SillyVersions/Mineshaft.png" type="Texture" id=7]
+[ext_resource path="res://Images/SillyVersions/Artica.png" type="Texture" id=8]
+[ext_resource path="res://Images/SillyVersions/Jacki.png" type="Texture" id=9]
+[ext_resource path="res://Images/SillyVersions/Socket.png" type="Texture" id=10]
 
 [sub_resource type="DynamicFontData" id=5]
 font_path = "res://Fonts/SourceCodePro/SourceCodePro-Regular.otf"
@@ -29,7 +34,7 @@ fallback/0 = SubResource( 5 )
 fallback/1 = SubResource( 3 )
 fallback/2 = SubResource( 4 )
 
-[sub_resource type="StyleBoxFlat" id=13]
+[sub_resource type="StyleBoxFlat" id=16]
 bg_color = Color( 0.741176, 0, 0, 1 )
 border_width_left = 12
 border_width_top = 12
@@ -42,7 +47,7 @@ corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
-[sub_resource type="StyleBoxFlat" id=14]
+[sub_resource type="StyleBoxFlat" id=17]
 bg_color = Color( 0.470588, 0, 0.537255, 1 )
 border_width_left = 12
 border_width_top = 12
@@ -68,7 +73,7 @@ corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
-[sub_resource type="StyleBoxFlat" id=27]
+[sub_resource type="StyleBoxFlat" id=18]
 bg_color = Color( 0.74902, 0.376471, 0.301961, 1 )
 border_width_left = 12
 border_width_top = 12
@@ -81,7 +86,7 @@ corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
-[sub_resource type="StyleBoxFlat" id=28]
+[sub_resource type="StyleBoxFlat" id=33]
 bg_color = Color( 0.137255, 0.137255, 0.137255, 1 )
 border_width_left = 12
 border_width_top = 12
@@ -94,8 +99,8 @@ corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
-[sub_resource type="StyleBoxFlat" id=29]
-bg_color = Color( 0.882353, 0.882353, 0.87451, 1 )
+[sub_resource type="StyleBoxFlat" id=32]
+bg_color = Color( 1, 1, 1, 1 )
 border_width_left = 12
 border_width_top = 12
 border_width_right = 12
@@ -107,7 +112,7 @@ corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
-[sub_resource type="StyleBoxFlat" id=33]
+[sub_resource type="StyleBoxFlat" id=21]
 bg_color = Color( 0.698039, 0.278431, 0.584314, 1 )
 border_width_left = 12
 border_width_top = 12
@@ -120,7 +125,7 @@ corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
-[sub_resource type="StyleBoxFlat" id=24]
+[sub_resource type="StyleBoxFlat" id=22]
 bg_color = Color( 0.878431, 0.478431, 0.207843, 1 )
 border_width_left = 12
 border_width_top = 12
@@ -133,7 +138,7 @@ corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
-[sub_resource type="StyleBoxFlat" id=31]
+[sub_resource type="StyleBoxFlat" id=23]
 bg_color = Color( 0.777344, 0.838226, 1, 1 )
 border_width_left = 12
 border_width_top = 12
@@ -146,7 +151,7 @@ corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
-[sub_resource type="StyleBoxFlat" id=32]
+[sub_resource type="StyleBoxFlat" id=24]
 bg_color = Color( 0.85098, 1, 0.823529, 1 )
 border_width_left = 12
 border_width_top = 12
@@ -159,7 +164,7 @@ corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
-[sub_resource type="StyleBoxFlat" id=22]
+[sub_resource type="StyleBoxFlat" id=25]
 bg_color = Color( 0.121569, 0, 0.160784, 1 )
 border_width_left = 12
 border_width_top = 12
@@ -172,7 +177,7 @@ corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
-[sub_resource type="StyleBoxFlat" id=30]
+[sub_resource type="StyleBoxFlat" id=34]
 bg_color = Color( 0.870588, 0.694118, 0.572549, 1 )
 border_width_left = 12
 border_width_top = 12
@@ -185,7 +190,7 @@ corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
-[sub_resource type="StyleBoxFlat" id=25]
+[sub_resource type="StyleBoxFlat" id=27]
 bg_color = Color( 0.819608, 0.247059, 0.2, 1 )
 border_width_left = 12
 border_width_top = 12
@@ -198,7 +203,7 @@ corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
-[sub_resource type="StyleBoxFlat" id=26]
+[sub_resource type="StyleBoxFlat" id=28]
 bg_color = Color( 0.0352941, 0, 0, 1 )
 border_width_left = 12
 border_width_top = 12
@@ -211,7 +216,7 @@ corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
-[sub_resource type="StyleBoxFlat" id=34]
+[sub_resource type="StyleBoxFlat" id=29]
 bg_color = Color( 0.266667, 0.0745098, 0, 1 )
 border_width_left = 12
 border_width_top = 12
@@ -224,7 +229,7 @@ corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
-[sub_resource type="StyleBoxFlat" id=35]
+[sub_resource type="StyleBoxFlat" id=30]
 bg_color = Color( 0, 0.898039, 0.898039, 1 )
 border_width_left = 12
 border_width_top = 12
@@ -237,7 +242,7 @@ corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
-[sub_resource type="StyleBoxFlat" id=36]
+[sub_resource type="StyleBoxFlat" id=31]
 bg_color = Color( 0.0235294, 0.8, 0, 1 )
 border_width_left = 12
 border_width_top = 12
@@ -307,7 +312,7 @@ margin_left = -283.0
 margin_top = -309.0
 margin_right = -135.0
 margin_bottom = -180.0
-custom_styles/panel = SubResource( 13 )
+custom_styles/panel = SubResource( 16 )
 contentID = "MainKait"
 contentName = "Kait Main Route"
 contentDesc = "Dominate the whole prison! A route for dominant players
@@ -320,7 +325,7 @@ margin_left = -100.0
 margin_top = -268.0
 margin_right = 48.0
 margin_bottom = -139.0
-custom_styles/panel = SubResource( 14 )
+custom_styles/panel = SubResource( 17 )
 contentID = "MainTavi"
 contentName = "Tavi Main Route"
 contentDesc = "Become Tavi's sidekick and find a way to escape the prison together. A route for switch players."
@@ -342,7 +347,7 @@ margin_left = -531.0
 margin_top = -213.0
 margin_right = -383.0
 margin_bottom = -99.0
-custom_styles/panel = SubResource( 27 )
+custom_styles/panel = SubResource( 18 )
 contentID = "Rahi"
 contentName = "Rahi"
 contentDesc = "Help a shy brown kitty with her drinking problem."
@@ -350,8 +355,8 @@ bgColor = Color( 0.74902, 0.376471, 0.301961, 1 )
 borderColor = Color( 0.458824, 0.14902, 0.0862745, 1 )
 
 [node name="ContentAutoSprite" type="Sprite" parent="Rahi"]
-position = Vector2( 120, -16 )
-scale = Vector2( 0.109375, 0.109375 )
+position = Vector2( 118, -17 )
+scale = Vector2( 0.128906, 0.128906 )
 z_index = 111
 texture = ExtResource( 3 )
 script = ExtResource( 4 )
@@ -361,31 +366,45 @@ margin_left = -585.0
 margin_top = -76.0
 margin_right = -437.0
 margin_bottom = 53.0
-custom_styles/panel = SubResource( 28 )
+custom_styles/panel = SubResource( 33 )
 contentID = "Jacki"
 contentName = "Jacki Northstar"
 contentDesc = "Have fun with a kind wolfo that is wearing unique chastity piercings."
 bgColor = Color( 0.137255, 0.137255, 0.137255, 1 )
 borderColor = Color( 0.537255, 0, 0, 1 )
 
+[node name="ContentAutoSprite4" type="Sprite" parent="Jacki"]
+position = Vector2( 122, 127 )
+scale = Vector2( 0.146484, 0.146484 )
+z_index = 111
+texture = ExtResource( 9 )
+script = ExtResource( 4 )
+
 [node name="Artica" parent="." instance=ExtResource( 1 )]
 margin_left = -225.0
-margin_top = 48.0
+margin_top = 37.0
 margin_right = -77.0
-margin_bottom = 147.0
-custom_styles/panel = SubResource( 29 )
+margin_bottom = 146.0
+custom_styles/panel = SubResource( 32 )
 contentID = "Artica"
 contentName = "Artica"
 contentDesc = "Corrupt a very shy herm fluff."
-bgColor = Color( 0.882353, 0.882353, 0.87451, 1 )
+bgColor = Color( 1, 1, 1, 1 )
 borderColor = Color( 0.0823529, 0.937255, 0.94902, 1 )
+
+[node name="ContentAutoSprite3" type="Sprite" parent="Artica"]
+position = Vector2( 145, 76 )
+scale = Vector2( 0.113281, 0.113281 )
+z_index = 111
+texture = ExtResource( 8 )
+script = ExtResource( 4 )
 
 [node name="Vion" parent="." instance=ExtResource( 1 )]
 margin_left = -184.0
 margin_top = 178.0
 margin_right = -36.0
 margin_bottom = 277.0
-custom_styles/panel = SubResource( 33 )
+custom_styles/panel = SubResource( 21 )
 contentID = "Vion"
 contentName = "Vion"
 contentDesc = "Find a way to help a lizard with his stallion problem."
@@ -397,7 +416,7 @@ margin_left = -395.0
 margin_top = 175.0
 margin_right = -247.0
 margin_bottom = 289.0
-custom_styles/panel = SubResource( 24 )
+custom_styles/panel = SubResource( 22 )
 contentID = "AlexRynard"
 contentName = "Alex Rynard"
 contentDesc = "Offer your company to a lonely engineer foxy guy who has trust issues."
@@ -416,7 +435,7 @@ margin_left = 453.0
 margin_top = -229.0
 margin_right = 601.0
 margin_bottom = -81.0
-custom_styles/panel = SubResource( 31 )
+custom_styles/panel = SubResource( 23 )
 contentID = "ElizaChastity"
 contentName = "Obedience Training"
 contentDesc = "Go through an obedience training program created by Eliza Quinn, focused all around male chastity"
@@ -428,7 +447,7 @@ margin_left = 288.0
 margin_top = -231.0
 margin_right = 436.0
 margin_bottom = -83.0
-custom_styles/panel = SubResource( 32 )
+custom_styles/panel = SubResource( 24 )
 contentID = "ElizaLab"
 contentName = "BioLab Assistant"
 contentDesc = "Become Eliza's assistant and get a chance to work in her lab, researching new transformation drugs"
@@ -440,31 +459,45 @@ margin_left = -405.0
 margin_top = -27.0
 margin_right = -257.0
 margin_bottom = 121.0
-custom_styles/panel = SubResource( 22 )
+custom_styles/panel = SubResource( 25 )
 contentID = "Kidlat"
 contentName = "Kidlat"
 contentDesc = "Find a cute cat that got stuck in the endless maintenance tunnels and see if you can help her out."
 bgColor = Color( 0.121569, 0, 0.160784, 1 )
 borderColor = Color( 0.00784314, 0.894118, 0.862745, 1 )
 
+[node name="ContentAutoSprite2" type="Sprite" parent="Kidlat"]
+position = Vector2( 74, -37 )
+scale = Vector2( 0.167969, 0.167969 )
+z_index = 111
+texture = ExtResource( 6 )
+script = ExtResource( 4 )
+
 [node name="Socket" parent="." instance=ExtResource( 1 )]
-margin_left = -578.0
-margin_top = 80.0
-margin_right = -430.0
-margin_bottom = 224.0
-custom_styles/panel = SubResource( 30 )
+margin_left = -569.0
+margin_top = 95.0
+margin_right = -421.0
+margin_bottom = 239.0
+custom_styles/panel = SubResource( 34 )
 contentID = "Socket"
 contentName = "Socket"
 contentDesc = "Meet a fennec engineer with a very interesting outfit. Help her with her tasks all around the prison."
 bgColor = Color( 0.870588, 0.694118, 0.572549, 1 )
 borderColor = Color( 0.513726, 0.301961, 0.207843, 1 )
 
+[node name="ContentAutoSprite3" type="Sprite" parent="Socket"]
+position = Vector2( 37, -11 )
+scale = Vector2( 0.124756, 0.124756 )
+z_index = 111
+texture = ExtResource( 10 )
+script = ExtResource( 4 )
+
 [node name="Arena" parent="." instance=ExtResource( 1 )]
 margin_left = 288.0
 margin_top = -48.0
 margin_right = 436.0
 margin_bottom = 81.0
-custom_styles/panel = SubResource( 25 )
+custom_styles/panel = SubResource( 27 )
 contentID = "Arena"
 contentName = "Arena"
 contentDesc = "Become the Grand Champion of the hidden underground arena that has only rule: No Rules!"
@@ -476,7 +509,7 @@ margin_left = 456.0
 margin_top = -49.0
 margin_right = 604.0
 margin_bottom = 95.0
-custom_styles/panel = SubResource( 26 )
+custom_styles/panel = SubResource( 28 )
 contentID = "Mirri"
 contentName = "Blacktail Market"
 contentDesc = "Meet Mirri and Luxe from the Blacktail family who are running a slave auction. Sell your slaves here!"
@@ -488,19 +521,27 @@ margin_left = 79.0
 margin_top = 157.0
 margin_right = 227.0
 margin_bottom = 301.0
-custom_styles/panel = SubResource( 34 )
+custom_styles/panel = SubResource( 29 )
 contentID = "SlaveryShaftMiner"
 contentName = "Shaft Miner"
 contentDesc = "Get sold on a slave auction and become a shaft miner on a godforsaken planet."
 bgColor = Color( 0.266667, 0.0745098, 0, 1 )
 borderColor = Color( 1, 0.513726, 0, 1 )
 
+[node name="ContentAutoSprite3" type="Sprite" parent="SlaveryShaftMiner"]
+position = Vector2( -22, 12 )
+rotation = 0.416742
+scale = Vector2( 0.167969, 0.167969 )
+z_index = 111
+texture = ExtResource( 7 )
+script = ExtResource( 4 )
+
 [node name="SlaveryMilkCafe" parent="." instance=ExtResource( 1 )]
 margin_left = 245.0
 margin_top = 157.0
 margin_right = 393.0
 margin_bottom = 301.0
-custom_styles/panel = SubResource( 35 )
+custom_styles/panel = SubResource( 30 )
 contentID = "SlaveryMilkCafe"
 contentName = "The Daily Drip"
 contentDesc = "Get sold on a slave auction to a lovely couple that runs a cafe in dire need of milk and cum."
@@ -512,7 +553,7 @@ margin_left = 410.0
 margin_top = 158.0
 margin_right = 558.0
 margin_bottom = 302.0
-custom_styles/panel = SubResource( 36 )
+custom_styles/panel = SubResource( 31 )
 contentID = "SlaveryTentacles"
 contentName = "Tentacles Biolab"
 contentDesc = "Get sold on a slave auction to a biolab where you will help grow your own tentacle monster!"

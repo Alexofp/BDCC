@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Rahi.png-c9e16cb0992f6b1cc4769305feaa8eaa.stex"
+path="res://.import/Mineshaft.png-d8864a818e3997ccb27b0b13ee09b433.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/SillyVersions/Rahi.png"
-dest_files=[ "res://.import/Rahi.png-c9e16cb0992f6b1cc4769305feaa8eaa.stex" ]
+source_file="res://Images/SillyVersions/Mineshaft.png"
+dest_files=[ "res://.import/Mineshaft.png-d8864a818e3997ccb27b0b13ee09b433.stex" ]
 
 [params]
 
@@ -21,7 +21,7 @@ compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
 flags/filter=true
-flags/mipmaps=true
+flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=0
 process/fix_alpha_border=true
