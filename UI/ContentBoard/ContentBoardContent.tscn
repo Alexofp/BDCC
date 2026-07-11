@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://UI/ContentBoard/ContentBoardCard.tscn" type="PackedScene" id=1]
 [ext_resource path="res://UI/ContentBoard/ContentBoardContent.gd" type="Script" id=2]
@@ -10,6 +10,10 @@
 [ext_resource path="res://Images/SillyVersions/Artica.png" type="Texture" id=8]
 [ext_resource path="res://Images/SillyVersions/Jacki.png" type="Texture" id=9]
 [ext_resource path="res://Images/SillyVersions/Socket.png" type="Texture" id=10]
+[ext_resource path="res://Images/SillyVersions/Tentacles.png" type="Texture" id=11]
+[ext_resource path="res://Images/SillyVersions/Chastity.png" type="Texture" id=12]
+[ext_resource path="res://Images/SillyVersions/SplashContent.png" type="Texture" id=13]
+[ext_resource path="res://Images/SillyVersions/Market.png" type="Texture" id=14]
 
 [sub_resource type="DynamicFontData" id=5]
 font_path = "res://Fonts/SourceCodePro/SourceCodePro-Regular.otf"
@@ -86,7 +90,7 @@ corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
-[sub_resource type="StyleBoxFlat" id=33]
+[sub_resource type="StyleBoxFlat" id=19]
 bg_color = Color( 0.137255, 0.137255, 0.137255, 1 )
 border_width_left = 12
 border_width_top = 12
@@ -99,7 +103,7 @@ corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
-[sub_resource type="StyleBoxFlat" id=32]
+[sub_resource type="StyleBoxFlat" id=20]
 bg_color = Color( 1, 1, 1, 1 )
 border_width_left = 12
 border_width_top = 12
@@ -177,7 +181,7 @@ corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
-[sub_resource type="StyleBoxFlat" id=34]
+[sub_resource type="StyleBoxFlat" id=26]
 bg_color = Color( 0.870588, 0.694118, 0.572549, 1 )
 border_width_left = 12
 border_width_top = 12
@@ -271,11 +275,16 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="SplashContent" type="Sprite" parent="."]
+position = Vector2( 604, 317 )
+scale = Vector2( 0.564453, 0.564453 )
+texture = ExtResource( 13 )
+
 [node name="Label" type="Label" parent="."]
-margin_left = 544.0
-margin_top = 13.0
-margin_right = 655.0
-margin_bottom = 33.0
+margin_left = 557.0
+margin_top = 11.0
+margin_right = 668.0
+margin_bottom = 31.0
 custom_fonts/font = SubResource( 12 )
 text = "Main Routes"
 align = 1
@@ -321,10 +330,10 @@ bgColor = Color( 0.741176, 0, 0, 1 )
 borderColor = Color( 0.0509804, 0.0431373, 0, 1 )
 
 [node name="TaviRoute" parent="." instance=ExtResource( 1 )]
-margin_left = -100.0
-margin_top = -268.0
-margin_right = 48.0
-margin_bottom = -139.0
+margin_left = -82.0
+margin_top = -271.0
+margin_right = 66.0
+margin_bottom = -127.0
 custom_styles/panel = SubResource( 17 )
 contentID = "MainTavi"
 contentName = "Tavi Main Route"
@@ -333,10 +342,10 @@ bgColor = Color( 0.470588, 0, 0.537255, 1 )
 borderColor = Color( 0, 0.933333, 0.0784314, 1 )
 
 [node name="CaptainRoute" parent="." instance=ExtResource( 1 )]
-margin_left = 82.0
-margin_top = -294.0
-margin_right = 230.0
-margin_bottom = -165.0
+margin_left = 113.0
+margin_top = -304.0
+margin_right = 261.0
+margin_bottom = -175.0
 custom_styles/panel = SubResource( 15 )
 contentID = "MainCaptain"
 contentName = "Captain Route"
@@ -362,11 +371,11 @@ texture = ExtResource( 3 )
 script = ExtResource( 4 )
 
 [node name="Jacki" parent="." instance=ExtResource( 1 )]
-margin_left = -585.0
-margin_top = -76.0
-margin_right = -437.0
-margin_bottom = 53.0
-custom_styles/panel = SubResource( 33 )
+margin_left = -597.0
+margin_top = -82.0
+margin_right = -449.0
+margin_bottom = 47.0
+custom_styles/panel = SubResource( 19 )
 contentID = "Jacki"
 contentName = "Jacki Northstar"
 contentDesc = "Have fun with a kind wolfo that is wearing unique chastity piercings."
@@ -381,11 +390,11 @@ texture = ExtResource( 9 )
 script = ExtResource( 4 )
 
 [node name="Artica" parent="." instance=ExtResource( 1 )]
-margin_left = -225.0
-margin_top = 37.0
-margin_right = -77.0
-margin_bottom = 146.0
-custom_styles/panel = SubResource( 32 )
+margin_left = -243.0
+margin_top = 51.0
+margin_right = -95.0
+margin_bottom = 160.0
+custom_styles/panel = SubResource( 20 )
 contentID = "Artica"
 contentName = "Artica"
 contentDesc = "Corrupt a very shy herm fluff."
@@ -401,9 +410,9 @@ script = ExtResource( 4 )
 
 [node name="Vion" parent="." instance=ExtResource( 1 )]
 margin_left = -184.0
-margin_top = 178.0
+margin_top = 189.0
 margin_right = -36.0
-margin_bottom = 277.0
+margin_bottom = 288.0
 custom_styles/panel = SubResource( 21 )
 contentID = "Vion"
 contentName = "Vion"
@@ -442,6 +451,13 @@ contentDesc = "Go through an obedience training program created by Eliza Quinn, 
 bgColor = Color( 0.777344, 0.838226, 1, 1 )
 borderColor = Color( 0.0156863, 0, 0.486275, 1 )
 
+[node name="ContentAutoSprite5" type="Sprite" parent="ElizaChastity"]
+position = Vector2( 138, 5 )
+scale = Vector2( 0.13623, 0.13623 )
+z_index = 111
+texture = ExtResource( 12 )
+script = ExtResource( 4 )
+
 [node name="ElizaLab" parent="." instance=ExtResource( 1 )]
 margin_left = 288.0
 margin_top = -231.0
@@ -455,10 +471,10 @@ bgColor = Color( 0.85098, 1, 0.823529, 1 )
 borderColor = Color( 0.2, 0.34902, 0, 1 )
 
 [node name="Kidlat" parent="." instance=ExtResource( 1 )]
-margin_left = -405.0
-margin_top = -27.0
-margin_right = -257.0
-margin_bottom = 121.0
+margin_left = -421.0
+margin_top = -31.0
+margin_right = -273.0
+margin_bottom = 117.0
 custom_styles/panel = SubResource( 25 )
 contentID = "Kidlat"
 contentName = "Kidlat"
@@ -474,11 +490,11 @@ texture = ExtResource( 6 )
 script = ExtResource( 4 )
 
 [node name="Socket" parent="." instance=ExtResource( 1 )]
-margin_left = -569.0
-margin_top = 95.0
-margin_right = -421.0
-margin_bottom = 239.0
-custom_styles/panel = SubResource( 34 )
+margin_left = -590.0
+margin_top = 104.0
+margin_right = -442.0
+margin_bottom = 248.0
+custom_styles/panel = SubResource( 26 )
 contentID = "Socket"
 contentName = "Socket"
 contentDesc = "Meet a fennec engineer with a very interesting outfit. Help her with her tasks all around the prison."
@@ -515,6 +531,13 @@ contentName = "Blacktail Market"
 contentDesc = "Meet Mirri and Luxe from the Blacktail family who are running a slave auction. Sell your slaves here!"
 bgColor = Color( 0.0352941, 0, 0, 1 )
 borderColor = Color( 1, 0.352941, 0, 1 )
+
+[node name="ContentAutoSprite5" type="Sprite" parent="Mirri"]
+position = Vector2( 127, 197 )
+scale = Vector2( 0.214844, 0.214844 )
+z_index = 111
+texture = ExtResource( 14 )
+script = ExtResource( 4 )
 
 [node name="SlaveryShaftMiner" parent="." instance=ExtResource( 1 )]
 margin_left = 79.0
@@ -559,3 +582,10 @@ contentName = "Tentacles Biolab"
 contentDesc = "Get sold on a slave auction to a biolab where you will help grow your own tentacle monster!"
 bgColor = Color( 0.0235294, 0.8, 0, 1 )
 borderColor = Color( 0.239216, 0.403922, 0, 1 )
+
+[node name="ContentAutoSprite4" type="Sprite" parent="SlaveryTentacles"]
+position = Vector2( 80, -17 )
+scale = Vector2( 0.214844, 0.214844 )
+z_index = 111
+texture = ExtResource( 11 )
+script = ExtResource( 4 )
