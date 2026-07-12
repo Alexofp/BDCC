@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://UI/ContentBoard/ContentBoard.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://UI/ContentBoard/ContentBoardContent.tscn" type="PackedScene" id=3]
 [ext_resource path="res://UI/ContentBoard/ContentBoardInfoPanel.tscn" type="PackedScene" id=4]
+[ext_resource path="res://GlobalTheme.tres" type="Theme" id=5]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0, 0, 0.45098 )
@@ -29,6 +30,7 @@ margin_left = 12.0
 margin_top = 11.0
 margin_right = 126.0
 margin_bottom = 54.0
+theme = ExtResource( 5 )
 text = "Close"
 
 [node name="RightPanelCanvas" type="CanvasLayer" parent="."]

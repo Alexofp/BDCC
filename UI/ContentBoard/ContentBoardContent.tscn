@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://UI/ContentBoard/ContentBoardCard.tscn" type="PackedScene" id=1]
 [ext_resource path="res://UI/ContentBoard/ContentBoardContent.gd" type="Script" id=2]
@@ -14,6 +14,11 @@
 [ext_resource path="res://Images/SillyVersions/Chastity.png" type="Texture" id=12]
 [ext_resource path="res://Images/SillyVersions/SplashContent.png" type="Texture" id=13]
 [ext_resource path="res://Images/SillyVersions/Market.png" type="Texture" id=14]
+[ext_resource path="res://Images/SillyVersions/Milking.png" type="Texture" id=15]
+[ext_resource path="res://Images/SillyVersions/Avy.png" type="Texture" id=16]
+[ext_resource path="res://Images/SillyVersions/Eliza.png" type="Texture" id=17]
+[ext_resource path="res://Images/SillyVersions/Flask.png" type="Texture" id=18]
+[ext_resource path="res://Images/SillyVersions/Hypno.png" type="Texture" id=19]
 
 [sub_resource type="DynamicFontData" id=5]
 font_path = "res://Fonts/SourceCodePro/SourceCodePro-Regular.otf"
@@ -116,13 +121,13 @@ corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
-[sub_resource type="StyleBoxFlat" id=21]
-bg_color = Color( 0.698039, 0.278431, 0.584314, 1 )
+[sub_resource type="StyleBoxFlat" id=32]
+bg_color = Color( 0.804688, 0.226318, 0.64654, 1 )
 border_width_left = 12
 border_width_top = 12
 border_width_right = 12
 border_width_bottom = 12
-border_color = Color( 0.92549, 0.835294, 0.815686, 1 )
+border_color = Color( 0.737255, 0.392157, 1, 1 )
 border_blend = true
 corner_radius_top_left = 12
 corner_radius_top_right = 12
@@ -413,12 +418,19 @@ margin_left = -184.0
 margin_top = 189.0
 margin_right = -36.0
 margin_bottom = 288.0
-custom_styles/panel = SubResource( 21 )
+custom_styles/panel = SubResource( 32 )
 contentID = "Vion"
 contentName = "Vion"
 contentDesc = "Find a way to help a lizard with his stallion problem."
-bgColor = Color( 0.698039, 0.278431, 0.584314, 1 )
-borderColor = Color( 0.92549, 0.835294, 0.815686, 1 )
+bgColor = Color( 0.804688, 0.226318, 0.64654, 1 )
+borderColor = Color( 0.737255, 0.392157, 1, 1 )
+
+[node name="ContentAutoSprite3" type="Sprite" parent="Vion"]
+position = Vector2( 120, 2 )
+scale = Vector2( 0.171875, 0.171875 )
+z_index = 111
+texture = ExtResource( 19 )
+script = ExtResource( 4 )
 
 [node name="AlexRynard" parent="." instance=ExtResource( 1 )]
 margin_left = -395.0
@@ -470,6 +482,20 @@ contentDesc = "Become Eliza's assistant and get a chance to work in her lab, res
 bgColor = Color( 0.85098, 1, 0.823529, 1 )
 borderColor = Color( 0.2, 0.34902, 0, 1 )
 
+[node name="ContentAutoSprite6" type="Sprite" parent="ElizaLab"]
+position = Vector2( 45.5, -3 )
+scale = Vector2( 0.117188, 0.117188 )
+z_index = 111
+texture = ExtResource( 17 )
+script = ExtResource( 4 )
+
+[node name="ContentAutoSprite7" type="Sprite" parent="ElizaLab"]
+position = Vector2( 8.5, 1 )
+scale = Vector2( 0.0898438, 0.0898438 )
+z_index = 111
+texture = ExtResource( 18 )
+script = ExtResource( 4 )
+
 [node name="Kidlat" parent="." instance=ExtResource( 1 )]
 margin_left = -421.0
 margin_top = -31.0
@@ -509,16 +535,23 @@ texture = ExtResource( 10 )
 script = ExtResource( 4 )
 
 [node name="Arena" parent="." instance=ExtResource( 1 )]
-margin_left = 288.0
-margin_top = -48.0
-margin_right = 436.0
-margin_bottom = 81.0
+margin_left = 290.0
+margin_top = -29.0
+margin_right = 438.0
+margin_bottom = 100.0
 custom_styles/panel = SubResource( 27 )
 contentID = "Arena"
 contentName = "Arena"
 contentDesc = "Become the Grand Champion of the hidden underground arena that has only rule: No Rules!"
 bgColor = Color( 0.819608, 0.247059, 0.2, 1 )
 borderColor = Color( 0.52549, 0, 0, 1 )
+
+[node name="ContentAutoSprite6" type="Sprite" parent="Arena"]
+position = Vector2( 32, -23 )
+scale = Vector2( 0.129, 0.129 )
+z_index = 111
+texture = ExtResource( 16 )
+script = ExtResource( 4 )
 
 [node name="Mirri" parent="." instance=ExtResource( 1 )]
 margin_left = 456.0
@@ -570,6 +603,13 @@ contentName = "The Daily Drip"
 contentDesc = "Get sold on a slave auction to a lovely couple that runs a cafe in dire need of milk and cum."
 bgColor = Color( 0, 0.898039, 0.898039, 1 )
 borderColor = Color( 1, 1, 1, 1 )
+
+[node name="ContentAutoSprite5" type="Sprite" parent="SlaveryMilkCafe"]
+position = Vector2( 129, 131 )
+scale = Vector2( 0.182617, 0.182617 )
+z_index = 111
+texture = ExtResource( 15 )
+script = ExtResource( 4 )
 
 [node name="SlaveryTentacles" parent="." instance=ExtResource( 1 )]
 margin_left = 410.0

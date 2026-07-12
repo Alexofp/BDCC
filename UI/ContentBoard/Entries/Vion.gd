@@ -8,8 +8,8 @@ func getName() -> String:
 
 func getDesc(_isFull:bool) -> String:
 	if(_isFull):
-		return "Find a way to help a lizard with his stallion problem. Also, get a chance to explore Vion's hypnosis skills. This content was submitted by PeteTimesSix."
-	return "Find a way to help a lizard with his stallion problem. (By PTS)"
+		return "Find a way to help a hypnotist dragon with his stallion problem. Also, get a chance to explore Vion's hypnosis skills. This content was submitted by PeteTimesSix."
+	return "Find a way to help a hypnotist dragon with his stallion problem. (By PTS)"
 
 func getKinks() -> Array:
 	return [
