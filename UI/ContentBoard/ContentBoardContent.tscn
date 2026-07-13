@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://UI/ContentBoard/ContentBoardCard.tscn" type="PackedScene" id=1]
 [ext_resource path="res://UI/ContentBoard/ContentBoardContent.gd" type="Script" id=2]
@@ -19,6 +19,8 @@
 [ext_resource path="res://Images/SillyVersions/Eliza.png" type="Texture" id=17]
 [ext_resource path="res://Images/SillyVersions/Flask.png" type="Texture" id=18]
 [ext_resource path="res://Images/SillyVersions/Hypno.png" type="Texture" id=19]
+[ext_resource path="res://Images/SillyVersions/Tavi.png" type="Texture" id=20]
+[ext_resource path="res://Images/SillyVersions/Pin.png" type="Texture" id=21]
 
 [sub_resource type="DynamicFontData" id=5]
 font_path = "res://Fonts/SourceCodePro/SourceCodePro-Regular.otf"
@@ -121,7 +123,7 @@ corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
-[sub_resource type="StyleBoxFlat" id=32]
+[sub_resource type="StyleBoxFlat" id=21]
 bg_color = Color( 0.804688, 0.226318, 0.64654, 1 )
 border_width_left = 12
 border_width_top = 12
@@ -334,6 +336,14 @@ contentDesc = "Dominate the whole prison! A route for dominant players
 bgColor = Color( 0.741176, 0, 0, 1 )
 borderColor = Color( 0.0509804, 0.0431373, 0, 1 )
 
+[node name="Pin17" type="Sprite" parent="KaitRoute"]
+modulate = Color( 1, 0, 0, 1 )
+position = Vector2( 72, 2 )
+rotation = -0.139622
+scale = Vector2( 0.433594, 0.433594 )
+z_index = 1111
+texture = ExtResource( 21 )
+
 [node name="TaviRoute" parent="." instance=ExtResource( 1 )]
 margin_left = -82.0
 margin_top = -271.0
@@ -346,6 +356,21 @@ contentDesc = "Become Tavi's sidekick and find a way to escape the prison togeth
 bgColor = Color( 0.470588, 0, 0.537255, 1 )
 borderColor = Color( 0, 0.933333, 0.0784314, 1 )
 
+[node name="ContentAutoSprite3" type="Sprite" parent="TaviRoute"]
+position = Vector2( 153, 65.9999 )
+scale = Vector2( 0.15625, 0.15625 )
+z_index = 111
+texture = ExtResource( 20 )
+script = ExtResource( 4 )
+
+[node name="Pin16" type="Sprite" parent="TaviRoute"]
+modulate = Color( 0.431373, 1, 0, 1 )
+position = Vector2( 82, -2 )
+rotation = -0.139622
+scale = Vector2( 0.433594, 0.433594 )
+z_index = 1111
+texture = ExtResource( 21 )
+
 [node name="CaptainRoute" parent="." instance=ExtResource( 1 )]
 margin_left = 113.0
 margin_top = -304.0
@@ -355,6 +380,14 @@ custom_styles/panel = SubResource( 15 )
 contentID = "MainCaptain"
 contentName = "Captain Route"
 contentDesc = "Become captain's most trusted inmate. A route for submissive players. (Planned)"
+
+[node name="Pin15" type="Sprite" parent="CaptainRoute"]
+modulate = Color( 0.376471, 0.647059, 1, 1 )
+position = Vector2( 82, 4 )
+rotation = -0.139622
+scale = Vector2( 0.433594, 0.433594 )
+z_index = 1111
+texture = ExtResource( 21 )
 
 [node name="Rahi" parent="." instance=ExtResource( 1 )]
 margin_left = -531.0
@@ -375,6 +408,14 @@ z_index = 111
 texture = ExtResource( 3 )
 script = ExtResource( 4 )
 
+[node name="Pin14" type="Sprite" parent="Rahi"]
+modulate = Color( 1, 0.6, 0.278431, 1 )
+position = Vector2( 76, -4 )
+rotation = -0.139622
+scale = Vector2( 0.433594, 0.433594 )
+z_index = 1111
+texture = ExtResource( 21 )
+
 [node name="Jacki" parent="." instance=ExtResource( 1 )]
 margin_left = -597.0
 margin_top = -82.0
@@ -393,6 +434,14 @@ scale = Vector2( 0.146484, 0.146484 )
 z_index = 111
 texture = ExtResource( 9 )
 script = ExtResource( 4 )
+
+[node name="Pin13" type="Sprite" parent="Jacki"]
+modulate = Color( 1, 0.235294, 0, 1 )
+position = Vector2( 62, -7 )
+rotation = -0.486585
+scale = Vector2( 0.433594, 0.433594 )
+z_index = 1111
+texture = ExtResource( 21 )
 
 [node name="Artica" parent="." instance=ExtResource( 1 )]
 margin_left = -243.0
@@ -413,12 +462,20 @@ z_index = 111
 texture = ExtResource( 8 )
 script = ExtResource( 4 )
 
+[node name="Pin12" type="Sprite" parent="Artica"]
+modulate = Color( 0, 1, 1, 1 )
+position = Vector2( 77, -4 )
+rotation = -0.486585
+scale = Vector2( 0.433594, 0.433594 )
+z_index = 1111
+texture = ExtResource( 21 )
+
 [node name="Vion" parent="." instance=ExtResource( 1 )]
 margin_left = -184.0
 margin_top = 189.0
 margin_right = -36.0
 margin_bottom = 288.0
-custom_styles/panel = SubResource( 32 )
+custom_styles/panel = SubResource( 21 )
 contentID = "Vion"
 contentName = "Vion"
 contentDesc = "Find a way to help a lizard with his stallion problem."
@@ -431,6 +488,14 @@ scale = Vector2( 0.171875, 0.171875 )
 z_index = 111
 texture = ExtResource( 19 )
 script = ExtResource( 4 )
+
+[node name="Pin11" type="Sprite" parent="Vion"]
+modulate = Color( 0.913725, 0.317647, 1, 1 )
+position = Vector2( 60, -3 )
+rotation = -1.07962
+scale = Vector2( 0.433594, 0.433594 )
+z_index = 1111
+texture = ExtResource( 21 )
 
 [node name="AlexRynard" parent="." instance=ExtResource( 1 )]
 margin_left = -395.0
@@ -451,6 +516,14 @@ z_index = 111
 texture = ExtResource( 5 )
 script = ExtResource( 4 )
 
+[node name="Pin10" type="Sprite" parent="AlexRynard"]
+modulate = Color( 1, 0.443137, 0.317647, 1 )
+position = Vector2( 81, -3 )
+rotation = -0.265588
+scale = Vector2( 0.433594, 0.433594 )
+z_index = 1111
+texture = ExtResource( 21 )
+
 [node name="ElizaChastity" parent="." instance=ExtResource( 1 )]
 margin_left = 453.0
 margin_top = -229.0
@@ -469,6 +542,13 @@ scale = Vector2( 0.13623, 0.13623 )
 z_index = 111
 texture = ExtResource( 12 )
 script = ExtResource( 4 )
+
+[node name="Pin9" type="Sprite" parent="ElizaChastity"]
+position = Vector2( 72, -3 )
+rotation = -0.759848
+scale = Vector2( 0.433594, 0.433594 )
+z_index = 1111
+texture = ExtResource( 21 )
 
 [node name="ElizaLab" parent="." instance=ExtResource( 1 )]
 margin_left = 288.0
@@ -496,6 +576,14 @@ z_index = 111
 texture = ExtResource( 18 )
 script = ExtResource( 4 )
 
+[node name="Pin8" type="Sprite" parent="ElizaLab"]
+modulate = Color( 0, 1, 0.811765, 1 )
+position = Vector2( 127, 1.00003 )
+rotation = 0.296042
+scale = Vector2( 0.433594, 0.433594 )
+z_index = 1111
+texture = ExtResource( 21 )
+
 [node name="Kidlat" parent="." instance=ExtResource( 1 )]
 margin_left = -421.0
 margin_top = -31.0
@@ -514,6 +602,14 @@ scale = Vector2( 0.167969, 0.167969 )
 z_index = 111
 texture = ExtResource( 6 )
 script = ExtResource( 4 )
+
+[node name="Pin7" type="Sprite" parent="Kidlat"]
+modulate = Color( 0, 0.882353, 1, 1 )
+position = Vector2( 118, -4 )
+rotation = -0.47545
+scale = Vector2( 0.433594, 0.433594 )
+z_index = 1111
+texture = ExtResource( 21 )
 
 [node name="Socket" parent="." instance=ExtResource( 1 )]
 margin_left = -590.0
@@ -534,6 +630,14 @@ z_index = 111
 texture = ExtResource( 10 )
 script = ExtResource( 4 )
 
+[node name="Pin6" type="Sprite" parent="Socket"]
+modulate = Color( 1, 0.662745, 0.341176, 1 )
+position = Vector2( 77, -3 )
+rotation = -0.47545
+scale = Vector2( 0.433594, 0.433594 )
+z_index = 1111
+texture = ExtResource( 21 )
+
 [node name="Arena" parent="." instance=ExtResource( 1 )]
 margin_left = 290.0
 margin_top = -29.0
@@ -553,6 +657,14 @@ z_index = 111
 texture = ExtResource( 16 )
 script = ExtResource( 4 )
 
+[node name="Pin5" type="Sprite" parent="Arena"]
+modulate = Color( 0.509804, 0.509804, 0.509804, 1 )
+position = Vector2( 72, -3 )
+rotation = -0.963305
+scale = Vector2( 0.433594, 0.433594 )
+z_index = 1111
+texture = ExtResource( 21 )
+
 [node name="Mirri" parent="." instance=ExtResource( 1 )]
 margin_left = 456.0
 margin_top = -49.0
@@ -571,6 +683,14 @@ scale = Vector2( 0.214844, 0.214844 )
 z_index = 111
 texture = ExtResource( 14 )
 script = ExtResource( 4 )
+
+[node name="Pin4" type="Sprite" parent="Mirri"]
+modulate = Color( 0.376471, 0.545098, 1, 1 )
+position = Vector2( 76, -3 )
+rotation = -0.259454
+scale = Vector2( 0.433594, 0.433594 )
+z_index = 1111
+texture = ExtResource( 21 )
 
 [node name="SlaveryShaftMiner" parent="." instance=ExtResource( 1 )]
 margin_left = 79.0
@@ -592,6 +712,14 @@ z_index = 111
 texture = ExtResource( 7 )
 script = ExtResource( 4 )
 
+[node name="Pin3" type="Sprite" parent="SlaveryShaftMiner"]
+modulate = Color( 1, 0.815686, 0.376471, 1 )
+position = Vector2( 68, -4 )
+rotation = -1.13703
+scale = Vector2( 0.433594, 0.433594 )
+z_index = 1111
+texture = ExtResource( 21 )
+
 [node name="SlaveryMilkCafe" parent="." instance=ExtResource( 1 )]
 margin_left = 245.0
 margin_top = 157.0
@@ -611,6 +739,14 @@ z_index = 111
 texture = ExtResource( 15 )
 script = ExtResource( 4 )
 
+[node name="Pin2" type="Sprite" parent="SlaveryMilkCafe"]
+modulate = Color( 0.376471, 0.941176, 1, 1 )
+position = Vector2( 78, 2 )
+rotation = -0.0589577
+scale = Vector2( 0.433594, 0.433594 )
+z_index = 1111
+texture = ExtResource( 21 )
+
 [node name="SlaveryTentacles" parent="." instance=ExtResource( 1 )]
 margin_left = 410.0
 margin_top = 158.0
@@ -629,3 +765,11 @@ scale = Vector2( 0.214844, 0.214844 )
 z_index = 111
 texture = ExtResource( 11 )
 script = ExtResource( 4 )
+
+[node name="Pin" type="Sprite" parent="SlaveryTentacles"]
+modulate = Color( 0.376471, 0.941176, 1, 1 )
+position = Vector2( 142, 63 )
+rotation = 0.305721
+scale = Vector2( 0.433594, 0.433594 )
+z_index = 1111
+texture = ExtResource( 21 )

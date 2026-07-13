@@ -39,7 +39,10 @@ func _run():
 		saynn("What kind of sexual activity do you want to do with Kait?")
 
 		addButton("Back", "You changed your mind", "")
-		addButton("69", "(Love 2+) Lick or suck each other off!", "sex_69")
+		if(GM.pc.hasReachablePenis() || GM.pc.hasReachableVagina() || GM.pc.isWearingChastityCage()):
+			addButton("69", "(Love 2+) Lick or suck each other off!", "sex_69")
+		else:
+			addDisabledButton("69", "You need private bits to be able to do 69, sorry :(")
 		addButton("Finger her", "(Love 2+) Make that snep cum just from your fingers!", "sex_fingerher")
 	if(state == "dom_menu"):
 		saynn("How do you wanna dominate Kait?")
