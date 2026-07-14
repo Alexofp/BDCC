@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://UI/ContentBoard/ContentBoardCard.tscn" type="PackedScene" id=1]
 [ext_resource path="res://UI/ContentBoard/ContentBoardContent.gd" type="Script" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://Images/SillyVersions/Hypno.png" type="Texture" id=19]
 [ext_resource path="res://Images/SillyVersions/Tavi.png" type="Texture" id=20]
 [ext_resource path="res://Images/SillyVersions/Pin.png" type="Texture" id=21]
+[ext_resource path="res://Images/SillyVersions/Kait.png" type="Texture" id=22]
 
 [sub_resource type="DynamicFontData" id=5]
 font_path = "res://Fonts/SourceCodePro/SourceCodePro-Regular.otf"
@@ -45,7 +46,7 @@ fallback/0 = SubResource( 5 )
 fallback/1 = SubResource( 3 )
 fallback/2 = SubResource( 4 )
 
-[sub_resource type="StyleBoxFlat" id=16]
+[sub_resource type="StyleBoxFlat" id=32]
 bg_color = Color( 0.741176, 0, 0, 1 )
 border_width_left = 12
 border_width_top = 12
@@ -57,6 +58,9 @@ corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
+shadow_color = Color( 0, 0, 0, 0.239216 )
+shadow_size = 9
+shadow_offset = Vector2( 0, 5 )
 
 [sub_resource type="StyleBoxFlat" id=17]
 bg_color = Color( 0.470588, 0, 0.537255, 1 )
@@ -70,6 +74,9 @@ corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
+shadow_color = Color( 0, 0, 0, 0.239216 )
+shadow_size = 9
+shadow_offset = Vector2( 0, 5 )
 
 [sub_resource type="StyleBoxFlat" id=15]
 bg_color = Color( 0.0392157, 0.156863, 0.407843, 1 )
@@ -96,6 +103,9 @@ corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
+shadow_color = Color( 0, 0, 0, 0.239216 )
+shadow_size = 9
+shadow_offset = Vector2( 0, 5 )
 
 [sub_resource type="StyleBoxFlat" id=19]
 bg_color = Color( 0.137255, 0.137255, 0.137255, 1 )
@@ -109,6 +119,9 @@ corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
+shadow_color = Color( 0, 0, 0, 0.239216 )
+shadow_size = 9
+shadow_offset = Vector2( 0, 5 )
 
 [sub_resource type="StyleBoxFlat" id=20]
 bg_color = Color( 1, 1, 1, 1 )
@@ -122,6 +135,9 @@ corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
+shadow_color = Color( 0, 0, 0, 0.239216 )
+shadow_size = 9
+shadow_offset = Vector2( 0, 5 )
 
 [sub_resource type="StyleBoxFlat" id=21]
 bg_color = Color( 0.804688, 0.226318, 0.64654, 1 )
@@ -135,6 +151,9 @@ corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
+shadow_color = Color( 0, 0, 0, 0.239216 )
+shadow_size = 9
+shadow_offset = Vector2( 0, 5 )
 
 [sub_resource type="StyleBoxFlat" id=22]
 bg_color = Color( 0.878431, 0.478431, 0.207843, 1 )
@@ -148,6 +167,9 @@ corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
+shadow_color = Color( 0, 0, 0, 0.239216 )
+shadow_size = 9
+shadow_offset = Vector2( 0, 5 )
 
 [sub_resource type="StyleBoxFlat" id=23]
 bg_color = Color( 0.777344, 0.838226, 1, 1 )
@@ -161,6 +183,9 @@ corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
+shadow_color = Color( 0, 0, 0, 0.239216 )
+shadow_size = 9
+shadow_offset = Vector2( 0, 5 )
 
 [sub_resource type="StyleBoxFlat" id=24]
 bg_color = Color( 0.85098, 1, 0.823529, 1 )
@@ -174,6 +199,9 @@ corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
+shadow_color = Color( 0, 0, 0, 0.239216 )
+shadow_size = 9
+shadow_offset = Vector2( 0, 5 )
 
 [sub_resource type="StyleBoxFlat" id=25]
 bg_color = Color( 0.121569, 0, 0.160784, 1 )
@@ -187,6 +215,9 @@ corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
+shadow_color = Color( 0, 0, 0, 0.239216 )
+shadow_size = 9
+shadow_offset = Vector2( 0, 5 )
 
 [sub_resource type="StyleBoxFlat" id=26]
 bg_color = Color( 0.870588, 0.694118, 0.572549, 1 )
@@ -200,6 +231,9 @@ corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
+shadow_color = Color( 0, 0, 0, 0.239216 )
+shadow_size = 9
+shadow_offset = Vector2( 0, 5 )
 
 [sub_resource type="StyleBoxFlat" id=27]
 bg_color = Color( 0.819608, 0.247059, 0.2, 1 )
@@ -213,6 +247,9 @@ corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
+shadow_color = Color( 0, 0, 0, 0.239216 )
+shadow_size = 9
+shadow_offset = Vector2( 0, 5 )
 
 [sub_resource type="StyleBoxFlat" id=28]
 bg_color = Color( 0.0352941, 0, 0, 1 )
@@ -226,6 +263,9 @@ corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
+shadow_color = Color( 0, 0, 0, 0.239216 )
+shadow_size = 9
+shadow_offset = Vector2( 0, 5 )
 
 [sub_resource type="StyleBoxFlat" id=29]
 bg_color = Color( 0.266667, 0.0745098, 0, 1 )
@@ -239,6 +279,9 @@ corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
+shadow_color = Color( 0, 0, 0, 0.239216 )
+shadow_size = 9
+shadow_offset = Vector2( 0, 5 )
 
 [sub_resource type="StyleBoxFlat" id=30]
 bg_color = Color( 0, 0.898039, 0.898039, 1 )
@@ -252,6 +295,9 @@ corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
+shadow_color = Color( 0, 0, 0, 0.239216 )
+shadow_size = 9
+shadow_offset = Vector2( 0, 5 )
 
 [sub_resource type="StyleBoxFlat" id=31]
 bg_color = Color( 0.0235294, 0.8, 0, 1 )
@@ -265,6 +311,9 @@ corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
+shadow_color = Color( 0, 0, 0, 0.239216 )
+shadow_size = 9
+shadow_offset = Vector2( 0, 5 )
 
 [node name="ContentBoardContent" type="ColorRect"]
 anchor_left = 0.5
@@ -324,11 +373,11 @@ text = "Meet characters"
 align = 1
 
 [node name="KaitRoute" parent="." instance=ExtResource( 1 )]
-margin_left = -283.0
-margin_top = -309.0
-margin_right = -135.0
-margin_bottom = -180.0
-custom_styles/panel = SubResource( 16 )
+margin_left = -273.0
+margin_top = -308.0
+margin_right = -125.0
+margin_bottom = -179.0
+custom_styles/panel = SubResource( 32 )
 contentID = "MainKait"
 contentName = "Kait Main Route"
 contentDesc = "Dominate the whole prison! A route for dominant players
@@ -344,11 +393,18 @@ scale = Vector2( 0.433594, 0.433594 )
 z_index = 1111
 texture = ExtResource( 21 )
 
+[node name="ContentAutoSprite4" type="Sprite" parent="KaitRoute"]
+position = Vector2( -15, 64 )
+scale = Vector2( 0.132812, 0.132812 )
+z_index = 111
+texture = ExtResource( 22 )
+script = ExtResource( 4 )
+
 [node name="TaviRoute" parent="." instance=ExtResource( 1 )]
-margin_left = -82.0
-margin_top = -271.0
-margin_right = 66.0
-margin_bottom = -127.0
+margin_left = -100.0
+margin_top = -274.0
+margin_right = 48.0
+margin_bottom = -130.0
 custom_styles/panel = SubResource( 17 )
 contentID = "MainTavi"
 contentName = "Tavi Main Route"
@@ -372,9 +428,9 @@ z_index = 1111
 texture = ExtResource( 21 )
 
 [node name="CaptainRoute" parent="." instance=ExtResource( 1 )]
-margin_left = 113.0
+margin_left = 94.0
 margin_top = -304.0
-margin_right = 261.0
+margin_right = 242.0
 margin_bottom = -175.0
 custom_styles/panel = SubResource( 15 )
 contentID = "MainCaptain"
