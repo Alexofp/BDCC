@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://UI/ContentBoard/ContentBoardCard.tscn" type="PackedScene" id=1]
 [ext_resource path="res://UI/ContentBoard/ContentBoardContent.gd" type="Script" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://Images/SillyVersions/Pin.png" type="Texture" id=21]
 [ext_resource path="res://Images/SillyVersions/Kait.png" type="Texture" id=22]
 [ext_resource path="res://Images/SillyVersions/Captain.png" type="Texture" id=23]
+[ext_resource path="res://Images/SillyVersions/Ferri.png" type="Texture" id=24]
 
 [sub_resource type="DynamicFontData" id=5]
 font_path = "res://Fonts/SourceCodePro/SourceCodePro-Regular.otf"
@@ -399,6 +400,13 @@ position = Vector2( -15, 64 )
 scale = Vector2( 0.132812, 0.132812 )
 z_index = 111
 texture = ExtResource( 22 )
+script = ExtResource( 4 )
+
+[node name="ContentAutoSprite5" type="Sprite" parent="KaitRoute"]
+position = Vector2( -50, 98 )
+scale = Vector2( 0.132812, 0.132812 )
+z_index = 111
+texture = ExtResource( 24 )
 script = ExtResource( 4 )
 
 [node name="TaviRoute" parent="." instance=ExtResource( 1 )]

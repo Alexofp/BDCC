@@ -8,7 +8,7 @@ func getName() -> String:
 
 func getDesc(_isFull:bool) -> String:
 	if(_isFull):
-		return "Help a shy brown kitty with her drinking problem. Keep Rahi's body and mind occupied in order to help her cope."
+		return "Help a shy brown kitty with her drinking problem. Keep Rahi's body and mind occupied in order to help her cope.\nSilly Rahi sprite drawn by [url=https://silkiedraws.carrd.co/]Silkie! [img=32]res://UI/ContentBoard/Util/heart_silkie2.png[/img][/url]"
 	return "Help a shy brown kitty with her drinking problem."
 
 func getKinks() -> Array:

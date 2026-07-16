@@ -12,6 +12,7 @@ onready var load_game_button = $"%LoadGameButton"
 onready var datapacks_button = $"%DatapacksButton"
 onready var main_menu_button = $"%MainMenuButton"
 onready var sex_toy_manager_button = $"%SexToyManagerButton"
+onready var content_board_button = $"%ContentBoardButton"
 
 func resizeButtons():
 	var theButtons:Array = [
@@ -21,6 +22,7 @@ func resizeButtons():
 		datapacks_button,
 		main_menu_button,
 		sex_toy_manager_button,
+		content_board_button,
 	]
 	if(OPTIONS.isTouchFriendlyUI()):
 		for theButton in theButtons:

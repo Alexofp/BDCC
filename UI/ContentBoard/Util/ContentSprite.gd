@@ -3,9 +3,11 @@ class_name ContentAutoSprite
 
 export(String) var contentID:String = ""
 
+var darkSpriteMat := preload("res://UI/ContentBoard/Util/DarkSpriteMat.tres")
+
 func _ready():
-	if(true): #TODO: Remove before ship
-		return
+	#if(true):
+	#	return
 	if(contentID.empty()):
 		var theParent = get_parent()
 		if(theParent && theParent.has_method("getContentID")):
@@ -21,5 +23,19 @@ func _ready():
 		if(theScript):
 			theBoardEntry = theScript.new()
 	
+	var shouldSh:bool = true
 	if(theBoardEntry):
-		visible = theBoardEntry.isCompleted()
+		shouldSh = theBoardEntry.isCompleted()
+	
+	if(!shouldSh):
+		material = darkSpriteMat
+		modulate = Color.black
+		modulate.a = 0.15
+	else:
+		material = null
+		modulate = Color.white
+
+func _unhandled_key_input(event: InputEventKey):
+	if(event.pressed && event.physical_scancode == KEY_P): # Tshhhhhhhhh-
+		material = null
+		modulate = Color.white

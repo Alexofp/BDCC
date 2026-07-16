@@ -6,11 +6,23 @@ var previousPosition: Vector2 = Vector2(0, 0)
 var startMousePosition: Vector2 = Vector2(0, 0)
 onready var right_panel_canvas = $"%RightPanelCanvas"
 onready var content_board_info_panel = $"%ContentBoardInfoPanel"
+var ContentBoardCardFontDesc := preload("res://UI/ContentBoard/Util/ContentBoardCardFontDesc.tres")
+var ContentBoardCardFontName := preload("res://UI/ContentBoard/Util/ContentBoardCardFontName.tres")
 
 signal onClosePressed(_board)
 
 func _enter_tree():
 	get_node("/root").get_texture().flags = Texture.FLAG_FILTER
+
+func _ready():
+	if(OPTIONS.isVerticalOrientation()):
+		content_board_info_panel.anchor_left = 0.0
+		ContentBoardCardFontDesc.font_data.override_oversampling = 1.5
+		ContentBoardCardFontName.font_data.override_oversampling = 1.5
+	else:
+		content_board_info_panel.anchor_left = 0.7
+		ContentBoardCardFontDesc.font_data.override_oversampling = 0.0
+		ContentBoardCardFontName.font_data.override_oversampling = 0.0
 
 #func _unhandled_input(event):
 func _input(event):

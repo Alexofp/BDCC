@@ -8,7 +8,7 @@ func getName() -> String:
 
 func getDesc(_isFull:bool) -> String:
 	if(_isFull):
-		return "Find a cute cat that got stuck in the endless maintenance tunnels and see if you can help her out."
+		return "Find a cute cat that got stuck in the endless maintenance tunnels and see if you can help her out."+("\n\nSilly sprite original is from [url=https://www.furaffinity.net/view/53363888/]Kidlat's FurAffinity[/url]" if getStatus() == ContentBoardStatus.Completed else "")
 	return "Find a cute cat that got stuck in the endless maintenance tunnels. See if you can help her out"
 
 func getKinks() -> Array:

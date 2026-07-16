@@ -29,11 +29,10 @@ func getStatus() -> int:
 	return ContentBoardStatus.Unknown
 
 func isStarted() -> bool:
-	var theStatus := getStatus()
-	return ContentBoardStatus.doesCountAsStarted(theStatus)
+	return ContentBoardStatus.doesCountAsStarted(getStatus())
 
 func isCompleted() -> bool:
-	return getStatus() == ContentBoardStatus.Completed
+	return ContentBoardStatus.doesCountAsCompleted(getStatus())
 
 func getFlag(_flagID:String, _default = null):
 	if(!GM.main):

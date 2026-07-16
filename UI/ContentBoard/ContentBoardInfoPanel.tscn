@@ -258,4 +258,5 @@ margin_bottom = 696.0
 rect_min_size = Vector2( 0, 44 )
 text = "Close"
 
+[connection signal="meta_clicked" from="VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer2/VBoxContainer/DescLabel" to="." method="_on_DescLabel_meta_clicked"]
 [connection signal="pressed" from="VBoxContainer/CloseButton" to="." method="_on_CloseButton_pressed"]

@@ -2418,9 +2418,11 @@ func checkPCOnALeash() -> bool: # Maybe I could expand this onto other pawn reac
 	
 # If this returns true, you shouldn't be able to agree to any new main routes
 func hasCommittedToMainRoute() -> bool:
-	if(getFlag("TaviModule.Tavi_Quest2Completed", false)):
+	if(hasCommittedToTaviMainRoute()):
 		return true
-	if(getFlag("KaitModule.joinedTeam", false)):
+	if(hasCommittedToKaitMainRoute()):
+		return true
+	if(hasCommittedToCaptainMainRoute()):
 		return true
 	
 	return false

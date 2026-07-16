@@ -9,6 +9,7 @@ const Completed := 4
 const Impossible := 5
 const Cancelled := 6
 const Unavailable := 7
+const Completedish := 8
 
 const StatusToColor:Dictionary = {
 	Unknown: Color.red,
@@ -19,6 +20,7 @@ const StatusToColor:Dictionary = {
 	Impossible: Color.darkred,
 	Cancelled: Color.darkgray,
 	Unavailable: Color.gray,
+	Completedish: Color.green,
 }
 const StatusToText:Dictionary = {
 	Unknown: "Unknown",
@@ -29,6 +31,7 @@ const StatusToText:Dictionary = {
 	Impossible: "Impossible",
 	Cancelled: "Cancelled",
 	Unavailable: "Unavailable",
+	Completedish: "Completed-ish",
 }
 
 static func getColor(_status:int) -> Color:
@@ -41,6 +44,16 @@ static func doesCountAsStarted(_status:int) -> bool:
 	if(_status == InProgress):
 		return true
 	if(_status == Completed):
+		return true
+	if(_status == Completedish):
+		return true
+	
+	return false
+
+static func doesCountAsCompleted(_status:int) -> bool:
+	if(_status == Completed):
+		return true
+	if(_status == Completedish):
 		return true
 	
 	return false

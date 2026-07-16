@@ -1,7 +1,9 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
 [ext_resource path="res://UI/ContentBoard/ContentBoardCard.gd" type="Script" id=2]
+[ext_resource path="res://UI/ContentBoard/Util/ContentBoardCardFontName.tres" type="DynamicFont" id=3]
+[ext_resource path="res://UI/ContentBoard/Util/ContentBoardCardFontDesc.tres" type="DynamicFont" id=4]
 
 [sub_resource type="StyleBoxFlat" id=19]
 bg_color = Color( 0.0392157, 0.156863, 0.407843, 1 )
@@ -28,51 +30,6 @@ corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
-
-[sub_resource type="DynamicFontData" id=9]
-font_path = "res://Fonts/SourceCodePro/SourceCodePro-Regular.otf"
-
-[sub_resource type="DynamicFontData" id=13]
-font_path = "res://Fonts/DroidSansJapanese.woff2"
-
-[sub_resource type="DynamicFontData" id=14]
-font_path = "res://Fonts/DroidSansFallback.woff2"
-
-[sub_resource type="DynamicFontData" id=12]
-font_path = "res://Fonts/Titillium-Regular.otf"
-
-[sub_resource type="DynamicFont" id=6]
-outline_size = 2
-outline_color = Color( 0, 0, 0, 1 )
-use_mipmaps = true
-use_filter = true
-font_data = SubResource( 12 )
-fallback/0 = SubResource( 9 )
-fallback/1 = SubResource( 13 )
-fallback/2 = SubResource( 14 )
-
-[sub_resource type="DynamicFontData" id=15]
-font_path = "res://Fonts/SourceCodePro/SourceCodePro-Regular.otf"
-
-[sub_resource type="DynamicFontData" id=16]
-font_path = "res://Fonts/DroidSansJapanese.woff2"
-
-[sub_resource type="DynamicFontData" id=17]
-font_path = "res://Fonts/DroidSansFallback.woff2"
-
-[sub_resource type="DynamicFontData" id=18]
-font_path = "res://Fonts/Titillium-Regular.otf"
-
-[sub_resource type="DynamicFont" id=8]
-size = 12
-outline_size = 1
-outline_color = Color( 0, 0, 0, 1 )
-use_mipmaps = true
-use_filter = true
-font_data = SubResource( 18 )
-fallback/0 = SubResource( 15 )
-fallback/1 = SubResource( 16 )
-fallback/2 = SubResource( 17 )
 
 [sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 0.137255, 0.133333, 0.164706, 1 )
@@ -133,7 +90,7 @@ custom_constants/separation = 0
 unique_name_in_owner = true
 margin_right = 124.0
 margin_bottom = 16.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = ExtResource( 3 )
 text = "Some content"
 align = 1
 autowrap = true
@@ -148,7 +105,7 @@ unique_name_in_owner = true
 margin_top = 20.0
 margin_right = 124.0
 margin_bottom = 47.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = ExtResource( 4 )
 text = "Some content meow meow"
 autowrap = true
 
@@ -170,7 +127,7 @@ margin_top = 8.0
 margin_right = 65.0
 margin_bottom = 20.0
 custom_colors/font_color = Color( 0, 1, 0, 1 )
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = ExtResource( 4 )
 text = "Completed!"
 
 [node name="PressButton" type="TextureButton" parent="."]

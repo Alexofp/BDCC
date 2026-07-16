@@ -63,3 +63,7 @@ func setEntry(_id:String):
 	var theKinks:Array = theBoardEntry.getKinks()
 	kinks_panel.visible = !theKinks.empty()
 	kinks_label.bbcode_text = Util.join(theKinks, "\n")
+
+
+func _on_DescLabel_meta_clicked(meta):
+	var _ok = Util.fixed_shell_open(meta)

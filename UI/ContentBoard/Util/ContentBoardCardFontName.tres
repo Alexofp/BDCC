@@ -1,0 +1,23 @@
+[gd_resource type="DynamicFont" load_steps=5 format=2]
+
+[sub_resource type="DynamicFontData" id=9]
+font_path = "res://Fonts/SourceCodePro/SourceCodePro-Regular.otf"
+
+[sub_resource type="DynamicFontData" id=13]
+font_path = "res://Fonts/DroidSansJapanese.woff2"
+
+[sub_resource type="DynamicFontData" id=14]
+font_path = "res://Fonts/DroidSansFallback.woff2"
+
+[sub_resource type="DynamicFontData" id=12]
+font_path = "res://Fonts/Titillium-Regular.otf"
+
+[resource]
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = SubResource( 12 )
+fallback/0 = SubResource( 9 )
+fallback/1 = SubResource( 13 )
+fallback/2 = SubResource( 14 )
