@@ -35,6 +35,7 @@ func _init():
 	
 	rewardExp = 20
 	rewardCredits = 0
+	addAsAQuest = false
 
 func getObjectives() -> Array:
 	var result:Array = []

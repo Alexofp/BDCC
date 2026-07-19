@@ -11,6 +11,7 @@ func _init():
 	npcSkinData={
 	"hair": {"r": Color("ff555555"),"g": Color("ff3c3c3c"),"b": Color("ff3d3d3d"),},
 	"ears": {"b": Color("ffdcdcdc"),},
+	"tail": {"skin": "LuxeSkin",},
 	}
 	
 	npcLevel = 15
@@ -142,7 +143,7 @@ func getFemininity() -> int:
 func createBodyparts():
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felinehead"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("overeyehair2"))
-	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felineears"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felineears2"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anthrobody"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anthroarms"))
 	var breasts = GlobalRegistry.createBodypart("humanbreasts")
@@ -150,7 +151,9 @@ func createBodyparts():
 	giveBodypartUnlessSame(breasts)
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("vagina"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anus"))
-	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felinetail"))
+	var tail = GlobalRegistry.createBodypart("felinetail")
+	tail.tailScale = 1.2
+	giveBodypartUnlessSame(tail)
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("digilegs"))
 
 func getDefaultEquipment():
