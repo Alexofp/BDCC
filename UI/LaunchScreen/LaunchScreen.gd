@@ -8,6 +8,7 @@ onready var modCountLabel = $VBoxContainer/HBoxContainer/PanelContainer/VBoxCont
 onready var build_pck_button = $"%BuildPCKButton"
 onready var open_mods_folder = $"%OpenModsFolder"
 onready var search_line_edit = $"%SearchLineEdit"
+onready var android_choose_folder_panel = $"%AndroidChooseFolderPanel"
 
 onready var debug_button = $"%DebugButton"
 onready var building_pck_panel = $"%BuildingPCKPanel"
@@ -24,6 +25,7 @@ export(Resource) var GlobalTheme
 
 const modOrderPath = "user://modOrder.json"
 const pckversionPath = "user://bdccpckversion.txt"
+const androidPickedModsFolderPath := "user://androidPickedModsFolderLock.txt"
 var foundBDCC:bool = false
 
 var startedPlaying:bool = false # Used to prevent the bug where you sometimes double-tap the play button on mobile
@@ -38,11 +40,20 @@ func _ready():
 	#print(diag.processString("Hello,_[[asd]]meow", {kind=true,mean=true}, {BITCH=["bitch", "stupid-bitch", "stupid-stupid-bitch"]}))
 	troubleshooting_screen.visible = false
 	building_pck_panel.visible = false
+	android_choose_folder_panel.visible = false
 	
 	if(GlobalTheme != null):
 		if(OS.has_touchscreen_ui_hint()):
 			GlobalTheme.rename_stylebox("scrollTouch", "scroll", "VScrollBar")
 	
+	if(OPTIONS.shouldShowModdedLauncher() && shouldShowPickModsFolderPanel()):
+		OS.request_permissions()
+		android_choose_folder_panel.visible = true
+	else:
+		doStart()
+
+
+func doStart():
 	var rawModList := GlobalRegistry.getRawModList()
 	if(GlobalRegistry.hasModSupport() && OS.get_name() == "Android" && (rawModList.size() > 0 || OPTIONS.shouldShowModdedLauncher())):
 		if(Util.readFile(pckversionPath) != GlobalRegistry.getGameVersionString()):
@@ -635,3 +646,30 @@ func getNodeWithEntry(modEntry={}):
 
 func _on_search_text_changed(_new_text:String):
 	updateModList()
+
+func shouldShowPickModsFolderPanel() -> bool:
+	if(OS.get_name() != "Android"):
+		return false
+	
+	var theFile := File.new()
+	if(theFile.file_exists(androidPickedModsFolderPath)):
+		return false
+	return true
+	
+func _on_AndroidLoadDocuments_pressed():
+	setAndroidFolder(OPTIONS.ANDROID_SAVE_FOLDER_DOCUMENTS)
+
+func _on_AndroidLoadData_pressed():
+	setAndroidFolder(OPTIONS.ANDROID_SAVE_FOLDER_GAME_DATA)
+
+func _on_AndroidLoadDownloads_pressed():
+	setAndroidFolder(OPTIONS.ANDROID_SAVE_FOLDER_DOWNLOADS)
+
+func setAndroidFolder(_f:int):
+	OPTIONS.androidSaveFolder = _f
+	android_choose_folder_panel.visible = false
+	var theFile := File.new()
+	theFile.open(androidPickedModsFolderPath, File.WRITE)
+	theFile.store_string("6 7")
+	theFile.close()
+	doStart()

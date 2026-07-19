@@ -45,6 +45,8 @@ func updateOptions():
 			var optionTab:int = option["tab"] if option.has("tab") else OPTIONS.TAB_GAME
 			if(optionTab != currentTab):
 				continue
+			if(option.get("hide", false)):
+				continue
 			
 			var optionType = option["type"]
 			var optionID = option["id"]
