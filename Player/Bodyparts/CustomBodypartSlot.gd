@@ -3,9 +3,9 @@ class_name CustomBodypartSlot
 
 var id : String = "badslot"
 
-# see BodypartSlot's same function
-static func findReplacement(_oldvalue, _species=null, _gender=Gender.Androgynous):
-	return null
+# see BodypartSlot.findReplacement()
+func findReplacement(_oldBodypartID:String, _species=null, _gender=Gender.Androgynous) -> String:
+	return ""
 
 func getVisibleName() -> String:
 	return getVisibleNameNoCap().capitalize()

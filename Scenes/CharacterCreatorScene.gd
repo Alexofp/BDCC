@@ -104,13 +104,13 @@ func _run():
 			sayn(curAttrib[0]+": "+str(curAttrib[1]))
 			
 
-		addButton("Confirm", "I like it", "donecreating")
+		addExtraButtonAt(0, "Confirm", "Confirm your character", "donecreating")
 		
 		for slot in allSlots:
 			var slotName = BodypartSlot.getVisibleName(slot)
 			addButton(slotName, "Change this bodypart", "pickbodypart", [slot])
 			
-		addButton("Body attributes", "Change your femininity, thickness and so", "bodyAttributes")
+		addExtraButtonAt(3, "Body attributes", "Change your femininity, thickness and so", "bodyAttributes")
 			
 		# DEBUG testing stuff, feel free to remove
 		if(false):
@@ -128,9 +128,9 @@ func _run():
 			
 		
 		if(!debugMode):
-			addButton("back", "Back to picking species", "pickspecies")
+			addExtraButtonAt(4, "Change species", "Back to picking species", "pickspecies")
 		else:
-			addButton("Change species", "! This will override all the bodyparts !", "pickspecies")
+			addExtraButtonAt(4, "Change species", "! This will override all the bodyparts !", "pickspecies")
 		
 	if(state == "pickbodypart"):
 		saynn("Choose the bodypart or change the attributes of the current one")

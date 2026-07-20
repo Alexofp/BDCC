@@ -2115,6 +2115,8 @@ func invCanEquipSlot(slot):
 		return false
 	if(slot == InventorySlot.Vagina && !hasVagina()):
 		return false
+	if(GlobalRegistry.hasCustomInventorySlot(slot)):
+		return GlobalRegistry.getCustomInventorySlot(slot).invCanEquipSlot(self)
 	
 	return true
 

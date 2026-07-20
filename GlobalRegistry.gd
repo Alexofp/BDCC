@@ -224,7 +224,9 @@ var allSpecies: Dictionary = {}
 var items: Dictionary = {}
 var itemsRefs: Dictionary = {}
 var itemsByTag: Dictionary = {}
+var cachedInventorySlotsList:Array = []
 var inventorySlots : Dictionary = {}
+var cachedBodypartSlotsList:Array = []
 var bodypartSlots : Dictionary = {}
 var buffs: Dictionary = {}
 var events: Dictionary = {}
@@ -764,6 +766,19 @@ func registerEverything():
 	
 	yield(registerModules(), "completed") # 15.0 & 16.0
 	
+	# Caching the bodypart/inventory slots for quicker access
+	if(bodypartSlots.empty()):
+		cachedBodypartSlotsList = BodypartSlot.DEFAULT_SLOTS
+	else:
+		cachedBodypartSlotsList = BodypartSlot.DEFAULT_SLOTS.duplicate()
+		cachedBodypartSlotsList.append_array(bodypartSlots.keys())
+	if(inventorySlots.empty()):
+		cachedInventorySlotsList = InventorySlot.DEFAULT_SLOTS
+	else:
+		cachedInventorySlotsList = InventorySlot.DEFAULT_SLOTS.duplicate()
+		cachedInventorySlotsList.append_array(inventorySlots.keys())
+	
+	
 	findCustomSkins()
 	sortFightClubFighters()
 	sortRegisteredStatusEffectsByPriority()
@@ -1299,22 +1314,9 @@ func registerInventorySlot(path: String):
 	inventorySlots[slotObj.id] = slotObj
 
 func registerInventorySlotFolder(folder: String):
-	var dir = Directory.new()
-	if dir.open(folder) != OK:
-		Log.printerr("An error occurred when trying to access the path "+folder)
-		return
-	
-	dir.list_dir_begin()
-	var file_name = dir.get_next()
-	while file_name != "":
-		if dir.current_is_dir():
-			continue
-		
-		if(file_name.get_extension() == "gd"):
-			var full_path = folder.plus_file(file_name)
-			registerInventorySlot(full_path)
-		file_name = dir.get_next()
-	
+	var scripts = getScriptsInFoldersRecursive(folder)
+	for scriptPath in scripts:
+		registerInventorySlot(scriptPath)
 
 func getCustomInventorySlots() -> Dictionary:
 	return inventorySlots
@@ -1326,6 +1328,8 @@ func getCustomInventorySlot(slot:String) -> CustomInventorySlot:
 	
 	return slotobj
 
+func hasCustomInventorySlot(_slot:String) -> bool:
+	return inventorySlots.has(_slot)
 
 
 func registerBodypartSlot(path: String):
@@ -1334,22 +1338,9 @@ func registerBodypartSlot(path: String):
 	bodypartSlots[slotObj.id] = slotObj
 
 func registerBodypartSlotFolder(folder: String):
-	var dir = Directory.new()
-	if dir.open(folder) != OK:
-		Log.printerr("An error occurred when trying to access the path "+folder)
-		return
-	
-	dir.list_dir_begin()
-	var file_name = dir.get_next()
-	while file_name != "":
-		if dir.current_is_dir():
-			continue
-		
-		if(file_name.get_extension() == "gd"):
-			var full_path = folder.plus_file(file_name)
-			registerBodypartSlot(full_path)
-		file_name = dir.get_next()
-	
+	var scripts = getScriptsInFoldersRecursive(folder)
+	for scriptPath in scripts:
+		registerBodypartSlot(scriptPath)
 
 func getCustomBodypartSlots() -> Dictionary:
 	return bodypartSlots
@@ -1361,6 +1352,8 @@ func getCustomBodypartSlot(slot:String) -> CustomBodypartSlot:
 	
 	return slotobj
 
+func hasCustomBodypartSlot(_slot:String) -> bool:
+	return bodypartSlots.has(_slot)
 
 
 
