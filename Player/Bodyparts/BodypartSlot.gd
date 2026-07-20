@@ -15,7 +15,12 @@ const Tail = "tail"
 const Legs = "legs"
 
 static func getAll() -> Array:
-	return [Head, Hair, Ears, Horns, Body, Arms, Breasts, Penis, Vagina, Anus, Tail, Legs]
+	var res = [Head, Hair, Ears, Horns, Body, Arms, Breasts, Penis, Vagina, Anus, Tail, Legs]
+	
+	for id in GlobalRegistry.getCustomBodypartSlots().keys():
+		res.append(id)
+	
+	return res
 
 static func getVisibleName(slot: String):
 	if(slot == Horns):
@@ -43,7 +48,8 @@ static func getVisibleName(slot: String):
 	elif(slot == Head):
 		return "Head"
 	else:
-		return slot
+		var sobj = GlobalRegistry.getCustomBodypartSlot(slot)
+		return sobj.getVisibleName() if sobj else slot
 
 static func getVisibleNameNoCap(slot: String):
 	if(slot == Horns):
@@ -71,7 +77,8 @@ static func getVisibleNameNoCap(slot: String):
 	elif(slot == Head):
 		return "head"
 	else:
-		return slot
+		var sobj = GlobalRegistry.getCustomBodypartSlot(slot)
+		return sobj.getVisibleNameNoCap() if sobj else slot
 
 static func getSlotChildName(slot: String):
 	if(slot == Head):
@@ -98,7 +105,9 @@ static func getSlotChildName(slot: String):
 		return "butt"
 	if(slot == Legs):
 		return "butt"
-	return "body"
+	
+	var slotobj = GlobalRegistry.getCustomBodypartSlot(slot)
+	return slotobj.getSlotChildName() if slotobj else "body"
 
 static func isEssential(slot:String) -> bool:
 	if(slot == Horns):
@@ -109,8 +118,8 @@ static func isEssential(slot:String) -> bool:
 		return false
 	if(slot == Vagina):
 		return false
-	
-	return true
+	var slotobj = GlobalRegistry.getCustomBodypartSlot(slot)
+	return slotobj.isEssential() if slotobj else true
 
 # Note: we assume "oldvalue" does not exists as a bodypart ref.
 static func findReplacement(slot, oldvalue, species=null, gender=Gender.Androgynous):
@@ -146,4 +155,9 @@ static func findReplacement(slot, oldvalue, species=null, gender=Gender.Androgyn
 		return "digilegs"
 	elif(slot == Vagina):
 		return "vagina"
+	
+	var slotobj = GlobalRegistry.getCustomBodypartSlot(slot)
+	if slotobj:
+		return slotobj.findReplacement(slot, oldvalue, species, gender)
+	
 	return null

@@ -399,6 +399,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Player/Player3D/Chains/CurveRenderer.gd"
 }, {
+"base": "Reference",
+"class": "CustomBodypartSlot",
+"language": "GDScript",
+"path": "res://Player/Bodyparts/CustomBodypartSlot.gd"
+}, {
+"base": "Reference",
+"class": "CustomInventorySlot",
+"language": "GDScript",
+"path": "res://Inventory/CustomInventorySlot.gd"
+}, {
 "base": "Object",
 "class": "CycleStage",
 "language": "GDScript",
@@ -2088,6 +2098,8 @@ _global_script_class_icons={
 "CumProduction": "",
 "CurveEditorCustom": "",
 "CurveRenderer": "",
+"CustomBodypartSlot": "",
+"CustomInventorySlot": "",
 "CycleStage": "",
 "DamageType": "",
 "Datapack": "",

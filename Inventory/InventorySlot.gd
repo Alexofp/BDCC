@@ -24,7 +24,12 @@ const Static2 = "static2"
 const Static3 = "static3"
 
 static func getAll():
-	return [Eyes, Mouth, Neck, Torso, Body, UnderwearTop, UnderwearBottom, Penis, Vagina, Anal, Wrists, Hands, Ring, Ankles, Strapon, Unique]
+	var res = [Eyes, Mouth, Neck, Torso, Body, UnderwearTop, UnderwearBottom, Penis, Vagina, Anal, Wrists, Hands, Ring, Ankles, Strapon, Unique]
+	
+	for id in GlobalRegistry.getCustomInventorySlots().keys():
+		res.append(id)
+	
+	return res
 
 static func getStatic():
 	return [Static1, Static2, Static3]
@@ -63,8 +68,8 @@ static func getVisibleName(slot: String):
 	if(slot == Unique):
 		return "Unique"
 	
-	return "Error"
-
+	var s = GlobalRegistry.getCustomInventorySlot(slot)
+	return s.getVisibleName() if s else "Error"
 
 
 
