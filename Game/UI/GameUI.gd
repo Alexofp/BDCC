@@ -552,8 +552,8 @@ func translateText(manualButton = false):
 		var buttonsTexts = []
 		if(AutoTranslation.shouldTranslateButtons):
 			for optionID in options:
-				buttonsTexts.append(options[optionID][1])
-				buttonsTexts.append(options[optionID][2].replace("\n", "^"))
+				buttonsTexts.append("[[BTN_"+str(optionID)+"_TEXT]]"+options[optionID][1])
+				buttonsTexts.append("[[BTN_"+str(optionID)+"_DESC]]"+options[optionID][2].replace("\n", "^"))
 		
 		translateStatusLabel.text = "Translating.."
 		currentTranslationTask += 1
@@ -576,17 +576,28 @@ func translateText(manualButton = false):
 		if(result != null && result != ""):
 			if(buttonsTexts.size() > 0):
 				var resultSplitted = result.split("\n")
-				if(resultSplitted.size() >= buttonsTexts.size()):
-					var _i = 0
-					for optionID in options:
-						var realI = resultSplitted.size() - buttonsTexts.size() + _i*2
-						options[optionID].append(resultSplitted[realI])
-						options[optionID].append(resultSplitted[realI+1].replace("^", "\n"))
-						
-						_i += 1
-					resultSplitted.resize(resultSplitted.size() - buttonsTexts.size())
-					result = Util.join(resultSplitted, "\n")
-					queueUpdate()
+				var translatedButtons = {}
+				var storyLines = []
+				for line in resultSplitted:
+					if(line.begins_with("[[BTN_") && line.find("]]", 0) != -1):
+						var markerEnd = line.find("]]", 0)
+						var marker = line.substr(2, markerEnd - 2)
+						var translatedText = line.substr(markerEnd + 2, line.length())
+						translatedButtons[marker] = translatedText
+					else:
+						storyLines.append(line)
+				for optionID in options:
+					var textMarker = "BTN_"+str(optionID)+"_TEXT"
+					var descMarker = "BTN_"+str(optionID)+"_DESC"
+					if(translatedButtons.has(textMarker) && translatedButtons.has(descMarker)):
+						if(options[optionID].size() > 5):
+							options[optionID][5] = translatedButtons[textMarker]
+							options[optionID][6] = translatedButtons[descMarker].replace("^", "\n")
+						else:
+							options[optionID].append(translatedButtons[textMarker])
+							options[optionID].append(translatedButtons[descMarker].replace("^", "\n"))
+				result = Util.join(storyLines, "\n")
+				queueUpdate()
 			
 			savedTranslatedText = result
 			if(!showOriginalCheckbox.pressed):
