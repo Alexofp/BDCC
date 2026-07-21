@@ -16,7 +16,7 @@ const SCREEN_VERTICAL = 1
 const ANDROID_SAVE_FOLDER_DOCUMENTS := 0
 const ANDROID_SAVE_FOLDER_GAME_DATA := 1
 const ANDROID_SAVE_FOLDER_DOWNLOADS := 2
-var androidSaveFolder:int = ANDROID_SAVE_FOLDER_DOCUMENTS
+var androidSaveFolder:int = ANDROID_SAVE_FOLDER_DOWNLOADS
 
 var currentSupportsVertical:bool = false
 var currentScreenOrientation:int = SCREEN_HORIZONTAL # not saved
@@ -1499,7 +1499,7 @@ func loadData(data):
 	webTextInputFallback = loadVar(data, "webTextInputFallback", false)
 	fullscreen = loadVar(data, "fullscreen", false)
 	profilerEnabled = loadVar(data, "profilerEnabled", false)
-	androidSaveFolder = loadVar(data, "androidSaveFolder", ANDROID_SAVE_FOLDER_DOCUMENTS)
+	androidSaveFolder = loadVar(data, "androidSaveFolder", ANDROID_SAVE_FOLDER_DOCUMENTS if data.has("showModdedLauncher") else ANDROID_SAVE_FOLDER_DOWNLOADS)
 
 func saveToFile():
 	var saveData = saveData()
