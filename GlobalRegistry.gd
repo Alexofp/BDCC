@@ -387,7 +387,14 @@ func checkModSupport():
 	else:
 		modsSupport = true
 
+const androidBDCCPCKPath := "user://BDCC.pck"
+
 func loadModOrder(theModOrder:Array):
+	if(theModOrder.size() > 0 && OS.get_name() == "Android"):
+		var theFile := File.new()
+		if(theFile.file_exists(androidBDCCPCKPath)):
+			var _ok = ProjectSettings.load_resource_pack(androidBDCCPCKPath)
+	
 	for modEntry in theModOrder:
 		if(modEntry["disabled"]):
 			continue
