@@ -555,7 +555,7 @@ func translateText(manualButton = false):
 			manualTranslateButton.visible = true
 			return
 		
-		var buttonsTexts = []
+		var buttonsTexts:Array = []
 		if(AutoTranslation.shouldTranslateButtons):
 			for optionID in options:
 				buttonsTexts.append("[[BTN_"+str(optionID)+"_TEXT]]"+options[optionID][1])
@@ -566,7 +566,7 @@ func translateText(manualButton = false):
 		var rememberedTask = currentTranslationTask
 		savedOriginalText = textOutput.bbcode_text
 		
-		var toTranslate = textOutput.text
+		var toTranslate:String = textOutput.bbcode_text if AutoTranslation.shouldKeepBBTags else textOutput.text
 		if(buttonsTexts.size() > 0):
 			toTranslate += "\n"+Util.join(buttonsTexts, "\n")
 		var result = AutoTranslation.translate(toTranslate)
@@ -581,14 +581,14 @@ func translateText(manualButton = false):
 			translateStatusLabel.text = "Failed to translate"
 		if(result != null && result != ""):
 			if(buttonsTexts.size() > 0):
-				var resultSplitted = result.split("\n")
-				var translatedButtons = {}
-				var storyLines = []
+				var resultSplitted:Array = result.split("\n")
+				var translatedButtons:Dictionary = {}
+				var storyLines:Array = []
 				for line in resultSplitted:
 					if(line.begins_with("[[BTN_") && line.find("]]", 0) != -1):
-						var markerEnd = line.find("]]", 0)
-						var marker = line.substr(2, markerEnd - 2)
-						var translatedText = line.substr(markerEnd + 2, line.length())
+						var markerEnd:int = line.find("]]", 0)
+						var marker:String = line.substr(2, markerEnd - 2)
+						var translatedText:String = line.substr(markerEnd + 2, line.length())
 						translatedButtons[marker] = translatedText
 					else:
 						storyLines.append(line)

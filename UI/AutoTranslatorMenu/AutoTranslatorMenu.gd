@@ -19,6 +19,7 @@ func _ready():
 	$VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/EnableTranslationBox.pressed = AutoTranslation.shouldTranslate()
 	$VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3/EnableManualTranslateButton.pressed = AutoTranslation.shouldHaveManualTranslateButton()
 	$VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4/TranslateButtonsButton.pressed = AutoTranslation.shouldTranslateButtons
+	$VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer5/KeepBBTagCheckbox.pressed = AutoTranslation.shouldKeepBBTags
 
 func _on_AutoTranslation_translator_recreated():
 	refreshTranslatorOrder()
@@ -55,3 +56,6 @@ func _on_TranslatorsList_onDownPressed(id):
 
 func _on_TranslatorsList_onUpPressed(id):
 	AutoTranslation.moveUpTranslator(id)
+
+func _on_KeepBBTagCheckbox_toggled(button_pressed):
+	AutoTranslation.shouldKeepBBTags = button_pressed
