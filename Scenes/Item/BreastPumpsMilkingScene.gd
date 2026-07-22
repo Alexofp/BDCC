@@ -25,8 +25,8 @@ func _reactInit():
 	
 	if(!item.isWornByWearer()):
 		if(!GM.pc.hasBlockedHands()):
-			if(GM.pc.getInventory().hasSlotEquipped(item.getClothingSlot())):
-				var alreadyEquipped = GM.pc.getInventory().getEquippedItem(item.getClothingSlot())
+			if(GM.pc.getInventory().hasSlotEquipped(item.getClothingSlotSafe())):
+				var alreadyEquipped = GM.pc.getInventory().getEquippedItem(item.getClothingSlotSafe())
 				if(alreadyEquipped != item && alreadyEquipped.isRestraint()):
 					setState("restraintequipped")
 					return

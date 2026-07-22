@@ -73,7 +73,7 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 		for possibleRestraintID in possibleRestraints:
 			var item:ItemBase = GlobalRegistry.getItemRef(possibleRestraintID)
 			if(_domInfo.goalsScore({SexGoal.FuckOral: 1.0}, _subInfo.charID) > 0.0 || _domInfo.goalsScore({SexGoal.BreastFeedSub: 1.0}, _subInfo.charID) > 0.0 || _sexEngine.hasTag(_subInfo.charID, SexActivityTag.MouthUsed)):
-				if(item.getClothingSlot() == InventorySlot.Mouth):
+				if(item.getClothingSlotSafe() == InventorySlot.Mouth):
 					if(!item.hasBuff(Buff.RingGagBuff)):
 						continue
 			
@@ -96,7 +96,7 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 	#var canActuallyPutOn = 0
 	var theActivityScore:float = getActivityScore(_sexEngine, _domInfo, _subInfo)
 	for item in usableItems:
-		var itemSlot = item.getClothingSlot()
+		var itemSlot:String = item.getClothingSlotSafe()
 		var bodypartSlot = item.getRequiredBodypart()
 		
 		if(item.getRequiredBodypart() == BodypartSlot.Vagina && _subInfo.hasTag(SexActivityTag.VaginaPenetrated)):

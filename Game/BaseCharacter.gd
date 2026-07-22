@@ -2110,7 +2110,7 @@ func canStartSex() -> bool:
 	#	return false
 	return true
 
-func invCanEquipSlot(slot):
+func invCanEquipSlot(slot:String) -> bool:
 	if(slot == InventorySlot.Penis && !hasPenis()):
 		return false
 	if(slot == InventorySlot.Vagina && !hasVagina()):
@@ -2739,15 +2739,19 @@ func getStraponContentsReadableString():
 
 func removeStrapon():
 	var theStrapon = getWornStrapon()
-	if(theStrapon == null):
+	if(!theStrapon):
 		return null
-	return getInventory().removeEquippedItem(theStrapon)
+	if(getInventory().removeEquippedItem(theStrapon)):
+		return theStrapon
+	return null
 
 func unequipStrapon():
 	var theStrapon = getWornStrapon()
-	if(theStrapon == null):
+	if(!theStrapon):
 		return null
-	return getInventory().unequipItem(theStrapon)
+	if(getInventory().unequipItem(theStrapon)):
+		return theStrapon
+	return null
 
 func doPainfullyStretchHole(_bodypart, _who = "pc") -> bool:
 	return false

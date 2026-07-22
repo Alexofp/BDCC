@@ -52,7 +52,7 @@ func setItem(theItem:ItemBase, theMode):
 	if(isGive):
 		$HBoxContainer/HBoxContainer/InteractButton.text = "Give"
 	if(isEquipTake):
-		if(item.getClothingSlot() != null):
+		if(!item.getClothingSlotSafe().empty()):
 			if(item.isWornByWearer()):
 				$HBoxContainer/HBoxContainer/InteractButton.text = "Unequip"
 			else:

@@ -276,6 +276,13 @@ func loadData(_data):
 func getClothingSlot():
 	return null
 
+# Always returns a string. Empty string = no slot
+func getClothingSlotSafe() -> String:
+	var theSlot = getClothingSlot()
+	if(theSlot == null || !(theSlot is String)):
+		return ""
+	return theSlot
+
 func getRequiredBodypart():
 	return null
 
@@ -548,7 +555,7 @@ func isWornByWearer():
 	var wearer = getWearer()
 	if(wearer == null):
 		return false
-	if(wearer.getInventory().getEquippedItem(getClothingSlot()) == self):
+	if(wearer.getInventory().getEquippedItem(getClothingSlotSafe()) == self):
 		return true
 	return false
 

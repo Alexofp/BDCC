@@ -40,7 +40,7 @@ func _run():
 		
 		if(theItem.hasTag(ItemTag.Strapon)):
 			playAnimation(StageScene.Solo, "stand", {bodyState={exposedCrotch=true}})
-		elif(theItem.getClothingSlot() != null && (theItem.getClothingSlot() in [InventorySlot.UnderwearBottom, InventorySlot.UnderwearTop])):
+		elif(!theItem.getClothingSlotSafe().empty() && (theItem.getClothingSlotSafe() in [InventorySlot.UnderwearBottom, InventorySlot.UnderwearTop])):
 			playAnimation(StageScene.Solo, "stand", {bodyState={underwear=true}})
 		else:
 			playAnimation(StageScene.Solo, "stand")
@@ -108,8 +108,8 @@ func _react(_action: String, _args):
 		dyingItemUniqueID = _args[0].uniqueID
 		savedDyedColor = theItem.clothesColor.to_html()
 		if(!GM.pc.getInventory().hasEquippedItemWithUniqueID(dyingItemUniqueID)):
-			var theSlot = theItem.getClothingSlot()
-			if(theSlot != null):
+			var theSlot:String = theItem.getClothingSlotSafe()
+			if(!theSlot.empty()):
 				if(GM.pc.getInventory().canEquipSlot(theSlot)):
 					if(GM.pc.getInventory().hasSlotEquipped(theSlot)):
 						if(!GM.pc.getInventory().getEquippedItem(theSlot).isRestraint()):

@@ -261,7 +261,7 @@ func getStarterAcceptHelpProbability() -> float:
 
 func getRestraintIsPlural(item:ItemBase) -> bool:
 	# Ideally there'd be item.isPlural(), but the best we can do for now is an approximate guess
-	return ( item.getClothingSlot() in [InventorySlot.Wrists, InventorySlot.Hands, InventorySlot.Ankles] )
+	return ( item.getClothingSlotSafe() in [InventorySlot.Wrists, InventorySlot.Hands, InventorySlot.Ankles] )
 
 func saveData():
 	var data = .saveData()
