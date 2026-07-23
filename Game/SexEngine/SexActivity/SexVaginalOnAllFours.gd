@@ -210,12 +210,25 @@ func getUsedBodypartName() -> String:
 	if(usedBodypart == BodypartSlot.Anus):
 		theName = "{sub.anusStretch} "+theName
 	
-	if(getSub().getLustLevel() > 0.6):
+	var _isNeedy:bool = getSub().getLustLevel() > 0.6
+	var _isDry:bool = getSub().getLustLevel() < 0.1
+	var _isLubedUp:bool = getSub().hasEffect(StatusEffect.LubedUp)
+	var _hasCumInHole:bool = false
+	if(usedBodypart == BodypartSlot.Vagina):
+		_hasCumInHole = getSub().hasEffect(StatusEffect.HasCumInsideVagina)
+	if(usedBodypart == BodypartSlot.Anus):
+		_hasCumInHole = getSub().hasEffect(StatusEffect.HasCumInsideAnus)
+	
+	if(_hasCumInHole && RNG.chance(30)):
+		theName = RNG.pick(["creamed", "stuffed"])+" "+theName
+	elif(_isNeedy):
 		if(usedBodypart == BodypartSlot.Vagina):
 			theName = RNG.pick(["needy", "awaiting", "inviting"])+" "+theName
 		if(usedBodypart == BodypartSlot.Anus):
 			theName = RNG.pick(["needy", "awaiting", "drippy", "inviting", "wet", "slick", "aroused"])+" "+theName
-	elif(getSub().getLustLevel() < 0.1 && RNG.chance(50)):
+	elif(_isLubedUp):
+		theName = RNG.pick(["lubed up"])+" "+theName
+	elif(_isDry && RNG.chance(50)):
 		if(usedBodypart == BodypartSlot.Vagina):
 			theName = RNG.pick(["dry"])+" "+theName
 		if(usedBodypart == BodypartSlot.Anus):
