@@ -757,6 +757,7 @@ func applyBodyState(bodystate):
 	var shouldBeHard = bodystate.has("hard") && bodystate["hard"]
 	var shouldBeCaged = bodystate.has("caged") && bodystate["caged"]
 	var shouldBeCondom = bodystate.has("condom") && bodystate["condom"]
+	var shouldBeHiddenCompletely = bodystate.has("hiddenCompletely") && bodystate["hiddenCompletely"]
 	#var shouldLookLeft = bodystate.has("lookLeft") && bodystate["lookLeft"]
 	
 	var exposeBodyparts = []
@@ -797,6 +798,9 @@ func applyBodyState(bodystate):
 	
 	if(shouldForceShowPenis):
 		forceSlotToBeVisible(BodypartSlot.Penis)
+	
+	if(shouldBeHiddenCompletely):
+		visible = false
 	
 	var newChains = []
 	if(bodystate.has("chains")):
