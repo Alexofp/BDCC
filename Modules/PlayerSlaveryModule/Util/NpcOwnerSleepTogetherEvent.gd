@@ -15,6 +15,9 @@ func react(_triggerID, _args):
 		var theNpcOwner:NpcOwnerBase = theSpecial.npcOwner
 		if(!theNpcOwner):
 			continue
+		var thePawn:CharacterPawn = GM.main.IS.getPawn(charID)
+		if(thePawn && !thePawn.canBeInterrupted()): # If stuck in stocks for example
+			continue
 		if(theNpcOwner.checkShouldSleepTogether()):
 			possible.append(charID)
 	

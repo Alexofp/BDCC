@@ -1820,7 +1820,7 @@ func shouldBeStoppedOnNewDay() -> bool:
 	for role in involvedPawns:
 		var thePawn = getRolePawn(role)
 		
-		if(thePawn.isPlayer() || thePawn.isSlaveToPlayer()):
+		if(thePawn.isPlayer() || thePawn.isSlaveToPlayer() || thePawn.hasSpecialRelationshipWithPC()):
 			return false
 	return true
 

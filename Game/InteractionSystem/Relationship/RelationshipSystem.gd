@@ -267,6 +267,11 @@ func startSpecialRelantionship(_relationshipID:String, _charID:String, _args:Arr
 func hasSpecialRelationship(_charID:String) -> bool:
 	return special.has(_charID)
 
+func hasSpecialRelationshipID(_charID:String, _relationshipID:String) -> bool:
+	if(!special.has(_charID)):
+		return false
+	return special[_charID].id == _relationshipID
+
 func getSpecialRelationship(_charID:String):
 	if(!hasSpecialRelationship(_charID)):
 		return null

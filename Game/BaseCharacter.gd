@@ -3162,6 +3162,9 @@ func getEnslaveQuest() -> NpcEnslavementQuest:
 func isSlaveToPlayer():
 	return false
 
+func isPlayerOwner() -> bool:
+	return GM.main.RS.hasSpecialRelationshipID(getID(), "SoftSlavery")
+
 func isSlaveTo(_charID:String) -> bool:
 	if(_charID == "pc"):
 		return isSlaveToPlayer()
