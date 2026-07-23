@@ -1644,9 +1644,9 @@ func _react(_action: String, _args):
 
 	if(_action == "pstocks_unlock"):
 		processTime(3*60)
-		getCharacter("rahi").addBodywritingRandom()
-		getCharacter("rahi").addBodywritingRandom()
-		getCharacter("rahi").addBodywritingRandom()
+		getCharacter("rahi").addBodywritingRandom(false, "pc")
+		getCharacter("rahi").addBodywritingRandom(false, "pc")
+		getCharacter("rahi").addBodywritingRandom(false, "pc")
 
 	if(_action == "pstocks_tease"):
 		processTime(3*60)

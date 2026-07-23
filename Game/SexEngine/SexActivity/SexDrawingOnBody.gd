@@ -97,8 +97,8 @@ func abouttodraw_processTurn():
 	if(getDom().isPlayer() && isPermanent):
 		getDom().getInventory().removeXOfOrDestroy("PermanentMarker", 1)
 	var writingID:String = BodyWritings.getRandomWritingIDForZone(zone) if customWritingID == "" else customWritingID
-	getSub().addBodywriting(zone, writingID, isPermanent)
-	sendSexEvent(SexEvent.BodyWritingAdded, DOM_0, SUB_0, {zone=zone,writingID=writingID,isPermanent=isPermanent})
+	getSub().addBodywriting(zone, writingID, isPermanent, getDomID()) # This function sends the sex event now
+	#sendSexEvent(SexEvent.BodyWritingAdded, DOM_0, SUB_0, {zone=zone,writingID=writingID,isPermanent=isPermanent})
 	satisfyGoal(SexGoal.AddBodywritings)
 	
 	addText("{dom.You} drew [b]'"+str(BodyWritings.getWritingText(writingID))+"'[/b] on {sub.yourHis} "+BodyWritingsZone.getZoneVisibleName(zone)+(" with a [b]PERMANENT[/b] marker" if isPermanent else "")+".")

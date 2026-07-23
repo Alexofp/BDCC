@@ -2036,14 +2036,34 @@ func getTallymarkCount() -> int:
 func clearTallymarks():
 	removeEffect(StatusEffect.HasTallyMarks)
 
-func addBodywriting(zone, writingID, isPermanent:bool = false):
+# if you're feeling up to it, you can track all of the old add bodywritings calls and specify the _fromCharID for them..
+func addBodywriting(zone, writingID, isPermanent:bool = false, _fromCharID:String = ""):
 	addEffect(StatusEffect.HasBodyWritings, [zone, writingID, isPermanent])
+	
+	if(_fromCharID.empty() && isPlayer()):
+		_fromCharID = "inmateMale" # Just a random placeholder npc, just so we can get the sex event
+	if(!_fromCharID.empty()):
+		var theOtherChar = GlobalRegistry.getCharacter(_fromCharID)
+		if(theOtherChar):
+			var newSexEvent:SexEvent = SexEventHelper.create(
+				SexEvent.BodyWritingAdded,
+				_fromCharID,
+				getID(),
+				{
+					zone = zone,
+					writingID = writingID,
+					isPermanent = isPermanent,
+				}
+			)
+			sendSexEvent(newSexEvent)
+			if(theOtherChar != self):
+				theOtherChar.sendSexEvent(newSexEvent)
 
-func addBodywritingRandom(isPermanent:bool = false):
+func addBodywritingRandom(isPermanent:bool = false, _fromCharID:String = ""):
 	var zone = BodyWritingsZone.getRandomZone()
 	addBodywriting(zone, BodyWritings.getRandomWritingIDForZone(zone), isPermanent)
 
-func addBodywritingLowerBody(isPermanent:bool = false):
+func addBodywritingLowerBody(isPermanent:bool = false, _fromCharID:String = ""):
 	var zone = BodyWritingsZone.getRandomZoneLowerPart()
 	addBodywriting(zone, BodyWritings.getRandomWritingIDForZone(zone), isPermanent)
 

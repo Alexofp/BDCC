@@ -775,7 +775,7 @@ func _react(_action: String, _args):
 			lastBodywritingID = RNG.pick(["useme","freeuse","stripme","slave","slut","publictoy","publicpet","submissive","subby","subbyslut"])
 		elif(npcVariation == "mean"):
 			lastBodywritingID = BodyWritings.getRandomWritingIDForZone(lastBodywritingZone)
-		GM.pc.addBodywriting(lastBodywritingZone, lastBodywritingID)
+		GM.pc.addBodywriting(lastBodywritingZone, lastBodywritingID, false, npcID)
 		
 	if(_action == "kneel"):
 		GM.pc.addLust(RNG.randi_range(5,10))
