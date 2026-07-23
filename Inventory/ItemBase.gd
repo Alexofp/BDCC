@@ -286,6 +286,13 @@ func getClothingSlotSafe() -> String:
 func getRequiredBodypart():
 	return null
 
+# Always returns a string. Empty string = no slot
+func getRequiredBodypartSafe() -> String:
+	var theSlot = getRequiredBodypart()
+	if(theSlot == null || !(theSlot is String)):
+		return ""
+	return theSlot
+
 func getTakeOffScene():
 	return "TakeAnyItemOffScene"
 

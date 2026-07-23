@@ -97,16 +97,16 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 	var theActivityScore:float = getActivityScore(_sexEngine, _domInfo, _subInfo)
 	for item in usableItems:
 		var itemSlot:String = item.getClothingSlotSafe()
-		var bodypartSlot = item.getRequiredBodypart()
+		var bodypartSlot:String = item.getRequiredBodypartSafe()
 		
-		if(item.getRequiredBodypart() == BodypartSlot.Vagina && _subInfo.hasTag(SexActivityTag.VaginaPenetrated)):
+		if(bodypartSlot == BodypartSlot.Vagina && _subInfo.hasTag(SexActivityTag.VaginaPenetrated)):
 			continue
-		if(item.getRequiredBodypart() == BodypartSlot.Anus && _subInfo.hasTag(SexActivityTag.AnusPenetrated)):
+		if(bodypartSlot == BodypartSlot.Anus && _subInfo.hasTag(SexActivityTag.AnusPenetrated)):
 			continue
-		if(item.getRequiredBodypart() == BodypartSlot.Penis && _subInfo.hasTag(SexActivityTag.PenisUsed)):
+		if(bodypartSlot == BodypartSlot.Penis && _subInfo.hasTag(SexActivityTag.PenisUsed)):
 			continue
 		
-		if(bodypartSlot != null && sub.getFirstItemThatCoversBodypart(bodypartSlot) != null):
+		if(!bodypartSlot.empty() && sub.getFirstItemThatCoversBodypart(bodypartSlot) != null):
 			continue
 		elif(!sub.invCanEquipSlot(itemSlot)):
 			continue

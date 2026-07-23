@@ -2332,7 +2332,7 @@ func afterSexEnded(sexInfo):
 		
 	updateAppearance()
 
-func getFirstItemThatCoversBodypart(bodypartSlot):
+func getFirstItemThatCoversBodypart(bodypartSlot:String):
 	return getInventory().getFirstItemThatCoversBodypart(bodypartSlot)
 	
 func getWornCondom():

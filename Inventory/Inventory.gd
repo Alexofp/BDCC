@@ -679,9 +679,9 @@ func getRestraintsThatCanBeForcedDuringSex(tag):
 			if(ourItem.isRestraint() || ourItem.isImportant()):
 				continue
 		
-		var bodypartSlot = potentialItem.getRequiredBodypart()
+		var bodypartSlot:String = potentialItem.getRequiredBodypartSafe()
 		var coversItem = getFirstItemThatCoversBodypart(bodypartSlot)
-		if(bodypartSlot != null && coversItem != null):
+		if(!bodypartSlot.empty() && coversItem != null):
 			if(coversItem.isRestraint() || coversItem.isImportant()):
 				continue
 		
