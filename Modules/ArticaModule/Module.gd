@@ -296,21 +296,28 @@ func canTriggerWaitScene():
 #		"eventPortalPanties": flag(FlagType.Number),
 
 func getCorruptionEventScenes():
+	var isAlexBusy:bool = GM.main.isEventBusy("AlexRynardBusy")
+	var isElizaBusy:bool = GM.main.isEventBusy("ElizaBusy")
+	
 	return {
 		"eventTentacles": [
 			{
 				"name": "Scouting greenhouses",
 				"scene": "articaEventTentacles1Scene",
+				"canstart": !isElizaBusy,
+				"hint": "Eliza Quinn must be available",
 			},
 			{
 				"name": "Small tentacles",
 				"scene": "articaEventTentacles2Scene",
-				"canstart": getFlag("ArticaModule.TentaclesArticaHasFlower", false),
-				"hint": "Artica needs a special flower. Steal one from the greenhouses and give it to her!",
+				"canstart": !isElizaBusy && getFlag("ArticaModule.TentaclesArticaHasFlower", false),
+				"hint": ("Artica needs a special flower. Steal one from the greenhouses and give it to her! " if !getFlag("ArticaModule.TentaclesArticaHasFlower", false) else "")+("Eliza Quinn must be available" if isElizaBusy else ""),
 			},
 			{
 				"name": "Big tentacles",
 				"scene": "articaEventTentacles3Scene",
+				"canstart": !isElizaBusy,
+				"hint": "Eliza Quinn must be available",
 			},
 		],
 		"eventSelfsuck": [
@@ -345,12 +352,14 @@ func getCorruptionEventScenes():
 			{
 				"name": "Hypnovisor",
 				"scene": "articaEventPortalPanties1Scene",
+				"canstart": !isAlexBusy,
+				"hint": "Alex Rynard must be available",
 			},
 			{
 				"name": "Portal panties",
 				"scene": "articaEventPortalPanties2Scene",
-				"canstart": !GlobalRegistry.getCharacter("artica").isWearingChastityCage(),
-				"hint": "Artica can not be wearing a chastity cage",
+				"canstart": !isAlexBusy && !GlobalRegistry.getCharacter("artica").isWearingChastityCage(),
+				"hint": ("Artica can not be wearing a chastity cage. " if GlobalRegistry.getCharacter("artica").isWearingChastityCage() else "")+("Alex Rynard must be available." if isAlexBusy else ""),
 			}
 		]
 	}

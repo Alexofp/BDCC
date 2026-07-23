@@ -2444,3 +2444,9 @@ func hasCommittedToCaptainMainRoute() -> bool:
 # If we have gotten to any ending, we can restart the main route
 func canRestartMainRoute() -> bool:
 	return MRH.canRestartMainRoute()
+
+func isEventBusy(_checkID:String) -> bool:
+	var checkData = GM.ES.eventCheck(_checkID, [])
+	if(checkData == null):
+		return false
+	return true
