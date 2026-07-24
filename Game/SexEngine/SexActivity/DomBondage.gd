@@ -70,14 +70,20 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 		
 		var possibleRestraints = sub.getInventory().getRestraintsThatCanBeForcedDuringSex(itemTagToUse)
 		
+		var hasOralGoals:bool = _domInfo.goalsScoreMax(SexGoal.GoalsRequireSubMouthFree, _subInfo.charID) > 0.0
+		var subMouthIsUsed:bool = _sexEngine.hasTag(_subInfo.charID, SexActivityTag.MouthUsed)
+		var subHasPenisInside:bool = _sexEngine.hasTag(_subInfo.charID, SexActivityTag.PenisInside)
+		var subHasPenisUsed:bool = _sexEngine.hasTag(_subInfo.charID, SexActivityTag.PenisUsed)
+		
 		for possibleRestraintID in possibleRestraints:
 			var item:ItemBase = GlobalRegistry.getItemRef(possibleRestraintID)
-			if(_domInfo.goalsScore({SexGoal.FuckOral: 1.0}, _subInfo.charID) > 0.0 || _domInfo.goalsScore({SexGoal.BreastFeedSub: 1.0}, _subInfo.charID) > 0.0 || _sexEngine.hasTag(_subInfo.charID, SexActivityTag.MouthUsed)):
+			
+			if(hasOralGoals || subMouthIsUsed):
 				if(item.getClothingSlotSafe() == InventorySlot.Mouth):
 					if(!item.hasBuff(Buff.RingGagBuff)):
 						continue
 			
-			if(item.hasTag(ItemTag.ChastityCage) && (_sexEngine.hasTag(_subInfo.charID, SexActivityTag.PenisInside) || _sexEngine.hasTag(_subInfo.charID, SexActivityTag.PenisUsed))):
+			if(item.hasTag(ItemTag.ChastityCage) && (subHasPenisInside || subHasPenisUsed)):
 				continue
 			
 			if(_isSubPC && item.hasTag(ItemTag.Hypnovisor) && GM.main.getEncounterSettings().isGoalDisabledForSubPC(SexGoal.Hypnotize)):
