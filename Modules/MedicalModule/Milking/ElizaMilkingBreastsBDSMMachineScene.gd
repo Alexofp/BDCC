@@ -2,6 +2,7 @@ extends SceneBase
 
 var isAnal = false
 var amountCollected = 0.0
+var removedItemID:String = ""
 
 func _init():
 	sceneID = "ElizaMilkingBreastsBDSMMachineScene"
@@ -270,11 +271,19 @@ func _run():
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
+		if(!removedItemID.empty()):
+			var theItem = GM.pc.getInventory().getItemByUniqueID(removedItemID)
+			if(theItem):
+				GM.pc.getInventory().equipItem(theItem)
 		endScene()
 		return
 
 	if(_action == "get_locked"):
 		processTime(5*60)
+		var theRemovedItem:ItemBase = GM.pc.getInventory().unequipSlot(InventorySlot.UnderwearTop)
+		if(theRemovedItem && theRemovedItem.uniqueID != null):
+			removedItemID = theRemovedItem.uniqueID
+			
 		var thePump = GlobalRegistry.createItem("BreastPump")
 		if(thePump):
 			var theFluids = thePump.getFluids()
@@ -348,6 +357,7 @@ func saveData():
 
 	data["isAnal"] = isAnal
 	data["amountCollected"] = amountCollected
+	data["removedItemID"] = removedItemID
 
 	return data
 
@@ -356,3 +366,4 @@ func loadData(data):
 
 	isAnal = SAVE.loadVar(data, "isAnal", false)
 	amountCollected = SAVE.loadVar(data, "amountCollected", 0.0)
+	removedItemID = SAVE.loadVar(data, "removedItemID", "")

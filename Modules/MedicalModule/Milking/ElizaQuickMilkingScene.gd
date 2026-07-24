@@ -12,7 +12,7 @@ func _init():
 
 func saveSlotToBeReequipped(_slot:String):
 	var theItem:ItemBase = GM.pc.getInventory().unequipSlot(_slot)
-	if(theItem):
+	if(theItem && theItem.uniqueID != null):
 		removedItemIDs.append(theItem.uniqueID)
 
 func _reactInit():
