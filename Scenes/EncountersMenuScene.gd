@@ -8,6 +8,7 @@ var pickedSpeciesToChange = ""
 var pickedGoalIDToChange = ""
 var pickedTFIDToChange = ""
 var npclistScene = preload("res://UI/NpcList/NpcList.tscn") 
+var page:int = -1
 
 func _init():
 	sceneID = "EncountersMenuScene"
@@ -190,6 +191,9 @@ func _run():
 			saynn("- Nothing is disabled")
 		else:
 			saynn(Util.humanReadableList(disabledGoalsNames))
+			
+		if(page > 0):
+			GM.ui.setCurrentPage(page)
 
 	if(state == "speciesmenu"):
 		var encounterSettings:EncounterSettings = GM.main.getEncounterSettings()
@@ -386,10 +390,12 @@ func _react(_action: String, _args):
 		return
 		
 	if(_action == "enablegoalforpc"):
+		page = GM.ui.getCurrentPage()
 		GM.main.getEncounterSettings().enableGoalForSubPC(_args[0])
 		return
 	
 	if(_action == "disablegoalforpc"):
+		page = GM.ui.getCurrentPage()
 		GM.main.getEncounterSettings().disableGoalForSubPC(_args[0])
 		return
 	

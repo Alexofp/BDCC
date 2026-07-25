@@ -87,7 +87,7 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 				continue
 			
 			if(_isSubPC && item.hasTag(ItemTag.Hypnovisor) && GM.main.getEncounterSettings().isGoalDisabledForSubPC(SexGoal.Hypnotize)):
-				return
+				continue
 			
 			usableItems.append(item)
 		
