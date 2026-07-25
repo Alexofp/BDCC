@@ -826,38 +826,42 @@ func getAnimation():
 		if(state in [""]):
 			return [StageScene.PuppySexCowgirl, "tease", {npc=SUB_0, pc=DOM_0}]
 		if(state in ["knotting", "inside"]):
-			return [StageScene.PuppySexCowgirl, "inside", {npc=SUB_0, pc=DOM_0}]
+			return [StageScene.PuppySexCowgirl, "inside", {npc=SUB_0, pc=DOM_0, bodyState={hard=true}}]
 		if(getSubInfo().isCloseToCumming() || (isStraponSex() && getDomInfo().isCloseToCumming())):
-			return [StageScene.PuppySexCowgirl, "fast", {npc=SUB_0, pc=DOM_0}]
-		return [StageScene.PuppySexCowgirl, "sex", {npc=SUB_0, pc=DOM_0}]
+			return [StageScene.PuppySexCowgirl, "fast", {npc=SUB_0, pc=DOM_0, bodyState={hard=true}}]
+		return [StageScene.PuppySexCowgirl, "sex", {npc=SUB_0, pc=DOM_0, bodyState={hard=true}}]
 	
 	if(getSexType() == SexType.SlutwallSex):
 		if(state in [""]):
 			return [StageScene.SlutwallRide, "tease", {pc=SUB_0, npc=DOM_0}]
 		if(state in ["knotting", "inside"]):
-			return [StageScene.SlutwallRide, "inside", {pc=SUB_0, npc=DOM_0}]
+			return [StageScene.SlutwallRide, "inside", {pc=SUB_0, npc=DOM_0, bodyState={hard=true}}]
 		if(getSubInfo().isCloseToCumming() || (isStraponSex() && getDomInfo().isCloseToCumming())):
-			return [StageScene.SlutwallRide, "fast", {pc=SUB_0, npc=DOM_0}]
-		return [StageScene.SlutwallRide, "sex", {pc=SUB_0, npc=DOM_0}]
+			return [StageScene.SlutwallRide, "fast", {pc=SUB_0, npc=DOM_0, bodyState={hard=true}}]
+		return [StageScene.SlutwallRide, "sex", {pc=SUB_0, npc=DOM_0, bodyState={hard=true}}]
 	
 	var animToPlay = StageScene.SexCowgirl
 	if(PoseToAnimName.has(currentPose)):
 		animToPlay = PoseToAnimName[currentPose]
 	var pcPoseID:int=SUB_0
 	var npcPoseID:int=DOM_0
+	var pcState:Dictionary = {hard=true}
+	var npcState:Dictionary = {}
 	if(currentPose == POSE_LOTUS):
 		pcPoseID = DOM_0
 		npcPoseID = SUB_0
+		pcState = {}
+		npcState = {hard=true}
 	
 	if(state in [""]):
 		return [animToPlay, "tease", {pc=pcPoseID, npc=npcPoseID, uncon=shouldUncon}]
 	if(state in ["knotting", "inside"]):
-		return [animToPlay, "inside", {pc=pcPoseID, npc=npcPoseID, uncon=shouldUncon}]
+		return [animToPlay, "inside", {pc=pcPoseID, npc=npcPoseID, uncon=shouldUncon, bodyState=pcState, npcBodyState=npcState}]
 	if(getSubInfo().isCloseToCumming() || (isStraponSex() && getDomInfo().isCloseToCumming())):
 		if(currentPose == POSE_REVERSECOWGIRL):
 			shouldUncon = false
-		return [animToPlay, "fast", {pc=pcPoseID, npc=npcPoseID, uncon=shouldUncon}]
-	return [animToPlay, "sex", {pc=pcPoseID, npc=npcPoseID, uncon=shouldUncon}]
+		return [animToPlay, "fast", {pc=pcPoseID, npc=npcPoseID, uncon=shouldUncon, bodyState=pcState, npcBodyState=npcState}]
+	return [animToPlay, "sex", {pc=pcPoseID, npc=npcPoseID, uncon=shouldUncon, bodyState=pcState, npcBodyState=npcState}]
 
 func getDomSwitchHoleChance() -> float:
 	if(getDomInfo().hasMemory("switchedHoles")):
