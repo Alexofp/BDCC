@@ -155,7 +155,7 @@ func _handle_drag(event: InputEventScreenDrag):
 		var new_vector: Vector2 = new_point - pivot_point
 		
 		var delta_scale = new_vector.length() / old_vector.length()
-		camera3d.size *= delta_scale
+		camera3d.size /= delta_scale
 		#world.zoomRaw(delta_scale)
 		touch_points[event.index] = new_point
 		
