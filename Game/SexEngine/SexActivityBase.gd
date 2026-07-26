@@ -816,7 +816,7 @@ func getThroughClothingText(_indx:int, _slot:String) -> String:
 	var clothingItem = theChar.getFirstItemThatCoversBodypart(_slot)
 	var throughTheClothing:String = ""
 	if(clothingItem != null):
-		throughTheClothing = " through {"+indxToOverrideName(_indx)+".yourHis} "+clothingItem.getCasualName()
+		throughTheClothing = " through {"+getDomOrSubID(_indx)+".yourHis} "+clothingItem.getCasualName()
 	return throughTheClothing
 
 func getThroughClothingTextCustom(_indx:int, _slot:String, _customText:String) -> String:
