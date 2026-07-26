@@ -3548,6 +3548,11 @@ func doStuffEggInto(_roleMain:int, _roleTarget:int, _bodypart:String, _showMessa
 	var thePenis:BodypartPenis = _main.getBodypart(BodypartSlot.Penis)
 	if(thePenis.hasTrait(PartTrait.Ovipositor) && thePenis.has_method("canStuffEggInto") && thePenis.has_method("doStuffEggInto")):
 		if(thePenis.canStuffEggInto(_target, _bodypart)):
+			if(_main.isWearingCondom()): # I'm not making a condom-of-eggs mechanic, nuhhhhh
+				var theCondom = _main.getWornCondom()
+				theCondom.destroyMe()
+				addTextRaw("[b]{"+_main.getID()+".Your} condom breaks![/b]")
+			
 			var theResult:Dictionary = thePenis.doStuffEggInto(_target, _bodypart)
 			if(!theResult.get("success", false)):
 				return {success = false}
