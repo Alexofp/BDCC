@@ -261,6 +261,11 @@ func about_to_shout_text():
 func about_to_shout_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "continue"):
 		getCharByRole("inmate").addStamina(20)
+		
+		if(isPlayersTurn() && triggerRandomStocksEvent(10.0, 10.0, 10.0, 100.0)):
+			setState("", "inmate")
+			return
+
 		if(!shoutForInterruptions("inmate", 3, 2, 0.5, "You hear begging coming from "+getCharByRole("inmate").getName()+" who is stuck in stocks at the punishment platform..")):
 			setState("after_shout", "inmate")
 			checkSleep()
