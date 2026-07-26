@@ -2747,29 +2747,36 @@ func cumGeneric(_indxWho:int, _indxCauser:int, uniqueOrgasm:String = "", extraOr
 		fetishAffect(_indxWho, Fetish.SeedMilking, 3.0)
 	
 func cumInsideShare(_indxWho:int, _indxTarget1:int, _hole1:String, _indxTarget2:int, _hole2:String, _shareFirst:float = 0.5):
-	var theInfo:SexInfoBase = getDomOrSubInfo(_indxWho)
+	#var theInfo:SexInfoBase = getDomOrSubInfo(_indxWho)
 	var theChar:BaseCharacter = getDomOrSub(_indxWho)
 	var target1:BaseCharacter = getDomOrSub(_indxTarget1)
-	var target1Info:SexInfoBase = getDomOrSubInfo(_indxTarget1)
+	#var target1Info:SexInfoBase = getDomOrSubInfo(_indxTarget1)
 	var target2:BaseCharacter = getDomOrSub(_indxTarget2)
-	var target2Info:SexInfoBase = getDomOrSubInfo(_indxTarget2)
+	#var target2Info:SexInfoBase = getDomOrSubInfo(_indxTarget2)
 	
-	target1.cummedInBodypartByAdvanced(_hole1, theChar.getID(), {}, null, _shareFirst)
-	target2.cummedInBodypartByAdvanced(_hole2, theChar.getID(), {}, null)
+	var _hasCondom:bool = isWearingCondom(_indxWho)
+	var _cumInfo1:Dictionary = cumInsideNoText(_indxWho, _indxTarget1, _hole1, {shareMode=true})
+	var _cumInfo2:Dictionary = cumInsideNoText(_indxWho, _indxTarget2, _hole2, {})
+	var _condomBrokeAfter1:bool = _hasCondom && _cumInfo1.get("condomBroke", false)
+	var _condomBrokeAfter2:bool = _hasCondom && _cumInfo2.get("condomBroke", false)
+	var _didCondomHeld:bool = _hasCondom && !_condomBrokeAfter1 && !_condomBrokeAfter2
 	
-	addTextRaw(("{<TOP>.You} {<TOP>.youVerb('stuff')} {<BOTTOM1>.your} "+getNameHole(_indxTarget1, _hole1)+" with the first waves of {<TOP>.yourHis} {<TOP>.cum}. While the orgasm is still going, {<TOP>.youHe} quickly {<TOP>.youHeVerb('pull')} out and {<TOP>.youHeVerb('pump')} the rest into {<BOTTOM2>.your} "+getNameHole(_indxTarget2, _hole2)+", [b]sharing {<TOP>.your} load between them[/b]!").replace("<TOP>", theChar.getID()).replace("<BOTTOM1>", target1.getID()).replace("<BOTTOM2>", target2.getID()))
-	
-	if(target1.hasWombIn(_hole1) && (target1Info is SexSubInfo)):
-		var beingBredScore:float = target1Info.fetishScore({Fetish.BeingBred: 1.0})
-		if(beingBredScore < 0.0):
-			target1Info.addResistance(1.0)
-			target1Info.addFear(0.1)
-	if(target2.hasWombIn(_hole2) && (target2Info is SexSubInfo)):
-		var beingBredScore:float = target2Info.fetishScore({Fetish.BeingBred: 1.0})
-		if(beingBredScore < 0.0):
-			target2Info.addResistance(1.0)
-			target2Info.addFear(0.1)
-	theInfo.cum()
+	if(_didCondomHeld): # used a condom that held
+		addTextRaw(("{<TOP>.You} {<TOP>.youVerb('stuff')} the condom inside {<BOTTOM1>.your} "+getNameHole(_indxTarget1, _hole1)+" with the first waves of {<TOP>.yourHis} {<TOP>.cum}. While the orgasm is still going, {<TOP>.youHe} quickly {<TOP>.youHeVerb('pull')} out and {<TOP>.youHeVerb('pump')} the rest into the condom while it's inside {<BOTTOM2>.your} "+getNameHole(_indxTarget2, _hole2)+", [b]the condom safely holding {<TOP>.your} load[/b]!").replace("<TOP>", theChar.getID()).replace("<BOTTOM1>", target1.getID()).replace("<BOTTOM2>", target2.getID()))
+	elif(_condomBrokeAfter1): # condom broke when the cock was inside the first sub, both subs received share of cum (same as if no condom)
+		addTextRaw(("{<TOP>.You} {<TOP>.youVerb('stuff')} the condom inside {<BOTTOM1>.your} "+getNameHole(_indxTarget1, _hole1)+" with the first waves of {<TOP>.yourHis} {<TOP>.cum}. [b]The condom suddenly breaks![/b] While the orgasm is still going, {<TOP>.youHe} quickly {<TOP>.youHeVerb('pull')} out and {<TOP>.youHeVerb('pump')} the rest into {<BOTTOM2>.your} "+getNameHole(_indxTarget2, _hole2)+", [b]sharing {<TOP>.your} load between them[/b]!").replace("<TOP>", theChar.getID()).replace("<BOTTOM1>", target1.getID()).replace("<BOTTOM2>", target2.getID()))
+	elif(_condomBrokeAfter2): # condom broke when the cock was inside the second sub, only the second sub got cream-pied
+		addTextRaw(("{<TOP>.You} {<TOP>.youVerb('stuff')} the condom inside {<BOTTOM1>.your} "+getNameHole(_indxTarget1, _hole1)+" with the first waves of {<TOP>.yourHis} {<TOP>.cum}. While the orgasm is still going, {<TOP>.youHe} quickly {<TOP>.youHeVerb('pull')} out and {<TOP>.youHeVerb('pump')} the rest into the condom while it's inside {<BOTTOM2>.your} "+getNameHole(_indxTarget2, _hole2)+". [b]The condom suddenly breaks! The whole load ends up in {<BOTTOM2>.you}[/b]!").replace("<TOP>", theChar.getID()).replace("<BOTTOM1>", target1.getID()).replace("<BOTTOM2>", target2.getID()))
+	else: # Didn't use any condoms, just came inside both
+		addTextRaw(("{<TOP>.You} {<TOP>.youVerb('stuff')} {<BOTTOM1>.your} "+getNameHole(_indxTarget1, _hole1)+" with the first waves of {<TOP>.yourHis} {<TOP>.cum}. While the orgasm is still going, {<TOP>.youHe} quickly {<TOP>.youHeVerb('pull')} out and {<TOP>.youHeVerb('pump')} the rest into {<BOTTOM2>.your} "+getNameHole(_indxTarget2, _hole2)+", [b]sharing {<TOP>.your} load between them[/b]!").replace("<TOP>", theChar.getID()).replace("<BOTTOM1>", target1.getID()).replace("<BOTTOM2>", target2.getID()))
+
+
+#	return {
+#		text="",
+#		didCumInside=didCumInside,
+#		condomBroke=condomBroke,
+#		knotSuccess=knotSuccess
+#	}
 
 func cumInsideNoText(_indxWho:int, _indxTarget:int, _hole:String, _extra:Dictionary = {}) -> Dictionary:
 	var theChar:BaseCharacter = getDomOrSub(_indxWho)
@@ -2780,6 +2787,8 @@ func cumInsideNoText(_indxWho:int, _indxTarget:int, _hole:String, _extra:Diction
 		return {}
 
 	var tryKnot:bool = _extra["tryKnot"] if _extra.has("tryKnot") else false
+	# Share mode means the target will only receive half of the cum and the dom also won't 'cum'
+	var shareMode:bool = _extra["shareMode"] if _extra.has("shareMode") else false
 	#var isRiding:bool = _extra["isRiding"] if _extra.has("isRiding") else false
 	#var isDeepthroat:bool = _extra["isDeepthroat"] if _extra.has("isDeepthroat") else false
 
@@ -2794,7 +2803,7 @@ func cumInsideNoText(_indxWho:int, _indxTarget:int, _hole:String, _extra:Diction
 		var strapon = theChar.getWornStrapon()
 		if(strapon.getFluids() != null && !strapon.getFluids().isEmpty()):
 			var straponHasCum:bool = strapon.getFluids().hasVirileFluids()
-			target.cummedInBodypartByAdvanced(_hole, theChar.getID())
+			target.cummedInBodypartByAdvanced(_hole, theChar.getID(), {}, null, 0.5 if shareMode else 1.0)
 			
 			if(straponHasCum && target.hasWombIn(_hole) && target.getFertility() > 0.1):
 				fetishAffect(_indxWho, Fetish.Breeding, 5.0)
@@ -2850,8 +2859,9 @@ func cumInsideNoText(_indxWho:int, _indxTarget:int, _hole:String, _extra:Diction
 				fetishAffect(_indxTarget, Fetish.Condoms, 5.0)
 				handledCum = true
 				
-				var loadSize = topChar.cumInItem(condom)
-				topInfo.cum()
+				var loadSize = topChar.cumInItem(condom, FluidSource.Penis, 0.5 if shareMode else 1.0)
+				if(!shareMode):
+					topInfo.cum()
 				bottomInfo.addArousalSex(0.2)
 				sendSexEvent(SexEvent.FilledCondomInside, _indxWho, _indxTarget, {hole=_hole,loadSize=loadSize,knotted=knotSuccess})
 		
@@ -2866,8 +2876,9 @@ func cumInsideNoText(_indxWho:int, _indxTarget:int, _hole:String, _extra:Diction
 					if(beingBredScore < 0.0):
 						bottomInfo.addResistance(1.0)
 						bottomInfo.addFear(0.1)
-			bottomChar.cummedInBodypartByAdvanced(_hole, topInfo.getCharID(), {knotted=knotSuccess,condomBroke=condomBroke})
-			topInfo.cum()
+			bottomChar.cummedInBodypartByAdvanced(_hole, topInfo.getCharID(), {knotted=knotSuccess,condomBroke=condomBroke}, null, 0.5 if shareMode else 1.0)
+			if(!shareMode):
+				topInfo.cum()
 			bottomInfo.addArousalSex(0.2)
 
 		if(shouldStretchPainfully):
@@ -2901,16 +2912,18 @@ func cumInsideNoText(_indxWho:int, _indxTarget:int, _hole:String, _extra:Diction
 			else:
 				fetishAffect(_indxWho, Fetish.Condoms, 5.0)
 				fetishAffect(_indxTarget, Fetish.Condoms, 5.0)
-				topChar.cumInItem(condom)
-				topInfo.cum()
+				topChar.cumInItem(condom, FluidSource.Penis, 0.5 if shareMode else 1.0)
+				if(!shareMode):
+					topInfo.cum()
 				return {}
 		if(bottomInfo is SexSubInfo):
 			var beingBredScore:float = bottomInfo.fetishScore({Fetish.OralSexGiving: 1.0})
 			if(beingBredScore < 0.0):
 				bottomInfo.addResistance(1.0)
 				bottomInfo.addFear(0.1)
-		bottomChar.cummedInBodypartByAdvanced(BodypartSlot.Head, topInfo.getCharID(), {condomBroke=condomBroke})
-		topInfo.cum()
+		bottomChar.cummedInBodypartByAdvanced(BodypartSlot.Head, topInfo.getCharID(), {condomBroke=condomBroke}, null, 0.5 if shareMode else 1.0)
+		if(!shareMode):
+			topInfo.cum()
 		
 		#return getSexEngine().combineData({text=text}, applyTallymarkIfNeededData(BodypartSlot.Head))
 		return {}
