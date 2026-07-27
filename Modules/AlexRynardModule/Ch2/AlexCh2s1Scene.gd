@@ -836,7 +836,7 @@ func _run():
 		addButton("Follow", "See where the life brings you", "time7_lift")
 	if(state == "time7_lift"):
 		aimCameraAndSetLocName("mining_elevator")
-		saynn("You follow Alex and Eliza to the lift. She presses the 'MD' button and soon the doors close followed by an annoying screech as the whole room begins moving.")
+		saynn("You follow Alex and Eliza to the lift. She presses the 'MB' button and soon the doors close followed by an annoying screech as the whole room begins moving.")
 
 		saynn("Foxy stands still.. but Eliza doesn't. She leans against one of the walls.")
 

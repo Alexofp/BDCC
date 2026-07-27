@@ -33,6 +33,15 @@ const DEFAULT_EXTRA_SLOTS:Array = [
 	Static1, Static2, Static3,
 ]
 
+const DEFAULT_UNDRESS_CHAINS:Array = [
+	[Torso, Body, UnderwearTop],
+	[Torso, Body, UnderwearBottom],
+	[Eyes, Mouth],
+	[Wrists, Hands],
+	[Ankles],
+	[Unique],
+]
+
 static func getAll() -> Array:
 	if(GlobalRegistry.cachedInventorySlotsList.empty()):
 		Log.printerr("InventorySlot.getAll() got called before the cached list got populated with values!")
@@ -49,3 +58,17 @@ static func getVisibleName(slot: String):
 
 	var s = GlobalRegistry.getCustomInventorySlot(slot)
 	return s.getVisibleName() if s else "Error"
+
+static func getUndressChains() -> Array:
+	if(GlobalRegistry.inventorySlots.empty()):
+		return DEFAULT_UNDRESS_CHAINS
+	var theChains:Array = DEFAULT_UNDRESS_CHAINS.duplicate()
+	
+	for theSlotID in GlobalRegistry.inventorySlots:
+		var theSlot = GlobalRegistry.inventorySlots[theSlotID]
+		var theChain:Array = theSlot.getUndressChain()
+		if(theChain.empty()):
+			continue
+		theChains.append(theChain)
+	
+	return theChains

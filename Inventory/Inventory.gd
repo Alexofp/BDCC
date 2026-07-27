@@ -658,6 +658,8 @@ func getFirstItemThatCoversBodypart(bodypartSlot:String):
 			continue
 		
 		var item = getEquippedItem(inventorySlot)
+		if(item.isRemoved()):
+			continue
 		if(item.coversBodypart(bodypartSlot)):
 			return item
 	

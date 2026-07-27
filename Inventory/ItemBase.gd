@@ -382,8 +382,16 @@ func coversBodyparts():
 		return itemState.coversBodyparts()
 	return {}
 
+func coversBodypartsFinal() -> Dictionary:
+	if(isRemoved()):
+		return {}
+	var theCovers = coversBodyparts()
+	if(theCovers == null):
+		return {}
+	return theCovers
+
 func coversBodypart(bodypartSlot):
-	var covers = coversBodyparts()
+	var covers = coversBodypartsFinal()
 	if(covers.has(bodypartSlot)):
 		return true
 	return false
