@@ -48,7 +48,7 @@ func _run():
 		
 		saynn("You step over the mess of shattered glass and spilled fluids, eyeing the setup. The place is filthy as fuck.. greasy counters, rusted burners, and beakers filled with ominous, bubbling sludge. Despite how shitty it all looks, there’s some real chemistry going on here.")
 		
-		saynn("There is a few options avaiable to you. You could take a closer look at this setup and try to understand how these junkies manage to cook up their drugs with such limited resources. Might be useful for upgrading your own lab.")
+		saynn("There is a few options available to you. You could take a closer look at this setup and try to understand how these junkies manage to cook up their drugs with such limited resources. Might be useful for upgrading your own lab.")
 		
 		saynn("Or maybe you could use the equipment yourself. There is already something brewing in here.. and also some notes that you can follow.. so why not finish the job? This will probably result in one of those strange pills..")
 		
