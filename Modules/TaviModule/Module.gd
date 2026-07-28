@@ -6,6 +6,7 @@ func getFlags():
 		# Tavi module
 		"Tavi_IntroducedTo": flag(FlagType.Bool),
 		"Tavi_IsAngryAtPlayer": flag(FlagType.Bool),
+		"Tavi_RefusedToSubmit": flag(FlagType.Bool),
 		"Tavi_ToldHowToEscape": flag(FlagType.Bool),
 		"Tavi_NeedsApple": flag(FlagType.Bool),
 		"Tavi_GotApple": flag(FlagType.Bool),

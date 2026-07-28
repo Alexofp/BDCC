@@ -34,10 +34,10 @@ func getStatus() -> int:
 		return ContentBoardStatus.Completed
 	if(getFlag("TaviModule.Ch7NoEnding", false) || getFlag("TaviModule.Ch7YesEnding", false) || getFlag("TaviModule.Ch7KillEnding", false)):
 		return ContentBoardStatus.Completed
-	if(getFlag("TaviModule.Tavi_IntroducedTo", false)):
-		return ContentBoardStatus.InProgress
 	if(GM.main.hasCommittedToMainRoute() && !GM.main.hasCommittedToTaviMainRoute()):
 		return ContentBoardStatus.Cancelled
+	if(getFlag("TaviModule.Tavi_IntroducedTo", false)):
+		return ContentBoardStatus.InProgress
 	return ContentBoardStatus.ConditionsNotMet
 
 func getStartConditions() -> Array:

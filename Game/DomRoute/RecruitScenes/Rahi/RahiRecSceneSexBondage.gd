@@ -33,7 +33,7 @@ func _run():
 
 		addButton("Cuff her", "Time for bondage!", "do_bondage")
 	if(state == "do_bondage"):
-		playAnimation(StageScene.HangingDuo, "idle", {pc="pc", npc="rahi", npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.HangingDuo, "idle", {pc="rahi", npc="pc", bodyState={naked=true, hard=true}})
 		saynn("That shirt is only gonna get in the way. Without saying anything, you begin unbuttoning and taking it off.")
 
 		saynn("[say=rahi]W-what are you.. meow![/say]")
@@ -64,7 +64,7 @@ func _run():
 
 		addButton("More toys", "Put more things on Rahi", "more_toys")
 	if(state == "more_toys"):
-		playAnimation(StageScene.HangingSex, "tease", {pc="pc", npc="rahi", bodyState={naked=true, hard=true, condom=condomUsed}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.HangingSex, "tease", {pc="rahi", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, condom=condomUsed}})
 		saynn("A strip of black cloth goes over her eyes, pulling her into complete darkness. Then comes the ballgag. You push the rubber ball against her lips until she parts them, the rubber sphere now holding her jaw open, her tongue drooling.")
 
 		saynn("[say=rahi]Mmph..[/say]")
@@ -87,7 +87,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "sex_part")
 	if(state == "sex_part"):
-		playAnimation(StageScene.HangingSex, "sex", {pc="pc", npc="rahi", bodyState={naked=true, hard=true, condom=condomUsed}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.HangingSex, "sex", {pc="rahi", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, condom=condomUsed}})
 		saynn("Then you push inside..")
 
 		saynn("[say=rahi]Mmph-![/say]")
@@ -102,7 +102,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "sex_fast")
 	if(state == "sex_fast"):
-		playAnimation(StageScene.HangingSex, "fast", {pc="pc", npc="rahi", bodyState={naked=true, hard=true, condom=condomUsed}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.HangingSex, "fast", {pc="rahi", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, condom=condomUsed}})
 		saynn("You pick up the pace, railing that slick pussy faster. Rahi's muffled moans get louder, her body squirming in the restraints, her inner walls clenching tightly around you, her clit still getting pleasured by the toy at the same time.")
 
 		saynn("[say=rahi]Mmmphh.. mmmphh-..[/say]")
@@ -119,7 +119,7 @@ func _run():
 
 		addButton("Cum inside", "Breed the kitty!", "sex_cum")
 	if(state == "sex_cum"):
-		playAnimation(StageScene.HangingSex, "inside", {pc="pc", npc="rahi", pcCum=cameInsideRahi, bodyState={naked=true, hard=true, condom=condomUsed}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.HangingSex, "inside", {pc="rahi", npc="pc", npcCum=cameInsideRahi, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, condom=condomUsed}})
 		saynn("You keep fucking Rahi through her orgasm, through her squirming.. until she is whimpering and trying to push back against the chains."+str(" The pressure builds in your {pc.penis}.." if !straponUsed else "")+"")
 
 		if (straponUsed):
@@ -186,7 +186,7 @@ func _react(_action: String, _args):
 		return
 
 	if(_action == "do_bondage"):
-		putOn("rahi", "inmatewristcuffs")
+		putOn("rahi", "policecuffs")
 		putOn("rahi", "inmateanklecuffs")
 
 	if(_action == "more_toys"):
@@ -225,7 +225,7 @@ func _react(_action: String, _args):
 		recRemoveStrapons()
 		putOff("rahi", "blindfold")
 		putOff("rahi", "ballgag")
-		putOff("rahi", "inmatewristcuffs")
+		putOff("rahi", "policecuffs")
 		putOff("rahi", "inmateanklecuffs")
 
 	setState(_action)

@@ -28,10 +28,10 @@ func getStatus() -> int:
 		return ContentBoardStatus.Completedish
 	#if(getFlag("TaviModule.Ch7NoEnding", false) || getFlag("TaviModule.Ch7YesEnding", false) || getFlag("TaviModule.Ch7KillEnding", false)):
 	#	return ContentBoardStatus.Completed
-	if(getFlag("KaitModule.joinedTeam", false)):
-		return ContentBoardStatus.InProgress
 	if(GM.main.hasCommittedToMainRoute() && !GM.main.hasCommittedToKaitMainRoute()):
 		return ContentBoardStatus.Cancelled
+	if(getFlag("KaitModule.joinedTeam", false)):
+		return ContentBoardStatus.InProgress
 	return ContentBoardStatus.ConditionsNotMet
 
 func getStartConditions() -> Array:

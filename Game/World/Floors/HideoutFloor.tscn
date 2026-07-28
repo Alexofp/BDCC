@@ -28,6 +28,7 @@ position = Vector2( 64, -64 )
 roomName = "Hideout"
 roomID = "hideout_hq"
 roomDescription = "You step into the main room of your hideout, a mission center. Against one of the walls, there is a table turned on its side and propped up above the floor with a few crates. The table has some scribbles on it from previous planning sessions, done with a marker. Apart from that, there is nothing else special here. Just a few old chairs and crates."
+roomSprite = 4
 
 [node name="HideoutRoom5" parent="." index="4" instance=ExtResource( 1 )]
 position = Vector2( -64, -64 )

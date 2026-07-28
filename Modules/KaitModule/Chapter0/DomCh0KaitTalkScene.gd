@@ -125,7 +125,9 @@ func _run():
 		saynn("She throws her head back and stares at the ceiling.")
 
 		saynn("[say=kait]You're the only one who even bothered to ask. Well, I guess Ans also did. He is nice.[/say]")
-
+		
+		saynn("She sighs.")
+		
 		saynn("[say=kait]I tried to bribe a guy with my ass. Got my face stamped with a 'Unsolicited Breeding' charge. The worst part? There was no breeding, we didn't get to it even! Total fucking bullshit.[/say]")
 
 		saynn("[say=pc]Are you mad because you didn't get bred?[/say]")

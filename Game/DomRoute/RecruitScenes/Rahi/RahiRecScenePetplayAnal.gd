@@ -76,6 +76,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "walkies")
 	if(state == "walkies"):
+		playAnimation(StageScene.Duo, "stand", {npc="rahi", npcAction="allfours", further=true, npcBodyState={naked=true, leashedBy="pc"}})
 		aimCameraAndSetLocName("hideout_west_corridor")
 		saynn("You lead Rahi out of her cell and just start walking around the corridor. Rahi's paws shuffle across the cold floor, little moans escaping her every so often, her tail curling low.")
 

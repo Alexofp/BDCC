@@ -136,7 +136,7 @@ func _run():
 	if(state == "ask_planet"):
 		saynn("[say=pc]Can you tell me more about Earth? I'm curious.[/say]")
 
-		saynn("[say=announcer]It used to be a nice little planet. Now it's just pure wasteland, for as far as your eyes can see.[/say]")
+		saynn("[say=announcer]It used to be a nice little planet. Now it's just pure wasteland, for as far as an eye can see. An eye or a satellite.[/say]")
 
 		saynn("[say=pc]A wasteland? How did that happen?[/say]")
 

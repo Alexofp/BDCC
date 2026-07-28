@@ -97,7 +97,7 @@ func _run():
 
 		saynn("[say=kait]From what I've gathered, the captain has a few guards who are his 'besties'. They are the best of the best and so he trusts them, naturally. If we manage to break them all, there will be no one left to protect the little guy.[/say]")
 
-		saynn("[say=announcer]Breaking his team, that's a dangerous game you wanna play.[/say]")
+		saynn("[say=announcer]Breaking his team, that's a dangerous game you wanna play. Not sure if its a good idea.[/say]")
 
 		saynn("[say=kait]Yeah. If we do it right, he won't even notice his team turning against him. Do you have something better in mind?[/say]")
 
@@ -121,7 +121,7 @@ func _run():
 
 		saynn("Kait draws more lines below the previous ones and writes 'Staffers'.")
 
-		saynn("[say=kait]Normal guards and other staff. They're all just little bitches, most of them are basically inmates already, minus the collars. If we dominate the best ones, others should just submit without a fight.[/say]")
+		saynn("[say=kait]Normal guards and other staff. They're all just little bitches, most of them are basically inmates already, minus the collars. Gonna be easy.[/say]")
 
 		saynn("It doesn't look like there are any objections here.. until Avy decides to chime in.")
 
@@ -200,5 +200,6 @@ func _react(_action: String, _args):
 		#addMessage("Task completed!")
 		#addExperienceToPlayer(100)
 		GM.main.MS.completeMission()
+		addMessage("Talking options with Avy unlocked.")
 	
 	setState(_action)

@@ -12,7 +12,7 @@ func _run():
 		aimCameraAndSetLocName("hideout_breakroom")
 		gentle = (c1 == 0)
 		mean = (c1 == 2)
-		playAnimation(StageScene.Duo, "stand", {npc="rahi", npcAction="allfours", npcBodyState={naked=true, leashedBy="pc"}})
+		playAnimation(StageScene.Duo, "stand", {npc="rahi", npcAction="allfours", further=true, npcBodyState={naked=true, leashedBy="pc"}})
 		aimCameraAndSetLocName("hideout_breakroom")
 		saynn("You enter Rahi's cell and grab her leash. She doesn't seem to resist as you bring her closer to the exit.. but then stop and turn around.")
 

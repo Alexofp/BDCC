@@ -228,6 +228,7 @@ func _run():
 		addButton("Continue", "Listen to the rules", "continue")
 
 	if(state == "no1"):
+		setFlag("TaviModule.Tavi_RefusedToSubmit", true)
 		playAnimation(StageScene.Duo, "defeat", {npc="tavi"})
 		
 		saynn("You just spit in her direction. And Tavi clearly didn’t like that answer, she growls as she pushes her leg into your chest and then kicks you away, causing you to hit the floor. That act puts a somewhat satisfied grin on her face.")

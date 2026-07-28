@@ -68,15 +68,17 @@ func _run():
 
 		saynn("[say=rahi]She will yell for help..[/say]")
 
-		saynn("Right. You might need a ballgag to shut her up first.")
-
+		saynn("Right. You might need a ballgag to shut her up first. Surely, the guards here have a few. Just gotta beat one up.")
+		
+		setFlag("KaitModule.needBallgag", true)
+		
 		if (hasItemID("ballgag")):
 			addButton("Make her", "Put a ballgag on Rahi so she doesn't cry for help and bring her forcefully", "ballgag")
 		else:
-			addDisabledButton("Make her", "You need a ballgag in your inventory to be able to bring her in without her yelling")
+			addDisabledButton("Make her", "You need a ballgag in your inventory to be able to bring her in without her yelling.\n\nSurely, the guards here have a few. Just gotta beat one up.")
 		addButton("Let her be", "Let kitty be for now", "let_her_be")
 	if(state == "let_her_be"):
-		saynn("[say=pc]Fine.[/say]")
+		saynn("[say=pc]Alright. Sit tight.[/say]")
 
 		saynn("[say=rahi]Meow..[/say]")
 

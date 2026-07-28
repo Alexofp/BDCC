@@ -7,6 +7,8 @@ func getFlags():
 		"talkedKaitArena": flag(FlagType.Bool), # We have talked with Kait near the arena
 		"toldSaved": flag(FlagType.Bool), # The player has told Kait that they have saved her from getting bred by Avy
 		"joinedTeam": flag(FlagType.Bool), # PC joined Kait's team, we have committed to the dom main route
+		"needBallgag": flag(FlagType.Bool), # The next staff member that we fight will drop a ballgag
+		"gotBallgag": flag(FlagType.Bool), # The staff member has dropped a ballgag for us
 		"caughtRahi": flag(FlagType.Bool), # Did we catch Rahi and bring her for recruiting
 		"introCompleted": flag(FlagType.Bool), # Did we recruit Rahi and got access to everything now
 		"didAvyDomIntro": flag(FlagType.Bool), # Did we do the Light Domination option with Avy

@@ -137,7 +137,7 @@ func _run():
 		var thePresenterName:String = getCharacter(_recruit.getPresenterCharID()).getName()
 		if(_hasPresenter):
 			saynn("[say="+_recruit.getPresenterCharID()+"]"+_recruit.getPresenterDialogue()+"[/say]")
-		addButton("You", "Do the plan yourself", "startThePlan")
+		addButton("I got it", "Do the plan yourself", "startThePlan")
 		addButton(thePresenterName, "(Skip scene) Let "+thePresenterName+" do the plan, avoiding the need for you to see it", "helperStartsThePlan")
 	
 	if(state == "extraMenu"):

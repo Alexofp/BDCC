@@ -12,12 +12,18 @@ func _run():
 		saynn("[say=kait]Hey, you![/say]")
 
 		saynn("A swift little snow leopard runs up to you.")
-
-		saynn("[say=pc]Don't tell me you want me to submit too. I don't wanna break another cat.[/say]")
+		
+		if(getFlag("TaviModule.Tavi_RefusedToSubmit")):
+			saynn("[say=pc]Don't tell me you want me to submit too. I got enough of that already.[/say]")
+		else:
+			saynn("[say=pc]Don't tell me you want me to submit too. I don't wanna break another cat.[/say]")
 
 		saynn("She offers you a little smile.")
 
-		saynn("[say=kait]Nah, quite the opposite in fact. I saw what you did. Great job, really. That bitch deserved it.[/say]")
+		if(getFlag("TaviModule.Tavi_RefusedToSubmit")):
+			saynn("[say=kait]Nah, I saw what happened back there. You did good, all things considered. You lost but didn't bend the knee.[/say]")
+		else:
+			saynn("[say=kait]Nah, quite the opposite in fact. I saw what you did. Great job, really. That bitch deserved it.[/say]")
 
 		saynn("At least she doesn't seem to be hostile.")
 
@@ -44,8 +50,11 @@ func _run():
 		saynn("[say=kait]If you're interested, find me in the underground arena.[/say]")
 
 		saynn("[say=pc]Underground arena?[/say]")
-
-		saynn("[say=kait]Well, that will be your first test then. The entrance is hidden somewhere near the gym. If you manage to get in, we can talk more~. Name is Kait by the way.[/say]")
+		
+		if(getFlag("TaviModule.Tavi_RefusedToSubmit")):
+			saynn("[say=kait]It will help you improve your fighting skills. The entrance is hidden somewhere near the gym. If you manage to get in, we can talk more~. Name is Kait by the way.[/say]")
+		else:
+			saynn("[say=kait]Well, that will be your first test then. The entrance is hidden somewhere near the gym. If you manage to get in, we can talk more~. Name is Kait by the way.[/say]")
 
 		saynn("[say=pc]Uh huh.[/say]")
 
