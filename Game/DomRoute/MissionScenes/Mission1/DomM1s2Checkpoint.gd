@@ -34,7 +34,7 @@ func _run():
 
 		saynn("A few seconds later Avy approaches you and hands you something. A few pill bottles it seems.")
 
-		saynn("[say=avy]I brought you some painkillers. Pop one if it hurts. It's not like I give a fuck but you might as well have them.[/say]")
+		saynn("[say=avy]I brought you some antipains. Pop one if you feel shitty. It's not like I give a fuck but you might as well have them.[/say]")
 
 		saynn("[say=pc]Thanks, might come in handy.[/say]")
 

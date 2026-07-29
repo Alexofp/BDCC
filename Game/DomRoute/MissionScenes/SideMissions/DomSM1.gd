@@ -21,7 +21,7 @@ func _run():
 
 		saynn("Who knows, she might be getting you into a trap for all you know.")
 
-		saynn("[say=avy]Chill~. Murder is not in the plans today. One guy owes me a bunch, I need someone to be near. Just in case.[/say]")
+		saynn("[say=avy]Chill. Murder is not in the plans today. One guy owes me a bunch, I need someone to be near. Just in case.[/say]")
 
 		saynn("[say=pc]Just in case?[/say]")
 
@@ -31,7 +31,7 @@ func _run():
 
 		saynn("[say=pc]I thought you could stand for yourself.[/say]")
 
-		saynn("[say=avy]I very much can. But this way I can share the knowledge, you know?[/say]")
+		saynn("[say=avy]I sure can. But this way I can share the knowledge.[/say]")
 
 		saynn("Sounds like you won't need to be doing much. So why not?")
 
@@ -58,7 +58,7 @@ func _run():
 
 		saynn("Avy stops for a moment, her bushy tail flicks.")
 
-		saynn("[say=avy]Hah, fuck you, of course not. He is from Earth, that huge pile of trash. Our past livelines could not be any more parallel.[/say]")
+		saynn("[say=avy]Hah, fuck you, of course not. He is from Earth, that huge pile of trash. And I'm not.[/say]")
 
 		saynn("Soon, you reach the lilac cellblock. It's busy with life, as always, a bunch of inmates walking around.. most of them doing so quite seductively. Some lean against the walls, showing off. Others whisper to each other, maybe even about you two.")
 
@@ -76,9 +76,9 @@ func _run():
 
 		saynn("Her ear twitches.")
 
-		saynn("[say=avy]You're asking a lot of questions, you know~.[/say]")
+		saynn("[say=avy]You're asking a lot of questions.[/say]")
 
-		saynn("[say=pc]You don't have to answer.[/say]")
+		saynn("[say=pc]Don't answer then.[/say]")
 
 		saynn("A short quiet moment is broken up by her shrug.")
 
@@ -94,7 +94,7 @@ func _run():
 
 		saynn("She nudges you with her elbow.")
 
-		saynn("[say=avy]I'm just teasing~.[/say]")
+		saynn("[say=avy]Just teasing~.[/say]")
 
 		saynn("You see a bunch of lilacs.. Some of them are cats.. some of them are naked.. but none of them are just shirtless.")
 
@@ -114,7 +114,7 @@ func _run():
 
 		saynn("[say=pc]Don't kill him.[/say]")
 
-		saynn("[say=avy]I will try~.[/say]")
+		saynn("[say=avy]I will try.[/say]")
 
 		saynn("She pushes off the wall and starts walking.")
 
@@ -148,7 +148,7 @@ func _run():
 
 		saynn("His smile fades fast.")
 
-		saynn("[say=rubi]I've also put some bets on some fighters who were totally supposed to win..[/say]")
+		saynn("[say=rubi]What I meant is.. some of my bets on some fighters who were totally supposed to win.. didn't come through.[/say]")
 
 		saynn("Avy tilts her head.")
 
@@ -161,7 +161,9 @@ func _run():
 		saynn("She shakes her head slowly.")
 
 		saynn("[say=avy]Sorry, can't do. I've waited long enough. Now you're just pulling my balls. And I don't appreciate my balls being pulled.[/say]")
-
+		
+		saynn("Avy looms.")
+		
 		saynn("[say=avy]I'd rather be the one pulling.[/say]")
 
 		saynn("[say=rubi]I don't.. have..[/say]")
@@ -186,7 +188,7 @@ func _run():
 
 		saynn("[say=rubi]Agh..[/say]")
 
-		saynn("[say=avy]Do you know how painful it is to lose a claw? How about three? Ten?[/say]")
+		saynn("[say=avy]Do you know how painful it is to lose a claw? How about three? All of them?[/say]")
 
 		saynn("[say=rubi]Please.. I don't..[/say]")
 
@@ -367,7 +369,7 @@ func _run():
 
 		saynn("[say=pc]Sure.[/say]")
 
-		saynn("[say=avy]You have something in you.. A liver and a heart, yes. But also some kind of spark~. It would be a shame to extinguish it. But just know that you can't stop me from being sadistic.[/say]")
+		saynn("[say=avy]You have something in you.. A liver and a heart, yes.[/say]")
 
 		saynn("[say=pc]Maybe I can offer you something better.[/say]")
 

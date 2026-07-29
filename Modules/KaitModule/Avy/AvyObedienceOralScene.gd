@@ -121,7 +121,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "avy_buttplug")
 	if(state == "avy_buttplug"):
-		playAnimation(StageScene.SexFisting, "tease", {pc="pc", npc="avy", bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexFisting, "tease", {pc="pc", npc="avy", npcBodyState={naked=true, hard=true}})
 		saynn("You get a hold on Avy's collar and yank her down to the floor, forcing her to get down on all fours.")
 
 		saynn("[say=avy]Agh..[/say]")

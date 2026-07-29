@@ -390,7 +390,7 @@ func internal_generateGoalsFor(domID:String, amountToGenerate:int, _minFetishVal
 			var randomGoalInfo = RNG.pickWeightedPairs(breedingGoals)
 			personDomInfo.goals.append(randomGoalInfo.duplicate(true))
 		
-	Log.printVerbose("Goals added to NPC: "+str(personDomInfo.goals))
+	Log.printVerbose("Goals added to "+personDomInfo.getChar().getName()+": "+str(personDomInfo.goals))
 	personDomInfo.afterGoalsAssigned()
 	return generatedAnyGoals
 

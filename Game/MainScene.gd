@@ -297,7 +297,7 @@ func runScene(id, _args = [], parentSceneUniqueID = -1,tag:String=""):
 		scene.parentSceneUniqueID = parentSceneUniqueID
 	add_child(scene)
 	sceneStack.append(scene)
-	print("Starting scene "+id)
+	Log.print("Starting scene id="+str(id)+" Args="+str(_args))
 	
 	allowExecuteOnce = true
 	scene.initScene(_args)
@@ -366,6 +366,7 @@ func _on_GameUI_on_option_button(method, args):
 	
 func pickOption(method, args):
 	GM.PROFILE.start("pickOption")
+	Log.print("- Picked '"+str(method)+"' Args="+str(args))
 	rollbacker.notifyMadeChoice()
 	
 	IS.resetExtraText()
@@ -577,7 +578,7 @@ func loadData(data):
 		var scene = GlobalRegistry.createScene(id)
 		add_child(scene)
 		sceneStack.append(scene)
-		print("Starting scene "+id)
+		#print("Starting scene "+id)
 		
 		#scene.initScene(_args)
 		scene.loadData(SAVE.loadVar(sceneData, "sceneData", {}))

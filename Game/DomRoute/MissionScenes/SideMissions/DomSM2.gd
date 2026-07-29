@@ -178,7 +178,7 @@ func _run():
 
 		saynn("The fennec hums.")
 
-		saynn("[say=socket]Hm.. I still prefer the bonking route.[/say]")
+		saynn("[say=socket]Hm.. I still prefer the bonking thing.[/say]")
 
 		saynn("[say=kait]Pretty please?[/say]")
 
@@ -325,7 +325,7 @@ func _run():
 
 		saynn("That's when she finally manages to switch the channel. The screen goes black.. and then shows the beginning of some movie instead!")
 
-		saynn("[say=kait]Finally. We're not gonna watch your stupid AlphaCorp propaganda down here.[/say]")
+		saynn("[say=kait]Finally. We're not gonna watch your stupid war shit down here.[/say]")
 
 		saynn("That's.. interesting.")
 

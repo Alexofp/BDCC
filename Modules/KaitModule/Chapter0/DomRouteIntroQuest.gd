@@ -4,12 +4,12 @@ func _init():
 	id = "DomRouteIntroQuest"
 
 func getVisibleName():
-	return "Asserting Yourself"
+	return "Asserting Yourself (Dom Route)"
 
 func getProgress():
 	var result:Array = []
 	
-	result.append("(Dominant Main Route) You got approached by Kait, the snow leopard lilac. It looks like she wants to overtake the captain and is looking for people who can help.")
+	result.append("You got approached by Kait, the snow leopard lilac. It looks like she wants to overtake the captain and is looking for people who can help.")
 	result.append("Kait wants you to find her down in the underground arena that is hidden somewhere near the gym.")
 	
 	var amountWon:int = GlobalRegistry.getModule("FightClubModule").getAmountFightersWon()

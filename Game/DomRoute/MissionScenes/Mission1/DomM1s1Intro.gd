@@ -24,11 +24,17 @@ func _run():
 
 		saynn("[say=kait]The datapad is obviously a no-go. The thing is gonna get wiped.[/say]")
 
-		saynn("[say=announcer]Listen. I have an idea. What if we.. print it?[/say]")
+		saynn("[say=announcer]I might have an idea. What if we use an ancient piece of technology.. known as a printer.[/say]")
 
-		saynn("[say=kait]Print it? You wanna print multiple thousands of records? And how?[/say]")
+		saynn("[say=kait]Printer? Ancient? They're used everywhere.[/say]")
+		
+		saynn("Ans raises a brow.")
+		
+		saynn("[say=announcer]Really? Not where I'm from.[/say]")
+		
+		saynn("[say=kait]You wanna print multiple thousands of records? How?[/say]")
 
-		saynn("[say=announcer]We get access to a console. We sort the records by.. the length of the crime list. And we print the top twenty or so? Should fit on a page. Then we do something similar but with staff.[/say]")
+		saynn("[say=announcer]Find any console. Sort the inmate records by.. the length of the crime list. And we print the top twenty or so. Should fit on a page nicely.[/say]")
 
 		saynn("[say=avy]Exclude me too first, because I'd be the first on that list.[/say]")
 
@@ -38,17 +44,17 @@ func _run():
 
 		saynn("The snow leopard rubs her chin.")
 
-		saynn("[say=kait]Hm.. That is so old-school. But it could actually work. They can't wipe a piece of paper remotely. Do you know any consoles we can get to?[/say]")
+		saynn("[say=kait]Hm.. That is so weird. But it could actually work. They can't wipe a piece of paper remotely. Do you know any consoles we can get to?[/say]")
 
-		saynn("[say=announcer]No. Not on this floor. Command Deck has a bunch of offices. But we would need a staff badge to get there.[/say]")
+		saynn("[say=announcer]Command Deck has a bunch of offices. All you need is a staff badge.[/say]")
 
 		saynn("[say=pc]Command Deck?[/say]")
 
-		saynn("[say=avy]Scared already? They're a bunch of pussies up there. Worst case, you will run into a guard or two.[/say]")
+		saynn("[say=avy]Don't be scared. They're a bunch of pussies up there. Worst case, you will run into a guard or two.[/say]")
 
 		saynn("[say=kait]I will go grab Rahi then. Let's all meet near the checkpoint, in front of the main elevator.[/say]")
 
-		saynn("[say=announcer]Do you need me there? The arena needs managing.[/say]")
+		saynn("[say=announcer]Hope you don't need my presence. The arena requires managing.[/say]")
 
 		saynn("[say=kait]You should stay and do that, you gave us plenty of help anyway.[/say]")
 

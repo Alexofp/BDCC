@@ -201,7 +201,7 @@ func runScene(id: String, args = [], tag = ""):
 	return scene
 
 func react_scene_end(_tag, _result):
-	print(name+": My parent scene has ended")
+	#print(name+": My parent scene has ended")
 	#updateCharacter()
 	_react_scene_end(_tag, _result)
 	#checkSceneEnded()

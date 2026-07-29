@@ -56,13 +56,13 @@ func _run():
 
 		saynn("[say=announcer]We can help with the preparations.[/say]")
 
-		saynn("[say=pc]We're thinking about our next recruitment targets.[/say]")
+		saynn("[say=pc]We're thinking about our next targets.[/say]")
 
 		saynn("[say=kait]Yeah.. and these lists are confusing.[/say]")
 
 		saynn("Avy pushes off the wall and strides towards the board, snatching the marker from Kait's paw.")
 
-		saynn("[say=avy]Bitch please, I'm the master of lists. Let me through.[/say]")
+		saynn("[say=avy]Bitch please. I am Avy, the master of lists. Let me through.[/say]")
 
 		saynn("She pulls both lists from the board and starts quickly going over them.")
 
@@ -89,11 +89,11 @@ func _run():
 		playAnimation(StageScene.Solo, "stand", {pc="skar"})
 		saynn("Skar.. There is a small picture of him in the list so you can kinda see how he looks.")
 
-		saynn("[say=avy]Skar seems to be the one who is protecting the Captain's office. He is a guard, a wolf with a bunch of prosthetics. Went through some wars. Wonder what he thinks about them now.[/say]")
+		saynn("[say=avy]Skar seems to be the one who is protecting the Captain's office. He is a guard, a wolf, lots of metal. Went through some wars. Guess he had enough.[/say]")
 
 		saynn("Ans nods slowly, rubbing his chin.")
 
-		saynn("[say=announcer]Heard about him. A hero of his time.[/say]")
+		saynn("[say=announcer]Can't be a hero if you don't sacrifice some part of yourself.[/say]")
 
 		saynn("[say=kait]So he is our first priority target?[/say]")
 
@@ -146,7 +146,7 @@ func _run():
 
 			saynn("[say=kait]Fuck you, you could have helped me.[/say]")
 
-			saynn("[say=avy]You told me you had it![/say]")
+			saynn("[say=avy]You asked to do it alone. Got what you wanted.[/say]")
 
 		saynn("Ans breaks the tension.")
 
@@ -193,7 +193,7 @@ func _run():
 		playAnimation(StageScene.Duo, "stand", {pc="alexrynard", npc="eliza"})
 		saynn("She writes the name 'Alex Rynard' and a word 'collars' near it.")
 
-		saynn("[say=avy]Alex Rynard. A foxy, just like me, wow. Seems to be the one who is semi-responsible for the collars. He is also spineless. Perfect for breaking.[/say]")
+		saynn("[say=avy]Alex Rynard. A foxy, wow, we got so much in common. Seems to be the one who is semi-responsible for the collars. He is also spineless. Perfect for breaking.[/say]")
 
 		saynn("[say=kait]How are you gonna break someone who doesn't have a spine?[/say]")
 
@@ -264,7 +264,7 @@ func _run():
 
 		saynn("[say=kait]I hate this prison but destroying it would also kill us, you know.[/say]")
 
-		saynn("[say=avy]Who said anything about the whole prison? Let me tell you what will happen when we start our big attack. The whole prison is gonna go into a full fucking lockdown. All the doors are gonna be locked and bolted shut. How do you plan on getting through to the captain then?[/say]")
+		saynn("[say=avy]Who said anything about the whole prison? The captain can lock and bolt down all the doors with one button press. How do you plan on getting through to him then?[/say]")
 
 		saynn("Kait scratches behind her head.")
 

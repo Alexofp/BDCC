@@ -11,6 +11,7 @@ func _run():
 	if(state == ""):
 		addCharacter("ferri", ["naked"])
 		aimCameraAndSetLocName("hideout_breakroom")
+		playAnimation(StageScene.Grope, "grope", {pc="ferri", npc="pc", bodyState={naked=true, hard=true}})
 		saynn("You ask if your team can supply you with a particular item. There weren't any available but Kait managed to quickly make one out of all the scrap that's around. You keep it hidden for now though.")
 
 		saynn("And so you enter the cell. Ferri is still there, naked, muzzled, and cuffed.")
