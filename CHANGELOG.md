@@ -5,6 +5,52 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## [0.3.0] - 2026-07-30
+### Added
+- First missions of the new Main Route! Begin your quest of overthrowing the captain, together with Kait (and others). This route is gonna be tailored specifically towards dominant players.
+- The dom route currently contains: the intro (multiple ways to start it), first 2 main missions, first 2 side missions, first 2 characters that can be recruited (new mechanic), 8 'reward' sex scenes (unlocked based on your choices). Lots of fun. Expect more in the next updates. The word count of the new content is roughly 300 pages/80k words
+- Character recruitment mechanic where you have to make a plan about how you want to break a character and then see it happen! Each character requires like 9 hand-written scenes so don't expect many of these x3
+- [Content Board](https://github.com/user-attachments/assets/9b424b38-7c86-4f76-908a-652da0835fcc)! This is an in-game way of seeing what content you haven't started yet and how to start it! Can you complete the whole board?.. obviously not yet since I haven't finished 2 main routes..
+- Ability to 'reset' your main route. A new game+ of sorts. You can only be on one main route at a time. But once you complete it, you're now able to do a soft reset that keeps everything except for the main route progress, allowing you to start a different route! This way you will be able to complete all 3 main routes on the same save! If you want to, of course.. The option will appear when you sleep in your cell after completing Tavi's main route.
+- [The Announcer and Skar received their portraits](https://github.com/user-attachments/assets/bea4d2b5-4edc-4beb-ae5d-7507e25884a4)!
+- For Android, you can now choose where to store saves/mods. 3 options: Documents folder, Downloads folder (new default), Data folder.
+- Ability to export/import saves using your clipboard. Since the saves are huge, they get compressed/decompressed during this. This means that the clipboard contents won't make much sense.
+
+### Changed
+- Bulldog is made easier because the new route requires it. He will also ask for less credits.
+- You can now optionally save Kait from getting railed by Avy during the underground arena intro scene.
+- For Android, the BDCC.pck file is now stored internally rather than in the documents folder. Loads faster, supported by more devices. You can delete the BDCC.pck that shows up in the mod list, it's not used anymore.
+- Autotranslator tries to keep the formatting now (colors, bold text). Might not always work.
+- The stocks can now trigger the old hand-written events again (Risha+Nova, Avy, etc)
+- Stripping during the procedural sex has been updated to support stripping specific pieces of clothing, including destroyed clothing.
+- AI doms can now try to breastfeed subs even if they're not lactating.
+
+### Fixed
+- Your owner won't be able to get out of stocks when you sleep anymore.
+- Bodywriting slutlock task should get completed by any bodywritings now, not just the ones received during the procedural sex engine.
+- Fixed a bug where the dom would never put bondage gear on you if you have disabled the Hypnotize ai goal.
+- Fixed drug den level ups giving you extra-extra stats from your equipment during each level up.
+- Fixed the pinch-to-zoom zooming the wrong way on the phones.
+- Fixed buttstack sex activity ignoring condoms.
+- Fixed ovipositors ignoring condoms (the condom now always breaks if you deposit an egg).
+- Lots of typppos fixed, a lot more added.
+
+### Contributions
+- [Tiny spelling fixes](https://github.com/Alexofp/BDCC/pull/314) (by sleezyIguana)
+- [Correctly handle singular they/them pronouns, typo fixes](https://github.com/Alexofp/BDCC/pull/316) (by keerifox)
+- [Fix ponytail 4 haircut being solid black and not supporting recoloring](https://github.com/Alexofp/BDCC/pull/339) (by keerifox)
+- [Minimal slave level -> Minimum slave level](https://github.com/Alexofp/BDCC/pull/341) (by keerifox)
+- [Split youre and youve for consistency with you/youHe and your/yourHis](https://github.com/Alexofp/BDCC/pull/345) (by keerifox)
+- [Allow mods to add new bodypart and inventory slots](https://github.com/Alexofp/BDCC/pull/344) (by Selinoccino)
+- [Fixed translator sometimes applying the translations incorrectly](https://github.com/Alexofp/BDCC/pull/323) (by PuroSlavKing)
+- [Add random name generator when starting new game or renaming owned pawns](https://github.com/Alexofp/BDCC/pull/340) (by keerifox)
+- [Fix for mod support on Android 16+](https://github.com/Alexofp/BDCC/pull/332) (by kristijanWolff)
+- [Fixed NPCs magically restoring full stamina if you 'use' them in stocks](https://github.com/Alexofp/BDCC/pull/321) (by Zsar)
+- [Fixed Eliza Quinn 'Milking' not re-equiping bra afterwards](https://github.com/Alexofp/BDCC/pull/317) (by Zsar)
+- [Check for restraints/collar when pulling towards tentacles, fix leash anim not being used](https://github.com/Alexofp/BDCC/pull/336) (by keerifox)
+- [Fix runtime error when penis is rubbed against buttstacked subs](https://github.com/Alexofp/BDCC/pull/342) (by keerifox)
+- [Add ability to fully hide any character from 2+ character anims](https://github.com/Alexofp/BDCC/pull/347) (by keerifox)
+
 ## [0.2.0] - 2026-04-20
 ### Added
 - New player slavery scenario that is focused around tentacles. The scenario is about growing your very own tentacle monster! Features a lot of replayability (it has like 6 or 7 endings, depending on if you include the bad one). Even if you don't like tentacles, you can still enjoy it, all the lewds are completely optional.
@@ -46,7 +92,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Computer hacking minigame improvements](https://github.com/Alexofp/BDCC/pull/284) (by Selinoccino)
 - [Quality of life changes](https://github.com/Alexofp/BDCC/pull/285) (by Selinoccino)
 
-## [Unreleased]
 ## [0.1.12] - 2025-12-03
 ### Added
 - A 'soft slavery' system for the player! The player character can now get enslaved by one of the dynamic npcs on the prison. A few ways to trigger this: the npc might just offer to make you their prison bitch, you might ask to become one, a very-likely outcome of losing a nemesis ambush. Or you can just use a new debug action. You can have multiple owners.
@@ -713,7 +758,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Turn-based fighting
 - Initial player customization
 
-[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.2.0...main
+[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.3.0...main
+[0.3.0]: https://github.com/Alexofp/BDCC/compare/0.2.0...0.3.0
 [0.2.0]: https://github.com/Alexofp/BDCC/compare/0.1.12...0.2.0
 [0.1.12]: https://github.com/Alexofp/BDCC/compare/0.1.11...0.1.12
 [0.1.11]: https://github.com/Alexofp/BDCC/compare/0.1.10...0.1.11
