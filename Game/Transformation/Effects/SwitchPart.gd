@@ -98,13 +98,13 @@ func generateTransformText(_result:Dictionary):
 	
 	# Nothing changed?
 	if(!hadPartBefore && !hasPartNow):
-		addText("{npc.YouHe} {npc.youVerb('get')} a strange tickling feeling around {npc.yourHis} "+slotChildName+" but nothing seems to be changing about it.")
+		addText("{npc.YouHe} {npc.youHeVerb('get')} a strange tickling feeling around {npc.yourHis} "+slotChildName+" but nothing seems to be changing about it.")
 	# Got morphed away
 	elif(hadPartBefore && !hasPartNow):
 		if(bodypartRefBefore != null):
 			addText(bodypartRefBefore.getTransformAwayMessage({result=_result}))
 		else:
-			addText("{npc.YouHe} {npc.youVerb('feel')} a tingling sensation on {npc.yourHis} scalp as {npc.yourHis} "+slotName+" begin"+("s" if shouldHaveS else "")+" to shift and change. Suddenly, {npc.YourHis} "+slotName+" morph"+("s" if shouldHaveS else "")+" away completely, leaving nothing in its place!")
+			addText("{npc.YouHe} {npc.youHeVerb('feel')} a tingling sensation on {npc.yourHis} scalp as {npc.yourHis} "+slotName+" begin"+("s" if shouldHaveS else "")+" to shift and change. Suddenly, {npc.YourHis} "+slotName+" morph"+("s" if shouldHaveS else "")+" away completely, leaving nothing in its place!")
 		
 		if(_result.has("extras")):
 			if(_result["extras"].has("lostcage") && _result["extras"]["lostcage"]):
@@ -115,13 +115,13 @@ func generateTransformText(_result:Dictionary):
 		if(bodypartRefNow != null):
 			addText(bodypartRefNow.getTransformGrowMessage({result=_result}))
 		else:
-			addText("A sudden warmth spreads through {npc.yourHis} body, and {npc.youHe} {npc.youVerb('feel')} a peculiar sensation as "+("a " if shouldHaveS else "")+"new "+slotName+" begin"+("s" if shouldHaveS else "")+" to form from {npc.yourHis} "+slotChildName+". "+("It gets" if shouldHaveS else "They get")+" more and more defined, the contours slowly taking shape. The process is quite.. uncomfortable.. to say the least.. but eventually "+("it finishes" if shouldHaveS else "they finish")+" growing, assuming "+("its" if shouldHaveS else "their")+" final form.")
+			addText("A sudden warmth spreads through {npc.yourHis} body, and {npc.youHe} {npc.youHeVerb('feel')} a peculiar sensation as "+("a " if shouldHaveS else "")+"new "+slotName+" begin"+("s" if shouldHaveS else "")+" to form from {npc.yourHis} "+slotChildName+". "+("It gets" if shouldHaveS else "They get")+" more and more defined, the contours slowly taking shape. The process is quite.. uncomfortable.. to say the least.. but eventually "+("it finishes" if shouldHaveS else "they finish")+" growing, assuming "+("its" if shouldHaveS else "their")+" final form.")
 	# Part morphs into a different one
 	elif(hadPartBefore && hasPartNow):
 		if(bodypartRefNow != null):
 			addText(bodypartRefNow.getTransformMorphMessage({result=_result, oldTraits=(bodypartRefBefore.getTraits() if bodypartRefBefore != null else {})}))
 		else:
-			addText("An unusual sensation courses through {npc.yourHis} body as {npc.yourHis} "+slotName+" begin"+("s" if shouldHaveS else "")+" to shift and change! The familiar contours start to dissolve and reshape, morphing into something different. Gradually, the new "+slotName+" emerge"+("s" if shouldHaveS else "")+", taking on a more defined form. The process is quite painful and uncomfortable, but eventually "+("it settles" if shouldHaveS else "they settle")+" into "+("its" if shouldHaveS else "their")+" final appearance. {npc.YouHe} now {npc.youVerb('have', 'has')} "+bodypartRefNow.getAVulgarName()+".")
+			addText("An unusual sensation courses through {npc.yourHis} body as {npc.yourHis} "+slotName+" begin"+("s" if shouldHaveS else "")+" to shift and change! The familiar contours start to dissolve and reshape, morphing into something different. Gradually, the new "+slotName+" emerge"+("s" if shouldHaveS else "")+", taking on a more defined form. The process is quite painful and uncomfortable, but eventually "+("it settles" if shouldHaveS else "they settle")+" into "+("its" if shouldHaveS else "their")+" final appearance. {npc.YouHe} now {npc.youHaveHeHas} "+bodypartRefNow.getAVulgarName()+".")
 	#else:
 	#	addText("This shouldn't happen")
 

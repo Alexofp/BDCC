@@ -11,6 +11,7 @@ func _init():
 	npcSkinData={
 	"hair": {"r": Color("ff555555"),"g": Color("ff3c3c3c"),"b": Color("ff3d3d3d"),},
 	"ears": {"b": Color("ffdcdcdc"),},
+	"tail": {"skin": "LuxeSkin",},
 	}
 	
 	npcLevel = 15
@@ -107,17 +108,28 @@ func _getAttacks():
 	return ["simplekickattack", "NpcScratch", "biteattack", "kickToBallsAttack", "slapTitsAttack", "stretchingAttack", "lickWounds", "shoveattack", "trygetupattack"]
 
 func getFightIntro(_battleName):
+	#var didCommit:bool = GM.main.hasCommittedToMainRoute()
+	var isOnKaitRoute:bool = GM.main.getFlag("KaitModule.joinedTeam", false)
+	
 	var mes = "Kait bounces in place and stretches like all felines usually do. She then directs her attention to you while getting into a combat pose, slightly lowering herself and extending her claws out."
 	mes += "\n\n"
 	if(_battleName == "arenafight"):
-		mes += "[say=kait]And who the heck are you?[/say]"
+		if(isOnKaitRoute):
+			mes += "[say=kait]Oh, hey there. Hah. I won't go easy on you because we're in the same team.[/say]"
+			mes += "\n\n"
+			mes += "[say=kait]Good.[/say]"
+		else:
+			mes += "[say=kait]And who the heck are you?[/say]"
 	else:
 		mes += "[say=kait]Who do you think you are?[/say]"
 	mes += "\n\n"
 	mes += "She huffs and puts on a battle face, her big fluffy tail sways behind her like it has a mind of its own."
 	mes += "\n\n"
 	if(_battleName == "arenafight"):
-		mes += "[say=kait]Actually, it doesn’t matter. Just remember. If I win - I’m marking you.[/say]"
+		if(isOnKaitRoute):
+			mes += "[say=kait]Actually, it doesn’t matter. Just remember. If I win - I’m marking you.[/say]"
+		else:
+			mes += "[say=kait]Bring it on.[/say]"
 	else:
 		mes += "[say=kait]Bring it on, doormat.[/say]"
 	return mes
@@ -131,7 +143,7 @@ func getFemininity() -> int:
 func createBodyparts():
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felinehead"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("overeyehair2"))
-	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felineears"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felineears2"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anthrobody"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anthroarms"))
 	var breasts = GlobalRegistry.createBodypart("humanbreasts")
@@ -139,7 +151,9 @@ func createBodyparts():
 	giveBodypartUnlessSame(breasts)
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("vagina"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anus"))
-	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felinetail"))
+	var tail = GlobalRegistry.createBodypart("felinetail")
+	tail.tailScale = 1.2
+	giveBodypartUnlessSame(tail)
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("digilegs"))
 
 func getDefaultEquipment():

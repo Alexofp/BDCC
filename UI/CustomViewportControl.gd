@@ -7,6 +7,8 @@ extends TextureRect
 export(NodePath) var viewportPath
 var viewport:Viewport
 
+var ignoreEvents:bool = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	viewport = get_node(viewportPath)
@@ -60,6 +62,8 @@ func _notification(what):
 		viewport.size = getPixelSize()#rect_size
 
 func _input(event):
+	if(ignoreEvents):
+		return
 	if(viewport != null):
 		var globalTrans = get_global_transform().affine_inverse()
 		

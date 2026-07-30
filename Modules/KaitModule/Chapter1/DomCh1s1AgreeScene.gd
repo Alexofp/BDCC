@@ -8,11 +8,12 @@ func _init():
 
 func _run():
 	if(state == ""):
+		GM.pc.setLocation("fight_announcer")
 		addCharacter("kait")
 		playAnimation(StageScene.Duo, "stand", {npc="kait"})
 		saynn("[say=pc]I think I might just accept your offer.[/say]")
 
-		saynn("[say=kait]Haha. Yes. Perfect. You made the right choice, trust me. We will make these corporate rats our subby bitches. We will make them all beg![/say]")
+		saynn("[say=kait]Haha. Yes. Perfect. You made the right choice, trust me. We will turn them all into our subby bitches. We will make them all beg![/say]")
 
 		saynn("You nod. Kait seems excited. Maybe a bit too much. You haven't done anything yet so you keep a serious face.")
 
@@ -190,7 +191,7 @@ func _run():
 
 		saynn("[say=pc]Not in a good way. There are hundreds of inmates. Maybe thousands.[/say]")
 
-		saynn("[say=kait]Well.. we focus on the big fish then! The rest will join us automatically.[/say]")
+		saynn("[say=kait]Well.. we focus on the big fish then! The rest will follow.[/say]")
 
 		saynn("At this point, you stop helping and just look at her.")
 
@@ -310,25 +311,25 @@ func _run():
 
 		saynn("[say=avy]No. Our top priority must be cleaning this shithole up. Before I break my leg and then cough my lungs out.[/say]")
 
-		saynn("[say=announcer]Both of those sound actionable. Perfect, girls.[/say]")
+		saynn("[say=announcer]We can do both. Perfect, girls.[/say]")
 
 		saynn("Avy tilts her head at you all.")
 
-		saynn("[say=avy]Actionable? How exactly are you planning to trick bitches into following you, huh? Go around asking people? This prison is full of spineless brats. We will have to break them.[/say]")
+		saynn("[say=avy]Both? How exactly are you planning to trick bitches into following you, huh? Go around begging people? This prison is full of psychos and brats.[/say]")
 
 		saynn("The guy taps the cane against the floor idly, thinking.")
 
-		saynn("[say=announcer]I hear you. We gotta do what we gotta do. I'm sure we can assemble something here that will help with that.[/say]")
+		saynn("[say=announcer]I'd prefer to talk them in indeed. Anything can happen if you put the right words in the right combination.[/say]")
 
-		saynn("He sounds like he believes in the goal.. even if he is not exactly thrilled by the situation.")
+		saynn("Not everything can be done with words.")
 
-		saynn("[say=avy]Useless ones will weigh us down.[/say]")
+		saynn("[say=avy]How will you know who is good and who's not? Useless ones will lie to you and then weigh us down.[/say]")
 
 		saynn("Kait hums and scritches her chin.")
 
-		saynn("[say=kait]If we can get our paws on a datapad with the personnel database..[/say]")
+		saynn("[say=kait]What if.. what if we can get our paws on a datapad with the inmate database.. Could that help?[/say]")
 
-		saynn("[say=avy]The thing will get remotely wiped in seconds, you dumb cat. Even if you do it stealthily.[/say]")
+		saynn("[say=avy]The thing will get remotely wiped in seconds, you dumb cat.[/say]")
 
 		saynn("Kait's ears go flat for a second.")
 
@@ -340,7 +341,7 @@ func _run():
 
 		saynn("That little rectangular thing they all seem to use for everything important. It probably would not control much on its own.. But it might indeed be useful if it can pull up records, names, locations, plans..")
 
-		saynn("[say=announcer]We can still try it. Are any of us good thieves?[/say]")
+		saynn("[say=announcer]Worth a shot. Anyone here can pickpocket?[/say]")
 
 		saynn("[say=kait]Not really.[/say]")
 
@@ -354,9 +355,9 @@ func _run():
 
 		saynn("Avy's eyes light up.")
 
-		saynn("[say=avy]I do, in fact, know one. Name is.. uh.. Rahi.[/say]")
+		saynn("[say=avy]You know what? I do, in fact, know one. Name is.. uh.. Rahi. Yes.[/say]")
 
-		saynn("[say=kait]Who the heck is Rahi?[/say]")
+		saynn("[say=kait]Rahi? Who the fuck is Rahi?[/say]")
 
 		knowsRahi = getFlag("RahiModule.Rahi_AskedName", false)
 		enslavedRahi = getFlag("RahiModule.rahi5SceneHappened", false)
@@ -384,13 +385,13 @@ func _run():
 
 		saynn("[say=pc]I will go grab and bring her.[/say]")
 
-		saynn("[say=announcer]Sounds like a plan. We will need a special space.. where we can talk with her.[/say]")
+		saynn("[say=announcer]Sounds like a plan. We will need to clean up here.. make a spot where we can talk with her.[/say]")
 
 		saynn("Who knows, maybe a creepy dark maintenance tunnel is exactly the right place for that?")
 
 		saynn("[say=pc]You think she won't just join us?[/say]")
 
-		saynn("[say=announcer]Gotta make sure her heart and mind is with us, not just her leash.[/say]")
+		saynn("[say=announcer]She might. Gotta make sure her heart and mind is with us, not just her leash.[/say]")
 
 		if (enslavedRahi):
 			saynn("That will be easy, you already know it.")
@@ -441,7 +442,9 @@ func _react(_action: String, _args):
 
 	if(_action == "fake_out"):
 		processTime(5*60)
-		addMessage("Task added!")
+		setFlag("KaitModule.joinedTeam", true)
+		addMessage("Task updated!")
+		GM.main.applyAllWorldEdits()
 
 	setState(_action)
 

@@ -68,7 +68,7 @@ func rubpussy_processTurn():
 	if(isReadyToCum(SUB_0) && !getSubInfo().canDoActions()):
 		satisfyGoals()
 		getSub().cummedOnBy(getSubID(), FluidSource.Vagina, 0.7)
-		addText("{sub.Your} pussy is squirting all over {sub.yourHis} thighs as {sub.youHe} {sub.youVerb('orgasm')} in such a humiliating way!")
+		addText("{sub.Your} pussy is squirting all over {sub.yourHis} thighs as {sub.youHe} {sub.youHeVerb('orgasm')} in such a humiliating way!")
 		cumOnSelf(SUB_0, DOM_0, UniqueOrgasm.Feet, "", SexReaction.FeetplayCumPussy)
 		state = ""
 	else:
@@ -285,7 +285,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 	if(_id == "cumpussy"):
 		satisfyGoals()
 		getSub().cummedOnBy(getSubID(), FluidSource.Vagina, 0.7)
-		addText("{sub.Your} pussy is squirting all over {sub.yourHis} thighs as {sub.youHe} {sub.youVerb('orgasm')} in such a humiliating way!")
+		addText("{sub.Your} pussy is squirting all over {sub.yourHis} thighs as {sub.youHe} {sub.youHeVerb('orgasm')} in such a humiliating way!")
 		cumOnSelf(SUB_0, DOM_0, UniqueOrgasm.Feet, "", SexReaction.FeetplayCumPussy)
 		state = ""
 		return

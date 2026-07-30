@@ -157,7 +157,7 @@ func _run():
 			usableItems = newUsable
 		else:
 			for item in usableItems:
-				var itemSlot:String = item.getClothingSlot()
+				var itemSlot:String = item.getClothingSlotSafe()
 				var theCanEquipResult:Array = canEquipRestraintOntoEnemySlotOrReason(itemSlot)
 				if(theCanEquipResult[0]):
 					hasAtLeastOneUsableByItemID[item.id] = true
@@ -183,7 +183,7 @@ func _run():
 			if(!isInCategory && countsByItemID.has(item.id) && countsByItemID[item.id] > 1):
 				continue
 			
-			var itemSlot:String = item.getClothingSlot()
+			var itemSlot:String = item.getClothingSlotSafe()
 			var theCanEquipResult:Array = canEquipRestraintOntoEnemySlotOrReason(itemSlot)
 			
 			if(!theCanEquipResult[0]):

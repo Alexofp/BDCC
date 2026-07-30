@@ -21,7 +21,7 @@ func playAnimation(animID, _args = {}):
 	var fullAnimID = animID
 	if(animID is Array):
 		animID = animID[0]
-	print("Playing: "+str(animID))
+	#print("Playing: "+str(animID))
 	if(_args.has("pc")):
 		doll.prepareCharacter(_args["pc"])
 	else:

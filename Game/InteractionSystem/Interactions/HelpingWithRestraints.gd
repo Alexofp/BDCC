@@ -141,7 +141,7 @@ func restraints_helping_do(_id:String, _args:Dictionary, _context:Dictionary):
 func restraints_enough_text():
 	saynn("{reacter.name} stops helping {starter.you}.")
 	sayLine("reacter", "HelpRestraintsFinished", {main="reacter", target="starter"})
-	saynn("And just like that, {reacter.youHe} {reacter.youVerb('leave')} {starter.youHim} alone..")
+	saynn("And just like that, {reacter.youHe} {reacter.youHeVerb('leave')} {starter.youHim} alone..")
 
 	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 60, {})
 
@@ -154,7 +154,7 @@ func restraints_enough_do(_id:String, _args:Dictionary, _context:Dictionary):
 func restraints_ask_credits_text():
 	saynn("{reacter.name} stops helping {starter.you}.")
 	sayLine("reacter", "HelpRestraintsFinished", {main="reacter", target="starter"})
-	saynn("But before {reacter.youHe} {reacter.youVerb('leave')}..")
+	saynn("But before {reacter.youHe} {reacter.youHeVerb('leave')}..")
 	saynn("[say=reacter]That will be.. "+str(askCredits)+" credits.[/say]")
 	saynn("Wow, looks like {reacter.yourHis} help wasn't free after all..")
 
@@ -261,7 +261,7 @@ func getStarterAcceptHelpProbability() -> float:
 
 func getRestraintIsPlural(item:ItemBase) -> bool:
 	# Ideally there'd be item.isPlural(), but the best we can do for now is an approximate guess
-	return ( item.getClothingSlot() in [InventorySlot.Wrists, InventorySlot.Hands, InventorySlot.Ankles] )
+	return ( item.getClothingSlotSafe() in [InventorySlot.Wrists, InventorySlot.Hands, InventorySlot.Ankles] )
 
 func saveData():
 	var data = .saveData()

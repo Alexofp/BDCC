@@ -1687,9 +1687,9 @@ func isPawnFuckingSomeone(pawn) -> bool:
 		return true
 	return false
 
-func triggerRandomStocksEvent(_lewdChance, _willingSexChance, _unWillingSexChance, _nothingChance):
-	if(!isPlayersTurn()):
-		return false
+func triggerRandomStocksEvent(_lewdChance:float, _willingSexChance:float, _unWillingSexChance:float, _nothingChance:float):
+	#if(!isPlayersTurn()):
+	#	return false
 	var eventType = RNG.pickWeighted(["StocksEvent", "StocksWillingSex", "StocksUnWillingSex", ""], [_lewdChance, _willingSexChance, _unWillingSexChance, _nothingChance])
 	
 	if(eventType == "StocksEvent"):
@@ -1820,7 +1820,7 @@ func shouldBeStoppedOnNewDay() -> bool:
 	for role in involvedPawns:
 		var thePawn = getRolePawn(role)
 		
-		if(thePawn.isPlayer() || thePawn.isSlaveToPlayer()):
+		if(thePawn.isPlayer() || thePawn.isSlaveToPlayer() || thePawn.hasSpecialRelationshipWithPC()):
 			return false
 	return true
 

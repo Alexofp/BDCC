@@ -234,7 +234,7 @@ func getAttributesText():
 	return [
 		["Capacity", str(round(getFluidAmount() * 10.0)/10.0)+"/"+ str(round(getCapacity() * 10.0)/10.0)+" ml"],		
 		["Looseness level", str(round(getLooseness() * 10.0)/10.0)+", "+getLoosenessString()],
-		["Looseness level minimal", str(round(getMinLooseness() * 10.0)/10.0)],
+		["Looseness level minimum", str(round(getMinLooseness() * 10.0)/10.0)],
 		["Comfortable insertion", Util.cmToString(round(getComfortableInsertion() * 10.0)/10.0)],
 		["Elasticity", str(round(getElasticity() * 1000.0)/10.0)+"%"],
 		["Tightness", str(round(getResistance() * 1000.0)/10.0)+"%"],

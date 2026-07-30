@@ -105,7 +105,7 @@ func generateTransformText(_result:Dictionary):
 		addText(text)
 	else:
 		text += RNG.pick([
-			"{npc.YouHe} {npc.youVerb('feel')} a tingling in {npc.yourHis} {penis} but nothing about it has seemingly changed.",
+			"{npc.YouHe} {npc.youHeVerb('feel')} a tingling in {npc.yourHis} {penis} but nothing about it has seemingly changed.",
 		])
 		addText(text)
 #

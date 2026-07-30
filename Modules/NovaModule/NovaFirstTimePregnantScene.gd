@@ -100,7 +100,7 @@ func _run():
 
 		saynn("She joins you on the bed while you keep holding hands with her. You can feel how warm her body is.")
 
-		saynn("[say=nova]I guess you’re right.. It’s just that.. My parents abandoned me. They wanted a male hair for their company. So much that they gave me away to AlphaCorp.. I don’t wanna follow my parent’s steps, I don’t wanna abandon my children..[/say]")
+		saynn("[say=nova]I guess you’re right.. It’s just that.. My parents abandoned me. They wanted a male heir for their company. So much that they gave me away to AlphaCorp.. I don’t wanna follow my parent’s steps, I don’t wanna abandon my children..[/say]")
 
 		saynn("You stop holding her hand and instead wrap it around her waist, the second one lands on her belly and softly caresses it.")
 

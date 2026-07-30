@@ -5,10 +5,11 @@ func _init():
 	
 	pickedSkin="HumanSkin"
 	pickedSkinRColor=Color("ff593737")
-	pickedSkinGColor=Color("ff3b3434")
-	pickedSkinBColor=Color("ff847a7a")
+	pickedSkinGColor=Color("ff423028")
+	pickedSkinBColor=Color("ffa87d57")
 	npcSkinData={
-	"hair": {"r": Color("ff1a1515"),"g": Color("ff4e4747"),"b": Color("ff444040"),},
+	"hair": {"r": Color("ff000000"),"g": Color("ff322727"),"b": Color("ff090909"),},
+	"ears": {"b": Color("ff413937"),},
 	"penis": {"g": Color("ff5e3c3c"),"b": Color("ff412a2a"),},
 	}
 	
@@ -43,7 +44,7 @@ func getFightIntro(_battleName):
 	return getName() + " gets into the combat stance and prepares for a fight."
 
 func getThickness() -> int:
-	return 80
+	return 60
 
 func getFemininity() -> int:
 	return 25
@@ -62,7 +63,7 @@ func createBodyparts():
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anthroarms"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("humanears"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("coolhair"))
-	giveBodypartUnlessSame(GlobalRegistry.createBodypart("humanhead"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("humanoldhead"))
 
 func getLootTable(_battleName):
 	return InmateLoot.new()

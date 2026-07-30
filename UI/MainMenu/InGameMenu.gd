@@ -12,6 +12,7 @@ onready var load_game_button = $"%LoadGameButton"
 onready var datapacks_button = $"%DatapacksButton"
 onready var main_menu_button = $"%MainMenuButton"
 onready var sex_toy_manager_button = $"%SexToyManagerButton"
+onready var content_board_button = $"%ContentBoardButton"
 
 func resizeButtons():
 	var theButtons:Array = [
@@ -21,6 +22,7 @@ func resizeButtons():
 		datapacks_button,
 		main_menu_button,
 		sex_toy_manager_button,
+		content_board_button,
 	]
 	if(OPTIONS.isTouchFriendlyUI()):
 		for theButton in theButtons:
@@ -90,3 +92,13 @@ func _on_SexToyManagerButton_pressed():
 func onSexToyManagerUIClose(_ui:Control):
 	_ui.queue_free()
 	mainMenuScreen.visible = true
+
+func _on_ContentBoardButton_pressed():
+	var theBoard = load("res://UI/ContentBoard/ContentBoard.tscn").instance()
+	GM.ui.get_parent().add_child(theBoard)
+	theBoard.connect("onClosePressed", self, "onContentBoardClosePressed")
+	GM.ui.visible = false
+
+func onContentBoardClosePressed(_board):
+	_board.queue_free()
+	GM.ui.visible = true

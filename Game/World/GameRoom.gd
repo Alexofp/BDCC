@@ -71,7 +71,8 @@ var astarID
 export(PoolStringArray) var astarConnectedTo = PoolStringArray()
 var astarConnections:Array = []
 
-var floorID = ""
+var floorID := ""
+var highlighted:bool = false
 
 func getPopulation():
 	var result = []
@@ -102,31 +103,51 @@ func _ready():
 	
 	#if(world):
 	#	world.registerRoom(self)
-	if(RoomColorToColor.has(roomColor)):
+	updateRoomVisuals()
+
+func updateRoomVisuals():
+	updateRoomSprite()
+	updateRoomMainColor()
+	updateRoomGridColor()
+
+func updateRoomSprite():
+	if(roomSprite == RoomStuff.RoomSprite.NONE):
+		$Sprite.texture = null
+		return
+	if(!sprites.has(roomSprite)):
+		Log.printerr("ROOM SPRITE NOT FOUND: "+str(roomSprite))
+		return
+	$Sprite.texture = sprites[roomSprite]
+
+func updateRoomMainColor():
+	if(highlighted):
+		self_modulate = Color.purple
+	elif(RoomColorToColor.has(roomColor)):
 		self_modulate = RoomColorToColor[roomColor]
-	if(sprites.has(roomSprite)):
-		roomSpriteObject.texture = sprites[roomSprite]
-		
-func setRoomColor(newColor):
+
+func updateRoomGridColor():
+	if(gridColor == RoomStuff.RoomColor.White):
+		$Grid.visible = false
+	else:
+		$Grid.visible = true
+	if(RoomColorToColor.has(gridColor)):
+		$Grid.self_modulate = RoomColorToColor[gridColor]
+
+func setRoomColor(newColor:int):
 	if(newColor != roomColor && RoomColorToColor.has(newColor)):
 		roomColor = newColor
+		updateRoomMainColor()
 		
-func setRoomGridColor(newColor):
+func setRoomGridColor(newColor:int):
 	if(newColor != gridColor && RoomColorToColor.has(newColor)):
 		gridColor = newColor
-		
-func setRoomSprite(newSprite):
-	if(newSprite == RoomStuff.RoomSprite.NONE):
-		roomSprite = newSprite
-		$Sprite.texture = null
-	
-	if(newSprite != roomSprite && sprites.has(newSprite)):
-		roomSprite = newSprite
-		#roomSpriteObject.texture = sprites[roomSprite]
-		$Sprite.texture = sprites[roomSprite]
-	
+		updateRoomGridColor()
 
-	
+
+func setRoomSprite(newSprite:int):
+	roomSprite = newSprite
+	updateRoomSprite()
+
 func getFloorID():
 	var myParent = get_parent()
 	while(!myParent.has_method("getRooms")):
@@ -219,26 +240,17 @@ func _onButton(key):
 	emit_signal("onReact", self, key)
 	return true
 
-func setHighlighted(high):
-	if(high):
-		self_modulate = Color.purple
-	else:
-		self_modulate = RoomColorToColor[roomColor]
+func setHighlighted(high:bool):
+	highlighted = high
+	updateRoomMainColor()
 
 func onRoomChangeColor(newvalue):
 	roomColor = newvalue
-	
-	self_modulate = RoomColorToColor[roomColor]
+	updateRoomMainColor()
 
 func onGridChangeColor(newvalue):
 	gridColor = newvalue
-	
-	if(newvalue == RoomStuff.RoomColor.White):
-		$Grid.visible = false
-	else:
-		$Grid.visible = true
-	
-	$Grid.self_modulate = RoomColorToColor[gridColor]
+	updateRoomGridColor()
 
 func getCachedFloorID():
 	return floorID

@@ -9,6 +9,9 @@ func registerTriggers(es):
 func run(_triggerID, _args):
 	if(!GM.main.getModuleFlag("TaviModule", "Tavi_IntroducedTo")):
 		return
+	# If we start another main route, we can't find Tavi anymore
+	if(GM.main.hasCommittedToMainRoute() && !GM.main.hasCommittedToTaviMainRoute()):
+		return
 	
 	if(checkCharacterBusy("TaviBusy", "Seems like Tavi is not here", "Tavi")):
 		return

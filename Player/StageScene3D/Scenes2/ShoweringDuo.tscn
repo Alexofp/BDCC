@@ -64,10 +64,10 @@ states/ShoweringDuo_1-loop/node = SubResource( 451 )
 states/ShoweringDuo_1-loop/position = Vector2( 332, 155 )
 transitions = [ "ShoweringDuoTease_1-loop", "ShoweringDuo_1-loop", SubResource( 452 ), "ShoweringDuo_1-loop", "ShoweringDuoTease_1-loop", SubResource( 453 ), "ShoweringDuo_1-loop", "ShoweringDuoStroke_1-loop", SubResource( 454 ), "ShoweringDuoStroke_1-loop", "ShoweringDuo_1-loop", SubResource( 455 ), "ShoweringDuoRub_1-loop", "ShoweringDuoStroke_1-loop", SubResource( 458 ), "ShoweringDuoStroke_1-loop", "ShoweringDuoRub_1-loop", SubResource( 459 ), "ShoweringDuoTease_1-loop", "ShoweringDuoRub_1-loop", SubResource( 460 ), "ShoweringDuoRub_1-loop", "ShoweringDuoTease_1-loop", SubResource( 461 ), "ShoweringDuoTease_1-loop", "ShoweringDuoStroke_1-loop", SubResource( 462 ), "ShoweringDuoStroke_1-loop", "ShoweringDuoTease_1-loop", SubResource( 463 ) ]
 start_node = "ShoweringDuoTease_1-loop"
-graph_offset = Vector2( -24, -125 )
+graph_offset = Vector2( -21, -97 )
 
 [sub_resource type="AnimationNodeBlendTree" id=465]
-graph_offset = Vector2( -21, 34 )
+graph_offset = Vector2( -58.56, -56 )
 nodes/Animation/node = SubResource( 446 )
 nodes/Animation/position = Vector2( 140, 280 )
 nodes/CuffsBlend/node = SubResource( 447 )
@@ -169,3 +169,4 @@ parameters/StateMachine/playback = SubResource( 484 )
 [editable path="Doll3D"]
 [editable path="Doll3D/DollSkeleton"]
 [editable path="Doll3D/DollSkeleton2"]
+[editable path="Doll3D/DollSkeleton3"]

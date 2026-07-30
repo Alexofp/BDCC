@@ -1,0 +1,847 @@
+[gd_scene load_steps=47 format=2]
+
+[ext_resource path="res://UI/ContentBoard/ContentBoardCard.tscn" type="PackedScene" id=1]
+[ext_resource path="res://UI/ContentBoard/ContentBoardContent.gd" type="Script" id=2]
+[ext_resource path="res://Images/SillyVersions/Rahi.png" type="Texture" id=3]
+[ext_resource path="res://UI/ContentBoard/Util/ContentSprite.gd" type="Script" id=4]
+[ext_resource path="res://Images/SillyVersions/AlexRynard.png" type="Texture" id=5]
+[ext_resource path="res://Images/SillyVersions/Kidlat.png" type="Texture" id=6]
+[ext_resource path="res://Images/SillyVersions/Mineshaft.png" type="Texture" id=7]
+[ext_resource path="res://Images/SillyVersions/Artica.png" type="Texture" id=8]
+[ext_resource path="res://Images/SillyVersions/Jacki.png" type="Texture" id=9]
+[ext_resource path="res://Images/SillyVersions/Socket.png" type="Texture" id=10]
+[ext_resource path="res://Images/SillyVersions/Tentacles.png" type="Texture" id=11]
+[ext_resource path="res://Images/SillyVersions/Chastity.png" type="Texture" id=12]
+[ext_resource path="res://Images/SillyVersions/SplashContent.png" type="Texture" id=13]
+[ext_resource path="res://Images/SillyVersions/Market.png" type="Texture" id=14]
+[ext_resource path="res://Images/SillyVersions/Milking.png" type="Texture" id=15]
+[ext_resource path="res://Images/SillyVersions/Avy.png" type="Texture" id=16]
+[ext_resource path="res://Images/SillyVersions/Eliza.png" type="Texture" id=17]
+[ext_resource path="res://Images/SillyVersions/Flask.png" type="Texture" id=18]
+[ext_resource path="res://Images/SillyVersions/Hypno.png" type="Texture" id=19]
+[ext_resource path="res://Images/SillyVersions/Tavi.png" type="Texture" id=20]
+[ext_resource path="res://Images/SillyVersions/Pin.png" type="Texture" id=21]
+[ext_resource path="res://Images/SillyVersions/Kait.png" type="Texture" id=22]
+[ext_resource path="res://Images/SillyVersions/Captain.png" type="Texture" id=23]
+[ext_resource path="res://Images/SillyVersions/Ferri.png" type="Texture" id=24]
+
+[sub_resource type="DynamicFontData" id=5]
+font_path = "res://Fonts/SourceCodePro/SourceCodePro-Regular.otf"
+
+[sub_resource type="DynamicFontData" id=3]
+font_path = "res://Fonts/DroidSansJapanese.woff2"
+
+[sub_resource type="DynamicFontData" id=4]
+font_path = "res://Fonts/DroidSansFallback.woff2"
+
+[sub_resource type="DynamicFontData" id=6]
+font_path = "res://Fonts/Titillium-Regular.otf"
+
+[sub_resource type="DynamicFont" id=12]
+size = 20
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = SubResource( 6 )
+fallback/0 = SubResource( 5 )
+fallback/1 = SubResource( 3 )
+fallback/2 = SubResource( 4 )
+
+[sub_resource type="StyleBoxFlat" id=16]
+bg_color = Color( 0.741176, 0, 0, 1 )
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color( 0.0509804, 0.0431373, 0, 1 )
+border_blend = true
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color( 0, 0, 0, 0.239216 )
+shadow_size = 9
+shadow_offset = Vector2( 0, 5 )
+
+[sub_resource type="StyleBoxFlat" id=17]
+bg_color = Color( 0.470588, 0, 0.537255, 1 )
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color( 0, 0.933333, 0.0784314, 1 )
+border_blend = true
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color( 0, 0, 0, 0.239216 )
+shadow_size = 9
+shadow_offset = Vector2( 0, 5 )
+
+[sub_resource type="StyleBoxFlat" id=15]
+bg_color = Color( 0.0392157, 0.156863, 0.407843, 1 )
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color( 0.0705882, 0.0784314, 0.168627, 1 )
+border_blend = true
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id=18]
+bg_color = Color( 0.74902, 0.376471, 0.301961, 1 )
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color( 0.458824, 0.14902, 0.0862745, 1 )
+border_blend = true
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color( 0, 0, 0, 0.239216 )
+shadow_size = 9
+shadow_offset = Vector2( 0, 5 )
+
+[sub_resource type="StyleBoxFlat" id=19]
+bg_color = Color( 0.137255, 0.137255, 0.137255, 1 )
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color( 0.537255, 0, 0, 1 )
+border_blend = true
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color( 0, 0, 0, 0.239216 )
+shadow_size = 9
+shadow_offset = Vector2( 0, 5 )
+
+[sub_resource type="StyleBoxFlat" id=20]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color( 0.0823529, 0.937255, 0.94902, 1 )
+border_blend = true
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color( 0, 0, 0, 0.239216 )
+shadow_size = 9
+shadow_offset = Vector2( 0, 5 )
+
+[sub_resource type="StyleBoxFlat" id=21]
+bg_color = Color( 0.804688, 0.226318, 0.64654, 1 )
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color( 0.737255, 0.392157, 1, 1 )
+border_blend = true
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color( 0, 0, 0, 0.239216 )
+shadow_size = 9
+shadow_offset = Vector2( 0, 5 )
+
+[sub_resource type="StyleBoxFlat" id=22]
+bg_color = Color( 0.878431, 0.478431, 0.207843, 1 )
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color( 0.27451, 0.0509804, 0, 1 )
+border_blend = true
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color( 0, 0, 0, 0.239216 )
+shadow_size = 9
+shadow_offset = Vector2( 0, 5 )
+
+[sub_resource type="StyleBoxFlat" id=23]
+bg_color = Color( 0.777344, 0.838226, 1, 1 )
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color( 0.0156863, 0, 0.486275, 1 )
+border_blend = true
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color( 0, 0, 0, 0.239216 )
+shadow_size = 9
+shadow_offset = Vector2( 0, 5 )
+
+[sub_resource type="StyleBoxFlat" id=24]
+bg_color = Color( 0.85098, 1, 0.823529, 1 )
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color( 0.2, 0.34902, 0, 1 )
+border_blend = true
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color( 0, 0, 0, 0.239216 )
+shadow_size = 9
+shadow_offset = Vector2( 0, 5 )
+
+[sub_resource type="StyleBoxFlat" id=25]
+bg_color = Color( 0.121569, 0, 0.160784, 1 )
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color( 0.00784314, 0.894118, 0.862745, 1 )
+border_blend = true
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color( 0, 0, 0, 0.239216 )
+shadow_size = 9
+shadow_offset = Vector2( 0, 5 )
+
+[sub_resource type="StyleBoxFlat" id=26]
+bg_color = Color( 0.870588, 0.694118, 0.572549, 1 )
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color( 0.513726, 0.301961, 0.207843, 1 )
+border_blend = true
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color( 0, 0, 0, 0.239216 )
+shadow_size = 9
+shadow_offset = Vector2( 0, 5 )
+
+[sub_resource type="StyleBoxFlat" id=27]
+bg_color = Color( 0.819608, 0.247059, 0.2, 1 )
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color( 0.52549, 0, 0, 1 )
+border_blend = true
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color( 0, 0, 0, 0.239216 )
+shadow_size = 9
+shadow_offset = Vector2( 0, 5 )
+
+[sub_resource type="StyleBoxFlat" id=28]
+bg_color = Color( 0.0352941, 0, 0, 1 )
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color( 1, 0.352941, 0, 1 )
+border_blend = true
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color( 0, 0, 0, 0.239216 )
+shadow_size = 9
+shadow_offset = Vector2( 0, 5 )
+
+[sub_resource type="StyleBoxFlat" id=29]
+bg_color = Color( 0.266667, 0.0745098, 0, 1 )
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color( 1, 0.513726, 0, 1 )
+border_blend = true
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color( 0, 0, 0, 0.239216 )
+shadow_size = 9
+shadow_offset = Vector2( 0, 5 )
+
+[sub_resource type="StyleBoxFlat" id=30]
+bg_color = Color( 0, 0.898039, 0.898039, 1 )
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color( 1, 1, 1, 1 )
+border_blend = true
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color( 0, 0, 0, 0.239216 )
+shadow_size = 9
+shadow_offset = Vector2( 0, 5 )
+
+[sub_resource type="StyleBoxFlat" id=31]
+bg_color = Color( 0.0235294, 0.8, 0, 1 )
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color( 0.239216, 0.403922, 0, 1 )
+border_blend = true
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color( 0, 0, 0, 0.239216 )
+shadow_size = 9
+shadow_offset = Vector2( 0, 5 )
+
+[node name="ContentBoardContent" type="ColorRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -622.0
+margin_top = -319.0
+margin_right = 622.0
+margin_bottom = 319.0
+mouse_filter = 2
+color = Color( 0.384314, 0.380392, 0.647059, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="SplashContent" type="Sprite" parent="."]
+position = Vector2( 604, 317 )
+scale = Vector2( 0.564453, 0.564453 )
+texture = ExtResource( 13 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 557.0
+margin_top = 11.0
+margin_right = 668.0
+margin_bottom = 31.0
+custom_fonts/font = SubResource( 12 )
+text = "Main Routes"
+align = 1
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 824.0
+margin_top = 443.0
+margin_right = 1053.0
+margin_bottom = 463.0
+custom_fonts/font = SubResource( 12 )
+text = "Get sold on a slave auction!"
+align = 1
+
+[node name="Label4" type="Label" parent="."]
+margin_left = 956.0
+margin_top = 46.0
+margin_right = 1185.0
+margin_bottom = 66.0
+custom_fonts/font = SubResource( 12 )
+text = "Participate in fun activities"
+align = 1
+
+[node name="Label3" type="Label" parent="."]
+margin_left = 36.0
+margin_top = 36.0
+margin_right = 265.0
+margin_bottom = 56.0
+custom_fonts/font = SubResource( 12 )
+text = "Meet characters"
+align = 1
+
+[node name="KaitRoute" parent="." instance=ExtResource( 1 )]
+margin_left = -272.0
+margin_top = -308.0
+margin_right = -124.0
+margin_bottom = -179.0
+custom_styles/panel = SubResource( 16 )
+contentID = "MainKait"
+contentName = "Kait Main Route"
+contentDesc = "Dominate the whole prison! A route for dominant players
+(work in progress)"
+bgColor = Color( 0.741176, 0, 0, 1 )
+borderColor = Color( 0.0509804, 0.0431373, 0, 1 )
+
+[node name="Pin17" type="Sprite" parent="KaitRoute"]
+modulate = Color( 1, 0, 0, 1 )
+position = Vector2( 72, 2 )
+rotation = -0.139622
+scale = Vector2( 0.433594, 0.433594 )
+z_index = 1111
+texture = ExtResource( 21 )
+
+[node name="ContentAutoSprite4" type="Sprite" parent="KaitRoute"]
+position = Vector2( -15, 64 )
+scale = Vector2( 0.132812, 0.132812 )
+z_index = 111
+texture = ExtResource( 22 )
+script = ExtResource( 4 )
+
+[node name="ContentAutoSprite5" type="Sprite" parent="KaitRoute"]
+position = Vector2( -50, 98 )
+scale = Vector2( 0.132812, 0.132812 )
+z_index = 111
+texture = ExtResource( 24 )
+script = ExtResource( 4 )
+
+[node name="TaviRoute" parent="." instance=ExtResource( 1 )]
+margin_left = -100.0
+margin_top = -274.0
+margin_right = 48.0
+margin_bottom = -130.0
+custom_styles/panel = SubResource( 17 )
+contentID = "MainTavi"
+contentName = "Tavi Main Route"
+contentDesc = "Become Tavi's sidekick and find a way to escape the prison together. A route for switch players."
+bgColor = Color( 0.470588, 0, 0.537255, 1 )
+borderColor = Color( 0, 0.933333, 0.0784314, 1 )
+
+[node name="ContentAutoSprite3" type="Sprite" parent="TaviRoute"]
+position = Vector2( 153, 65.9999 )
+scale = Vector2( 0.15625, 0.15625 )
+z_index = 111
+texture = ExtResource( 20 )
+script = ExtResource( 4 )
+
+[node name="Pin16" type="Sprite" parent="TaviRoute"]
+modulate = Color( 0.431373, 1, 0, 1 )
+position = Vector2( 82, -2 )
+rotation = -0.139622
+scale = Vector2( 0.433594, 0.433594 )
+z_index = 1111
+texture = ExtResource( 21 )
+
+[node name="CaptainRoute" parent="." instance=ExtResource( 1 )]
+margin_left = 92.0
+margin_top = -303.0
+margin_right = 240.0
+margin_bottom = -174.0
+custom_styles/panel = SubResource( 15 )
+contentID = "MainCaptain"
+contentName = "Captain Route"
+contentDesc = "Become captain's most trusted inmate. A route for submissive players. (Planned)"
+
+[node name="Pin15" type="Sprite" parent="CaptainRoute"]
+modulate = Color( 0.376471, 0.647059, 1, 1 )
+position = Vector2( 82, 4 )
+rotation = -0.139622
+scale = Vector2( 0.433594, 0.433594 )
+z_index = 1111
+texture = ExtResource( 21 )
+
+[node name="ContentAutoSprite4" type="Sprite" parent="CaptainRoute"]
+position = Vector2( 167.5, 69 )
+scale = Vector2( 0.158203, 0.158203 )
+z_index = 111
+texture = ExtResource( 23 )
+script = ExtResource( 4 )
+
+[node name="Rahi" parent="." instance=ExtResource( 1 )]
+margin_left = -531.0
+margin_top = -213.0
+margin_right = -383.0
+margin_bottom = -99.0
+custom_styles/panel = SubResource( 18 )
+contentID = "Rahi"
+contentName = "Rahi"
+contentDesc = "Help a shy brown kitty with her drinking problem."
+bgColor = Color( 0.74902, 0.376471, 0.301961, 1 )
+borderColor = Color( 0.458824, 0.14902, 0.0862745, 1 )
+
+[node name="ContentAutoSprite" type="Sprite" parent="Rahi"]
+position = Vector2( 118, -17 )
+scale = Vector2( 0.128906, 0.128906 )
+z_index = 111
+texture = ExtResource( 3 )
+script = ExtResource( 4 )
+
+[node name="Pin14" type="Sprite" parent="Rahi"]
+modulate = Color( 1, 0.6, 0.278431, 1 )
+position = Vector2( 76, -4 )
+rotation = -0.139622
+scale = Vector2( 0.433594, 0.433594 )
+z_index = 1111
+texture = ExtResource( 21 )
+
+[node name="Jacki" parent="." instance=ExtResource( 1 )]
+margin_left = -597.0
+margin_top = -82.0
+margin_right = -449.0
+margin_bottom = 47.0
+custom_styles/panel = SubResource( 19 )
+contentID = "Jacki"
+contentName = "Jacki Northstar"
+contentDesc = "Have fun with a kind wolfo that is wearing unique chastity piercings."
+bgColor = Color( 0.137255, 0.137255, 0.137255, 1 )
+borderColor = Color( 0.537255, 0, 0, 1 )
+
+[node name="ContentAutoSprite4" type="Sprite" parent="Jacki"]
+position = Vector2( 122, 127 )
+scale = Vector2( 0.146484, 0.146484 )
+z_index = 111
+texture = ExtResource( 9 )
+script = ExtResource( 4 )
+
+[node name="Pin13" type="Sprite" parent="Jacki"]
+modulate = Color( 1, 0.235294, 0, 1 )
+position = Vector2( 62, -7 )
+rotation = -0.486585
+scale = Vector2( 0.433594, 0.433594 )
+z_index = 1111
+texture = ExtResource( 21 )
+
+[node name="Artica" parent="." instance=ExtResource( 1 )]
+margin_left = -243.0
+margin_top = 51.0
+margin_right = -95.0
+margin_bottom = 160.0
+custom_styles/panel = SubResource( 20 )
+contentID = "Artica"
+contentName = "Artica"
+contentDesc = "Corrupt a very shy herm fluff."
+bgColor = Color( 1, 1, 1, 1 )
+borderColor = Color( 0.0823529, 0.937255, 0.94902, 1 )
+
+[node name="ContentAutoSprite3" type="Sprite" parent="Artica"]
+position = Vector2( 145, 76 )
+scale = Vector2( 0.113281, 0.113281 )
+z_index = 111
+texture = ExtResource( 8 )
+script = ExtResource( 4 )
+
+[node name="Pin12" type="Sprite" parent="Artica"]
+modulate = Color( 0, 1, 1, 1 )
+position = Vector2( 77, -4 )
+rotation = -0.486585
+scale = Vector2( 0.433594, 0.433594 )
+z_index = 1111
+texture = ExtResource( 21 )
+
+[node name="Vion" parent="." instance=ExtResource( 1 )]
+margin_left = -184.0
+margin_top = 189.0
+margin_right = -36.0
+margin_bottom = 288.0
+custom_styles/panel = SubResource( 21 )
+contentID = "Vion"
+contentName = "Vion"
+contentDesc = "Find a way to help a lizard with his stallion problem."
+bgColor = Color( 0.804688, 0.226318, 0.64654, 1 )
+borderColor = Color( 0.737255, 0.392157, 1, 1 )
+
+[node name="ContentAutoSprite3" type="Sprite" parent="Vion"]
+position = Vector2( 120, 2 )
+scale = Vector2( 0.171875, 0.171875 )
+z_index = 111
+texture = ExtResource( 19 )
+script = ExtResource( 4 )
+
+[node name="Pin11" type="Sprite" parent="Vion"]
+modulate = Color( 0.913725, 0.317647, 1, 1 )
+position = Vector2( 60, -3 )
+rotation = -1.07962
+scale = Vector2( 0.433594, 0.433594 )
+z_index = 1111
+texture = ExtResource( 21 )
+
+[node name="AlexRynard" parent="." instance=ExtResource( 1 )]
+margin_left = -395.0
+margin_top = 175.0
+margin_right = -247.0
+margin_bottom = 289.0
+custom_styles/panel = SubResource( 22 )
+contentID = "AlexRynard"
+contentName = "Alex Rynard"
+contentDesc = "Offer your company to a lonely engineer foxy guy who has trust issues."
+bgColor = Color( 0.878431, 0.478431, 0.207843, 1 )
+borderColor = Color( 0.27451, 0.0509804, 0, 1 )
+
+[node name="ContentAutoSprite2" type="Sprite" parent="AlexRynard"]
+position = Vector2( 19, -6 )
+scale = Vector2( 0.171875, 0.171875 )
+z_index = 111
+texture = ExtResource( 5 )
+script = ExtResource( 4 )
+
+[node name="Pin10" type="Sprite" parent="AlexRynard"]
+modulate = Color( 1, 0.443137, 0.317647, 1 )
+position = Vector2( 81, -3 )
+rotation = -0.265588
+scale = Vector2( 0.433594, 0.433594 )
+z_index = 1111
+texture = ExtResource( 21 )
+
+[node name="ElizaChastity" parent="." instance=ExtResource( 1 )]
+margin_left = 453.0
+margin_top = -229.0
+margin_right = 601.0
+margin_bottom = -81.0
+custom_styles/panel = SubResource( 23 )
+contentID = "ElizaChastity"
+contentName = "Obedience Training"
+contentDesc = "Go through an obedience training program created by Eliza Quinn, focused all around male chastity"
+bgColor = Color( 0.777344, 0.838226, 1, 1 )
+borderColor = Color( 0.0156863, 0, 0.486275, 1 )
+
+[node name="ContentAutoSprite5" type="Sprite" parent="ElizaChastity"]
+position = Vector2( 138, 5 )
+scale = Vector2( 0.13623, 0.13623 )
+z_index = 111
+texture = ExtResource( 12 )
+script = ExtResource( 4 )
+
+[node name="Pin9" type="Sprite" parent="ElizaChastity"]
+position = Vector2( 72, -3 )
+rotation = -0.759848
+scale = Vector2( 0.433594, 0.433594 )
+z_index = 1111
+texture = ExtResource( 21 )
+
+[node name="ElizaLab" parent="." instance=ExtResource( 1 )]
+margin_left = 288.0
+margin_top = -231.0
+margin_right = 436.0
+margin_bottom = -83.0
+custom_styles/panel = SubResource( 24 )
+contentID = "ElizaLab"
+contentName = "BioLab Assistant"
+contentDesc = "Become Eliza's assistant and get a chance to work in her lab, researching new transformation drugs"
+bgColor = Color( 0.85098, 1, 0.823529, 1 )
+borderColor = Color( 0.2, 0.34902, 0, 1 )
+
+[node name="ContentAutoSprite6" type="Sprite" parent="ElizaLab"]
+position = Vector2( 45.5, -3 )
+scale = Vector2( 0.117188, 0.117188 )
+z_index = 111
+texture = ExtResource( 17 )
+script = ExtResource( 4 )
+
+[node name="ContentAutoSprite7" type="Sprite" parent="ElizaLab"]
+position = Vector2( 8.5, 1 )
+scale = Vector2( 0.0898438, 0.0898438 )
+z_index = 111
+texture = ExtResource( 18 )
+script = ExtResource( 4 )
+
+[node name="Pin8" type="Sprite" parent="ElizaLab"]
+modulate = Color( 0, 1, 0.811765, 1 )
+position = Vector2( 127, 1.00003 )
+rotation = 0.296042
+scale = Vector2( 0.433594, 0.433594 )
+z_index = 1111
+texture = ExtResource( 21 )
+
+[node name="Kidlat" parent="." instance=ExtResource( 1 )]
+margin_left = -421.0
+margin_top = -31.0
+margin_right = -273.0
+margin_bottom = 117.0
+custom_styles/panel = SubResource( 25 )
+contentID = "Kidlat"
+contentName = "Kidlat"
+contentDesc = "Find a cute cat that got stuck in the endless maintenance tunnels and see if you can help her out."
+bgColor = Color( 0.121569, 0, 0.160784, 1 )
+borderColor = Color( 0.00784314, 0.894118, 0.862745, 1 )
+
+[node name="ContentAutoSprite2" type="Sprite" parent="Kidlat"]
+position = Vector2( 74, -37 )
+scale = Vector2( 0.167969, 0.167969 )
+z_index = 111
+texture = ExtResource( 6 )
+script = ExtResource( 4 )
+
+[node name="Pin7" type="Sprite" parent="Kidlat"]
+modulate = Color( 0, 0.882353, 1, 1 )
+position = Vector2( 118, -4 )
+rotation = -0.47545
+scale = Vector2( 0.433594, 0.433594 )
+z_index = 1111
+texture = ExtResource( 21 )
+
+[node name="Socket" parent="." instance=ExtResource( 1 )]
+margin_left = -590.0
+margin_top = 104.0
+margin_right = -442.0
+margin_bottom = 248.0
+custom_styles/panel = SubResource( 26 )
+contentID = "Socket"
+contentName = "Socket"
+contentDesc = "Meet a fennec engineer with a very interesting outfit. Help her with her tasks all around the prison."
+bgColor = Color( 0.870588, 0.694118, 0.572549, 1 )
+borderColor = Color( 0.513726, 0.301961, 0.207843, 1 )
+
+[node name="ContentAutoSprite3" type="Sprite" parent="Socket"]
+position = Vector2( 37, -11 )
+scale = Vector2( 0.124756, 0.124756 )
+z_index = 111
+texture = ExtResource( 10 )
+script = ExtResource( 4 )
+
+[node name="Pin6" type="Sprite" parent="Socket"]
+modulate = Color( 1, 0.662745, 0.341176, 1 )
+position = Vector2( 77, -3 )
+rotation = -0.47545
+scale = Vector2( 0.433594, 0.433594 )
+z_index = 1111
+texture = ExtResource( 21 )
+
+[node name="Arena" parent="." instance=ExtResource( 1 )]
+margin_left = 290.0
+margin_top = -29.0
+margin_right = 438.0
+margin_bottom = 100.0
+custom_styles/panel = SubResource( 27 )
+contentID = "Arena"
+contentName = "Arena"
+contentDesc = "Become the Grand Champion of the hidden underground arena that has only rule: No Rules!"
+bgColor = Color( 0.819608, 0.247059, 0.2, 1 )
+borderColor = Color( 0.52549, 0, 0, 1 )
+
+[node name="ContentAutoSprite6" type="Sprite" parent="Arena"]
+position = Vector2( 32, -23 )
+scale = Vector2( 0.129, 0.129 )
+z_index = 111
+texture = ExtResource( 16 )
+script = ExtResource( 4 )
+
+[node name="Pin5" type="Sprite" parent="Arena"]
+modulate = Color( 0.509804, 0.509804, 0.509804, 1 )
+position = Vector2( 72, -3 )
+rotation = -0.963305
+scale = Vector2( 0.433594, 0.433594 )
+z_index = 1111
+texture = ExtResource( 21 )
+
+[node name="Mirri" parent="." instance=ExtResource( 1 )]
+margin_left = 456.0
+margin_top = -49.0
+margin_right = 604.0
+margin_bottom = 95.0
+custom_styles/panel = SubResource( 28 )
+contentID = "Mirri"
+contentName = "Blacktail Market"
+contentDesc = "Meet Mirri and Luxe from the Blacktail family who are running a slave auction. Sell your slaves here!"
+bgColor = Color( 0.0352941, 0, 0, 1 )
+borderColor = Color( 1, 0.352941, 0, 1 )
+
+[node name="ContentAutoSprite5" type="Sprite" parent="Mirri"]
+position = Vector2( 127, 197 )
+scale = Vector2( 0.214844, 0.214844 )
+z_index = 111
+texture = ExtResource( 14 )
+script = ExtResource( 4 )
+
+[node name="Pin4" type="Sprite" parent="Mirri"]
+modulate = Color( 0.376471, 0.545098, 1, 1 )
+position = Vector2( 76, -3 )
+rotation = -0.259454
+scale = Vector2( 0.433594, 0.433594 )
+z_index = 1111
+texture = ExtResource( 21 )
+
+[node name="SlaveryShaftMiner" parent="." instance=ExtResource( 1 )]
+margin_left = 79.0
+margin_top = 157.0
+margin_right = 227.0
+margin_bottom = 301.0
+custom_styles/panel = SubResource( 29 )
+contentID = "SlaveryShaftMiner"
+contentName = "Shaft Miner"
+contentDesc = "Get sold on a slave auction and become a shaft miner on a godforsaken planet."
+bgColor = Color( 0.266667, 0.0745098, 0, 1 )
+borderColor = Color( 1, 0.513726, 0, 1 )
+
+[node name="ContentAutoSprite3" type="Sprite" parent="SlaveryShaftMiner"]
+position = Vector2( -22, 12 )
+rotation = 0.416742
+scale = Vector2( 0.167969, 0.167969 )
+z_index = 111
+texture = ExtResource( 7 )
+script = ExtResource( 4 )
+
+[node name="Pin3" type="Sprite" parent="SlaveryShaftMiner"]
+modulate = Color( 1, 0.815686, 0.376471, 1 )
+position = Vector2( 68, -4 )
+rotation = -1.13703
+scale = Vector2( 0.433594, 0.433594 )
+z_index = 1111
+texture = ExtResource( 21 )
+
+[node name="SlaveryMilkCafe" parent="." instance=ExtResource( 1 )]
+margin_left = 245.0
+margin_top = 157.0
+margin_right = 393.0
+margin_bottom = 301.0
+custom_styles/panel = SubResource( 30 )
+contentID = "SlaveryMilkCafe"
+contentName = "The Daily Drip"
+contentDesc = "Get sold on a slave auction to a lovely couple that runs a cafe in dire need of milk and cum."
+bgColor = Color( 0, 0.898039, 0.898039, 1 )
+borderColor = Color( 1, 1, 1, 1 )
+
+[node name="ContentAutoSprite5" type="Sprite" parent="SlaveryMilkCafe"]
+position = Vector2( 129, 131 )
+scale = Vector2( 0.182617, 0.182617 )
+z_index = 111
+texture = ExtResource( 15 )
+script = ExtResource( 4 )
+
+[node name="Pin2" type="Sprite" parent="SlaveryMilkCafe"]
+modulate = Color( 0.376471, 0.941176, 1, 1 )
+position = Vector2( 78, 2 )
+rotation = -0.0589577
+scale = Vector2( 0.433594, 0.433594 )
+z_index = 1111
+texture = ExtResource( 21 )
+
+[node name="SlaveryTentacles" parent="." instance=ExtResource( 1 )]
+margin_left = 410.0
+margin_top = 158.0
+margin_right = 558.0
+margin_bottom = 302.0
+custom_styles/panel = SubResource( 31 )
+contentID = "SlaveryTentacles"
+contentName = "Tentacles Biolab"
+contentDesc = "Get sold on a slave auction to a biolab where you will help grow your own tentacle monster!"
+bgColor = Color( 0.0235294, 0.8, 0, 1 )
+borderColor = Color( 0.239216, 0.403922, 0, 1 )
+
+[node name="ContentAutoSprite4" type="Sprite" parent="SlaveryTentacles"]
+position = Vector2( 80, -17 )
+scale = Vector2( 0.214844, 0.214844 )
+z_index = 111
+texture = ExtResource( 11 )
+script = ExtResource( 4 )
+
+[node name="Pin" type="Sprite" parent="SlaveryTentacles"]
+modulate = Color( 0.376471, 0.941176, 1, 1 )
+position = Vector2( 142, 63 )
+rotation = 0.305721
+scale = Vector2( 0.433594, 0.433594 )
+z_index = 1111
+texture = ExtResource( 21 )

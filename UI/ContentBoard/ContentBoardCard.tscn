@@ -1,0 +1,139 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
+[ext_resource path="res://UI/ContentBoard/ContentBoardCard.gd" type="Script" id=2]
+[ext_resource path="res://UI/ContentBoard/Util/ContentBoardCardFontName.tres" type="DynamicFont" id=3]
+[ext_resource path="res://UI/ContentBoard/Util/ContentBoardCardFontDesc.tres" type="DynamicFont" id=4]
+
+[sub_resource type="StyleBoxFlat" id=19]
+bg_color = Color( 0.0392157, 0.156863, 0.407843, 1 )
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color( 0.0705882, 0.0784314, 0.168627, 1 )
+border_blend = true
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 0, 1, 0.976471, 1 )
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color( 0.8, 0.8, 0.8, 0 )
+border_blend = true
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.137255, 0.133333, 0.164706, 1 )
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color( 0, 0, 0, 1 )
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="ContentBoardCard" type="PanelContainer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -74.0
+margin_top = -49.5
+margin_right = 74.0
+margin_bottom = 49.5
+theme = ExtResource( 1 )
+custom_styles/panel = SubResource( 19 )
+script = ExtResource( 2 )
+contentName = "Some content"
+contentDesc = "Some content meow meow sd asdf test test you're gonna see it here some text."
+
+[node name="SelectionContainer" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+show_behind_parent = true
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 136.0
+margin_bottom = 87.0
+custom_constants/margin_right = -20
+custom_constants/margin_top = -20
+custom_constants/margin_left = -20
+custom_constants/margin_bottom = -20
+
+[node name="Panel" type="Panel" parent="SelectionContainer"]
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 144.0
+margin_bottom = 95.0
+custom_styles/panel = SubResource( 10 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 136.0
+margin_bottom = 87.0
+custom_constants/separation = 0
+
+[node name="NameLabel" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+margin_right = 124.0
+margin_bottom = 16.0
+custom_fonts/font = ExtResource( 3 )
+text = "Some content"
+align = 1
+autowrap = true
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+margin_top = 16.0
+margin_right = 124.0
+margin_bottom = 20.0
+
+[node name="DescLabel" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+margin_top = 20.0
+margin_right = 124.0
+margin_bottom = 47.0
+custom_fonts/font = ExtResource( 4 )
+text = "Some content meow meow"
+autowrap = true
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
+margin_top = 47.0
+margin_right = 124.0
+margin_bottom = 75.0
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/CenterContainer"]
+margin_left = 25.0
+margin_right = 98.0
+margin_bottom = 28.0
+custom_styles/panel = SubResource( 7 )
+
+[node name="StatusLabel" type="Label" parent="VBoxContainer/CenterContainer/PanelContainer"]
+unique_name_in_owner = true
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 65.0
+margin_bottom = 20.0
+custom_colors/font_color = Color( 0, 1, 0, 1 )
+custom_fonts/font = ExtResource( 4 )
+text = "Completed!"
+
+[node name="PressButton" type="TextureButton" parent="."]
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 136.0
+margin_bottom = 87.0
+
+[connection signal="pressed" from="PressButton" to="." method="_on_PressButton_pressed"]

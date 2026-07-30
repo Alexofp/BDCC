@@ -15,13 +15,13 @@ func getButtonDesc() -> String:
 func onAct(_char:BaseCharacter, _auction, _slaveTraits:Dictionary):
 	saynn(RNG.pick([
 		"{presenter.You} {presenter.youVerb('step')} closer to the slave, {presenter.yourHis} fingers trailing lightly over the exposed skin, a teasing smirk spreading across {presenter.yourHis} lips.",
-		"{presenter.You} {presenter.youVerb('walk')} around the slave, {presenter.yourHis} hands lingering just a little too long as {presenter.youHe} {presenter.youVerb('eye')} the bidders with a sultry glance.",
-		"{presenter.You} {presenter.youVerb('bend')} down, {presenter.yourHis} breath tickling the slave’s ear. {presenter.YouHe} {presenter.youAre} whispering just loud enough for the crowd to hear.",
+		"{presenter.You} {presenter.youVerb('walk')} around the slave, {presenter.yourHis} hands lingering just a little too long as {presenter.youHe} {presenter.youHeVerb('eye')} the bidders with a sultry glance.",
+		"{presenter.You} {presenter.youVerb('bend')} down, {presenter.yourHis} breath tickling the slave’s ear. {presenter.YouHe} {presenter.youAreHeIs} whispering just loud enough for the crowd to hear.",
 		"{presenter.You} {presenter.youVerb('run')} {presenter.yourHis} fingers up the slave’s body, pausing at key spots, sending a wave of tension through the air.",
-		"{presenter.You} {presenter.youVerb('twirl')} playfully, {presenter.yourHis} hips swaying as {presenter.youHe} turn back to face the bidders with a mischievous grin.",
-		"{presenter.You} {presenter.youVerb('run')} {presenter.yourHis} hand along the chain holding the slave, tugging it gently for effect as {presenter.youHe} {presenter.youVerb('make')} direct eye contact with the bidders.",
+		"{presenter.You} {presenter.youVerb('twirl')} playfully, {presenter.yourHis} hips swaying as {presenter.youHe} {presenter.youHeVerb('turn')} back to face the bidders with a mischievous grin.",
+		"{presenter.You} {presenter.youVerb('run')} {presenter.yourHis} hand along the chain holding the slave, tugging it gently for effect as {presenter.youHe} {presenter.youHeVerb('make')} direct eye contact with the bidders.",
 		"{presenter.You} {presenter.youVerb('lean')} against the slave, {presenter.yourHis} breath hot against the exposed skin, sending shivers through the captive's body.",
-		"{presenter.You} {presenter.youVerb('tease')} the slave’s body and restraints, {presenter.yourHis} fingers playing with the chains while {presenter.youHe} {presenter.youVerb('eye')} the crowd with a light laugh.",
+		"{presenter.You} {presenter.youVerb('tease')} the slave’s body and restraints, {presenter.yourHis} fingers playing with the chains while {presenter.youHe} {presenter.youHeVerb('eye')} the crowd with a light laugh.",
 		"{presenter.You} {presenter.youVerb('step')} in front of the slave, blocking the view, and winking playfully at the bidders.",
 		"{presenter.You} {presenter.youVerb('place')} a single finger on the slave’s lips before turning to the crowd, {presenter.yourHis} voice low and inviting.",
 	]))

@@ -299,7 +299,7 @@ func doAction(_indx:int, _actionID:String, _action:Dictionary):
 				addTextPick([
 					"The tentacles wrap around {sub.yourHis} {sub.breasts} and knead them, adding extra stimulation.",
 					"Extra tentacles join to massage {sub.yourHis} {sub.breasts}, stimulating them.",
-					"The tentacles knead {sub.yourHis} {sub.breasts}, occasionalyl squeezing them hard.",
+					"The tentacles knead {sub.yourHis} {sub.breasts}, occasionally squeezing them hard.",
 				])
 			else:
 				addTextPick([

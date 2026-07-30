@@ -155,7 +155,7 @@ func _handle_drag(event: InputEventScreenDrag):
 		var new_vector: Vector2 = new_point - pivot_point
 		
 		var delta_scale = new_vector.length() / old_vector.length()
-		camera3d.size *= delta_scale
+		camera3d.size /= delta_scale
 		#world.zoomRaw(delta_scale)
 		touch_points[event.index] = new_point
 		
@@ -163,3 +163,7 @@ func _handle_drag(event: InputEventScreenDrag):
 		#offset -= drag_vector / 2 * zoom
 		var offsetTranslate :Vector2 = drag_vector# / 2.0 * camera3d.zoom
 		camera3d.translate(Vector3(offsetTranslate.x * camera3d.size / 500.0, -offsetTranslate.y * camera3d.size / 500.0, 0.0))
+
+func setPCViewportVis(_v:bool):
+	$ViewportWrapper.visible = _v
+	$ViewportWrapper/CustomViewportControl.ignoreEvents = !_v

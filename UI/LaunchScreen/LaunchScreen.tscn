@@ -199,16 +199,16 @@ margin_bottom = 644.0
 rect_min_size = Vector2( 0, 50 )
 
 [node name="Control" type="Control" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
-margin_right = 30.0
+margin_right = 9.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 
 [node name="BuildPCKButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-margin_left = 34.0
+margin_left = 13.0
 margin_right = 174.0
 margin_bottom = 50.0
-text = "Build BDCC.pck"
+text = "Rebuild BDCC.pck"
 
 [node name="ResetGRCacheButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 margin_left = 178.0
@@ -267,23 +267,33 @@ visible = false
 unique_name_in_owner = true
 visible = false
 
-[node name="BuildingPCKPanel" type="PanelContainer" parent="."]
+[node name="BuildingPCKPanelDark" type="PanelContainer" parent="."]
 unique_name_in_owner = true
 visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 4 )
+
+[node name="CenterContainer" type="Control" parent="BuildingPCKPanelDark"]
+margin_right = 1280.0
+margin_bottom = 720.0
+
+[node name="BuildingPCKPanel" type="PanelContainer" parent="BuildingPCKPanelDark/CenterContainer"]
+unique_name_in_owner = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -290.0
-margin_top = -83.0
-margin_right = 290.0
-margin_bottom = 83.0
+margin_left = -208.0
+margin_top = -78.0
+margin_right = 208.0
+margin_bottom = 78.0
 
-[node name="Label" type="Label" parent="BuildingPCKPanel"]
+[node name="Label" type="Label" parent="BuildingPCKPanelDark/CenterContainer/BuildingPCKPanel"]
 margin_left = 7.0
-margin_top = 61.0
-margin_right = 573.0
-margin_bottom = 104.0
+margin_top = 56.0
+margin_right = 409.0
+margin_bottom = 99.0
 text = "Building BDCC.pck
 Please wait.."
 align = 1
@@ -328,6 +338,65 @@ margin_right = 286.0
 margin_bottom = 51.0
 text = "OK"
 
+[node name="AndroidChooseFolderPanel" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 4 )
+
+[node name="CenterContainer" type="CenterContainer" parent="AndroidChooseFolderPanel"]
+margin_right = 1280.0
+margin_bottom = 720.0
+
+[node name="PanelContainer" type="PanelContainer" parent="AndroidChooseFolderPanel/CenterContainer"]
+margin_left = 490.0
+margin_top = 353.0
+margin_right = 790.0
+margin_bottom = 367.0
+rect_min_size = Vector2( 300, 0 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AndroidChooseFolderPanel/CenterContainer/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 293.0
+margin_bottom = 316.0
+
+[node name="BusyLabel" type="RichTextLabel" parent="AndroidChooseFolderPanel/CenterContainer/PanelContainer/VBoxContainer"]
+margin_right = 286.0
+margin_bottom = 147.0
+bbcode_enabled = true
+bbcode_text = "[center]Choose which folder to use to save/load mods and other files.
+
+If you're using an Android 16+ device, you should probably pick the last option
+[/center]"
+text = "Choose which folder to use to save/load mods and other files.
+
+If you're using an Android 16+ device, you should probably pick the last option
+"
+fit_content_height = true
+
+[node name="AndroidLoadDocuments" type="Button" parent="AndroidChooseFolderPanel/CenterContainer/PanelContainer/VBoxContainer"]
+margin_top = 151.0
+margin_right = 286.0
+margin_bottom = 201.0
+rect_min_size = Vector2( 0, 50 )
+text = "Documents folder (default)"
+
+[node name="AndroidLoadDownloads" type="Button" parent="AndroidChooseFolderPanel/CenterContainer/PanelContainer/VBoxContainer"]
+margin_top = 205.0
+margin_right = 286.0
+margin_bottom = 255.0
+rect_min_size = Vector2( 0, 50 )
+text = "Downloads folder"
+
+[node name="AndroidLoadData" type="Button" parent="AndroidChooseFolderPanel/CenterContainer/PanelContainer/VBoxContainer"]
+margin_top = 259.0
+margin_right = 286.0
+margin_bottom = 309.0
+rect_min_size = Vector2( 0, 50 )
+text = "data/org.rahimew.bdcc/files"
+
 [node name="HTTPRequestMods" type="HTTPRequest" parent="."]
 unique_name_in_owner = true
 
@@ -351,4 +420,7 @@ unique_name_in_owner = true
 [connection signal="onClose" from="TroubleshootingScreen" to="." method="_on_TroubleshootingScreen_onClose"]
 [connection signal="meta_clicked" from="BusyPanel/CenterContainer/PanelContainer/VBoxContainer/BusyLabel" to="." method="_on_BusyLabel_meta_clicked"]
 [connection signal="pressed" from="BusyPanel/CenterContainer/PanelContainer/VBoxContainer/BusyCloseButton" to="." method="_on_BusyCloseButton_pressed"]
+[connection signal="pressed" from="AndroidChooseFolderPanel/CenterContainer/PanelContainer/VBoxContainer/AndroidLoadDocuments" to="." method="_on_AndroidLoadDocuments_pressed"]
+[connection signal="pressed" from="AndroidChooseFolderPanel/CenterContainer/PanelContainer/VBoxContainer/AndroidLoadDownloads" to="." method="_on_AndroidLoadDownloads_pressed"]
+[connection signal="pressed" from="AndroidChooseFolderPanel/CenterContainer/PanelContainer/VBoxContainer/AndroidLoadData" to="." method="_on_AndroidLoadData_pressed"]
 [connection signal="request_completed" from="HTTPRequestMods" to="." method="_on_HTTPRequestMods_request_completed"]

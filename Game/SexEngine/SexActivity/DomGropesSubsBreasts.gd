@@ -146,8 +146,8 @@ func groping_processTurn():
 			text += RNG.pick([
 				" {dom.YourHis} free hand is stroking {sub.yourHis} {sub.penis}.",
 				" {dom.YourHis} free hand is stroking {sub.youHim}.",
-				" {dom.YouHe} {dom.youAre} also stroking {sub.youHim}.",
-				" {dom.YouHe} {dom.youAre} also stroking {sub.youHim} at the same time.",
+				" {dom.YouHe} {dom.youAreHeIs} also stroking {sub.youHim}.",
+				" {dom.YouHe} {dom.youAreHeIs} also stroking {sub.youHim} at the same time.",
 			])
 	
 	sendSexEvent(SexEvent.BreastsGroped, DOM_0, SUB_0, {madeLactate=suddenlyLactating})

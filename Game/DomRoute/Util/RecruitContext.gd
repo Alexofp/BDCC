@@ -20,6 +20,20 @@ func t3(_choiceIndx:int, _text1:String, _text2:String, _text3:String) -> String:
 		return _text3
 	return _text1
 
+func ch1(_text1:String, _text2:String, _text3:String) -> String:
+	return t3(0, _text1, _text2, _text3)
+
+func ch2(_text1:String, _text2:String, _text3:String) -> String:
+	return t3(1, _text1, _text2, _text3)
+
+func ch3(_text1:String, _text2:String, _text3:String) -> String:
+	return t3(2, _text1, _text2, _text3)
+
+func extra(_id:String, _default = ""):
+	if(!extras.has(_id)):
+		return _default
+	return extras[_id]
+
 func saveData() -> Dictionary:
 	return {
 		recruitID = recruitID,

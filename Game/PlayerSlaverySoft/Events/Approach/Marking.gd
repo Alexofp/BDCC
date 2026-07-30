@@ -270,7 +270,7 @@ func incMarked():
 		
 	var zone = BodyWritingsZone.getRandomZone()
 	var theWritingID:String = BodyWritings.getRandomWritingIDForZone(zone)
-	GM.pc.addBodywriting(zone, theWritingID)
+	GM.pc.addBodywriting(zone, theWritingID, false, getOwnerID())
 	
 	GM.main.addMessage("You have a received a '"+BodyWritings.getWritingText(theWritingID)+"' writing on your "+BodyWritingsZone.getZoneVisibleName(zone))
 
@@ -309,7 +309,7 @@ func aboutToPermWriting():
 	addContinue("getMarked")
 
 func aboutToPermWriting_do(_id:String, _args:Array):
-	GM.pc.addBodywritingRandom(true)
+	GM.pc.addBodywritingRandom(true, getOwnerID())
 	setState("afterGetPermMarked")
 
 func afterGetPermMarked():

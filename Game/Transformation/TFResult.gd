@@ -56,7 +56,7 @@ func getAllTFTexts(connectorStr:String = "\n\n", addMiddleParts:bool = true) -> 
 			actualResults.append(RNG.pick([
 				"But that's not all..",
 				"Something else is happening..",
-				"Just when {npc.youHe} {npc.youVerb('think')} that this is over..",
+				"Just when {npc.youHe} {npc.youHeVerb('think')} that this is over..",
 				"Wait.. More?",
 				"It's not stopping..",
 				"It doesn't stop there..",

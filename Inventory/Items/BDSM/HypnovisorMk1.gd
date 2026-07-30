@@ -30,7 +30,7 @@ func getPossibleActions():
 			return [{
 					"name": "Program",
 					"scene": "ProgramVisorScene",
-					"description": "Program the visor to suppress one of your drawback perks",
+					"description": "Program the visor to suppress your drawback perks",
 					"onlyWhenCalm": true
 				}]
 	return []

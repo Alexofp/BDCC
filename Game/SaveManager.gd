@@ -288,7 +288,7 @@ func getAllSavePathsInFolder(path = "user://saves/"):
 func getAllSavePaths():
 	var saves = getAllSavePathsInFolder("user://saves/")
 	if(OS.get_name() == "Android"):
-		var externalDir:String = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
+		var externalDir:String = Util.getAndroidSaveFolder()#OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
 		var androidSavesDir = externalDir.plus_file("BDCCSaves")
 		saves.append_array(getAllSavePathsInFolder(androidSavesDir))
 	return saves

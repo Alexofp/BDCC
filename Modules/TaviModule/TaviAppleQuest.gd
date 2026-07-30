@@ -4,7 +4,7 @@ func _init():
 	id = "TaviAppleQuest"
 
 func getVisibleName():
-	return "Forbidden fruit"
+	return "Forbidden Fruit (Switch Route)"
 
 func getProgress():
 	var result = []
@@ -22,4 +22,4 @@ func isCompleted():
 	return GM.main.getModuleFlag("TaviModule", "Tavi_GotApple")
 
 func isMainQuest():
-	return false
+	return true

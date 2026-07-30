@@ -228,6 +228,7 @@ func _run():
 		addButton("Continue", "Listen to the rules", "continue")
 
 	if(state == "no1"):
+		setFlag("TaviModule.Tavi_RefusedToSubmit", true)
 		playAnimation(StageScene.Duo, "defeat", {npc="tavi"})
 		
 		saynn("You just spit in her direction. And Tavi clearly didn’t like that answer, she growls as she pushes her leg into your chest and then kicks you away, causing you to hit the floor. That act puts a somewhat satisfied grin on her face.")
@@ -256,7 +257,7 @@ func _run():
 			addButtonWithChecks("Degrade Tavi", "Force her to act like a puppy", "degradeTavi", [], [ButtonChecks.NotHandsBlocked])
 		else:
 			addDisabledButton("Degrade Tavi", "Tavi needs to be at least a little bit obedient")
-		addDisabledButton("Fuck Tavi", "Not done :(")
+		#addDisabledButton("Fuck Tavi", "Not done :(")
 
 	if(state == "submit2"):
 		playAnimation(StageScene.Duo, "kneel", {npc="tavi"})
@@ -412,12 +413,14 @@ func _run():
 
 		saynn("Eventually you both calm down though your hearts are still racing and Tavi is panting a lot. She slowly stands up and takes a look at the mess she left, smiling.")
 
-		saynn("[say=tavi]Good little toy~. I will see you around, my pet.[/say]")
+		saynn("[say=tavi]Good little toy~. I will see you around, pet.[/say]")
 
 		saynn("[say=pc]Thank you, Miss Tavi..[/say]")
 
 		saynn("And with that, she quickly grabs her shorts and leaves you alone, your face is covered with her fluids. You keep licking your lips, liking the aftertaste. Eventually you catch your breath and stand up. You probably would need to wash your face or take a shower after that.")
-
+		
+		GM.pc.setLocation("mining_taviroom")
+		
 		addButton("Continue", "That was something", "endthescene")
 
 func _react(_action: String, _args):
@@ -441,7 +444,8 @@ func _react(_action: String, _args):
 		GM.pc.cummedOnBy("tavi", FluidSource.Vagina)
 		GM.pc.cummedInMouthBy("tavi", FluidSource.Vagina)
 		GM.pc.addSkillExperience(Skill.SexSlave, 50, "tavi_firstencounter")
-		addMessage("Tavi came on you, covering your body with her female juices")
+		#addMessage("Tavi came on you, covering your body with her female juices")
+		addMessage("Talk with Tavi to start planning your escape")
 	
 	if(_action == "fight"):
 		runScene("FightScene", ["tavi"], "tavifight")

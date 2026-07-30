@@ -59,6 +59,15 @@ func playAnimation(animID, _args = {}):
 	if(_args.has("npcCum") && _args["npcCum"]):
 		startCumPenis(doll2)
 	
+	if(_args.has("noShower") && _args["noShower"]):
+		$Sprite3D3.visible = false
+		$CPUParticles.visible = false
+		$Sprite3D2.visible = false
+	else:
+		$Sprite3D3.visible = true
+		$CPUParticles.visible = true
+		$Sprite3D2.visible = true
+	
 	updateSubAnims()
 	
 	var state_machine = animationTree["parameters/StateMachine/playback"]
@@ -76,6 +85,9 @@ func playAnimation(animID, _args = {}):
 	if(animID == "rub"):
 		state_machine.travel("ShoweringDuoRub_1-loop")
 		state_machine2.travel("ShoweringDuoRub_2-loop")
+	if(animID == "teasehug"):
+		state_machine.travel("ShoweringDuoTease_1-loop")
+		state_machine2.travel("ShoweringDuo_2-loop")
 		
 
 func canTransitionTo(_actionID, _args = []):
@@ -91,7 +103,16 @@ func canTransitionTo(_actionID, _args = []):
 	return true
 
 func getSupportedStates():
-	return ["tease", "shower", "stroke", "rub"]
+	return ["tease", "shower", "stroke", "rub", "teasehug"]
 
 func getVarNpcs():
 	return ["pc", "npc"]
+
+func getVarOptions():
+	var options = .getVarOptions()
+	
+	options["noShower"] = {
+		type = "bool",
+	}
+
+	return options

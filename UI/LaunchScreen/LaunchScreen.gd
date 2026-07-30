@@ -8,6 +8,8 @@ onready var modCountLabel = $VBoxContainer/HBoxContainer/PanelContainer/VBoxCont
 onready var build_pck_button = $"%BuildPCKButton"
 onready var open_mods_folder = $"%OpenModsFolder"
 onready var search_line_edit = $"%SearchLineEdit"
+onready var android_choose_folder_panel = $"%AndroidChooseFolderPanel"
+onready var building_pck_panel_dark = $"%BuildingPCKPanelDark"
 
 onready var debug_button = $"%DebugButton"
 onready var building_pck_panel = $"%BuildingPCKPanel"
@@ -24,6 +26,8 @@ export(Resource) var GlobalTheme
 
 const modOrderPath = "user://modOrder.json"
 const pckversionPath = "user://bdccpckversion.txt"
+const androidPickedModsFolderPath := "user://androidPickedModsFolderLock.txt"
+const androidBDCCPCKPath := "user://BDCC.pck"
 var foundBDCC:bool = false
 
 var startedPlaying:bool = false # Used to prevent the bug where you sometimes double-tap the play button on mobile
@@ -37,15 +41,30 @@ func _ready():
 	#print(diag.getLexems("Hello world. How;are|you. Hey, [[mean=fucker|bitch;kind=bro;person]]. Meow."))
 	#print(diag.processString("Hello,_[[asd]]meow", {kind=true,mean=true}, {BITCH=["bitch", "stupid-bitch", "stupid-stupid-bitch"]}))
 	troubleshooting_screen.visible = false
-	building_pck_panel.visible = false
+	building_pck_panel.visible = true
+	building_pck_panel_dark.visible = false
+	android_choose_folder_panel.visible = false
 	
-	if(GlobalTheme != null):
+	if(GlobalTheme):
 		if(OS.has_touchscreen_ui_hint()):
-			GlobalTheme.rename_stylebox("scrollTouch", "scroll", "VScrollBar")
+			var theThem:Theme = GlobalTheme
+			var theStyleBox := theThem.get_stylebox("scrollTouch", "VScrollBar")
+			theThem.set_stylebox("scroll", "VScrollBar", theStyleBox)
+			#theThem.rename_stylebox("scrollTouch", "scroll", "VScrollBar")
+	
+	if(OPTIONS.shouldShowModdedLauncher() && shouldShowPickModsFolderPanel()):
+		OS.request_permissions()
+		android_choose_folder_panel.visible = true
+	else:
+		doStart()
+
+
+func doStart():
+	var needsThePCKFile:bool = (OS.get_name() == "Android")
 	
 	var rawModList := GlobalRegistry.getRawModList()
-	if(GlobalRegistry.hasModSupport() && OS.get_name() == "Android" && (rawModList.size() > 0 || OPTIONS.shouldShowModdedLauncher())):
-		if(Util.readFile(pckversionPath) != GlobalRegistry.getGameVersionString()):
+	if(GlobalRegistry.hasModSupport() && needsThePCKFile && (rawModList.size() > 0 || OPTIONS.shouldShowModdedLauncher())):
+		if(Util.readFile(pckversionPath) != GlobalRegistry.getGameVersionString() || !doesBDCCpckFileExist()):
 			yield(generateBDCCpckFile(), "completed")
 			rawModList = GlobalRegistry.getRawModList()
 
@@ -228,21 +247,10 @@ func onModEntryClicked(entry):
 	updateSelectedEntry()
 
 func updateSelectedEntry():
-	
 	if(selectedEntry == null):
-		if(OS.get_name() == "Android" && false):
-			if(!foundBDCC):
-				$VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/WarningLabel.bbcode_text = "[color=red]You must provide BDCC.pck file to be able to use mods. It must be from the current version! Download the most recent one [url=https://github.com/Alexofp/BDCC/releases]HERE[/url] and place into the mods folder[/color]"
-				$VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/WarningLabel.visible = true
-				$VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/WithModsButton.disabled = true
-			else:
-				$VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/WarningLabel.bbcode_text = "BDCC.pck file is found. Don't forget to update it when you update the game. Download the most recent one [url=https://github.com/Alexofp/BDCC/releases]HERE[/url]"
-				$VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/WarningLabel.visible = true
-		
 		modDescriptionLabel.bbcode_text = "No mod selected"
 		return
 	modDisableButton.text = "Enable" if(selectedEntry['disabled']) else "Disable"
-
 	
 	var desc:String = ""
 	
@@ -274,6 +282,8 @@ func tryToPopulateFilesList():
 		return ""
 	var zipToLoad = selectedEntry["path"]
 	if(zipToLoad.get_file() == "BDCC.pck"):
+		if(OS.get_name() == "Android"):
+			return "This file is stored internally now and can be safely deleted."
 		return "This file is required for mods to function on Android version. On other platforms this file is Not required and will be disabled automatically"
 	
 	var gdunzip = GDUnzip.new()
@@ -357,10 +367,10 @@ func ensureBDCCIsFirst():
 	for _i in range(currentModOrder.size()):
 		if(currentModOrder[_i]["name"] == "BDCC.pck"):
 			var entry = currentModOrder[_i]
-			if(OS.get_name() != "Android"):
-				entry["disabled"] = true
-			else:
-				entry["disabled"] = false
+			#if(OS.get_name() != "Android"):
+			entry["disabled"] = true
+			#else:
+			#	entry["disabled"] = false
 			
 			currentModOrder.remove(_i)
 			currentModOrder.insert(0, entry)
@@ -395,24 +405,29 @@ func _on_RichTextLabel_meta_clicked(meta):
 func _on_TestButton_pressed():
 	yield(generateBDCCpckFile(), "completed")
 	checkModOrderAndFillData(GlobalRegistry.getRawModList())
-	
+
+func doesBDCCpckFileExist() -> bool:
+	var theF:File = File.new()
+	return theF.file_exists(androidBDCCPCKPath)
+
 func generateBDCCpckFile():
+	building_pck_panel_dark.visible = true
 	building_pck_panel.visible = true
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	var packer = PCKPacker.new()
 	
-	var modsFolder = GlobalRegistry.getModsFolder()
-	
-	packer.pck_start(modsFolder.plus_file("BDCC.pck"))
-	
+	packer.pck_start(androidBDCCPCKPath)
 	
 	fillFolder(packer, "res://")
 	#packer.add_file("res://text.txt", "text.txt")
 	packer.flush()
 	
 	Util.writeFile(pckversionPath, GlobalRegistry.getGameVersionString())
-	building_pck_panel.visible = false
+	#building_pck_panel.visible = false
+	building_pck_panel_dark.visible = false
 
 const ignorePaths = {
 	"res://.git": true,
@@ -430,7 +445,7 @@ func fillFolder(packer, folder):
 			if dir.current_is_dir():
 				var full_path = folder.plus_file(file_name)
 				if(ignorePaths.has(full_path)):
-					print("IGNORED "+full_path)
+					#print("IGNORED "+full_path)
 					file_name = dir.get_next()
 					continue
 				
@@ -635,3 +650,32 @@ func getNodeWithEntry(modEntry={}):
 
 func _on_search_text_changed(_new_text:String):
 	updateModList()
+
+func shouldShowPickModsFolderPanel() -> bool:
+	if(true): # Not needed
+		return false
+	if(OS.get_name() != "Android"):
+		return false
+	
+	var theFile := File.new()
+	if(theFile.file_exists(androidPickedModsFolderPath)):
+		return false
+	return true
+	
+func _on_AndroidLoadDocuments_pressed():
+	setAndroidFolder(OPTIONS.ANDROID_SAVE_FOLDER_DOCUMENTS)
+
+func _on_AndroidLoadData_pressed():
+	setAndroidFolder(OPTIONS.ANDROID_SAVE_FOLDER_GAME_DATA)
+
+func _on_AndroidLoadDownloads_pressed():
+	setAndroidFolder(OPTIONS.ANDROID_SAVE_FOLDER_DOWNLOADS)
+
+func setAndroidFolder(_f:int):
+	OPTIONS.androidSaveFolder = _f
+	android_choose_folder_panel.visible = false
+	var theFile := File.new()
+	theFile.open(androidPickedModsFolderPath, File.WRITE)
+	theFile.store_string("6 7")
+	theFile.close()
+	doStart()

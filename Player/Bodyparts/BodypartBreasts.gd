@@ -185,4 +185,4 @@ func getFluidType(_fluidSource) -> String:
 	return fluidType
 
 func getTransformMorphMessage(_context:Dictionary) -> String:
-	return "{npc.YouHe} {npc.youVerb('feel')} a warmth spreading across {npc.yourHis} chest, and suddenly, {npc.yourHis} breasts begin to swell and reshape, their countours and texture changing. {npc.YouHe} now {npc.youVerb('have', 'has')} "+getAVulgarName()+"."
+	return "{npc.YouHe} {npc.youHeVerb('feel')} a warmth spreading across {npc.yourHis} chest, and suddenly, {npc.yourHis} breasts begin to swell and reshape, their countours and texture changing. {npc.YouHe} now {npc.youHaveHeHas} "+getAVulgarName()+"."

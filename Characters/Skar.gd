@@ -14,9 +14,8 @@ func _init():
 	npcSkinData={
 	"head": {"b": Color("ff222222"),},
 	"hair": {"r": Color("ff232323"),"g": Color("ff141414"),"b": Color("ff505050"),},
-	"ears": {"r": Color("ff5b5b5b"),"g": Color("ff3c3c3c"),"b": Color("ff020202"),},
-	"arms": {"skin": "HumanSkin","r": Color("ff4a4a56"),"g": Color("ffafafaf"),"b": Color("ff506261"),},
-	"breasts": {"r": Color("ff6b6b6b"),},
+	"ears": {"r": Color("ff4a4a4a"),"g": Color("ff3c3c3c"),"b": Color("ff0092ff"),},
+	"arms": {"skin": "GeometricSkin","r": Color("ff4a4a56"),"g": Color("ffafafaf"),"b": Color("ff506261"),},
 	"penis": {"g": Color("ff971616"),"b": Color("ffda0707"),},
 	}
 	

@@ -84,7 +84,7 @@ func _run():
 				"Don't go anywhere, or you'll regret it.",
 			])+"[/say]")
 			
-			saynn("{npc.Name} {npc.verb('turn')} around and {npc.verb('strut')} off.")
+			saynn("{npc.Name} turns around and struts off.")
 
 		# (kind version)
 		if(npcVariation == "kind"):

@@ -888,3 +888,22 @@ static func replaceLettersRandomly(_sentence:String, _chance:float, _newLetters:
 		else:
 			finalString += letter
 	return finalString
+
+const ANDROID_SAVE_PATH := "/sdcard/Android/data/org.rahimew.bdcc/files/"
+#OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
+
+static func getAndroidSaveFolder() -> String:
+	if(OS.get_name() != "Android"):
+		Log.error("Calling getAndroidSaveFolder() when not on android!")
+		return "user://"
+	var theDir := Directory.new()
+	
+	var theFold:String = ANDROID_SAVE_PATH
+	if(OPTIONS.androidSaveFolder == OPTIONS.ANDROID_SAVE_FOLDER_DOCUMENTS):
+		theFold = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
+	if(OPTIONS.androidSaveFolder == OPTIONS.ANDROID_SAVE_FOLDER_DOWNLOADS):
+		theFold = OS.get_system_dir(OS.SYSTEM_DIR_DOWNLOADS)
+	
+	if(!theDir.dir_exists(theFold)):
+		theDir.make_dir_recursive(theFold)
+	return theFold

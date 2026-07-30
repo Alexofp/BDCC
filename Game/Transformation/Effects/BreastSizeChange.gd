@@ -49,7 +49,7 @@ func describeNewSize(origSize:int, size:int, _breastsCovered:bool = false) -> St
 	
 	if(size <= BreastsSize.FLAT):
 		return RNG.pick([
-			"{npc.YourHis} chest is "+nowOrStill+" completely flat, smooth and {npc.masc}. The absence of curves gives {npc.youHim} a sleek, streamlined appearance, emphasizing {npc.yourHis} other features. {npc.YouHe} {npc.youVerb('feel')} a sense of freedom, unencumbered by weight.",
+			"{npc.YourHis} chest is "+nowOrStill+" completely flat, smooth and {npc.masc}. The absence of curves gives {npc.youHim} a sleek, streamlined appearance, emphasizing {npc.yourHis} other features. {npc.YouHe} {npc.youHeVerb('feel')} a sense of freedom, unencumbered by weight.",
 		])
 	if(size <= BreastsSize.A):
 		return RNG.pick([
@@ -117,43 +117,43 @@ func describeNewSize(origSize:int, size:int, _breastsCovered:bool = false) -> St
 func describeBreastTransformation(origSize:int, size:int, breastsCovered:bool = false) -> String:
 	if(origSize == size):
 		return RNG.pick([
-			"There is a slight warm tingle in {npc.yourHis} breasts, a gentle pulse that radiates through {npc.yourHis} chest. As the sensation washes over, {npc.youHe} {npc.youVerb('expect')} something to happen, but nothing about them seems to be changing. The familiar weight remains.",
-			"A soft warmth envelops {npc.yourHis} breasts, and {npc.youHe} {npc.youVerb('sense')} a shift in energy, but the size remains unchanged. The tingling sensation lingers, teasing {npc.youHim} with the possibility of change, yet {npc.yourHis} breasts hold their familiar shape. {npc.YouHe} {npc.youAre} left feeling both relieved and oddly unsatisfied as the moment passes.",
-			"A gentle warmth spreads through {npc.yourHis} chest, and for a moment, {npc.youHe} {npc.youVerb('think')} something might happen. But as the sensation fades, {npc.youHe} {npc.youVerb('realize')} {npc.yourHis} breasts are just as they were. Same size and same volume.",
-			"A soft tingling sensation courses through {npc.yourHis} chest, and {npc.youHe} {npc.youVerb('brace')} for a change. But as the warmth fades, {npc.youHe} {npc.youVerb('realize')} that {npc.yourHis} breasts are still the same, their size and weight unchanged.",
+			"There is a slight warm tingle in {npc.yourHis} breasts, a gentle pulse that radiates through {npc.yourHis} chest. As the sensation washes over, {npc.youHe} {npc.youHeVerb('expect')} something to happen, but nothing about them seems to be changing. The familiar weight remains.",
+			"A soft warmth envelops {npc.yourHis} breasts, and {npc.youHe} {npc.youHeVerb('sense')} a shift in energy, but the size remains unchanged. The tingling sensation lingers, teasing {npc.youHim} with the possibility of change, yet {npc.yourHis} breasts hold their familiar shape. {npc.YouHe} {npc.youAreHeIs} left feeling both relieved and oddly unsatisfied as the moment passes.",
+			"A gentle warmth spreads through {npc.yourHis} chest, and for a moment, {npc.youHe} {npc.youHeVerb('think')} something might happen. But as the sensation fades, {npc.youHe} {npc.youHeVerb('realize')} {npc.yourHis} breasts are just as they were. Same size and same volume.",
+			"A soft tingling sensation courses through {npc.yourHis} chest, and {npc.youHe} {npc.youHeVerb('brace')} for a change. But as the warmth fades, {npc.youHe} {npc.youHeVerb('realize')} that {npc.yourHis} breasts are still the same, their size and weight unchanged.",
 		])
 	var diff:int = size - origSize
 	if(diff == 1):
 		return RNG.pick([
-			"A warm sensation begins to spread through {npc.yourHis} breasts, a gentle pulse that hints at a change. {npc.youHe} {npc.youVerb('feel')} a slight pressure building, and as the warmth intensifies, {npc.youHe} {npc.youVerb('realize')} {npc.yourHis} breasts are swelling just a bit. {npc.yourHis} breasts now look and feel slightly heavier.",
-			"{npc.YouHe} {npc.youVerb('sense')} a soft warmth enveloping {npc.yourHis} chest, and a gentle tingling begins to take hold. As the sensation grows, {npc.youHe} {npc.youVerb('feel')} {npc.yourHis} breasts expanding slightly, the change subtle yet undeniable. The added weight settles in" + (", making {npc.yourHis} clothes feel a little tighter" if breastsCovered else "") + ".",
-			"A gentle warmth radiates through {npc.yourHis} breasts, and {npc.youHe} {npc.youVerb('feel')} a slight tug as they begin to swell. The transformation is gradual, but soon {npc.youHe} {npc.youVerb('realize')} they’ve grown just enough to feel a bit heavier.",
-			"{npc.YouHe} {npc.youVerb('feel')} a warm pulse coursing through {npc.yourHis} chest, and as it intensifies, {npc.yourHis} breasts begin to expand. The change is slight but noticeable, the added weight creating a new sensation that draws {npc.yourHis} attention.",
-			"A soft tingling sensation envelops {npc.yourHis} breasts, and {npc.youHe} {npc.youVerb('brace')} for the change. As the warmth spreads, {npc.youHe} {npc.youVerb('feel')} them swell slightly, the weight becoming more pronounced. {npc.yourHis} breasts are now fuller and more gropable than before.",
+			"A warm sensation begins to spread through {npc.yourHis} breasts, a gentle pulse that hints at a change. {npc.youHe} {npc.youHeVerb('feel')} a slight pressure building, and as the warmth intensifies, {npc.youHe} {npc.youHeVerb('realize')} {npc.yourHis} breasts are swelling just a bit. {npc.yourHis} breasts now look and feel slightly heavier.",
+			"{npc.YouHe} {npc.youHeVerb('sense')} a soft warmth enveloping {npc.yourHis} chest, and a gentle tingling begins to take hold. As the sensation grows, {npc.youHe} {npc.youHeVerb('feel')} {npc.yourHis} breasts expanding slightly, the change subtle yet undeniable. The added weight settles in" + (", making {npc.yourHis} clothes feel a little tighter" if breastsCovered else "") + ".",
+			"A gentle warmth radiates through {npc.yourHis} breasts, and {npc.youHe} {npc.youHeVerb('feel')} a slight tug as they begin to swell. The transformation is gradual, but soon {npc.youHe} {npc.youHeVerb('realize')} they’ve grown just enough to feel a bit heavier.",
+			"{npc.YouHe} {npc.youHeVerb('feel')} a warm pulse coursing through {npc.yourHis} chest, and as it intensifies, {npc.yourHis} breasts begin to expand. The change is slight but noticeable, the added weight creating a new sensation that draws {npc.yourHis} attention.",
+			"A soft tingling sensation envelops {npc.yourHis} breasts, and {npc.youHe} {npc.youHeVerb('brace')} for the change. As the warmth spreads, {npc.youHe} {npc.youHeVerb('feel')} them swell slightly, the weight becoming more pronounced. {npc.yourHis} breasts are now fuller and more gropable than before.",
 		])
 	if(diff > 1):
 		return RNG.pick([
-			"A powerful surge of warmth engulfs {npc.yourHis} breasts, and {npc.youHe} {npc.youVerb('gasp')} as they begin to swell significantly. The sensation is intense, a deep pulsing that pulls at {npc.yourHis} " + ("clothing" if breastsCovered else "bare chest") + " as {npc.yourHis} breasts expand dramatically. The weight settles heavily on {npc.yourHis} chest, creating a new sexy silhouette.",
-			"{npc.YouHe} {npc.youVerb('feel')} an overwhelming warmth radiating through {npc.yourHis} breasts, and the change is immediate and striking. They swell with a force that leaves {npc.youHim} breathless, the weight becoming substantial as they grow larger.",
+			"A powerful surge of warmth engulfs {npc.yourHis} breasts, and {npc.youHe} {npc.youHeVerb('gasp')} as they begin to swell significantly. The sensation is intense, a deep pulsing that pulls at {npc.yourHis} " + ("clothing" if breastsCovered else "bare chest") + " as {npc.yourHis} breasts expand dramatically. The weight settles heavily on {npc.yourHis} chest, creating a new sexy silhouette.",
+			"{npc.YouHe} {npc.youHeVerb('feel')} an overwhelming warmth radiating through {npc.yourHis} breasts, and the change is immediate and striking. They swell with a force that leaves {npc.youHim} breathless, the weight becoming substantial as they grow larger.",
 			"A wave of heat washes over {npc.yourHis} body, and {npc.yourHis} breasts inflate with a powerful surge. The sensation is intoxicating as they grow noticeably larger, the weight shifting {npc.yourHis} balance.",
-			"{npc.YouHe} {npc.youVerb('sense')} a strong tingling as {npc.yourHis} breasts expand, the transformation unfolding rapidly. The weight becomes heavy and full, pulling at {npc.yourHis} " + ("clothing" if breastsCovered else "bare chest") + " and altering {npc.yourHis} posture. The change is significant, requiring {npc.youHim} to adjust to {npc.yourHis} new, much bigger size.",
-			"A deep warmth radiates through {npc.yourHis} chest, and {npc.youHe} {npc.youVerb('feel')} {npc.yourHis} breasts swell to an impressive size. The transformation is overwhelming, the weight settling heavily on {npc.yourHis} frame, leaving a very obvious change.",
+			"{npc.YouHe} {npc.youHeVerb('sense')} a strong tingling as {npc.yourHis} breasts expand, the transformation unfolding rapidly. The weight becomes heavy and full, pulling at {npc.yourHis} " + ("clothing" if breastsCovered else "bare chest") + " and altering {npc.yourHis} posture. The change is significant, requiring {npc.youHim} to adjust to {npc.yourHis} new, much bigger size.",
+			"A deep warmth radiates through {npc.yourHis} chest, and {npc.youHe} {npc.youHeVerb('feel')} {npc.yourHis} breasts swell to an impressive size. The transformation is overwhelming, the weight settling heavily on {npc.yourHis} frame, leaving a very obvious change.",
 		])
 	if(diff == -1):
 		return RNG.pick([
-			"A cool sensation washes over {npc.yourHis} breasts, and {npc.youHe} {npc.youVerb('feel')} a gentle pull as they begin to shrink just a bit. The warmth that enveloped {npc.youHim} moments ago slowly fades, leaving a subtle lightness in its wake. {npc.YouHe} {npc.youVerb('notice')} {npc.yourHis} breasts getting smaller, creating a more streamlined shape.",
-			"{npc.YouHe} {npc.youVerb('sense')} a soft chill enveloping {npc.yourHis} chest, and as the sensation deepens, {npc.yourHis} breasts begin to diminish slightly. The change is subtle, but {npc.youHe} can feel the weight easing, {npc.yourHis} breasts becoming a bit smaller.",
-			"A gentle tingling sensation courses through {npc.yourHis} breasts, and {npc.youHe} {npc.youVerb('brace')} for the change. As the warmth dissipates, {npc.youHe} {npc.youVerb('realize')} they’ve shrunk slightly, the weight reduced enough to notice.",
-			"{npc.YouHe} {npc.youVerb('feel')} a soft pulse in {npc.yourHis} chest, and as it intensifies, {npc.yourHis} breasts begin to shrink, gradually losing their weight and shape.",
-			"A light tingling sensation courses through {npc.yourHis} breasts, and {npc.youHe} {npc.youVerb('sense')} a shift as they become slightly smaller. The familiar weight is reduced, leaving {npc.youHim} with a more delicate shape."
+			"A cool sensation washes over {npc.yourHis} breasts, and {npc.youHe} {npc.youHeVerb('feel')} a gentle pull as they begin to shrink just a bit. The warmth that enveloped {npc.youHim} moments ago slowly fades, leaving a subtle lightness in its wake. {npc.YouHe} {npc.youHeVerb('notice')} {npc.yourHis} breasts getting smaller, creating a more streamlined shape.",
+			"{npc.YouHe} {npc.youHeVerb('sense')} a soft chill enveloping {npc.yourHis} chest, and as the sensation deepens, {npc.yourHis} breasts begin to diminish slightly. The change is subtle, but {npc.youHe} can feel the weight easing, {npc.yourHis} breasts becoming a bit smaller.",
+			"A gentle tingling sensation courses through {npc.yourHis} breasts, and {npc.youHe} {npc.youHeVerb('brace')} for the change. As the warmth dissipates, {npc.youHe} {npc.youHeVerb('realize')} they’ve shrunk slightly, the weight reduced enough to notice.",
+			"{npc.YouHe} {npc.youHeVerb('feel')} a soft pulse in {npc.yourHis} chest, and as it intensifies, {npc.yourHis} breasts begin to shrink, gradually losing their weight and shape.",
+			"A light tingling sensation courses through {npc.yourHis} breasts, and {npc.youHe} {npc.youHeVerb('sense')} a shift as they become slightly smaller. The familiar weight is reduced, leaving {npc.youHim} with a more delicate shape."
 		])
 	if(diff < -1):
 		return RNG.pick([
-			"A sharp coolness spreads through {npc.yourHis} breasts, and {npc.youHe} {npc.youVerb('gasp')} as they shrink significantly. The sensation is jarring, a sudden lightness that leaves {npc.youHim} feeling unbalanced. As the weight vanishes, {npc.youHe} {npc.youAre} left with a strikingly different silhouette, {npc.yourHis} breasts losing a lot of their volume.",
-			"{npc.YouHe} {npc.youVerb('feel')} a wave of chill enveloping {npc.yourHis} chest, and {npc.yourHis} breasts begin to deflate dramatically. The transformation is swift, and {npc.youHe} can’t help but notice how much lighter they look and feel now.",
-			"A deep chill courses through {npc.yourHis} breasts, and {npc.youHe} {npc.youVerb('sense')} a significant reduction in size. The weight that once pulled at {npc.yourHis} " + ("clothing" if breastsCovered else "bare chest") + " is gone, leaving {npc.youHim} feeling almost weightless.",
-			"{npc.YouHe} {npc.youVerb('sense')} a strong tingling as {npc.yourHis} breasts shrink rapidly, the change leaving {npc.youHim} breathless. The volume of {npc.yourHis} breasts goes down a lot, creating a very different appearance.",
-			"A sudden chill washes over {npc.yourHis} chest, and {npc.youHe} {npc.youVerb('feel')} {npc.yourHis} breasts gradually getting smaller and smaller, shrinking to a size that feels almost foreign.",
+			"A sharp coolness spreads through {npc.yourHis} breasts, and {npc.youHe} {npc.youHeVerb('gasp')} as they shrink significantly. The sensation is jarring, a sudden lightness that leaves {npc.youHim} feeling unbalanced. As the weight vanishes, {npc.youHe} {npc.youAreHeIs} left with a strikingly different silhouette, {npc.yourHis} breasts losing a lot of their volume.",
+			"{npc.YouHe} {npc.youHeVerb('feel')} a wave of chill enveloping {npc.yourHis} chest, and {npc.yourHis} breasts begin to deflate dramatically. The transformation is swift, and {npc.youHe} can’t help but notice how much lighter they look and feel now.",
+			"A deep chill courses through {npc.yourHis} breasts, and {npc.youHe} {npc.youHeVerb('sense')} a significant reduction in size. The weight that once pulled at {npc.yourHis} " + ("clothing" if breastsCovered else "bare chest") + " is gone, leaving {npc.youHim} feeling almost weightless.",
+			"{npc.YouHe} {npc.youHeVerb('sense')} a strong tingling as {npc.yourHis} breasts shrink rapidly, the change leaving {npc.youHim} breathless. The volume of {npc.yourHis} breasts goes down a lot, creating a very different appearance.",
+			"A sudden chill washes over {npc.yourHis} chest, and {npc.youHe} {npc.youHeVerb('feel')} {npc.yourHis} breasts gradually getting smaller and smaller, shrinking to a size that feels almost foreign.",
 		])
 	return "something went wrong"
 

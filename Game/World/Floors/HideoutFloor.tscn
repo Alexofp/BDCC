@@ -8,33 +8,45 @@
 [node name="HideoutRoom" parent="." index="0" instance=ExtResource( 1 )]
 roomName = "Hideout"
 roomID = "hideout_enter"
+roomDescription = "This is the exit from your hideout. It looks like a door that is blocked from the other side most of the time, with only a small slit of light getting in."
 roomSprite = 3
 
 [node name="HideoutRoom2" parent="." index="1" instance=ExtResource( 1 )]
 position = Vector2( 0, -64 )
 roomName = "Hideout"
 roomID = "hideout_middle"
+roomDescription = "Central intersection of your hideout. This was previously a maintenance corridor.. but now all the trash has been cleared out. The lighting here flickers occasionally.. but at least it works."
 
 [node name="HideoutRoom3" parent="." index="2" instance=ExtResource( 1 )]
 position = Vector2( 0, -128 )
 roomName = "Hideout"
 roomID = "hideout_chill"
+roomDescription = "You step into the quiet room of the hideout where your team can rest between missions. Against one of the walls, old storage shelves have been stacked and bolted together into makeshift bunk-beds, each one supplied with thin mattress and blankets made out of stiched-together black fabric. In the middle of the room, a few mismatched chairs face a battered TV that someone dragged in from another place and fixed with spare wires and tape. Nothing fancy.. but it's cozy."
 
 [node name="HideoutRoom4" parent="." index="3" instance=ExtResource( 1 )]
 position = Vector2( 64, -64 )
 roomName = "Hideout"
 roomID = "hideout_hq"
+roomDescription = "You step into the main room of your hideout, a mission center. Against one of the walls, there is a table turned on its side and propped up above the floor with a few crates. The table has some scribbles on it from previous planning sessions, done with a marker. Apart from that, there is nothing else special here. Just a few old chairs and crates."
+roomSprite = 4
 
 [node name="HideoutRoom5" parent="." index="4" instance=ExtResource( 1 )]
 position = Vector2( -64, -64 )
 roomName = "Hideout"
+roomID = "hideout_west_corridor"
+roomDescription = "An abandoned maintenance corridor that you and your team have turned into a hideout."
 
 [node name="HideoutRoom6" parent="." index="5" instance=ExtResource( 1 )]
 position = Vector2( -128, -64 )
 roomName = "Hideout"
 roomID = "hideout_near_break_room"
+roomDescription = "An abandoned maintenance corridor that you and your team have turned into a hideout. There is a door here that leads into a room where you usually perform the recruiting process."
 
 [node name="HideoutRoom7" parent="." index="6" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
 position = Vector2( -128, 0 )
 roomName = "Hideout"
 roomID = "hideout_breakroom"
+canNorth = false
+roomColor = 7
+gridColor = 7

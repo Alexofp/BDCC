@@ -461,7 +461,7 @@ func _run():
 
 		saynn("Error: Communications are disabled. Enable them and try again? Yes/No.")
 
-		saynn("Even though the console is one, the comms themselves are still off. Without much thought, you press Yes.")
+		saynn("Even though the console is on, the comms themselves are still off. Without much thought, you press Yes.")
 
 		saynn("A helpful window pops up.. one that says 'bluespace jamming protocols have been temporarily disabled'.")
 

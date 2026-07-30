@@ -425,6 +425,12 @@ func isSlaveToPlayer():
 	var theChar = getChar()
 	return theChar != null && theChar.isSlaveToPlayer()
 
+func isPlayerOwner() -> bool:
+	return GM.main.RS.hasSpecialRelationshipID(getID(), "SoftSlavery")
+
+func hasSpecialRelationshipWithPC() -> bool:
+	return GM.main.RS.hasSpecialRelationship(getID())
+
 func getNpcSlavery() -> NpcSlave:
 	return getChar().getNpcSlavery()
 

@@ -2071,7 +2071,7 @@ func induceLactationScene(_actorID:String, _targetID:String):
 	# Just stimulate breasts
 	if(_hasCumAlready):
 		playAnimation(StageScene.BreastGroping, "grope", {pc=_actorID, npc=_targetID, npcBodyState={naked=true,hard=true}})
-		sayParsed("{actor.You} {actor.youVerb('see')} that {target.yourHis} "+("cunt" if _hasVag else "tailhole")+" is already creamed enough so {actor.youHe} just {actor.youVerb('pull')} {target.youHim} into a tight embrace and {actor.youVerb('begin')} tightly-squeezing {target.yourHis} {target.breasts}, stimulating them!")
+		sayParsed("{actor.You} {actor.youVerb('see')} that {target.yourHis} "+("cunt" if _hasVag else "tailhole")+" is already creamed enough so {actor.youHe} just {actor.youHeVerb('pull')} {target.youHim} into a tight embrace and {actor.youHeVerb('begin')} tightly-squeezing {target.yourHis} {target.breasts}, stimulating them!")
 		talk(_targetID, "Ah..")
 		if(stimulateLactation(_target, lactationTry >= (6 if _canGetPreg else 3))):
 			lactationTry = 0
@@ -2382,7 +2382,7 @@ func milkScene(_actorID:String, _targetID:String):
 		shouldMilkPenis = true
 		addPenisPump(_targetID)
 		var theChains := [["hoseshort", "penisPump", "scene", "milktank"], ["short", "neck", "scene", "bottompipe"]]
-		sayParsed("{actor.You} {actor.youVerb('lock')} {target.you} into the milking stall and {actor.youVerb('fit')} a pump over {target.yourHis} {target.penis}. {actor.YouHe} then just {actor.youVerb('watch', 'watches')} as the pleasure ring strokes and caresses the length, stimulating {target.yourHis} cock until it starts stuffing the pump’s reservoir full!")
+		sayParsed("{actor.You} {actor.youVerb('lock')} {target.you} into the milking stall and {actor.youVerb('fit')} a pump over {target.yourHis} {target.penis}. {actor.YouHe} then just {actor.youHeVerb('watch', 'watches')} as the pleasure ring strokes and caresses the length, stimulating {target.yourHis} cock until it starts stuffing the pump’s reservoir full!")
 		if(_canUsePumps && _canMilkBreasts && addBreastPump(_targetID)):
 			shouldMilkBreasts = true
 			sayParsed("At the same time, two breast-pumps hum away at {target.yourHis} {target.breasts}, pulling out {target.milk}!")
@@ -2399,7 +2399,7 @@ func milkScene(_actorID:String, _targetID:String):
 		shouldMilkBreasts = true
 		addBreastPump(_targetID)
 		var theChains := [["hoseshort", "breastpump", "scene", "milktank"], ["short", "neck", "scene", "bottompipe"]]
-		sayParsed("{actor.You} {actor.youVerb('cuff')} {target.you} to the milking stall and {actor.youVerb('let')} two breast pumps work away at {target.yourHis} {target.breasts}. {actor.YouHe} {actor.youVerb('watch', 'watches')} them hum and steadily fill the milk tank.")
+		sayParsed("{actor.You} {actor.youVerb('cuff')} {target.you} to the milking stall and {actor.youVerb('let')} two breast pumps work away at {target.yourHis} {target.breasts}. {actor.YouHe} {actor.youHeVerb('watch', 'watches')} them hum and steadily fill the milk tank.")
 		if(_canUsePumps && _canMilkPenis && addPenisPump(_targetID)):
 			shouldMilkPenis = true
 			sayParsed("At the same time, a penis pump drains {target.yourHis} balls!")
@@ -2416,7 +2416,7 @@ func milkScene(_actorID:String, _targetID:String):
 	if(milkWay == "fuckmachineseed"):
 		shouldMilkPenis = true
 		playAnimation(StageScene.HangingSexFuckmachine, "fast", {pc=_targetID, pcCum=true, bodyState={naked=true, hard=true}})
-		sayParsed("{actor.You} {actor.youVerb('cuff')} {target.you} by the wrists high above {target.yourHis} head. {actor.YouHe} then {actor.youVerb('bring')} a fuck-machine behind and {actor.youVerb('turn')} it on! Its thick dildo slides into {target.your} ass and starts hammering {target.yourHis} prostate until {target.yourHis} seed begins to trickle down into the collection tank!")
+		sayParsed("{actor.You} {actor.youVerb('cuff')} {target.you} by the wrists high above {target.yourHis} head. {actor.YouHe} then {actor.youHeVerb('bring')} a fuck-machine behind and {actor.youHeVerb('turn')} it on! Its thick dildo slides into {target.your} ass and starts hammering {target.yourHis} prostate until {target.yourHis} seed begins to trickle down into the collection tank!")
 		if(_canUsePumps && _canMilkBreasts && addBreastPump(_targetID)):
 			shouldMilkBreasts = true
 			sayParsed("At the same time, two breast-pumps hum away at {target.yourHis} {target.breasts}, pulling out {target.milk}!")
@@ -2796,7 +2796,7 @@ func eGirlBulliesSlave_state():
 	else:
 		aimCamera(L_COW)
 	
-	sayParsed("{actor.You} {actor.youVerb('approach', 'aproaches')} {target.you}!")
+	sayParsed("{actor.You} {actor.youVerb('approach', 'approaches')} {target.you}!")
 	
 	talk(theOwner, RNG.pick([
 		"Why are you looking at me, you dumb animal? You wanna get punished?",

@@ -13,6 +13,11 @@ const LAYOUT_TOUCH_VERTICAL = 3
 const SCREEN_HORIZONTAL = 0
 const SCREEN_VERTICAL = 1
 
+const ANDROID_SAVE_FOLDER_DOCUMENTS := 0
+const ANDROID_SAVE_FOLDER_GAME_DATA := 1
+const ANDROID_SAVE_FOLDER_DOWNLOADS := 2
+var androidSaveFolder:int = ANDROID_SAVE_FOLDER_DOWNLOADS
+
 var currentSupportsVertical:bool = false
 var currentScreenOrientation:int = SCREEN_HORIZONTAL # not saved
 signal onScreenOrientationChange
@@ -367,6 +372,20 @@ func getChangeableOptions():
 					"type": "checkbox",
 					"value": showModdedLauncher,
 					"tab": TAB_GAME,
+				},
+				{
+					"name": "(Android) Mods folder",
+					"description": "On Android devices, the game will use this folder to search for mods. Exported saves will go into this folder too.",
+					"id": "androidSaveFolder",
+					"type": "list",
+					"value": androidSaveFolder,
+					"values": [
+						[ANDROID_SAVE_FOLDER_DOCUMENTS, "Documents folder"],
+						[ANDROID_SAVE_FOLDER_DOWNLOADS, "Downloads folder"],
+						[ANDROID_SAVE_FOLDER_GAME_DATA, "data/org.rahimew.bdcc/files"],
+					],
+					"tab": TAB_GAME,
+					"hide": (OS.get_name() != "Android"),
 				},
 			],
 		},
@@ -1133,6 +1152,8 @@ func applyOption(categoryID, optionID, value):
 			showModdedLauncher = value
 			if(showModdedLauncher):
 				var _ok = OS.request_permissions()
+		if(optionID == "androidSaveFolder"):
+			androidSaveFolder = value
 	
 	
 	if(categoryID == "pregnancy"):
@@ -1411,6 +1432,7 @@ func saveData():
 		"webTextInputFallback": webTextInputFallback,
 		"fullscreen": fullscreen,
 		"profilerEnabled": profilerEnabled,
+		"androidSaveFolder": androidSaveFolder,
 	}
 	
 	return data
@@ -1477,6 +1499,7 @@ func loadData(data):
 	webTextInputFallback = loadVar(data, "webTextInputFallback", false)
 	fullscreen = loadVar(data, "fullscreen", false)
 	profilerEnabled = loadVar(data, "profilerEnabled", false)
+	androidSaveFolder = loadVar(data, "androidSaveFolder", ANDROID_SAVE_FOLDER_DOCUMENTS if data.has("showModdedLauncher") else ANDROID_SAVE_FOLDER_DOWNLOADS)
 
 func saveToFile():
 	var saveData = saveData()

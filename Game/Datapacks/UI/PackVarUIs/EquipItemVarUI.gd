@@ -67,9 +67,9 @@ func updateValues():
 	for itemID in allItems:
 		var theItem:ItemBase = allItems[itemID]
 		
-		var invSlot = theItem.getClothingSlot()
+		var invSlot:String = theItem.getClothingSlotSafe()
 		
-		if(invSlot != null && invSlot == inventorySlot):
+		if(!invSlot.empty() && invSlot == inventorySlot):
 			values.append(itemID)
 			#$HBoxContainer/OptionButton.add_item(itemID)
 			

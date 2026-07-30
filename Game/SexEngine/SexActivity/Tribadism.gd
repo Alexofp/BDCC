@@ -71,7 +71,7 @@ func grinding_processTurn():
 	if(isCloseToCumming(DOM_0) && isCloseToCumming(SUB_0)):
 		addTextPick([
 			"Both lovers "+RNG.pick(["moan lustfully", "moan", "shiver slightly"])+" as they get closer to their orgasms!",
-			"{dom.You} {dom.youVerb('see')} that {sub.youHe} {sub.youAre} close and so {dom.youAre} {dom.youHe}.",
+			"{dom.You} {dom.youVerb('see')} that {sub.youHe} {sub.youAreHeIs} close and so {dom.youAreHeIs} {dom.youHe}.",
 			"Both "+RNG.pick(["pussies", "kitties", "pussy slits"])+" drip quite a bit of arousal.",
 			"Both lovers gonna cum soon!",
 		])

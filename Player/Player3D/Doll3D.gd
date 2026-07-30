@@ -1,16 +1,28 @@
 extends Spatial
 class_name Doll3D
 
-var state = {}
-var parts = {}
-var dollAttachmentZones = {}
-var hiddenPartZones = {}
-var hiddenAttachmentZones = {}
-var overridenPartHidden = {}
+onready var doll_skeleton = $"%DollSkeleton"
+onready var bone_attachments = $"%BoneAttachments"
+onready var doll_attachment_zones = $"%DollAttachmentZones"
+
+# Used to fake-hide the doll
+onready var hideNodes:Array = [
+	doll_skeleton,
+	bone_attachments,
+	doll_attachment_zones,
+]
+var isFakeHidden:bool = false
+
+var state:Dictionary = {}
+var parts:Dictionary = {}
+var dollAttachmentZones:Dictionary = {}
+var hiddenPartZones:Dictionary = {}
+var hiddenAttachmentZones:Dictionary = {}
+var overridenPartHidden:Dictionary = {}
 var savedCharacterID
-var temporaryState = {}
-var exposedBodyparts = []
-var skinData = {}
+var temporaryState:Dictionary = {}
+var exposedBodyparts:Array = []
+var skinData:Dictionary = {}
 var writingsData:Dictionary = {
 #	BodyWritingsZone.ThighLeft: [
 #		["Fuck me", false],
@@ -749,14 +761,15 @@ func applyBodyState(bodystate):
 	if(bodystate == null):
 		bodystate = {}
 	
-	var shouldForceShowPenis = bodystate.has("showPenis") && bodystate["showPenis"]
-	var shouldExposeChest = bodystate.has("exposedChest") && bodystate["exposedChest"]
-	var shouldExposeCrotch = bodystate.has("exposedCrotch") && bodystate["exposedCrotch"]
-	var shouldBeNaked = bodystate.has("naked") && bodystate["naked"]
-	var shouldShowUnderwear = bodystate.has("underwear") && bodystate["underwear"]
-	var shouldBeHard = bodystate.has("hard") && bodystate["hard"]
-	var shouldBeCaged = bodystate.has("caged") && bodystate["caged"]
-	var shouldBeCondom = bodystate.has("condom") && bodystate["condom"]
+	var shouldForceShowPenis:bool = bodystate.has("showPenis") && bodystate["showPenis"]
+	var shouldExposeChest:bool = bodystate.has("exposedChest") && bodystate["exposedChest"]
+	var shouldExposeCrotch:bool = bodystate.has("exposedCrotch") && bodystate["exposedCrotch"]
+	var shouldBeNaked:bool = bodystate.has("naked") && bodystate["naked"]
+	var shouldShowUnderwear:bool = bodystate.has("underwear") && bodystate["underwear"]
+	var shouldBeHard:bool = bodystate.has("hard") && bodystate["hard"]
+	var shouldBeCaged:bool = bodystate.has("caged") && bodystate["caged"]
+	var shouldBeCondom:bool = bodystate.has("condom") && bodystate["condom"]
+	var shouldBeHiddenCompletely:bool = bodystate.has("hide") && bodystate["hide"]
 	#var shouldLookLeft = bodystate.has("lookLeft") && bodystate["lookLeft"]
 	
 	var exposeBodyparts = []
@@ -798,7 +811,18 @@ func applyBodyState(bodystate):
 	if(shouldForceShowPenis):
 		forceSlotToBeVisible(BodypartSlot.Penis)
 	
-	var newChains = []
+	if(shouldBeHiddenCompletely): # A bit hacky but this way we don't care about our main node visibility
+		if(!isFakeHidden):
+			for theNode in hideNodes:
+				theNode.visible = false
+			isFakeHidden = true
+	else:
+		if(isFakeHidden):
+			for theNode in hideNodes:
+				theNode.visible = true
+			isFakeHidden = false
+	
+	var newChains := []
 	if(bodystate.has("chains")):
 		newChains = bodystate["chains"]
 	if(bodystate.has("leashedBy") && bodystate["leashedBy"] != null && bodystate["leashedBy"] != ""):

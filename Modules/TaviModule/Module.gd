@@ -6,6 +6,7 @@ func getFlags():
 		# Tavi module
 		"Tavi_IntroducedTo": flag(FlagType.Bool),
 		"Tavi_IsAngryAtPlayer": flag(FlagType.Bool),
+		"Tavi_RefusedToSubmit": flag(FlagType.Bool),
 		"Tavi_ToldHowToEscape": flag(FlagType.Bool),
 		"Tavi_NeedsApple": flag(FlagType.Bool),
 		"Tavi_GotApple": flag(FlagType.Bool),
@@ -466,3 +467,9 @@ func addCorruption(howMuch, showMessage = true):
 			GM.main.addMessage("Tavi's corruption has increased to "+str(Util.roundF(currentCorruption * 100.0, 1))+"%")
 		elif(diff < 0.0):
 			GM.main.addMessage("Tavi's corruption has decreased to "+str(Util.roundF(currentCorruption * 100.0, 1))+"%")
+
+func resetMainRoute():
+	resetAllFlagsWithExceptions({
+		
+	})
+	GlobalRegistry.getCharacter("tavi").updateAppearance()

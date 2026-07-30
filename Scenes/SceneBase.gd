@@ -184,6 +184,9 @@ func setCharactersEasyList(newChars:Array):
 		if(!currentCharactersVariants.has(charID)):
 			addCharacter(charID)
 
+func setCharacters(_newChars:Array):
+	setCharactersEasyList(_newChars)
+
 func _onSceneEnd():
 	pass
 
@@ -198,7 +201,7 @@ func runScene(id: String, args = [], tag = ""):
 	return scene
 
 func react_scene_end(_tag, _result):
-	print(name+": My parent scene has ended")
+	#print(name+": My parent scene has ended")
 	#updateCharacter()
 	_react_scene_end(_tag, _result)
 	#checkSceneEnded()

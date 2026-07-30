@@ -488,10 +488,10 @@ func loadData(data):
 		if(loadedBodyparts[slot] == null):
 			bodyparts[slot] = null
 			continue
-		var id = SAVE.loadVar(loadedBodyparts[slot], "id", "errorbad")
-		var bodypart = GlobalRegistry.createBodypart(id)
+		var partID = SAVE.loadVar(loadedBodyparts[slot], "id", "errorbad")
+		var bodypart = GlobalRegistry.createBodypart(partID)
 		if(bodypart == null):
-			var replacementID = BodypartSlot.findReplacement(slot, id, getSpecies(), getGender())
+			var replacementID = BodypartSlot.findReplacement(slot, partID, getSpecies(), getGender())
 			if(replacementID == null || replacementID == ""):
 				Log.printerr("Couldn't find an replacement bodypart for slot "+str(slot))
 				continue

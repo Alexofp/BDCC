@@ -32,3 +32,14 @@ static func getDefaultValue(theType):
 		return null
 	
 	return null
+
+static func toFlagType(theType:String) -> int:
+	if(theType == BOOL):
+		return FlagType.Bool
+	if(theType == NUMBER):
+		return FlagType.Number
+	if(theType == STRING):
+		return FlagType.Text
+	if(theType == ANY):
+		return FlagType.Anything
+	return FlagType.Anything

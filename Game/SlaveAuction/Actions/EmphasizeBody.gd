@@ -22,7 +22,7 @@ func onAct(_char:BaseCharacter, _auction, _slaveTraits:Dictionary):
 	
 	if(isFemi):
 		if(isSlim):
-			saynn("{presenter.You} {presenter.youVerb('step')} closer to {slave.name}, running {presenter.yourHis} hands down {slave.hisHer} delicate, slender figure. With a firm grip, {presenter.youHe} {presenter.youVerb('pull')} {slave.himHer} forward slightly, giving the bidders a better view of the feminine beauty before them.")
+			saynn("{presenter.You} {presenter.youVerb('step')} closer to {slave.name}, running {presenter.yourHis} hands down {slave.hisHer} delicate, slender figure. With a firm grip, {presenter.youHe} {presenter.youHeVerb('pull')} {slave.himHer} forward slightly, giving the bidders a better view of the feminine beauty before them.")
 			
 			sayPresenter("Look at this slender beauty.. graceful, refined, and perfectly feminine. A body built for elegance and obedience.")
 		if(isAver):
@@ -35,11 +35,11 @@ func onAct(_char:BaseCharacter, _auction, _slaveTraits:Dictionary):
 			sayPresenter("This one’s body is just impossible to resist.. voluptuous and undeniably feminine. All the softness you could ever want.")
 	if(isAndr):
 		if(isSlim):
-			saynn("{presenter.You} {presenter.youVerb('step')} up to {slave.name}, {presenter.yourHis} hands tracing along the slim, androgynous lines of {slave.hisHer} body. {presenter.YouHe} {presenter.youVerb('let')} the light of the projector play on that fit body.. highlighting the curves.")
+			saynn("{presenter.You} {presenter.youVerb('step')} up to {slave.name}, {presenter.yourHis} hands tracing along the slim, androgynous lines of {slave.hisHer} body. {presenter.YouHe} {presenter.youHeVerb('let')} the light of the projector play on that fit body.. highlighting the curves.")
 			
 			sayPresenter("This is something truly unique - a slender body that walks the line between feminine and masculine, appealing to those with an eye for both.")
 		if(isAver):
-			saynn("Standing close to {slave.name}, {presenter.you} {presenter.youVerb('let')} your hands glide along {slave.hisHer} neutral, balanced frame. {slave.HisHer} body is neither overly feminine nor masculine, with proportions that offer a harmonious middle ground.. so {presenter.youHe} {presenter.youVerb('make')} sure to highlight that.")
+			saynn("Standing close to {slave.name}, {presenter.you} {presenter.youVerb('let')} your hands glide along {slave.hisHer} neutral, balanced frame. {slave.HisHer} body is neither overly feminine nor masculine, with proportions that offer a harmonious middle ground.. so {presenter.youHe} {presenter.youHeVerb('make')} sure to highlight that.")
 			
 			sayPresenter("A perfect body.. neither too soft nor too firm. This body will adapt to any role, ready to serve however you see fit.")
 		if(isThic):
@@ -145,16 +145,16 @@ func getSlaveReaction(_char:BaseCharacter, _reactionType) -> String:
 		return RNG.pick([
 			"{slave.name} squirms in place, confusion and panic evident in {slave.hisHer} wide eyes as {presenter.you} {presenter.youVerb('display')} {slave.hisHer} body to the bidders. {slave.HeShe} tugs at {slave.hisHer} restraints, but to no avail.",
 			"{slave.name}'s breath quickens, desperation in {slave.hisHer} eyes as {presenter.you} {presenter.youVerb('emphasize')} {slave.hisHer} form. {slave.HeShe} looks around frantically, clearly not understanding what’s happening.",
-			"{slave.name} glances at {presenter.you} in confusion, breathing heavily as {presenter.youHe} {presenter.youVerb('show')} off {slave.hisHer} body. Desperation flickers in {slave.hisHer} eyes, unsure of what to expect.",
+			"{slave.name} glances at {presenter.you} in confusion, breathing heavily as {presenter.youHe} {presenter.youHeVerb('show')} off {slave.hisHer} body. Desperation flickers in {slave.hisHer} eyes, unsure of what to expect.",
 			"{slave.name} shifts uneasily, pulling at {slave.hisHer} chains as {presenter.you} {presenter.youVerb('handle')} {slave.hisHer} body. {slave.HeShe} seems lost and desperate, confused by the attention.",
 			"{slave.name} trembles as {presenter.you} {presenter.youVerb('run')} {presenter.your} hands over {slave.hisHer} form, fear and confusion mixing with the desperation in {slave.hisHer} expression.",
 			"{slave.name} stares at the crowd, {slave.hisHer} chest rising and falling rapidly as {presenter.you} {presenter.youVerb('display')} {slave.hisHer} body, clearly overwhelmed by confusion and panic.",
 		])
 	if(_reactionType == AuctionSlaveReaction.Angry):
 		return RNG.pick([
-			"{slave.name} glares at {presenter.you} with fury in {slave.hisHer} eyes as {presenter.youHe} {presenter.youVerb('run')} {presenter.yourHis} hands over {slave.hisHer} form. {slave.HeShe} pulls against {slave.hisHer} restraints, clearly hating every second of it.",
+			"{slave.name} glares at {presenter.you} with fury in {slave.hisHer} eyes as {presenter.youHe} {presenter.youHeVerb('run')} {presenter.yourHis} hands over {slave.hisHer} form. {slave.HeShe} pulls against {slave.hisHer} restraints, clearly hating every second of it.",
 			"{slave.name} bares {slave.hisHer} teeth, a growl escaping as {presenter.you} {presenter.youVerb('emphasize')} {slave.hisHer} body. {slave.HeShe} fights against the chains, anger radiating from {slave.himHer}.",
-			"{slave.name} sneers at the bidders, trying to pull away from {presenter.your} touch as {presenter.youHe} {presenter.youVerb('present')} {slave.hisHer} body. Every movement is filled with defiance and rage.",
+			"{slave.name} sneers at the bidders, trying to pull away from {presenter.your} touch as {presenter.youHe} {presenter.youHeVerb('present')} {slave.hisHer} body. Every movement is filled with defiance and rage.",
 			"{slave.name} tugs violently at the restraints, eyes blazing with anger as {presenter.you} {presenter.youVerb('handle')} {slave.hisHer} body. {slave.HeShe} refuses to be passive, fighting every touch.",
 			"{slave.name} growls, hatred burning in {slave.hisHer} gaze as {presenter.you} {presenter.youVerb('display')} {slave.hisHer} body. {slave.HeShe} is clearly not broken, determined to resist even now.",
 			"{slave.name} spits on the floor, fury in {slave.hisHer} eyes as {presenter.you} {presenter.youVerb('emphasize')} {slave.hisHer} form. {slave.HeShe} pulls at the chains, refusing to submit.",

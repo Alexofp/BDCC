@@ -11,7 +11,7 @@ func getVisibleDescription():
 	return "You discovered where the config menu button is hidden on hypnotic visors."
 
 func getMoreDescription():
-	return 	"You can program hypnotic visors to suppress one of your hypnotic drawbacks."+"\n\n"+\
+	return 	"You can program hypnotic visors to suppress your hypnotic drawbacks."+"\n\n"+\
 			"When forcing an opponent to wear a hypnotic visor, their hypnosis level will immediately rise to 50% if it is lower."
 
 func getSkillTier():

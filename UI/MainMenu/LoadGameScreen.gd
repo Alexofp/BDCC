@@ -7,8 +7,12 @@ var inDeleteMode = false
 var currentExportedPath = ""
 signal in_focus
 
+var selectedFilePathForExport:String = ""
+
 func _ready():
 	updateSaves()
+	export_text_panel_container.visible = false
+	import_save_panel_container.visible = false
 	
 	if(OS.get_name() == "Android"):
 		$VBoxContainer/GridContainer/SavesButton.visible = false
@@ -53,7 +57,21 @@ func _on_DeleteButton_pressed():
 	inDeleteMode = !inDeleteMode
 	updateSaves()
 
+func onExport2ButtonClicked(_savePath:String):
+	var theText:String = Util.readFile(_savePath)
+	if(theText.empty()):
+		return
+	var theBytes := theText.to_utf8().compress(File.COMPRESSION_DEFLATE)
+	print("BYTES AMOUNT: "+str(theBytes.size()))
+	#export_save_as_text_text_edit.text = Marshalls.raw_to_base64(theBytes)
+	export_text_panel_container.visible = true
+
 func onExportButtonClicked(savePath: String):
+	selectedFilePathForExport = savePath
+	export_text_panel_container.visible = true
+
+func onExportButtonClickedActually():
+	var savePath:String = selectedFilePathForExport
 	print("EXPORT: "+savePath)
 	if(OS.get_name() == "HTML5"):
 		var save_game = File.new()
@@ -82,7 +100,7 @@ func onExportButtonClicked(savePath: String):
 #				has_permissions = true
 		
 		var d = Directory.new()
-		var externalDir:String = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
+		var externalDir:String = Util.getAndroidSaveFolder()#OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
 		var finalDir = externalDir.plus_file("BDCCSaves/")
 		d.make_dir_recursive(finalDir)
 		var finalPath = finalDir.plus_file(savePath.get_file())
@@ -170,6 +188,10 @@ func readSaveFileHTML5():
 
 
 func _on_ImportButton_pressed():
+	import_save_panel_container.visible = true
+	import_label.text = "Save import"
+
+func doActuallyImportFromFile():
 	if OS.get_name() == "HTML5":
 		var saveDataAndFileName = yield(readSaveFileHTML5(), "completed")
 		if(saveDataAndFileName == null || saveDataAndFileName.size() != 2):
@@ -193,7 +215,7 @@ func _on_ImportButton_pressed():
 #					has_permissions = true
 		
 			var d = Directory.new()
-			var externalDir:String = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
+			var externalDir:String = Util.getAndroidSaveFolder()#OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
 			var finalDir = externalDir.plus_file("BDCCSaves")
 			d.make_dir_recursive(finalDir)
 			$ImportSaveDialog.current_dir = finalDir
@@ -208,3 +230,53 @@ func _on_ImportSaveDialog_file_selected(path: String):
 
 func _on_SavesButton_pressed():
 	var _ok = Util.fixed_shell_open(ProjectSettings.globalize_path("user://saves/"))
+
+onready var export_text_panel_container = $"%ExportTextPanelContainer"
+onready var import_save_panel_container = $"%ImportSavePanelContainer"
+onready var import_label = $"%ImportLabel"
+
+
+func _on_DoCloseExportTextButton_pressed():
+	export_text_panel_container.visible = false
+
+func _on_DoExportAsFileButton_pressed():
+	export_text_panel_container.visible = false
+	onExportButtonClickedActually()
+
+func _on_DoExportToClipboardButton_pressed():
+	export_text_panel_container.visible = false
+	var theText:String = Util.readFile(selectedFilePathForExport)
+	if(theText.empty()):
+		return
+	var theBytes := theText.to_utf8().compress(File.COMPRESSION_DEFLATE)
+	#print("BYTES AMOUNT: "+str(theBytes.size()))
+	#export_save_as_text_text_edit.text = Marshalls.raw_to_base64(theBytes)
+	#export_text_panel_container.visible = true
+	OS.clipboard = selectedFilePathForExport.get_file().get_basename()+ "|" + Marshalls.raw_to_base64(theBytes)
+
+
+func _on_DoImportFromFileButton_pressed():
+	import_save_panel_container.visible = false
+	doActuallyImportFromFile()
+
+func _on_DoImportFromClipboardButton_pressed():
+	var theText:String = OS.clipboard
+	if(theText.empty()):
+		import_label.text = "Clipboard is empty"
+		return
+	var theStuff:Array = Util.splitOnFirst(theText, "|")
+	if(theStuff.size() <= 1):
+		import_label.text = "Clipboard doesn't have a save"
+		return
+	var theFileName:String = theStuff[0]
+	var theSaveText:String = Marshalls.base64_to_raw(theStuff[1]).decompress_dynamic(-1, File.COMPRESSION_DEFLATE).get_string_from_utf8()
+	if(theSaveText.empty()):
+		import_label.text = "Clipboard has a corrupted/bad save"
+		return
+	#print(Marshalls.base64_to_raw(theStuff[1]).decompress(File.COMPRESSION_DEFLATE))
+	SAVE.saveGameFromText(theFileName, theSaveText)
+	updateSaves()
+	import_save_panel_container.visible = false
+
+func _on_DoCloseImportTextButton_pressed():
+	import_save_panel_container.visible = false

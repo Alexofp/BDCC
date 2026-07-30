@@ -217,7 +217,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			possible.append_array([
 				"Slick tip of a tentacle swell inside {sub.your} "+RNG.pick(fuckHoleNames)+", then begin to pulse, pumping thick {dom.cum} deep into {sub.yourHis} belly"+(", [b]fertilizing the eggs[/b]" if hasEggs else "")+"!",
 				"The slick tip lodged inside {sub.your} "+RNG.pick(fuckHoleNames)+" swells to a fat knot, then pulses hard. A thick, hot load of {dom.cum} begins to get pumped deep into {sub.yourHis} belly"+(", [b]fertilizing the eggs inside[/b]" if hasEggs else "")+".",
-				"The tentacle rams in deep and swells. Thick, gooey {dom.cum} erupts from the tip in a hot wave. Another thick load follows fast, pumping deep into {sub.your} "+RNG.pick(fuckHoleNames)+". The tentacles keep stuffing {sub.youHim} until {sub.youHe} {sub.youAre} full"+(", [b]fertilizing the eggs inside {sub.yourHis} belly[/b]" if hasEggs else "")+".",
+				"The tentacle rams in deep and swells. Thick, gooey {dom.cum} erupts from the tip in a hot wave. Another thick load follows fast, pumping deep into {sub.your} "+RNG.pick(fuckHoleNames)+". The tentacles keep stuffing {sub.youHim} until {sub.youHe} {sub.youAreHeIs} full"+(", [b]fertilizing the eggs inside {sub.yourHis} belly[/b]" if hasEggs else "")+".",
 			])
 			
 			addTextPick(possible)

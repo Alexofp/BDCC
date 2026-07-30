@@ -1,16 +1,19 @@
 extends Node
 
+const DEBUG_TRANSLATION := false # Set to true to get debug text printed into the console
+
 signal translator_recreated
 
-var targetLanguage = "de"
-var shouldBeTranslating = false
-var manualTranslateButton = false
-var shouldTranslateButtons = true
+var targetLanguage:String = "de"
+var shouldBeTranslating:bool = false
+var manualTranslateButton:bool = false
+var shouldTranslateButtons:bool = true
+var shouldKeepBBTags:bool = true
 
-var translators = []
-var translatorIDS = ["google", "bing", "papago", "googlebatch"]
+var translators:Array = []
+var translatorIDS:Array = ["google", "googlebatch", "bing", "papago"]
 
-var hadToUseFallback = false
+var hadToUseFallback:bool = false
 
 func _ready():
 	loadFromFile()
@@ -97,7 +100,12 @@ func shouldHaveManualTranslateButton():
 func setManualTransalteButton(newb):
 	manualTranslateButton = newb
 
-func translate(inputText):
+func translate(inputText:String):
+	if(DEBUG_TRANSLATION):
+		print(" == SENT TO TRANSLATOR ==")
+		print(inputText)
+		print(" == END ==")
+	
 	hadToUseFallback = false
 	if(!shouldBeTranslating || translators.size() == 0):
 		return inputText
@@ -119,6 +127,8 @@ func translate(inputText):
 			if(theResult is GDScriptFunctionState):
 				theResult = yield(theResult, "completed")
 			if(theResult == null || !(theResult is Dictionary) || !(theResult.has("success")) || !theResult["success"]):
+				if(DEBUG_TRANSLATION):
+					printerr(translator.id+" RETURNED BAD RESULT: "+str(theResult))
 				continue
 			if(translator.id == "googlebatch"):
 				hadToUseFallback = true
@@ -143,6 +153,16 @@ func translate(inputText):
 	
 	for translator in usedTranslators:
 		translator.afterTranslate()
+		
+	if(DEBUG_TRANSLATION):
+		print(" == USED TRANSLATORS ==")
+		for translator in usedTranslators:
+			print(translator.id)
+		print(" == RECEIVED ==")
+		for theLine in theResultedArray:
+			print(theLine)
+		print(" == END ==")
+		
 	return join(theResultedArray, "\n")
 
 func splitBySize(inputText:String, maxSize):
@@ -192,7 +212,8 @@ func saveData():
 		"shouldBeTranslating": shouldBeTranslating,
 		"manualTranslateButton": manualTranslateButton,
 		"shouldTranslateButtons": shouldTranslateButtons,
-		"translatorIDS": translatorIDS
+		"translatorIDS": translatorIDS,
+		"shouldKeepBBTags": shouldKeepBBTags,
 	}
 
 func loadData(data):
@@ -200,6 +221,7 @@ func loadData(data):
 	shouldBeTranslating = SAVE.loadVar(data, "shouldBeTranslating", false)
 	manualTranslateButton = SAVE.loadVar(data, "manualTranslateButton", false)
 	shouldTranslateButtons = SAVE.loadVar(data, "shouldTranslateButtons", true)
+	shouldKeepBBTags = SAVE.loadVar(data, "shouldKeepBBTags", true)
 	
 	var loadedTranslatorIDS:Array = SAVE.loadVar(data, "translatorIDS", [])
 	var defaultList:Array = translatorIDS.duplicate()

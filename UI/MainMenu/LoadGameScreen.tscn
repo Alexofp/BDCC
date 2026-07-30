@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
 [ext_resource path="res://UI/MainMenu/SaveGameElement.tscn" type="PackedScene" id=2]
 [ext_resource path="res://UI/MainMenu/LoadGameScreen.gd" type="Script" id=3]
 [ext_resource path="res://Game/UI/Buttons/BetterButton.tscn" type="PackedScene" id=4]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0, 0, 0.301961 )
 
 [node name="LoadGameScreen" type="Control"]
 anchor_right = 1.0
@@ -149,6 +152,108 @@ margin_bottom = 59.5
 window_title = "Save exported"
 dialog_text = "Your save was exported to:"
 
+[node name="ExportTextPanelContainer" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 1 )
+
+[node name="Control" type="Control" parent="ExportTextPanelContainer"]
+margin_right = 1280.0
+margin_bottom = 720.0
+
+[node name="PanelContainer" type="PanelContainer" parent="ExportTextPanelContainer/Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -169.0
+margin_top = -62.0
+margin_right = 169.0
+margin_bottom = 62.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ExportTextPanelContainer/Control/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 331.0
+margin_bottom = 117.0
+
+[node name="Label" type="Label" parent="ExportTextPanelContainer/Control/PanelContainer/VBoxContainer"]
+margin_right = 324.0
+margin_bottom = 20.0
+text = "Save export"
+align = 1
+
+[node name="DoExportAsFileButton" type="Button" parent="ExportTextPanelContainer/Control/PanelContainer/VBoxContainer"]
+margin_top = 24.0
+margin_right = 324.0
+margin_bottom = 50.0
+text = "Export as file"
+
+[node name="DoExportToClipboardButton" type="Button" parent="ExportTextPanelContainer/Control/PanelContainer/VBoxContainer"]
+margin_top = 54.0
+margin_right = 324.0
+margin_bottom = 80.0
+text = "Export to clipboard"
+
+[node name="DoCloseExportTextButton" type="Button" parent="ExportTextPanelContainer/Control/PanelContainer/VBoxContainer"]
+margin_top = 84.0
+margin_right = 324.0
+margin_bottom = 110.0
+text = "Cancel"
+
+[node name="ImportSavePanelContainer" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 1 )
+
+[node name="Control" type="Control" parent="ImportSavePanelContainer"]
+margin_right = 1280.0
+margin_bottom = 720.0
+
+[node name="PanelContainer" type="PanelContainer" parent="ImportSavePanelContainer/Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -169.0
+margin_top = -62.0
+margin_right = 169.0
+margin_bottom = 62.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ImportSavePanelContainer/Control/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 331.0
+margin_bottom = 117.0
+
+[node name="ImportLabel" type="Label" parent="ImportSavePanelContainer/Control/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_right = 324.0
+margin_bottom = 20.0
+text = "Save import"
+align = 1
+
+[node name="DoImportFromFileButton" type="Button" parent="ImportSavePanelContainer/Control/PanelContainer/VBoxContainer"]
+margin_top = 24.0
+margin_right = 324.0
+margin_bottom = 50.0
+text = "Import from file"
+
+[node name="DoImportFromClipboardButton" type="Button" parent="ImportSavePanelContainer/Control/PanelContainer/VBoxContainer"]
+margin_top = 54.0
+margin_right = 324.0
+margin_bottom = 80.0
+text = "Import from clipboard"
+
+[node name="DoCloseImportTextButton" type="Button" parent="ImportSavePanelContainer/Control/PanelContainer/VBoxContainer"]
+margin_top = 84.0
+margin_right = 324.0
+margin_bottom = 110.0
+text = "Cancel"
+
 [connection signal="visibility_changed" from="." to="." method="_on_LoadGameScreen_visibility_changed"]
 [connection signal="pressedActually" from="VBoxContainer/GridContainer/CloseButton" to="." method="_on_CloseButton_pressed"]
 [connection signal="pressedActually" from="VBoxContainer/GridContainer/DeleteButton" to="." method="_on_DeleteButton_pressed"]
@@ -156,3 +261,9 @@ dialog_text = "Your save was exported to:"
 [connection signal="pressedActually" from="VBoxContainer/GridContainer/SavesButton" to="." method="_on_SavesButton_pressed"]
 [connection signal="file_selected" from="ExportSaveDialog" to="." method="_on_ExportSaveDialog_file_selected"]
 [connection signal="file_selected" from="ImportSaveDialog" to="." method="_on_ImportSaveDialog_file_selected"]
+[connection signal="pressed" from="ExportTextPanelContainer/Control/PanelContainer/VBoxContainer/DoExportAsFileButton" to="." method="_on_DoExportAsFileButton_pressed"]
+[connection signal="pressed" from="ExportTextPanelContainer/Control/PanelContainer/VBoxContainer/DoExportToClipboardButton" to="." method="_on_DoExportToClipboardButton_pressed"]
+[connection signal="pressed" from="ExportTextPanelContainer/Control/PanelContainer/VBoxContainer/DoCloseExportTextButton" to="." method="_on_DoCloseExportTextButton_pressed"]
+[connection signal="pressed" from="ImportSavePanelContainer/Control/PanelContainer/VBoxContainer/DoImportFromFileButton" to="." method="_on_DoImportFromFileButton_pressed"]
+[connection signal="pressed" from="ImportSavePanelContainer/Control/PanelContainer/VBoxContainer/DoImportFromClipboardButton" to="." method="_on_DoImportFromClipboardButton_pressed"]
+[connection signal="pressed" from="ImportSavePanelContainer/Control/PanelContainer/VBoxContainer/DoCloseImportTextButton" to="." method="_on_DoCloseImportTextButton_pressed"]

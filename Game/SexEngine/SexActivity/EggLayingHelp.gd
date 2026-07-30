@@ -150,7 +150,7 @@ func doAction(_indx:int, _actionID:String, _action:Dictionary):
 		addTextPick([
 			"{dom.You} {dom.youVerb('support')} {sub.you} as a "+anEgg.getName()+" slides out of {sub.yourHis} "+getNameHole(SUB_0, anEgg.getBodypart())+", landing softly onto the floor below.",
 			"{dom.You} {dom.youVerb('help')} {sub.you}. The "+anEgg.getName()+" emerges slowly, {sub.yourHis} "+getNameHole(SUB_0, anEgg.getBodypart())+" stretching around it before releasing it with a wet pop.",
-			"{dom.You} {dom.youVerb('hold')} {sub.you} as {sub.youHe} {sub.youVerb('strain')} {sub.yourHis} "+getNameHole(SUB_0, anEgg.getBodypart())+" muscles. A soft grunt escapes {sub.youHim} as the "+anEgg.getName()+" finally comes out, dropping with a quiet plop.",
+			"{dom.You} {dom.youVerb('hold')} {sub.you} as {sub.youHe} {sub.youHeVerb('strain')} {sub.yourHis} "+getNameHole(SUB_0, anEgg.getBodypart())+" muscles. A soft grunt escapes {sub.youHim} as the "+anEgg.getName()+" finally comes out, dropping with a quiet plop.",
 		])
 		moan(SUB_0)
 		

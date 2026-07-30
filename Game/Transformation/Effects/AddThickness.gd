@@ -53,7 +53,7 @@ func generateTransformText(_result:Dictionary):
 				" {npc.yourHis} butt is becoming more full and round.",
 				" It looks like {npc.youHe} gained some weight.",
 				" {npc.YourHis} curves become more pronounced.",
-				" {npc.YouHe} {npc.youAre} getting thicker and thicker.",
+				" {npc.YouHe} {npc.youAreHeIs} getting thicker and thicker.",
 				" {npc.YourHis} thighs are starting to fill out nicely.",
 				" {npc.YourHis} body is receiving a more voluptuous shape.",
 				" {npc.YourHis} butt is developing a delightful roundness.",
@@ -70,10 +70,10 @@ func generateTransformText(_result:Dictionary):
 		text += RNG.pick([
 			" {npc.YouHe} can feel a slight reduction in fullness.",
 			" {npc.YourHis} curves are becoming less pronounced.",
-			" {npc.YouHe} {npc.youVerb('notice')} that {npc.yourHis} hips are not as wide as before.",
-			" The change is subtle, but {npc.youHe} feel a bit slimmer.",
+			" {npc.YouHe} {npc.youHeVerb('notice')} that {npc.yourHis} hips are not as wide as before.",
+			" The change is subtle, but {npc.youHe} {npc.youHeVerb('feel')} a bit slimmer.",
 			" {npc.YourHis} body is returning to a more streamlined shape.",
-			" {npc.YouHe} {npc.youVerb('feel')} lighter, as if some of the weight has lifted.",
+			" {npc.YouHe} {npc.youHeVerb('feel')} lighter, as if some of the weight has lifted.",
 			" {npc.YourHis} silhouette is less curvy than it was moments ago.",
 			" {npc.YouHe} can sense a shift, as {npc.yourHis} form becomes more delicate."
 		])

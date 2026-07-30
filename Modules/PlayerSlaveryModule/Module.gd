@@ -5,6 +5,7 @@ func getFlags():
 		#"slavesSpace": flag(FlagType.Number),
 		"mirriTimes": flag(FlagType.Number),
 		"luxeTimes": flag(FlagType.Number),
+		"foundMeme": flag(FlagType.Bool),
 	}
 
 func _init():

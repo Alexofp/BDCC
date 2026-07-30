@@ -146,7 +146,7 @@ func loadData(data):
 			continue
 		var bodypart = getBodypart(slot)
 		if(bodypartid != bodypart.id):
-			Log.printerr("Bodypart changed for "+getName()+"'s "+str(slot)+", ignoring data (was "+bodypartid+", became "+bodypart.id+")")
+			Log.warning("Bodypart changed for "+getName()+"'s "+str(slot)+", ignoring data (was "+bodypartid+", became "+bodypart.id+")")
 			continue
 		bodypart.loadDataNPC(bodypartData)
 	
@@ -242,8 +242,8 @@ func equipDefaultEquipmentEntrySafely(equipEntry):
 	if(itemRef == null):
 		return false
 	
-	var itemSlot = itemRef.getClothingSlot()
-	if(itemSlot == null):
+	var itemSlot:String = itemRef.getClothingSlotSafe()
+	if(itemSlot.empty()):
 		return false
 	
 	if(getInventory().hasSlotEquipped(itemSlot)):
@@ -263,7 +263,9 @@ func equipDefaultEquipmentEntrySafely(equipEntry):
 			for dataID in foundData:
 				theItem.applyDatapackEditVar(dataID, foundData[dataID])
 	
-	return getInventory().equipItem(theItem)
+	if(getInventory().equipItem(theItem)):
+		return true
+	return false
 
 func createEquipment():
 	var theEquip = getDefaultEquipment()

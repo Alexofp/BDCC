@@ -49,3 +49,11 @@ const SubChoking = "SubChoking"
 const SubOptionalApplyLubeOnSub = "SubOptionalApplyLubeOnSub"
 const SubOptionalApplyLubeOnDom = "SubOptionalApplyLubeOnDom"
 const SubMakeUnconscious = "SubMakeUnconscious"
+
+
+const GoalsRequireSubMouthFree:Dictionary = {
+	FuckOral: 1.0,
+	BreastFeedSub: 1.0,
+	Fuck69: 1.0,
+	RimmingReceive: 1.0,
+}

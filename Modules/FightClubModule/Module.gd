@@ -29,6 +29,15 @@ func getFlags():
 		"CanBuySlaveCollars": flag(FlagType.Bool),
 	}
 
+func resetMainRoute():
+	GM.main.clearFlag("FightClubModule.BulldogFirstTimeHappened")
+	GM.main.clearFlag("FightClubModule.BulldogSeduced")
+	GM.main.clearFlag("FightClubModule.BulldogBeatenUp")
+	GM.main.clearFlag("FightClubModule.BulldogBypassed")
+	#GM.main.clearFlag("FightClubModule.AnnouncerIntroduced")
+	#GM.main.clearFlag("FightClubModule.AnnouncerAskedAboutShop")
+	#GM.main.clearFlag("FightClubModule.AvyIntroduced")
+
 func _init():
 	id = "FightClubModule"
 	author = "Rahi"
@@ -168,6 +177,18 @@ static func markFighterAsDefeated(fighterID):
 	var defeated = GM.main.getFlag("FightClubModule.FightClubDefeatedFighters", {})
 	defeated[fighterID] = true
 	GM.main.setFlag("FightClubModule.FightClubDefeatedFighters", defeated)
+
+func getAmountFightersWon() -> int:
+	var ranks = FightClubRank.getAll()
+	var result:int = 0
+	for i in ranks.size():
+		var rankID = ranks[-i-1]
+		var fighters = GlobalRegistry.getFightClubFightersIDsByRank(rankID)
+		for i2 in fighters.size():
+			var fighterID = fighters[-i2-1]
+			if(isFighterDefeated(fighterID)):
+				result += 1
+	return result
 
 func isReadyToFightAvy():
 	var ranks = FightClubRank.getAll()

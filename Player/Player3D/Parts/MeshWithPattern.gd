@@ -3,7 +3,8 @@ class_name MeshInstanceWithPattern
 
 export var pattern_start:Vector2
 export var pattern_size:Vector2 = Vector2(1.0, 1.0)
-export(String, "head", "hair", "ears", "horns", "body", "arms", "breasts", "penis", "vagina", "anus", "tail", "legs") var bodypartSlot:String
+export(String, "head", "hair", "ears", "horns", "body", "arms", "breasts", "penis", "vagina", "anus", "tail", "legs", "CUSTOM") var bodypartSlot:String
+export var bodypartSlotCustom:String = "" # Set the bodypartSlot to CUSTOM first
 export(Texture) var customOverlay = null
 export(Texture) var customSkinPattern = null
 export(Texture) var customAlbedo = null
@@ -86,7 +87,7 @@ func updateMaterial():
 			fancyMaterial.set_shader_param("cum_transparency", 0.0)
 			fancyMaterial.set_shader_param("cum_amount", 0)
 		
-		var skinData = theDoll.getSkinDataByID(bodypartSlot)
+		var skinData = theDoll.getSkinDataByID(getFinalBodypartSlot())
 		if(skinData != null):
 			#fancyMaterial = materialWithSkin.duplicate()
 			if(skinData.has("partskin") && skinData.has("partid")):
@@ -127,3 +128,8 @@ func updateMaterial():
 func updateFacing():
 	if(writingsHandler):
 		writingsHandler.updateFacing()
+
+func getFinalBodypartSlot() -> String:
+	if(bodypartSlot == "CUSTOM"):
+		return bodypartSlotCustom
+	return bodypartSlot

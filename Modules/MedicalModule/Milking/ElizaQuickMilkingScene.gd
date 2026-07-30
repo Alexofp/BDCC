@@ -5,9 +5,15 @@ var penisMilked = false
 var vaginaMilked = false
 var hasPenisPump = false
 var amountCollected = 0.0
+var removedItemIDs:Array = []
 
 func _init():
 	sceneID = "ElizaQuickMilkingScene"
+
+func saveSlotToBeReequipped(_slot:String):
+	var theItem:ItemBase = GM.pc.getInventory().unequipSlot(_slot)
+	if(theItem && theItem.uniqueID != null):
+		removedItemIDs.append(theItem.uniqueID)
 
 func _reactInit():
 	processTime(30*60)
@@ -19,11 +25,15 @@ func _reactInit():
 			var theFluids = thePump.getFluids()
 			if(theFluids):
 				theFluids.addFluid("Milk", 400.0)
+
+		saveSlotToBeReequipped(InventorySlot.UnderwearTop)
 		GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(thePump)
 	if(GM.pc.hasReachablePenis() || GM.pc.isWearingChastityCage()):
 		amountCollected += GM.main.SCI.processMilkPlayerPenis()
 		penisMilked = true
 	if(GM.pc.hasReachablePenis()):
+		saveSlotToBeReequipped(InventorySlot.Penis)
+		
 		var thePump = GlobalRegistry.createItem("PenisPump")
 		GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(thePump)
 		hasPenisPump = true
@@ -53,10 +63,16 @@ func _react(_action: String, _args):
 		return
 
 	if(_action == "endthescene_removestuff"):
+		var theInv := GM.pc.getInventory()
 		if(hasPenisPump):
-			GM.pc.getInventory().clearSlot(InventorySlot.Penis)
+			theInv.clearSlot(InventorySlot.Penis)
 		if(breastsMilked):
-			GM.pc.getInventory().clearSlot(InventorySlot.UnderwearTop)
+			theInv.clearSlot(InventorySlot.UnderwearTop)
+		
+		for theUniqueItemID in removedItemIDs:
+			var theItem = theInv.getItemByUniqueID(theUniqueItemID)
+			if(theItem):
+				theInv.equipItem(theItem)
 		
 		playAnimation(StageScene.Duo, "stand", {npc="eliza"})
 		aimCameraAndSetLocName(GM.pc.getLocation())
@@ -73,6 +89,7 @@ func saveData():
 	data["vaginaMilked"] = vaginaMilked
 	data["hasPenisPump"] = hasPenisPump
 	data["amountCollected"] = amountCollected
+	data["removedItemIDs"] = removedItemIDs
 
 	return data
 
@@ -84,3 +101,4 @@ func loadData(data):
 	vaginaMilked = SAVE.loadVar(data, "vaginaMilked", false)
 	hasPenisPump = SAVE.loadVar(data, "hasPenisPump", false)
 	amountCollected = SAVE.loadVar(data, "amountCollected", 0.0)
+	removedItemIDs = SAVE.loadVar(data, "removedItemIDs", [])

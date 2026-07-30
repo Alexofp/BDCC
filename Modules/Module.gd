@@ -189,3 +189,16 @@ func flag(type):
 	return {
 		"type": type,
 	}
+
+func resetMainRoute():
+	pass
+
+func resetAllFlags():
+	for theFlag in flagsCache:
+		GM.main.clearModuleFlag(id, theFlag)
+
+func resetAllFlagsWithExceptions(_ignore:Dictionary):
+	for theFlag in flagsCache:
+		if(_ignore.get(theFlag, false)):
+			continue
+		GM.main.clearModuleFlag(id, theFlag)

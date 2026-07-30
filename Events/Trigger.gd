@@ -33,3 +33,5 @@ const EnteringRoomWithSlave = "EnteringRoomWithSlave"
 const SlaverySlutLookAtEvent = "SlaverySlutLookAtEvent"
 const SlaverySlutImportantEvent = "SlaverySlutImportantEvent"
 const UnconsciousPCGrabbed = "UnconsciousPCGrabbed"
+const WonCaughtOffLimitsFight = "WonCaughtOffLimitsFight" # args = [npcID, "guard/nurse/engineer"]
+const LostCaughtOffLimitsFight = "LostCaughtOffLimitsFight" # args = [npcID, "guard/nurse/engineer"]

@@ -117,7 +117,7 @@ func _run():
 
 		saynn("The guy chuckles while waiting for his knot to deflate.")
 
-		saynn("[say=bulldog]Sure thing. You earned yourself a 25 credit discount.[/say]")
+		saynn("[say=bulldog]Sure thing. You earned yourself a 10 credit discount.[/say]")
 
 		saynn("[say=pc]Wai-.. What?[/say]")
 
@@ -244,7 +244,7 @@ func _run():
 
 		# (if has cock)
 		if(GM.pc.isWearingChastityCage()):
-			saynn("Your {pc.cock} is trying to get hard in its little cage and leaking a lot while you’re getting used. Obviously it won’t get used by it’s fun to look at..")
+			saynn("Your {pc.cock} is trying to get hard in its little cage and leaking a lot while you’re getting used. Obviously it won’t get used.. but it’s fun to look at..")
 		elif(GM.pc.hasPenis()):
 			saynn("Your {pc.cock} is hard and leaking a lot while you’re getting used. You feel like it won’t get used at all..")
 

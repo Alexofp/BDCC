@@ -5,6 +5,7 @@ func _init():
 
 func _run():
 	if(state == ""):
+		setFlag("PlayerSlaveryModule.foundMeme", true)
 		playAnimation(StageScene.Solo, "stand")
 		saynn("There is a credits chip, just lying on the floor here.")
 

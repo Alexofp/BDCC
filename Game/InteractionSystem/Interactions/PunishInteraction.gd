@@ -37,10 +37,12 @@ func init_text():
 	if(getRoleChar("punisher").isPlayer()):
 		var elizaModule = GlobalRegistry.getModule("ElizaModule")
 		if(elizaModule && elizaModule.hasAccessToTentacles()):
-			if(canGetToStocks()):
+			if(!punisherRestraintsPreventPulling && getRoleChar("target").getInventory().hasEquippedItemWithTag(ItemTag.AllowsEnslaving) && canGetToStocks()):
 				addAction("tentacles", "Tentacles", "Get them punished by the tentacles in your cell", "default", 0.0, 60, {})
+			elif(punisherRestraintsPreventPulling):
+				addDisabledAction("Tentacles", "You can't do that with restraints on your arms..")
 			else:
-				addDisabledAction("Tentacles", "Your cell is too far..")
+				addDisabledAction("Tentacles", ""+("They need to be wearing a collar for this!" if canGetToStocks() else "Your cell is too far..")+"")
 	addAction("leave", "Leave", "Just leave", "justleave", 1.0, 30, {})
 
 	addDefeatButtons("punisher", "target")
@@ -236,7 +238,7 @@ func getAnimData() -> Array:
 		return [StageScene.SlutwallSex, "tease", {pc="target", npc="punisher"}]
 	if(getState() == "in_stocks"):
 		return [StageScene.StocksSexOral, "tease", {npc="punisher", pc="target"}]
-	if(getState() in ["pulling_to_stocks", "pulling_to_slutwall"]):
+	if(getState() in ["pulling_to_stocks", "pulling_to_slutwall", "pulling_to_cell_tentacles"]):
 		if(getLocation() != "main_punishment_spot" && getLocation() != "fight_slutwall"):
 			return [StageScene.Duo, "walk", {pc="target", npc="punisher", npcAction="walk", flipNPC=true, bodyState={leashedBy="punisher"}}]
 	if(getState() in [""]):
@@ -255,12 +257,12 @@ func getPreviewLineForRole(_role:String) -> String:
 	return .getPreviewLineForRole(_role)
 
 func isRoleOnALeash(_role:String) -> bool:
-	if(_role == "target" && getState() in ["pulling_to_stocks", "pulling_to_slutwall"]):
+	if(_role == "target" && getState() in ["pulling_to_stocks", "pulling_to_slutwall", "pulling_to_cell_tentacles"]):
 		return true
 	return false
 	
 func isRoleLeashing(_role:String) -> bool:
-	if(_role == "punisher" && getState() in ["pulling_to_stocks", "pulling_to_slutwall"]):
+	if(_role == "punisher" && getState() in ["pulling_to_stocks", "pulling_to_slutwall", "pulling_to_cell_tentacles"]):
 		return true
 	return false
 

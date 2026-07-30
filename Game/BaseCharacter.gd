@@ -696,6 +696,9 @@ func hasPerk(perkID):
 func getStat(statID):
 	return skillsHolder.getStat(statID)
 
+func getBaseStat(statID:String) -> int:
+	return skillsHolder.getBaseStat(statID)
+
 func getSkillLevel(skillID):
 	var skill = skillsHolder.getSkill(skillID)
 	if(skill == null):
@@ -714,7 +717,7 @@ func getSpeciesFullName():
 	
 func getFightIntro(_battleName):
 	if(_battleName == "DrugDenEncounter"):
-		var theText:String = "You run into a junkie. Looks like "+heShe()+" isn't happy to see you."
+		var theText:String = "You run into a junkie. Looks like "+heShe()+" "+isAre()+"n't happy to see you."
 		theText += "\n\nThe junkie gets into the combat stance and prepares to fight."
 		return theText
 		
@@ -2036,14 +2039,34 @@ func getTallymarkCount() -> int:
 func clearTallymarks():
 	removeEffect(StatusEffect.HasTallyMarks)
 
-func addBodywriting(zone, writingID, isPermanent:bool = false):
+# if you're feeling up to it, you can track all of the old add bodywritings calls and specify the _fromCharID for them..
+func addBodywriting(zone, writingID, isPermanent:bool = false, _fromCharID:String = ""):
 	addEffect(StatusEffect.HasBodyWritings, [zone, writingID, isPermanent])
+	
+	if(_fromCharID.empty() && isPlayer()):
+		_fromCharID = "inmateMale" # Just a random placeholder npc, just so we can get the sex event
+	if(!_fromCharID.empty()):
+		var theOtherChar = GlobalRegistry.getCharacter(_fromCharID)
+		if(theOtherChar):
+			var newSexEvent:SexEvent = SexEventHelper.create(
+				SexEvent.BodyWritingAdded,
+				_fromCharID,
+				getID(),
+				{
+					zone = zone,
+					writingID = writingID,
+					isPermanent = isPermanent,
+				}
+			)
+			sendSexEvent(newSexEvent)
+			if(theOtherChar != self):
+				theOtherChar.sendSexEvent(newSexEvent)
 
-func addBodywritingRandom(isPermanent:bool = false):
+func addBodywritingRandom(isPermanent:bool = false, _fromCharID:String = ""):
 	var zone = BodyWritingsZone.getRandomZone()
 	addBodywriting(zone, BodyWritings.getRandomWritingIDForZone(zone), isPermanent)
 
-func addBodywritingLowerBody(isPermanent:bool = false):
+func addBodywritingLowerBody(isPermanent:bool = false, _fromCharID:String = ""):
 	var zone = BodyWritingsZone.getRandomZoneLowerPart()
 	addBodywriting(zone, BodyWritings.getRandomWritingIDForZone(zone), isPermanent)
 
@@ -2110,11 +2133,13 @@ func canStartSex() -> bool:
 	#	return false
 	return true
 
-func invCanEquipSlot(slot):
+func invCanEquipSlot(slot:String) -> bool:
 	if(slot == InventorySlot.Penis && !hasPenis()):
 		return false
 	if(slot == InventorySlot.Vagina && !hasVagina()):
 		return false
+	if(GlobalRegistry.hasCustomInventorySlot(slot)):
+		return GlobalRegistry.getCustomInventorySlot(slot).invCanEquipSlot(self)
 	
 	return true
 
@@ -2305,17 +2330,12 @@ func afterSexEnded(sexInfo):
 		if(resultText != null && resultText != ""):
 			GM.main.addMessage(resultText)
 	
-	if(!isPlayer()):
-		addLust(-getLust())
-		addPain(-getPain())
-		addStamina(getMaxStamina())
-
 	consciousness = 1.0
 	arousal = 0.0
 		
 	updateAppearance()
 
-func getFirstItemThatCoversBodypart(bodypartSlot):
+func getFirstItemThatCoversBodypart(bodypartSlot:String):
 	return getInventory().getFirstItemThatCoversBodypart(bodypartSlot)
 	
 func getWornCondom():
@@ -2742,15 +2762,19 @@ func getStraponContentsReadableString():
 
 func removeStrapon():
 	var theStrapon = getWornStrapon()
-	if(theStrapon == null):
+	if(!theStrapon):
 		return null
-	return getInventory().removeEquippedItem(theStrapon)
+	if(getInventory().removeEquippedItem(theStrapon)):
+		return theStrapon
+	return null
 
 func unequipStrapon():
 	var theStrapon = getWornStrapon()
-	if(theStrapon == null):
+	if(!theStrapon):
 		return null
-	return getInventory().unequipItem(theStrapon)
+	if(getInventory().unequipItem(theStrapon)):
+		return theStrapon
+	return null
 
 func doPainfullyStretchHole(_bodypart, _who = "pc") -> bool:
 	return false
@@ -3160,6 +3184,9 @@ func getEnslaveQuest() -> NpcEnslavementQuest:
 
 func isSlaveToPlayer():
 	return false
+
+func isPlayerOwner() -> bool:
+	return GM.main.RS.hasSpecialRelationshipID(getID(), "SoftSlavery")
 
 func isSlaveTo(_charID:String) -> bool:
 	if(_charID == "pc"):

@@ -202,7 +202,7 @@ func _run():
 
 		# (if kitty)
 		if(!isPuppy):
-			saynn("You carefully move your head under the offered hand and let it pet you. You can’t yourself, quiet feline-like purring escapes from your mouth, you let the hand pet you and then nuzzle it back. It feels so good. You mewl and beg for more pets, pawing at the hand when it stops petting you.")
+			saynn("You carefully move your head under the offered hand and let it pet you. You can’t help yourself, quiet feline-like purring escapes from your mouth, you let the hand pet you and then nuzzle it back. It feels so good. You mewl and beg for more pets, pawing at the hand when it stops petting you.")
 
 			saynn("[sayFemale]Good kitty[/sayFemale]")
 

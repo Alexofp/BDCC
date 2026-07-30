@@ -46,4 +46,7 @@ func getAllQuests():
 			
 			result[datapackID+":"+questID] = newQuestBase
 	
+	for missionID in GlobalRegistry.missionQuests:
+		result["mission#"+missionID] = GlobalRegistry.missionQuests[missionID]
+	
 	return result

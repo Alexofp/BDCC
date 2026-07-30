@@ -23,49 +23,52 @@ const Static1 = "static1"
 const Static2 = "static2"
 const Static3 = "static3"
 
-static func getAll():
-	return [Eyes, Mouth, Neck, Torso, Body, UnderwearTop, UnderwearBottom, Penis, Vagina, Anal, Wrists, Hands, Ring, Ankles, Strapon, Unique]
+const DEFAULT_SLOTS:Array = [
+	Eyes, Mouth, Neck, Torso, Body, UnderwearTop, UnderwearBottom, Penis, Vagina, Anal, Wrists, Hands, Ring, Ankles, Strapon, Unique,
+]
+const DEFAULT_SLOT_NAMES:Dictionary = {
+	Eyes: "Eyes", Mouth: "Mouth", Neck: "Neck", Torso: "Torso", Body: "Body", Wrists: "Wrists", Hands: "Hands", Ring: "Ring", Ankles: "Ankles", UnderwearTop: "Underwear, top", UnderwearBottom: "Underwear, bottom", Penis: "Penis", Vagina: "Vagina", Anal: "Anal", Strapon: "Strapon", Unique: "Unique", Static1: "Static restraint", Static2: "Static restraint", Static3: "Static restraint",
+}
+const DEFAULT_EXTRA_SLOTS:Array = [
+	Static1, Static2, Static3,
+]
 
-static func getStatic():
-	return [Static1, Static2, Static3]
+const DEFAULT_UNDRESS_CHAINS:Array = [
+	[Torso, Body, UnderwearTop],
+	[Torso, Body, UnderwearBottom],
+	[Eyes, Mouth],
+	[Wrists, Hands],
+	[Ankles],
+	[Unique],
+]
+
+static func getAll() -> Array:
+	if(GlobalRegistry.cachedInventorySlotsList.empty()):
+		Log.printerr("InventorySlot.getAll() got called before the cached list got populated with values!")
+		return DEFAULT_SLOTS # Fallback
+
+	return GlobalRegistry.cachedInventorySlotsList
+
+static func getStatic() -> Array:
+	return DEFAULT_EXTRA_SLOTS
 
 static func getVisibleName(slot: String):
-	if(slot == Eyes):
-		return "Eyes"
-	if(slot == Mouth):
-		return "Mouth"
-	if(slot == Neck):
-		return "Neck"
-	if(slot == Torso):
-		return "Torso"
-	if(slot == Body):
-		return "Body"
-	if(slot == Wrists):
-		return "Wrists"
-	if(slot == Hands):
-		return "Hands"
-	if(slot == Ring):
-		return "Ring"
-	if(slot == Ankles):
-		return "Ankles"
-	if(slot == UnderwearTop):
-		return "Underwear, top"
-	if(slot == UnderwearBottom):
-		return "Underwear, bottom"
-	if(slot == Penis):
-		return "Penis"
-	if(slot == Vagina):
-		return "Vagina"
-	if(slot == Anal):
-		return "Anal"
-	if(slot == Strapon):
-		return "Strapon"
-	if(slot == Unique):
-		return "Unique"
+	if(DEFAULT_SLOT_NAMES.has(slot)):
+		return DEFAULT_SLOT_NAMES[slot]
+
+	var s = GlobalRegistry.getCustomInventorySlot(slot)
+	return s.getVisibleName() if s else "Error"
+
+static func getUndressChains() -> Array:
+	if(GlobalRegistry.inventorySlots.empty()):
+		return DEFAULT_UNDRESS_CHAINS
+	var theChains:Array = DEFAULT_UNDRESS_CHAINS.duplicate()
 	
-	return "Error"
-
-
-
-
-
+	for theSlotID in GlobalRegistry.inventorySlots:
+		var theSlot = GlobalRegistry.inventorySlots[theSlotID]
+		var theChain:Array = theSlot.getUndressChain()
+		if(theChain.empty()):
+			continue
+		theChains.append(theChain)
+	
+	return theChains

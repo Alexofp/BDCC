@@ -5,6 +5,9 @@ var id:String = ""
 var difficulty:int = RecruitDifficulty.Easy
 var charID:String = ""
 
+var nextStoryScene:String = ""
+var talkScene:String = ""
+
 # To save
 var history:Array = [] # [["loving", "sex", "bondage"], ["strict", "painplay", "anal"], ...]
 var completed:bool = false
@@ -24,7 +27,7 @@ var choices:Array = [
 ]
 
 # Only gets called when all options are picked, gurantees that _choices has all the choices
-func getExtraChoices(_choices:Array) -> Array:
+func getExtraChoices(_choices:Array, _extras:Dictionary) -> Array:
 	#if(_choices[1] == "sex"):
 	return [
 		{
@@ -44,11 +47,11 @@ func isCombinationPossible(_choices:Array, _extras:Dictionary) -> Array:
 	return [true, ""]
 
 func isCombinationPossibleFinal(_choices:Array, _extras:Dictionary) -> Array:
-	var theExtras := getExtraChoices(_choices)
+	var theExtras := getExtraChoices(_choices, _extras)
 	for theExtra in theExtras:
 		var theID:String = theExtra["id"]
 		if(!_extras.has(theID)):
-			return [false, "'"+theExtra["name"]+"' option needs to be selected."]
+			return [false, "'"+theExtra["name"]+"' option needs to be picked."]
 	return isCombinationPossible(_choices, _extras)
 
 func getSceneToPlay(_choices:Array, _extras:Dictionary) -> String:
@@ -56,13 +59,14 @@ func getSceneToPlay(_choices:Array, _extras:Dictionary) -> String:
 
 # Happens during story after the breaking
 func getStorySceneSuccess() -> String:
-	return ""
+	return nextStoryScene
 
-func getStorySceneFail() -> String:
-	return ""
+# Not needed??
+#func getStorySceneFail() -> String:
+#	return ""
 
 func getTalkScene() -> String:
-	return ""
+	return talkScene
 
 func isArSame(_ar1:Array, _ar2:Array) -> bool:
 	if(_ar1.size() != _ar2.size()):
@@ -211,6 +215,9 @@ func onContext(_context:RecruitContext):
 	while(history.size() > 10):
 		history.pop_front()
 
+func hasHistory() -> bool:
+	return !history.empty()
+
 func getHistoryString() -> String:
 	if(history.empty()):
 		return ""
@@ -219,6 +226,17 @@ func getHistoryString() -> String:
 		result.append(getColorStringForChoices(theEntry))
 	
 	return Util.join(result, "\n")
+
+func getStraponOptions() -> Array:
+	var result:Array = [
+		["default", "Default", "Use the strapon provided by your team"],
+	]
+	for strapon in GM.pc.getStrapons():
+		result.append([
+			strapon.uniqueID, strapon.getVisibleName(), strapon.getVisibleDescription(),
+		])
+	
+	return result
 
 func saveData() -> Dictionary:
 	return {

@@ -48,7 +48,7 @@ func getFlags():
 		"PC_ReceivedPermanentCage": flag(FlagType.Bool),
 		"PC_PickedFlatPermanentCage": flag(FlagType.Bool),
 		
-		"Chastity_EventNumber": flag(FlagType.Number),
+		"Chastity_EventNumber": flag(FlagType.Number), # if 7 = storyline done
 		"Chastity_LastEventDay": flag(FlagType.Number),
 		"Chastity_Event1Choice1": flag(FlagType.Text), #How does it feel? Possible values: ["good", "awful", "why"]
 		"Chastity_Event2Choice1": flag(FlagType.Text), #How much was it already? At least ten days, right? You must be quite pent up, patient? Possible values: ["yes", "no"]

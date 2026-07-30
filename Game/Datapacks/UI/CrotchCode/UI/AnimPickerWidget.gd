@@ -201,6 +201,12 @@ func resetAnimData():
 				varName = "",
 			}
 			valuesForID[optionEntryID+".caged"] = [false, true]
+			extraData[optionEntryID+".hide"] = {
+				value = false,
+				isVar = false,
+				varName = "",
+			}
+			valuesForID[optionEntryID+".hide"] = [false, true]
 			extraData[optionEntryID+".leashedBy"] = {
 				value = "",
 				isVar = false,

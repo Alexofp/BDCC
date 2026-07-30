@@ -567,20 +567,20 @@ func getTransformAwayMessage(_context:Dictionary) -> String:
 	var slot = getSlot()
 	var slotName:String = BodypartSlot.getVisibleNameNoCap(slot)
 	var shouldHaveS:bool = !slotName.ends_with("s") || (slotName in ["penis", "anus"])
-	return "{npc.YouHe} {npc.youVerb('feel')} a tingling sensation on {npc.yourHis} scalp as {npc.yourHis} "+slotName+" begin"+("s" if shouldHaveS else "")+" to shift and change. Suddenly, {npc.YourHis} "+slotName+" morph"+("s" if shouldHaveS else "")+" away completely, leaving nothing in its place!"
+	return "{npc.YouHe} {npc.youHeVerb('feel')} a tingling sensation on {npc.yourHis} scalp as {npc.yourHis} "+slotName+" begin"+("s" if shouldHaveS else "")+" to shift and change. Suddenly, {npc.YourHis} "+slotName+" morph"+("s" if shouldHaveS else "")+" away completely, leaving nothing in its place!"
 
 func getTransformGrowMessage(_context:Dictionary) -> String:
 	var slot = getSlot()
 	var slotName:String = BodypartSlot.getVisibleNameNoCap(slot)
 	var shouldHaveS:bool = !slotName.ends_with("s") || (slotName in ["penis", "anus"])
 	var slotChildName:String = BodypartSlot.getSlotChildName(slot)
-	return "A sudden warmth spreads through {npc.yourHis} body, and {npc.youHe} {npc.youVerb('feel')} a peculiar sensation as "+("a " if shouldHaveS else "")+"new "+slotName+" begin"+("s" if shouldHaveS else "")+" to form from {npc.yourHis} "+slotChildName+". "+("It gets" if shouldHaveS else "They get")+" more and more defined, the contours slowly taking shape. The process is quite.. uncomfortable.. to say the least.. but eventually "+("it finishes" if shouldHaveS else "they finish")+" growing, assuming "+("its" if shouldHaveS else "their")+" final form."
+	return "A sudden warmth spreads through {npc.yourHis} body, and {npc.youHe} {npc.youHeVerb('feel')} a peculiar sensation as "+("a " if shouldHaveS else "")+"new "+slotName+" begin"+("s" if shouldHaveS else "")+" to form from {npc.yourHis} "+slotChildName+". "+("It gets" if shouldHaveS else "They get")+" more and more defined, the contours slowly taking shape. The process is quite.. uncomfortable.. to say the least.. but eventually "+("it finishes" if shouldHaveS else "they finish")+" growing, assuming "+("its" if shouldHaveS else "their")+" final form."
 
 func getTransformMorphMessage(_context:Dictionary) -> String:
 	var slot = getSlot()
 	var slotName:String = BodypartSlot.getVisibleNameNoCap(slot)
 	var shouldHaveS:bool = !slotName.ends_with("s") || (slotName in ["penis", "anus"])
-	return "An unusual sensation courses through {npc.yourHis} body as {npc.yourHis} "+slotName+" begin"+("s" if shouldHaveS else "")+" to shift and change! The familiar contours start to dissolve and reshape, morphing into something different. Gradually, the new "+slotName+" emerge"+("s" if shouldHaveS else "")+", taking on a more defined form. The process is quite painful and uncomfortable, but eventually "+("it settles" if shouldHaveS else "they settle")+" into "+("its" if shouldHaveS else "their")+" final appearance. {npc.YouHe} now {npc.youVerb('have', 'has')} "+getAVulgarName()+"."
+	return "An unusual sensation courses through {npc.yourHis} body as {npc.yourHis} "+slotName+" begin"+("s" if shouldHaveS else "")+" to shift and change! The familiar contours start to dissolve and reshape, morphing into something different. Gradually, the new "+slotName+" emerge"+("s" if shouldHaveS else "")+", taking on a more defined form. The process is quite painful and uncomfortable, but eventually "+("it settles" if shouldHaveS else "they settle")+" into "+("its" if shouldHaveS else "their")+" final appearance. {npc.YouHe} now {npc.youHaveHeHas} "+getAVulgarName()+"."
 
 func setFluidsCauserID(_charID:String):
 	var _fluids = getFluids()

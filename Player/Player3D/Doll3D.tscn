@@ -38,6 +38,7 @@ _data = [ Vector2( 0, 0 ), 0.0, -0.0950416, 0, 0, Vector2( 0.192893, 1 ), 0.0, 0
 script = ExtResource( 2 )
 
 [node name="DollSkeleton" parent="." instance=ExtResource( 1 )]
+unique_name_in_owner = true
 
 [node name="BreastsJiggleBone" type="Spatial" parent="DollSkeleton"]
 script = ExtResource( 6 )
@@ -73,6 +74,7 @@ projection = 1
 size = 10.0
 
 [node name="BoneAttachments" type="Spatial" parent="."]
+unique_name_in_owner = true
 
 [node name="HeadBoneAttachment" parent="BoneAttachments" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.097, 7.152, 0 )
@@ -294,6 +296,7 @@ anim_offset = 1.0
 anim_offset_random = 1.0
 
 [node name="DollAttachmentZones" type="Spatial" parent="."]
+unique_name_in_owner = true
 
 [node name="RandomLeakTimer" type="Timer" parent="."]
 unique_name_in_owner = true

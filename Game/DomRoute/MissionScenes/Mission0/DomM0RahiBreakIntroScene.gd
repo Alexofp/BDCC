@@ -1,12 +1,14 @@
 extends SceneBase
 
 func _init():
-	sceneID = "DomCh1RahiBreakIntroScene"
+	sceneID = "DomM0RahiBreakIntroScene"
 
 func _run():
 	if(state == ""):
+		aimCameraAndSetLocName("hideout_middle")
 		addCharacter("rahi")
 		addCharacter("kait")
+		setFlag("KaitModule.caughtRahi", true)
 		playAnimation(StageScene.Duo, "stand", {npc="rahi", npcAction="hurt", pc="kait", npcBodyState={leashedBy="kait"}})
 		saynn("[say=kait]You brought her in? Perfect.[/say]")
 
@@ -152,7 +154,7 @@ func _run():
 
 		saynn("It's not like they can run away anymore anyway.")
 
-		saynn("[say=kait]Talk with them. Figure out their kinks, their fears. Use what you've learned against them.[/say]")
+		saynn("[say=kait]Talk with them. Figure out their biggest kinks, that's the most important part. Then use what you've learned against them.[/say]")
 
 		saynn("You nod again.")
 
@@ -167,21 +169,28 @@ func _run():
 		saynn("[say=kait]Not really, this is my first time too. But I did watch and help a bit a few times. That doesn't matter right now, let's just do it. Ready when you are.[/say]")
 
 		saynn("Kait leans against the wall near the door, making sure Rahi doesn't escape.")
-
+		
+		saynn("Rahi doesn't seem to be resisting. But who knows.")
+		
 		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
+		GM.pc.setLocation("hideout_near_break_room")
 		endScene()
+		GM.main.RCS.setCurrent("Rahi")
 		return
 
 	if(_action == "do_assert_yourself"):
-		getModule("KaitModule").incKaitSubmission()
+		#getModule("KaitModule").incKaitSubmission()
+		GM.main.MS.setDecision("kait", "assert")
 
 	if(_action == "do_let_her_keep_it"):
-		getModule("KaitModule").incKaitLove()
+		#getModule("KaitModule").incKaitLove()
+		GM.main.MS.setDecision("kait", "allow")
 
 	if(_action == "explain_mechanic"):
 		processTime(3*60)
+		addMessage("Task updated!")
 
 	setState(_action)

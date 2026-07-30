@@ -23,11 +23,11 @@ func onAct(_char:BaseCharacter, _auction, _slaveTraits:Dictionary):
 			
 			sayPresenter("Petite, aren’t they? For those of you who appreciate a more subtle form, these are perfect.")
 	if(_slaveTraits.has("BreastsAverage") && _slaveTraits["BreastsAverage"] > 0.0):
-		saynn("{presenter.You} {presenter.youVerb('move')} closer to {slave.name}, cupping {slave.hisHer} {slave.breasts} in {presenter.YourHis} hands, lifting them slightly to give the bidders a clear view. {presenter.YouHe} {presenter.youVerb('run')} your thumbs over {slave.hisHer} nipples, making sure to highlight their firmness.")
+		saynn("{presenter.You} {presenter.youVerb('move')} closer to {slave.name}, cupping {slave.hisHer} {slave.breasts} in {presenter.YourHis} hands, lifting them slightly to give the bidders a clear view. {presenter.YouHe} {presenter.youHeVerb('run')} your thumbs over {slave.hisHer} nipples, making sure to highlight their firmness.")
 	
 		sayPresenter("These are some beatiful, firm little babies. Trust me, they are incredibly fun to grope.")
 	if(_slaveTraits.has("BreastsHuge") && _slaveTraits["BreastsHuge"] > 0.0):
-		saynn("{presenter.You} {presenter.youVerb('approach', 'approaches')} {slave.name} before gripping {slave.hisHer} {slave.breasts} with both hands, lifting and squeezing them gently to emphasize their fullness. {presenter.YouHe} {presenter.youVerb('smile')} at the bidders as you continue to present the heavy curves to them.")
+		saynn("{presenter.You} {presenter.youVerb('approach', 'approaches')} {slave.name} before gripping {slave.hisHer} {slave.breasts} with both hands, lifting and squeezing them gently to emphasize their fullness. {presenter.YouHe} {presenter.youHeVerb('smile')} at the bidders as you continue to present the heavy curves to them.")
 	
 		sayPresenter("Look at the size of these! Full, soft, and incredibly fun to squeeze. You won’t find a better pair, trust me.")
 

@@ -155,15 +155,16 @@ size_flags_vertical = 3
 
 [node name="HFlowContainer" type="HFlowContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
 margin_right = 837.0
-margin_bottom = 20.0
+margin_bottom = 40.0
 
 [node name="DownloadModButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer"]
 margin_right = 108.0
-margin_bottom = 20.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
 text = "Download mod"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
-margin_top = 24.0
+margin_top = 44.0
 margin_right = 837.0
 margin_bottom = 654.0
 size_flags_horizontal = 3

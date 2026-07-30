@@ -21,7 +21,7 @@ func _run():
 
 func onConfirmPressed(selectedStat:String, selectedPerk:String):
 	if(selectedStat != ""):
-		GM.pc.getSkillsHolder().setStat(selectedStat, GM.pc.getStat(selectedStat) + 3)
+		GM.pc.getSkillsHolder().setStat(selectedStat, GM.pc.getBaseStat(selectedStat) + 3)
 	if(selectedPerk != ""):
 		GM.pc.getSkillsHolder().addPerk(selectedPerk)
 	if(GM.main.DrugDenRun != null):

@@ -184,7 +184,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		return
 	if(_id == "bite"):
 		if(getSubResistChance(60.0, 45.0)):
-			addText("{sub.You} {sub.youVerb('bite')} {dom.your} ass! {dom.YouHe} {dom.youVerb('grunt')} painfully and {dom.youVerb('pull')} away.")
+			addText("{sub.You} {sub.youVerb('bite')} {dom.your} ass! {dom.YouHe} {dom.youHeVerb('grunt')} painfully and {dom.youHeVerb('pull')} away.")
 			getDomInfo().addPain(5)
 			sendSexEvent(SexEvent.PainInflicted, SUB_0, DOM_0, {pain=10,isDefense=true,intentional=true})
 			getDomInfo().addAnger(1.0 - getDomInfo().fetishScore({Fetish.Masochism: 0.5}))
@@ -193,7 +193,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 				endActivity()
 			state = ""
 		else:
-			addText("{sub.You} {sub.youVerb('try', 'tries')} to bite {dom.you} but {dom.youHe} {dom.youVerb('avoid')} it!")
+			addText("{sub.You} {sub.youVerb('try', 'tries')} to bite {dom.you} but {dom.youHe} {dom.youHeVerb('avoid')} it!")
 			getDomInfo().addAnger(0.4)
 		return
 

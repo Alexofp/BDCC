@@ -64,7 +64,7 @@ func _react(_action: String, _args):
 		return
 	if(_action == "doWrite"):
 		var writingID:String = _args[0]
-		GM.pc.addBodywriting(pickedZone, writingID, true)
+		GM.pc.addBodywriting(pickedZone, writingID, true, "pc")
 		GM.pc.getInventory().removeXOfOrDestroy("PermanentMarker", 1)
 		setState("afterwrite")
 		return

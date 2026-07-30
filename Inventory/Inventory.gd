@@ -1,8 +1,8 @@
 extends Node
 class_name Inventory
 
-var items = []
-var equippedItems = {}
+var items:Array = []
+var equippedItems:Dictionary = {}
 
 signal equipped_items_changed
 
@@ -34,7 +34,7 @@ func forceEquipItemID(itemID:String):
 	var newItem = GlobalRegistry.createItem(itemID)
 	if(newItem == null):
 		return false
-	if(newItem.getClothingSlot() == null):
+	if(newItem.getClothingSlotSafe().empty()):
 		return false
 	return forceEquipStoreOtherUnlessRestraint(newItem)
 
@@ -60,7 +60,7 @@ func addXOfItemID(itemID:String, amount:int):
 			addItem(newItem)
 		return true
 
-func hasItem(item):
+func hasItem(item) -> bool:
 	return items.has(item)
 
 func hasItemID(itemID: String) -> bool:
@@ -69,17 +69,17 @@ func hasItemID(itemID: String) -> bool:
 			return true
 	return false
 
-func getItems():
+func getItems() -> Array:
 	return items
 
-func getAllItems():
+func getAllItems() -> Array:
 	return items
 
-func getEquippedItems():
+func getEquippedItems() -> Dictionary:
 	return equippedItems
 
-func getAllItemsCanDye():
-	var result = []
+func getAllItemsCanDye() -> Array:
+	var result := []
 	for item in items:
 		if(item.canDye()):
 			result.append(item)
@@ -88,21 +88,21 @@ func getAllItemsCanDye():
 			result.append(equippedItems[itemSlot])
 	return result
 
-func getAllSellableItems():
-	var result = []
+func getAllSellableItems() -> Array:
+	var result := []
 	for item in items:
 		if(item.canSell()):
 			result.append(item)
 	return result
 
-func getItemsAndEquippedItemsTogether():
-	var result = []
+func getItemsAndEquippedItemsTogether() -> Array:
+	var result := []
 	result.append_array(equippedItems.values())
 	result.append_array(items)
 	return result
 
-func getItemsAndEquippedItemsTogetherGrouped():
-	var result = {}
+func getItemsAndEquippedItemsTogetherGrouped() -> Dictionary:
+	var result := {}
 	for item in equippedItems.values():
 		result["%$%"+item.id] = [item]
 	
@@ -115,8 +115,8 @@ func getItemsAndEquippedItemsTogetherGrouped():
 	
 	return result
 
-func getAllOf(itemID: String):
-	var result = []
+func getAllOf(itemID: String) -> Array:
+	var result := []
 	
 	for item in items:
 		if(item.id == itemID):
@@ -130,7 +130,7 @@ func getFirstOf(itemID: String):
 			return item
 	return null
 
-func hasItemWithUniqueID(uniqueID: String):
+func hasItemWithUniqueID(uniqueID: String) -> bool:
 	for item in items:
 		if(item.uniqueID == uniqueID):
 			return true
@@ -175,7 +175,7 @@ func removeItem(item):
 		return item
 	return null
 
-func removeFirstOf(itemID:String):
+func removeFirstOf(itemID:String) -> bool:
 	var theItem = getFirstOf(itemID)
 	if(theItem != null):
 		removeItem(theItem)
@@ -189,7 +189,7 @@ func removeXFromItemOrDelete(item, amount:int):
 
 func getAmountOf(itemID:String) -> int:
 	var item = getFirstOf(itemID)
-	if(item == null):
+	if(!item):
 		return 0
 	return item.amount
 
@@ -202,7 +202,7 @@ func getUniqueAmountOf(itemID:String) -> int:
 
 func hasXOf(itemID:String, amount:int) -> bool:
 	var item = getFirstOf(itemID)
-	if(item == null):
+	if(!item):
 		return false
 	if(item.amount >= amount):
 		return true
@@ -230,8 +230,8 @@ func removeXOfOrDestroy(itemID:String, amount:int):
 	
 	item.removeXOrDestroy(amount)
 
-func getAllCombatUsableItems():
-	var result = []
+func getAllCombatUsableItems() -> Array:
+	var result := []
 	
 	for item in items:
 		if(item.canUseInCombat()):
@@ -239,8 +239,8 @@ func getAllCombatUsableItems():
 	
 	return result
 		
-func getAllCombatUsableRestraints():
-	var result = []
+func getAllCombatUsableRestraints() -> Array:
+	var result := []
 	
 	for item in items:
 		if(item.canForceOntoNpc()):
@@ -248,8 +248,8 @@ func getAllCombatUsableRestraints():
 		
 	return result
 		
-func getAllCombatUsableRestraintsForStaticNpc():
-	var result = []
+func getAllCombatUsableRestraintsForStaticNpc() -> Array:
+	var result := []
 	
 	for item in items:
 		if(item.canForceOntoStaticNpc()):
@@ -257,7 +257,7 @@ func getAllCombatUsableRestraintsForStaticNpc():
 		
 	return result
 		
-func canEquipSlot(slot):
+func canEquipSlot(slot:String) -> bool:
 	if(get_parent() != null && get_parent().has_method("invCanEquipSlot")):
 		return get_parent().invCanEquipSlot(slot)
 	return true
@@ -266,12 +266,12 @@ func getCharacter():
 	if(get_parent() != null):
 		return get_parent()
 	return null
-		
-func equipItem(item):
+
+func equipItem(item) -> bool:
 	if(hasItem(item)):
 		removeItem(item)
 	
-	var slot:String = item.getClothingSlot()
+	var slot:String = item.getClothingSlotSafe()
 	
 	if(equippedItems.has(slot)):
 		Log.printerr("Trying to equip an item to slot "+str(slot)+" when there is already an item")
@@ -293,55 +293,52 @@ func equipItem(item):
 	
 	return true
 
-func unequipItem(item):
+func unequipItem(item) -> bool:
 	var theitem = removeEquippedItem(item)
-	if(theitem != null):
+	if(theitem):
 		addItem(theitem)
 		return true
 	return false
 
-func clearSlot(slot):
-	var theitem = removeItemFromSlot(slot)
-	if(theitem != null):
-		return true
-	return false
+func clearSlot(slot:String):
+	return removeItemFromSlot(slot)
 
-func unequipSlot(slot):
+# Returns the unequipped item or null
+func unequipSlot(slot:String):
 	var theitem = removeItemFromSlot(slot)
-	if(theitem != null):
+	if(theitem):
 		addItem(theitem)
-		return true
-	return false
+	return theitem
 
-func unequipSlotUnlessRestraint(slot):
+func unequipSlotUnlessRestraint(slot:String):
 	var theitem = getEquippedItem(slot)
 	if(theitem != null):
 		if(theitem.isRestraint()):
-			return false
+			return null
 		
 		return unequipItem(theitem)
-	return false
+	return null
 
-func unequipSlotRemoveIfRestraint(slot):
+func unequipSlotRemoveIfRestraint(slot:String):
 	var theitem = getEquippedItem(slot)
-	if(theitem == null):
-		return false
+	if(!theitem):
+		return null
 
 	removeItemFromSlot(slot)
 	if(!theitem.isRestraint() || theitem.isImportant()):
 		addItem(theitem)
-		return true
+	return theitem
 
-func forceEquipRemoveOther(item):
-	var slot:String = item.getClothingSlot()
+func forceEquipRemoveOther(item) -> bool:
+	var slot:String = item.getClothingSlotSafe()
 	
 	if(hasSlotEquipped(slot)):
 		removeItemFromSlot(slot)
 	
 	return equipItem(item)
 
-func forceEquipStoreOther(item):
-	var slot:String = item.getClothingSlot()
+func forceEquipStoreOther(item) -> bool:
+	var slot:String = item.getClothingSlotSafe()
 	
 	if(hasSlotEquipped(slot)):
 		var storedItem = removeItemFromSlot(slot)
@@ -349,8 +346,8 @@ func forceEquipStoreOther(item):
 	
 	return equipItem(item)
 
-func forceEquipStoreOtherUnlessRestraint(item):
-	var slot:String = item.getClothingSlot()
+func forceEquipStoreOtherUnlessRestraint(item) -> bool:
+	var slot:String = item.getClothingSlotSafe()
 	
 	if(hasSlotEquipped(slot)):
 		var storedItem = removeItemFromSlot(slot)
@@ -359,31 +356,35 @@ func forceEquipStoreOtherUnlessRestraint(item):
 	
 	return equipItem(item)
 	
-func equipItemBy(item, equipper):
-	var success = equipItem(item)
-	if(success):
+func equipItemBy(item, equipper) -> bool:
+	if(equipItem(item)):
 		item.onEquippedBy(equipper, false)
+		return true
+	return false
 
-func forceEquipByRemoveOther(item, forcer, canSmartLock=true):
-	var success = forceEquipRemoveOther(item)
-	if(success):
+func forceEquipByRemoveOther(item, forcer, canSmartLock=true) -> bool:
+	if(forceEquipRemoveOther(item)):
 		item.onEquippedBy(forcer, true)
 		if(canSmartLock):
 			item.tryAddSmartLock(forcer)
+		return true
+	return false
 		
-func forceEquipByStoreOther(item, forcer, canSmartLock=true):
-	var success = forceEquipStoreOther(item)
-	if(success):
+func forceEquipByStoreOther(item, forcer, canSmartLock=true) -> bool:
+	if(forceEquipStoreOther(item)):
 		item.onEquippedBy(forcer, true)
 		if(canSmartLock):
 			item.tryAddSmartLock(forcer)
+		return true
+	return false
 		
-func forceEquipByStoreOtherUnlessRestraint(item, forcer, canSmartLock=true):
-	var success = forceEquipStoreOtherUnlessRestraint(item)
-	if(success):
+func forceEquipByStoreOtherUnlessRestraint(item, forcer, canSmartLock:bool=true) -> bool:
+	if(forceEquipStoreOtherUnlessRestraint(item)):
 		item.onEquippedBy(forcer, true)
 		if(canSmartLock):
 			item.tryAddSmartLock(forcer)
+		return true
+	return false
 
 func getSmartLockedItemsAmount() -> int:
 	var result:int = 0
@@ -401,31 +402,26 @@ func getAllSmartLocks() -> Array:
 			result.append(item.restraintData.getSmartLock())
 	return result
 
-func hasItemIDEquipped(itemID: String):
+func hasItemIDEquipped(itemID: String) -> bool:
 	for slot in equippedItems:
 		var item = equippedItems[slot]
 		if(item.id == itemID):
 			return true
 	return false
 
-func hasSlotEquipped(slot):
+# If your code crashes here, replace getClothingSlot() with getClothingSlotSafe()
+func hasSlotEquipped(slot:String) -> bool:
 	return equippedItems.has(slot) && equippedItems[slot] != null
 
-func getEquippedItem(slot):
+func getEquippedItem(slot:String):
 	if(equippedItems.has(slot)):
 		return equippedItems[slot]
 	return null
 
-func getAllEquippedItems():
-#	var result = []
-#	for slot in equippedItems:
-#		if(equippedItems[slot] == null):
-#			continue
-#		result.append(equippedItems[slot])
-	
+func getAllEquippedItems() -> Dictionary:
 	return equippedItems
 
-func removeItemFromSlot(slot):
+func removeItemFromSlot(slot:String):
 	if(equippedItems.has(slot)):
 		var item = equippedItems[slot]
 		item.onUnequipped()
@@ -479,8 +475,8 @@ func clearEquippedItemsKeepPersistent():
 	equippedItems = persistent
 	emit_signal("equipped_items_changed")
 
-func getEquippedItemsWithBuff(buffID):
-	var result = []
+func getEquippedItemsWithBuff(buffID) -> Array:
+	var result:Array = []
 	for itemSlot in equippedItems.keys():
 		var item = equippedItems[itemSlot]
 		
@@ -500,32 +496,32 @@ func removeEquippedItemsList(itemsToDelete: Array):
 	for item in itemsToDelete:
 		removeEquippedItem(item)
 
-func removeEquippedItemsWithBuff(buffID):
-	var founditems = getEquippedItemsWithBuff(buffID)
+func removeEquippedItemsWithBuff(buffID) -> bool:
+	var founditems := getEquippedItemsWithBuff(buffID)
 	var hasItem = false
 	if(founditems.size() > 0):
 		hasItem = true
 	removeEquippedItemsList(founditems)
 	return hasItem
 
-func getItemsWithTag(tag):
-	var result = []
+func getItemsWithTag(tag) -> Array:
+	var result := []
 	for item in items:
 		if(item.hasTag(tag)):
 			result.append(item)
 	return result
 		
-func hasItemsWithTag(tag):
+func hasItemsWithTag(tag) -> bool:
 	return getItemsWithTag(tag).size() > 0
 
-func getItemsWithTagCount(tag):
+func getItemsWithTagCount(tag) -> int:
 	return getItemsWithTag(tag).size()
 
 func removeItemsWithTag(tag):
 	removeItemsList(getItemsWithTag(tag))
 
-func getEquippedItemsWithTag(tag):
-	var result = []
+func getEquippedItemsWithTag(tag) -> Array:
+	var result := []
 	for itemSlot in equippedItems.keys():
 		var item = equippedItems[itemSlot]
 
@@ -533,7 +529,7 @@ func getEquippedItemsWithTag(tag):
 			result.append(item)
 	return result
 	
-func hasEquippedItemWithTag(tag):
+func hasEquippedItemWithTag(tag) -> bool:
 	for itemSlot in equippedItems.keys():
 		var item = equippedItems[itemSlot]
 
@@ -541,14 +537,14 @@ func hasEquippedItemWithTag(tag):
 			return true
 	return false
 	
-func getEquippedItemsWithTagCount(tag):
+func getEquippedItemsWithTagCount(tag) -> int:
 	return getEquippedItemsWithTag(tag).size()
 	
 func removeEquippedItemsWithTag(tag):
 	removeEquippedItemsList(getEquippedItemsWithTag(tag))
 	
-func getEquppedRestraints():
-	var result = []
+func getEquppedRestraints() -> Array:
+	var result := []
 	
 	for itemSlot in equippedItems:
 		var item = equippedItems[itemSlot]
@@ -556,7 +552,7 @@ func getEquppedRestraints():
 			result.append(item)
 	return result
 
-func getEquippedRestraints():
+func getEquippedRestraints() -> Array:
 	return getEquppedRestraints()
 
 func getRemovableRestraintsAmount() -> int:
@@ -569,10 +565,10 @@ func getRemovableRestraintsAmount() -> int:
 				result += 1
 	return result
 
-func hasRemovableRestraints():
+func hasRemovableRestraints() -> bool:
 	return getRemovableRestraintsAmount() > 0
 
-func hasRemovableRestraintsNoLockedSmartlocks():
+func hasRemovableRestraintsNoLockedSmartlocks() -> bool:
 	for itemSlot in equippedItems:
 		var item = equippedItems[itemSlot]
 		if(item.isRestraint()):
@@ -581,8 +577,8 @@ func hasRemovableRestraintsNoLockedSmartlocks():
 				return true
 	return false
 
-func getEquppedRemovableRestraints():
-	var result = []
+func getEquppedRemovableRestraints() -> Array:
+	var result := []
 	
 	for itemSlot in equippedItems:
 		var item = equippedItems[itemSlot]
@@ -592,8 +588,8 @@ func getEquppedRemovableRestraints():
 				result.append(item)
 	return result
 
-func getEquppedRemovableRestraintsNoLockedSmartlocks():
-	var result = []
+func getEquppedRemovableRestraintsNoLockedSmartlocks() -> Array:
+	var result := []
 	
 	for itemSlot in equippedItems:
 		var item = equippedItems[itemSlot]
@@ -603,17 +599,17 @@ func getEquppedRemovableRestraintsNoLockedSmartlocks():
 				result.append(item)
 	return result
 
-func forceRestraintsWithTag(tag, amount = 1):
+func forceRestraintsWithTag(tag, amount:int = 1) -> Array:
 	var itemIDs = GlobalRegistry.getItemIDsByTag(tag)
 	itemIDs.shuffle()
-	var added = 0
-	var result = []
+	var added:int = 0
+	var result := []
 	
 	for itemID in itemIDs:
 		var potentialItem = GlobalRegistry.getItemRef(itemID)
 		
-		var slot:String = potentialItem.getClothingSlot()
-		if(slot == null || !canEquipSlot(slot)):
+		var slot:String = potentialItem.getClothingSlotSafe()
+		if(slot.empty() || !canEquipSlot(slot)):
 			continue
 		
 		if(hasSlotEquipped(slot)):
@@ -637,8 +633,8 @@ func forceRestraintsList(_itemIDs:Array, maxAmount:int=-1) -> Array:
 	for itemID in _itemIDs:
 		var potentialItem = GlobalRegistry.getItemRef(itemID)
 		
-		var slot:String = potentialItem.getClothingSlot()
-		if(slot == null || !canEquipSlot(slot)):
+		var slot:String = potentialItem.getClothingSlotSafe()
+		if(slot.empty() || !canEquipSlot(slot)):
 			continue
 		
 		if(hasSlotEquipped(slot)):
@@ -656,12 +652,14 @@ func forceRestraintsList(_itemIDs:Array, maxAmount:int=-1) -> Array:
 	
 	return result
 
-func getFirstItemThatCoversBodypart(bodypartSlot):
+func getFirstItemThatCoversBodypart(bodypartSlot:String):
 	for inventorySlot in InventorySlot.getAll():
 		if(!hasSlotEquipped(inventorySlot)):
 			continue
 		
 		var item = getEquippedItem(inventorySlot)
+		if(item.isRemoved()):
+			continue
 		if(item.coversBodypart(bodypartSlot)):
 			return item
 	
@@ -674,8 +672,8 @@ func getRestraintsThatCanBeForcedDuringSex(tag):
 	for itemID in itemIDs:
 		var potentialItem = GlobalRegistry.getItemRef(itemID)
 		
-		var slot:String = potentialItem.getClothingSlot()
-		if(slot == null || !canEquipSlot(slot)):
+		var slot:String = potentialItem.getClothingSlotSafe()
+		if(slot.empty() || !canEquipSlot(slot)):
 			continue
 
 		if(hasSlotEquipped(slot)):
@@ -683,16 +681,16 @@ func getRestraintsThatCanBeForcedDuringSex(tag):
 			if(ourItem.isRestraint() || ourItem.isImportant()):
 				continue
 		
-		var bodypartSlot = potentialItem.getRequiredBodypart()
+		var bodypartSlot:String = potentialItem.getRequiredBodypartSafe()
 		var coversItem = getFirstItemThatCoversBodypart(bodypartSlot)
-		if(bodypartSlot != null && coversItem != null):
+		if(!bodypartSlot.empty() && coversItem != null):
 			if(coversItem.isRestraint() || coversItem.isImportant()):
 				continue
 		
 		result.append(itemID)
 	return result
 
-func getAmountOfRestraintsThatCanForceDuringSex(tag):
+func getAmountOfRestraintsThatCanForceDuringSex(tag) -> int:
 	return getRestraintsThatCanBeForcedDuringSex(tag).size()
 
 func clearStaticRestraints():
@@ -705,7 +703,7 @@ func hasLockedStaticRestraints():
 			return true
 	return false
 
-func hasIllegalItems():
+func hasIllegalItems() -> bool:
 	for item in items:
 		if(item.hasTag(ItemTag.Illegal)):
 			return true
@@ -726,10 +724,10 @@ func findAndEquipInmateUniform():
 		forceEquipStoreOtherUnlessRestraint(getFirstOf("inmateuniformSexDeviant"))
 
 func removeBrokenDuplicatedItems():
-	var itemsToRemove = []
-	var equippedItemsToRemove = []
+	var itemsToRemove := []
+	var equippedItemsToRemove := []
 	
-	var seenIDS = {}
+	var seenIDS := {}
 	for item in items:
 		if(item.uniqueID == null || item.uniqueID == ""):
 			continue
@@ -757,9 +755,9 @@ func removeBrokenDuplicatedItems():
 		Log.printerr("REMOVING DUBLICATED ITEM: "+equippedItem.id+" UNIQUE ID: "+str(equippedItem.uniqueID))
 		removeEquippedItem(equippedItem)
 
-func removeRandomRestraints(removedRestraintsChance):
-	var restraints = getEquppedRestraints()
-	var howManyRemoved = 0
+func removeRandomRestraints(removedRestraintsChance:float) -> int:
+	var restraints := getEquppedRestraints()
+	var howManyRemoved := 0
 	if(restraints.size() > 0):
 		for restraint in restraints:
 			if(restraint.isImportant() || restraint.isPersistent()):
@@ -807,8 +805,8 @@ func getOffspringEggs() -> Array:
 				result.append(item)
 	return result
 
-func saveData():
-	var data = {}
+func saveData() -> Dictionary:
+	var data := {}
 	
 	data["items"] = []
 	
@@ -834,7 +832,7 @@ func saveData():
 		
 	return data
 	
-func loadData(data):
+func loadData(data:Dictionary):
 	clear()
 	
 	var loadedItems = SAVE.loadVar(data, "items", [])
@@ -875,7 +873,7 @@ func loadData(data):
 		newItem.loadData(itemLoadedData)
 		equipItem(newItem)
 
-func loadDataNPC(data, npc):
+func loadDataNPC(data:Dictionary, npc):
 	if(true):
 		var hasAnyInvData = data.has("equipped_items")
 		loadData(data)

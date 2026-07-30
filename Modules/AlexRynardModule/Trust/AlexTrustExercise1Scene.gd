@@ -1043,12 +1043,12 @@ func _react(_action: String, _args):
 
 	if(_action == "9_let"):
 		for _i in range(5):
-			GM.pc.addBodywritingRandom()
+			GM.pc.addBodywritingRandom(false, "alexrynard")
 
 	if(_action == "9_brat"):
 		for _i in range(8):
-			GM.pc.addBodywritingRandom()
-		getCharacter("alexrynard").addBodywritingRandom()
+			GM.pc.addBodywritingRandom(false, "alexrynard")
+		getCharacter("alexrynard").addBodywritingRandom(false, "pc")
 		bratCounter += 1
 
 	if(_action == "10_brat"):

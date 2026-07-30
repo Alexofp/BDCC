@@ -3,6 +3,9 @@ extends "res://Scenes/SceneBase.gd"
 func _init():
 	sceneID = "RestingInCellScene"
 
+func _reactInit():
+	GM.main.MRH.checkCanRestart()
+
 func _run():
 	if(state == ""):
 		playAnimation(StageScene.Sleeping, "sleep")
@@ -21,7 +24,10 @@ func _run():
 				addButton("Rest %02d:00" % [t], "Wake up when the time becomes %02d:00" % [t], "restuntil", [t])
 			else:
 				addDisabledButton("Rest %02d:00" % [t], "Too late for that today")
-			
+		
+		if(GM.main.MRH.canRestartMainRoute()):
+			addExtraButtonAt(4, "Reset Main Route", "Reset the main route progress, allowing you to start another route if you want to!", "startReset")
+		
 	if(state == "rested"):
 		saynn("You spend some time in your cell. You feel less tired.")
 		
@@ -82,6 +88,11 @@ func _react(_action: String, _args):
 		GM.main.showLog()
 		
 		endScene()
+		return
+	
+	if(_action == "startReset"):
+		endScene()
+		runScene("ResetMainRouteScene")
 		return
 	
 	setState(_action)

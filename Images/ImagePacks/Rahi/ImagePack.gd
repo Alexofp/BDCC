@@ -70,6 +70,12 @@ func _init():
 	addCharacter("elizaMom", [], "res://Images/ImagePacks/Rahi/Characters/elizaMom/elizaMom.png")
 	addCharacter("elizaMom", ["naked"], "res://Images/ImagePacks/Rahi/Characters/elizaMom/elizaMom-naked.png")
 	
+	addCharacter("announcer", [], "res://Images/ImagePacks/Rahi/Characters/announcer/announcer.png")
+	addCharacter("announcer", ["naked"], "res://Images/ImagePacks/Rahi/Characters/announcer/announcer-naked.png")
+	
+	addCharacter("skar", [], "res://Images/ImagePacks/Rahi/Characters/skar/skar.png")
+	addCharacter("skar", ["naked"], "res://Images/ImagePacks/Rahi/Characters/skar/skar-naked.png")
+	
 	addSceneImageCustomArtist("SocketTalkScene", "look_poster", "res://Images/ImagePacks/Rahi/Scenes/socket.webp", 500, "Sompurr and Rahi")
 	#addSceneImageCustomArtist("SocketIntroScene", "naked_engineer", "res://Images/ImagePacks/Rahi/Scenes/socket_nobackground.webp", 500, "Sompurr and Rahi")
 	addSceneImageCustomArtist("SocketHelp2Scene", "socket_gets_stuck", "res://Images/ImagePacks/Rahi/Scenes/socket_stuck.webp", 400, "Sompurr")

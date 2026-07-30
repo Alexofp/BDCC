@@ -14,7 +14,7 @@ func onAct(_char:BaseCharacter, _auction, _slaveTraits:Dictionary):
 	
 	sayPresenter("Well, well, well, look who we have tonight, here at the Blacktail Market! I hope you're all ready for a little fun, because things are about to get interesting.")
 	
-	saynn("{presenter.YouHe} {presenter.youVerb('give')} a playful wink, gesturing to the slave standing nearby. The spotlight follows the gesture, casting a soft glow on {slave.him} as {slave.he} squints and shifts nervously.")
+	saynn("{presenter.YouHe} {presenter.youHeVerb('give')} a playful wink, gesturing to the slave standing nearby. The spotlight follows the gesture, casting a soft glow on {slave.him} as {slave.he} squints and shifts nervously.")
 	
 	sayPresenter("Meet this little toy, someone who has just the right mix of charm, skill, and.. well, let’s just say, you’ll have fun figuring out the rest. Plug-And-Play, you know how it works!")
 	

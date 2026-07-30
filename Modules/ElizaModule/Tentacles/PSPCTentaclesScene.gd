@@ -92,7 +92,7 @@ func _run():
 
 		saynn("And then.. the whole world splinters.")
 
-		saynn("You feel a throbbing headache that's unlike anything you've ever felt before. It's like your mind is expanding.. but way too fast for your likings. You stagger, catching yourself against the wall. Your vision gets all blurry.. you senses begin to see colors that don't exist.. sounds that don't make any sense..")
+		saynn("You feel a throbbing headache that's unlike anything you've ever felt before. It's like your mind is expanding.. but way too fast for your likings. You stagger, catching yourself against the wall. Your vision gets all blurry.. your senses begin to see colors that don't exist.. sounds that don't make any sense..")
 
 		saynn("[say=pc]Argh..[/say]")
 

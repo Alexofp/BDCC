@@ -19,13 +19,13 @@ static func getName(_diff:int) -> String:
 
 static func getDifficultyText(_diff:int) -> String:
 	if(_diff == VeryEasy):
-		return "3 yellows"
+		return "3 yellows allowed"
 	if(_diff == Easy):
-		return "2 yellows"
+		return "2 yellows allowed"
 	if(_diff == Medium):
-		return "1 yellow"
+		return "1 yellow allowed"
 	if(_diff == Hard):
-		return "No yellows"
+		return "No yellows allowed"
 	return "Unknown"
 
 static func getDifficultyYellowAmount(_diff:int) -> int:

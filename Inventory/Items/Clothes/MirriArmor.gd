@@ -63,6 +63,8 @@ func getHidesParts(_character):
 #	return "res://Images/Items/equipment/guardarmor.png"
 
 func coversBodyparts():
+	if(itemState.isRemoved()):
+		return {}
 	return {
 		BodypartSlot.Body: true,
 		BodypartSlot.Breasts: true,

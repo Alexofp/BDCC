@@ -191,7 +191,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 	if(_id == "startHandjob"):
 		setState("handjob")
 		addTextPick([
-			"A tentacles wraps around {sub.your} {sub.penisShort} and proceeds to stroke it!",
+			"A tentacle wraps around {sub.your} {sub.penisShort} and proceeds to stroke it!",
 		])
 		stimulate(DOM_0, S_MOUTH, SUB_0, S_PENIS, I_TEASE, Fetish.OralSexGiving, SPEED_SLOW)
 		react(SexReaction.AboutToHandjobSub)

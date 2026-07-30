@@ -62,7 +62,7 @@ func denied_leave_do(_id:String, _args:Dictionary, _context:Dictionary):
 func gave_key_text():
 	saynn("{reacter.name} thinks about it for a second..")
 	sayLine("reacter", "AskKeyGive", {main="reacter", target="starter"})
-	saynn("{reacter.YouHe} {reacter.youVerb('approach', 'aproaches')} {starter.you} and unlocks the smart-locked gear with {reacter.yourHis} unique key..")
+	saynn("{reacter.YouHe} {reacter.youHeVerb('approach', 'approaches')} {starter.you} and {reacter.youHeVerb('unlock')} the smart-locked gear with {reacter.yourHis} unique key..")
 	saynn("Freedom..")
 
 	addAction("leave", "Leave", "Yay.", "default", 1.0, 60, {})
@@ -75,7 +75,7 @@ func gave_key_do(_id:String, _args:Dictionary, _context:Dictionary):
 func sex_challenge_start_text():
 	saynn("{reacter.name} thinks about it for a second..")
 	sayLine("reacter", "AskKeyChallenge", {main="reacter", target="starter"})
-	saynn("Looks like {starter.you} {starter.youAre}n't getting that key unless {starter.youHe} {starter.youVerb('let')} {reacter.you} fuck {starter.youHim}..")
+	saynn("Looks like {starter.you} {starter.youArent} getting that key unless {starter.youHe} {starter.youHeVerb('let')} {reacter.you} fuck {starter.youHim}..")
 
 	addAction("submit", "Submit", "Let it happen..", "sexSub", 1.0, 300, {start_sex=["reacter", "starter", SexType.DefaultSex, {SexMod.BondageDisabled: true}],})
 	addAction("refuse", "Refuse", "You'd rather not..", "default", 0.1, 60, {})

@@ -289,6 +289,26 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/Computer/ComputerBase.gd"
 }, {
+"base": "Sprite",
+"class": "ContentAutoSprite",
+"language": "GDScript",
+"path": "res://UI/ContentBoard/Util/ContentSprite.gd"
+}, {
+"base": "Object",
+"class": "ContentBoardCondition",
+"language": "GDScript",
+"path": "res://UI/ContentBoard/Util/ContentBoardCondition.gd"
+}, {
+"base": "Reference",
+"class": "ContentBoardEntryBase",
+"language": "GDScript",
+"path": "res://UI/ContentBoard/ContentBoardEntryBase.gd"
+}, {
+"base": "Object",
+"class": "ContentBoardStatus",
+"language": "GDScript",
+"path": "res://UI/ContentBoard/Util/ContentBoardStatus.gd"
+}, {
 "base": "Object",
 "class": "ContentType",
 "language": "GDScript",
@@ -378,6 +398,16 @@ _global_script_classes=[ {
 "class": "CurveRenderer",
 "language": "GDScript",
 "path": "res://Player/Player3D/Chains/CurveRenderer.gd"
+}, {
+"base": "Reference",
+"class": "CustomBodypartSlot",
+"language": "GDScript",
+"path": "res://Player/Bodyparts/CustomBodypartSlot.gd"
+}, {
+"base": "Reference",
+"class": "CustomInventorySlot",
+"language": "GDScript",
+"path": "res://Inventory/CustomInventorySlot.gd"
 }, {
 "base": "Object",
 "class": "CycleStage",
@@ -954,6 +984,21 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/LustCombat/LustInterests.gd"
 }, {
+"base": "Object",
+"class": "MainRouteEnding",
+"language": "GDScript",
+"path": "res://Game/Flags/MainRouteEnding.gd"
+}, {
+"base": "Reference",
+"class": "MainRouteHistory",
+"language": "GDScript",
+"path": "res://Game/Flags/MainRouteHistory.gd"
+}, {
+"base": "Reference",
+"class": "MainRouteHistoryEntry",
+"language": "GDScript",
+"path": "res://Game/Flags/MainRouteHistoryEntry.gd"
+}, {
 "base": "Control",
 "class": "MainScene",
 "language": "GDScript",
@@ -993,6 +1038,21 @@ _global_script_classes=[ {
 "class": "MinigameResult",
 "language": "GDScript",
 "path": "res://Game/Minigames/MinigameResult.gd"
+}, {
+"base": "Reference",
+"class": "MissionBase",
+"language": "GDScript",
+"path": "res://Game/DomRoute/MissionBase.gd"
+}, {
+"base": "QuestBase",
+"class": "MissionQuestProxy",
+"language": "GDScript",
+"path": "res://Game/DomRoute/Util/MissionQuestProxy.gd"
+}, {
+"base": "Reference",
+"class": "MissionSystem",
+"language": "GDScript",
+"path": "res://Game/DomRoute/MissionSystem.gd"
 }, {
 "base": "Reference",
 "class": "ModEntry",
@@ -1338,6 +1398,11 @@ _global_script_classes=[ {
 "class": "RecruitSystem",
 "language": "GDScript",
 "path": "res://Game/DomRoute/RecruitSystem.gd"
+}, {
+"base": "SceneBase",
+"class": "RecruitTalkSceneBase",
+"language": "GDScript",
+"path": "res://Game/DomRoute/Util/RecruitTalkSceneBase.gd"
 }, {
 "base": "Reference",
 "class": "RelationshipEntry",
@@ -2011,6 +2076,10 @@ _global_script_class_icons={
 "CodeContex": "",
 "ColorUtils": "",
 "ComputerBase": "",
+"ContentAutoSprite": "",
+"ContentBoardCondition": "",
+"ContentBoardEntryBase": "",
+"ContentBoardStatus": "",
 "ContentType": "",
 "CreatedInteraction": "",
 "CreatedInteractionAction": "",
@@ -2029,6 +2098,8 @@ _global_script_class_icons={
 "CumProduction": "",
 "CurveEditorCustom": "",
 "CurveRenderer": "",
+"CustomBodypartSlot": "",
+"CustomInventorySlot": "",
 "CycleStage": "",
 "DamageType": "",
 "Datapack": "",
@@ -2144,6 +2215,9 @@ _global_script_class_icons={
 "LustCombatState": "",
 "LustFocus": "",
 "LustInterests": "",
+"MainRouteEnding": "",
+"MainRouteHistory": "",
+"MainRouteHistoryEntry": "",
 "MainScene": "",
 "MapDecoration": "",
 "MedicalLoot": "",
@@ -2152,6 +2226,9 @@ _global_script_class_icons={
 "MeshInstanceWithPattern": "",
 "MicrosoftTranslator": "",
 "MinigameResult": "",
+"MissionBase": "",
+"MissionQuestProxy": "",
+"MissionSystem": "",
 "ModEntry": "",
 "Module": "",
 "MyBoneAttachment": "",
@@ -2221,6 +2298,7 @@ _global_script_class_icons={
 "RecruitDifficulty": "",
 "RecruitSceneBase": "",
 "RecruitSystem": "",
+"RecruitTalkSceneBase": "",
 "RelationshipEntry": "",
 "RelationshipSystem": "",
 "RepStat": "",
@@ -2494,6 +2572,7 @@ common/enable_pause_aware_picking=true
 [rendering]
 
 quality/driver/fallback_to_gles2=true
+2d/snapping/use_gpu_pixel_snap=true
 vram_compression/import_etc=true
 gles2/compatibility/disable_half_float=true
 environment/default_clear_color=Color( 0.247059, 0.243137, 0.490196, 1 )

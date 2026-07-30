@@ -276,8 +276,22 @@ func loadData(_data):
 func getClothingSlot():
 	return null
 
+# Always returns a string. Empty string = no slot
+func getClothingSlotSafe() -> String:
+	var theSlot = getClothingSlot()
+	if(theSlot == null || !(theSlot is String)):
+		return ""
+	return theSlot
+
 func getRequiredBodypart():
 	return null
+
+# Always returns a string. Empty string = no slot
+func getRequiredBodypartSafe() -> String:
+	var theSlot = getRequiredBodypart()
+	if(theSlot == null || !(theSlot is String)):
+		return ""
+	return theSlot
 
 func getTakeOffScene():
 	return "TakeAnyItemOffScene"
@@ -368,8 +382,16 @@ func coversBodyparts():
 		return itemState.coversBodyparts()
 	return {}
 
+func coversBodypartsFinal() -> Dictionary:
+	if(isRemoved()):
+		return {}
+	var theCovers = coversBodyparts()
+	if(theCovers == null):
+		return {}
+	return theCovers
+
 func coversBodypart(bodypartSlot):
-	var covers = coversBodyparts()
+	var covers = coversBodypartsFinal()
 	if(covers.has(bodypartSlot)):
 		return true
 	return false
@@ -548,7 +570,7 @@ func isWornByWearer():
 	var wearer = getWearer()
 	if(wearer == null):
 		return false
-	if(wearer.getInventory().getEquippedItem(getClothingSlot()) == self):
+	if(wearer.getInventory().getEquippedItem(getClothingSlotSafe()) == self):
 		return true
 	return false
 
