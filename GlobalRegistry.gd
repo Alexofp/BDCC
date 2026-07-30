@@ -1,8 +1,8 @@
 extends Node
 
 var game_version_major = 0
-var game_version_minor = 2
-var game_version_revision = 5
+var game_version_minor = 3
+var game_version_revision = 0
 var game_version_suffix = ""
 
 var contributorsCredits:Dictionary = {
@@ -139,6 +139,14 @@ var contributorsCredits:Dictionary = {
 		"[url=https://github.com/Alexofp/BDCC/pull/251]#20[/url]",
 		"[url=https://github.com/Alexofp/BDCC/pull/268]#21[/url]",
 		"[url=https://github.com/Alexofp/BDCC/pull/269]#22[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/316]#23[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/339]#24[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/341]#25[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/345]#26[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/340]#27[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/336]#28[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/342]#29[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/347]#30[/url]",
 	],
 	"CheeseyCake92": [
 		"[url=https://github.com/Alexofp/BDCC/pull/158]#1[/url]",
@@ -172,6 +180,7 @@ var contributorsCredits:Dictionary = {
 		"[url=https://github.com/Alexofp/BDCC/pull/284]#9[/url]",
 		"[url=https://github.com/Alexofp/BDCC/pull/285]#10[/url]",
 		"[url=https://github.com/Alexofp/BDCC/pull/287]#11[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/344]#12[/url]",
 	],
 	"SongJo": [
 		"42 great haircuts",
@@ -194,6 +203,17 @@ var contributorsCredits:Dictionary = {
 	],
 	"Zsar": [
 		"[url=https://github.com/Alexofp/BDCC/pull/293]#1[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/321]#2[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/317]#3[/url]",
+	],
+	"sleezyIguana": [
+		"[url=https://github.com/Alexofp/BDCC/pull/314]#1[/url]",
+	],
+	"PuroSlavKing": [
+		"[url=https://github.com/Alexofp/BDCC/pull/323]#1[/url]",
+	],
+	"kristijanWolff": [
+		"[url=https://github.com/Alexofp/BDCC/pull/332]#1[/url]",
 	],
 }
 

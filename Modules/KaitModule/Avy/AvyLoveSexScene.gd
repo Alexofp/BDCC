@@ -247,10 +247,10 @@ func _react(_action: String, _args):
 		GM.pc.orgasmFrom("avy")
 		if(isVag):
 			GM.pc.gotVaginaFuckedBy("avy")
-			GM.pc.gotCummedInVaginaBy("avy")
+			GM.pc.cummedInVaginaBy("avy")
 		else:
 			GM.pc.gotAnusFuckedBy("avy")
-			GM.pc.gotCummedInAnusBy("avy")
+			GM.pc.cummedInAnusBy("avy")
 
 	if(_action == "after_orgasm"):
 		processTime(5*60)
