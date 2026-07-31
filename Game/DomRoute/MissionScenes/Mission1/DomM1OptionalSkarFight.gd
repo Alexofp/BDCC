@@ -63,7 +63,7 @@ func _run():
 
 		addButton("Just leave", "Leave the guard be", "just_leave")
 		addButtonWithChecks("Ride (vaginal)", "Might as well ride his cock now!", "start_vag_ride", [], [[ButtonChecks.HasReachableVagina]])
-		addButtonWithChecks("Ride (anal)", "Might as well ride his cock now!", "start_anal_ride", [], [[ButtonChecks.HasReachableVagina]])
+		addButton("Ride (anal)", "Might as well ride his cock now!", "start_anal_ride")
 		addButtonWithChecks("Fuck him", "Rail his ass!", "start_fuck_him", [], [[ButtonChecks.HasReachablePenis]])
 	if(state == "just_leave"):
 		playAnimation(StageScene.Solo, "stand")

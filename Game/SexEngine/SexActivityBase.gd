@@ -2726,7 +2726,7 @@ func cumOnSelf(_indxWho:int, _indxCauser:int, uniqueOrgasm:String = "", extraOrg
 	if(uniqueOrgasm != ""):
 		sendSexEvent(SexEvent.UniqueOrgasm, _indxCauser, _indxWho, {orgasmType=uniqueOrgasm})
 	if(orgasmReaction >= 0):
-		react(orgasmReaction, [100.0, 100.0] if causerInfo != theInfo else [100.0], [_indxWho, _indxCauser] if causerInfo != theInfo else [_indxWho], [uniqueOrgasm])
+		react(orgasmReaction, [100.0, 100.0] if causerInfo != theInfo else [100.0], [_indxCauser, _indxWho] if causerInfo != theInfo else [_indxWho], [uniqueOrgasm])
 	
 	if(theChar.getWornPenisPump() != null):
 		fetishAffect(_indxWho, Fetish.SeedMilking, 3.0)
