@@ -97,7 +97,7 @@ func _run():
 
 		saynn("[say=kait]From what I've gathered, the captain has a few guards who are his 'besties'. They are the best of the best and so he trusts them, naturally. If we manage to break them all, there will be no one left to protect the little guy.[/say]")
 
-		saynn("[say=announcer]Breaking his team, that's a dangerous game you wanna play. Not sure if its a good idea.[/say]")
+		saynn("[say=announcer]Breaking his team, that's a dangerous game you wanna play. Not sure if it's a good idea.[/say]")
 
 		saynn("[say=kait]Yeah. If we do it right, he won't even notice his team turning against him. Do you have something better in mind?[/say]")
 

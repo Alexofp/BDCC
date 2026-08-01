@@ -9,6 +9,7 @@ var pcLust:int = 0
 var pcStamina:int = 0 # Missing stamina
 var oldFlags:Dictionary = {} # The old flags of the mission that we have started again
 var replayMode:bool = false # Are we replaying a mission for the second time
+var missionMarkers:Array = [] # Locations of rooms that should have a mission marker
 
 func getAllPossibleMissions() -> Array:
 	var result:Array = []
@@ -200,6 +201,7 @@ func cancelCurrentMission():
 	if(current.empty()):
 		return
 	restoreOldFlags()
+	clearMissionMarkers()
 	current = ""
 	GM.main.RCS.clearCurrentIfMission()
 
@@ -209,6 +211,7 @@ func failCurrentMission():
 		replayMode = false
 	else:
 		flags.erase(current) # Make sure there is nothing recorded about what we did
+	clearMissionMarkers()
 	current = ""
 	GM.main.RCS.clearCurrentIfMission()
 	
@@ -231,6 +234,7 @@ func completeMission():
 	var wasAlreadyCompleted:bool = isCompleted(current)
 	var theMission = GlobalRegistry.getMission(current)
 	completed[current] = true
+	clearMissionMarkers()
 	current = ""
 	GM.main.addMessage("Task completed!")
 	# Add experience here?
@@ -399,6 +403,7 @@ func getDecisionsStrings(_missionID:String) -> Array:
 	
 # Called from KaitModule
 func resetMainRoute():
+	clearMissionMarkers()
 	current = ""
 	completed.clear()
 	flags.clear()
@@ -408,6 +413,24 @@ func setKaitLine(_text:String):
 
 func setAvyLine(_text:String):
 	GM.main.setFlag("KaitModule.avyApproach", _text)
+
+func clearMissionMarkers():
+	if(!current.empty()):
+		setMissionMarkers([])
+
+func setMissionMarkers(_Ar:Array):
+	if(!isOnMission()):
+		Log.printerr("Trying to call setMissionMarkers("+str(_Ar)+") while not on a mission!")
+		_Ar = []
+	if(_Ar != missionMarkers):
+		missionMarkers = _Ar.duplicate()
+	GM.world.setMissionRooms(_Ar)
+
+func internal_setMissionMarkers(_Ar:Array):
+	GM.world.setMissionRooms(_Ar)
+
+func setMissionMarker(_loc:String):
+	setMissionMarkers([_loc] if !_loc.empty() else [])
 
 func saveData() -> Dictionary:
 	return {
@@ -419,6 +442,7 @@ func saveData() -> Dictionary:
 		pcStamina = pcStamina,
 		oldFlags = oldFlags,
 		replayMode = replayMode,
+		missionMarkers = missionMarkers,
 	}
 
 func loadData(_data:Dictionary):
@@ -433,3 +457,5 @@ func loadData(_data:Dictionary):
 	pcStamina = SAVE.loadVar(_data, "pcStamina", 0)
 	oldFlags = SAVE.loadVar(_data, "oldFlags", {})
 	replayMode = SAVE.loadVar(_data, "replayMode", false)
+	missionMarkers = SAVE.loadVar(_data, "missionMarkers", [])
+	call_deferred("internal_setMissionMarkers", missionMarkers) # Ehh, just a visual thing, its fine to use call_deferred here

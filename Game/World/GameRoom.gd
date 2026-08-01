@@ -44,6 +44,7 @@ const sprites = {
 
 onready var roomSpriteObject = $Sprite
 onready var gridSprite = $Grid
+onready var missionSprite = $Mission
 
 signal onEnter(room)
 signal onPreEnter(room)
@@ -272,6 +273,9 @@ func isLocToCatchOfflimits() -> bool:
 		return true
 	
 	return false
+
+func setMissionSpriteVisible(_vis:bool):
+	missionSprite.visible = _vis
 
 # https://github.com/godotengine/godot/issues/43491
 # This function should just start working after the issue is fixed
