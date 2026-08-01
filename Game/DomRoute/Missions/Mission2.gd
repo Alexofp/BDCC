@@ -40,6 +40,9 @@ func _init():
 	rewardExp = 50
 	rewardCredits = 5
 
+func onMissionStart():
+	setMissionMarker("cellblock_red_nearcell")
+
 func getObjectives() -> Array:
 	var result:Array = []
 	

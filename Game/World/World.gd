@@ -27,6 +27,7 @@ var lastAimedRoomID = null
 
 var pawns:Dictionary = {}
 var entities:Dictionary = {}
+var missionRooms:Array = []
 
 var roomConnectionScene = preload("res://Game/World/RoomConnection.tscn")
 onready var worldFloorScene = load("res://Game/World/WorldFloor.tscn")
@@ -740,6 +741,20 @@ func canMeetInLoc(_loc:String) -> bool:
 	if(!theRoom):
 		return false
 	return canMeetOnFloor(theRoom.getFloorID())
+
+func setMissionRooms(_roomIDs:Array):
+	for theOldRoomID in missionRooms:
+		var theRoom = getRoomByID(theOldRoomID)
+		if(!theRoom):
+			continue
+		theRoom.setMissionSpriteVisible(false)
+	
+	missionRooms = _roomIDs.duplicate()
+	for theNewRoomID in missionRooms:
+		var theRoom = getRoomByID(theNewRoomID)
+		if(!theRoom):
+			continue
+		theRoom.setMissionSpriteVisible(true)
 
 func saveData():
 	var data = {}

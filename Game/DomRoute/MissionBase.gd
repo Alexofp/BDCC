@@ -144,3 +144,12 @@ func giveRewardFinal(_isRepeat:bool):
 
 func canCancelAtAnyTime() -> bool:
 	return true
+
+func clearMissionMarkers():
+	GM.main.MS.clearMissionMarkers()
+
+func setMissionMarkers(_Ar:Array):
+	GM.main.MS.setMissionMarkers(_Ar)
+
+func setMissionMarker(_loc:String):
+	GM.main.MS.setMissionMarker(_loc)

@@ -46,14 +46,15 @@ func _init():
 	rewardExp = 50
 	rewardCredits = 3
 
+func onMissionStart():
+	setMissionMarker("hall_mainentrance")
+
 func getObjectives() -> Array:
 	var result:Array = []
 	
 	result.append("Meet your team in front of the checkpoint that's near the elevator.")
 	if(getFlag("check", false)):
 		result.append("Search the offices until you find the right one!")
-	
-	
 	
 	return result
 
@@ -81,12 +82,22 @@ func checkOfficeStuff(_flagID:String, _loc:String, _officeLoc:String) -> Array:
 func onSceneStart(_sceneID:String, _args:Array):
 	if(_sceneID == "DomM1s2Checkpoint"):
 		setFlag("check", true)
+		updateOfficeMarkers()
 	if(_sceneID == "DomM1OptionalSkar"):
 		setFlag("skar", true)
+
+func updateOfficeMarkers():
+	var theMarkers:Array = []
+	for _i in 4:
+		var _index:int = _i + 1
+		if(!getFlag("c"+str(_index), false)):
+			theMarkers.append("cd_office"+str(_index))
+	setMissionMarkers(theMarkers)
 
 func onSimpleScene(_eventID:String, _args:Array, _scene):
 	if(_eventID == "check"):
 		setFlag(_args[0], true)
+		updateOfficeMarkers()
 	if(_eventID == "skarNope"):
 		GM.pc.setLocation("cd_last_intersection")
 
