@@ -82,7 +82,11 @@ func sex_challenge_start_text():
 
 func sex_challenge_start_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "submit"):
+		var theDom:String = getRoleID("reacter")
 		var _result:SexEngineResult = getSexResult(_args, true)
+		if(_result.isSubUnconscious("pc")):
+			var _howMany = GM.pc.unlockAllKeyholderLocksFrom(theDom)
+			addMessage("The dom decided to unlock your restraints anyway.")
 		domSatisfaction = _result.getAverageDomSatisfaction() if _result else 0.0
 		setState("sex_challenge_after_sex", "reacter")
 	if(_id == "refuse"):
