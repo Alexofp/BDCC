@@ -317,3 +317,10 @@ func _on_SexToysButton_pressedActually():
 func onMenuClosePressed(_menu):
 	_menu.queue_free()
 	main_h_box.visible = true
+
+
+func _on_DevFetishGenerator_pressedActually():
+	Util.delete_children(devSubScreen)
+	
+	var scene = load("res://UI/NpcFetishGenerator/NpcFetishGenerator.tscn")
+	devSubScreen.add_child(scene.instance())

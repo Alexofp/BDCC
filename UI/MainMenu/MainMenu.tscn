@@ -560,6 +560,16 @@ margin_bottom = 56.0
 text = "Interaction Creator"
 myShortcutKey = "W"
 
+[node name="DevFetishGenerator" parent="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer" instance=ExtResource( 11 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 304.0
+margin_top = 30.0
+margin_right = 452.0
+margin_bottom = 56.0
+text = "Npc Fetishes Gen."
+myShortcutKey = "3"
+
 [node name="TroubleshootingScreen" parent="MainHBox/CenterAreaVBox" instance=ExtResource( 12 )]
 unique_name_in_owner = true
 visible = false
@@ -711,6 +721,7 @@ unique_name_in_owner = true
 [connection signal="pressedActually" from="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer/DevSceneConverter" to="." method="_on_DevSceneConverter_pressed"]
 [connection signal="pressed" from="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer/SexActivityCreator" to="." method="_on_SexActivityCreator_pressed"]
 [connection signal="pressedActually" from="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer/InteractionCreator" to="." method="_on_InteractionCreator_pressed"]
+[connection signal="pressedActually" from="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer/DevFetishGenerator" to="." method="_on_DevFetishGenerator_pressedActually"]
 [connection signal="onClose" from="MainHBox/CenterAreaVBox/TroubleshootingScreen" to="." method="_on_TroubleshootingScreen_onClose"]
 [connection signal="onClosePressed" from="MainHBox/CenterAreaVBox/LoadGameScreen" to="." method="switchToMainMenu"]
 [connection signal="onClosePressed" from="MainHBox/CenterAreaVBox/OptionsScreen" to="." method="switchToMainMenu"]
