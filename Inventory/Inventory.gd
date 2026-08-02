@@ -934,26 +934,24 @@ func loadDataNPC(data:Dictionary, npc):
 
 func canUndressSlot(_slot:String, _handled:Dictionary={}) -> bool:
 	for equippedSlot in equippedItems:
-		if _slot==equippedSlot:
-			continue
 		
 		var undressChain : Array = InventorySlot.getUndressChainForSlot(equippedSlot)
 		if not _slot in undressChain:
 			continue
 		
-		if getNextSlotForUndressChain(undressChain, _handled)==_slot:
-			return true
+		if not getNextSlotForUndressChain(undressChain, _handled) in ["", _slot]:
+			return false
 	
 	
-	return false
+	return true
 
-func getNextSlotForUndressChain(_chain:Array, _handled:Dictionary={}) -> String:
+func getNextSlotForUndressChain(_chain:Array, _handled:Dictionary={}): # returns null if can't undress any slot, "" if ended
 	for slot in _chain:
 		var item = getEquippedItem(slot)
 		if(!item || item.isRemoved()):
 			continue
 		if(_handled.has(item) || item.isRestraint() || !item.itemState):
-			return ""
+			return null
 		
 		return slot
 	
