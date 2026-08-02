@@ -12,6 +12,9 @@ func getDescription():
 func getClothingSlot():
 	return InventorySlot.Penis
 
+func generateItemState():
+	itemState = ItemStateUnremovable.new()
+
 func getBuffs():
 	return [
 		buff(Buff.ChastityPenisBuff),

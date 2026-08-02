@@ -60,15 +60,13 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 	if(_domInfo.getChar().isPlayer()):
 		var _inv:Inventory = sub.getInventory()
 		for slot in _inv.getEquippedItems():
-			if _inv.hasSlotEquipped(slot):
-				addUndressButtonsForSlot(_inv, slot, handledItems)
+			addUndressButtonsForSlot(_inv, slot, handledItems)
 	
 func addUndressButtonsForSlot(_inv:Inventory, _slot:String, _handled:Dictionary):
-	if _inv.canUndressSlot(_slot):
-		var theItem = _inv.getEquippedItem(_slot)
+	var theItem = _inv.getEquippedItem(_slot)
+	if(!_handled.has(theItem) && _inv.canUndressSlotSexEngine(_slot)):
 		_handled[theItem] = true
-		addStartAction([theItem], "Take off "+str(theItem.getCasualName()), "Take off this item from the sub", 0.0)
-	
+		addStartAction([theItem], "Take off "+str(theItem.getCasualName()), "Take off this item from the sub", 0.0, {A_CATEGORY: ["Undress", "Sub (specific)"]})
 		
 func startActivity(_args):
 	#affectSub(getSubInfo().fetishScore({Fetish.Bodywritings: 1.0}, -0.25), 0.01, 0.0, -0.2, -0.02)

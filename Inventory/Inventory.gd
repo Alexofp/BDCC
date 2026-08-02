@@ -805,6 +805,29 @@ func getOffspringEggs() -> Array:
 				result.append(item)
 	return result
 
+func canUndressSlotSexEngine(_slot:String, _handled:Dictionary={}) -> bool:
+	if(!equippedItems.has(_slot)):
+		return false
+	var theItem = equippedItems[_slot]
+	if(theItem.isRestraint() || !theItem.itemState || theItem.isRemoved() || !theItem.itemState.canBeRemoved()):
+		return false
+	
+	if(InventorySlot.DEFAULT_SLOTS_NO_UNDRESS_SEXENGINE.has(_slot)):
+		return false
+	if(GlobalRegistry.inventorySlots.has(_slot)):
+		var theCustomSlot:CustomInventorySlot = GlobalRegistry.getCustomInventorySlot(_slot)
+		if(!theCustomSlot.allowUndressInSexEngine):
+			return false
+	
+	var theChain := InventorySlot.getUndressChainForSlot(_slot)
+	for theRequiredSlot in theChain:
+		var item = getEquippedItem(theRequiredSlot)
+		if(!item || item.isRemoved()):
+			continue
+		return false
+
+	return true
+
 func saveData() -> Dictionary:
 	var data := {}
 	
@@ -931,28 +954,3 @@ func loadDataNPC(data:Dictionary, npc):
 				newItem.loadData(itemLoadedData)
 				equipItem(newItem)
 	emit_signal("equipped_items_changed")
-
-func canUndressSlot(_slot:String, _handled:Dictionary={}) -> bool:
-	for equippedSlot in equippedItems:
-		
-		var undressChain : Array = InventorySlot.getUndressChainForSlot(equippedSlot)
-		if not _slot in undressChain:
-			continue
-		
-		if not getNextSlotForUndressChain(undressChain, _handled) in ["", _slot]:
-			return false
-	
-	
-	return true
-
-func getNextSlotForUndressChain(_chain:Array, _handled:Dictionary={}): # returns null if can't undress any slot, "" if ended
-	for slot in _chain:
-		var item = getEquippedItem(slot)
-		if(!item || item.isRemoved()):
-			continue
-		if(_handled.has(item) || item.isRestraint() || !item.itemState):
-			return null
-		
-		return slot
-	
-	return ""

@@ -26,6 +26,8 @@ func getTags():
 	return []
 
 func getUnriggedParts(_character):
+	if(itemState.isRemoved()):
+		return null
 	return {
 		"blindfold": ["res://Inventory/RiggedModels/SocketArmor/VisorUpModel.tscn"],
 	}

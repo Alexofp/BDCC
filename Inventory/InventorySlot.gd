@@ -34,14 +34,18 @@ const DEFAULT_EXTRA_SLOTS:Array = [
 ]
 
 const DEFAULT_UNDRESS_CHAINS:Dictionary = {
-	UnderwearTop:[Torso, Body, UnderwearTop],
-	UnderwearBottom:[Torso, Body, UnderwearBottom],
-	Mouth:[Eyes, Mouth],
-	Hands:[Wrists, Hands],
-	Ankles:[Ankles],
-	Unique:[Unique],
-	Body:[Body],
-	Neck:[Neck],
+	UnderwearTop: [Torso, Body],
+	UnderwearBottom: [Torso, Body],
+	Mouth: [Eyes],
+	Hands: [Wrists],
+}
+const DEFAULT_SLOTS_NO_UNDRESS_SEXENGINE:Dictionary = {
+	Ring: true,
+	Strapon: true,
+	Static1: true,
+	Static2: true,
+	Static3: true,
+	Penis: true,
 }
 
 static func getAll() -> Array:
@@ -76,12 +80,10 @@ static func getUndressChains() -> Dictionary:
 	return theChains
 
 static func getUndressChainForSlot(slot:String) -> Array:
-	var defaultChain = DEFAULT_UNDRESS_CHAINS.get(slot, null)
-	if defaultChain!=null:
-		return defaultChain
+	if(DEFAULT_UNDRESS_CHAINS.has(slot)):
+		return DEFAULT_UNDRESS_CHAINS[slot]
 	
-	var theSlot : CustomInventorySlot = GlobalRegistry.getCustomInventorySlot(slot)
-	if !theSlot:
+	if(!GlobalRegistry.inventorySlots.has(slot)):
 		return []
-	
+	var theSlot : CustomInventorySlot = GlobalRegistry.getCustomInventorySlot(slot)
 	return theSlot.getUndressChain()

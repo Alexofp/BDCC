@@ -2,10 +2,13 @@ extends Reference
 class_name ItemState
 
 var item: WeakRef
-var removed = false
+var removed := false
 
 func isRemoved():
 	return removed
+
+func canBeRemoved() -> bool:
+	return true
 
 func remove():
 	removed = true

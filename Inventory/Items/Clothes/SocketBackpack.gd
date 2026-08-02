@@ -26,6 +26,8 @@ func getTags():
 	return []
 
 func getUnriggedParts(_character):
+	if(itemState.isRemoved()):
+		return null
 	return {
 		"back": ["res://Inventory/RiggedModels/SocketArmor/BackpackModel.tscn"],
 	}

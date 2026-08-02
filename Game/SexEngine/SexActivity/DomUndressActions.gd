@@ -47,12 +47,11 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 	if(dom.isPlayer()):
 		var _inv:Inventory = dom.getInventory()
 		for slot in _inv.getEquippedItems():
-			if _inv.hasSlotEquipped(slot):
-				addUndressButtonsForSlot(_inv, slot, handledItems)
+			addUndressButtonsForSlot(_inv, slot, handledItems)
 	
 func addUndressButtonsForSlot(_inv:Inventory, _slot:String, _handled:Dictionary):
-	if _inv.canUndressSlot(_slot):
-		var theItem = _inv.getEquippedItem(_slot)
+	var theItem = _inv.getEquippedItem(_slot)
+	if(!_handled.has(theItem) && _inv.canUndressSlotSexEngine(_slot)):
 		_handled[theItem] = true
 		addStartAction([theItem], "Take off "+str(theItem.getCasualName()), "Take off this item", 0.0)
 	

@@ -28,7 +28,7 @@ func populate(map:Dictionary={}) -> void:
 	updateText()
 
 func list2text() -> String:
-	var res : String = "npcFetished = {\n"
+	var res : String = "npcFetishes = {\n"
 	
 	var defs : Array = Fetish.getAllDefault()
 	

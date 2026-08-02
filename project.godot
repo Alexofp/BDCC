@@ -904,6 +904,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Inventory/ItemState.gd"
 }, {
+"base": "ItemState",
+"class": "ItemStateUnremovable",
+"language": "GDScript",
+"path": "res://Inventory/ItemStateUnremovable.gd"
+}, {
 "base": "Object",
 "class": "ItemTag",
 "language": "GDScript",
@@ -2199,6 +2204,7 @@ _global_script_class_icons={
 "ItemBase": "",
 "ItemCategory": "",
 "ItemState": "",
+"ItemStateUnremovable": "",
 "ItemTag": "",
 "JiggleBone": "",
 "JunkieLoot": "",
