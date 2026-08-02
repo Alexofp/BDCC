@@ -931,3 +931,30 @@ func loadDataNPC(data:Dictionary, npc):
 				newItem.loadData(itemLoadedData)
 				equipItem(newItem)
 	emit_signal("equipped_items_changed")
+
+func canUndressSlot(_slot:String, _handled:Dictionary={}) -> bool:
+	for equippedSlot in equippedItems:
+		if _slot==equippedSlot:
+			continue
+		
+		var undressChain : Array = InventorySlot.getUndressChainForSlot(equippedSlot)
+		if not _slot in undressChain:
+			continue
+		
+		if getNextSlotForUndressChain(undressChain, _handled)==_slot:
+			return true
+	
+	
+	return false
+
+func getNextSlotForUndressChain(_chain:Array, _handled:Dictionary={}) -> String:
+	for slot in _chain:
+		var item = getEquippedItem(slot)
+		if(!item || item.isRemoved()):
+			continue
+		if(_handled.has(item) || item.isRestraint() || !item.itemState):
+			return ""
+		
+		return slot
+	
+	return ""
