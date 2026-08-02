@@ -11,7 +11,7 @@ var shouldTranslateButtons:bool = true
 var shouldKeepBBTags:bool = true
 
 var translators:Array = []
-var translatorIDS:Array = ["google", "googlebatch", "bing", "papago"]
+var translatorIDS:Array = ["yandex", "deeplv2", "google", "googlebatch"] #, "bing", "papago"
 
 var hadToUseFallback:bool = false
 
@@ -33,6 +33,10 @@ func createTranslator(translatorID):
 		return PapagoTranslate.new()
 	if(translatorID == "bing"):
 		return MicrosoftTranslator.new()
+	if(translatorID == "deeplv2"):
+		return DeepLTranslatorV2.new()
+	if(translatorID == "yandex"):
+		return YandexTranslator.new()
 	return null
 	
 func setTargetLanguage(tl):

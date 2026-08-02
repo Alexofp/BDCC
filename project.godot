@@ -509,6 +509,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Util/AutoTranslation/Translators/DeepLTranslator.gd"
 }, {
+"base": "TranslatorBase",
+"class": "DeepLTranslatorV2",
+"language": "GDScript",
+"path": "res://Util/AutoTranslation/Translators/DeepLTranslatorV2.gd"
+}, {
 "base": "Reference",
 "class": "DialogueFiller",
 "language": "GDScript",
@@ -2023,6 +2028,11 @@ _global_script_classes=[ {
 "class": "WritingsHandler",
 "language": "GDScript",
 "path": "res://Player/Player3D/WritingsHandler/WritingsHandler.gd"
+}, {
+"base": "TranslatorBase",
+"class": "YandexTranslator",
+"language": "GDScript",
+"path": "res://Util/AutoTranslation/Translators/YandexTranslator.gd"
 } ]
 _global_script_class_icons={
 "AIStrategyBase": "",
@@ -2125,6 +2135,7 @@ _global_script_class_icons={
 "DatapackSkin": "",
 "DatapackTriggerCodeContext": "",
 "DeepLTranslator": "",
+"DeepLTranslatorV2": "",
 "DialogueFiller": "",
 "DialogueFillerAdder": "",
 "DialogueForm": "",
@@ -2427,7 +2438,8 @@ _global_script_class_icons={
 "WorldPopulation": "",
 "WorldZone": "",
 "WritingZoneInfoNode": "",
-"WritingsHandler": ""
+"WritingsHandler": "",
+"YandexTranslator": ""
 }
 
 [application]

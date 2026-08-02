@@ -23,7 +23,7 @@ func canTranslate():
 	return true
 
 func startCooldownMinutes(minutes):
-	print(id+" translator went on cooldown for "+str(minutes)+" minutes")
+	Log.print(id+" translator went on cooldown for "+str(minutes)+" minutes")
 	cooldownUntil = Time.get_unix_time_from_system() + 60*minutes
 
 func afterTranslate():

@@ -558,8 +558,8 @@ func translateText(manualButton = false):
 		var buttonsTexts:Array = []
 		if(AutoTranslation.shouldTranslateButtons):
 			for optionID in options:
-				buttonsTexts.append("[[BTN_"+str(optionID)+"_TEXT]]"+options[optionID][1])
-				buttonsTexts.append("[[BTN_"+str(optionID)+"_DESC]]"+options[optionID][2].replace("\n", "^"))
+				buttonsTexts.append("[[BTN_"+str(optionID)+"_TEXT]] "+options[optionID][1])
+				buttonsTexts.append("[[BTN_"+str(optionID)+"_DESC]] "+options[optionID][2].replace("\n", "^"))
 		
 		translateStatusLabel.text = "Translating.."
 		currentTranslationTask += 1
@@ -588,8 +588,8 @@ func translateText(manualButton = false):
 					if(line.begins_with("[[BTN_") && line.find("]]", 0) != -1):
 						var markerEnd:int = line.find("]]", 0)
 						var marker:String = line.substr(2, markerEnd - 2)
-						var translatedText:String = line.substr(markerEnd + 2, line.length())
-						translatedButtons[marker] = translatedText
+						var translatedText:String = line.substr(markerEnd + 3, line.length())
+						translatedButtons[marker] = translatedText.replace("[["+marker+"]] ", "")
 					else:
 						storyLines.append(line)
 				for optionID in options:
