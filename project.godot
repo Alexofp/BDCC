@@ -785,6 +785,11 @@ _global_script_classes=[ {
 "path": "res://Util/AutoTranslation/Translators/GoogleBatchTranslator.gd"
 }, {
 "base": "TranslatorBase",
+"class": "GoogleGTXTranslator",
+"language": "GDScript",
+"path": "res://Util/AutoTranslation/Translators/GoogleGTXTranslator.gd"
+}, {
+"base": "TranslatorBase",
 "class": "GoogleTranslator",
 "language": "GDScript",
 "path": "res://Util/AutoTranslation/Translators/GoogleTranslator.gd"
@@ -2190,6 +2195,7 @@ _global_script_class_icons={
 "Gender": "",
 "GlobalTask": "",
 "GoogleBatchTranslator": "",
+"GoogleGTXTranslator": "",
 "GoogleTranslator": "",
 "GuardGenerator": "",
 "GuardLoot": "",

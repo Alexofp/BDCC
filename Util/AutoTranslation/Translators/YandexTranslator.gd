@@ -104,7 +104,6 @@ func translate(_targetLanguage, _inputText):
 	
 	if(!(theStuff is String)):
 		theResult["error"] = true
-		startCooldownMinutes(5)
 		return theResult
 	
 	theResult["success"] = true

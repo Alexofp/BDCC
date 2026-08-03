@@ -51,7 +51,6 @@ func translate(_targetLanguage, _inputText):
 	
 	if(!(theStuff is String)):
 		theResult["error"] = true
-		startCooldownMinutes(5)
 		return theResult
 	
 	theResult["success"] = true
@@ -148,3 +147,6 @@ func getName():
 
 func _init():
 	id = "deeplv2"
+
+func onError():
+	startCooldownMinutes(5)

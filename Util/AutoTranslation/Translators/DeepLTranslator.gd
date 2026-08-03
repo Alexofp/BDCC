@@ -136,7 +136,6 @@ func translate(_targetLanguage, _inputText):
 		theResult["success"] = false
 		theResult["errorMessage"] = "No result in json"
 		print(translateData)
-		startCooldownMinutes(10)
 		return
 	
 	var theActualResultTexts = []
@@ -157,3 +156,6 @@ static func join(arr: Array, separator: String = "") -> String:
 
 func getName():
 	return "DeepL"
+
+func onError():
+	startCooldownMinutes(5)
