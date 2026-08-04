@@ -202,3 +202,23 @@ func resetAllFlagsWithExceptions(_ignore:Dictionary):
 		if(_ignore.get(theFlag, false)):
 			continue
 		GM.main.clearModuleFlag(id, theFlag)
+
+func menuButton(_id:String, _name:String, _desc:String) -> Array:
+	return [_id, _name, _desc]
+
+# Override this method in your Module to add new buttons to the main menu
+func getMenuButtons() -> Array:
+	## An example
+	#return [menuButton("test", "Test!", "This is a test button")]
+	return []
+
+func onMenuButton(_buttonID:String, _menuScene):
+	Log.print("Module:"+id+" Pressed menu button: "+_buttonID)
+
+#	# An example of how to show some screen on top of the menu
+#	var someGame = load("res://Game/Minigames/Struggling/StrugglingGame.tscn").instance()
+#	someGame.connect("minigameCompleted", self, "onMinigameCompleted", [someGame])
+#	_menuScene.setCustomScreen(someGame)
+#
+#func onMinigameCompleted(_res, someGame):
+#	someGame.queue_free()

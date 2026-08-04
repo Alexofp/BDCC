@@ -310,6 +310,7 @@ rect_min_size = Vector2( 0, 40 )
 text = "Github Releases"
 
 [node name="GridContainer" type="GridContainer" parent="MainHBox/CenterAreaVBox/MainVBox"]
+unique_name_in_owner = true
 margin_top = 620.0
 margin_right = 754.0
 margin_bottom = 720.0
