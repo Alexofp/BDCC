@@ -28,6 +28,10 @@ func notifyMadeChoice():
 		needsExtraRollback = false
 		pushRollbackState_THREAD()
 
+func waitRollbackerThread():
+	if(usesThread && saveThread.is_active()):
+		saveThread.wait_to_finish()
+
 func pushRollbackState():
 	if(!OPTIONS.isRollbackEnabled()):
 		return

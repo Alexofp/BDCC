@@ -109,7 +109,7 @@ func getActions(_indx:int):
 
 func doAction(_indx:int, _id:String, _action:Dictionary):
 	if(_id == "stop"):
-		addText("{dom.You} {dom.youVerb('stop')} making {sub.you} rim you.")
+		addText("{dom.You} {dom.youVerb('stop')} making {sub.you} rim {dom.youHim}.")
 		endActivity()
 		return
 	if(_id == "forcerim"):

@@ -46,19 +46,15 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 
 	if(dom.isPlayer()):
 		var _inv:Inventory = dom.getInventory()
-		for theChain in InventorySlot.getUndressChains():
-			addUndressButtonsForChain(_inv, theChain, handledItems)
+		for slot in _inv.getEquippedItems():
+			addUndressButtonsForSlot(_inv, slot, handledItems)
 	
-func addUndressButtonsForChain(_inv:Inventory, _slotChain:Array, _handled:Dictionary):
-	for theSlot in _slotChain:
-		var theItem:ItemBase = _inv.getEquippedItem(theSlot)
-		if(!theItem || theItem.isRemoved()):
-			continue
-		if(_handled.has(theItem) || theItem.isRestraint() || !theItem.itemState):
-			return
+func addUndressButtonsForSlot(_inv:Inventory, _slot:String, _handled:Dictionary):
+	var theItem = _inv.getEquippedItem(_slot)
+	if(!_handled.has(theItem) && _inv.canUndressSlotSexEngine(_slot)):
 		_handled[theItem] = true
 		addStartAction([theItem], "Take off "+str(theItem.getCasualName()), "Take off this item", 0.0)
-		return
+	
 
 func startActivity(_args):
 	var theitem:ItemBase = _args[0]

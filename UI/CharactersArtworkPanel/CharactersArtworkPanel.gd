@@ -161,7 +161,7 @@ func updateMainCharacter():
 func _on_NextButton_pressed():
 	var keys = characters.keys()
 	
-	if(currentCharacter == null && keys > 0):
+	if(currentCharacter == null && keys.size() > 0):
 		currentCharacter = keys[0]
 	
 	if(currentCharacter == null):

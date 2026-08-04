@@ -85,7 +85,7 @@ func startActivity(_args):
 
 func milkingSub_processTurn():
 	var pumpItem = getSub().getInventory().getEquippedItemByUniqueID(pumpID)
-	if(pumpItem == null):
+	if(!pumpItem || pumpItem.isRemoved()):
 		endActivity()
 		return
 	

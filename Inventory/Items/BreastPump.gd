@@ -12,6 +12,9 @@ func getDescription():
 func getClothingSlot():
 	return InventorySlot.UnderwearTop
 
+func generateItemState():
+	itemState = ItemStateUnremovable.new()
+
 func getBuffs():
 	return [
 		]

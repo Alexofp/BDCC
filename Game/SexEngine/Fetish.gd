@@ -43,6 +43,51 @@ const HypnosisSubject = "HypnosisSubject"
 const TFGiving = "TFGiving"
 const TFReceiving = "TFReceiving"
 
+static func getAllDefault() -> Array:
+	return [
+		VaginalSexGiving,
+		VaginalSexReceiving,
+		AnalSexGiving,
+		AnalSexReceiving,
+		OralSexGiving,
+		OralSexReceiving,
+		Tribadism,
+		StraponSexVaginal,
+		StraponSexAnal,
+		
+		Bodywritings,
+		
+		Masochism,
+		Sadism,
+		Choking,
+		
+		UnconsciousSex,
+		DrugUse,
+		
+		Breeding,
+		BeingBred,
+		Condoms,
+		Lactation,
+		SeedMilking,
+		
+		Exhibitionism,
+		
+		Bondage,
+		Rigging,
+		
+		RimmingGiving,
+		RimmingReceiving,
+		
+		FeetplayGiving,
+		FeetplayReceiving,
+		
+		HypnosisHypnotist,
+		HypnosisSubject,
+		
+		TFGiving,
+		TFReceiving,
+	]
+
 static func getOppositeFetish(_theFetishID:String) -> String:
 	if(_theFetishID == AnalSexGiving):
 		return AnalSexReceiving

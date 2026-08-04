@@ -805,6 +805,29 @@ func getOffspringEggs() -> Array:
 				result.append(item)
 	return result
 
+func canUndressSlotSexEngine(_slot:String, _handled:Dictionary={}) -> bool:
+	if(!equippedItems.has(_slot)):
+		return false
+	var theItem = equippedItems[_slot]
+	if(theItem.isRestraint() || !theItem.itemState || theItem.isRemoved() || !theItem.itemState.canBeRemoved()):
+		return false
+	
+	if(InventorySlot.DEFAULT_SLOTS_NO_UNDRESS_SEXENGINE.has(_slot)):
+		return false
+	if(GlobalRegistry.inventorySlots.has(_slot)):
+		var theCustomSlot:CustomInventorySlot = GlobalRegistry.getCustomInventorySlot(_slot)
+		if(!theCustomSlot.allowUndressInSexEngine):
+			return false
+	
+	var theChain := InventorySlot.getUndressChainForSlot(_slot)
+	for theRequiredSlot in theChain:
+		var item = getEquippedItem(theRequiredSlot)
+		if(!item || item.isRemoved()):
+			continue
+		return false
+
+	return true
+
 func saveData() -> Dictionary:
 	var data := {}
 	

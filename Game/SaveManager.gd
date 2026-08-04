@@ -252,8 +252,10 @@ func triggerAutosave():
 		return
 	if(!OPTIONS.shouldAutosave()):
 		return
-		
 	isAutoSaving = true
+	# Apparently autosaves can crash the game if they happen during rollback thread stuff
+	GM.main.rollbacker.waitRollbackerThread()
+		
 	# To make sure we're not in a middle of calculating something
 	yield(get_tree().create_timer(0.1), "timeout")
 	if(GM.main == null || GM.pc == null):

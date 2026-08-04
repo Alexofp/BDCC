@@ -11,7 +11,29 @@ func setup():
 
 func translate(_targetLanguage, _inputText):
 	return "Error. I'm just a dummy translator."
+
+func translateFinal(_targetLanguage:String, _inputText:String) -> Dictionary:
+	var theRes = translate(_targetLanguage, _inputText)
 	
+	if(theRes is GDScriptFunctionState):
+		theRes = yield(theRes, "completed")
+	
+	if(!(theRes is Dictionary)):
+		onError()
+		return {
+			error = true,
+			success = false,
+			errorMessage = "No error message provided",
+			resultText = "No text provided",
+		}
+	
+	if(theRes.get("error", false)):
+		onError()
+	return theRes
+
+func onError():
+	startCooldownSeconds(60)
+
 func canTranslate():
 	var currentTime = Time.get_unix_time_from_system()
 	if(currentTime < antispamUntil):
@@ -22,9 +44,13 @@ func canTranslate():
 	
 	return true
 
-func startCooldownMinutes(minutes):
-	print(id+" translator went on cooldown for "+str(minutes)+" minutes")
+func startCooldownMinutes(minutes:int):
+	Log.print(id+" translator went on cooldown for "+str(minutes)+" minutes")
 	cooldownUntil = Time.get_unix_time_from_system() + 60*minutes
+
+func startCooldownSeconds(seconds:int):
+	Log.print(id+" translator went on cooldown for "+str(seconds)+" seconds")
+	cooldownUntil = Time.get_unix_time_from_system() + seconds
 
 func afterTranslate():
 	if(antispamSeconds > 0):
