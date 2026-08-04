@@ -106,21 +106,22 @@ text = "Oldest first"
 [node name="ModSearch" type="LineEdit" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer"]
 margin_top = 52.0
 margin_right = 411.0
-margin_bottom = 76.0
+margin_bottom = 78.0
 max_length = 256
+clear_button_enabled = true
 placeholder_text = "Search Mod..."
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer"]
-margin_top = 80.0
+margin_top = 82.0
 margin_right = 411.0
-margin_bottom = 654.0
+margin_bottom = 646.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 2 )
 
 [node name="ModList" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/ScrollContainer"]
 margin_right = 411.0
-margin_bottom = 574.0
+margin_bottom = 564.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -130,6 +131,16 @@ margin_bottom = 31.0
 text = "
 LOADING MOD LIST"
 align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+margin_top = 650.0
+margin_right = 411.0
+margin_bottom = 650.0
+
+[node name="HFlowContainer2" type="HFlowContainer" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+margin_top = 654.0
+margin_right = 411.0
+margin_bottom = 654.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 margin_left = 429.0
