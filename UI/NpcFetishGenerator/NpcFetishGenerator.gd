@@ -15,6 +15,20 @@ onready var resultEdit : TextEdit = $vb/resultEdit
 
 func _ready():
 	populate()
+	var vals : Array = FetishInterest.getAll()
+	var texts : Array = FetishInterest.getAllText()
+	
+	var defaultButton : OptionButton = $vb/defaulthb/defaultButton
+	for i in texts.size():
+		defaultButton.add_item(texts[i], i)
+		var idx : int = defaultButton.get_item_index(i)
+		defaultButton.set_item_metadata(idx, vals[i])
+		
+		if vals[i]==default: # crap but it's only done once so whatevs
+			defaultButton.select(idx)
+	
+	
+	
 
 func populate(map:Dictionary={}) -> void:
 	Util.delete_children(entriesc)
@@ -86,3 +100,8 @@ func text2list() -> void:
 	
 	populate(map)
 	
+
+
+func _on_defaultButton_item_selected(index):
+	default = $vb/defaulthb/defaultButton.get_item_metadata(index)
+	updateText()

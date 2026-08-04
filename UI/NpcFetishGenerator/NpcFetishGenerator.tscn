@@ -29,16 +29,34 @@ size_flags_horizontal = 3
 
 [node name="resultEdit" type="TextEdit" parent="vb"]
 margin_right = 638.0
-margin_bottom = 690.0
+margin_bottom = 660.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 show_line_numbers = true
 wrap_enabled = true
 
 [node name="fromTextButt" type="Button" parent="vb"]
+margin_top = 664.0
+margin_right = 638.0
+margin_bottom = 690.0
+text = "Load from text"
+
+[node name="defaulthb" type="HBoxContainer" parent="vb"]
 margin_top = 694.0
 margin_right = 638.0
 margin_bottom = 720.0
-text = "Load from text"
+
+[node name="Label" type="Label" parent="vb/defaulthb"]
+margin_top = 3.0
+margin_right = 132.0
+margin_bottom = 23.0
+text = "Default interest"
+
+[node name="defaultButton" type="OptionButton" parent="vb/defaulthb"]
+margin_left = 136.0
+margin_right = 638.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
 
 [connection signal="pressed" from="vb/fromTextButt" to="." method="_on_fromTextButt_pressed"]
+[connection signal="item_selected" from="vb/defaulthb/defaultButton" to="." method="_on_defaultButton_item_selected"]

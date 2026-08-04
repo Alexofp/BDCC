@@ -45,6 +45,7 @@ const TFReceiving = "TFReceiving"
 
 static func getAllDefault() -> Array:
 	return [
+		VaginalSexGiving,
 		VaginalSexReceiving,
 		AnalSexGiving,
 		AnalSexReceiving,
@@ -53,36 +54,36 @@ static func getAllDefault() -> Array:
 		Tribadism,
 		StraponSexVaginal,
 		StraponSexAnal,
-
+		
 		Bodywritings,
-
+		
 		Masochism,
 		Sadism,
 		Choking,
-
+		
 		UnconsciousSex,
 		DrugUse,
-
+		
 		Breeding,
 		BeingBred,
 		Condoms,
 		Lactation,
 		SeedMilking,
-
+		
 		Exhibitionism,
-
+		
 		Bondage,
 		Rigging,
-
+		
 		RimmingGiving,
 		RimmingReceiving,
-
+		
 		FeetplayGiving,
 		FeetplayReceiving,
-
+		
 		HypnosisHypnotist,
 		HypnosisSubject,
-
+		
 		TFGiving,
 		TFReceiving,
 	]
