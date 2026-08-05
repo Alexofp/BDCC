@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Player/Player3D/DollSkeleton.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player3D/Doll3D.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Player/Player3D/DollSkeleton2.glb" type="PackedScene" id=7]
 [ext_resource path="res://Player/Player3D/Particles/cumsingle_lq.png" type="Texture" id=8]
 [ext_resource path="res://Player/Player3D/DollSkeleton3.glb" type="PackedScene" id=9]
+[ext_resource path="res://Player/Player3D/DollSkeletonCombat.glb" type="PackedScene" id=10]
 
 [sub_resource type="SpatialMaterial" id=6]
 flags_transparent = true
@@ -312,6 +313,11 @@ root_node = NodePath("../../DollSkeleton")
 [node name="AnimationPlayer" parent="DollSkeleton3" index="0"]
 root_node = NodePath("../../DollSkeleton")
 
+[node name="DollSkeletonCombat" parent="." instance=ExtResource( 10 )]
+
+[node name="AnimationPlayer" parent="DollSkeletonCombat" index="0"]
+root_node = NodePath("../../DollSkeleton")
+
 [connection signal="mouseEntered" from="BoneAttachments/HeadBoneAttachment/Doll3DTooltip" to="." method="_on_Doll3DTooltip_mouseEntered"]
 [connection signal="mouseExited" from="BoneAttachments/HeadBoneAttachment/Doll3DTooltip" to="." method="_on_Doll3DTooltip_mouseExited"]
 [connection signal="mouseEntered" from="BoneAttachments/BreastsBoneAttachment/Doll3DTooltip" to="." method="_on_Doll3DTooltip_mouseEntered"]
@@ -327,3 +333,4 @@ root_node = NodePath("../../DollSkeleton")
 [editable path="DollSkeleton"]
 [editable path="DollSkeleton2"]
 [editable path="DollSkeleton3"]
+[editable path="DollSkeletonCombat"]

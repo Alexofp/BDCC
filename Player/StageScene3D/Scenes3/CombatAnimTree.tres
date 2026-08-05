@@ -1,4 +1,4 @@
-[gd_resource type="AnimationNodeStateMachine" load_steps=105 format=2]
+[gd_resource type="AnimationNodeStateMachine" load_steps=108 format=2]
 
 [sub_resource type="AnimationNodeAnimation" id=62]
 animation = "AllFours-loop"
@@ -29,6 +29,30 @@ animation = "HoldObject-loop"
 
 [sub_resource type="AnimationNodeAnimation" id=39]
 animation = "Hurt"
+
+[sub_resource type="AnimationNodeAnimation" id=116]
+animation = "Standing-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=117]
+animation = "StandingCombat-loop"
+
+[sub_resource type="AnimationNodeTransition" id=118]
+input_count = 2
+input_0/name = "Standing-loop"
+input_0/auto_advance = false
+input_1/name = "StandingCombat-loop"
+input_1/auto_advance = false
+
+[sub_resource type="AnimationNodeBlendTree" id=119]
+graph_offset = Vector2( -433.37, 66.5416 )
+nodes/Animation/node = SubResource( 117 )
+nodes/Animation/position = Vector2( -220, 220 )
+"nodes/Animation 2/node" = SubResource( 116 )
+"nodes/Animation 2/position" = Vector2( -200, 80 )
+nodes/IDLE_PICK/node = SubResource( 118 )
+nodes/IDLE_PICK/position = Vector2( 80, 120 )
+nodes/output/position = Vector2( 340, 160 )
+node_connections = [ "IDLE_PICK", 0, "Animation 2", "IDLE_PICK", 1, "Animation", "output", 0, "IDLE_PICK" ]
 
 [sub_resource type="AnimationNodeAnimation" id=104]
 animation = "Jogging-loop"
@@ -62,9 +86,6 @@ animation = "Sitting-loop"
 
 [sub_resource type="AnimationNodeAnimation" id=27]
 animation = "SittingToStanding"
-
-[sub_resource type="AnimationNodeAnimation" id=1]
-animation = "Standing-loop"
 
 [sub_resource type="AnimationNodeAnimation" id=9]
 animation = "StandingToKneeling"
@@ -120,186 +141,51 @@ animation = "WeaponSwing"
 [sub_resource type="AnimationNodeAnimation" id=84]
 animation = "WeaponThrow"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=10]
-xfade_time = 0.1
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=11]
 switch_mode = 2
 auto_advance = true
-xfade_time = 0.1
+xfade_time = 0.3
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=12]
-xfade_time = 0.1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=13]
-switch_mode = 2
-auto_advance = true
-xfade_time = 0.1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=17]
-xfade_time = 0.1
+xfade_time = 0.3
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=18]
 switch_mode = 2
 auto_advance = true
-xfade_time = 0.1
+xfade_time = 0.3
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=19]
 switch_mode = 2
 auto_advance = true
-xfade_time = 0.1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=20]
-switch_mode = 2
-auto_advance = true
-xfade_time = 0.1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=21]
-xfade_time = 0.1
-priority = 2
+xfade_time = 0.3
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=22]
 switch_mode = 2
 auto_advance = true
 xfade_time = 1.0
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=29]
-xfade_time = 0.1
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=30]
 switch_mode = 2
 auto_advance = true
-xfade_time = 0.1
+xfade_time = 0.3
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=31]
-xfade_time = 0.1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=32]
-switch_mode = 2
-auto_advance = true
-xfade_time = 0.1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=33]
-xfade_time = 0.1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=34]
-switch_mode = 2
-auto_advance = true
-xfade_time = 0.1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=35]
-xfade_time = 0.1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=36]
-switch_mode = 2
-auto_advance = true
-xfade_time = 0.1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=37]
-xfade_time = 0.1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=38]
-switch_mode = 2
-auto_advance = true
-xfade_time = 0.1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=43]
-switch_mode = 2
-auto_advance = true
-xfade_time = 0.1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=44]
-switch_mode = 2
-auto_advance = true
-xfade_time = 0.1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=45]
-switch_mode = 2
-auto_advance = true
-xfade_time = 0.1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=46]
-switch_mode = 2
-auto_advance = true
-xfade_time = 0.1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=47]
-xfade_time = 0.1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=48]
-xfade_time = 0.1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=49]
-xfade_time = 0.1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=50]
-xfade_time = 0.1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=52]
-xfade_time = 0.5
+xfade_time = 0.3
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=54]
 switch_mode = 2
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=55]
-switch_mode = 2
-auto_advance = true
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=58]
-xfade_time = 0.1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=59]
-xfade_time = 0.1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=60]
-switch_mode = 2
-auto_advance = true
-xfade_time = 0.1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=61]
-switch_mode = 2
-auto_advance = true
-xfade_time = 0.1
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=66]
 xfade_time = 0.2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=73]
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=74]
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=75]
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=76]
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=77]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=78]
 switch_mode = 2
 auto_advance = true
-xfade_time = 0.1
+xfade_time = 0.3
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=79]
 xfade_time = 0.2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=80]
-switch_mode = 2
-auto_advance = true
-xfade_time = 0.1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=85]
-xfade_time = 0.1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=86]
-switch_mode = 2
-auto_advance = true
-xfade_time = 0.1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=87]
 xfade_time = 0.4
@@ -309,12 +195,6 @@ xfade_time = 0.4
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=89]
 xfade_time = 0.4
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=91]
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=92]
-xfade_time = 0.5
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=93]
 switch_mode = 2
@@ -345,15 +225,156 @@ switch_mode = 2
 auto_advance = true
 xfade_time = 0.2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=108]
-xfade_time = 0.8
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=109]
 auto_advance = true
 xfade_time = 0.5
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=111]
 xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=10]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=20]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=21]
+xfade_time = 0.3
+priority = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=29]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=32]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=33]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=34]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=35]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=36]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=37]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=38]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=43]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=44]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=45]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=46]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=47]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=48]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=49]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=50]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=52]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=55]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=58]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=59]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=60]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=61]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=73]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=74]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=75]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=76]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=77]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=80]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=85]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=86]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=91]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=92]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=108]
+xfade_time = 0.8
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=112]
 auto_advance = true
@@ -375,7 +396,7 @@ states/AllFoursCrawl-loop/position = Vector2( 12, 661 )
 states/AllFoursToKneeling/node = SubResource( 98 )
 states/AllFoursToKneeling/position = Vector2( 242.547, 417 )
 states/Bite/node = SubResource( 23 )
-states/Bite/position = Vector2( 644.547, -105 )
+states/Bite/position = Vector2( 701.547, -134 )
 states/Block/node = SubResource( 24 )
 states/Block/position = Vector2( 566.547, -166 )
 states/Defeat/node = SubResource( 14 )
@@ -386,6 +407,8 @@ states/HoldObject-loop/node = SubResource( 113 )
 states/HoldObject-loop/position = Vector2( 951.547, 249 )
 states/Hurt/node = SubResource( 39 )
 states/Hurt/position = Vector2( 365.547, -218 )
+states/IDLE/node = SubResource( 119 )
+states/IDLE/position = Vector2( 349.547, 41 )
 states/Jogging-loop/node = SubResource( 104 )
 states/Jogging-loop/position = Vector2( 541.547, 625 )
 states/Kick/node = SubResource( 40 )
@@ -399,17 +422,15 @@ states/KneelingToStanding/position = Vector2( 121, 175 )
 states/Punch/node = SubResource( 41 )
 states/Punch/position = Vector2( 127.547, -166 )
 states/ShacklesWalk-loop/node = SubResource( 51 )
-states/ShacklesWalk-loop/position = Vector2( 742.547, -42 )
+states/ShacklesWalk-loop/position = Vector2( 900.547, -105 )
 "states/ShacklesWalk-loop 2/node" = SubResource( 53 )
 "states/ShacklesWalk-loop 2/position" = Vector2( 958.547, -42 )
 states/Shove/node = SubResource( 42 )
-states/Shove/position = Vector2( 80, -100 )
+states/Shove/position = Vector2( 80, -99 )
 states/Sitting-loop/node = SubResource( 26 )
 states/Sitting-loop/position = Vector2( 629.547, 332 )
 states/SittingToStanding/node = SubResource( 27 )
 states/SittingToStanding/position = Vector2( 541.547, 249 )
-states/Standing-loop/node = SubResource( 1 )
-states/Standing-loop/position = Vector2( 421, 78 )
 states/StandingToKneeling/node = SubResource( 9 )
 states/StandingToKneeling/position = Vector2( 248, 243 )
 states/StandingToSitting/node = SubResource( 28 )
@@ -417,17 +438,17 @@ states/StandingToSitting/position = Vector2( 742.547, 249 )
 states/StandingToStruggleLegs/node = SubResource( 68 )
 states/StandingToStruggleLegs/position = Vector2( -437.453, 84 )
 states/StandingToStruggleLegsReverse/node = SubResource( 69 )
-states/StandingToStruggleLegsReverse/position = Vector2( -431.453, 247 )
+states/StandingToStruggleLegsReverse/position = Vector2( -406.453, 150 )
 states/StandingToWalking/node = SubResource( 15 )
 states/StandingToWalking/position = Vector2( 837.547, 35 )
 "states/StandingToWalking 2/node" = SubResource( 107 )
 "states/StandingToWalking 2/position" = Vector2( 674.547, 524 )
 states/StruggleGag-loop/node = SubResource( 70 )
-states/StruggleGag-loop/position = Vector2( -350.453, 320 )
+states/StruggleGag-loop/position = Vector2( -285.453, 256 )
 states/StruggleGeneric-loop/node = SubResource( 71 )
 states/StruggleGeneric-loop/position = Vector2( -222.453, 400 )
 states/StruggleLegs-loop/node = SubResource( 72 )
-states/StruggleLegs-loop/position = Vector2( -499.453, 175 )
+states/StruggleLegs-loop/position = Vector2( -684.453, 133 )
 states/Walk-loop/node = SubResource( 2 )
 states/Walk-loop/position = Vector2( 837.547, 105 )
 states/WalkingToStanding/node = SubResource( 16 )
@@ -435,7 +456,7 @@ states/WalkingToStanding/position = Vector2( 837.547, 175 )
 "states/WalkingToStanding 2/node" = SubResource( 110 )
 "states/WalkingToStanding 2/position" = Vector2( 404.547, 495 )
 states/WeaponGunAim-loop/node = SubResource( 81 )
-states/WeaponGunAim-loop/position = Vector2( -465.453, -209 )
+states/WeaponGunAim-loop/position = Vector2( -519.453, -223 )
 states/WeaponGunHold-loop/node = SubResource( 82 )
 states/WeaponGunHold-loop/position = Vector2( -280.453, -142 )
 states/WeaponGunShoot/node = SubResource( 83 )
@@ -446,6 +467,6 @@ states/WeaponSwing/node = SubResource( 57 )
 states/WeaponSwing/position = Vector2( -118.453, 15 )
 states/WeaponThrow/node = SubResource( 84 )
 states/WeaponThrow/position = Vector2( -222.453, -42 )
-transitions = [ "Standing-loop", "StandingToKneeling", SubResource( 10 ), "StandingToKneeling", "Kneeling-loop", SubResource( 11 ), "Kneeling-loop", "KneelingToStanding", SubResource( 12 ), "KneelingToStanding", "Standing-loop", SubResource( 13 ), "Standing-loop", "StandingToWalking", SubResource( 17 ), "StandingToWalking", "Walk-loop", SubResource( 18 ), "Walk-loop", "WalkingToStanding", SubResource( 19 ), "WalkingToStanding", "Standing-loop", SubResource( 20 ), "Standing-loop", "Defeat", SubResource( 21 ), "Defeat", "Kneeling-loop", SubResource( 22 ), "Standing-loop", "StandingToSitting", SubResource( 29 ), "StandingToSitting", "Sitting-loop", SubResource( 30 ), "Sitting-loop", "SittingToStanding", SubResource( 31 ), "SittingToStanding", "Standing-loop", SubResource( 32 ), "Standing-loop", "Bite", SubResource( 33 ), "Bite", "Standing-loop", SubResource( 34 ), "Standing-loop", "Block", SubResource( 35 ), "Block", "Standing-loop", SubResource( 36 ), "Standing-loop", "Dodge", SubResource( 37 ), "Dodge", "Standing-loop", SubResource( 38 ), "Hurt", "Standing-loop", SubResource( 43 ), "Kick", "Standing-loop", SubResource( 44 ), "Punch", "Standing-loop", SubResource( 45 ), "Shove", "Standing-loop", SubResource( 46 ), "Standing-loop", "Hurt", SubResource( 47 ), "Standing-loop", "Kick", SubResource( 48 ), "Standing-loop", "Punch", SubResource( 49 ), "Standing-loop", "Shove", SubResource( 50 ), "Standing-loop", "ShacklesWalk-loop", SubResource( 52 ), "ShacklesWalk-loop", "ShacklesWalk-loop 2", SubResource( 54 ), "ShacklesWalk-loop 2", "Standing-loop", SubResource( 55 ), "Standing-loop", "WeaponShiv", SubResource( 58 ), "Standing-loop", "WeaponSwing", SubResource( 59 ), "WeaponShiv", "Standing-loop", SubResource( 60 ), "WeaponSwing", "Standing-loop", SubResource( 61 ), "AllFours-loop", "AllFoursCrawl-loop", SubResource( 66 ), "Standing-loop", "StruggleGeneric-loop", SubResource( 73 ), "StruggleGeneric-loop", "Standing-loop", SubResource( 74 ), "Standing-loop", "StruggleGag-loop", SubResource( 75 ), "StruggleGag-loop", "Standing-loop", SubResource( 76 ), "Standing-loop", "StandingToStruggleLegs", SubResource( 77 ), "StandingToStruggleLegs", "StruggleLegs-loop", SubResource( 78 ), "StruggleLegs-loop", "StandingToStruggleLegsReverse", SubResource( 79 ), "StandingToStruggleLegsReverse", "Standing-loop", SubResource( 80 ), "Standing-loop", "WeaponThrow", SubResource( 85 ), "WeaponThrow", "Standing-loop", SubResource( 86 ), "WeaponGunHold-loop", "WeaponGunAim-loop", SubResource( 87 ), "WeaponGunAim-loop", "WeaponGunHold-loop", SubResource( 88 ), "WeaponGunAim-loop", "WeaponGunShoot", SubResource( 89 ), "WeaponGunHold-loop", "Standing-loop", SubResource( 91 ), "Standing-loop", "WeaponGunHold-loop", SubResource( 92 ), "WeaponGunShoot", "WeaponGunHold-loop", SubResource( 93 ), "AllFoursCrawl-loop", "AllFoursCrawl-loop 2", SubResource( 96 ), "AllFoursCrawl-loop 2", "AllFours-loop", SubResource( 97 ), "Kneeling-loop", "KneelingToAllFours", SubResource( 100 ), "KneelingToAllFours", "AllFours-loop", SubResource( 101 ), "AllFours-loop", "AllFoursToKneeling", SubResource( 102 ), "AllFoursToKneeling", "Kneeling-loop", SubResource( 103 ), "Standing-loop", "StandingToWalking 2", SubResource( 108 ), "StandingToWalking 2", "Jogging-loop", SubResource( 109 ), "Jogging-loop", "WalkingToStanding 2", SubResource( 111 ), "WalkingToStanding 2", "Standing-loop", SubResource( 112 ), "Standing-loop", "HoldObject-loop", SubResource( 114 ), "HoldObject-loop", "Standing-loop", SubResource( 115 ) ]
-start_node = "Standing-loop"
-graph_offset = Vector2( -681.453, -325 )
+transitions = [ "StandingToKneeling", "Kneeling-loop", SubResource( 11 ), "Kneeling-loop", "KneelingToStanding", SubResource( 12 ), "StandingToWalking", "Walk-loop", SubResource( 18 ), "Walk-loop", "WalkingToStanding", SubResource( 19 ), "Defeat", "Kneeling-loop", SubResource( 22 ), "StandingToSitting", "Sitting-loop", SubResource( 30 ), "Sitting-loop", "SittingToStanding", SubResource( 31 ), "ShacklesWalk-loop", "ShacklesWalk-loop 2", SubResource( 54 ), "AllFours-loop", "AllFoursCrawl-loop", SubResource( 66 ), "StandingToStruggleLegs", "StruggleLegs-loop", SubResource( 78 ), "StruggleLegs-loop", "StandingToStruggleLegsReverse", SubResource( 79 ), "WeaponGunHold-loop", "WeaponGunAim-loop", SubResource( 87 ), "WeaponGunAim-loop", "WeaponGunHold-loop", SubResource( 88 ), "WeaponGunAim-loop", "WeaponGunShoot", SubResource( 89 ), "WeaponGunShoot", "WeaponGunHold-loop", SubResource( 93 ), "AllFoursCrawl-loop", "AllFoursCrawl-loop 2", SubResource( 96 ), "AllFoursCrawl-loop 2", "AllFours-loop", SubResource( 97 ), "Kneeling-loop", "KneelingToAllFours", SubResource( 100 ), "KneelingToAllFours", "AllFours-loop", SubResource( 101 ), "AllFours-loop", "AllFoursToKneeling", SubResource( 102 ), "AllFoursToKneeling", "Kneeling-loop", SubResource( 103 ), "StandingToWalking 2", "Jogging-loop", SubResource( 109 ), "Jogging-loop", "WalkingToStanding 2", SubResource( 111 ), "IDLE", "StandingToKneeling", SubResource( 10 ), "KneelingToStanding", "IDLE", SubResource( 13 ), "IDLE", "StandingToWalking", SubResource( 17 ), "WalkingToStanding", "IDLE", SubResource( 20 ), "IDLE", "Defeat", SubResource( 21 ), "IDLE", "StandingToSitting", SubResource( 29 ), "SittingToStanding", "IDLE", SubResource( 32 ), "IDLE", "Bite", SubResource( 33 ), "Bite", "IDLE", SubResource( 34 ), "IDLE", "Block", SubResource( 35 ), "Block", "IDLE", SubResource( 36 ), "IDLE", "Dodge", SubResource( 37 ), "Dodge", "IDLE", SubResource( 38 ), "Hurt", "IDLE", SubResource( 43 ), "Kick", "IDLE", SubResource( 44 ), "Punch", "IDLE", SubResource( 45 ), "Shove", "IDLE", SubResource( 46 ), "IDLE", "Hurt", SubResource( 47 ), "IDLE", "Kick", SubResource( 48 ), "IDLE", "Punch", SubResource( 49 ), "IDLE", "Shove", SubResource( 50 ), "IDLE", "ShacklesWalk-loop", SubResource( 52 ), "ShacklesWalk-loop 2", "IDLE", SubResource( 55 ), "IDLE", "WeaponShiv", SubResource( 58 ), "IDLE", "WeaponSwing", SubResource( 59 ), "WeaponShiv", "IDLE", SubResource( 60 ), "WeaponSwing", "IDLE", SubResource( 61 ), "IDLE", "StruggleGeneric-loop", SubResource( 73 ), "StruggleGeneric-loop", "IDLE", SubResource( 74 ), "IDLE", "StruggleGag-loop", SubResource( 75 ), "StruggleGag-loop", "IDLE", SubResource( 76 ), "IDLE", "StandingToStruggleLegs", SubResource( 77 ), "StandingToStruggleLegsReverse", "IDLE", SubResource( 80 ), "IDLE", "WeaponThrow", SubResource( 85 ), "WeaponThrow", "IDLE", SubResource( 86 ), "WeaponGunHold-loop", "IDLE", SubResource( 91 ), "IDLE", "WeaponGunHold-loop", SubResource( 92 ), "IDLE", "StandingToWalking 2", SubResource( 108 ), "WalkingToStanding 2", "IDLE", SubResource( 112 ), "IDLE", "HoldObject-loop", SubResource( 114 ), "HoldObject-loop", "IDLE", SubResource( 115 ) ]
+start_node = "IDLE"
+graph_offset = Vector2( -137.453, -52 )

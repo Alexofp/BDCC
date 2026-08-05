@@ -592,6 +592,9 @@ func getAnimPlayer2():
 func getAnimPlayer3():
 	return $DollSkeleton3/AnimationPlayer
 
+func getAnimPlayerCombat():
+	return $DollSkeletonCombat/AnimationPlayer
+
 func setArmsCuffed(newcuffed):
 	armsCuffed = newcuffed
 	

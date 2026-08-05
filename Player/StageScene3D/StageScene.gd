@@ -4,6 +4,7 @@ class_name StageScene
 const Nothing = "Nothing"
 const Solo = "Solo"
 const Duo = "Duo"
+const Combat = "Combat"
 const SexStart = "SexStart"
 const SexCowgirl = "SexCowgirl"
 const SexCowgirlAlt = "SexCowgirlAlt"
