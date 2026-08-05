@@ -151,7 +151,6 @@ func incrementModCountForAuthors(authorsData) -> void:
 func parseAuthorField(authorField:String) -> Dictionary:
 	var authors:Array = []
 	var preferredSeparator:String = ", "
-	authorField = str(authorField)
 	if(", " in authorField):
 		authors = authorField.split(", ")
 		preferredSeparator = ", "
