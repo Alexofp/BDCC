@@ -10,14 +10,15 @@ onready var modDescriptionLabel = $VBoxContainer/HBoxContainer/VBoxContainer/Pan
 onready var downloadingContainer = $DownloadingContrainer
 onready var messageDialog = $MessageDialog
 
-var allMods = []
+var allMods:Array = []
 var modCountByAuthor:Dictionary = {}
 var pickedModEntry:ModEntry
-var visualModEntries = []
+var visualModEntries:Array = []
 
 var viewModsByAuthorUriPrefix:String = "view_mods_by:"
-var sortType = "newest" #newest, oldest, name
-var downloadedMods = false
+var sortType:String = "newest" #newest, oldest, name
+var searchQuery:String = ""
+var downloadedMods:bool = false
 
 signal closePressed
 
@@ -40,10 +41,11 @@ func resetMods():
 func resetModListScroll() -> void:
 	modListScrollContainer.set_deferred("scroll_vertical", 0)
 
-func updateModList(modsArray = allMods):
+func updateModList():
+	var filteredMods:Array = getSearchQueryFilteredMods()
 	visualModEntries.clear()
 	Util.delete_children(modList)
-	for modEntry in modsArray:
+	for modEntry in filteredMods:
 		var newBrowserEntry = modEntryScene.instance()
 		modList.add_child(newBrowserEntry)
 		newBrowserEntry.setModEntry(modEntry)
@@ -51,6 +53,7 @@ func updateModList(modsArray = allMods):
 		if(modEntry == pickedModEntry):
 			newBrowserEntry.makeActive()
 		visualModEntries.append(newBrowserEntry)
+	resetModListScroll()
 
 func _on_HTTPRequest_request_completed(result, _response_code, _headers, body):
 	if result != HTTPRequest.RESULT_SUCCESS:
@@ -227,19 +230,19 @@ static func sort_oldest(a, b):
 func _on_SortNameButton_pressed():
 	sortType = "name"
 	allMods.sort_custom(self, "sort_name")
-	updateModListWithSearchApplied(modSearch.text)
+	updateModList()
 
 
 func _on_SortNewestFirstButton_pressed():
 	sortType = "newest"
 	allMods.sort_custom(self, "sort_newest")
-	updateModListWithSearchApplied(modSearch.text)
+	updateModList()
 
 
 func _on_SortOldestFirstButton_pressed():
 	sortType = "oldest"
 	allMods.sort_custom(self, "sort_oldest")
-	updateModListWithSearchApplied(modSearch.text)
+	updateModList()
 
 func _on_CloseButton_pressed():
 	emit_signal("closePressed")
@@ -247,10 +250,12 @@ func _on_CloseButton_pressed():
 
 func _on_RichTextLabel_meta_clicked(meta):
 	if(meta.begins_with(viewModsByAuthorUriPrefix)):
+		var exactAuthorSearchQuery:String = "\"@"+meta.trim_prefix(viewModsByAuthorUriPrefix)+"\""
 		# moves caret to the end as opposed to using modSearch.text = "...
 		modSearch.clear()
-		modSearch.append_at_cursor("\"@"+meta.trim_prefix(viewModsByAuthorUriPrefix)+"\"")
-		updateModListWithSearchApplied(modSearch.text)
+		modSearch.append_at_cursor(exactAuthorSearchQuery)
+		setSearchQuery(exactAuthorSearchQuery)
+		updateModList()
 		return
 	var _ok = Util.fixed_shell_open(meta)
 
@@ -258,35 +263,36 @@ func _on_RichTextLabel_meta_clicked(meta):
 func _on_ModSearch_text_changed(new_text:String) -> void:
 	var new_text_length = new_text.length()
 	if((new_text_length == 0) || (new_text_length > 2)):
-		updateModListWithSearchApplied(new_text)
-
-func updateModListWithSearchApplied(new_text:String) -> void:
-	if new_text.length() > 2:
-		var modsFound = []
-		var new_text_lower:String = new_text.to_lower()
-		var new_text_special:String = ""
-		var isExactAuthorSearch:bool = new_text.begins_with("\"@") && new_text.ends_with("\"")
-		var isSubstringAuthorSearch:bool = new_text.begins_with("@")
-		if(isExactAuthorSearch):
-			new_text_special = new_text.trim_prefix("\"@").trim_suffix("\"")
-		elif(isSubstringAuthorSearch):
-			new_text_special = new_text_lower.trim_prefix("@")
-
-		for mod in allMods:
-			if(isExactAuthorSearch):
-				for authorName in mod.authorsData.authors:
-					if(new_text_special == authorName):
-						modsFound.append(mod)
-						break
-			elif(isSubstringAuthorSearch):
-				if mod.author.to_lower().find(new_text_special) != -1:
-					modsFound.append(mod)
-			else:
-				if new_text_lower in mod.name.to_lower():
-					modsFound.append(mod)
-		resetModListScroll()
-		updateModList(modsFound)
-	else:
-		resetModListScroll()
+		setSearchQuery(new_text)
 		updateModList()
+
+func setSearchQuery(newQuery:String) -> void:
+	searchQuery = newQuery
+
+func getSearchQueryFilteredMods() -> Array:
+	if(searchQuery.empty()):
+		return allMods
+	var modsFound:Array = []
+	var searchQueryLower:String = searchQuery.to_lower()
+	var searchQuerySpecial:String = ""
+	var isExactAuthorSearch:bool = searchQuery.begins_with("\"@") && searchQuery.ends_with("\"")
+	var isSubstringAuthorSearch:bool = searchQuery.begins_with("@")
+	if(isExactAuthorSearch):
+		searchQuerySpecial = searchQuery.trim_prefix("\"@").trim_suffix("\"")
+	elif(isSubstringAuthorSearch):
+		searchQuerySpecial = searchQueryLower.trim_prefix("@")
+
+	for mod in allMods:
+		if(isExactAuthorSearch):
+			for authorName in mod.authorsData.authors:
+				if(searchQuerySpecial == authorName):
+					modsFound.append(mod)
+					break
+		elif(isSubstringAuthorSearch):
+			if mod.author.to_lower().find(searchQuerySpecial) != -1:
+				modsFound.append(mod)
+		else:
+			if searchQueryLower in mod.name.to_lower():
+				modsFound.append(mod)
+	return modsFound
 	
