@@ -309,7 +309,7 @@ func refused_save_offered_self_do(_id:String, _args:Dictionary, _context:Diction
 
 func offered_self_deny_text():
 	sayLine("saver", "TalkSexOfferSelfDeny", {main="saver", target="inmate"})
-	saynn("{saver.You} {saver.youVerb('walk')} away, leaving {inmate.youHim} to be someone else's toy..")
+	saynn("{saver.You} {saver.youVerb('walk')} away, leaving {inmate.you} to be someone else's toy..")
 
 	addAction("continue", "Continue", "Aww..", "default", 1.0, 60, {})
 
