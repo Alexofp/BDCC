@@ -37,12 +37,8 @@ func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 		var pawnIDs:Array = findProstitutionTargetsNearby(ignoreList)
 		if(!pawnIDs.empty()):
 			var pawnID = RNG.pick(pawnIDs)
-			lastClientID = pawnID
-			clientCooldowns[pawnID] = clientCooldownSeconds
-			doInvolvePawn("client", pawnID)
 			clientApproached = false
-			clientRequestedAskType = ""
-			setState("found_client", "main")
+			setClientToCharID(pawnID)
 			return
 		setState("", "main")
 	if(_id == "wait"):
@@ -513,11 +509,8 @@ func getInterruptActions(_pawn:CharacterPawn) -> Array:
 
 func doInterruptAction(_pawn:CharacterPawn, _id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "approach"):
-		doInvolvePawn("client", _pawn.charID)
-		clientCooldowns[_pawn.charID] = clientCooldownSeconds
 		clientApproached = true
-		clientRequestedAskType = ""
-		setState("found_client", "main")
+		setClientToCharID(_pawn.charID)
 
 
 func getAnimData() -> Array:
@@ -527,6 +520,13 @@ func getAnimData() -> Array:
 
 func isSlutDom():
 	return slutDom
+
+func setClientToCharID(charID:String) -> void:
+	lastClientID = charID
+	clientCooldowns[charID] = clientCooldownSeconds
+	doInvolvePawn("client", charID)
+	clientRequestedAskType = ""
+	setState("found_client", "main")
 
 func processTime(_howMuch:int):
 	jobTime += _howMuch
