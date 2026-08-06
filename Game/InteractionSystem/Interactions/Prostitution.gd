@@ -523,7 +523,9 @@ func isSlutDom():
 
 func setClientToCharID(charID:String) -> void:
 	lastClientID = charID
-	clientCooldowns[charID] = clientCooldownSeconds
+	# let creatures be obsessed sometimes, as a treat
+	if(RNG.chance(95)):
+		clientCooldowns[charID] = clientCooldownSeconds
 	doInvolvePawn("client", charID)
 	clientRequestedAskType = ""
 	setState("found_client", "main")
