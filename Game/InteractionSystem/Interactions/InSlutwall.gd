@@ -8,6 +8,10 @@ var useCount:int = 0
 var tips:int = 0
 var shoutedForHelpCount:int = 0
 var immediatelyLeft:bool = false
+var inmateOfferedSelf:bool = false
+var saverCooldowns:Dictionary = {}
+
+var saverCooldownSeconds:int = 2*60*60
 
 func _init():
 	id = "InSlutwall"
@@ -22,7 +26,7 @@ func start(_pawns:Dictionary, _args:Dictionary):
 
 func init_text():
 	saynn("{inmate.You} {inmate.youAre} stuck in the slutwall. {inmate.YouHe} {inmate.youAreHeIs} completely helpless with {inmate.yourHis} {inmate.thick} {butt} sticking out, free for anyone to fuck..")
-	saynn("The tipbox has "+str(tips)+" credits.. There is an automatic mechanism that would unlock {inmate.youHim} automatically at 10 credits..")
+	saynn("The tipbox has "+getTipsAmountString()+".. There is an automatic mechanism that would unlock {inmate.youHim} automatically at 10 credits..")
 	var thePawn = getRolePawn("inmate")
 	if(!thePawn.isPlayer()):
 		saynn("{inmate.name} has "+str(getRoleChar("inmate").getStamina())+" stamina left.")
@@ -79,10 +83,10 @@ func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 		if(tips > 0):
 			if(getRolePawn("inmate").isPlayer()):
 				GM.pc.addCredits(int(tips))
-				addMessage("You got "+str(int(tips))+" credits from the tipbox! Nice!")
+				addMessage("You got "+getTipsAmountString()+" from the tipbox! Nice!")
 			elif(getRolePawn("inmate").isSlaveToPlayer()):
 				GM.pc.addCredits(int(tips))
-				addMessage("Your slave "+getRoleChar("inmate").getName()+" earned you "+str(int(tips))+" credits by being in a slutwall! Nice!")
+				addMessage("Your slave "+getRoleChar("inmate").getName()+" earned you "+getTipsAmountString()+" by being in a slutwall! Nice!")
 		getRoleChar("inmate").getInventory().clearStaticRestraints()
 		stopMe()
 
@@ -123,7 +127,11 @@ func after_struggle_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 
 func about_to_use_text():
-	saynn("{user.name} approaches the slutwall, about to use {inmate.you}..")
+	if(inmateOfferedSelf):
+		saynn("{user.You} {user.youVerb('agree')} to use {inmate.you}..")
+		sayLine("user", "TalkSexOfferSelfAccept", {main="user", target="inmate"})
+	else:
+		saynn("{user.You} {user.youVerb('approach', 'approaches')} the slutwall, about to use {inmate.you}..")
 
 	addAction("continue", "Continue", "Start the sex!", "default", 1.0, 600, {start_sex=["user", "inmate", SexType.SlutwallSex, {SexMod.DisableDynamicJoiners: true}],})
 
@@ -137,7 +145,7 @@ func about_to_use_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 func after_use_text():
 	saynn("{user.name} has finished using {inmate.you}..")
-	saynn("The tipbox currently has.. "+str(tips)+" credits in it. {inmate.name} will be able to escape at 10 credits..")
+	saynn("The tipbox currently has.. "+getTipsAmountString()+" in it. {inmate.name} will be able to escape at 10 credits..")
 
 	addAction("leave", "Leave", "Time to go", "default", 1.0, 60, {})
 	if(!getRolePawn("user").isPlayer() || GM.pc.getCredits() > 0):
@@ -220,12 +228,16 @@ func refusable_save_using_stamina_text():
 	var refuseHelpProbability = 1.0 - acceptHelpProbability
 	addAction("accept", "Accept", "Allow them to help you", "default", acceptHelpProbability, 60, {})
 	addAction("refuse", "Refuse", "You'd rather stay in the slutwall", "default", refuseHelpProbability, 60, {})
+	addAction("offer_self", "Offer self", "Invite them to fuck you instead", "sexSub", 0.5, 60, {})
 
 func refusable_save_using_stamina_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "accept"):
 		saveUsingStamina()
 	if(_id == "refuse"):
 		setState("refused_save", "saver")
+	if(_id == "offer_self"):
+		inmateOfferedSelf = true
+		setState("refused_save_offered_self", "saver")
 
 
 func refusable_save_using_key_text():
@@ -252,6 +264,59 @@ func refused_save_text():
 func refused_save_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "leave"):
 		setState("canceled_save", "saver")
+
+
+func refused_save_offered_self_text():
+	saynn("{inmate.You} {inmate.youVerb('refuse', 'refused')} {saver.your} help.")
+	sayLine("inmate", "HelpStocksSlutwallRefuse", {main="inmate", target="saver"})
+
+	var saverIsMean:bool = getRolePawn("saver").scorePersonalityMax({ PersonalityStat.Mean: 1.0 }) > 0.4
+	var responses:Array = [
+		"Alright.",
+		"If that's how you want it.",
+		"Mmmh..",
+		"Oki.",
+		"Your choice.",
+		"Wouldn't be called slutwall without you in it~.",
+	]
+	if(!getRoleChar("saver").isBlindfolded()):
+		responses.append_array([
+			"Good. Your butt looks better in the slutwall~.",
+		])
+	if(saverIsMean):
+		responses.append_array([
+			"Suit yourself.",
+			"Whatever.",
+			"Why did I even bother.",
+		])
+	saynn("[say=saver]"+RNG.pick(responses)+"[/say]")
+
+	saynn("\nBut {inmate.youHe} {inmate.youDontHeDoesnt} want {saver.youHim} to leave just yet..")
+	sayLine("inmate", "TalkSexOfferSelf", {main="inmate", target="saver"})
+
+	addAction("agree", "Agree", "Agree to fuck them", "agreeSexAsDom", 1.0, 60, {})
+	addAction("deny", "Deny", "You'd rather not..", "default", 0.2, 60, {})
+
+func refused_save_offered_self_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "agree"):
+		var saverCharID = getRolePawn("saver").charID
+		doRemoveRole("saver")
+		doInvolvePawn("user", saverCharID)
+		setState("about_to_use", "user")
+	if(_id == "deny"):
+		setState("offered_self_deny", "inmate")
+
+
+func offered_self_deny_text():
+	sayLine("saver", "TalkSexOfferSelfDeny", {main="saver", target="inmate"})
+	saynn("{saver.You} {saver.youVerb('walk')} away, leaving {inmate.youHim} to be someone else's toy..")
+
+	addAction("continue", "Continue", "Aww..", "default", 1.0, 60, {})
+
+func offered_self_deny_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "continue"):
+		doRemoveRole("saver")
+		setState("", "inmate")
 
 
 func canceled_save_text():
@@ -302,7 +367,10 @@ func about_to_shout_text():
 func about_to_shout_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "continue"):
 		getCharByRole("inmate").addStamina(20)
-		if(!shoutForInterruptions("inmate", 4, 4, 0.5, "You notice "+getCharByRole("inmate").getName()+" wiggling their ass in the slutwall..")):
+		var ignoreList:Array = []
+		for charID in saverCooldowns:
+			ignoreList.append(charID)
+		if(!shoutForInterruptions("inmate", 4, 4, ignoreList, 0.5, "You notice "+getCharByRole("inmate").getName()+" wiggling their ass in the slutwall..")):
 			setState("after_shout", "inmate")
 			checkSleep()
 
@@ -345,7 +413,7 @@ func after_sleep_do(_id:String, _args:Dictionary, _context:Dictionary):
 func after_tip_text():
 	saynn("Just before leaving, {user.name} decides to add to the tipbox..")
 	sayLine("user", "SlutwallAddTip", {main="user", target="inmate"})
-	saynn("The tipbox now has.. "+str(tips)+" credits in it. {inmate.name} will be able to get to them.. after freeing {inmate.himself}..")
+	saynn("The tipbox now has.. "+getTipsAmountString()+" in it. {inmate.name} will be able to get "+("it" if(tips == 1) else "to them")+".. after freeing {inmate.himself}..")
 
 	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 60, {})
 
@@ -391,11 +459,12 @@ func getInterruptActions(_pawn:CharacterPawn) -> Array:
 			args = {},
 		})
 	if(getPawnAmount() == 1):
+		var helpScore:float = -0.01 if(saverCooldowns.has(_pawn.charID)) else 1.0
 		result.append({
 			id = "free",
 			name = "Free",
 			desc = "Try to free them!",
-			score = 1.0,
+			score = helpScore,
 			scoreType = "help",
 			scoreRole = "inmate",
 			args = {},
@@ -414,11 +483,14 @@ func getInterruptActions(_pawn:CharacterPawn) -> Array:
 
 func doInterruptAction(_pawn:CharacterPawn, _id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "use"):
+		inmateOfferedSelf = false
 		doInvolvePawn("user", _pawn)
 		setState("about_to_use", "user")
 	if(_id == "free"):
 		saveTryCount = 0
 		immediatelyLeft = false
+		inmateOfferedSelf = false
+		saverCooldowns[_pawn.charID] = saverCooldownSeconds
 		doInvolvePawn("saver", _pawn)
 		setState("about_to_save", "saver")
 	if(_id == "free_slave"):
@@ -429,11 +501,21 @@ func doInterruptAction(_pawn:CharacterPawn, _id:String, _args:Dictionary, _conte
 func getAnimData() -> Array:
 	if(getState() in ["save_saved", "free_slave"]):
 		return [StageScene.Duo, "stand", {pc="inmate", npc="saver"}]
-	if(getState() in ["about_to_save", "refusable_save_using_stamina", "refusable_save_using_key", "refused_save", "save_after_help"]):
+	if(getState() in ["about_to_save", "refusable_save_using_stamina", "refusable_save_using_key", "refused_save", "refused_save_offered_self", "save_after_help"]):
 		return [StageScene.SlutwallSex, "tease", {pc="inmate", npc="saver"}]
 	if(getState() in ["about_to_use", "after_use", "after_tip"]):
 		return [StageScene.SlutwallSex, "tease", {pc="inmate", npc="user"}]
 	return [StageScene.Slutwall, "idle", {pc="inmate"}]
+
+func processTime(_howMuch:int):
+	if(saverCooldowns.empty() || _howMuch <= 0):
+		return
+	var newSaverCooldowns:Dictionary = {}
+	for charID in saverCooldowns:
+		saverCooldowns[charID] -= _howMuch
+		if(saverCooldowns[charID] > 0):
+			newSaverCooldowns[charID] = saverCooldowns[charID]
+	saverCooldowns = newSaverCooldowns
 
 func getActivityIconForRole(_role:String):
 	if(_role == "inmate"):
@@ -462,6 +544,9 @@ func checkSleep():
 func onStopped():
 	if(hasRoleChar("inmate")):
 		getRoleChar("inmate").getInventory().clearStaticRestraints()
+
+func getTipsAmountString() -> String:
+	return (str(tips)+" credit"+("" if(tips == 1) else "s"))
 
 func getInmateAcceptHelpProbability() -> float:
 	var acceptHelpProbability:float = 1.0
@@ -515,6 +600,8 @@ func saveData():
 	data["tips"] = tips
 	data["shoutedForHelpCount"] = shoutedForHelpCount
 	data["immediatelyLeft"] = immediatelyLeft
+	data["inmateOfferedSelf"] = inmateOfferedSelf
+	data["saverCooldowns"] = saverCooldowns
 	return data
 
 func loadData(_data):
@@ -528,4 +615,6 @@ func loadData(_data):
 	tips = SAVE.loadVar(_data, "tips", 0)
 	shoutedForHelpCount = SAVE.loadVar(_data, "shoutedForHelpCount", 0)
 	immediatelyLeft = SAVE.loadVar(_data, "immediatelyLeft", false)
+	inmateOfferedSelf = SAVE.loadVar(_data, "inmateOfferedSelf", false)
+	saverCooldowns = SAVE.loadVar(_data, "saverCooldowns", {})
 

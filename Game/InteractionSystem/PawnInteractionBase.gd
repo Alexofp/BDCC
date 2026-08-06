@@ -1091,7 +1091,7 @@ func doLookAround(role:String, keepScoreMult:float = 1.0):
 	
 	return pawn.tryInterruptPawns(allPawns, keepScoreMult)
 
-func shoutForInterruptions(role:String, searchDepth:int, maxDist:float = -1.0, keepScoreMult:float = 1.0, pcMessage:String = ""):
+func shoutForInterruptions(role:String, searchDepth:int, maxDist:float = -1.0, ignoreList:Array = [], keepScoreMult:float = 1.0, pcMessage:String = ""):
 	var pawn = getRolePawn(role)
 	var allPawnIDs = GM.main.IS.getPawnIDsNear(pawn.getLocation(), searchDepth, maxDist)
 	allPawnIDs.shuffle()
@@ -1104,7 +1104,7 @@ func shoutForInterruptions(role:String, searchDepth:int, maxDist:float = -1.0, k
 				addMessage(pcMessage)
 			continue
 
-		if(!otherPawn.canInterrupt()):
+		if(!otherPawn.canInterrupt() || ignoreList.has(otherPawnID)):
 			continue
 		
 		if(otherPawn.tryInterruptPawns([pawn], keepScoreMult)):
