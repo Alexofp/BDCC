@@ -1,0 +1,35 @@
+extends Reference
+class_name CombatAnimApplier
+
+var theCombatAnimTree:AnimationNodeStateMachine = preload("res://Player/StageScene3D/Scenes3/CombatAnimTree.tres")
+
+func applyCombatAnims():
+	for theID in GlobalRegistry.combatAnims:
+		var theAnim:CombatAnimBase = GlobalRegistry.combatAnims[theID]
+		
+		if(!theAnim.animName.empty()):
+			var newAnimNode:AnimationNodeAnimation = AnimationNodeAnimation.new()
+			newAnimNode.animation = theAnim.animName
+			
+			theCombatAnimTree.add_node(theAnim.animName, newAnimNode)
+			
+			addTransition("IDLE", theAnim.animName, theAnim.fadeIn)
+			addTransition(theAnim.animName, theAnim.transitionTo, theAnim.fadeOut, !theAnim.isLooped)
+			
+		if(!theAnim.animNameKnockedDown.empty()):
+			var newAnimNode:AnimationNodeAnimation = AnimationNodeAnimation.new()
+			newAnimNode.animation = theAnim.animNameKnockedDown
+			
+			theCombatAnimTree.add_node(theAnim.animNameKnockedDown, newAnimNode)
+			
+			addTransition("IDLE", theAnim.animNameKnockedDown, theAnim.fadeIn)
+			addTransition(theAnim.animNameKnockedDown, theAnim.transitionTo, theAnim.fadeOut, !theAnim.isLooped)
+			
+
+func addTransition(_from:String, _to:String, _time:float, _autoAdvance:bool = false):
+	var theTrans := AnimationNodeStateMachineTransition.new()
+	theTrans.xfade_time = _time
+	theTrans.auto_advance = _autoAdvance
+	if(_autoAdvance):
+		theTrans.switch_mode = AnimationNodeStateMachineTransition.SWITCH_MODE_AT_END
+	theCombatAnimTree.add_transition(_from, _to, theTrans)

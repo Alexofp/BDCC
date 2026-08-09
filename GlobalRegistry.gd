@@ -321,6 +321,8 @@ var recruits:Dictionary = {}
 var missions:Dictionary = {}
 var missionQuests:Dictionary = {}
 var contentBoardEntries:Dictionary = {}
+var combatAnims:Dictionary = {}
+var combatAnimsApplier := CombatAnimApplier.new()
 
 var bodypartStorageNode
 
@@ -811,6 +813,9 @@ func registerEverything():
 	sortRegisteredStatusEffectsByPriority()
 	sortPlayerAttacks()
 	sortSpeechModifiersByPriority()
+	
+	registerCombatAnims()
+	combatAnimsApplier.applyCombatAnims()
 	
 	GM.GES.registerAll()
 	
@@ -3093,7 +3098,20 @@ func getContentBoardEntry(id: String):
 func getContentBoardEntries():
 	return contentBoardEntries
 
+func registerCombatAnims():
+	var thePack := CombatAnimPack.new()
+	for theID in thePack.anims:
+		combatAnims[theID] = thePack.anims[theID]
 
+func getCombatAnims() -> Dictionary:
+	return combatAnims
+
+func getCombatAnim(_id:String):
+	if(combatAnims.has(_id)):
+		return combatAnims[_id]
+	else:
+		Log.printerr("ERROR: combat anim with the id "+_id+" wasn't found")
+		return null
 
 
 
