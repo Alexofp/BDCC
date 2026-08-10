@@ -2,6 +2,7 @@ extends Reference
 class_name CombatAnimPlayerChar
 
 var id:int
+var knockedDown:bool = false # Is the Doll currently 'knocked down'
 
 var queue:Array = []
 
@@ -34,3 +35,5 @@ func processQueue(_dt:float):
 		
 		queue.pop_front()
 		
+func doProcess(_dt:float):
+	processQueue(_dt)

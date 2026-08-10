@@ -14,7 +14,7 @@ func applyCombatAnims():
 			theCombatAnimTree.add_node(theAnim.animName, newAnimNode)
 			
 			addTransition("IDLE", theAnim.animName, theAnim.fadeIn)
-			addTransition(theAnim.animName, theAnim.transitionTo, theAnim.fadeOut, !theAnim.isLooped)
+			addTransition(theAnim.animName, "IDLE", theAnim.fadeOut, !theAnim.isLooped)
 			
 		if(!theAnim.animNameKnockedDown.empty()):
 			var newAnimNode:AnimationNodeAnimation = AnimationNodeAnimation.new()
@@ -22,8 +22,8 @@ func applyCombatAnims():
 			
 			theCombatAnimTree.add_node(theAnim.animNameKnockedDown, newAnimNode)
 			
-			addTransition("IDLE", theAnim.animNameKnockedDown, theAnim.fadeIn)
-			addTransition(theAnim.animNameKnockedDown, theAnim.transitionTo, theAnim.fadeOut, !theAnim.isLooped)
+			addTransition("KnockedDown-loop", theAnim.animNameKnockedDown, theAnim.fadeIn)
+			addTransition(theAnim.animNameKnockedDown, "KnockedDown-loop", theAnim.fadeOut, !theAnim.isLooped)
 			
 
 func addTransition(_from:String, _to:String, _time:float, _autoAdvance:bool = false):

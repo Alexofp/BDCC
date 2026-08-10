@@ -466,7 +466,8 @@ func _react(_action: String, _args):
 		var result = attack.doAttack(enemyCharacter, GM.pc)
 		result["text"] = GM.ui.processString(result["text"])
 		
-		playAnimation(StageScene.Duo, result["receiverAnimation"], {npc=enemyID, npcAction=result["attackerAnimation"]})
+		#playAnimation(StageScene.Duo, result["receiverAnimation"], {npc=enemyID, npcAction=result["attackerAnimation"]})
+		playAttackAnim(result["attackerAnimation"], false)
 		
 		whatEnemyDid += result["text"]
 		savedAIAttackID = ""
@@ -657,7 +658,8 @@ func doPlayerAttack(attackData):
 	var result = attack.doAttack(GM.pc, enemyCharacter, attackData)
 	result["text"] = GM.ui.processString(result["text"])
 	
-	playAnimation(StageScene.Duo, result["attackerAnimation"], {npc=enemyID, npcAction=result["receiverAnimation"]})
+	#playAnimation(StageScene.Duo, result["attackerAnimation"], {npc=enemyID, npcAction=result["receiverAnimation"]})
+	playAttackAnim(result["attackerAnimation"], true)
 	
 	var expData = attack.getExperience()
 	for expAdd in expData:
@@ -772,7 +774,8 @@ func aiTurn():
 			var result = attack.doAttack(enemyCharacter, GM.pc)
 			result["text"] = GM.ui.processString(result["text"])
 				
-			playAnimation(StageScene.Duo, result["receiverAnimation"], {npc=enemyID, npcAction=result["attackerAnimation"]})
+			#playAnimation(StageScene.Duo, result["receiverAnimation"], {npc=enemyID, npcAction=result["attackerAnimation"]})
+			playAttackAnim(result["attackerAnimation"], false)
 			
 			enemyText += result["text"]
 		else:
@@ -1093,3 +1096,15 @@ func canEquipRestraintOntoEnemySlotOrReason(itemSlot:String) -> Array:
 	elif(enemyCharacter.getInventory().hasSlotEquipped(itemSlot) && enemyCharacter.getInventory().getEquippedItem(itemSlot).isRestraint()):
 		return [false, "They are wearing this type of restraint already"]
 	return [true, ""]
+
+func playAttackAnim(_attackID:String, _pcAttacks:bool, _receiverDodges:bool = false, _receiverDefeated:bool = false):
+	var _attackerID:int = 0 if _pcAttacks else 1
+	var _attackerKnockedDown:bool = GM.pc.hasEffect(StatusEffect.Collapsed) if _pcAttacks else enemyCharacter.hasEffect(StatusEffect.Collapsed)
+	var _receiverKnockedDown:bool = GM.pc.hasEffect(StatusEffect.Collapsed) if !_pcAttacks else enemyCharacter.hasEffect(StatusEffect.Collapsed)
+	var _payload:Array = [
+		[CombatAnimPlayer.QUEUE_ATTACK, _attackID, _attackerID, _attackerKnockedDown],
+		[CombatAnimPlayer.QUEUE_ATTACKREACTION, _attackID, 1-_attackerID, _receiverKnockedDown, _receiverDefeated, _receiverDodges],
+		[CombatAnimPlayer.QUEUE_NOTBUSY],
+	]
+	playAnimation(StageScene.Combat, "", {npc=enemyID, pc="pc", payload=_payload})
+	

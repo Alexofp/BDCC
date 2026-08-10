@@ -14,7 +14,7 @@ var animTimeKnockedDown:float = -1.0
 var fadeIn:float = 0.25
 var fadeOut:float = 0.25
 
-var transitionTo:String = "IDLE"
+#var transitionTo:String = "IDLE"
 var isLooped:bool = false
 
 var hitDelay:float = 0.3

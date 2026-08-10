@@ -14,6 +14,13 @@ func prepareCharacter(_char):
 func getDoll():
 	return doll
 
+func playAnimRaw(animID:String, _instant:bool = false):
+	var state_machine:AnimationNodeStateMachinePlayback = animationTree["parameters/StateMachine/playback"]
+	if(_instant):
+		state_machine.start(animID)
+	else:
+		state_machine.travel(animID)
+
 func playAnim(animID, _bodyState:Dictionary):
 	var fullAnimID = animID
 	if(animID is Array):

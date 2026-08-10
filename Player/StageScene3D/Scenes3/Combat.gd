@@ -2,16 +2,25 @@ extends BaseStageScene3D
 
 onready var combat_doll_instance = $CombatDollInstance
 onready var combat_doll_instance_2 = $CombatDollInstance2
+var animPlayer:CombatAnimPlayer = CombatAnimPlayer.new()
 
 func _init():
 	id = StageScene.Combat
 
 func _ready():
+	animPlayer.connect("playAnim", self, "onPlayAnim")
+	
 #	animationTree.anim_player = animationTree.get_path_to(doll.getAnimPlayerCombat())
 #	animationTree.active = true
 #	animationTree2.anim_player = animationTree2.get_path_to(doll2.getAnimPlayerCombat())
 #	animationTree2.active = true
 	pass
+
+func onPlayAnim(_id:int, _anim:String):
+	if(_id == 0):
+		combat_doll_instance.playAnimRaw(_anim)
+	elif(_id == 1):
+		combat_doll_instance_2.playAnimRaw(_anim)
 
 func updateSubAnims():
 	pass
@@ -147,8 +156,15 @@ func playAnimation(animID, _args = {}):
 	
 	#doll.forceSlotToBeVisible(BodypartSlot.Penis)
 	
+	
 	combat_doll_instance.playAnim(animID, _args["bodyState"] if _args.has("bodyState") else {})
 	combat_doll_instance_2.playAnim(_args["npcAction"] if _args.has("npcAction") else "", _args["npcBodyState"] if _args.has("npcBodyState") else {})
+	
+	if(_args.has("payload")):
+		animPlayer.addPayload(_args["payload"])
+		#var theAttack:Array = _args["attack"]
+		#animPlayer.playAttack(theAttack[0], theAttack[1], theAttack[2], theAttack[3])
+	
 	
 #	if(_args.has("flipNPC") && _args["flipNPC"]):
 #		doll2.scale.x = abs(doll2.scale.x)
@@ -178,9 +194,12 @@ func canTransitionTo(_actionID, _args = []):
 	if(_args.has("npc")):
 		secondDoll = _args["npc"]
 		
-	if(combat_doll_instance.getDoll().getCharacterID() != firstDoll || combat_doll_instance.getDoll().getCharacterID() != secondDoll):
+	if(combat_doll_instance.getDoll().getCharacterID() != firstDoll || combat_doll_instance_2.getDoll().getCharacterID() != secondDoll):
 		return false
 	return true
+
+func _process(_delta):
+	animPlayer.doProcess(_delta)
 
 func getSupportedStates():
 	return getSupportedStatesCombat()

@@ -1,4 +1,4 @@
-[gd_resource type="AnimationNodeStateMachine" load_steps=102 format=2]
+[gd_resource type="AnimationNodeStateMachine" load_steps=113 format=2]
 
 [sub_resource type="AnimationNodeAnimation" id=62]
 animation = "AllFours-loop"
@@ -30,32 +30,36 @@ animation = "Hurt"
 [sub_resource type="AnimationNodeAnimation" id=116]
 animation = "Standing-loop"
 
+[sub_resource type="AnimationNodeAnimation" id=120]
+animation = "KnockedDown-loop"
+
 [sub_resource type="AnimationNodeAnimation" id=117]
 animation = "StandingCombat-loop"
 
 [sub_resource type="AnimationNodeTransition" id=118]
-input_count = 2
+input_count = 3
 input_0/name = "Standing-loop"
 input_0/auto_advance = false
 input_1/name = "StandingCombat-loop"
 input_1/auto_advance = false
+input_2/name = "KnockedDown-loop"
+input_2/auto_advance = false
 
 [sub_resource type="AnimationNodeBlendTree" id=119]
-graph_offset = Vector2( -433.37, 66.5416 )
+graph_offset = Vector2( -433.37, 163.542 )
 nodes/Animation/node = SubResource( 117 )
 nodes/Animation/position = Vector2( -220, 220 )
 "nodes/Animation 2/node" = SubResource( 116 )
 "nodes/Animation 2/position" = Vector2( -200, 80 )
+"nodes/Animation 3/node" = SubResource( 120 )
+"nodes/Animation 3/position" = Vector2( -220, 360 )
 nodes/IDLE_PICK/node = SubResource( 118 )
 nodes/IDLE_PICK/position = Vector2( 80, 120 )
 nodes/output/position = Vector2( 340, 160 )
-node_connections = [ "IDLE_PICK", 0, "Animation 2", "IDLE_PICK", 1, "Animation", "output", 0, "IDLE_PICK" ]
+node_connections = [ "IDLE_PICK", 0, "Animation 2", "IDLE_PICK", 1, "Animation", "IDLE_PICK", 2, "Animation 3", "output", 0, "IDLE_PICK" ]
 
 [sub_resource type="AnimationNodeAnimation" id=104]
 animation = "Jogging-loop"
-
-[sub_resource type="AnimationNodeAnimation" id=40]
-animation = "Kick"
 
 [sub_resource type="AnimationNodeAnimation" id=7]
 animation = "Kneeling-loop"
@@ -66,14 +70,26 @@ animation = "KneelingToAllFours"
 [sub_resource type="AnimationNodeAnimation" id=8]
 animation = "KneelingToStanding"
 
+[sub_resource type="AnimationNodeAnimation" id=123]
+animation = "KnockedDown-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=121]
+animation = "KnockedDownBlocking"
+
+[sub_resource type="AnimationNodeAnimation" id=124]
+animation = "KnockedDownDefeat"
+
+[sub_resource type="AnimationNodeAnimation" id=122]
+animation = "KnockedDownGetHit"
+
+[sub_resource type="AnimationNodeAnimation" id=125]
+animation = "KnockedDownToStanding"
+
 [sub_resource type="AnimationNodeAnimation" id=53]
 animation = "ShacklesWalk-loop"
 
 [sub_resource type="AnimationNodeAnimation" id=51]
 animation = "ShacklesWalk-loop"
-
-[sub_resource type="AnimationNodeAnimation" id=42]
-animation = "Shove"
 
 [sub_resource type="AnimationNodeAnimation" id=26]
 animation = "Sitting-loop"
@@ -83,6 +99,9 @@ animation = "SittingToStanding"
 
 [sub_resource type="AnimationNodeAnimation" id=9]
 animation = "StandingToKneeling"
+
+[sub_resource type="AnimationNodeAnimation" id=126]
+animation = "StandingToKnockedDown"
 
 [sub_resource type="AnimationNodeAnimation" id=28]
 animation = "StandingToSitting"
@@ -275,23 +294,7 @@ switch_mode = 2
 auto_advance = true
 xfade_time = 0.3
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=44]
-switch_mode = 2
-auto_advance = true
-xfade_time = 0.3
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=46]
-switch_mode = 2
-auto_advance = true
-xfade_time = 0.3
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=47]
-xfade_time = 0.3
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=48]
-xfade_time = 0.3
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=50]
 xfade_time = 0.3
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=52]
@@ -364,6 +367,44 @@ xfade_time = 0.5
 [sub_resource type="AnimationNodeStateMachineTransition" id=115]
 xfade_time = 0.5
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=127]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.25
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=128]
+xfade_time = 0.25
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=129]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.25
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=130]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=131]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.25
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=132]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.25
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=133]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=134]
+xfade_time = 0.25
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=135]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.25
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=136]
+xfade_time = 0.25
+
 [resource]
 states/AllFours-loop/node = SubResource( 62 )
 states/AllFours-loop/position = Vector2( 121, 511 )
@@ -374,39 +415,47 @@ states/AllFoursCrawl-loop/position = Vector2( 12, 661 )
 states/AllFoursToKneeling/node = SubResource( 98 )
 states/AllFoursToKneeling/position = Vector2( 242.547, 417 )
 states/Block/node = SubResource( 24 )
-states/Block/position = Vector2( 566.547, -166 )
+states/Block/position = Vector2( 780.547, -171 )
 states/Defeat/node = SubResource( 14 )
 states/Defeat/position = Vector2( 365.547, 314 )
 states/Dodge/node = SubResource( 25 )
-states/Dodge/position = Vector2( 487.547, -218 )
+states/Dodge/position = Vector2( 742.547, -223 )
 states/HoldObject-loop/node = SubResource( 113 )
 states/HoldObject-loop/position = Vector2( 951.547, 249 )
 states/Hurt/node = SubResource( 39 )
-states/Hurt/position = Vector2( 365.547, -218 )
+states/Hurt/position = Vector2( 695.547, -279 )
 states/IDLE/node = SubResource( 119 )
 states/IDLE/position = Vector2( 349.547, 41 )
 states/Jogging-loop/node = SubResource( 104 )
 states/Jogging-loop/position = Vector2( 541.547, 625 )
-states/Kick/node = SubResource( 40 )
-states/Kick/position = Vector2( 242.547, -209 )
 states/Kneeling-loop/node = SubResource( 7 )
 states/Kneeling-loop/position = Vector2( 121, 314 )
 states/KneelingToAllFours/node = SubResource( 99 )
 states/KneelingToAllFours/position = Vector2( 12, 417 )
 states/KneelingToStanding/node = SubResource( 8 )
 states/KneelingToStanding/position = Vector2( 121, 175 )
+states/KnockedDown-loop/node = SubResource( 123 )
+states/KnockedDown-loop/position = Vector2( 269.547, -351 )
+states/KnockedDownBlocking/node = SubResource( 121 )
+states/KnockedDownBlocking/position = Vector2( 198.547, -475 )
+states/KnockedDownDefeat/node = SubResource( 124 )
+states/KnockedDownDefeat/position = Vector2( 5, -326 )
+states/KnockedDownGetHit/node = SubResource( 122 )
+states/KnockedDownGetHit/position = Vector2( 12, -420 )
+states/KnockedDownToStanding/node = SubResource( 125 )
+states/KnockedDownToStanding/position = Vector2( 139.547, -223 )
 states/ShacklesWalk-loop/node = SubResource( 51 )
 states/ShacklesWalk-loop/position = Vector2( 900.547, -105 )
 "states/ShacklesWalk-loop 2/node" = SubResource( 53 )
 "states/ShacklesWalk-loop 2/position" = Vector2( 958.547, -42 )
-states/Shove/node = SubResource( 42 )
-states/Shove/position = Vector2( 80, -99 )
 states/Sitting-loop/node = SubResource( 26 )
 states/Sitting-loop/position = Vector2( 629.547, 332 )
 states/SittingToStanding/node = SubResource( 27 )
 states/SittingToStanding/position = Vector2( 541.547, 249 )
 states/StandingToKneeling/node = SubResource( 9 )
 states/StandingToKneeling/position = Vector2( 248, 243 )
+states/StandingToKnockedDown/node = SubResource( 126 )
+states/StandingToKnockedDown/position = Vector2( 305.547, -171 )
 states/StandingToSitting/node = SubResource( 28 )
 states/StandingToSitting/position = Vector2( 742.547, 249 )
 states/StandingToStruggleLegs/node = SubResource( 68 )
@@ -441,6 +490,6 @@ states/WeaponSwing/node = SubResource( 57 )
 states/WeaponSwing/position = Vector2( -118.453, 15 )
 states/WeaponThrow/node = SubResource( 84 )
 states/WeaponThrow/position = Vector2( -222.453, -42 )
-transitions = [ "StandingToKneeling", "Kneeling-loop", SubResource( 11 ), "Kneeling-loop", "KneelingToStanding", SubResource( 12 ), "StandingToWalking", "Walk-loop", SubResource( 18 ), "Walk-loop", "WalkingToStanding", SubResource( 19 ), "Defeat", "Kneeling-loop", SubResource( 22 ), "StandingToSitting", "Sitting-loop", SubResource( 30 ), "Sitting-loop", "SittingToStanding", SubResource( 31 ), "ShacklesWalk-loop", "ShacklesWalk-loop 2", SubResource( 54 ), "AllFours-loop", "AllFoursCrawl-loop", SubResource( 66 ), "StandingToStruggleLegs", "StruggleLegs-loop", SubResource( 78 ), "StruggleLegs-loop", "StandingToStruggleLegsReverse", SubResource( 79 ), "WeaponGunHold-loop", "WeaponGunAim-loop", SubResource( 87 ), "WeaponGunAim-loop", "WeaponGunHold-loop", SubResource( 88 ), "WeaponGunAim-loop", "WeaponGunShoot", SubResource( 89 ), "WeaponGunShoot", "WeaponGunHold-loop", SubResource( 93 ), "AllFoursCrawl-loop", "AllFoursCrawl-loop 2", SubResource( 96 ), "AllFoursCrawl-loop 2", "AllFours-loop", SubResource( 97 ), "Kneeling-loop", "KneelingToAllFours", SubResource( 100 ), "KneelingToAllFours", "AllFours-loop", SubResource( 101 ), "AllFours-loop", "AllFoursToKneeling", SubResource( 102 ), "AllFoursToKneeling", "Kneeling-loop", SubResource( 103 ), "StandingToWalking 2", "Jogging-loop", SubResource( 109 ), "Jogging-loop", "WalkingToStanding 2", SubResource( 111 ), "IDLE", "StandingToKneeling", SubResource( 10 ), "KneelingToStanding", "IDLE", SubResource( 13 ), "IDLE", "StandingToWalking", SubResource( 17 ), "WalkingToStanding", "IDLE", SubResource( 20 ), "IDLE", "Defeat", SubResource( 21 ), "IDLE", "StandingToSitting", SubResource( 29 ), "SittingToStanding", "IDLE", SubResource( 32 ), "IDLE", "Block", SubResource( 35 ), "Block", "IDLE", SubResource( 36 ), "IDLE", "Dodge", SubResource( 37 ), "Dodge", "IDLE", SubResource( 38 ), "Hurt", "IDLE", SubResource( 43 ), "Kick", "IDLE", SubResource( 44 ), "Shove", "IDLE", SubResource( 46 ), "IDLE", "Hurt", SubResource( 47 ), "IDLE", "Kick", SubResource( 48 ), "IDLE", "Shove", SubResource( 50 ), "IDLE", "ShacklesWalk-loop", SubResource( 52 ), "ShacklesWalk-loop 2", "IDLE", SubResource( 55 ), "IDLE", "WeaponShiv", SubResource( 58 ), "IDLE", "WeaponSwing", SubResource( 59 ), "WeaponShiv", "IDLE", SubResource( 60 ), "WeaponSwing", "IDLE", SubResource( 61 ), "IDLE", "StruggleGeneric-loop", SubResource( 73 ), "StruggleGeneric-loop", "IDLE", SubResource( 74 ), "IDLE", "StruggleGag-loop", SubResource( 75 ), "StruggleGag-loop", "IDLE", SubResource( 76 ), "IDLE", "StandingToStruggleLegs", SubResource( 77 ), "StandingToStruggleLegsReverse", "IDLE", SubResource( 80 ), "IDLE", "WeaponThrow", SubResource( 85 ), "WeaponThrow", "IDLE", SubResource( 86 ), "WeaponGunHold-loop", "IDLE", SubResource( 91 ), "IDLE", "WeaponGunHold-loop", SubResource( 92 ), "IDLE", "StandingToWalking 2", SubResource( 108 ), "WalkingToStanding 2", "IDLE", SubResource( 112 ), "IDLE", "HoldObject-loop", SubResource( 114 ), "HoldObject-loop", "IDLE", SubResource( 115 ) ]
+transitions = [ "StandingToKneeling", "Kneeling-loop", SubResource( 11 ), "Kneeling-loop", "KneelingToStanding", SubResource( 12 ), "StandingToWalking", "Walk-loop", SubResource( 18 ), "Walk-loop", "WalkingToStanding", SubResource( 19 ), "Defeat", "Kneeling-loop", SubResource( 22 ), "StandingToSitting", "Sitting-loop", SubResource( 30 ), "Sitting-loop", "SittingToStanding", SubResource( 31 ), "ShacklesWalk-loop", "ShacklesWalk-loop 2", SubResource( 54 ), "AllFours-loop", "AllFoursCrawl-loop", SubResource( 66 ), "StandingToStruggleLegs", "StruggleLegs-loop", SubResource( 78 ), "StruggleLegs-loop", "StandingToStruggleLegsReverse", SubResource( 79 ), "WeaponGunHold-loop", "WeaponGunAim-loop", SubResource( 87 ), "WeaponGunAim-loop", "WeaponGunHold-loop", SubResource( 88 ), "WeaponGunAim-loop", "WeaponGunShoot", SubResource( 89 ), "WeaponGunShoot", "WeaponGunHold-loop", SubResource( 93 ), "AllFoursCrawl-loop", "AllFoursCrawl-loop 2", SubResource( 96 ), "AllFoursCrawl-loop 2", "AllFours-loop", SubResource( 97 ), "Kneeling-loop", "KneelingToAllFours", SubResource( 100 ), "KneelingToAllFours", "AllFours-loop", SubResource( 101 ), "AllFours-loop", "AllFoursToKneeling", SubResource( 102 ), "AllFoursToKneeling", "Kneeling-loop", SubResource( 103 ), "StandingToWalking 2", "Jogging-loop", SubResource( 109 ), "Jogging-loop", "WalkingToStanding 2", SubResource( 111 ), "IDLE", "StandingToKneeling", SubResource( 10 ), "KneelingToStanding", "IDLE", SubResource( 13 ), "IDLE", "StandingToWalking", SubResource( 17 ), "WalkingToStanding", "IDLE", SubResource( 20 ), "IDLE", "Defeat", SubResource( 21 ), "IDLE", "StandingToSitting", SubResource( 29 ), "SittingToStanding", "IDLE", SubResource( 32 ), "IDLE", "Block", SubResource( 35 ), "Block", "IDLE", SubResource( 36 ), "IDLE", "Dodge", SubResource( 37 ), "Dodge", "IDLE", SubResource( 38 ), "Hurt", "IDLE", SubResource( 43 ), "IDLE", "Hurt", SubResource( 47 ), "IDLE", "ShacklesWalk-loop", SubResource( 52 ), "ShacklesWalk-loop 2", "IDLE", SubResource( 55 ), "IDLE", "WeaponShiv", SubResource( 58 ), "IDLE", "WeaponSwing", SubResource( 59 ), "WeaponShiv", "IDLE", SubResource( 60 ), "WeaponSwing", "IDLE", SubResource( 61 ), "IDLE", "StruggleGeneric-loop", SubResource( 73 ), "StruggleGeneric-loop", "IDLE", SubResource( 74 ), "IDLE", "StruggleGag-loop", SubResource( 75 ), "StruggleGag-loop", "IDLE", SubResource( 76 ), "IDLE", "StandingToStruggleLegs", SubResource( 77 ), "StandingToStruggleLegsReverse", "IDLE", SubResource( 80 ), "IDLE", "WeaponThrow", SubResource( 85 ), "WeaponThrow", "IDLE", SubResource( 86 ), "WeaponGunHold-loop", "IDLE", SubResource( 91 ), "IDLE", "WeaponGunHold-loop", SubResource( 92 ), "IDLE", "StandingToWalking 2", SubResource( 108 ), "WalkingToStanding 2", "IDLE", SubResource( 112 ), "IDLE", "HoldObject-loop", SubResource( 114 ), "HoldObject-loop", "IDLE", SubResource( 115 ), "KnockedDownToStanding", "IDLE", SubResource( 127 ), "IDLE", "StandingToKnockedDown", SubResource( 128 ), "KnockedDownDefeat", "Kneeling-loop", SubResource( 129 ), "KnockedDown-loop", "KnockedDownGetHit", SubResource( 130 ), "KnockedDownGetHit", "KnockedDown-loop", SubResource( 131 ), "KnockedDownBlocking", "KnockedDown-loop", SubResource( 132 ), "KnockedDown-loop", "KnockedDownBlocking", SubResource( 133 ), "KnockedDown-loop", "KnockedDownToStanding", SubResource( 134 ), "StandingToKnockedDown", "KnockedDown-loop", SubResource( 135 ), "KnockedDown-loop", "KnockedDownDefeat", SubResource( 136 ) ]
 start_node = "IDLE"
-graph_offset = Vector2( -229.453, -382 )
+graph_offset = Vector2( -250.453, -531 )
