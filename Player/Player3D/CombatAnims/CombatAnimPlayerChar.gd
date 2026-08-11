@@ -9,13 +9,17 @@ var queue:Array = []
 const DO_WAIT := 0
 const DO_ANIM := 1
 
-signal playAnim(_id, _anim)
+signal playAnim(_id, _anim, _args)
 
 func addWait(_howLong:float):
 	queue.append([DO_WAIT, _howLong])
 
-func addAnim(_anim:String):
-	queue.append([DO_ANIM, _anim])
+func addAnimNoWait(_anim:String, _args:Array = []):
+	queue.append([DO_ANIM, _anim, _args])
+
+func addAnim(_anim:String, _args:Array = []):
+	queue.append([DO_ANIM, _anim, _args])
+	addWait(getAnimLen(_anim))
 
 func isBusy() -> bool:
 	return !queue.empty()
@@ -31,9 +35,21 @@ func processQueue(_dt:float):
 				return
 		
 		if(elType == DO_ANIM):
-			emit_signal("playAnim", id, curEl[1])
+			emit_signal("playAnim", id, curEl[1], curEl[2])
 		
 		queue.pop_front()
 		
 func doProcess(_dt:float):
 	processQueue(_dt)
+
+var theAnimTree:AnimationNodeStateMachine = preload("res://Player/StageScene3D/Scenes3/CombatAnimTree.tres")
+func getAnimLen(_anim:String) -> float:
+	if(theAnimTree.has_node(_anim)):
+		var theNode = theAnimTree.get_node(_anim)
+		if(theNode && (theNode is AnimationNodeAnimation)):
+			var theAnimNode:AnimationNodeAnimation = theNode
+			var theAnimName:String = theAnimNode.animation
+			if(GlobalRegistry.combatAnimLen.has(theAnimName)):
+				return GlobalRegistry.combatAnimLen[theAnimName]
+		
+	return 1.0

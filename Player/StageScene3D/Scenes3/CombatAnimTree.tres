@@ -1,4 +1,4 @@
-[gd_resource type="AnimationNodeStateMachine" load_steps=113 format=2]
+[gd_resource type="AnimationNodeStateMachine" load_steps=110 format=2]
 
 [sub_resource type="AnimationNodeAnimation" id=62]
 animation = "AllFours-loop"
@@ -147,9 +147,6 @@ animation = "WeaponGunShoot"
 
 [sub_resource type="AnimationNodeAnimation" id=56]
 animation = "WeaponShiv"
-
-[sub_resource type="AnimationNodeAnimation" id=57]
-animation = "WeaponSwing"
 
 [sub_resource type="AnimationNodeAnimation" id=84]
 animation = "WeaponThrow"
@@ -308,15 +305,7 @@ xfade_time = 0.5
 [sub_resource type="AnimationNodeStateMachineTransition" id=58]
 xfade_time = 0.3
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=59]
-xfade_time = 0.3
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=60]
-switch_mode = 2
-auto_advance = true
-xfade_time = 0.3
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=61]
 switch_mode = 2
 auto_advance = true
 xfade_time = 0.3
@@ -486,10 +475,8 @@ states/WeaponGunShoot/node = SubResource( 83 )
 states/WeaponGunShoot/position = Vector2( -280.453, -272 )
 states/WeaponShiv/node = SubResource( 56 )
 states/WeaponShiv/position = Vector2( -35.453, -42 )
-states/WeaponSwing/node = SubResource( 57 )
-states/WeaponSwing/position = Vector2( -118.453, 15 )
 states/WeaponThrow/node = SubResource( 84 )
 states/WeaponThrow/position = Vector2( -222.453, -42 )
-transitions = [ "StandingToKneeling", "Kneeling-loop", SubResource( 11 ), "Kneeling-loop", "KneelingToStanding", SubResource( 12 ), "StandingToWalking", "Walk-loop", SubResource( 18 ), "Walk-loop", "WalkingToStanding", SubResource( 19 ), "Defeat", "Kneeling-loop", SubResource( 22 ), "StandingToSitting", "Sitting-loop", SubResource( 30 ), "Sitting-loop", "SittingToStanding", SubResource( 31 ), "ShacklesWalk-loop", "ShacklesWalk-loop 2", SubResource( 54 ), "AllFours-loop", "AllFoursCrawl-loop", SubResource( 66 ), "StandingToStruggleLegs", "StruggleLegs-loop", SubResource( 78 ), "StruggleLegs-loop", "StandingToStruggleLegsReverse", SubResource( 79 ), "WeaponGunHold-loop", "WeaponGunAim-loop", SubResource( 87 ), "WeaponGunAim-loop", "WeaponGunHold-loop", SubResource( 88 ), "WeaponGunAim-loop", "WeaponGunShoot", SubResource( 89 ), "WeaponGunShoot", "WeaponGunHold-loop", SubResource( 93 ), "AllFoursCrawl-loop", "AllFoursCrawl-loop 2", SubResource( 96 ), "AllFoursCrawl-loop 2", "AllFours-loop", SubResource( 97 ), "Kneeling-loop", "KneelingToAllFours", SubResource( 100 ), "KneelingToAllFours", "AllFours-loop", SubResource( 101 ), "AllFours-loop", "AllFoursToKneeling", SubResource( 102 ), "AllFoursToKneeling", "Kneeling-loop", SubResource( 103 ), "StandingToWalking 2", "Jogging-loop", SubResource( 109 ), "Jogging-loop", "WalkingToStanding 2", SubResource( 111 ), "IDLE", "StandingToKneeling", SubResource( 10 ), "KneelingToStanding", "IDLE", SubResource( 13 ), "IDLE", "StandingToWalking", SubResource( 17 ), "WalkingToStanding", "IDLE", SubResource( 20 ), "IDLE", "Defeat", SubResource( 21 ), "IDLE", "StandingToSitting", SubResource( 29 ), "SittingToStanding", "IDLE", SubResource( 32 ), "IDLE", "Block", SubResource( 35 ), "Block", "IDLE", SubResource( 36 ), "IDLE", "Dodge", SubResource( 37 ), "Dodge", "IDLE", SubResource( 38 ), "Hurt", "IDLE", SubResource( 43 ), "IDLE", "Hurt", SubResource( 47 ), "IDLE", "ShacklesWalk-loop", SubResource( 52 ), "ShacklesWalk-loop 2", "IDLE", SubResource( 55 ), "IDLE", "WeaponShiv", SubResource( 58 ), "IDLE", "WeaponSwing", SubResource( 59 ), "WeaponShiv", "IDLE", SubResource( 60 ), "WeaponSwing", "IDLE", SubResource( 61 ), "IDLE", "StruggleGeneric-loop", SubResource( 73 ), "StruggleGeneric-loop", "IDLE", SubResource( 74 ), "IDLE", "StruggleGag-loop", SubResource( 75 ), "StruggleGag-loop", "IDLE", SubResource( 76 ), "IDLE", "StandingToStruggleLegs", SubResource( 77 ), "StandingToStruggleLegsReverse", "IDLE", SubResource( 80 ), "IDLE", "WeaponThrow", SubResource( 85 ), "WeaponThrow", "IDLE", SubResource( 86 ), "WeaponGunHold-loop", "IDLE", SubResource( 91 ), "IDLE", "WeaponGunHold-loop", SubResource( 92 ), "IDLE", "StandingToWalking 2", SubResource( 108 ), "WalkingToStanding 2", "IDLE", SubResource( 112 ), "IDLE", "HoldObject-loop", SubResource( 114 ), "HoldObject-loop", "IDLE", SubResource( 115 ), "KnockedDownToStanding", "IDLE", SubResource( 127 ), "IDLE", "StandingToKnockedDown", SubResource( 128 ), "KnockedDownDefeat", "Kneeling-loop", SubResource( 129 ), "KnockedDown-loop", "KnockedDownGetHit", SubResource( 130 ), "KnockedDownGetHit", "KnockedDown-loop", SubResource( 131 ), "KnockedDownBlocking", "KnockedDown-loop", SubResource( 132 ), "KnockedDown-loop", "KnockedDownBlocking", SubResource( 133 ), "KnockedDown-loop", "KnockedDownToStanding", SubResource( 134 ), "StandingToKnockedDown", "KnockedDown-loop", SubResource( 135 ), "KnockedDown-loop", "KnockedDownDefeat", SubResource( 136 ) ]
+transitions = [ "StandingToKneeling", "Kneeling-loop", SubResource( 11 ), "Kneeling-loop", "KneelingToStanding", SubResource( 12 ), "StandingToWalking", "Walk-loop", SubResource( 18 ), "Walk-loop", "WalkingToStanding", SubResource( 19 ), "Defeat", "Kneeling-loop", SubResource( 22 ), "StandingToSitting", "Sitting-loop", SubResource( 30 ), "Sitting-loop", "SittingToStanding", SubResource( 31 ), "ShacklesWalk-loop", "ShacklesWalk-loop 2", SubResource( 54 ), "AllFours-loop", "AllFoursCrawl-loop", SubResource( 66 ), "StandingToStruggleLegs", "StruggleLegs-loop", SubResource( 78 ), "StruggleLegs-loop", "StandingToStruggleLegsReverse", SubResource( 79 ), "WeaponGunHold-loop", "WeaponGunAim-loop", SubResource( 87 ), "WeaponGunAim-loop", "WeaponGunHold-loop", SubResource( 88 ), "WeaponGunAim-loop", "WeaponGunShoot", SubResource( 89 ), "WeaponGunShoot", "WeaponGunHold-loop", SubResource( 93 ), "AllFoursCrawl-loop", "AllFoursCrawl-loop 2", SubResource( 96 ), "AllFoursCrawl-loop 2", "AllFours-loop", SubResource( 97 ), "Kneeling-loop", "KneelingToAllFours", SubResource( 100 ), "KneelingToAllFours", "AllFours-loop", SubResource( 101 ), "AllFours-loop", "AllFoursToKneeling", SubResource( 102 ), "AllFoursToKneeling", "Kneeling-loop", SubResource( 103 ), "StandingToWalking 2", "Jogging-loop", SubResource( 109 ), "Jogging-loop", "WalkingToStanding 2", SubResource( 111 ), "IDLE", "StandingToKneeling", SubResource( 10 ), "KneelingToStanding", "IDLE", SubResource( 13 ), "IDLE", "StandingToWalking", SubResource( 17 ), "WalkingToStanding", "IDLE", SubResource( 20 ), "IDLE", "Defeat", SubResource( 21 ), "IDLE", "StandingToSitting", SubResource( 29 ), "SittingToStanding", "IDLE", SubResource( 32 ), "IDLE", "Block", SubResource( 35 ), "Block", "IDLE", SubResource( 36 ), "IDLE", "Dodge", SubResource( 37 ), "Dodge", "IDLE", SubResource( 38 ), "Hurt", "IDLE", SubResource( 43 ), "IDLE", "Hurt", SubResource( 47 ), "IDLE", "ShacklesWalk-loop", SubResource( 52 ), "ShacklesWalk-loop 2", "IDLE", SubResource( 55 ), "IDLE", "WeaponShiv", SubResource( 58 ), "WeaponShiv", "IDLE", SubResource( 60 ), "IDLE", "StruggleGeneric-loop", SubResource( 73 ), "StruggleGeneric-loop", "IDLE", SubResource( 74 ), "IDLE", "StruggleGag-loop", SubResource( 75 ), "StruggleGag-loop", "IDLE", SubResource( 76 ), "IDLE", "StandingToStruggleLegs", SubResource( 77 ), "StandingToStruggleLegsReverse", "IDLE", SubResource( 80 ), "IDLE", "WeaponThrow", SubResource( 85 ), "WeaponThrow", "IDLE", SubResource( 86 ), "WeaponGunHold-loop", "IDLE", SubResource( 91 ), "IDLE", "WeaponGunHold-loop", SubResource( 92 ), "IDLE", "StandingToWalking 2", SubResource( 108 ), "WalkingToStanding 2", "IDLE", SubResource( 112 ), "IDLE", "HoldObject-loop", SubResource( 114 ), "HoldObject-loop", "IDLE", SubResource( 115 ), "KnockedDownToStanding", "IDLE", SubResource( 127 ), "IDLE", "StandingToKnockedDown", SubResource( 128 ), "KnockedDownDefeat", "Kneeling-loop", SubResource( 129 ), "KnockedDown-loop", "KnockedDownGetHit", SubResource( 130 ), "KnockedDownGetHit", "KnockedDown-loop", SubResource( 131 ), "KnockedDownBlocking", "KnockedDown-loop", SubResource( 132 ), "KnockedDown-loop", "KnockedDownBlocking", SubResource( 133 ), "KnockedDown-loop", "KnockedDownToStanding", SubResource( 134 ), "StandingToKnockedDown", "KnockedDown-loop", SubResource( 135 ), "KnockedDown-loop", "KnockedDownDefeat", SubResource( 136 ) ]
 start_node = "IDLE"
-graph_offset = Vector2( -250.453, -531 )
+graph_offset = Vector2( -411.453, -325 )

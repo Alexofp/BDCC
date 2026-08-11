@@ -3,6 +3,7 @@ extends Spatial
 onready var doll = $Doll3D
 onready var animationTree = $AnimationTree
 onready var chair = $Chair
+var savedChar
 
 func _ready():
 	animationTree.anim_player = animationTree.get_path_to(doll.getAnimPlayerCombat())
@@ -10,6 +11,12 @@ func _ready():
 
 func prepareCharacter(_char):
 	doll.prepareCharacter(_char)
+	savedChar = _char
+
+func reprepareCharacter():
+	if(!savedChar):
+		return
+	doll.prepareCharacter(savedChar)
 
 func getDoll():
 	return doll

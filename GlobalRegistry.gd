@@ -323,6 +323,7 @@ var missionQuests:Dictionary = {}
 var contentBoardEntries:Dictionary = {}
 var combatAnims:Dictionary = {}
 var combatAnimsApplier := CombatAnimApplier.new()
+var combatAnimLen:Dictionary = {}
 
 var bodypartStorageNode
 
@@ -815,6 +816,7 @@ func registerEverything():
 	sortSpeechModifiersByPriority()
 	
 	registerCombatAnims()
+	calculateCombatAnimLens()
 	combatAnimsApplier.applyCombatAnims()
 	
 	GM.GES.registerAll()
@@ -3113,7 +3115,14 @@ func getCombatAnim(_id:String):
 		Log.printerr("ERROR: combat anim with the id "+_id+" wasn't found")
 		return null
 
-
+func calculateCombatAnimLens():
+	var theAnimsScene:Spatial = load("res://Player/Player3D/DollSkeletonCombat.glb").instance()
+	add_child(theAnimsScene)
+	var theAnimPlayer:AnimationPlayer = theAnimsScene.get_child(0)
+	
+	for theAnimName in theAnimPlayer.get_animation_list():
+		combatAnimLen[theAnimName] = theAnimPlayer.get_animation(theAnimName).length
+	pass
 
 
 

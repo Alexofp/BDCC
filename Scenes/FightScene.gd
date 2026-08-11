@@ -258,7 +258,9 @@ func _run():
 			else:
 				addDisabledButton("Double down", "You can only double down on a basic physical attack")
 				
-	if(state == "" || state == "fighting"):		
+	if(state == "" || state == "fighting"):
+		playGetUpAnimsIfNeedTo()
+		
 		addButtonWithChecks("Physical Attack", "Show a list of physical attacks that you can do", "physattacks", [], [ButtonChecks.NotStunned])
 		addButtonWithChecks("Lust Attack", "Show a list of lewd actions that you can do", "lustattacks", [], [ButtonChecks.NotStunned])
 		
@@ -384,7 +386,7 @@ func _react(_action: String, _args):
 				enemyCharacter.addStamina(-10)
 				whatPlayerDid += GM.ui.processString("You try to force a restraint onto {receiver.name} but {receiver.he} avoided your attempt!")
 			
-				playAnimation(StageScene.Duo, "", {npc=enemyID, npcAction="dodge"})
+				playAnimation(StageScene.Combat, "", {npc=enemyID, npcAction="dodge"})
 			else:
 				GM.pc.addSkillExperience(Skill.BDSM, restraintData.getLevel() * 3)
 				whatPlayerDid += GM.ui.processString(item.getForcedOnMessage(false))
@@ -695,7 +697,7 @@ func aiTurn():
 		
 		var animToPlay = restraintData.getResistAnimation()
 		if(animToPlay != null && animToPlay != ""):
-			playAnimation(StageScene.Duo, "", {npc=enemyID, npcAction=animToPlay})
+			playAnimation(StageScene.Combat, "", {npc=enemyID, npcAction=animToPlay})
 		
 		var damage = 0.0
 		var addLust = 0
@@ -1097,14 +1099,31 @@ func canEquipRestraintOntoEnemySlotOrReason(itemSlot:String) -> Array:
 		return [false, "They are wearing this type of restraint already"]
 	return [true, ""]
 
-func playAttackAnim(_attackID:String, _pcAttacks:bool, _receiverDodges:bool = false, _receiverDefeated:bool = false):
+func getNPCStatus(_npc:BaseCharacter) -> int:
+	var _result:int = 0
+	if(_npc.hasEffect(StatusEffect.Collapsed)):
+		_result |= CombatAnimPlayer.ST_KNOCKEDDOWN
+	if(_npc.isDefocusing()):
+		_result |= CombatAnimPlayer.ST_DEFOCUSING
+	if(_npc.isBlocking()):
+		_result |= CombatAnimPlayer.ST_BLOCKING
+	if(_npc.isDodging()):
+		_result |= CombatAnimPlayer.ST_DODGING
+	return _result
+
+func playAttackAnim(_attackID:String, _pcAttacks:bool, _pcStatus:int = 0, _npcStatus:int = 0):
 	var _attackerID:int = 0 if _pcAttacks else 1
-	var _attackerKnockedDown:bool = GM.pc.hasEffect(StatusEffect.Collapsed) if _pcAttacks else enemyCharacter.hasEffect(StatusEffect.Collapsed)
-	var _receiverKnockedDown:bool = GM.pc.hasEffect(StatusEffect.Collapsed) if !_pcAttacks else enemyCharacter.hasEffect(StatusEffect.Collapsed)
-	var _payload:Array = [
-		[CombatAnimPlayer.QUEUE_ATTACK, _attackID, _attackerID, _attackerKnockedDown],
-		[CombatAnimPlayer.QUEUE_ATTACKREACTION, _attackID, 1-_attackerID, _receiverKnockedDown, _receiverDefeated, _receiverDodges],
-		[CombatAnimPlayer.QUEUE_NOTBUSY],
-	]
-	playAnimation(StageScene.Combat, "", {npc=enemyID, pc="pc", payload=_payload})
 	
+	_pcStatus |= getNPCStatus(GM.pc)
+	_npcStatus |= getNPCStatus(enemyCharacter)
+	
+	var _payload:Array = [
+		_attackID, _attackerID, _pcStatus if _pcAttacks else _npcStatus, _pcStatus if !_pcAttacks else _npcStatus,
+	]
+	playAnimation(StageScene.Combat, "", {npc=enemyID, pc="pc", attack=_payload})
+	
+func playGetUpAnimsIfNeedTo():
+	var _pcStatus:int = getNPCStatus(GM.pc)
+	var _npcStatus:int = getNPCStatus(enemyCharacter)
+	
+	playAnimation(StageScene.Combat, "", {npc=enemyID, pc="pc", statusUpdate=[_pcStatus, _npcStatus]})
