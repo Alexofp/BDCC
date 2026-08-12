@@ -260,6 +260,8 @@ func _run():
 				
 	if(state == "" || state == "fighting"):
 		playGetUpAnimsIfNeedTo()
+		if(!GM.pc.hasEffect(StatusEffect.Collapsed)):
+			addExtraButtonAt(4, "Switch stance", "Switch your combat stance to the next one", "switchStance")
 		
 		addButtonWithChecks("Physical Attack", "Show a list of physical attacks that you can do", "physattacks", [], [ButtonChecks.NotStunned])
 		addButtonWithChecks("Lust Attack", "Show a list of lewd actions that you can do", "lustattacks", [], [ButtonChecks.NotStunned])
@@ -412,9 +414,9 @@ func _react(_action: String, _args):
 		beforeTurnChecks()
 		
 		whatPlayerDid += doPlayerAttack({"attackID": "trygetupattack"})
+		playGetUpAnimsIfNeedTo()
 		
 		whatEnemyDid += aiTurn()
-
 		afterTurnChecks()
 		return
 
@@ -624,6 +626,10 @@ func _react(_action: String, _args):
 		whatEnemyDid += aiTurn()
 			
 		afterTurnChecks()
+		return
+	
+	if(_action == "switchStance"):
+		GM.pc.switchToNextCombatStance()
 		return
 	
 	setState(_action)
@@ -885,9 +891,11 @@ func afterTurnChecks():
 
 func onPCWin():
 	SexToyManager.sendTrigger(SexToyTrigger.OnFightWin)
+	playDefeatAnim()
 
 func onPCLose():
 	SexToyManager.sendTrigger(SexToyTrigger.OnFightDefeat)
+	playDefeatAnim()
 
 func onPCSubmit():
 	pass
@@ -920,7 +928,7 @@ func checkEnd():
 		whatHappened += "You succumb to pain\n"
 		battleState = "lost"
 		battleEndedHow = "pain"
-		playAnimation(StageScene.Solo, "defeat")
+		#playAnimation(StageScene.Solo, "defeat")
 		return "lost"
 	if(GM.pc.getLust() >= GM.pc.lustThreshold()):
 		if(whatHappened != ""):
@@ -928,7 +936,7 @@ func checkEnd():
 		whatHappened += "You're too aroused to continue\n"
 		battleState = "lost"
 		battleEndedHow = "lust"
-		playAnimation(StageScene.Solo, "defeat")
+		#playAnimation(StageScene.Solo, "defeat")
 		return "lost"
 	
 	return ""
@@ -1014,7 +1022,7 @@ func _react_scene_end(_tag, _result):
 		
 	if(_tag == "lootingscene"):
 		endScene([battleState, battleEndedHow])
-
+	
 func supportsBattleTurns():
 	return true
 
@@ -1126,4 +1134,11 @@ func playGetUpAnimsIfNeedTo():
 	var _pcStatus:int = getNPCStatus(GM.pc)
 	var _npcStatus:int = getNPCStatus(enemyCharacter)
 	
-	playAnimation(StageScene.Combat, "", {npc=enemyID, pc="pc", statusUpdate=[_pcStatus, _npcStatus]})
+	playAnimation(StageScene.Combat, "", {npc=enemyID, pc="pc", pcStance=GM.pc.getCombatStance(), npcStance=enemyCharacter.getCombatStance() if enemyCharacter else 0, statusUpdate=[_pcStatus, _npcStatus]})
+
+func playDefeatAnim():
+	if(state == "lost"):
+		playAnimation(StageScene.Combat, ("defeat" if !GM.pc.hasEffect(StatusEffect.Collapsed) else "knockedDownDefeat"), {npc=enemyID, pc="pc"})
+	if(state == "win"):
+		playAnimation(StageScene.Combat, "", {npc=enemyID, pc="pc", npcAction=("defeat" if !enemyCharacter.hasEffect(StatusEffect.Collapsed) else "knockedDownDefeat")})
+	

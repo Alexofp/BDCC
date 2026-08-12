@@ -914,3 +914,12 @@ static func getAndroidSaveFolder() -> String:
 	if(!theDir.dir_exists(theFold)):
 		theDir.make_dir_recursive(theFold)
 	return theFold
+
+static func getNextInArray(_ar:Array, _value):
+	var theSize:int = _ar.size()
+	for _i in theSize:
+		if(_ar[_i] == _value):
+			if((_i+1) >= theSize):
+				return 0
+			return _i + 1
+	return 0

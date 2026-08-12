@@ -29,18 +29,21 @@ func playAnimRaw(animID:String, _instant:bool = false):
 		state_machine.travel(animID)
 
 func playAnim(animID, _bodyState:Dictionary):
-	var fullAnimID = animID
-	if(animID is Array):
-		animID = animID[0]
+	#var fullAnimID = animID
+	#if(animID is Array):
+	#	animID = animID[0]
 	
 	doll.applyBodyState(_bodyState)
 	chair.visible = (animID == "sit")
 	
 	animationTree["parameters/CuffsBlend/blend_amount"] = float(doll.getArmsCuffed())
 
-	var state_machine = animationTree["parameters/StateMachine/playback"]
-	if(!stateMachineTravelCombat(doll, state_machine, fullAnimID, animationTree)):
-		Log.printerr("Action "+str(animID)+" is not found for combat doll instance")
+	#var state_machine = animationTree["parameters/StateMachine/playback"]
+	#if(!stateMachineTravelCombat(doll, state_machine, fullAnimID, animationTree)):
+	#	Log.printerr("Action "+str(animID)+" is not found for combat doll instance")
+
+func setCombatStanceIndexRaw(_indx:int):
+	animationTree["parameters/StateMachine/IDLE/IDLE_PICK/current"] = _indx
 
 func stateMachineTravelCombat(thedoll, state_machine:AnimationNodeStateMachinePlayback, animID, _animTree:AnimationTree):
 	var args:Array = []

@@ -53,6 +53,8 @@ func playSmart(_indx:int, animID):#, _animTree:AnimationTree):
 	#thedoll.attachTemporaryUnriggedPart("hand.R", "res://Inventory/UnriggedModels/BigWrench/BigWrench.tscn")
 	if(animID == ""):
 		pass
+	elif(GlobalRegistry.combatAnims.has(animID)):
+		animPlayer.playAnimRaw(_indx, animID, "", _args[1] if _args.size() > 1 else "")
 	elif(animID == "walk"):
 		if(!thedoll.getLegsCuffed()):
 			animPlayer.playAnimRaw(_indx, "Walk-loop")
@@ -66,74 +68,68 @@ func playSmart(_indx:int, animID):#, _animTree:AnimationTree):
 	elif(animID == "standCombat"):
 		animPlayer.playAnimRaw(_indx, "IDLE")
 		#_animTree["parameters/StateMachine/IDLE/IDLE_PICK/current"] = 1
-		#if(args.size() > 1): # Better way to do this?
-		#	thedoll.attachTemporaryUnriggedPart("hand.R", args[1])
+		#if(_args.size() > 1): # Better way to do this?
+		#	thedoll.attachTemporaryUnriggedPart("hand.R", _args[1])
 	elif(animID == "kneel"):
 		animPlayer.playAnimRaw(_indx, "Kneeling-loop")
 	elif(animID == "defeat"):
 		animPlayer.playAnimRaw(_indx, "Defeat")
+	elif(animID == "knockedDownDefeat"):
+		animPlayer.playAnimRaw(_indx, "KnockedDownDefeat")
 	elif(animID == "sit"):
 		animPlayer.playAnimRaw(_indx, "Sitting-loop")
 	elif(animID == "bite"):
 		animPlayer.playAnimRaw(_indx, "Bite")
 	elif(animID == "block"):
-		animPlayer.playAnimRaw(_indx, "Block")
-		#thedoll.setTemporaryState("hands", "fists")
+		animPlayer.playAnimRaw(_indx, "Block", "", "", "", true)
 	elif(animID == "dodge"):
 		animPlayer.playAnimRaw(_indx, "Dodge")
 	elif(animID == "hurt"):
 		animPlayer.playAnimRaw(_indx, "Hurt")
 	elif(animID == "kick"):
-		animPlayer.playAnimRaw(_indx, "Kick")
+		animPlayer.playAnimRaw(_indx, "kick")
 	elif(animID == "punch"):
-		animPlayer.playAnimRaw(_indx, "Punch")
-		#thedoll.setTemporaryState("hands", "fists")
+		animPlayer.playAnimRaw(_indx, "punch", "", "", "", true)
 	elif(animID == "allfours"):
 		animPlayer.playAnimRaw(_indx, "AllFours-loop")
 	elif(animID == "crawl"):
 		animPlayer.playAnimRaw(_indx, "AllFoursCrawl-loop")
 	elif(animID == "stunbaton"):
-		animPlayer.playAnimRaw(_indx, "WeaponSwing")
-		#if(args.size() > 1):
-		#	thedoll.attachTemporaryUnriggedPart("hand.R", args[1])
-		#else:
-		#	thedoll.attachTemporaryUnriggedPart("hand.R", "res://Inventory/UnriggedModels/StunBaton/StunBaton.tscn")
-		#thedoll.setTemporaryState("hands", "fists")
+		animPlayer.playAnimRaw(_indx, "stunbaton", "", "", "", true)
+		if(_args.size() > 1):
+			thedoll.attachTemporaryUnriggedPart("hand.R", _args[1])
+		else:
+			thedoll.attachTemporaryUnriggedPart("hand.R", "res://Inventory/UnriggedModels/StunBaton/StunBaton.tscn")
 	elif(animID == "throw"):
-		animPlayer.playAnimRaw(_indx, "WeaponThrow")
-		#if(args.size() > 1):
-		#	thedoll.attachTemporaryUnriggedPart("hand.R", args[1])
-		#thedoll.setTemporaryState("hands", "fists")
+		animPlayer.playAnimRaw(_indx, "WeaponThrow", "", "", "", true)
+		if(_args.size() > 1):
+			thedoll.attachTemporaryUnriggedPart("hand.R", _args[1])
 	elif(animID == "holdpistol"):
-		animPlayer.playAnimRaw(_indx, "WeaponGunHold-loop")
-		#if(args.size() > 1):
-		#	thedoll.attachTemporaryUnriggedPart("hand.L", args[1])
-		#else:
-		#	thedoll.attachTemporaryUnriggedPart("hand.L", "res://Inventory/UnriggedModels/EnergyPistol/EnergyPistolBlue.tscn")
-		#thedoll.setTemporaryState("hands", "fists")
+		animPlayer.playAnimRaw(_indx, "WeaponGunHold-loop", "", "", "", true)
+		if(_args.size() > 1):
+			thedoll.attachTemporaryUnriggedPart("hand.L", _args[1])
+		else:
+			thedoll.attachTemporaryUnriggedPart("hand.L", "res://Inventory/UnriggedModels/EnergyPistol/EnergyPistolBlue.tscn")
 	elif(animID == "aimpistol"):
-		animPlayer.playAnimRaw(_indx, "WeaponGunAim-loop")
-		#if(args.size() > 1):
-		#	thedoll.attachTemporaryUnriggedPart("hand.L", args[1])
-		#else:
-		#	thedoll.attachTemporaryUnriggedPart("hand.L", "res://Inventory/UnriggedModels/EnergyPistol/EnergyPistolBlue.tscn")
-		#thedoll.setTemporaryState("hands", "fists")
+		animPlayer.playAnimRaw(_indx, "WeaponGunAim-loop", "", "", "", true)
+		if(_args.size() > 1):
+			thedoll.attachTemporaryUnriggedPart("hand.L", _args[1])
+		else:
+			thedoll.attachTemporaryUnriggedPart("hand.L", "res://Inventory/UnriggedModels/EnergyPistol/EnergyPistolBlue.tscn")
 	elif(animID == "firepistol"):
-		animPlayer.playAnimRaw(_indx, "WeaponGunShoot")
-		#if(args.size() > 1):
-		#	thedoll.attachTemporaryUnriggedPart("hand.L", args[1])
-		#else:
-		#	thedoll.attachTemporaryUnriggedPart("hand.L", "res://Inventory/UnriggedModels/EnergyPistol/EnergyPistolBlue.tscn")
-		#thedoll.setTemporaryState("hands", "fists")
+		animPlayer.playAnimRaw(_indx, "WeaponGunShoot", "", "", "", true)
+		if(_args.size() > 1):
+			thedoll.attachTemporaryUnriggedPart("hand.L", _args[1])
+		else:
+			thedoll.attachTemporaryUnriggedPart("hand.L", "res://Inventory/UnriggedModels/EnergyPistol/EnergyPistolBlue.tscn")
 	elif(animID == "shiv"):
-		animPlayer.playAnimRaw(_indx, "WeaponShiv")
-		#if(args.size() > 1):
-		#	thedoll.attachTemporaryUnriggedPart("hand.R", args[1])
-		#else:
-		#	thedoll.attachTemporaryUnriggedPart("hand.R", "res://Inventory/UnriggedModels/Shiv/Shiv.tscn")
-		#thedoll.setTemporaryState("hands", "fists")
+		animPlayer.playAnimRaw(_indx, "WeaponShiv", "", "", "", true)
+		if(_args.size() > 1):
+			thedoll.attachTemporaryUnriggedPart("hand.R", _args[1])
+		else:
+			thedoll.attachTemporaryUnriggedPart("hand.R", "res://Inventory/UnriggedModels/Shiv/Shiv.tscn")
 	elif(animID == "shove"):
-		animPlayer.playAnimRaw(_indx, "Shove")
+		animPlayer.playAnimRaw(_indx, "shove")
 	elif(animID == "struggle"):
 		animPlayer.playAnimRaw(_indx, "StruggleGeneric-loop")
 	elif(animID == "struggle_gag"):
@@ -142,8 +138,8 @@ func playSmart(_indx:int, animID):#, _animTree:AnimationTree):
 		animPlayer.playAnimRaw(_indx, "StruggleLegs-loop")
 	elif(animID == "hold_object"):
 		animPlayer.playAnimRaw(_indx, "HoldObject-loop")
-		#if(args.size() > 1):
-		#	thedoll.attachTemporaryUnriggedPart("hand.L", args[1])
+		if(_args.size() > 1):
+			thedoll.attachTemporaryUnriggedPart("hand.L", _args[1])
 	else:
 		return false
 	return true
@@ -174,10 +170,14 @@ func playAnimation(animID, _args = {}):
 		animPlayer.addPayload(_args["payload"])
 	if(_args.has("attack")):
 		var theAttack:Array = _args["attack"]
-		animPlayer.addAttackPayload(theAttack[0], theAttack[1], theAttack[2], theAttack[3])
+		animPlayer.addAttackPayload(theAttack[0], theAttack[1], theAttack[2], theAttack[3], theAttack[4] if theAttack.size() > 4 else "")
 	if(_args.has("statusUpdate")):
 		var theAttack:Array = _args["statusUpdate"]
 		animPlayer.addStatusCheckPayload(theAttack[0], theAttack[1])
+	if(_args.has("pcStance")):
+		combat_doll_instance.setCombatStanceIndexRaw(CombatStance.getStanceRawIndex(_args["pcStance"]))
+	if(_args.has("npcStance")):
+		combat_doll_instance_2.setCombatStanceIndexRaw(CombatStance.getStanceRawIndex(_args["npcStance"]))
 	
 	var didWePlayAnything:bool = false
 	if(animID != ""):

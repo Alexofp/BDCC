@@ -3943,3 +3943,6 @@ func calculatePowerScore(ignoreCurrentState:bool = false) -> float:
 		finalScore *= (1.0 - getStaminaLevel()*0.5)
 	
 	return finalScore
+
+func getCombatStance() -> int:
+	return CombatStance.STANCE_COMBAT_DEFAULT

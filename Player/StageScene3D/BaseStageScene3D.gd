@@ -50,6 +50,8 @@ func stateMachineTravel(thedoll, state_machine, animID):
 		state_machine.travel("Kneeling-loop")
 	elif(animID == "defeat"):
 		state_machine.travel("Defeat")
+	elif(animID == "knockedDownDefeat"):
+		state_machine.travel("KnockedDownDefeat")
 	elif(animID == "sit"):
 		state_machine.travel("Sitting-loop")
 	elif(animID == "bite"):

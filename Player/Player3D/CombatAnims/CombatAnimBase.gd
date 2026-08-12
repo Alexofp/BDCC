@@ -23,3 +23,5 @@ var weaponLeft:String = ""
 var weaponRight:String = ""
 
 var weaponOverrideLeft:bool = false
+
+var allowStateReuse:bool = false

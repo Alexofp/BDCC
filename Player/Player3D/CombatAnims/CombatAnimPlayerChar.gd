@@ -19,7 +19,7 @@ func addAnimNoWait(_anim:String, _args:Array = []):
 
 func addAnim(_anim:String, _args:Array = []):
 	queue.append([DO_ANIM, _anim, _args])
-	addWait(getAnimLen(_anim))
+	addWait(getAnimLen(_anim)+0.01)
 
 func isBusy() -> bool:
 	return !queue.empty()

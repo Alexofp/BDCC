@@ -33,6 +33,8 @@ var tfHolder:TFHolder
 
 var dynamicPersonality: bool = false
 
+var combatStance:int = CombatStance.STANCE_COMBAT_DEFAULT
+
 func _init():
 	initialDodgeChance = 0.05 # Player has a small chance to dodge anything
 
@@ -427,6 +429,7 @@ func saveData():
 		"pickedSkinRColor": pickedSkinRColor.to_html(),
 		"pickedSkinGColor": pickedSkinGColor.to_html(),
 		"pickedSkinBColor": pickedSkinBColor.to_html(),
+		"combatStance": combatStance,
 	}
 	
 	data["bodyparts"] = {}
@@ -481,6 +484,7 @@ func loadData(data):
 	pickedSkinRColor = Color(SAVE.loadVar(data, "pickedSkinRColor", "ffffff"))
 	pickedSkinGColor = Color(SAVE.loadVar(data, "pickedSkinGColor", "cccccc"))
 	pickedSkinBColor = Color(SAVE.loadVar(data, "pickedSkinBColor", "999999"))
+	combatStance = SAVE.loadVar(data, "combatStance", CombatStance.STANCE_COMBAT_DEFAULT)
 	
 	resetSlots()
 	var loadedBodyparts = SAVE.loadVar(data, "bodyparts", {})
@@ -1017,3 +1021,9 @@ func isSlaveTo(_charID:String) -> bool:
 	if(theSpecial.id == "SoftSlavery"):
 		return true
 	return false
+
+func getCombatStance() -> int:
+	return combatStance
+
+func switchToNextCombatStance():
+	combatStance = Util.getNextInArray(CombatStance.getAllPlayerCanChoose(), combatStance)

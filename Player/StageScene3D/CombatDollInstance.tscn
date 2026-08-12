@@ -21,4 +21,5 @@ parameters/StateMachine/IDLE/IDLE_PICK/current = 0
 
 [node name="Chair" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.058, 1.928, 0.069 )
+visible = false
 texture = ExtResource( 4 )

@@ -44,7 +44,7 @@ func getAnticipationText(_attacker, _receiver):
 	return "{attacker.name} lunges forward and tries to kick you"
 
 func getAttackSoloAnimation():
-	return "shove"
+	return "charge"
 
 func getExperience():
 	return [[Skill.Combat, 10]]

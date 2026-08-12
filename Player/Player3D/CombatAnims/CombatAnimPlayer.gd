@@ -32,13 +32,13 @@ func addChar(_id:int):
 	theChar.connect("playAnim", self, "onCharPlayAnim")
 	chars[_id] = theChar
 
-func playAnimRaw(_charID:int, _animStanding:String, _animKnockedDown:String = ""):
+func playAnimRaw(_charID:int, _animStanding:String, _animKnockedDown:String = "", _customWeapon:String = "", _customWeaponRight:String = "", _fists:bool = false):
 	queue.append([
-		QUEUE_ANIMRAW, _charID, _animStanding, _animKnockedDown,
+		QUEUE_ANIMRAW, _charID, _animStanding, _animKnockedDown, _customWeapon, _customWeaponRight, _fists,
 	])
 
-func addAttackPayload(_attackID:String, _attackerID:int, _attackerStatus:int, _defenderStatus:int):
-	playAttack(_attackID, _attackerID, _attackerStatus, _defenderStatus)
+func addAttackPayload(_attackID:String, _attackerID:int, _attackerStatus:int, _defenderStatus:int, _customWeapon:String = ""):
+	playAttack(_attackID, _attackerID, _attackerStatus, _defenderStatus, _customWeapon)
 	playAttackReaction(_attackID, 1-_attackerID, _attackerStatus, _defenderStatus)
 	addBarrierNotBusy()
 
@@ -51,9 +51,9 @@ func addStatusCheckPayload(_attackerStatus:int, _defenderStatus:int):
 	])
 	addBarrierNotBusy()
 
-func playAttack(_attackID:String, _attackerID:int, _attackerStatus:int, _defenderStatus:int):
+func playAttack(_attackID:String, _attackerID:int, _attackerStatus:int, _defenderStatus:int, _customWeapon:String = ""):
 	queue.append([
-		QUEUE_ATTACK, _attackID, _attackerID, _attackerStatus, _defenderStatus,
+		QUEUE_ATTACK, _attackID, _attackerID, _attackerStatus, _defenderStatus, _customWeapon,
 	])
 
 func playAttackReaction(_attackID:String, _receiver:int, _attackerStatus:int, _defenderStatus:int):
@@ -85,17 +85,40 @@ func processQueue(_dt:float):
 			return
 	
 	elif(theType == QUEUE_ANIMRAW): # Support for fists/weapons would be nice
+		var theAttackAnim:String = theEntry[2]
 		var theAttackerID:int = theEntry[1]
+		var theCustomWeapon:String = theEntry[4]
 		var theChar:CombatAnimPlayerChar = chars[theAttackerID]
 		var _isKnockedDown:bool = theChar.knockedDown
-		if(!_isKnockedDown):
-			var theAnim:String = theEntry[2]
-			if(!theAnim.empty()):
-				theChar.addAnim(theAnim)
-		else:
-			var theAnim:String = theEntry[3]
-			if(!theAnim.empty()):
-				theChar.addAnim(theAnim)
+		
+		if(GlobalRegistry.combatAnims.has(theAttackAnim)):
+			var theAttack:CombatAnimBase = GlobalRegistry.getCombatAnim(theAttackAnim)
+			var theWeaponLeft:String = theAttack.weaponLeft
+			var theWeaponRight:String = theAttack.weaponRight
+			var theFists:bool = theAttack.fists
+			if(!theCustomWeapon.empty()):
+				if(theAttack.weaponOverrideLeft):
+					theWeaponLeft = theCustomWeapon
+				else:
+					theWeaponRight = theCustomWeapon
+			if(!_isKnockedDown):
+				theChar.addAnim(theAttack.animName, [theFists, theWeaponLeft, theWeaponRight])
+			else:
+				theChar.addAnim(theAttack.animNameKnockedDown, [theFists, theWeaponLeft, theWeaponRight])
+		else: # Just a normal anim
+			var theCustomWeaponRight:String = theEntry[5]
+			var theFists:bool = theEntry[6]
+			if(!theCustomWeapon.empty() || !theCustomWeaponRight.empty()):
+				theFists = true
+			
+			if(!_isKnockedDown):
+				var theAnim:String = theEntry[2]
+				if(!theAnim.empty()):
+					theChar.addAnim(theAnim, [theFists, theCustomWeapon, theCustomWeaponRight])
+			else:
+				var theAnim:String = theEntry[3]
+				if(!theAnim.empty()):
+					theChar.addAnim(theAnim, [theFists, theCustomWeapon, theCustomWeaponRight])
 		
 	elif(theType == QUEUE_STATUSCHECK):
 		var theAttackerID:int = theEntry[1]
@@ -110,21 +133,35 @@ func processQueue(_dt:float):
 		theChar.knockedDown = _shouldBeKnockedDown
 	
 	elif(theType == QUEUE_ATTACK):
-		var theAttack:CombatAnimBase = GlobalRegistry.getCombatAnim(theEntry[1])
+		var theAttackID:String = theEntry[1]
+		if(theAttackID.empty()):
+			queue.pop_front()
+			return
+		var theAttack:CombatAnimBase = GlobalRegistry.getCombatAnim(theAttackID)
 		if(!theAttack):
 			queue.pop_front()
 			return
 		var theAttackerID:int = theEntry[2]
 		var _theAttackerStatus:int = theEntry[3]
+		var theCustomWeapon:String = theEntry[5]
 		var theChar:CombatAnimPlayerChar = chars[theAttackerID]
 		
 		var _shouldBeKnockedDown:bool = _theAttackerStatus & ST_KNOCKEDDOWN
 		var _isKnockedDown:bool = theChar.knockedDown
 		
+		var theWeaponLeft:String = theAttack.weaponLeft
+		var theWeaponRight:String = theAttack.weaponRight
+		var theFists:bool = theAttack.fists
+		if(!theCustomWeapon.empty()):
+			if(theAttack.weaponOverrideLeft):
+				theWeaponLeft = theCustomWeapon
+			else:
+				theWeaponRight = theCustomWeapon
+		
 		if(!_isKnockedDown):
-			theChar.addAnim(theAttack.animName, [theAttack.fists, theAttack.weaponLeft, theAttack.weaponRight])
+			theChar.addAnim(theAttack.animName, [theFists, theWeaponLeft, theWeaponRight])
 		else:
-			theChar.addAnim(theAttack.animNameKnockedDown, [theAttack.fists, theAttack.weaponLeft, theAttack.weaponRight])
+			theChar.addAnim(theAttack.animNameKnockedDown, [theFists, theWeaponLeft, theWeaponRight])
 		
 		if(_isKnockedDown && !_shouldBeKnockedDown):
 			theChar.addAnim("KnockedDownToStanding")
@@ -134,7 +171,11 @@ func processQueue(_dt:float):
 		theChar.knockedDown = _shouldBeKnockedDown
 	
 	elif(theType == QUEUE_ATTACKREACTION):
-		var theAttack:CombatAnimBase = GlobalRegistry.getCombatAnim(theEntry[1])
+		var theAttackID:String = theEntry[1]
+		if(theAttackID.empty()):
+			queue.pop_front()
+			return
+		var theAttack:CombatAnimBase = GlobalRegistry.getCombatAnim(theAttackID)
 		if(!theAttack):
 			queue.pop_front()
 			return
@@ -152,12 +193,12 @@ func processQueue(_dt:float):
 		var theHitDelay:float = theAttack.hitDelay if !_shouldAttackerBeKnockedDown else theAttack.hitDelayKnockedDown
 		
 		if(_theReceiverStatus & ST_DODGING):
-			# Don't need any delay here
+			theChar.addWait(theHitDelay-0.2)
 			if(!_isKnockedDown):
 				theChar.addAnim("Dodge")
 		elif(_theReceiverStatus & ST_BLOCKING):
 			# Somehow guess the delay?
-			theChar.addWait(theHitDelay-0.3)
+			theChar.addWait(theHitDelay-0.4)
 			if(!_isKnockedDown):
 				theChar.addAnim("Block", [true])
 			else:
@@ -171,7 +212,12 @@ func processQueue(_dt:float):
 				theChar.addAnim("KnockedDownGetHit")
 			# ADD MORE HIT REACTIONS HERE IF YOU NEED THEM
 		
-		if(_isKnockedDown && !_shouldBeKnockedDown):
+		if(_theReceiverStatus & ST_DEFEATED):
+			if(_isKnockedDown):
+				theChar.addAnim("KnockedDownDefeat")
+			else:
+				theChar.addAnim("Defeat")
+		elif(_isKnockedDown && !_shouldBeKnockedDown):
 			theChar.addAnim("KnockedDownToStanding")
 		if(!_isKnockedDown && _shouldBeKnockedDown):
 			theChar.addAnim("StandingToKnockedDown")
