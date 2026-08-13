@@ -17,10 +17,12 @@ const ST_DODGING := 2
 const ST_BLOCKING := 4
 const ST_DEFOCUSING := 8
 const ST_DEFEATED := 16
+const ST_MISSED := 32
 
 var chars:Dictionary = {}
 
 signal playAnim(_id, _anim, _args)
+signal queueCompleted(_id)
 
 func _init():
 	addChar(ID_PC)
@@ -30,7 +32,11 @@ func addChar(_id:int):
 	var theChar := CombatAnimPlayerChar.new()
 	theChar.id = _id
 	theChar.connect("playAnim", self, "onCharPlayAnim")
+	theChar.connect("queueCompleted", self, "onCharQueueCompleted")
 	chars[_id] = theChar
+
+func onCharQueueCompleted(_id:int):
+	emit_signal("queueCompleted", _id)
 
 func playAnimRaw(_charID:int, _animStanding:String, _animKnockedDown:String = "", _customWeapon:String = "", _customWeaponRight:String = "", _fists:bool = false):
 	queue.append([
@@ -188,6 +194,7 @@ func processQueue(_dt:float):
 		
 		var _shouldBeKnockedDown:bool = _theReceiverStatus & ST_KNOCKEDDOWN
 		var _shouldAttackerBeKnockedDown:bool = _theAttackerStatus & ST_KNOCKEDDOWN
+		var _attackerMissed:bool = _theAttackerStatus & ST_MISSED
 		var _isKnockedDown:bool = theChar.knockedDown
 		
 		var theHitDelay:float = theAttack.hitDelay if !_shouldAttackerBeKnockedDown else theAttack.hitDelayKnockedDown
@@ -204,13 +211,14 @@ func processQueue(_dt:float):
 			else:
 				theChar.addAnim("KnockedDownBlocking", [true])
 		
-		elif(theAttack.hitReaction == theAttack.REACTION_HURT):
-			theChar.addWait(theHitDelay)
-			if(!_isKnockedDown):
-				theChar.addAnim("Hurt")
-			else:
-				theChar.addAnim("KnockedDownGetHit")
-			# ADD MORE HIT REACTIONS HERE IF YOU NEED THEM
+		elif(!_attackerMissed):
+			if(theAttack.hitReaction == theAttack.REACTION_HURT):
+				theChar.addWait(theHitDelay)
+				if(!_isKnockedDown):
+					theChar.addAnim("Hurt")
+				else:
+					theChar.addAnim("KnockedDownGetHit")
+				# ADD MORE HIT REACTIONS HERE IF YOU NEED THEM
 		
 		if(_theReceiverStatus & ST_DEFEATED):
 			if(_isKnockedDown):

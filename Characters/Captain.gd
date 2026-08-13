@@ -147,3 +147,6 @@ func reactRestraint(restraintType, restraintAmount, isGettingForced):
 			"You're only making it worse for yourself.",
 		])
 	return null
+
+func getCombatStance() -> int:
+	return CombatStance.STANCE_UNIQUE_PISTOL

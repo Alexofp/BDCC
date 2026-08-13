@@ -10,9 +10,20 @@ const STANCE_LUST_PROUD := 5
 const STANCE_LUST_SLY := 6
 const STANCE_LUST_BRAVE := 7
 
-const STANCE_UNIQUE_PISTOL := 8
+const STANCE_UNIQUE_STUNBATON := 100
+const STANCE_UNIQUE_SHIV := 101
+
+const STANCE_UNIQUE_PISTOL := 102
+const STANCE_UNIQUE_PISTOLRED := 103
+const STANCE_UNIQUE_10MMGUN := 104
+
 
 const MAP_STANCE_TO_INDEX:Dictionary = {
+	STANCE_UNIQUE_STUNBATON: 9,
+	STANCE_UNIQUE_SHIV: 10,
+	STANCE_UNIQUE_PISTOL: 8,
+	STANCE_UNIQUE_PISTOLRED: 8,
+	STANCE_UNIQUE_10MMGUN: 8,
 }
 
 const STANCE_NAMES:Dictionary = {
@@ -24,7 +35,32 @@ const STANCE_NAMES:Dictionary = {
 	STANCE_LUST_PROUD: "Proud lust stance",
 	STANCE_LUST_SLY: "Shy lust stance",
 	STANCE_LUST_BRAVE: "Brave lust stance",
-	STANCE_UNIQUE_PISTOL: "Pistol stance (Unique)",
+	STANCE_UNIQUE_STUNBATON: "Stun baton stance (Unique)",
+	STANCE_UNIQUE_SHIV: "Shiv stance (Unique)",
+	STANCE_UNIQUE_PISTOL: "Energy gun stance (Unique)",
+	STANCE_UNIQUE_PISTOLRED: "Red energy gun stance (Unique)",
+	STANCE_UNIQUE_10MMGUN: "10mm gun stance (Unique)",
+}
+const STANCE_TO_WEAPONS:Dictionary = { # [fists, left_hand_weapon, right_hand_weapon]
+	STANCE_UNIQUE_PISTOL: [true, "res://Inventory/UnriggedModels/EnergyPistol/EnergyPistolBlue.tscn", ""],
+	STANCE_UNIQUE_PISTOLRED: [true, "res://Inventory/UnriggedModels/EnergyPistol/EnergyPistolRed.tscn", ""],
+	STANCE_UNIQUE_10MMGUN: [true, "res://Inventory/UnriggedModels/Pistol/Pistol.tscn", ""],
+	STANCE_UNIQUE_STUNBATON: [true, "", "res://Inventory/UnriggedModels/StunBaton/StunBaton.tscn"],
+	STANCE_UNIQUE_SHIV: [true, "", "res://Inventory/UnriggedModels/Shiv/Shiv.tscn"],
+}
+
+const ATTACK_STANCE_PHYSICAL := 0
+const ATTACK_STANCE_LUST := 1
+const ATTACK_STANCE_PISTOL := 2
+const ATTACK_STANCE_STUNBATON := 3
+const ATTACK_STANCE_SHIV := 4
+
+const STANCETYPE_TO_STANCES:Dictionary = {
+	ATTACK_STANCE_PHYSICAL: [STANCE_COMBAT_DEFAULT, STANCE_COMBAT_RAISED, STANCE_COMBAT_KARATE, STANCE_COMBAT_RELAXED],
+	ATTACK_STANCE_LUST: [STANCE_LUST_PROUD, STANCE_LUST_SLY, STANCE_LUST_BRAVE],
+	ATTACK_STANCE_PISTOL: [STANCE_UNIQUE_PISTOL],
+	ATTACK_STANCE_STUNBATON: [STANCE_UNIQUE_STUNBATON],
+	ATTACK_STANCE_SHIV: [STANCE_UNIQUE_SHIV],
 }
 
 static func getStanceRawIndex(_indx:int):
@@ -44,7 +80,11 @@ static func getAll() -> Array:
 		STANCE_LUST_PROUD,
 		STANCE_LUST_SLY,
 		STANCE_LUST_BRAVE,
+		STANCE_UNIQUE_STUNBATON,
+		STANCE_UNIQUE_SHIV,
 		STANCE_UNIQUE_PISTOL,
+		STANCE_UNIQUE_PISTOLRED,
+		STANCE_UNIQUE_10MMGUN,
 	]
 
 static func getAllPlayerCanChoose() -> Array:
@@ -61,3 +101,45 @@ static func getAllPlayerCanChoose() -> Array:
 
 static func getRandomStancePlayerCanChoose() -> int:
 	return RNG.pick(getAllPlayerCanChoose())
+
+static func getAllCharacterStanceTypes(_npc) -> Dictionary:
+	var result:Dictionary = {}
+	
+	var _allTheAttacks = _npc.getAttacks("")
+	
+	for theAttackID in _allTheAttacks:
+		var theAttack = GlobalRegistry.getAttack(theAttackID)
+		if(!theAttack):
+			continue
+		var theStanceType:int = theAttack.getStanceType()
+		if(theStanceType < 0):
+			continue
+		if(!result.has(theStanceType)):
+			result[theStanceType] = 1
+		else:
+			result[theStanceType] += 1
+	
+	if(result.empty()):
+		result = {ATTACK_STANCE_PHYSICAL:1}
+	
+	return result
+
+static func pickStanceBasedOnStanceTypes(_types:Dictionary) -> int:
+	if(_types.empty()):
+		_types = {ATTACK_STANCE_PHYSICAL:1}
+	
+	var thePickedStance:int = RNG.pickWeightedDict(_types)
+	if(STANCETYPE_TO_STANCES.has(thePickedStance)):
+		return RNG.pick(STANCETYPE_TO_STANCES[thePickedStance])
+	return STANCE_STANDING_NORMALLY
+
+static func generateStanceBasedOnCharacter(_npc) -> int:
+	return pickStanceBasedOnStanceTypes(getAllCharacterStanceTypes(_npc))
+
+static func getStanceName(_indx:int) -> String:
+	return STANCE_NAMES.get(_indx, "Unknown")
+
+static func isValid(_indx:int) -> bool:
+	if(STANCE_NAMES.has(_indx)):
+		return true
+	return false

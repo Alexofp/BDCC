@@ -260,9 +260,7 @@ func _run():
 				
 	if(state == "" || state == "fighting"):
 		playGetUpAnimsIfNeedTo()
-		if(!GM.pc.hasEffect(StatusEffect.Collapsed)):
-			addExtraButtonAt(4, "Switch stance", "Switch your combat stance to the next one", "switchStance")
-		
+
 		addButtonWithChecks("Physical Attack", "Show a list of physical attacks that you can do", "physattacks", [], [ButtonChecks.NotStunned])
 		addButtonWithChecks("Lust Attack", "Show a list of lewd actions that you can do", "lustattacks", [], [ButtonChecks.NotStunned])
 		
@@ -294,6 +292,10 @@ func _run():
 		
 		if(GM.pc.hasPerk(Perk.BDSMRigger)):
 			addButtonWithChecks("Bondage", "Pick which restraint you wanna try to force onto your enemy", "bdsm_attacks", [], [ButtonChecks.NotHandsBlocked, ButtonChecks.NotArmsRestrained])
+		
+		if(!GM.pc.hasEffect(StatusEffect.Collapsed)):
+			addButton("Switch stance", "Switch your combat stance to the next one. This is just a visual change", "switchStance")
+		
 		
 		addButtonAt(14, "Submit", "Give up", "submit")
 		
@@ -471,7 +473,7 @@ func _react(_action: String, _args):
 		result["text"] = GM.ui.processString(result["text"])
 		
 		#playAnimation(StageScene.Duo, result["receiverAnimation"], {npc=enemyID, npcAction=result["attackerAnimation"]})
-		playAttackAnim(result["attackerAnimation"], false)
+		playAttackAnim(result, false)
 		
 		whatEnemyDid += result["text"]
 		savedAIAttackID = ""
@@ -667,7 +669,7 @@ func doPlayerAttack(attackData):
 	result["text"] = GM.ui.processString(result["text"])
 	
 	#playAnimation(StageScene.Duo, result["attackerAnimation"], {npc=enemyID, npcAction=result["receiverAnimation"]})
-	playAttackAnim(result["attackerAnimation"], true)
+	playAttackAnim(result, true)
 	
 	var expData = attack.getExperience()
 	for expAdd in expData:
@@ -783,7 +785,7 @@ func aiTurn():
 			result["text"] = GM.ui.processString(result["text"])
 				
 			#playAnimation(StageScene.Duo, result["receiverAnimation"], {npc=enemyID, npcAction=result["attackerAnimation"]})
-			playAttackAnim(result["attackerAnimation"], false)
+			playAttackAnim(result, false)
 			
 			enemyText += result["text"]
 		else:
@@ -1119,11 +1121,24 @@ func getNPCStatus(_npc:BaseCharacter) -> int:
 		_result |= CombatAnimPlayer.ST_DODGING
 	return _result
 
-func playAttackAnim(_attackID:String, _pcAttacks:bool, _pcStatus:int = 0, _npcStatus:int = 0):
+func playAttackAnim(_attackResult:Dictionary, _pcAttacks:bool, _pcStatus:int = 0, _npcStatus:int = 0):
+	var _attackID:String = _attackResult.get("attackerAnimation", "")
+	var _didMiss:bool = _attackResult.get("missed", false)
+	var _didDodge:bool = _attackResult.get("dodged", false)
 	var _attackerID:int = 0 if _pcAttacks else 1
 	
 	_pcStatus |= getNPCStatus(GM.pc)
 	_npcStatus |= getNPCStatus(enemyCharacter)
+	if(_didMiss):
+		if(_pcAttacks):
+			_pcStatus |= CombatAnimPlayer.ST_MISSED
+		else:
+			_npcStatus |= CombatAnimPlayer.ST_MISSED
+	if(_didDodge):
+		if(_pcAttacks):
+			_npcStatus |= CombatAnimPlayer.ST_DODGING
+		else:
+			_pcStatus |= CombatAnimPlayer.ST_DODGING
 	
 	var _payload:Array = [
 		_attackID, _attackerID, _pcStatus if _pcAttacks else _npcStatus, _pcStatus if !_pcAttacks else _npcStatus,

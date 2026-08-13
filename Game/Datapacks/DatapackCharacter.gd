@@ -61,6 +61,8 @@ var disableMeet:bool = false
 var restraintDodgeChanceMult:float = 0.9
 var restraintStrugglePower:float = 1.0
 
+var combatStance:int = -1
+
 func getPortrait(kind:Array):
 	if(portrait.isEmpty() && portraitNaked.isEmpty()):
 		return null
@@ -86,6 +88,11 @@ func getEditVars():
 	for perkID in GlobalRegistry.getPerks():
 		var thePerk:PerkBase = GlobalRegistry.getPerk(perkID)
 		perkListFancy.append([perkID, perkID+" = "+thePerk.getVisibleName()])
+	var combatStanceFancy:Array = [
+		[-1, "Random"],
+	]
+	for theStanceID in CombatStance.getAll():
+		combatStanceFancy.append([theStanceID, CombatStance.getStanceName(theStanceID)])
 	
 	return {
 		"name": {
@@ -196,6 +203,12 @@ func getEditVars():
 			value = attacks,
 			values = attackListFancy,
 			collapsable = true,
+		},
+		"combatStance": {
+			name = "Combat stance",
+			type = "selector",
+			values = combatStanceFancy,
+			value = combatStance,
 		},
 		"stats": {
 			name = "Stats",
@@ -404,6 +417,8 @@ func applyEditVar(varid, value):
 		restraintDodgeChanceMult = value
 	if(varid == "restraintStrugglePower"):
 		restraintStrugglePower = value
+	if(varid == "combatStance"):
+		combatStance = value
 	
 	return false
 
@@ -450,6 +465,7 @@ func saveData():
 		"disableMeet": disableMeet,
 		"restraintDodgeChanceMult": restraintDodgeChanceMult,
 		"restraintStrugglePower": restraintStrugglePower,
+		"combatStance": combatStance,
 	}
 
 func loadData(data):
@@ -494,6 +510,7 @@ func loadData(data):
 	disableMeet = loadVar(data, "disableMeet", false)
 	restraintDodgeChanceMult = loadVar(data, "restraintDodgeChanceMult", 0.9)
 	restraintStrugglePower = loadVar(data, "restraintStrugglePower", 1.0)
+	combatStance = loadVar(data, "combatStance", -1)
 
 func loadVar(_data, thekey, defaultValue = null):
 	if(_data.has(thekey)):

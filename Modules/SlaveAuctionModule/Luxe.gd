@@ -117,3 +117,6 @@ func beforeFightStarted():
 	.beforeFightStarted()
 	
 	addEffect("LuxeRage")
+
+func getCombatStance() -> int:
+	return CombatStance.STANCE_LUST_PROUD

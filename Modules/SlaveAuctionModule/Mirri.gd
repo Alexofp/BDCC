@@ -178,3 +178,6 @@ func updateBodyparts():
 		if(hasPerk(Perk.StartNoHeat) || hasPerk(Perk.StartInfertile)):
 			skillsHolder.removePerk(Perk.StartNoHeat)
 			skillsHolder.removePerk(Perk.StartInfertile)
+
+func getCombatStance() -> int:
+	return CombatStance.STANCE_LUST_SLY

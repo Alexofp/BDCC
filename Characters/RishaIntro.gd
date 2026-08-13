@@ -67,3 +67,6 @@ func getParentCharacterID():
 
 func getDefaultEquipment():
 	return ["GuardArmor", "RishaPiercings"]
+
+func getCombatStance() -> int:
+	return CombatStance.STANCE_UNIQUE_STUNBATON

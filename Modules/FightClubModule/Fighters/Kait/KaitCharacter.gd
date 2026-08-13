@@ -161,3 +161,6 @@ func getDefaultEquipment():
 
 func getLootTable(_battleName):
 	return InmateLoot.new()
+
+func getCombatStance() -> int:
+	return CombatStance.STANCE_COMBAT_RELAXED

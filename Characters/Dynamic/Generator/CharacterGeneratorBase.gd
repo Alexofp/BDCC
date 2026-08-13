@@ -177,6 +177,7 @@ func pickAttacks(character:DynamicCharacter, _args = {}):
 		if(RNG.chance(50)):
 			baseAttacks.append(possibleAttack)
 	character.npcAttacks = baseAttacks
+	character.combatStance = CombatStance.generateStanceBasedOnCharacter(character)
 
 func pickPersonality(character:DynamicCharacter, _args = {}):
 	var personality = character.getPersonality()

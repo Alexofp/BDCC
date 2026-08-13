@@ -23,6 +23,7 @@ var datapackID = null
 var npcLootOverride = null
 var extraSettings:DynCharExtraSettings = null
 var tfHolder:TFHolder
+var combatStance:int = -1
 
 func _init():
 	npcHasMenstrualCycle = true
@@ -349,6 +350,7 @@ func saveData():
 		"npcChatColorOverride": npcChatColorOverride,
 		"npcMimicArtworkID": npcMimicArtworkID,
 		"npcCustomSpeciesName": npcCustomSpeciesName,
+		"combatStance": combatStance,
 	}
 	if(npcGender != null):
 		data["npcGender"] = npcGender
@@ -583,7 +585,12 @@ func loadData(data):
 		newNpcSlavery.loadData(SAVE.loadVar(data, "npcSlavery", {}))
 	else:
 		npcSlavery = null
-
+	
+	if(data.has("combatStance")):
+		combatStance = SAVE.loadVar(data, "combatStance", 0)
+	if(!CombatStance.isValid(combatStance)):
+		combatStance = CombatStance.generateStanceBasedOnCharacter(self)
+	
 	updateAppearance()
 
 func getInmateType():
@@ -778,6 +785,10 @@ func loadFromDatapackCharacter(_datapack:Datapack, _datapackChar:DatapackCharact
 	if(isLactating()):
 		fillBreasts()
 	
+	combatStance = _datapackChar.combatStance
+	if(!CombatStance.isValid(combatStance)):
+		combatStance = CombatStance.generateStanceBasedOnCharacter(self)
+	
 	stamina = getMaxStamina()
 	updateAppearance()
 
@@ -846,3 +857,6 @@ func doPainfullyStretchHole(_bodypart, _who = "pc") -> bool:
 		addEffect(StatusEffect.StretchedPainfullyAnus, [1])
 		return true
 	return false
+
+func getCombatStance() -> int:
+	return combatStance

@@ -60,3 +60,6 @@ func getDefaultEquipment():
 
 func getParentCharacterID():
 	return "tavi"
+
+func getCombatStance() -> int:
+	return CombatStance.STANCE_LUST_SLY

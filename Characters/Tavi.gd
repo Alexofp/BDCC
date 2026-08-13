@@ -208,3 +208,6 @@ func reactRestraint(restraintType, restraintAmount, isGettingForced):
 			"Kinky~",
 		])
 	return null
+
+func getCombatStance() -> int:
+	return CombatStance.STANCE_LUST_SLY

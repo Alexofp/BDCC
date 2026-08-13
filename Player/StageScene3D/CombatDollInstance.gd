@@ -4,6 +4,7 @@ onready var doll = $Doll3D
 onready var animationTree = $AnimationTree
 onready var chair = $Chair
 var savedChar
+var stance:int = CombatStance.STANCE_COMBAT_DEFAULT
 
 func _ready():
 	animationTree.anim_player = animationTree.get_path_to(doll.getAnimPlayerCombat())
@@ -42,8 +43,12 @@ func playAnim(animID, _bodyState:Dictionary):
 	#if(!stateMachineTravelCombat(doll, state_machine, fullAnimID, animationTree)):
 	#	Log.printerr("Action "+str(animID)+" is not found for combat doll instance")
 
-func setCombatStanceIndexRaw(_indx:int):
-	animationTree["parameters/StateMachine/IDLE/IDLE_PICK/current"] = _indx
+func setCombatStance(_stance:int):
+	stance = _stance
+	animationTree["parameters/StateMachine/IDLE/IDLE_PICK/current"] = CombatStance.getStanceRawIndex(_stance)
+
+func getCombatStance() -> int:
+	return stance
 
 func stateMachineTravelCombat(thedoll, state_machine:AnimationNodeStateMachinePlayback, animID, _animTree:AnimationTree):
 	var args:Array = []

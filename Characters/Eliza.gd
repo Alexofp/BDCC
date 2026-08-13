@@ -374,3 +374,6 @@ func reactRestraint(restraintType, restraintAmount, isGettingForced):
 
 func getDefaultEquipment():
 	return ["LabcoatOutfit", "LaceBra", "LacePanties", "ElizaNecklace"]
+
+func getCombatStance() -> int:
+	return CombatStance.STANCE_LUST_SLY

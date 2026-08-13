@@ -131,3 +131,6 @@ func getLootTable(_battleName):
 
 func getDefaultEquipment():
 	return ["inmatecollar", "inmateuniformSexDeviant", "VionGlasses"]
+
+func getCombatStance() -> int:
+	return CombatStance.STANCE_COMBAT_RELAXED

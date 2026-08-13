@@ -194,3 +194,6 @@ func reactRestraint(restraintType, restraintAmount, isGettingForced):
 			"I'm too powerful to be tied up so easily",
 		])
 	return null
+
+func getCombatStance() -> int:
+	return CombatStance.STANCE_COMBAT_DEFAULT

@@ -144,3 +144,6 @@ func getLootTable(_battleName):
 	
 func getDefaultEquipment():
 	return ["inmatecollar", "inmateuniform"]
+
+func getCombatStance() -> int:
+	return CombatStance.STANCE_UNIQUE_SHIV

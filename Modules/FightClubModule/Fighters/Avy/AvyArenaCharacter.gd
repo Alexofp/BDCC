@@ -75,3 +75,6 @@ func getDefaultEquipment():
 	
 func getParentCharacterID():
 	return "avy"
+
+func getCombatStance() -> int:
+	return CombatStance.STANCE_LUST_PROUD

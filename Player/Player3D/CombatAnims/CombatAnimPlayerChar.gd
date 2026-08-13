@@ -10,6 +10,7 @@ const DO_WAIT := 0
 const DO_ANIM := 1
 
 signal playAnim(_id, _anim, _args)
+signal queueCompleted(_id)
 
 func addWait(_howLong:float):
 	queue.append([DO_WAIT, _howLong])
@@ -25,6 +26,7 @@ func isBusy() -> bool:
 	return !queue.empty()
 
 func processQueue(_dt:float):
+	var _hasSomething:bool = !queue.empty()
 	while(!queue.empty()):
 		var curEl:Array = queue.front()
 		var elType:int = curEl[0]
@@ -38,6 +40,9 @@ func processQueue(_dt:float):
 			emit_signal("playAnim", id, curEl[1], curEl[2])
 		
 		queue.pop_front()
+	
+	if(_hasSomething && queue.empty()):
+		emit_signal("queueCompleted", id)
 		
 func doProcess(_dt:float):
 	processQueue(_dt)

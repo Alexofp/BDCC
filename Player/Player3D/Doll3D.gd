@@ -331,6 +331,9 @@ func prepareCharacter(charID):
 	call_deferred("checkDirection") # Deferred because the character is usually flipped after this call
 
 func checkDirection():
+	var theParent = get_parent()
+	if(!(theParent is Spatial)):
+		return
 	var newIsFacingRight:bool = (get_scale().x*(get_parent().get_scale().x if get_parent() else 1.0) < 0)
 	
 	if(newIsFacingRight != isFacingRight):

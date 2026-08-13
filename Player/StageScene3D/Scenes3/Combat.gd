@@ -9,12 +9,35 @@ func _init():
 
 func _ready():
 	animPlayer.connect("playAnim", self, "onPlayAnim")
+	animPlayer.connect("queueCompleted", self, "onQueueCompleted")
 	
 #	animationTree.anim_player = animationTree.get_path_to(doll.getAnimPlayerCombat())
 #	animationTree.active = true
 #	animationTree2.anim_player = animationTree2.get_path_to(doll2.getAnimPlayerCombat())
 #	animationTree2.active = true
 	pass
+
+func onQueueCompleted(_id:int):
+	updateDollIdleWeapons(_id, true)
+
+func updateDollIdleWeapons(_id:int, _doReprepare:bool = false):
+	var theCombatDollInstance = combat_doll_instance if (_id == 0) else combat_doll_instance_2
+	var _theDoll = theCombatDollInstance.getDoll()
+	var theStance:int = theCombatDollInstance.getCombatStance()
+	if(!CombatStance.STANCE_TO_WEAPONS.has(theStance)):
+		return
+	if(_doReprepare):
+		theCombatDollInstance.reprepareCharacter()
+	var theWep:Array = CombatStance.STANCE_TO_WEAPONS[theStance]
+	var _fists:bool = theWep[0]
+	var _weaponLeft:String = theWep[1]
+	var _weaponRight:String = theWep[2]
+	if(_fists):
+		_theDoll.setTemporaryState("hands", "fists")
+	if(!_weaponLeft.empty()):
+		_theDoll.attachTemporaryUnriggedPart("hand.L", _weaponLeft)
+	if(!_weaponRight.empty()):
+		_theDoll.attachTemporaryUnriggedPart("hand.R", _weaponRight)
 
 func onPlayAnim(_id:int, _anim:String, _fists:bool, _weaponLeft:String, _weaponRight:String):
 	var theCombatDollInstance = combat_doll_instance if (_id == 0) else combat_doll_instance_2
@@ -160,6 +183,14 @@ func playAnimation(animID, _args = {}):
 		secondDoll = _args["npc"]
 	combat_doll_instance_2.prepareCharacter(secondDoll)
 	
+	if(_args.has("pcStance")):
+		combat_doll_instance.setCombatStance(_args["pcStance"])
+	if(_args.has("npcStance")):
+		combat_doll_instance_2.setCombatStance(_args["npcStance"])
+	
+	if(!animPlayer.isAnyoneBusy()):
+		updateDollIdleWeapons(0)
+		updateDollIdleWeapons(1)
 	#doll.forceSlotToBeVisible(BodypartSlot.Penis)
 	
 	
@@ -174,11 +205,7 @@ func playAnimation(animID, _args = {}):
 	if(_args.has("statusUpdate")):
 		var theAttack:Array = _args["statusUpdate"]
 		animPlayer.addStatusCheckPayload(theAttack[0], theAttack[1])
-	if(_args.has("pcStance")):
-		combat_doll_instance.setCombatStanceIndexRaw(CombatStance.getStanceRawIndex(_args["pcStance"]))
-	if(_args.has("npcStance")):
-		combat_doll_instance_2.setCombatStanceIndexRaw(CombatStance.getStanceRawIndex(_args["npcStance"]))
-	
+
 	var didWePlayAnything:bool = false
 	if(animID != ""):
 		if(playSmart(0, animID)):

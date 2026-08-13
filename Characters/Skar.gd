@@ -145,3 +145,6 @@ func reactRestraint(_restraintType, restraintAmount, isGettingForced):
 
 func getDefaultEquipment():
 	return ["GuardArmor"]
+
+func getCombatStance() -> int:
+	return CombatStance.STANCE_LUST_PROUD

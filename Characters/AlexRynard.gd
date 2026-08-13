@@ -195,3 +195,6 @@ func reactRestraint(restraintType, restraintAmount, isGettingForced):
 			"Keep that shit away from me",
 		])
 	return null
+
+func getCombatStance() -> int:
+	return CombatStance.STANCE_COMBAT_RELAXED

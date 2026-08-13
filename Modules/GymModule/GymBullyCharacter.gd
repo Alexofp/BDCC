@@ -108,3 +108,6 @@ func getLootTable(_battleName):
 
 func getDefaultEquipment():
 	return ["inmatecollar", "inmateuniformHighsec"]
+
+func getCombatStance() -> int:
+	return CombatStance.STANCE_COMBAT_RAISED

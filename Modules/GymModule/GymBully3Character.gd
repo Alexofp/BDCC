@@ -203,3 +203,6 @@ func reactRestraint(restraintType, restraintAmount, isGettingForced):
 			"Fight fair, bitch!",
 		])
 	return null
+
+func getCombatStance() -> int:
+	return CombatStance.STANCE_UNIQUE_SHIV

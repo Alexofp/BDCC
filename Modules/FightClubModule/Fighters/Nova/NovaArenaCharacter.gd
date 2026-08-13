@@ -94,3 +94,6 @@ func getParentCharacterID():
 
 func getDefaultEquipment():
 	return ["GuardArmor"]
+
+func getCombatStance() -> int:
+	return CombatStance.STANCE_UNIQUE_STUNBATON

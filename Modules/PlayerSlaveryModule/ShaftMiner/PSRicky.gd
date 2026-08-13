@@ -55,3 +55,6 @@ func createBodyparts():
 
 func getDefaultEquipment():
 	return ["OfficialClothes"]
+
+func getCombatStance() -> int:
+	return CombatStance.STANCE_UNIQUE_PISTOL

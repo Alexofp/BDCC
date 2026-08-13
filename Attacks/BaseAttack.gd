@@ -410,3 +410,20 @@ func combineWeaponAttacks():
 
 func canBeUsedByPlayer():
 	return isPlayerAttack
+
+# Gives a hint to the dynamic characters about what stance they should prefer
+func getStanceType() -> int:
+	var theSoloAnim = getAttackSoloAnimation()
+	if(theSoloAnim is String):
+		if(theSoloAnim == "stunbaton"):
+			return CombatStance.ATTACK_STANCE_STUNBATON
+		if(theSoloAnim == "shiv"):
+			return CombatStance.ATTACK_STANCE_SHIV
+		if(theSoloAnim == "firepistol"):
+			return CombatStance.ATTACK_STANCE_PISTOL
+
+	if(category == Category.Physical):
+		return CombatStance.ATTACK_STANCE_PHYSICAL
+	if(category == Category.Lust):
+		return CombatStance.ATTACK_STANCE_LUST
+	return -1
