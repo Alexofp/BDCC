@@ -1122,7 +1122,9 @@ func getNPCStatus(_npc:BaseCharacter) -> int:
 	return _result
 
 func playAttackAnim(_attackResult:Dictionary, _pcAttacks:bool, _pcStatus:int = 0, _npcStatus:int = 0):
-	var _attackID:String = _attackResult.get("attackerAnimation", "")
+	var theAttackAr = _attackResult.get("attackerAnimation", "")
+	var _attackID:String = theAttackAr if (theAttackAr is String) else theAttackAr[0]
+	var _customWep:String = theAttackAr[1] if ((theAttackAr is Array) && (theAttackAr.size() > 1)) else ""
 	var _didMiss:bool = _attackResult.get("missed", false)
 	var _didDodge:bool = _attackResult.get("dodged", false)
 	var _attackerID:int = 0 if _pcAttacks else 1
@@ -1141,7 +1143,7 @@ func playAttackAnim(_attackResult:Dictionary, _pcAttacks:bool, _pcStatus:int = 0
 			_pcStatus |= CombatAnimPlayer.ST_DODGING
 	
 	var _payload:Array = [
-		_attackID, _attackerID, _pcStatus if _pcAttacks else _npcStatus, _pcStatus if !_pcAttacks else _npcStatus,
+		_attackID, _attackerID, _pcStatus if _pcAttacks else _npcStatus, _pcStatus if !_pcAttacks else _npcStatus, _customWep,
 	]
 	playAnimation(StageScene.Combat, "", {npc=enemyID, pc="pc", attack=_payload})
 	

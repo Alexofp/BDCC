@@ -33,3 +33,6 @@ func getRequirements():
 
 func canBeDodgedByPlayer(_attacker, _receiver):
 	return false
+
+func getAttackSoloAnimation():
+	return "DodgePrepare"

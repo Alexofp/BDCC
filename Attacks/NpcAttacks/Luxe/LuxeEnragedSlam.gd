@@ -46,7 +46,7 @@ func getRequirements():
 	
 
 func getAttackSoloAnimation():
-	return "shove"
+	return "charge"
 
 func getRecieverArmorScaling(_attacker, _receiver, _damageType) -> float:
 	return 1.0

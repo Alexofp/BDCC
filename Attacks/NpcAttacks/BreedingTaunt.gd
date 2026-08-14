@@ -38,3 +38,6 @@ func getRequirements():
 
 func canSeeAnticipationTextWhenBlind():
 	return true
+
+func getAttackSoloAnimation():
+	return "LustCockTaunt"

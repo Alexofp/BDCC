@@ -180,4 +180,4 @@ func updateBodyparts():
 			skillsHolder.removePerk(Perk.StartInfertile)
 
 func getCombatStance() -> int:
-	return CombatStance.STANCE_LUST_SLY
+	return CombatStance.STANCE_COMBAT_RELAXED

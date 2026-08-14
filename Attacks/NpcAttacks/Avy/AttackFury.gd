@@ -43,7 +43,7 @@ func getAnticipationText(_attacker, _receiver):
 	return "{attacker.name}'s eyes narrow as {attacker.he} readies {attacker.his} devastating strike."
 
 func getAttackSoloAnimation():
-	return "punch"
+	return "charge"
 
 func getRequirements():
 	return [AttackRequirement.FreeArms, AttackRequirement.FreeHands]

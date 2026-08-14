@@ -96,3 +96,6 @@ func getExperience():
 
 func getRecieverArmorScaling(_attacker, _receiver, _damageType) -> float:
 	return 3.0
+
+func getAttackSoloAnimation():
+	return "LustCockTaunt"

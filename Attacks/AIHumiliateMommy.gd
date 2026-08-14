@@ -34,3 +34,6 @@ func getRequirements():
 
 func canSeeAnticipationTextWhenBlind():
 	return true
+
+func getAttackSoloAnimation():
+	return "LustBreastsAttack"

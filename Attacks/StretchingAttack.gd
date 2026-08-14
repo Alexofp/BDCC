@@ -37,3 +37,6 @@ func getAnticipationText(_attacker, _receiver):
 
 func getRequirements():
 	return [[AttackRequirement.Stamina, 20]]
+
+func getAttackSoloAnimation():
+	return "LustStretchAttack"

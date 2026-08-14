@@ -46,3 +46,6 @@ func getAnticipationText(_attacker, _receiver):
 
 func getRequirements():
 	return [AttackRequirement.FreeLegs]
+
+func getAttackSoloAnimation():
+	return "kick"

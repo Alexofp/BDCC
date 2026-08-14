@@ -38,3 +38,6 @@ func getAnticipationText(_attacker, _receiver):
 
 func getRequirements():
 	return [AttackRequirement.FreeArms, AttackRequirement.FreeHands]
+
+func getAttackSoloAnimation():
+	return "punch"

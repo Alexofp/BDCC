@@ -102,3 +102,94 @@ func doAdd():
 		theAnim.allowStateReuse = true
 		#theAnim.fists = true
 		anims[theAnim.id] = theAnim
+	if(true):
+		var theAnim := CombatAnimBase.new()
+		theAnim.id = "ChestSlap"
+		theAnim.animName = "AttackChestSlap"
+		theAnim.hitDelay = frames(11 -HD)
+		theAnim.animNameKnockedDown = "KnockedDownShove" # No unique knocked down version
+		theAnim.hitDelayKnockedDown = frames(7 -HDD)
+		theAnim.allowStateReuse = true
+		#theAnim.fists = true
+		anims[theAnim.id] = theAnim
+	if(true):
+		var theAnim := CombatAnimBase.new()
+		theAnim.id = "LustBeg"
+		theAnim.animName = "LustBeg"
+		theAnim.hitDelay = frames(45 -HD)
+		anims[theAnim.id] = theAnim
+	if(true):
+		var theAnim := CombatAnimBase.new()
+		theAnim.id = "LustBodyAttack"
+		theAnim.animName = "LustBodyAttack"
+		theAnim.hitDelay = frames(72 -HD)
+		anims[theAnim.id] = theAnim
+	if(true):
+		var theAnim := CombatAnimBase.new()
+		theAnim.id = "LustBreastsAttack"
+		theAnim.animName = "LustBreastsAttack"
+		theAnim.hitDelay = frames(46 -HD)
+		anims[theAnim.id] = theAnim
+	if(true): # Meme attack
+		var theAnim := CombatAnimBase.new()
+		theAnim.id = "LustPlow"
+		theAnim.animName = "LustPlow"
+		theAnim.hitDelay = frames(120 -HD)
+		anims[theAnim.id] = theAnim
+	if(true):
+		var theAnim := CombatAnimBase.new()
+		theAnim.id = "LustStretchAttack"
+		theAnim.animName = "LustStretchAttack"
+		theAnim.hitDelay = frames(58 -HD)
+		anims[theAnim.id] = theAnim
+	if(true):
+		var theAnim := CombatAnimBase.new()
+		theAnim.id = "ClothingBottomPullDown"
+		theAnim.animName = "ClothingBottomPullDown"
+		theAnim.hitDelay = frames(21 -HD)
+		anims[theAnim.id] = theAnim
+	if(true):
+		var theAnim := CombatAnimBase.new()
+		theAnim.id = "ClothingBottomPullDownFull"
+		theAnim.animName = "ClothingBottomPullDownFull"
+		theAnim.hitDelay = frames(25 -HD)
+		anims[theAnim.id] = theAnim
+	if(true):
+		var theAnim := CombatAnimBase.new()
+		theAnim.id = "ClothingTopOpen"
+		theAnim.animName = "ClothingTopOpen"
+		theAnim.hitDelay = frames(20 -HD)
+		anims[theAnim.id] = theAnim
+	if(true):
+		var theAnim := CombatAnimBase.new()
+		theAnim.id = "ClothingTopPullUp"
+		theAnim.animName = "ClothingTopPullUp"
+		theAnim.hitDelay = frames(20 -HD)
+		anims[theAnim.id] = theAnim
+	if(true):
+		var theAnim := CombatAnimBase.new()
+		theAnim.id = "DodgePrepare"
+		theAnim.animName = "DodgePrepare"
+		theAnim.hitDelay = frames(10 -HD)
+		theAnim.hitReaction = CombatAnimBase.REACTION_NOTHING
+		anims[theAnim.id] = theAnim
+	if(true):
+		var theAnim := CombatAnimBase.new()
+		theAnim.id = "DodgePrepareSly"
+		theAnim.animName = "DodgePrepareSly"
+		theAnim.hitDelay = frames(10 -HD)
+		theAnim.hitReaction = CombatAnimBase.REACTION_NOTHING
+		anims[theAnim.id] = theAnim
+	if(true):
+		var theAnim := CombatAnimBase.new()
+		theAnim.id = "LickWounds"
+		theAnim.animName = "LickWounds"
+		theAnim.hitDelay = frames(10 -HD)
+		theAnim.hitReaction = CombatAnimBase.REACTION_NOTHING
+		anims[theAnim.id] = theAnim
+	if(true):
+		var theAnim := CombatAnimBase.new()
+		theAnim.id = "LustCockTaunt"
+		theAnim.animName = "LustCockTaunt"
+		theAnim.hitDelay = frames(18 -HD)
+		anims[theAnim.id] = theAnim
