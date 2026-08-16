@@ -1,4 +1,4 @@
-[gd_resource type="AnimationNodeStateMachine" load_steps=112 format=2]
+[gd_resource type="AnimationNodeStateMachine" load_steps=113 format=2]
 
 [sub_resource type="AnimationNodeAnimation" id=62]
 animation = "AllFours-loop"
@@ -33,6 +33,9 @@ animation = "StandingCombatStunBaton-loop"
 [sub_resource type="AnimationNodeAnimation" id=145]
 animation = "StandingCombatShiv-loop"
 
+[sub_resource type="AnimationNodeAnimation" id=146]
+animation = "StandingCombatSyringe-loop"
+
 [sub_resource type="AnimationNodeAnimation" id=116]
 animation = "Standing-loop"
 
@@ -61,7 +64,7 @@ animation = "StandingCombatPistol-loop"
 animation = "StandingCombat-loop"
 
 [sub_resource type="AnimationNodeTransition" id=118]
-input_count = 11
+input_count = 12
 xfade_time = 0.25
 input_0/name = "Standing-loop"
 input_0/auto_advance = false
@@ -85,15 +88,19 @@ input_9/name = "state 9"
 input_9/auto_advance = false
 input_10/name = "state 10"
 input_10/auto_advance = false
+input_11/name = "state 11"
+input_11/auto_advance = false
 
 [sub_resource type="AnimationNodeBlendTree" id=119]
-graph_offset = Vector2( -515.807, 384.57 )
+graph_offset = Vector2( -416.292, 612.682 )
 nodes/Animation/node = SubResource( 117 )
 nodes/Animation/position = Vector2( -440, 120 )
 "nodes/Animation 10/node" = SubResource( 144 )
 "nodes/Animation 10/position" = Vector2( -500, 580 )
 "nodes/Animation 11/node" = SubResource( 145 )
 "nodes/Animation 11/position" = Vector2( -200, 620 )
+"nodes/Animation 12/node" = SubResource( 146 )
+"nodes/Animation 12/position" = Vector2( -500, 680 )
 "nodes/Animation 2/node" = SubResource( 116 )
 "nodes/Animation 2/position" = Vector2( -200, 60 )
 "nodes/Animation 3/node" = SubResource( 137 )
@@ -113,7 +120,7 @@ nodes/Animation/position = Vector2( -440, 120 )
 nodes/IDLE_PICK/node = SubResource( 118 )
 nodes/IDLE_PICK/position = Vector2( 340, 120 )
 nodes/output/position = Vector2( 620, 180 )
-node_connections = [ "IDLE_PICK", 0, "Animation 2", "IDLE_PICK", 1, "Animation", "IDLE_PICK", 2, "Animation 3", "IDLE_PICK", 3, "Animation 4", "IDLE_PICK", 4, "Animation 5", "IDLE_PICK", 5, "Animation 6", "IDLE_PICK", 6, "Animation 7", "IDLE_PICK", 7, "Animation 8", "IDLE_PICK", 8, "Animation 9", "IDLE_PICK", 9, "Animation 10", "IDLE_PICK", 10, "Animation 11", "output", 0, "IDLE_PICK" ]
+node_connections = [ "IDLE_PICK", 0, "Animation 2", "IDLE_PICK", 1, "Animation", "IDLE_PICK", 2, "Animation 3", "IDLE_PICK", 3, "Animation 4", "IDLE_PICK", 4, "Animation 5", "IDLE_PICK", 5, "Animation 6", "IDLE_PICK", 6, "Animation 7", "IDLE_PICK", 7, "Animation 8", "IDLE_PICK", 8, "Animation 9", "IDLE_PICK", 9, "Animation 10", "IDLE_PICK", 10, "Animation 11", "IDLE_PICK", 11, "Animation 12", "output", 0, "IDLE_PICK" ]
 
 [sub_resource type="AnimationNodeAnimation" id=104]
 animation = "Jogging-loop"

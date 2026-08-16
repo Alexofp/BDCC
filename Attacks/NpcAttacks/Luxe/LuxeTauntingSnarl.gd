@@ -50,3 +50,6 @@ func getLuxeRage(_attacker) -> float:
 	if(_attacker.hasEffect("LuxeRage")):
 		return _attacker.getEffect("LuxeRage").rage
 	return 0.0
+
+func getAttackSoloAnimation():
+	return "TauntPoint"

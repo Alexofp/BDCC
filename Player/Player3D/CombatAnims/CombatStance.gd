@@ -16,6 +16,7 @@ const STANCE_UNIQUE_SHIV := 101
 const STANCE_UNIQUE_PISTOL := 102
 const STANCE_UNIQUE_PISTOLRED := 103
 const STANCE_UNIQUE_10MMGUN := 104
+const STANCE_UNIQUE_SYRINGE := 105
 
 
 const MAP_STANCE_TO_INDEX:Dictionary = {
@@ -24,6 +25,7 @@ const MAP_STANCE_TO_INDEX:Dictionary = {
 	STANCE_UNIQUE_PISTOL: 8,
 	STANCE_UNIQUE_PISTOLRED: 8,
 	STANCE_UNIQUE_10MMGUN: 8,
+	STANCE_UNIQUE_SYRINGE: 11,
 }
 
 const STANCE_NAMES:Dictionary = {
@@ -40,6 +42,7 @@ const STANCE_NAMES:Dictionary = {
 	STANCE_UNIQUE_PISTOL: "Energy gun stance (Unique)",
 	STANCE_UNIQUE_PISTOLRED: "Red energy gun stance (Unique)",
 	STANCE_UNIQUE_10MMGUN: "10mm gun stance (Unique)",
+	STANCE_UNIQUE_SYRINGE: "Syringe (Unique)",
 }
 const STANCE_TO_WEAPONS:Dictionary = { # [fists, left_hand_weapon, right_hand_weapon]
 	STANCE_UNIQUE_PISTOL: [true, "res://Inventory/UnriggedModels/EnergyPistol/EnergyPistolBlue.tscn", ""],
@@ -47,6 +50,7 @@ const STANCE_TO_WEAPONS:Dictionary = { # [fists, left_hand_weapon, right_hand_we
 	STANCE_UNIQUE_10MMGUN: [true, "res://Inventory/UnriggedModels/Pistol/Pistol.tscn", ""],
 	STANCE_UNIQUE_STUNBATON: [true, "", "res://Inventory/UnriggedModels/StunBaton/StunBaton.tscn"],
 	STANCE_UNIQUE_SHIV: [true, "", "res://Inventory/UnriggedModels/Shiv/Shiv.tscn"],
+	STANCE_UNIQUE_SYRINGE: [true, "", "res://Inventory/UnriggedModels/Syringe/Syringe.tscn"],
 }
 
 const ATTACK_STANCE_PHYSICAL := 0
@@ -85,6 +89,7 @@ static func getAll() -> Array:
 		STANCE_UNIQUE_PISTOL,
 		STANCE_UNIQUE_PISTOLRED,
 		STANCE_UNIQUE_10MMGUN,
+		STANCE_UNIQUE_SYRINGE,
 	]
 
 static func getAllPlayerCanChoose() -> Array:

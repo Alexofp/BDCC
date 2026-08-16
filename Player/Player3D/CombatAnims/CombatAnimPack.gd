@@ -85,7 +85,7 @@ func doAdd():
 		var theAnim := CombatAnimBase.new()
 		theAnim.id = "firepistol"
 		theAnim.animName = "WeaponGunShootCombat"
-		theAnim.hitDelay = frames(11 -HD)
+		theAnim.hitDelay = frames(14 -HD)
 		theAnim.animNameKnockedDown = "KnockedDownPistolFire"
 		theAnim.hitDelayKnockedDown = frames(12 -HDD)
 		theAnim.fists = true
@@ -192,4 +192,120 @@ func doAdd():
 		theAnim.id = "LustCockTaunt"
 		theAnim.animName = "LustCockTaunt"
 		theAnim.hitDelay = frames(18 -HD)
+		anims[theAnim.id] = theAnim
+	if(true):
+		var theAnim := CombatAnimBase.new()
+		theAnim.id = "LustButt"
+		theAnim.animName = "LustButt"
+		theAnim.hitDelay = frames(56 -HD)
+		anims[theAnim.id] = theAnim
+	if(true):
+		var theAnim := CombatAnimBase.new()
+		theAnim.id = "UseSyringe"
+		theAnim.animName = "UseSyringe"
+		theAnim.hitDelay = frames(11 -HD)
+		theAnim.hitReaction = CombatAnimBase.REACTION_NOTHING
+		anims[theAnim.id] = theAnim
+	if(true):
+		var theAnim := CombatAnimBase.new()
+		theAnim.id = "TauntPoint"
+		theAnim.animName = "TauntPoint"
+		theAnim.hitDelay = frames(11 -HD)
+		theAnim.hitReaction = CombatAnimBase.REACTION_NOTHING
+		anims[theAnim.id] = theAnim
+	if(true):
+		var theAnim := CombatAnimBase.new()
+		theAnim.id = "TauntLustLeanIn"
+		theAnim.animName = "TauntLustLeanIn"
+		theAnim.hitDelay = frames(11 -HD)
+		theAnim.hitReaction = CombatAnimBase.REACTION_NOTHING
+		anims[theAnim.id] = theAnim
+	if(true):
+		var theAnim := CombatAnimBase.new()
+		theAnim.id = "TauntLustComeHere"
+		theAnim.animName = "TauntLustComeHere"
+		theAnim.hitDelay = frames(11 -HD)
+		theAnim.hitReaction = CombatAnimBase.REACTION_NOTHING
+		anims[theAnim.id] = theAnim
+	if(true):
+		var theAnim := CombatAnimBase.new()
+		theAnim.id = "RemoveAllRestraints"
+		theAnim.animName = "RemoveAllRestraints"
+		theAnim.hitDelay = frames(11 -HD)
+		theAnim.hitReaction = CombatAnimBase.REACTION_NOTHING
+		anims[theAnim.id] = theAnim
+	if(true):
+		var theAnim := CombatAnimBase.new()
+		theAnim.id = "TailSwipe"
+		theAnim.animName = "TailSwipe"
+		theAnim.hitDelay = frames(8 -HD)
+		theAnim.hitReaction = CombatAnimBase.REACTION_NOTHING
+		theAnim.animNameKnockedDown = "KnockedDownShove" # No unique knocked down version
+		theAnim.hitDelayKnockedDown = frames(7 -HDD)
+		theAnim.allowStateReuse = true
+		anims[theAnim.id] = theAnim
+	if(true):
+		var theAnim := CombatAnimBase.new()
+		theAnim.id = "WeaponSyringe"
+		theAnim.animName = "WeaponSyringe"
+		theAnim.hitDelay = frames(20 -HD)
+		theAnim.animNameKnockedDown = "KnockedDownWeaponSyringe"
+		theAnim.hitDelayKnockedDown = frames(25 -HDD)
+		theAnim.fists = true
+		theAnim.weaponRight = "res://Inventory/UnriggedModels/Syringe/Syringe.tscn"
+		theAnim.weaponOverrideLeft = false
+		anims[theAnim.id] = theAnim
+	if(true):
+		var theAnim := CombatAnimBase.new()
+		theAnim.id = "RestraintBody"
+		theAnim.animName = "RestraintBody"
+		theAnim.hitDelay = frames(14 -HD)
+		theAnim.animNameKnockedDown = "KnockedDownShove" # No unique knocked down version
+		theAnim.hitDelayKnockedDown = frames(7 -HDD)
+		theAnim.allowStateReuse = true
+		anims[theAnim.id] = theAnim
+	if(true):
+		var theAnim := CombatAnimBase.new()
+		theAnim.id = "RestraintCrotch"
+		theAnim.animName = "RestraintCrotch"
+		theAnim.hitDelay = frames(14 -HD)
+		theAnim.animNameKnockedDown = "KnockedDownShove" # No unique knocked down version
+		theAnim.hitDelayKnockedDown = frames(7 -HDD)
+		theAnim.allowStateReuse = true
+		anims[theAnim.id] = theAnim
+	if(true):
+		var theAnim := CombatAnimBase.new()
+		theAnim.id = "RestraintEyes"
+		theAnim.animName = "RestraintEyes"
+		theAnim.hitDelay = frames(14 -HD)
+		theAnim.animNameKnockedDown = "KnockedDownShove" # No unique knocked down version
+		theAnim.hitDelayKnockedDown = frames(7 -HDD)
+		theAnim.allowStateReuse = true
+		anims[theAnim.id] = theAnim
+	if(true):
+		var theAnim := CombatAnimBase.new()
+		theAnim.id = "RestraintFace"
+		theAnim.animName = "RestraintFace"
+		theAnim.hitDelay = frames(14 -HD)
+		theAnim.animNameKnockedDown = "KnockedDownShove" # No unique knocked down version
+		theAnim.hitDelayKnockedDown = frames(7 -HDD)
+		theAnim.allowStateReuse = true
+		anims[theAnim.id] = theAnim
+	if(true):
+		var theAnim := CombatAnimBase.new()
+		theAnim.id = "RestraintHands"
+		theAnim.animName = "RestraintHands"
+		theAnim.hitDelay = frames(15 -HD)
+		theAnim.animNameKnockedDown = "KnockedDownShove" # No unique knocked down version
+		theAnim.hitDelayKnockedDown = frames(7 -HDD)
+		theAnim.allowStateReuse = true
+		anims[theAnim.id] = theAnim
+	if(true):
+		var theAnim := CombatAnimBase.new()
+		theAnim.id = "RestraintLegs"
+		theAnim.animName = "RestraintLegs"
+		theAnim.hitDelay = frames(15 -HD)
+		theAnim.animNameKnockedDown = "KnockedDownShove" # No unique knocked down version
+		theAnim.hitDelayKnockedDown = frames(7 -HDD)
+		theAnim.allowStateReuse = true
 		anims[theAnim.id] = theAnim

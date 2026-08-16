@@ -32,7 +32,7 @@ func _canUse(_attacker, _receiver, _context = {}):
 	return true
 
 func getAttackSoloAnimation():
-	return "struggle"
+	return "RemoveAllRestraints"
 
 func getRequirements():
 	return [[AttackRequirement.Stamina, 100]]#[AttackRequirement.FreeArms, AttackRequirement.FreeHands]

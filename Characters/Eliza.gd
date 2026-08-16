@@ -376,4 +376,4 @@ func getDefaultEquipment():
 	return ["LabcoatOutfit", "LaceBra", "LacePanties", "ElizaNecklace"]
 
 func getCombatStance() -> int:
-	return CombatStance.STANCE_LUST_SLY
+	return CombatStance.STANCE_UNIQUE_SYRINGE

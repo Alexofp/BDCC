@@ -38,7 +38,7 @@ func getAnticipationText(_attacker, _receiver):
 	return "{attacker.name} prepares to strike {receiver.name} with the handle of {attacker.his} weapon!"
 	
 func getAttackSoloAnimation():
-	return "holdpistol"
+	return "punch"
 
 func getRequirements():
 	return [AttackRequirement.FreeArms, AttackRequirement.FreeHands]

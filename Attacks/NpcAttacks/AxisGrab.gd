@@ -36,4 +36,4 @@ func getRequirements():
 	return [AttackRequirement.FreeArms, AttackRequirement.FreeHands]
 	
 func getAttackSoloAnimation():
-	return "shove"
+	return "LustCockTaunt"

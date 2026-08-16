@@ -32,8 +32,6 @@ func _canUse(_attacker, _receiver, _context = {}):
 func getAnticipationText(_attacker, _receiver):
 	return "{attacker.name} meows." 
 
-func getAttackSoloAnimation():
-	return "holdpistol"
 
 func getRequirements():
 	return [AttackRequirement.FreeArms, AttackRequirement.FreeHands]

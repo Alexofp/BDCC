@@ -34,3 +34,6 @@ func getAnticipationText(_attacker, _receiver):
 
 func getRequirements():
 	return [AttackRequirement.CanTalk]
+
+func getAttackSoloAnimation():
+	return "TauntPoint"
