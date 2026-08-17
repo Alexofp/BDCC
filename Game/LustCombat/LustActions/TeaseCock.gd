@@ -85,6 +85,7 @@ func doAction(_lustState: LustCombatState, _args):
 		text = text,
 		lust = 1,
 		cantCum = cantCum,
+		anim = "LustCockTaunt",
 	}
 
 func getLustTopics():

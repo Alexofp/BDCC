@@ -1023,6 +1023,10 @@ func isSlaveTo(_charID:String) -> bool:
 	return false
 
 func getCombatStance() -> int:
+	if(lustCombatState):
+		var theStance:int = CombatStance.getStanceBasedOnLustActivities(lustCombatState.currentActivities)
+		if(theStance >= 0):
+			return theStance
 	return combatStance
 
 func switchToNextCombatStance():

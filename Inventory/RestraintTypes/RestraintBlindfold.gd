@@ -61,3 +61,6 @@ func getTightLockRequiredItemID() -> String:
 
 func getTightLockUnlockMessage() -> String:
 	return "The lock is impossible to remove so you just cut through the thick cloth of the blindfold with a shiv until it falls apart."
+
+func getForceOnCombatAnim() -> String:
+	return "RestraintEyes"

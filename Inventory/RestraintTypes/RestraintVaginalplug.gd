@@ -104,3 +104,6 @@ func loadData(_data):
 	.loadData(_data)
 	
 	turnedOn = SAVE.loadVar(_data, "turnedOn", false)
+
+func getForceOnCombatAnim() -> String:
+	return "RestraintCrotch"

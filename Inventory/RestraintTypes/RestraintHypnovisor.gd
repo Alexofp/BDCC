@@ -95,3 +95,6 @@ func processStruggleTurn(_pc, _isActivelyStruggling):
 		
 	if(failChance(_pc, 30) || _isActivelyStruggling):
 		return {"text": text, "lust": scaleDamage(5 + int(_isActivelyStruggling)*5)}
+
+func getForceOnCombatAnim() -> String:
+	return "RestraintEyes"

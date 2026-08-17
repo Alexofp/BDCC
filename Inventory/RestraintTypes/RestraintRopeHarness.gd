@@ -46,3 +46,6 @@ func getTightLockRequiredItemID() -> String:
 
 func getTightLockUnlockMessage() -> String:
 	return "The lock is impossible to remove so you just use a shiv to cut through the ropes of the harness, slowly freeing yourself from its embrace until you are able to just step out of it."
+
+func getForceOnCombatAnim() -> String:
+	return "RestraintBody"

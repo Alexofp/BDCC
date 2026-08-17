@@ -46,3 +46,6 @@ func loadData(_data):
 	if(_data.has("aiWontResist")):
 		aiWontResist = SAVE.loadVar(_data, "aiWontResist", false)
 	loadSmartLock(_data)
+
+func getForceOnCombatAnim() -> String:
+	return "RestraintFace"

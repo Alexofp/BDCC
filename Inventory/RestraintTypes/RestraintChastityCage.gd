@@ -41,3 +41,5 @@ func doStruggle(_pc, _minigame:MinigameResult):
 	
 	return {"text": text, "damage": damage, "lust": lust, "pain": pain, "stamina": stamina}
 
+func getForceOnCombatAnim() -> String:
+	return "RestraintCrotch"

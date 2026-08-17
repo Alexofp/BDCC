@@ -236,6 +236,7 @@ func _run():
 			sayn(activity)
 			
 	if(state == "playerMustDodge"):
+		playGetUpAnimsIfNeedTo()
 		var attack: Attack = GlobalRegistry.getAttack(savedAIAttackID)
 		
 		setEnemyAsAttacker()
@@ -384,14 +385,18 @@ func _react(_action: String, _args):
 		else:
 			var item:ItemBase = _args[0]
 			var restraintData:RestraintData = item.getRestraintData()
+			var theAttackToPlay:String = restraintData.getForceOnCombatAnim()
 			var finalSuccessChance = restraintData.getFinalChanceToForceARestraint(enemyCharacter)
 			
 			if(!RNG.chance(finalSuccessChance * 100.0) && enemyCharacter.getStamina() > 0):
 				enemyCharacter.addStamina(-10)
 				whatPlayerDid += GM.ui.processString("You try to force a restraint onto {receiver.name} but {receiver.he} avoided your attempt!")
 			
-				playAnimation(StageScene.Combat, "", {npc=enemyID, npcAction="dodge"})
+				if(!theAttackToPlay.empty()):
+					playAttackAnim({attackerAnimation=theAttackToPlay, dodged=true}, true)
 			else:
+				if(!theAttackToPlay.empty()):
+					playAttackAnim({attackerAnimation=theAttackToPlay}, true)
 				GM.pc.addSkillExperience(Skill.BDSM, restraintData.getLevel() * 3)
 				whatPlayerDid += GM.ui.processString(item.getForcedOnMessage(false))
 				
@@ -552,6 +557,7 @@ func _react(_action: String, _args):
 		
 		var lustCombatState:LustCombatState = GM.pc.getLustCombatState()
 		
+		var didAnyDamage:bool = false
 		var result = lustCombatState.doAction(actionData)
 		whatPlayerDid = GM.ui.processString(result["text"]).trim_suffix("\n\n")
 		if("lust" in result):
@@ -593,6 +599,8 @@ func _react(_action: String, _args):
 			if(isTease && enemyCharacter.getLustLevel() >= 0.6):
 				theDamage *= 1.0
 				extraText = "[b]Teasing is less effective when the enemy is horny![/b] "
+			if(theDamage > 0.0):
+				didAnyDamage = true
 			
 			var damage = enemyCharacter.receiveDamage(DamageType.Lust, int(round(theDamage)))
 			
@@ -614,6 +622,11 @@ func _react(_action: String, _args):
 		#	setState("lustCombatAfterCame")
 		#	afterTurnChecks()
 		#	return
+		
+		if(result.has("anim")):
+			var theAnim:String = result["anim"]
+			if(!theAnim.empty()):
+				playAttackAnim({attackerAnimation=theAnim, missed=!didAnyDamage}, true)
 		
 		if("lostBattle" in result):
 			GM.pc.addLust(GM.pc.lustThreshold())

@@ -2,13 +2,13 @@ extends Reference
 class_name LustCombatState
 
 var character: WeakRef
-var inBattle = false
-var enemyID = ""
+var inBattle:bool = false
+var enemyID:String = ""
 
-var currentActivities = []
+var currentActivities:Array = []
 
-var currentVisibility = 0.0
-var currentDanger = 0.0
+var currentVisibility:float = 0.0
+var currentDanger:float = 0.0
 
 func processLewdTurn(didSomethingLewd = false):
 	if(inBattle):

@@ -66,4 +66,5 @@ func processStruggleTurn(_pc, _isActivelyStruggling):
 	if(failChance(_pc, 10) || _isActivelyStruggling):
 		return {"text": "The buttplug shifts inside {user.name} while {user.he} {user.verbS('squirm')}", "lust": scaleDamage(5)}
 	
-	
+func getForceOnCombatAnim() -> String:
+	return "RestraintCrotch"

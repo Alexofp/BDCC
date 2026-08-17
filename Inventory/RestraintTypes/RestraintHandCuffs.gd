@@ -64,3 +64,6 @@ func getTightLockUnlockMessage() -> String:
 	if(tightlockShiv):
 		return "The lock is impossible to remove so you just use a shiv to cut through the restraint, slowly freeing your wrists."
 	return .getTightLockUnlockMessage()
+
+func getForceOnCombatAnim() -> String:
+	return "RestraintHands"

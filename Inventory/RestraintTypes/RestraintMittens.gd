@@ -54,3 +54,6 @@ func getTightLockRequiredItemID() -> String:
 
 func getTightLockUnlockMessage() -> String:
 	return "The lock is impossible to remove so you have to destroy the mittens. You sit down, trap the shiv between your legs and begin cutting the mittens using it, slowly tearing chunks of leather away.\n\nSoon, you manage to free your hands!"
+
+func getForceOnCombatAnim() -> String:
+	return "RestraintHands"

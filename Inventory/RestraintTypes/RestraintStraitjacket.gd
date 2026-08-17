@@ -35,3 +35,6 @@ func doStruggle(_pc, _minigame:MinigameResult):
 		stamina = RNG.randi_range(50, 60)
 	
 	return {"text": text, "damage": damage, "lust": lust, "pain": pain, "stamina": stamina}
+
+func getForceOnCombatAnim() -> String:
+	return "RestraintBody"

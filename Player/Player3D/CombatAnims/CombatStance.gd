@@ -18,6 +18,9 @@ const STANCE_UNIQUE_PISTOLRED := 103
 const STANCE_UNIQUE_10MMGUN := 104
 const STANCE_UNIQUE_SYRINGE := 105
 
+const STANCE_LUSTACT_BREASTS := 200
+const STANCE_LUSTACT_VAGINA := 201
+const STANCE_LUSTACT_PENIS := 202
 
 const MAP_STANCE_TO_INDEX:Dictionary = {
 	STANCE_UNIQUE_STUNBATON: 9,
@@ -26,6 +29,9 @@ const MAP_STANCE_TO_INDEX:Dictionary = {
 	STANCE_UNIQUE_PISTOLRED: 8,
 	STANCE_UNIQUE_10MMGUN: 8,
 	STANCE_UNIQUE_SYRINGE: 11,
+	STANCE_LUSTACT_BREASTS: 12,
+	STANCE_LUSTACT_VAGINA: 13,
+	STANCE_LUSTACT_PENIS: 14,
 }
 
 const STANCE_NAMES:Dictionary = {
@@ -148,3 +154,28 @@ static func isValid(_indx:int) -> bool:
 	if(STANCE_NAMES.has(_indx)):
 		return true
 	return false
+
+static func getStanceBasedOnLustActivities(_act:Array) -> int:
+	if(_act.empty()):
+		return -1
+	var _hasBreast:bool = false
+	var _hasPenis:bool = false
+	var _hasVag:bool = false
+	var _hasButt:bool = false
+	
+	if(_act.has(LustActivity.GropingChest)):
+		_hasBreast = true
+	if(_act.has(LustActivity.GropingButt) || _act.has(LustActivity.ProddingAnal)):
+		_hasButt = true
+	if(_act.has(LustActivity.StrokingCock)):
+		_hasPenis = true
+	if(_act.has(LustActivity.SpreadingPussy)):
+		_hasVag = true
+	
+	if(_hasBreast):
+		return STANCE_LUSTACT_BREASTS
+	if(_hasPenis):
+		return STANCE_LUSTACT_PENIS
+	if(_hasVag):
+		return STANCE_LUSTACT_VAGINA
+	return -1

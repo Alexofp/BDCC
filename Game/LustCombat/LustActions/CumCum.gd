@@ -77,6 +77,7 @@ func doAction(_lustState: LustCombatState, _args):
 		text = text,
 		came = true,
 		lostBattle = true,
+		anim = "LustCockTaunt",
 	}
 
 func getLustTopics():

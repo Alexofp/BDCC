@@ -26,7 +26,8 @@ func getVisibleDescription(_lustState: LustCombatState, _args):
 
 func doAction(_lustState: LustCombatState, _args):
 	return {
-		text = "Nope"
+		text = "Nope",
+		#anim="",
 	}
 
 func getItem(_lustState: LustCombatState, _args) -> ItemBase:

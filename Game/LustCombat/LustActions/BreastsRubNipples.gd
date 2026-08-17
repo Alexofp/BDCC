@@ -64,6 +64,7 @@ func doAction(_lustState: LustCombatState, _args):
 	return {
 		text = text,
 		lust = 3,
+		anim = "LustBreastsAttack",
 	}
 
 func getLustTopics():
