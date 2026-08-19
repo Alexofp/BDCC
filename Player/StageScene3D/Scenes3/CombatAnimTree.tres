@@ -1,4 +1,4 @@
-[gd_resource type="AnimationNodeStateMachine" load_steps=116 format=2]
+[gd_resource type="AnimationNodeStateMachine" load_steps=123 format=2]
 
 [sub_resource type="AnimationNodeAnimation" id=62]
 animation = "AllFours-loop"
@@ -45,8 +45,29 @@ animation = "LustStroke-loop"
 [sub_resource type="AnimationNodeAnimation" id=149]
 animation = "LustBreasts-loop"
 
+[sub_resource type="AnimationNodeAnimation" id=150]
+animation = "LustButt-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=151]
+animation = "LustStrokeAndRub-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=152]
+animation = "LustStrokeAndBreasts-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=153]
+animation = "LustStrokeAndButt-loop"
+
 [sub_resource type="AnimationNodeAnimation" id=116]
 animation = "Standing-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=154]
+animation = "LustRubAndBreasts-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=155]
+animation = "LustRubAndButt-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=156]
+animation = "LustButtAndBreasts-loop"
 
 [sub_resource type="AnimationNodeAnimation" id=137]
 animation = "StandingCombat2-loop"
@@ -73,7 +94,7 @@ animation = "StandingCombatPistol-loop"
 animation = "StandingCombat-loop"
 
 [sub_resource type="AnimationNodeTransition" id=118]
-input_count = 15
+input_count = 22
 xfade_time = 0.25
 input_0/name = "Standing-loop"
 input_0/auto_advance = false
@@ -105,9 +126,23 @@ input_13/name = "state 13"
 input_13/auto_advance = false
 input_14/name = "state 14"
 input_14/auto_advance = false
+input_15/name = "state 15"
+input_15/auto_advance = false
+input_16/name = "state 16"
+input_16/auto_advance = false
+input_17/name = "state 17"
+input_17/auto_advance = false
+input_18/name = "state 18"
+input_18/auto_advance = false
+input_19/name = "state 19"
+input_19/auto_advance = false
+input_20/name = "state 20"
+input_20/auto_advance = false
+input_21/name = "state 21"
+input_21/auto_advance = false
 
 [sub_resource type="AnimationNodeBlendTree" id=119]
-graph_offset = Vector2( -384.793, 169.848 )
+graph_offset = Vector2( -440.001, 129.274 )
 nodes/Animation/node = SubResource( 117 )
 nodes/Animation/position = Vector2( -440, 120 )
 "nodes/Animation 10/node" = SubResource( 144 )
@@ -122,8 +157,22 @@ nodes/Animation/position = Vector2( -440, 120 )
 "nodes/Animation 14/position" = Vector2( -200, 820 )
 "nodes/Animation 15/node" = SubResource( 149 )
 "nodes/Animation 15/position" = Vector2( -200, 720 )
+"nodes/Animation 16/node" = SubResource( 150 )
+"nodes/Animation 16/position" = Vector2( -380, 880 )
+"nodes/Animation 17/node" = SubResource( 151 )
+"nodes/Animation 17/position" = Vector2( -200, 920 )
+"nodes/Animation 18/node" = SubResource( 152 )
+"nodes/Animation 18/position" = Vector2( -460, 980 )
+"nodes/Animation 19/node" = SubResource( 153 )
+"nodes/Animation 19/position" = Vector2( -200, 1020 )
 "nodes/Animation 2/node" = SubResource( 116 )
 "nodes/Animation 2/position" = Vector2( -200, 60 )
+"nodes/Animation 20/node" = SubResource( 154 )
+"nodes/Animation 20/position" = Vector2( -460, 1080 )
+"nodes/Animation 21/node" = SubResource( 155 )
+"nodes/Animation 21/position" = Vector2( -200, 1120 )
+"nodes/Animation 22/node" = SubResource( 156 )
+"nodes/Animation 22/position" = Vector2( -460, 1180 )
 "nodes/Animation 3/node" = SubResource( 137 )
 "nodes/Animation 3/position" = Vector2( -200, 180 )
 "nodes/Animation 4/node" = SubResource( 138 )
@@ -141,7 +190,7 @@ nodes/Animation/position = Vector2( -440, 120 )
 nodes/IDLE_PICK/node = SubResource( 118 )
 nodes/IDLE_PICK/position = Vector2( 340, 120 )
 nodes/output/position = Vector2( 620, 180 )
-node_connections = [ "IDLE_PICK", 0, "Animation 2", "IDLE_PICK", 1, "Animation", "IDLE_PICK", 2, "Animation 3", "IDLE_PICK", 3, "Animation 4", "IDLE_PICK", 4, "Animation 5", "IDLE_PICK", 5, "Animation 6", "IDLE_PICK", 6, "Animation 7", "IDLE_PICK", 7, "Animation 8", "IDLE_PICK", 8, "Animation 9", "IDLE_PICK", 9, "Animation 10", "IDLE_PICK", 10, "Animation 11", "IDLE_PICK", 11, "Animation 12", "IDLE_PICK", 12, "Animation 15", "IDLE_PICK", 13, "Animation 13", "IDLE_PICK", 14, "Animation 14", "output", 0, "IDLE_PICK" ]
+node_connections = [ "IDLE_PICK", 0, "Animation 2", "IDLE_PICK", 1, "Animation", "IDLE_PICK", 2, "Animation 3", "IDLE_PICK", 3, "Animation 4", "IDLE_PICK", 4, "Animation 5", "IDLE_PICK", 5, "Animation 6", "IDLE_PICK", 6, "Animation 7", "IDLE_PICK", 7, "Animation 8", "IDLE_PICK", 8, "Animation 9", "IDLE_PICK", 9, "Animation 10", "IDLE_PICK", 10, "Animation 11", "IDLE_PICK", 11, "Animation 12", "IDLE_PICK", 12, "Animation 15", "IDLE_PICK", 13, "Animation 13", "IDLE_PICK", 14, "Animation 14", "IDLE_PICK", 15, "Animation 16", "IDLE_PICK", 16, "Animation 17", "IDLE_PICK", 17, "Animation 18", "IDLE_PICK", 18, "Animation 19", "IDLE_PICK", 19, "Animation 20", "IDLE_PICK", 20, "Animation 21", "IDLE_PICK", 21, "Animation 22", "output", 0, "IDLE_PICK" ]
 
 [sub_resource type="AnimationNodeAnimation" id=104]
 animation = "Jogging-loop"
