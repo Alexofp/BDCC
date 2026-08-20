@@ -48,13 +48,16 @@ func doAction(_lustState: LustCombatState, _args):
 		text += "Your {pc.cock} is throbbing and leaking pre as you pleasure your other set of bits."
 		text += "\n\n"
 	
+	var theAnim:String = "LustRubAttack"
 	if(RNG.chance(50) && pc.getLust() >= 50):
 		text += "You feel really close, your drippy cunt squirts with your juices, soft inner walls clench around your fingers as you push yourself further."
 		text += "\n\n"
+		theAnim = "LustRubAttackFast"
 
 	return {
 		text = text,
 		lust = 5,
+		anim = theAnim,
 	}
 
 func getLustTopics():

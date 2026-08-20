@@ -61,7 +61,7 @@ func doAction(_lustState: LustCombatState, _args):
 	
 	return {
 		text = text.replace("<casualName>", itemState.casualName),
-		anim = "ClothingTopPullUp",
+		anim = "LustBreastsShakeOff",
 	}
 
 func getLustTopics():

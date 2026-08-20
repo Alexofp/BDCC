@@ -62,7 +62,7 @@ func doAction(_lustState: LustCombatState, _args):
 	
 	return {
 		text = text,
-		anim = "ClothingBottomPullDownFull",
+		anim = "LustButtShakeOff",
 	}
 
 func getLustTopics():

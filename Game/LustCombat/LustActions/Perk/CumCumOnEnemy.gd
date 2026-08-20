@@ -41,6 +41,7 @@ func doAction(_lustState: LustCombatState, _args):
 			enemy.addEffect(StatusEffect.NPCCoveredInCum, [3, "girlcum"])
 		enemy.addEffect(StatusEffect.Stunned, [1])
 	
+	var theAnim:String = "LustRubAttackFast"
 	var text = ""
 	if(pc.hasPenis()):
 		text += "You feel your climax taking over your body. But instead of just being still, you pounce at your opponent, knocking them off their feet and pinning to the floor. Then you use this opportunity to stroke yourself further over the edge!"
@@ -51,6 +52,7 @@ func doAction(_lustState: LustCombatState, _args):
 	
 		text += "Opponent’s confusion gives you enough time to get off them and calm down after your climax."
 		text += "\n\n"
+		theAnim = "LustStrokeAttackFast"
 	elif(pc.hasVagina()):
 		text += "You feel your climax taking over your body. But instead of just being still, you pounce at your opponent, knocking them off their feet and pinning to the floor. Then you use this opportunity to rub your pussy, forcing yourself over the edge."
 		text += "\n\n"
@@ -60,12 +62,13 @@ func doAction(_lustState: LustCombatState, _args):
 		
 		text += "Opponent’s confusion gives you enough time to get off them and calm down after your orgasm."
 		text += "\n\n"
+		theAnim = "LustRubAttackFast"
 
 	return {
 		text = text,
 		came = true,
 		#lostBattle = true,
-		anim = "LustCockTaunt",
+		anim = theAnim,
 	}
 
 func getLustTopics():

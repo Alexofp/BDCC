@@ -40,6 +40,7 @@ func doAction(_lustState: LustCombatState, _args):
 	return {
 		text = text,
 		came = true,
+		anim = "RemoveAllRestraints",
 	}
 
 func getLustTopics():

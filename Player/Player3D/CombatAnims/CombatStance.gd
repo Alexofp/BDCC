@@ -72,6 +72,12 @@ const STANCE_TO_WEAPONS:Dictionary = { # [fists, left_hand_weapon, right_hand_we
 	STANCE_UNIQUE_SHIV: [true, "", "res://Inventory/UnriggedModels/Shiv/Shiv.tscn"],
 	STANCE_UNIQUE_SYRINGE: [true, "", "res://Inventory/UnriggedModels/Syringe/Syringe.tscn"],
 }
+const STANCE_TO_HARD:Dictionary = {
+	STANCE_LUSTACT_PENIS: true,
+	STANCE_LUSTACT_PENISVAGINA: true,
+	STANCE_LUSTACT_PENISBREASTS: true,
+	STANCE_LUSTACT_PENISBUTT: true,
+}
 
 const ATTACK_STANCE_PHYSICAL := 0
 const ATTACK_STANCE_LUST := 1
@@ -206,4 +212,8 @@ static func getStanceBasedOnLustActivities(_act:Array) -> int:
 		if(_hasButt):
 			return STANCE_LUSTACT_BREASTSBUTT
 		return STANCE_LUSTACT_BREASTS
+	
+	if(_hasButt):
+		return STANCE_LUSTACT_BUTT
+	
 	return -1

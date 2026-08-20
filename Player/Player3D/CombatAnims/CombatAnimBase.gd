@@ -19,6 +19,7 @@ var hitDelayKnockedDown:float = -1.0
 var hitReaction:int = REACTION_HURT
 
 var fists:bool = false
+var hard:bool = false
 var weaponLeft:String = ""
 var weaponRight:String = ""
 

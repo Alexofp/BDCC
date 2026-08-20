@@ -90,7 +90,7 @@ func processQueue(_dt:float):
 		if(isAnyoneBusy()):
 			return
 	
-	elif(theType == QUEUE_ANIMRAW): # Support for fists/weapons would be nice
+	elif(theType == QUEUE_ANIMRAW):
 		var theAttackAnim:String = theEntry[2]
 		var theAttackerID:int = theEntry[1]
 		var theCustomWeapon:String = theEntry[4]
@@ -108,9 +108,9 @@ func processQueue(_dt:float):
 				else:
 					theWeaponRight = theCustomWeapon
 			if(!_isKnockedDown):
-				theChar.addAnim(theAttack.animName, [theFists, theWeaponLeft, theWeaponRight])
+				theChar.addAnim(theAttack.animName, [theFists, theWeaponLeft, theWeaponRight, theAttack.hard])
 			else:
-				theChar.addAnim(theAttack.animNameKnockedDown, [theFists, theWeaponLeft, theWeaponRight])
+				theChar.addAnim(theAttack.animNameKnockedDown, [theFists, theWeaponLeft, theWeaponRight, theAttack.hard])
 		else: # Just a normal anim
 			var theCustomWeaponRight:String = theEntry[5]
 			var theFists:bool = theEntry[6]
@@ -165,9 +165,9 @@ func processQueue(_dt:float):
 				theWeaponRight = theCustomWeapon
 		
 		if(!_isKnockedDown):
-			theChar.addAnim(theAttack.animName, [theFists, theWeaponLeft, theWeaponRight])
+			theChar.addAnim(theAttack.animName, [theFists, theWeaponLeft, theWeaponRight, theAttack.hard])
 		else:
-			theChar.addAnim(theAttack.animNameKnockedDown, [theFists, theWeaponLeft, theWeaponRight])
+			theChar.addAnim(theAttack.animNameKnockedDown, [theFists, theWeaponLeft, theWeaponRight, theAttack.hard])
 		
 		if(_isKnockedDown && !_shouldBeKnockedDown):
 			theChar.addAnim("KnockedDownToStanding")
@@ -249,5 +249,6 @@ func onCharPlayAnim(_id:int, _anim:String, _args:Array):
 	var _fists:bool = _args[0] if _argsLen > 0 else false
 	var _leftWeapon:String = _args[1] if _argsLen > 1 else ""
 	var _rightWeapon:String = _args[2] if _argsLen > 2 else ""
+	var _hard:bool = _args[3] if _argsLen > 3 else false
 	
-	emit_signal("playAnim", _id, _anim, _fists, _leftWeapon, _rightWeapon)
+	emit_signal("playAnim", _id, _anim, _fists, _leftWeapon, _rightWeapon, _hard)

@@ -192,6 +192,7 @@ func doAdd():
 		theAnim.id = "LustCockTaunt"
 		theAnim.animName = "LustCockTaunt"
 		theAnim.hitDelay = frames(18 -HD)
+		theAnim.hard = true
 		anims[theAnim.id] = theAnim
 	if(true):
 		var theAnim := CombatAnimBase.new()
@@ -205,6 +206,9 @@ func doAdd():
 		theAnim.animName = "UseSyringe"
 		theAnim.hitDelay = frames(11 -HD)
 		theAnim.hitReaction = CombatAnimBase.REACTION_NOTHING
+		theAnim.fists = true
+		theAnim.weaponRight = "res://Inventory/UnriggedModels/Syringe/Syringe.tscn"
+		theAnim.weaponOverrideLeft = false
 		anims[theAnim.id] = theAnim
 	if(true):
 		var theAnim := CombatAnimBase.new()
@@ -308,4 +312,77 @@ func doAdd():
 		theAnim.animNameKnockedDown = "KnockedDownShove" # No unique knocked down version
 		theAnim.hitDelayKnockedDown = frames(7 -HDD)
 		theAnim.allowStateReuse = true
+		anims[theAnim.id] = theAnim
+	if(true):
+		var theAnim := CombatAnimBase.new()
+		theAnim.id = "LustBreastsSelfFeed"
+		theAnim.animName = "LustBreastsSelfFeed"
+		theAnim.hitDelay = frames(11 -HD)
+		theAnim.hitReaction = CombatAnimBase.REACTION_NOTHING
+		anims[theAnim.id] = theAnim
+	if(true):
+		var theAnim := CombatAnimBase.new()
+		theAnim.id = "LustStrokeAttack"
+		theAnim.animName = "LustStrokeAttack"
+		theAnim.hitDelay = frames(50 -HD)
+		theAnim.hard = true
+		anims[theAnim.id] = theAnim
+	if(true):
+		var theAnim := CombatAnimBase.new()
+		theAnim.id = "LustStrokeAttackFast"
+		theAnim.animName = "LustStrokeAttackFast"
+		theAnim.hitDelay = frames(63 -HD)
+		theAnim.hard = true
+		anims[theAnim.id] = theAnim
+	if(true):
+		var theAnim := CombatAnimBase.new()
+		theAnim.id = "LustButtRub"
+		theAnim.animName = "LustButtRub"
+		theAnim.hitDelay = frames(45 -HD)
+		anims[theAnim.id] = theAnim
+	if(true):
+		var theAnim := CombatAnimBase.new()
+		theAnim.id = "LustButtWiggle"
+		theAnim.animName = "LustButtWiggle"
+		theAnim.hitDelay = frames(36 -HD)
+		anims[theAnim.id] = theAnim
+	if(true):
+		var theAnim := CombatAnimBase.new()
+		theAnim.id = "LustButtShakeOff"
+		theAnim.animName = "LustButtShakeOff"
+		theAnim.hitDelay = frames(36 -HD)
+		#theAnim.hitReaction = CombatAnimBase.REACTION_NOTHING
+		anims[theAnim.id] = theAnim
+	if(true):
+		var theAnim := CombatAnimBase.new()
+		theAnim.id = "LustOrgasmAttack"
+		theAnim.animName = "LustOrgasmAttack"
+		theAnim.hitDelay = frames(10 -HD)
+		theAnim.hard = true
+		#theAnim.hitReaction = CombatAnimBase.REACTION_NOTHING
+		anims[theAnim.id] = theAnim
+	if(true):
+		var theAnim := CombatAnimBase.new()
+		theAnim.id = "LustBreastsShakeOff"
+		theAnim.animName = "LustBreastsShakeOff"
+		theAnim.hitDelay = frames(29 -HD)
+		#theAnim.hitReaction = CombatAnimBase.REACTION_NOTHING
+		anims[theAnim.id] = theAnim
+	if(true):
+		var theAnim := CombatAnimBase.new()
+		theAnim.id = "LustRubAttack"
+		theAnim.animName = "LustRubAttack"
+		theAnim.hitDelay = frames(52 -HD)
+		anims[theAnim.id] = theAnim
+	if(true):
+		var theAnim := CombatAnimBase.new()
+		theAnim.id = "LustRubAttackFast"
+		theAnim.animName = "LustRubAttackFast"
+		theAnim.hitDelay = frames(79 -HD)
+		anims[theAnim.id] = theAnim
+	if(true):
+		var theAnim := CombatAnimBase.new()
+		theAnim.id = "LustBreastsSqueeze"
+		theAnim.animName = "LustBreastsSqueeze"
+		theAnim.hitDelay = frames(60 -HD)
 		anims[theAnim.id] = theAnim

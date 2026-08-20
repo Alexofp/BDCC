@@ -24,22 +24,30 @@ func updateDollIdleWeapons(_id:int, _doReprepare:bool = false):
 	var theCombatDollInstance = combat_doll_instance if (_id == 0) else combat_doll_instance_2
 	var _theDoll = theCombatDollInstance.getDoll()
 	var theStance:int = theCombatDollInstance.getCombatStance()
-	if(!CombatStance.STANCE_TO_WEAPONS.has(theStance)):
+	
+	var hasStanceToWep:bool = CombatStance.STANCE_TO_WEAPONS.has(theStance)
+	var hasStanceHard:bool = CombatStance.STANCE_TO_HARD.has(theStance)
+	if(!hasStanceToWep && !hasStanceHard):
 		return
 	if(_doReprepare):
 		theCombatDollInstance.reprepareCharacter()
-	var theWep:Array = CombatStance.STANCE_TO_WEAPONS[theStance]
-	var _fists:bool = theWep[0]
-	var _weaponLeft:String = theWep[1]
-	var _weaponRight:String = theWep[2]
-	if(_fists):
-		_theDoll.setTemporaryState("hands", "fists")
-	if(!_weaponLeft.empty()):
-		_theDoll.attachTemporaryUnriggedPart("hand.L", _weaponLeft)
-	if(!_weaponRight.empty()):
-		_theDoll.attachTemporaryUnriggedPart("hand.R", _weaponRight)
+	
+	if(hasStanceToWep):
+		var theWep:Array = CombatStance.STANCE_TO_WEAPONS[theStance]
+		var _fists:bool = theWep[0]
+		var _weaponLeft:String = theWep[1]
+		var _weaponRight:String = theWep[2]
+		if(_fists):
+			_theDoll.setTemporaryState("hands", "fists")
+		if(!_weaponLeft.empty()):
+			_theDoll.attachTemporaryUnriggedPart("hand.L", _weaponLeft)
+		if(!_weaponRight.empty()):
+			_theDoll.attachTemporaryUnriggedPart("hand.R", _weaponRight)
+	
+	if(hasStanceHard):
+		_theDoll.setCockTemporaryHard()
 
-func onPlayAnim(_id:int, _anim:String, _fists:bool, _weaponLeft:String, _weaponRight:String):
+func onPlayAnim(_id:int, _anim:String, _fists:bool, _weaponLeft:String, _weaponRight:String, _hard:bool):
 	var theCombatDollInstance = combat_doll_instance if (_id == 0) else combat_doll_instance_2
 	var _theDoll = theCombatDollInstance.getDoll()
 	
@@ -51,6 +59,8 @@ func onPlayAnim(_id:int, _anim:String, _fists:bool, _weaponLeft:String, _weaponR
 		_theDoll.attachTemporaryUnriggedPart("hand.L", _weaponLeft)
 	if(!_weaponRight.empty()):
 		_theDoll.attachTemporaryUnriggedPart("hand.R", _weaponRight)
+	if(_hard):
+		_theDoll.setCockTemporaryHard()
 		
 
 func updateSubAnims():
