@@ -220,8 +220,11 @@ func addPartUnlessSame(slot, partPath):
 	if(parts.has(slot)):
 		var oldpart: Spatial = parts[slot]
 		if(oldpart.filename == partPath):
-			if(callbackObj != null && callbackObj.has_method("onDollUpdate")):
-				callbackObj.onDollUpdate(self, slot, oldpart)
+			if(callbackObj != null):
+				if(callbackObj.has_method("onDollUpdate")):
+					callbackObj.onDollUpdate(self, slot, oldpart)
+				if(oldpart.has_method("updateFromItem")):
+					oldpart.updateFromItem(callbackObj)
 			return
 	addPart(slot, partPath, callbackObj)
 		
@@ -256,8 +259,11 @@ func addPartObject(slot, part: Spatial, callbackObj = null):
 	for stateID in state:
 		part.setState(stateID, state[stateID])
 	
-	if(callbackObj != null && callbackObj.has_method("onDollUpdate")):
-		callbackObj.onDollUpdate(self, slot, part)
+	if(callbackObj != null):
+		if(callbackObj.has_method("onDollUpdate")):
+			callbackObj.onDollUpdate(self, slot, part)
+		if(part.has_method("updateFromItem")):
+			part.updateFromItem(callbackObj)
 	
 func removeDollAttachmentZone(attachZone):
 	attachZone.queue_free()

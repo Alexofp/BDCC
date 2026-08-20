@@ -117,3 +117,23 @@ func setColorRecursive(newColor, theNode):
 			mesh.set_surface_material(0, newMat)
 			
 		setColorRecursive(newColor, mesh)
+
+# Could also use updateFromBodypart?
+func updateFromItem(_item):
+	#print(_item)
+	pass
+
+func setMatTexture(_obj:MeshInstance, _texture:Texture):
+	var theMat:Material = _obj.get_active_material(0)
+	if(!theMat):
+		return
+	if(!theMat.resource_local_to_scene):
+		var theCopy:Material = theMat.duplicate()
+		_obj.set_surface_material(0, theCopy)
+		theMat = theCopy
+	
+	if(theMat is SpatialMaterial):
+		theMat.albedo_texture = _texture
+
+func setMatTexturePath(_obj:MeshInstance, _texturePath:String):
+	setMatTexture(_obj, load(_texturePath) if !_texturePath.empty() else null)

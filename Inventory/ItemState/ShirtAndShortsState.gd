@@ -100,6 +100,15 @@ func isHalfDamaged():
 func isSuperDamaged():
 	return superDamage# || clothesDamaged
 
+func getDamageState() -> int:
+	if(superDamage):
+		return 3
+	if(clothesDamaged):
+		return 2
+	if(halfDamage):
+		return 1
+	return 0
+
 func receiveDamage():
 	if(!halfDamage):
 		halfDamage = true

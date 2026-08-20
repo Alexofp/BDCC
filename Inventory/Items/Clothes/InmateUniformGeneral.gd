@@ -68,6 +68,12 @@ func generateItemState():
 func getRiggedParts(_character):
 	if(itemState.isRemoved()):
 		return null
+	
+	#if(true): # wip
+	#	return {
+	#		"clothing": "res://Inventory/RiggedModels/InmateUniform/InmateUniform.tscn",
+	#	}
+	
 	if(inmateType == InmateType.SexDeviant):
 		if(itemState.isSuperDamaged()):
 			return {
