@@ -123,15 +123,20 @@ func updateFromItem(_item):
 	#print(_item)
 	pass
 
-func setMatTexture(_obj:MeshInstance, _texture:Texture):
+func getMatUnique(_obj:MeshInstance) -> Material:
 	var theMat:Material = _obj.get_active_material(0)
 	if(!theMat):
-		return
+		return null
 	if(!theMat.resource_local_to_scene):
 		var theCopy:Material = theMat.duplicate()
 		_obj.set_surface_material(0, theCopy)
 		theMat = theCopy
-	
+	return theMat
+
+func setMatTexture(_obj:MeshInstance, _texture:Texture):
+	var theMat:Material = getMatUnique(_obj)
+	if(!theMat):
+		return
 	if(theMat is SpatialMaterial):
 		theMat.albedo_texture = _texture
 
