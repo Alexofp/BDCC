@@ -14,7 +14,6 @@ uniform vec4 color_b : hint_color = vec4(0.0, 0.0, 1.0, 1.0);
 
 uniform sampler2D texture_damage : hint_white;
 uniform float damage = 0.0;
-uniform float smoothness = 0.01;
 uniform vec4 damage_color : hint_color = vec4(0.0, 0.0, 0.0, 1.0);
 
 void vertex() {
@@ -22,35 +21,74 @@ void vertex() {
 }
 
 void fragment() {
-	vec2 base_uv = UV;
-	vec4 albedo_tex = texture(texture_albedo,base_uv);
-	
-	vec4 colormask_tex = texture(texture_colormask, base_uv);
+	vec4 albedo_tex = texture(texture_albedo, UV);
+	vec4 colormask_tex = texture(texture_colormask, UV);
 	vec3 colormask_color = color_r.rgb * colormask_tex.r + color_g.rgb * colormask_tex.g + color_b.rgb * colormask_tex.b;
 	
 	vec3 albedoColor = albedo.rgb * albedo_tex.rgb * colormask_color;
 	float alpha = albedo.a * albedo_tex.a;
+	vec4 damage_tex = texture(texture_damage, UV);
 	
-	vec4 damage_tex = texture(texture_damage, base_uv);
-	float amountAdj = -smoothness*0.5 + damage * (1.0 + smoothness*0.5);
+	float d = damage;
+	float s1 = 1.0 - step(d, 0.2);
+	float s2 = 1.0 - step(d, 0.45);
+	float s3 = 1.0 - step(d, 0.7);
+	float s4 = 1.0 - step(d, 0.95);
 	
-	float edge1 = amountAdj - smoothness*0.5;
-	float edge2 = amountAdj + smoothness*0.5;
-	float alpha_mask = smoothstep(edge1, edge2, damage_tex.r);
-	//float alpha_mask_2 = smoothstep(amountAdj, amountAdj+0.1, damage_tex.r);
-	//float damage_outline_mask = smoothstep(amountAdj-0.005, amountAdj, damage_tex.g);
-	float damage_factor = clamp(alpha_mask, 0.0, 1.0);
-	//float damage_factor_2 = clamp(alpha_mask_2, 0.0, 1.0);
+	float stage1 = s1 * (1.0 - s2);
+	float stage2 = s2 * (1.0 - s3);
+	float stage3 = s3 * (1.0 - s4);
+	float stage4 = s4;
 	
-	//if(damage >= (damage_tex.r-0.1)){
-	//	albedoColor = vec3(0.0, 0.0, 0.0);
-	//}
+	float alpha_mask = 1.0;
+	alpha_mask = mix(alpha_mask, damage_tex.r, stage1);
+	alpha_mask = mix(alpha_mask, damage_tex.g, stage2);
+	alpha_mask = mix(alpha_mask, damage_tex.b, stage3);
+	alpha_mask = mix(alpha_mask, 0.0, stage4);
 	
-	//damage_outline_mask = clamp(damage_outline_mask - alpha_mask_2, 0.0, 1.0)*alpha;
+	float mask_lt_025 = 1.0 - step(0.25, alpha_mask);
+	float mask_lt_055 = step(0.25, alpha_mask) * (1.0 - step(0.55, alpha_mask));
 	
-	
-	//albedoColor = mix(albedoColor, damage_color.rgb, damage_outline_mask);
+	float damage_factor = mask_lt_025;
+	albedoColor = mix(albedoColor, damage_color.rgb, mask_lt_055);
 	
 	ALBEDO = albedoColor;
-	ALPHA = alpha * (damage_factor);//max(alpha * (damage_factor), damage_outline_mask);
+	ALPHA = alpha * (1.0 - damage_factor);
 }
+//void fragment() {
+//	vec2 base_uv = UV;
+//	vec4 albedo_tex = texture(texture_albedo,base_uv);
+//
+//	vec4 colormask_tex = texture(texture_colormask, base_uv);
+//	vec3 colormask_color = color_r.rgb * colormask_tex.r + color_g.rgb * colormask_tex.g + color_b.rgb * colormask_tex.b;
+//
+//	vec3 albedoColor = albedo.rgb * albedo_tex.rgb * colormask_color;
+//	float alpha = albedo.a * albedo_tex.a;
+//
+//	vec4 damage_tex = texture(texture_damage, base_uv);
+//	float damage_factor = 0.0;
+//	float alpha_mask = 1.0;
+//
+//	if(damage > 0.95){
+//		alpha_mask = 0.0;
+//	}else
+//	if(damage > 0.70){
+//		alpha_mask = damage_tex.b;
+//	}else
+//	if(damage > 0.45){
+//		alpha_mask = damage_tex.g;
+//	}else
+//	if(damage > 0.20){
+//		alpha_mask = damage_tex.r;
+//	}
+//
+//	if(alpha_mask < 0.25){
+//		damage_factor = 1.0;
+//	}else
+//	if(alpha_mask < 0.55){
+//		albedoColor = damage_color.rgb;
+//	}
+//
+//	ALBEDO = albedoColor;
+//	ALPHA = alpha * (1.0-damage_factor);
+//}

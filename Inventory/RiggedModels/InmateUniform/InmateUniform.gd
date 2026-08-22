@@ -15,22 +15,12 @@ func setUniformColor(_col:Color):
 			continue
 		theMat.set_shader_param("color_r", _col)
 
-const BODY := 0
-const ARM := 1
-const LEG := 2
-
-# wip
-const SPRITES:Dictionary = {
-	InmateType.General: {
-		BODY: {
-			0: "res://Inventory/RiggedModels/InmateUniform/orangeUniform.png",
-			1: "res://Inventory/RiggedModels/InmateUniform/damaged/dam2OrangeBody.png",
-			2: "res://Inventory/RiggedModels/InmateUniform/damaged/damOrangeBody.png",
-			3: "res://Inventory/RiggedModels/InmateUniform/damaged/dam3OrangeBody.png",
-		},
-	},
-
-}
+func setDamageFloat(_obj:MeshInstance, _fl:float):
+	var theMat := getMatUnique(_obj)
+	if(!theMat):
+		return
+	if(theMat is ShaderMaterial):
+		theMat.set_shader_param("damage", _fl)
 
 func updateFromItem(_item):
 	var _inmateType:int = _item.inmateType # InmateType.General
@@ -46,4 +36,20 @@ func updateFromItem(_item):
 	else:
 		#setMatTexturePath(bodywidepng, "res://Inventory/RiggedModels/InmateUniform/lilacUniform.png")
 		setUniformColor(Color("AE00FF"))
-		
+	
+	if(_dam == 1):
+		for theMesh in [bodywidepng, bodywidepng_2, armpng, armpng_001, legup_deformable, legup_deformable_001, breasts_scalable_001]:
+			setDamageFloat(theMesh, 0.25)
+		setDamageFloat(breasts_scalable_001, 0.0)
+	elif(_dam == 2):
+		for theMesh in [bodywidepng, bodywidepng_2, armpng, armpng_001, legup_deformable, legup_deformable_001, breasts_scalable_001]:
+			setDamageFloat(theMesh, 0.5)
+	elif(_dam == 3):
+		for theMesh in [bodywidepng, bodywidepng_2, armpng, armpng_001, legup_deformable, legup_deformable_001, breasts_scalable_001]:
+			setDamageFloat(theMesh, 0.75)
+		setDamageFloat(breasts_scalable_001, 1.0)
+		setDamageFloat(legup_deformable, 1.0)
+	else:
+		for theMesh in [bodywidepng, bodywidepng_2, armpng, armpng_001, legup_deformable, legup_deformable_001, breasts_scalable_001]:
+			setDamageFloat(theMesh, 0.0)
+	

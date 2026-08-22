@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://Inventory/RiggedModels/InmateUniform/Textures/Shorts.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player3D/Parts/Part3D.tscn" type="PackedScene" id=2]
@@ -19,6 +19,9 @@
 [ext_resource path="res://Inventory/RiggedModels/InmateUniform/Textures/ArmColorMask.png" type="Texture" id=17]
 [ext_resource path="res://Inventory/RiggedModels/InmateUniform/Textures/LegColorMask.png" type="Texture" id=18]
 [ext_resource path="res://Inventory/RiggedModels/InmateUniform/Textures/ShirtShortsDamageMask.png" type="Texture" id=19]
+[ext_resource path="res://Inventory/RiggedModels/InmateUniform/Textures/InmateArmDamage.png" type="Texture" id=20]
+[ext_resource path="res://Inventory/RiggedModels/InmateUniform/Textures/InmateBreastDamage.png" type="Texture" id=21]
+[ext_resource path="res://Inventory/RiggedModels/InmateUniform/Textures/InmateLegDamage.png" type="Texture" id=22]
 
 [sub_resource type="SpatialMaterial" id=15]
 resource_name = "bodywide.png"
@@ -142,7 +145,6 @@ shader_param/color_r = Color( 1, 0.4, 0, 1 )
 shader_param/color_g = Color( 0.14902, 0.14902, 0.14902, 1 )
 shader_param/color_b = Color( 0, 0, 1, 1 )
 shader_param/damage = 0.0
-shader_param/smoothness = 0.01
 shader_param/damage_color = Color( 0, 0, 0, 1 )
 shader_param/texture_albedo = ExtResource( 14 )
 shader_param/texture_colormask = ExtResource( 15 )
@@ -159,10 +161,10 @@ shader_param/color_r = Color( 1, 0.4, 0, 1 )
 shader_param/color_g = Color( 0.14902, 0.14902, 0.14902, 1 )
 shader_param/color_b = Color( 0, 0, 1, 1 )
 shader_param/damage = 0.0
-shader_param/smoothness = 0.01
 shader_param/damage_color = Color( 0, 0, 0, 1 )
 shader_param/texture_albedo = ExtResource( 1 )
 shader_param/texture_colormask = ExtResource( 13 )
+shader_param/texture_damage = ExtResource( 19 )
 
 [sub_resource type="SpatialMaterial" id=1]
 resource_name = "arm.png.001"
@@ -269,10 +271,10 @@ shader_param/color_r = Color( 1, 0.4, 0, 1 )
 shader_param/color_g = Color( 0.14902, 0.14902, 0.14902, 1 )
 shader_param/color_b = Color( 0, 0, 1, 1 )
 shader_param/damage = 0.0
-shader_param/smoothness = 0.01
 shader_param/damage_color = Color( 0, 0, 0, 1 )
 shader_param/texture_albedo = ExtResource( 4 )
 shader_param/texture_colormask = ExtResource( 17 )
+shader_param/texture_damage = ExtResource( 20 )
 
 [sub_resource type="ArrayMesh" id=22]
 resource_name = "DollSkeleton_armpng002"
@@ -300,10 +302,10 @@ shader_param/color_r = Color( 1, 0.4, 0, 1 )
 shader_param/color_g = Color( 0.14902, 0.14902, 0.14902, 1 )
 shader_param/color_b = Color( 0, 0, 1, 1 )
 shader_param/damage = 0.0
-shader_param/smoothness = 0.01
 shader_param/damage_color = Color( 0, 0, 0, 1 )
 shader_param/texture_albedo = ExtResource( 4 )
 shader_param/texture_colormask = ExtResource( 17 )
+shader_param/texture_damage = ExtResource( 20 )
 
 [sub_resource type="SpatialMaterial" id=42]
 resource_name = "legup.png.001"
@@ -425,10 +427,10 @@ shader_param/color_r = Color( 1, 0.4, 0, 1 )
 shader_param/color_g = Color( 0.14902, 0.14902, 0.14902, 1 )
 shader_param/color_b = Color( 0, 0, 1, 1 )
 shader_param/damage = 0.0
-shader_param/smoothness = 0.01
 shader_param/damage_color = Color( 0, 0, 0, 1 )
 shader_param/texture_albedo = ExtResource( 6 )
 shader_param/texture_colormask = ExtResource( 18 )
+shader_param/texture_damage = ExtResource( 22 )
 
 [sub_resource type="ArrayMesh" id=46]
 resource_name = "DollSkeleton_leguppng004"
@@ -456,10 +458,10 @@ shader_param/color_r = Color( 1, 0.4, 0, 1 )
 shader_param/color_g = Color( 0.14902, 0.14902, 0.14902, 1 )
 shader_param/color_b = Color( 0, 0, 1, 1 )
 shader_param/damage = 0.0
-shader_param/smoothness = 0.01
 shader_param/damage_color = Color( 0, 0, 0, 1 )
 shader_param/texture_albedo = ExtResource( 6 )
 shader_param/texture_colormask = ExtResource( 18 )
+shader_param/texture_damage = ExtResource( 22 )
 
 [sub_resource type="SpatialMaterial" id=47]
 resource_name = "breasts4.png"
@@ -584,10 +586,10 @@ shader_param/color_r = Color( 1, 0.4, 0, 1 )
 shader_param/color_g = Color( 0.14902, 0.14902, 0.14902, 1 )
 shader_param/color_b = Color( 0, 0, 1, 1 )
 shader_param/damage = 0.0
-shader_param/smoothness = 0.01
 shader_param/damage_color = Color( 0, 0, 0, 1 )
 shader_param/texture_albedo = ExtResource( 16 )
 shader_param/texture_colormask = ExtResource( 8 )
+shader_param/texture_damage = ExtResource( 21 )
 
 [node name="InmateUniform" instance=ExtResource( 2 )]
 script = ExtResource( 11 )
