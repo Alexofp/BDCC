@@ -22,10 +22,6 @@ func getTags():
 func getRiggedParts(_character):
 	if(itemState.isRemoved()):
 		return null
-	if(itemState.isDamaged()):
-		return {
-			"panties": "res://Inventory/RiggedModels/Panties/PantiesDamaged.tscn",
-		}
 	return {
 		"panties": "res://Inventory/RiggedModels/Panties/PantiesStripped.tscn",
 	}

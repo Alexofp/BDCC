@@ -50,10 +50,6 @@ func generateItemState():
 func getRiggedParts(_character):
 	if(itemState.isRemoved()):
 		return null
-	if(itemState.isDamaged()):
-		return {
-			"panties": "res://Inventory/RiggedModels/Briefs/BriefsDamaged.tscn",
-		}
 	return {
 		"panties": "res://Inventory/RiggedModels/Briefs/Briefs.tscn",
 	}

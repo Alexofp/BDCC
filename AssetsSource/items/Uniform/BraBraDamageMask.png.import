@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/shirt.png-271d722d244c68970b79635a3dafd454.stex"
+path="res://.import/BraBraDamageMask.png-44b36c82879bf5379406b5b29dfacd9f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/Items/equipment/shirt.png"
-dest_files=[ "res://.import/shirt.png-271d722d244c68970b79635a3dafd454.stex" ]
+source_file="res://AssetsSource/items/Uniform/BraBraDamageMask.png"
+dest_files=[ "res://.import/BraBraDamageMask.png-44b36c82879bf5379406b5b29dfacd9f.stex" ]
 
 [params]
 
@@ -21,7 +21,7 @@ compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
 flags/filter=true
-flags/mipmaps=true
+flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=0
 process/fix_alpha_border=true

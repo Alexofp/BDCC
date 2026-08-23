@@ -1,12 +1,16 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Inventory/RiggedModels/Undershirt/body.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player3D/Parts/Part3D.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Inventory/RiggedModels/Undershirt/Undershirt.gd" type="Script" id=3]
 [ext_resource path="res://Inventory/RiggedModels/Undershirt/breasts.png" type="Texture" id=4]
+[ext_resource path="res://Player/Player3D/Skins/ClothingShader.gdshader" type="Shader" id=5]
+[ext_resource path="res://Inventory/RiggedModels/Undershirt/BodyDamageMask.png" type="Texture" id=6]
 [ext_resource path="res://Player/Player3D/Parts/Breasts/BreastsScaleable/breastsScaleable.png" type="Texture" id=7]
+[ext_resource path="res://AssetsSource/items/Uniform/red.png" type="Texture" id=8]
 [ext_resource path="res://Player/Player3D/Parts/PartStatePicker.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Player/Player3D/Parts/PartState.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Inventory/RiggedModels/Undershirt/BreastsDamageMask.png" type="Texture" id=11]
 
 [sub_resource type="SpatialMaterial" id=15]
 resource_name = "bodywide.png"
@@ -119,15 +123,19 @@ bind/27/name = "DeformButt"
 bind/27/bone = -1
 bind/27/pose = Transform( 0.31345, 0.949604, -8.4791e-07, 0.949605, -0.31345, -5.59528e-08, -3.30048e-07, -7.49881e-07, -1, -4.0694, 1.33643, 3.13489e-06 )
 
-[sub_resource type="SpatialMaterial" id=52]
-resource_name = "bodywide.png"
-flags_transparent = true
-flags_unshaded = true
-vertex_color_use_as_albedo = true
-params_cull_mode = 2
-params_depth_draw_mode = 3
-albedo_color = Color( 0.192157, 0.192157, 0.192157, 1 )
-albedo_texture = ExtResource( 1 )
+[sub_resource type="ShaderMaterial" id=50]
+shader = ExtResource( 5 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/uv1_scale = Vector2( 1, 1 )
+shader_param/uv1_offset = Vector2( 0, 0 )
+shader_param/color_r = Color( 0.192157, 0.192157, 0.192157, 1 )
+shader_param/color_g = Color( 0, 1, 0, 1 )
+shader_param/color_b = Color( 0, 0, 1, 1 )
+shader_param/damage = 0.0
+shader_param/damage_color = Color( 0, 0, 0, 1 )
+shader_param/texture_albedo = ExtResource( 1 )
+shader_param/texture_colormask = ExtResource( 8 )
+shader_param/texture_damage = ExtResource( 6 )
 
 [sub_resource type="SpatialMaterial" id=47]
 resource_name = "breasts4.png"
@@ -241,15 +249,19 @@ bind/27/name = "DeformBelly"
 bind/27/bone = -1
 bind/27/pose = Transform( 0.127554, -0.991832, 5.86852e-07, -0.991832, -0.127554, -2.3368e-08, 8.68952e-08, -5.41319e-07, -1, 4.73784, 0.229201, 2.55004e-06 )
 
-[sub_resource type="SpatialMaterial" id=53]
-resource_name = "breasts4.png"
-flags_transparent = true
-flags_unshaded = true
-vertex_color_use_as_albedo = true
-params_cull_mode = 2
-params_depth_draw_mode = 3
-albedo_color = Color( 0.192157, 0.192157, 0.192157, 1 )
-albedo_texture = ExtResource( 4 )
+[sub_resource type="ShaderMaterial" id=51]
+shader = ExtResource( 5 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/uv1_scale = Vector2( 1, 1 )
+shader_param/uv1_offset = Vector2( 0, 0 )
+shader_param/color_r = Color( 0.192157, 0.192157, 0.192157, 1 )
+shader_param/color_g = Color( 0, 1, 0, 1 )
+shader_param/color_b = Color( 0, 0, 1, 1 )
+shader_param/damage = 0.0
+shader_param/damage_color = Color( 0, 0, 0, 1 )
+shader_param/texture_albedo = ExtResource( 4 )
+shader_param/texture_colormask = ExtResource( 8 )
+shader_param/texture_damage = ExtResource( 11 )
 
 [node name="Undershirt" instance=ExtResource( 2 )]
 script = ExtResource( 3 )
@@ -258,7 +270,7 @@ script = ExtResource( 3 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.03 )
 mesh = SubResource( 16 )
 skin = SubResource( 17 )
-material/0 = SubResource( 52 )
+material/0 = SubResource( 50 )
 
 [node name="PartStatePicker" parent="." index="1" instance=ExtResource( 9 )]
 state = "breasts"
@@ -271,4 +283,4 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.03 )
 mesh = SubResource( 48 )
 skin = SubResource( 49 )
 skeleton = NodePath("../../..")
-material/0 = SubResource( 53 )
+material/0 = SubResource( 51 )

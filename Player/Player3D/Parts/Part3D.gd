@@ -111,10 +111,11 @@ func setColor(newColor):
 func setColorRecursive(newColor, theNode):
 	for mesh in theNode.get_children():
 		if(mesh is MeshInstance && !(mesh is MeshInstanceWithPattern)):
-			var theMat1:SpatialMaterial = mesh.get_surface_material(0)
-			var newMat:SpatialMaterial = theMat1.duplicate()
-			newMat.albedo_color = newColor
-			mesh.set_surface_material(0, newMat)
+			var theMat1 = mesh.get_active_material(0)
+			if(theMat1 is SpatialMaterial):
+				var newMat:SpatialMaterial = theMat1.duplicate()
+				newMat.albedo_color = newColor
+				mesh.set_surface_material(0, newMat)
 			
 		setColorRecursive(newColor, mesh)
 
@@ -132,6 +133,17 @@ func getMatUnique(_obj:MeshInstance) -> Material:
 		_obj.set_surface_material(0, theCopy)
 		theMat = theCopy
 	return theMat
+
+func getShaderMatUnique(_obj:MeshInstance) -> ShaderMaterial:
+	var theMat:Material = _obj.get_active_material(0)
+	if(!theMat || !(theMat is ShaderMaterial)):
+		return null
+	if(!theMat.resource_local_to_scene):
+		var theCopy:Material = theMat.duplicate()
+		_obj.set_surface_material(0, theCopy)
+		theMat = theCopy
+	var theFinalMat:ShaderMaterial = theMat
+	return theFinalMat
 
 func setMatTexture(_obj:MeshInstance, _texture:Texture):
 	var theMat:Material = getMatUnique(_obj)

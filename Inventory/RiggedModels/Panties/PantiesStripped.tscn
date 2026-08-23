@@ -1,8 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Inventory/RiggedModels/Panties/panties_stripped.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player3D/Parts/Part3D.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Inventory/RiggedModels/Panties/Panties.gd" type="Script" id=3]
+[ext_resource path="res://Player/Player3D/Skins/ClothingShader.gdshader" type="Shader" id=4]
+[ext_resource path="res://AssetsSource/items/Uniform/red.png" type="Texture" id=5]
+[ext_resource path="res://Inventory/RiggedModels/Panties/PantiesDamageMask.png" type="Texture" id=6]
 
 [sub_resource type="SpatialMaterial" id=15]
 resource_name = "bodywide.png"
@@ -115,15 +118,19 @@ bind/27/name = "DeformButt"
 bind/27/bone = -1
 bind/27/pose = Transform( 0.31345, 0.949604, -8.4791e-07, 0.949605, -0.31345, -5.59528e-08, -3.30048e-07, -7.49881e-07, -1, -4.0694, 1.33643, 3.13489e-06 )
 
-[sub_resource type="SpatialMaterial" id=18]
-resource_name = "bodywide.png"
-flags_transparent = true
-flags_unshaded = true
-vertex_color_use_as_albedo = true
-params_cull_mode = 2
-params_depth_draw_mode = 3
-albedo_color = Color( 0.192157, 0.192157, 0.192157, 1 )
-albedo_texture = ExtResource( 1 )
+[sub_resource type="ShaderMaterial" id=18]
+shader = ExtResource( 4 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/uv1_scale = Vector2( 1, 1 )
+shader_param/uv1_offset = Vector2( 0, 0 )
+shader_param/color_r = Color( 0.192157, 0.192157, 0.192157, 1 )
+shader_param/color_g = Color( 0, 1, 0, 1 )
+shader_param/color_b = Color( 0, 0, 1, 1 )
+shader_param/damage = 0.0
+shader_param/damage_color = Color( 0, 0, 0, 1 )
+shader_param/texture_albedo = ExtResource( 1 )
+shader_param/texture_colormask = ExtResource( 5 )
+shader_param/texture_damage = ExtResource( 6 )
 
 [node name="Panties" instance=ExtResource( 2 )]
 script = ExtResource( 3 )

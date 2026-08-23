@@ -2,6 +2,7 @@ extends ItemBase
 
 func _init():
 	id = "CasualClothes"
+	clothesColor = Color("22253e")
 
 func getVisibleName():
 	return "Casual clothes"
