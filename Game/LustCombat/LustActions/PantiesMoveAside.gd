@@ -29,7 +29,7 @@ func doAction(_lustState: LustCombatState, _args):
 	var _item:ItemBase = getItem(_lustState, _args)
 	
 	var itemState: PantiesState = _args["itemState"]
-	itemState.shiftPantiesAside()
+	itemState.shiftPantiesAside(false)
 	
 	var pc:Player = _lustState.getCharacter()
 	

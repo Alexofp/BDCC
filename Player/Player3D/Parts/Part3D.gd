@@ -154,3 +154,13 @@ func setMatTexture(_obj:MeshInstance, _texture:Texture):
 
 func setMatTexturePath(_obj:MeshInstance, _texturePath:String):
 	setMatTexture(_obj, load(_texturePath) if !_texturePath.empty() else null)
+
+func setShaderMatTexture(_obj:MeshInstance, _texture:Texture, _field:String = "texture_albedo"):
+	var theMat:ShaderMaterial = getShaderMatUnique(_obj)
+	if(!theMat):
+		return
+	if(theMat is ShaderMaterial):
+		theMat.set_shader_param(_field, _texture)
+
+func setShaderMatTexturePath(_obj:MeshInstance, _texturePath:String, _field:String = "texture_albedo"):
+	setShaderMatTexture(_obj, load(_texturePath) if !_texturePath.empty() else null, _field)

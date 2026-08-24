@@ -30,9 +30,21 @@ func setDamageFloat(_obj:MeshInstance, _fl:float):
 		theMat.set_shader_param("damage", _fl)
 
 func updateFromItem(_item):
+	if(!(_item.itemState is ShirtAndShortsState)):
+		Log.printerr("Something is wrong, inmate uniform has wrong item state: "+str(_item.itemState))
+		return
 	#var _inmateType:int = _item.inmateType # InmateType.General
 	var _state:ShirtAndShortsState = _item.itemState
 	var _dam:int = _state.getDamageState() # 0, 1, 2, 3
+	
+	bodywidepng.visible = !_state.shirtOpened
+	#bodywidepng_3.visible = _state.shirtOpened
+	armpng.visible = bodywidepng.visible
+	armpng_001.visible = bodywidepng.visible
+	breasts_scalable_001.visible = bodywidepng.visible
+	bodywidepng_2.visible = !_state.shortsPulledDown
+	legup_deformable.visible = bodywidepng_2.visible
+	legup_deformable_001.visible = bodywidepng_2.visible
 	
 #	if(_inmateType == InmateType.General):
 #		setUniformColor(Color("ff6600"))

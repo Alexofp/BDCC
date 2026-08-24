@@ -47,7 +47,7 @@ func generateItemState():
 	itemState.canActuallyBeDamaged = true
 
 func getRiggedParts(_character):
-	if(itemState.isRemoved() || itemState.isBraPulledUp()):
+	if(itemState.isRemoved()):
 		return null
 	return {
 		"top": "res://Inventory/RiggedModels/Undershirt/Undershirt.tscn",

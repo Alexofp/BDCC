@@ -23,6 +23,7 @@ var chars:Dictionary = {}
 
 signal playAnim(_id, _anim, _args)
 signal queueCompleted(_id)
+signal updateAppearance(_id)
 
 func _init():
 	addChar(ID_PC)
@@ -33,7 +34,11 @@ func addChar(_id:int):
 	theChar.id = _id
 	theChar.connect("playAnim", self, "onCharPlayAnim")
 	theChar.connect("queueCompleted", self, "onCharQueueCompleted")
+	theChar.connect("updateAppearance", self, "onCharUpdateAppearance")
 	chars[_id] = theChar
+
+func onCharUpdateAppearance(_id:int):
+	emit_signal("updateAppearance", _id)
 
 func onCharQueueCompleted(_id:int):
 	emit_signal("queueCompleted", _id)
@@ -166,9 +171,13 @@ func processQueue(_dt:float):
 		
 		if(!_isKnockedDown):
 			theChar.addAnim(theAttack.animName, [theFists, theWeaponLeft, theWeaponRight, theAttack.hard])
+			if(theAttack.updateAttackerAppearanceOnHit):
+				theChar.updateAppearanceTimer = theAttack.hitDelay - 0.05
 		else:
 			theChar.addAnim(theAttack.animNameKnockedDown, [theFists, theWeaponLeft, theWeaponRight, theAttack.hard])
-		
+			if(theAttack.updateAttackerAppearanceOnHit):
+				theChar.updateAppearanceTimer = theAttack.hitDelayKnockedDown - 0.05
+				
 		if(_isKnockedDown && !_shouldBeKnockedDown):
 			theChar.addAnim("KnockedDownToStanding")
 		if(!_isKnockedDown && _shouldBeKnockedDown):

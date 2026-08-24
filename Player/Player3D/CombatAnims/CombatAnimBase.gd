@@ -17,6 +17,7 @@ var isLooped:bool = false
 var hitDelay:float = 0.3
 var hitDelayKnockedDown:float = -1.0
 var hitReaction:int = REACTION_HURT
+var updateAttackerAppearanceOnHit:bool = false
 
 var fists:bool = false
 var hard:bool = false

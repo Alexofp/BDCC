@@ -147,24 +147,28 @@ func doAdd():
 		theAnim.id = "ClothingBottomPullDown"
 		theAnim.animName = "ClothingBottomPullDown"
 		theAnim.hitDelay = frames(21 -HD)
+		theAnim.updateAttackerAppearanceOnHit = true
 		anims[theAnim.id] = theAnim
 	if(true):
 		var theAnim := CombatAnimBase.new()
 		theAnim.id = "ClothingBottomPullDownFull"
 		theAnim.animName = "ClothingBottomPullDownFull"
 		theAnim.hitDelay = frames(25 -HD)
+		theAnim.updateAttackerAppearanceOnHit = true
 		anims[theAnim.id] = theAnim
 	if(true):
 		var theAnim := CombatAnimBase.new()
 		theAnim.id = "ClothingTopOpen"
 		theAnim.animName = "ClothingTopOpen"
 		theAnim.hitDelay = frames(20 -HD)
+		theAnim.updateAttackerAppearanceOnHit = true
 		anims[theAnim.id] = theAnim
 	if(true):
 		var theAnim := CombatAnimBase.new()
 		theAnim.id = "ClothingTopPullUp"
 		theAnim.animName = "ClothingTopPullUp"
 		theAnim.hitDelay = frames(20 -HD)
+		theAnim.updateAttackerAppearanceOnHit = true
 		anims[theAnim.id] = theAnim
 	if(true):
 		var theAnim := CombatAnimBase.new()
@@ -351,6 +355,7 @@ func doAdd():
 		theAnim.id = "LustButtShakeOff"
 		theAnim.animName = "LustButtShakeOff"
 		theAnim.hitDelay = frames(36 -HD)
+		theAnim.updateAttackerAppearanceOnHit = true
 		#theAnim.hitReaction = CombatAnimBase.REACTION_NOTHING
 		anims[theAnim.id] = theAnim
 	if(true):
@@ -366,6 +371,7 @@ func doAdd():
 		theAnim.id = "LustBreastsShakeOff"
 		theAnim.animName = "LustBreastsShakeOff"
 		theAnim.hitDelay = frames(29 -HD)
+		theAnim.updateAttackerAppearanceOnHit = true
 		#theAnim.hitReaction = CombatAnimBase.REACTION_NOTHING
 		anims[theAnim.id] = theAnim
 	if(true):

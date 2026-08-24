@@ -11,8 +11,11 @@ func canBeRemoved() -> bool:
 	return true
 
 func remove():
-	removed = true
+	removeNoAppearanceUpdate()
 	updateWearerAppearance()
+
+func removeNoAppearanceUpdate():
+	removed = true
 
 func getItem():
 	if(item == null):

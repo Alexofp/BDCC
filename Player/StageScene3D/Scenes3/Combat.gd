@@ -10,6 +10,7 @@ func _init():
 func _ready():
 	animPlayer.connect("playAnim", self, "onPlayAnim")
 	animPlayer.connect("queueCompleted", self, "onQueueCompleted")
+	animPlayer.connect("updateAppearance", self, "onUpdateAppearance")
 	
 #	animationTree.anim_player = animationTree.get_path_to(doll.getAnimPlayerCombat())
 #	animationTree.active = true
@@ -17,17 +18,24 @@ func _ready():
 #	animationTree2.active = true
 	pass
 
+func onUpdateAppearance(_id:int):
+	if(_id == 0):
+		combat_doll_instance.updateAppearance()
+	if(_id == 1):
+		combat_doll_instance_2.updateAppearance()
+	#updateDollIdleWeapons(_id, true, true)
+	
 func onQueueCompleted(_id:int):
 	updateDollIdleWeapons(_id, true)
 
-func updateDollIdleWeapons(_id:int, _doReprepare:bool = false):
+func updateDollIdleWeapons(_id:int, _doReprepare:bool = false, _updateAnyway:bool = false):
 	var theCombatDollInstance = combat_doll_instance if (_id == 0) else combat_doll_instance_2
 	var _theDoll = theCombatDollInstance.getDoll()
 	var theStance:int = theCombatDollInstance.getCombatStance()
 	
 	var hasStanceToWep:bool = CombatStance.STANCE_TO_WEAPONS.has(theStance)
 	var hasStanceHard:bool = CombatStance.STANCE_TO_HARD.has(theStance)
-	if(!hasStanceToWep && !hasStanceHard):
+	if(!_updateAnyway && !hasStanceToWep && !hasStanceHard):
 		return
 	if(_doReprepare):
 		theCombatDollInstance.reprepareCharacter()

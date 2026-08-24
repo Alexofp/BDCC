@@ -11,8 +11,12 @@ func setColor(newColor):
 		theMat.set_shader_param("color_r", newColor)
 
 func updateFromItem(_item):
+	if(!(_item.itemState is BraState)):
+		return
 	var _state:BraState = _item.itemState
 	var _dam:bool = _state.clothesDamaged
+	breasts_scalable_001.visible = !_state.pulledUp
+	setShaderMatTexturePath(bodywidepng, "res://Inventory/RiggedModels/Bra/body.png" if !_state.pulledUp else "res://Inventory/RiggedModels/Bra/bodyOpen.png")
 	
 	for theMesh in [bodywidepng, breasts_scalable_001]:
 		var theMat:ShaderMaterial = getShaderMatUnique(theMesh)

@@ -1,11 +1,11 @@
 extends ItemState
 class_name BraState
 
-var pulledUp = false
-var casualName = "bra"
+var pulledUp:bool = false
+var casualName:String = "bra"
 
-var clothesDamaged = false
-var canActuallyBeDamaged = false
+var clothesDamaged:bool = false
+var canActuallyBeDamaged:bool = false
 
 func getCasualName():
 	return casualName
@@ -13,10 +13,11 @@ func getCasualName():
 func isBraPulledUp():
 	return pulledUp
 
-func pullBraUp():
+func pullBraUp(_updateAppearance:bool = true):
 	pulledUp = true
 	removed = false
-	updateWearerAppearance()
+	if(_updateAppearance):
+		updateWearerAppearance()
 
 func getActions():
 	return [

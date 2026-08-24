@@ -10,7 +10,7 @@ func shouldShow(_lustState: LustCombatState, _args):
 	if(pc.hasBlockedHands()):
 		return false
 	var itemState: PantiesState = _args["itemState"]
-	if(itemState.isRemoved()):
+	if(itemState.arePantiesPulledDown() || itemState.isRemoved()):
 		return false
 	return true
 
@@ -29,7 +29,7 @@ func doAction(_lustState: LustCombatState, _args):
 	var _item:ItemBase = getItem(_lustState, _args)
 	
 	var itemState: PantiesState = _args["itemState"]
-	itemState.remove()
+	itemState.pullPantiesDown(false)
 	
 	var pc:Player = _lustState.getCharacter()
 	
@@ -68,7 +68,7 @@ func doAction(_lustState: LustCombatState, _args):
 	
 	return {
 		text = text.replace("<casualName>", itemState.casualName),
-		anim = "ClothingBottomPullDown",
+		anim = "ClothingBottomPullDownFull",
 	}
 
 func getLustTopics():

@@ -12,8 +12,13 @@ func setColor(newColor):
 		theMat.set_shader_param("color_r", newColor)
 
 func updateFromItem(_item):
+	if(!(_item.itemState is PantiesState)):
+		return
 	var _state:PantiesState = _item.itemState
 	var _dam:bool = _state.clothesDamaged
+	bodywidepng.visible = !_state.pulledDown
+	legup_deformable.visible = bodywidepng.visible
+	legup_deformable_001.visible = bodywidepng.visible
 	
 	for theMesh in [bodywidepng, legup_deformable, legup_deformable_001]:
 		var theMat:ShaderMaterial = getShaderMatUnique(theMesh)

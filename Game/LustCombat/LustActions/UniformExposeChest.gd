@@ -32,7 +32,7 @@ func doAction(_lustState: LustCombatState, _args):
 	var _item:ItemBase = getItem(_lustState, _args)
 	
 	var itemState: ShirtAndShortsState = _args["itemState"]
-	itemState.openShirt()
+	itemState.openShirt(false)
 	
 	var pc:Player = _lustState.getCharacter()
 	

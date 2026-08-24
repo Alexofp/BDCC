@@ -29,7 +29,7 @@ func doAction(_lustState: LustCombatState, _args):
 	var _item:ItemBase = getItem(_lustState, _args)
 	
 	var itemState: BraState = _args["itemState"]
-	itemState.pullBraUp()
+	itemState.pullBraUp(false)
 	
 	var pc:Player = _lustState.getCharacter()
 	

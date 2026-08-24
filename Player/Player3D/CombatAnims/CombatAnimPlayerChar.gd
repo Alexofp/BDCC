@@ -3,6 +3,7 @@ class_name CombatAnimPlayerChar
 
 var id:int
 var knockedDown:bool = false # Is the Doll currently 'knocked down'
+var updateAppearanceTimer:float = 0.0
 
 var queue:Array = []
 
@@ -11,6 +12,7 @@ const DO_ANIM := 1
 
 signal playAnim(_id, _anim, _args)
 signal queueCompleted(_id)
+signal updateAppearance(_id)
 
 func addWait(_howLong:float):
 	queue.append([DO_WAIT, _howLong])
@@ -46,6 +48,10 @@ func processQueue(_dt:float):
 		
 func doProcess(_dt:float):
 	processQueue(_dt)
+	if(updateAppearanceTimer > 0.0):
+		updateAppearanceTimer -= _dt
+		if(updateAppearanceTimer <= 0.0):
+			emit_signal("updateAppearance", id)
 
 var theAnimTree:AnimationNodeStateMachine = preload("res://Player/StageScene3D/Scenes3/CombatAnimTree.tres")
 func getAnimLen(_anim:String) -> float:

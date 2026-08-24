@@ -19,6 +19,12 @@ func reprepareCharacter():
 		return
 	doll.prepareCharacter(savedChar)
 
+func updateAppearance():
+	if(savedChar is String):
+		var theChar = GlobalRegistry.getCharacter(savedChar)
+		if(theChar):
+			theChar.updateAppearance()
+
 func getDoll():
 	return doll
 

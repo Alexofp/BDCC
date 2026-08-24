@@ -1,44 +1,52 @@
 extends ItemState
 class_name PantiesState
 
-var shiftedAside = false
-var casualName = "panties"
-var canShiftAside = true
+var pulledDown:bool = false
+var casualName:String = "panties"
+var canShiftAside:bool = true
 
-var clothesDamaged = false
-var canActuallyBeDamaged = false
+var clothesDamaged:bool = false
+var canActuallyBeDamaged:bool = false
 
 func getCasualName():
 	return casualName
 
+# Left for compatibility
 func arePantiesShiftedAside():
-	return shiftedAside
+	return pulledDown
 
-func shiftPantiesAside():
-	shiftedAside = true
+func arePantiesPulledDown() -> bool:
+	return pulledDown
+
+func shiftPantiesAside(_updateAppearance:bool = true):
+	pullPantiesDown(_updateAppearance)
+	
+func pullPantiesDown(_updateAppearance:bool = true):
+	pulledDown = true
 	removed = false
-	updateWearerAppearance()
+	if(_updateAppearance):
+		updateWearerAppearance()
 
 func getActions():
-	if(canShiftAside):
-		return [
-			"PantiesMoveAside",
-			"PantiesShakeOff",
-		]
-	else:
-		return [
-			"PantiesShakeOff",
-			"PantiesPullDown",
-		]
+#	if(canShiftAside):
+#		return [
+#			#"PantiesMoveAside",
+#			"PantiesShakeOff",
+#		]
+#	else:
+	return [
+		"PantiesShakeOff",
+		"PantiesPullDown",
+	]
 
 func resetState():
 	.resetState()
-	shiftedAside = false
+	pulledDown = false
 
 func saveData():
 	var data = .saveData()
 	
-	data["shiftedAside"] = shiftedAside
+	data["pulledDown"] = pulledDown
 	data["removed"] = removed
 	data["casualName"] = casualName
 	data["canShiftAside"] = canShiftAside
@@ -48,14 +56,14 @@ func saveData():
 	
 func loadData(_data):
 	.loadData(_data)
-	shiftedAside = SAVE.loadVar(_data, "shiftedAside", false)
+	pulledDown = SAVE.loadVar(_data, "pulledDown", false)
 	removed = SAVE.loadVar(_data, "removed", false)
 	casualName = SAVE.loadVar(_data, "casualName", "panties")
 	canShiftAside = SAVE.loadVar(_data, "canShiftAside", true)
 	clothesDamaged = SAVE.loadVar(_data, "clothesDamaged", false)
 
 func coversBodyparts():
-	if(removed || shiftedAside || clothesDamaged):
+	if(removed || pulledDown || clothesDamaged):
 		return {}
 	
 	return {
@@ -66,10 +74,10 @@ func coversBodyparts():
 
 func getStateText():
 	var text = ""
-	if(shiftedAside):
-		text += casualName.capitalize()+" are shifted aside. "
+	if(pulledDown):
+		text += casualName.capitalize()+" are pulled down. "
 	if(removed):
-		text = casualName.capitalize()+" are pulled down. "
+		text = casualName.capitalize()+" are removed. "
 	return text
 
 func getHidesParts(_character):

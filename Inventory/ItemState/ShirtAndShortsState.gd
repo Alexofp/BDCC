@@ -1,12 +1,12 @@
 extends ItemState
 class_name ShirtAndShortsState
 
-var shortsPulledDown = false
-var shirtOpened = false
-var clothesDamaged = false
-var halfDamage = false
-var canActuallyBeDamaged = false
-var superDamage = false
+var shortsPulledDown:bool = false
+var shirtOpened:bool = false
+var clothesDamaged:bool = false
+var halfDamage:bool = false
+var canActuallyBeDamaged:bool = false
+var superDamage:bool = false
 
 func getCasualName():
 	return "uniform"
@@ -14,16 +14,18 @@ func getCasualName():
 func areShortsPulledDown():
 	return shortsPulledDown
 
-func pullDownShorts():
+func pullDownShorts(_updateAppearance:bool = true):
 	shortsPulledDown = true
-	updateWearerAppearance()
+	if(_updateAppearance):
+		updateWearerAppearance()
 
 func isShirtOpened():
 	return shirtOpened
 
-func openShirt():
+func openShirt(_updateAppearance:bool = true):
 	shirtOpened = true
-	updateWearerAppearance()
+	if(_updateAppearance):
+		updateWearerAppearance()
 
 func getActions():
 	return [
