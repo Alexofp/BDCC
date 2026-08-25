@@ -172,6 +172,20 @@ func doAdd():
 		anims[theAnim.id] = theAnim
 	if(true):
 		var theAnim := CombatAnimBase.new()
+		theAnim.id = "ClothingFullOpen"
+		theAnim.animName = "ClothingFullOpen"
+		theAnim.hitDelay = frames(20 -HD)
+		theAnim.updateAttackerAppearanceOnHit = true
+		anims[theAnim.id] = theAnim
+	if(true):
+		var theAnim := CombatAnimBase.new()
+		theAnim.id = "ClothingFullOpenAlt"
+		theAnim.animName = "ClothingFullOpenAlt"
+		theAnim.hitDelay = frames(40 -HD)
+		theAnim.updateAttackerAppearanceOnHit = true
+		anims[theAnim.id] = theAnim
+	if(true):
+		var theAnim := CombatAnimBase.new()
 		theAnim.id = "DodgePrepare"
 		theAnim.animName = "DodgePrepare"
 		theAnim.hitDelay = frames(10 -HD)

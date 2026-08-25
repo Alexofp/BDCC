@@ -65,6 +65,32 @@ func generateItemState():
 	itemState = ShirtAndShortsState.new()
 	itemState.canActuallyBeDamaged = true # Is hack because there are many clothes that use this state already and don't support damaging..
 
+func useInCombat(_attacker, _receiver):
+	var text := "You toggle!"
+	
+	if(itemState is ShirtAndShortsState):
+		itemState.noShirt = !itemState.noShirt
+		if(itemState.noShirt):
+			text = "You take the shirt off!"
+		else:
+			text = "You put the shirt on!"
+	
+	if(isWornByWearer()):
+		updateWearerAppearance()
+	
+	return text
+
+func getPossibleActions():
+	if(!isWornByWearer()):
+		return []
+	return [
+		{
+			"name": "Toggle shirt",
+			"scene": "UseItemLikeInCombatScene",
+			"description": "Choose if you want to wear the shirt too or just the shorts",
+		},
+	]
+
 func getRiggedParts(_character):
 	if(itemState.isRemoved()):
 		return null

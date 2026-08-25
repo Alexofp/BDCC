@@ -7,6 +7,7 @@ var clothesDamaged:bool = false
 var halfDamage:bool = false
 var canActuallyBeDamaged:bool = false
 var superDamage:bool = false
+var noShirt:bool = false
 
 func getCasualName():
 	return "uniform"
@@ -20,9 +21,14 @@ func pullDownShorts(_updateAppearance:bool = true):
 		updateWearerAppearance()
 
 func isShirtOpened():
-	return shirtOpened
+	return shirtOpened || noShirt
+
+func shouldHideShirt() -> bool:
+	return noShirt
 
 func openShirt(_updateAppearance:bool = true):
+	if(noShirt):
+		return
 	shirtOpened = true
 	if(_updateAppearance):
 		updateWearerAppearance()
@@ -47,6 +53,7 @@ func saveData():
 	data["clothesDamaged"] = clothesDamaged
 	data["halfDamage"] = halfDamage
 	data["superDamage"] = superDamage
+	data["noShirt"] = noShirt
 
 	return data
 	
@@ -58,12 +65,14 @@ func loadData(_data):
 	clothesDamaged = SAVE.loadVar(_data, "clothesDamaged", false)
 	halfDamage = SAVE.loadVar(_data, "halfDamage", false)
 	superDamage = SAVE.loadVar(_data, "superDamage", false)
+	if(!_data.has("noShirt")):
+		noShirt = SAVE.loadVar(_data, "noShirt", false)
 
 func blocksInventorySlots():
 	var result = []
 	if(!shortsPulledDown && !clothesDamaged):
 		result.append(InventorySlot.UnderwearBottom)
-	if(!shirtOpened && !clothesDamaged):
+	if(!isShirtOpened() && !clothesDamaged):
 		result.append(InventorySlot.UnderwearTop)
 	return result
 
@@ -77,14 +86,14 @@ func coversBodyparts():
 		result[BodypartSlot.Vagina] = true
 		result[BodypartSlot.Penis] = true
 		result[BodypartSlot.Anus] = true
-	if(!shirtOpened && !clothesDamaged):
+	if(!isShirtOpened() && !clothesDamaged):
 		result[BodypartSlot.Breasts] = true
 	
 	return result
 
 func getStateText():
 	var text = ""
-	if(shirtOpened):
+	if(isShirtOpened()):
 		text += "Shirt is opened. "
 	if(shortsPulledDown):
 		text += "Shorts are pulled down. "

@@ -1,6 +1,6 @@
-[gd_scene load_steps=54 format=2]
+[gd_scene load_steps=63 format=2]
 
-[ext_resource path="res://Inventory/RiggedModels/NurseClothes/body.png" type="Texture" id=1]
+[ext_resource path="res://Player/Player3D/Skins/ClothingShader.gdshader" type="Shader" id=1]
 [ext_resource path="res://Player/Player3D/Parts/Part3D.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Player/Player3D/Parts/Arms/HumanArms/arm.png" type="Texture" id=3]
 [ext_resource path="res://Inventory/RiggedModels/NurseClothes/leglower.png" type="Texture" id=4]
@@ -14,9 +14,15 @@
 [ext_resource path="res://Inventory/RiggedModels/NurseClothes/foot.png" type="Texture" id=12]
 [ext_resource path="res://Inventory/RiggedModels/NurseClothes/digileg.png" type="Texture" id=13]
 [ext_resource path="res://Player/Player3D/Parts/Legs/HumanLegs/legdown.png" type="Texture" id=14]
-[ext_resource path="res://Inventory/RiggedModels/NurseClothes/legupper.png" type="Texture" id=15]
+[ext_resource path="res://Inventory/RiggedModels/InmateUniform/Textures/InmateBreastDamage.png" type="Texture" id=15]
 [ext_resource path="res://Player/Player3D/Parts/Legs/HumanLegs/foot.png" type="Texture" id=16]
 [ext_resource path="res://Inventory/RiggedModels/NurseClothes/hoof.png" type="Texture" id=17]
+[ext_resource path="res://Inventory/RiggedModels/NurseClothes/legupper.png" type="Texture" id=18]
+[ext_resource path="res://Inventory/RiggedModels/InmateUniform/Textures/ShirtShortsDamageMask.png" type="Texture" id=19]
+[ext_resource path="res://Inventory/RiggedModels/InmateUniform/Textures/InmateArmDamage.png" type="Texture" id=20]
+[ext_resource path="res://Inventory/RiggedModels/NurseClothes/bodyTop.png" type="Texture" id=21]
+[ext_resource path="res://Inventory/RiggedModels/NurseClothes/bodyBottom.png" type="Texture" id=22]
+[ext_resource path="res://Inventory/RiggedModels/NurseClothes/NurseClothes.gd" type="Script" id=23]
 
 [sub_resource type="SpatialMaterial" id=15]
 resource_name = "bodywide.png"
@@ -26,7 +32,7 @@ params_cull_mode = 2
 params_depth_draw_mode = 3
 metallic = 1.0
 
-[sub_resource type="ArrayMesh" id=16]
+[sub_resource type="ArrayMesh" id=73]
 resource_name = "DollSkeleton_bodywidepng"
 surfaces/0 = {
 "aabb": AABB( -0.91488, 3.32653, 1.10554e-05, 1.91453, 4.14346, 1e-05 ),
@@ -41,7 +47,7 @@ surfaces/0 = {
 "vertex_count": 367
 }
 
-[sub_resource type="Skin" id=17]
+[sub_resource type="Skin" id=74]
 resource_name = "Skin"
 bind_count = 28
 bind/0/name = "Hips"
@@ -129,14 +135,33 @@ bind/27/name = "DeformButt"
 bind/27/bone = -1
 bind/27/pose = Transform( 0.31345, 0.949604, -8.4791e-07, 0.949605, -0.31345, -5.59528e-08, -3.30048e-07, -7.49881e-07, -1, -4.0694, 1.33643, 3.13489e-06 )
 
-[sub_resource type="SpatialMaterial" id=50]
-resource_name = "bodywide.png"
-flags_transparent = true
-flags_unshaded = true
-vertex_color_use_as_albedo = true
-params_cull_mode = 2
-params_depth_draw_mode = 3
-albedo_texture = ExtResource( 1 )
+[sub_resource type="ShaderMaterial" id=75]
+resource_local_to_scene = true
+shader = ExtResource( 1 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/uv1_scale = Vector2( 1, 1 )
+shader_param/uv1_offset = Vector2( 0, 0 )
+shader_param/color_r = Color( 1, 0, 0, 1 )
+shader_param/color_g = Color( 0, 1, 0, 1 )
+shader_param/color_b = Color( 0, 0, 1, 1 )
+shader_param/damage = 0.0
+shader_param/damage_color = Color( 0, 0, 0, 1 )
+shader_param/texture_albedo = ExtResource( 21 )
+shader_param/texture_damage = ExtResource( 19 )
+
+[sub_resource type="ShaderMaterial" id=76]
+resource_local_to_scene = true
+shader = ExtResource( 1 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/uv1_scale = Vector2( 1, 1 )
+shader_param/uv1_offset = Vector2( 0, 0 )
+shader_param/color_r = Color( 1, 0, 0, 1 )
+shader_param/color_g = Color( 0, 1, 0, 1 )
+shader_param/color_b = Color( 0, 0, 1, 1 )
+shader_param/damage = 0.0
+shader_param/damage_color = Color( 0, 0, 0, 1 )
+shader_param/texture_albedo = ExtResource( 22 )
+shader_param/texture_damage = ExtResource( 19 )
 
 [sub_resource type="SpatialMaterial" id=1]
 resource_name = "arm.png.001"
@@ -147,7 +172,7 @@ params_depth_draw_mode = 3
 albedo_texture = ExtResource( 3 )
 metallic = 1.0
 
-[sub_resource type="ArrayMesh" id=19]
+[sub_resource type="ArrayMesh" id=77]
 resource_name = "DollSkeleton_armpng003"
 surfaces/0 = {
 "aabb": AABB( -0.144165, 4.38865, 0.405854, 0.64, 2.56, 1.00136e-05 ),
@@ -162,7 +187,7 @@ surfaces/0 = {
 "vertex_count": 4
 }
 
-[sub_resource type="Skin" id=20]
+[sub_resource type="Skin" id=78]
 resource_name = "Skin"
 bind_count = 22
 bind/0/name = "Hips"
@@ -232,16 +257,21 @@ bind/21/name = "Foot.R"
 bind/21/bone = -1
 bind/21/pose = Transform( 0.486096, -0.873925, 4.58786e-07, -0.874017, -0.486062, -1.14923e-08, 2.21924e-07, -3.57599e-07, -1, 0.196343, 0.375003, -0.209835 )
 
-[sub_resource type="SpatialMaterial" id=51]
-resource_name = "arm.png.001"
-flags_transparent = true
-flags_unshaded = true
-vertex_color_use_as_albedo = true
-params_cull_mode = 2
-params_depth_draw_mode = 3
-albedo_texture = ExtResource( 8 )
+[sub_resource type="ShaderMaterial" id=79]
+resource_local_to_scene = true
+shader = ExtResource( 1 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/uv1_scale = Vector2( 1, 1 )
+shader_param/uv1_offset = Vector2( 0, 0 )
+shader_param/color_r = Color( 1, 0, 0, 1 )
+shader_param/color_g = Color( 0, 1, 0, 1 )
+shader_param/color_b = Color( 0, 0, 1, 1 )
+shader_param/damage = 0.0
+shader_param/damage_color = Color( 0, 0, 0, 1 )
+shader_param/texture_albedo = ExtResource( 8 )
+shader_param/texture_damage = ExtResource( 20 )
 
-[sub_resource type="ArrayMesh" id=22]
+[sub_resource type="ArrayMesh" id=80]
 resource_name = "DollSkeleton_armpng002"
 surfaces/0 = {
 "aabb": AABB( -0.244165, 4.38865, -0.339218, 0.64, 2.56, 1.00136e-05 ),
@@ -256,6 +286,20 @@ surfaces/0 = {
 "vertex_count": 4
 }
 
+[sub_resource type="ShaderMaterial" id=81]
+resource_local_to_scene = true
+shader = ExtResource( 1 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/uv1_scale = Vector2( 1, 1 )
+shader_param/uv1_offset = Vector2( 0, 0 )
+shader_param/color_r = Color( 1, 0, 0, 1 )
+shader_param/color_g = Color( 0, 1, 0, 1 )
+shader_param/color_b = Color( 0, 0, 1, 1 )
+shader_param/damage = 0.0
+shader_param/damage_color = Color( 0, 0, 0, 1 )
+shader_param/texture_albedo = ExtResource( 8 )
+shader_param/texture_damage = ExtResource( 20 )
+
 [sub_resource type="SpatialMaterial" id=42]
 resource_name = "legup.png.001"
 flags_transparent = true
@@ -265,7 +309,7 @@ params_depth_draw_mode = 3
 albedo_texture = ExtResource( 5 )
 metallic = 1.0
 
-[sub_resource type="ArrayMesh" id=43]
+[sub_resource type="ArrayMesh" id=82]
 resource_name = "DollSkeleton_leguppng001"
 surfaces/0 = {
 "aabb": AABB( -0.416609, 1.85253, 0.255001, 1.05751, 2.56, 1.00136e-05 ),
@@ -280,7 +324,7 @@ surfaces/0 = {
 "vertex_count": 540
 }
 
-[sub_resource type="Skin" id=44]
+[sub_resource type="Skin" id=83]
 resource_name = "Skin"
 bind_count = 27
 bind/0/name = "Hips"
@@ -365,16 +409,20 @@ bind/26/name = "DeformThigh.R"
 bind/26/bone = -1
 bind/26/pose = Transform( 1.08032e-07, 1, 7.54979e-08, 0.99999, -1.45657e-06, 1.11371e-08, -2.26253e-14, 1.13257e-07, -1, -3.61767, -0.264871, -0.209836 )
 
-[sub_resource type="SpatialMaterial" id=60]
-resource_name = "legup.png.001"
-flags_transparent = true
-flags_unshaded = true
-vertex_color_use_as_albedo = true
-params_cull_mode = 2
-params_depth_draw_mode = 3
-albedo_texture = ExtResource( 15 )
+[sub_resource type="ShaderMaterial" id=84]
+resource_local_to_scene = true
+shader = ExtResource( 1 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/uv1_scale = Vector2( 1, 1 )
+shader_param/uv1_offset = Vector2( 0, 0 )
+shader_param/color_r = Color( 1, 0, 0, 1 )
+shader_param/color_g = Color( 0, 1, 0, 1 )
+shader_param/color_b = Color( 0, 0, 1, 1 )
+shader_param/damage = 0.0
+shader_param/damage_color = Color( 0, 0, 0, 1 )
+shader_param/texture_albedo = ExtResource( 18 )
 
-[sub_resource type="ArrayMesh" id=46]
+[sub_resource type="ArrayMesh" id=85]
 resource_name = "DollSkeleton_leguppng004"
 surfaces/0 = {
 "aabb": AABB( -0.516609, 1.85253, -0.208568, 1.05751, 2.56, 9.99868e-06 ),
@@ -389,6 +437,19 @@ surfaces/0 = {
 "vertex_count": 585
 }
 
+[sub_resource type="ShaderMaterial" id=86]
+resource_local_to_scene = true
+shader = ExtResource( 1 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/uv1_scale = Vector2( 1, 1 )
+shader_param/uv1_offset = Vector2( 0, 0 )
+shader_param/color_r = Color( 1, 0, 0, 1 )
+shader_param/color_g = Color( 0, 1, 0, 1 )
+shader_param/color_b = Color( 0, 0, 1, 1 )
+shader_param/damage = 0.0
+shader_param/damage_color = Color( 0, 0, 0, 1 )
+shader_param/texture_albedo = ExtResource( 18 )
+
 [sub_resource type="SpatialMaterial" id=47]
 resource_name = "breasts4.png"
 flags_transparent = true
@@ -398,7 +459,7 @@ params_depth_draw_mode = 3
 albedo_texture = ExtResource( 7 )
 metallic = 1.0
 
-[sub_resource type="ArrayMesh" id=48]
+[sub_resource type="ArrayMesh" id=87]
 resource_name = "DollSkeleton_breasts4png002"
 surfaces/0 = {
 "aabb": AABB( -1.08592, 5.28653, 0.02001, 1.2243, 1.28, 1.00005e-05 ),
@@ -413,7 +474,7 @@ surfaces/0 = {
 "vertex_count": 355
 }
 
-[sub_resource type="Skin" id=49]
+[sub_resource type="Skin" id=88]
 resource_name = "Skin"
 bind_count = 28
 bind/0/name = "Hips"
@@ -501,14 +562,19 @@ bind/27/name = "DeformBelly"
 bind/27/bone = -1
 bind/27/pose = Transform( 0.127554, -0.991832, 5.86852e-07, -0.991832, -0.127554, -2.3368e-08, 8.68952e-08, -5.41319e-07, -1, 4.73784, 0.229201, 2.55004e-06 )
 
-[sub_resource type="SpatialMaterial" id=53]
-resource_name = "breasts4.png"
-flags_transparent = true
-flags_unshaded = true
-vertex_color_use_as_albedo = true
-params_cull_mode = 2
-params_depth_draw_mode = 3
-albedo_texture = ExtResource( 6 )
+[sub_resource type="ShaderMaterial" id=89]
+resource_local_to_scene = true
+shader = ExtResource( 1 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/uv1_scale = Vector2( 1, 1 )
+shader_param/uv1_offset = Vector2( 0, 0 )
+shader_param/color_r = Color( 1, 0, 0, 1 )
+shader_param/color_g = Color( 0, 1, 0, 1 )
+shader_param/color_b = Color( 0, 0, 1, 1 )
+shader_param/damage = 0.0
+shader_param/damage_color = Color( 0, 0, 0, 1 )
+shader_param/texture_albedo = ExtResource( 6 )
+shader_param/texture_damage = ExtResource( 15 )
 
 [sub_resource type="SpatialMaterial" id=59]
 resource_name = "digileg.png"
@@ -831,51 +897,65 @@ surfaces/0 = {
 }
 
 [node name="NurseClothes" instance=ExtResource( 2 )]
+script = ExtResource( 23 )
 
 [node name="bodywidepng" type="MeshInstance" parent="." index="0"]
+unique_name_in_owner = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.07 )
-mesh = SubResource( 16 )
-skin = SubResource( 17 )
-material/0 = SubResource( 50 )
+mesh = SubResource( 73 )
+skin = SubResource( 74 )
+material/0 = SubResource( 75 )
 
-[node name="armpng" type="MeshInstance" parent="." index="1"]
+[node name="bodywidepng2" type="MeshInstance" parent="." index="1"]
+unique_name_in_owner = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.06 )
+mesh = SubResource( 73 )
+skin = SubResource( 74 )
+material/0 = SubResource( 76 )
+
+[node name="armpng" type="MeshInstance" parent="." index="2"]
+unique_name_in_owner = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.01 )
-mesh = SubResource( 19 )
-skin = SubResource( 20 )
-material/0 = SubResource( 51 )
+mesh = SubResource( 77 )
+skin = SubResource( 78 )
+material/0 = SubResource( 79 )
 
-[node name="armpng001" type="MeshInstance" parent="." index="2"]
+[node name="armpng001" type="MeshInstance" parent="." index="3"]
+unique_name_in_owner = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.01 )
-mesh = SubResource( 22 )
-skin = SubResource( 20 )
-material/0 = SubResource( 51 )
+mesh = SubResource( 80 )
+skin = SubResource( 78 )
+material/0 = SubResource( 81 )
 
-[node name="legupDeformable" type="MeshInstance" parent="." index="3"]
+[node name="legupDeformable" type="MeshInstance" parent="." index="4"]
+unique_name_in_owner = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.01 )
-mesh = SubResource( 43 )
-skin = SubResource( 44 )
-material/0 = SubResource( 60 )
+mesh = SubResource( 82 )
+skin = SubResource( 83 )
+material/0 = SubResource( 84 )
 
-[node name="legupDeformable001" type="MeshInstance" parent="." index="4"]
+[node name="legupDeformable001" type="MeshInstance" parent="." index="5"]
+unique_name_in_owner = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.01 )
-mesh = SubResource( 46 )
-skin = SubResource( 44 )
-material/0 = SubResource( 60 )
+mesh = SubResource( 85 )
+skin = SubResource( 83 )
+material/0 = SubResource( 86 )
 
-[node name="PartStatePicker" parent="." index="5" instance=ExtResource( 9 )]
+[node name="PartStatePicker" parent="." index="6" instance=ExtResource( 9 )]
 state = "breasts"
 
 [node name="PartState" parent="PartStatePicker" index="0" instance=ExtResource( 10 )]
 stateValue = "nonflat"
 
 [node name="breastsScalable001" type="MeshInstance" parent="PartStatePicker/PartState" index="0"]
+unique_name_in_owner = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.07 )
-mesh = SubResource( 48 )
-skin = SubResource( 49 )
+mesh = SubResource( 87 )
+skin = SubResource( 88 )
 skeleton = NodePath("../../..")
-material/0 = SubResource( 53 )
+material/0 = SubResource( 89 )
 
-[node name="PartStatePicker2" parent="." index="6" instance=ExtResource( 9 )]
+[node name="PartStatePicker2" parent="." index="7" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.01 )
 state = "legstype"
 

@@ -35,7 +35,9 @@ func getPuttingOnStringLong(withS):
 		return "put on your armor"
 
 func generateItemState():
-	itemState = ShirtAndShortsState.new()
+	itemState = SimpleRemoveState.new()
+	itemState.casualName = "armor"
+	itemState.revealAnim = "ClothingFullOpenAlt"
 
 func getRiggedParts(_character):
 	if(itemState.isRemoved()):

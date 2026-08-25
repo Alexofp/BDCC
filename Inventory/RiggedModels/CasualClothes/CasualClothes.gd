@@ -37,25 +37,26 @@ func updateFromItem(_item):
 	var _state:ShirtAndShortsState = _item.itemState
 	var _dam:int = _state.getDamageState() # 0, 1, 2, 3
 	
-	bodywidepng.visible = !_state.shirtOpened
-	#bodywidepng_3.visible = _state.shirtOpened
+	if(_item.id == "EngineerClothesOld"):
+		setShirtAndShortsColors(Color("CC8822"), Color("A85C19"))
+	
+	setShaderMatTexturePath(bodywidepng, "res://Inventory/RiggedModels/CasualClothes/body.png" if !_state.isShirtOpened() else "res://Inventory/RiggedModels/CasualClothes/ShirtOpen.png")
+	
+	bodywidepng.visible = !_state.shouldHideShirt()
 	armpng.visible = bodywidepng.visible
 	armpng_001.visible = bodywidepng.visible
-	breasts_scalable_001.visible = bodywidepng.visible
-	bodywidepng_2.visible = !_state.shortsPulledDown
-	legup_deformable.visible = bodywidepng_2.visible
-	legup_deformable_001.visible = bodywidepng_2.visible
-	
-#	if(_inmateType == InmateType.General):
-#		setUniformColor(Color("ff6600"))
-#		#setMatTexturePath(bodywidepng, "res://Inventory/RiggedModels/InmateUniform/orangeUniform.png")
-#	elif(_inmateType == InmateType.HighSec):
-#		#setMatTexturePath(bodywidepng, "res://Inventory/RiggedModels/InmateUniform/redUniform.png")
-#		setUniformColor(Color("FF1500"))
-#	else:
-#		#setMatTexturePath(bodywidepng, "res://Inventory/RiggedModels/InmateUniform/lilacUniform.png")
-#		setUniformColor(Color("AE00FF"))
-	
+	breasts_scalable_001.visible = !_state.isShirtOpened()
+	bodywidepng_2.visible = !_state.areShortsPulledDown()
+	#legup_deformable.visible = true#bodywidepng_2.visible
+	#legup_deformable_001.visible = true#bodywidepng_2.visible
+	var theMat1:ShaderMaterial = getShaderMatUnique(legup_deformable)
+	if(theMat1):
+		theMat1.set_shader_param("uv1_offset", Vector2(0.0, -0.15 if _state.areShortsPulledDown() else 0.0))
+	var theMat2:ShaderMaterial = getShaderMatUnique(legup_deformable_001)
+	if(theMat2):
+		theMat2.set_shader_param("uv1_offset", Vector2(0.0, -0.15 if _state.areShortsPulledDown() else 0.0))
+
+
 	if(_dam == 1):
 		for theMesh in [bodywidepng, bodywidepng_2, armpng, armpng_001, legup_deformable, legup_deformable_001, breasts_scalable_001]:
 			setDamageFloat(theMesh, 0.25)

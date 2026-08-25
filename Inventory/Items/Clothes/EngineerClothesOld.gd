@@ -35,11 +35,12 @@ func getPuttingOnStringLong(withS):
 
 func generateItemState():
 	itemState = ShirtAndShortsState.new()
+	itemState.canActuallyBeDamaged = true
 
 func getRiggedParts(_character):
 	if(itemState.isRemoved()):
 		return null
 	return {
-		"clothing": "res://Inventory/RiggedModels/CasualClothes/EngineerClothes.tscn",
+		"clothing": "res://Inventory/RiggedModels/CasualClothes/CasualClothes.tscn",
 	}
 

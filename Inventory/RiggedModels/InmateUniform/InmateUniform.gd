@@ -30,21 +30,22 @@ func updateFromItem(_item):
 	var _state:ShirtAndShortsState = _item.itemState
 	var _dam:int = _state.getDamageState() # 0, 1, 2, 3
 	
-	setShaderMatTexturePath(bodywidepng, "res://Inventory/RiggedModels/InmateUniform/Textures/Shirt.png" if !_state.shirtOpened else "res://Inventory/RiggedModels/InmateUniform/Textures/ShirtOpen.png")
-	setShaderMatTexturePath(bodywidepng, "res://Inventory/RiggedModels/InmateUniform/Textures/ShirtColorMask.png" if !_state.shirtOpened else "res://Inventory/RiggedModels/InmateUniform/Textures/ShirtOpenColorMask.png", "texture_colormask")
+	setShaderMatTexturePath(bodywidepng, "res://Inventory/RiggedModels/InmateUniform/Textures/Shirt.png" if !_state.isShirtOpened() else "res://Inventory/RiggedModels/InmateUniform/Textures/ShirtOpen.png")
+	setShaderMatTexturePath(bodywidepng, "res://Inventory/RiggedModels/InmateUniform/Textures/ShirtColorMask.png" if !_state.isShirtOpened() else "res://Inventory/RiggedModels/InmateUniform/Textures/ShirtOpenColorMask.png", "texture_colormask")
 	
-	#armpng.visible = true#bodywidepng.visible
-	#armpng_001.visible = true#bodywidepng.visible
-	breasts_scalable_001.visible = !_state.shirtOpened
-	bodywidepng_2.visible = !_state.shortsPulledDown
+	bodywidepng.visible = !_state.shouldHideShirt()
+	armpng.visible = bodywidepng.visible
+	armpng_001.visible = bodywidepng.visible
+	breasts_scalable_001.visible = !_state.isShirtOpened()
+	bodywidepng_2.visible = !_state.areShortsPulledDown()
 	#legup_deformable.visible = true#bodywidepng_2.visible
 	#legup_deformable_001.visible = true#bodywidepng_2.visible
 	var theMat1:ShaderMaterial = getShaderMatUnique(legup_deformable)
 	if(theMat1):
-		theMat1.set_shader_param("uv1_offset", Vector2(0.0, -0.15 if _state.shortsPulledDown else 0.0))
+		theMat1.set_shader_param("uv1_offset", Vector2(0.0, -0.15 if _state.areShortsPulledDown() else 0.0))
 	var theMat2:ShaderMaterial = getShaderMatUnique(legup_deformable_001)
 	if(theMat2):
-		theMat2.set_shader_param("uv1_offset", Vector2(0.0, -0.15 if _state.shortsPulledDown else 0.0))
+		theMat2.set_shader_param("uv1_offset", Vector2(0.0, -0.15 if _state.areShortsPulledDown() else 0.0))
 
 	if(_inmateType == InmateType.General):
 		setUniformColor(Color("ff6600"))

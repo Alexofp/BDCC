@@ -36,6 +36,7 @@ func getPuttingOnStringLong(withS):
 
 func generateItemState():
 	itemState = ShirtAndShortsState.new()
+	itemState.canActuallyBeDamaged = true
 
 func getRiggedParts(_character):
 	if(itemState.isRemoved()):

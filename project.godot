@@ -1789,6 +1789,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Util/SimpleParser.gd"
 }, {
+"base": "ItemState",
+"class": "SimpleRemoveState",
+"language": "GDScript",
+"path": "res://Inventory/ItemState/SimpleRemoveState.gd"
+}, {
 "base": "Reference",
 "class": "SimpleStringInterpolator",
 "language": "GDScript",
@@ -2426,6 +2431,7 @@ _global_script_class_icons={
 "SexVoice": "",
 "ShirtAndShortsState": "",
 "SimpleParser": "",
+"SimpleRemoveState": "",
 "SimpleStringInterpolator": "",
 "Skill": "",
 "SkillBase": "",
