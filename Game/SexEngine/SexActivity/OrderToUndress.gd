@@ -2,6 +2,7 @@ extends SexActivityBase
 
 var itemIDToRemove:String = ""
 var tick:int = 0
+var savedItemState:String = ""
 
 func _init():
 	id = "OrderToUndress"
@@ -41,12 +42,13 @@ func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: Sex
 	return .canStartActivity(_sexEngine, _domInfo, _subInfo)
 
 func startActivity(_args):
-	var itemToUndress = getItemToRemove(getSub())
+	var itemToUndress:ItemBase = getItemToRemove(getSub())
 	if(itemToUndress == null):
 		endActivity()
 		return
 	var casualName:String = str(itemToUndress.getCasualName())
 	itemIDToRemove = itemToUndress.id
+	savedItemState = itemToUndress.itemState.getChangeStr() if itemToUndress.itemState else ""
 	
 	addText("{dom.You} {dom.youVerb('order')} {sub.you} to undress {sub.yourHis} <ITEM>.".replace("<ITEM>", casualName))
 	react(SexReaction.OrderToUndress, [100, 100], [DOM_0, SUB_0], [casualName])
@@ -56,13 +58,14 @@ func checkRemoved() -> bool:
 		return true
 	
 	var sub = getSub()
-	var subDidIt = false
+	var subDidIt := false
 	var item = sub.getInventory().getEquippedItemByID(itemIDToRemove)
 	if(item == null):
 		subDidIt = true
 	else:
 		var itemState = item.getItemState()
-		if(itemState != null && itemState.isRemoved()):
+		#if(itemState != null && itemState.isRemoved()):
+		if(itemState && (itemState.getChangeStr() != savedItemState)):
 			subDidIt = true
 	
 	return subDidIt
@@ -120,6 +123,7 @@ func saveData():
 	
 	data["itemIDToRemove"] = itemIDToRemove
 	data["tick"] = tick
+	data["savedItemState"] = savedItemState
 
 	return data
 	
@@ -128,3 +132,4 @@ func loadData(data):
 	
 	itemIDToRemove = SAVE.loadVar(data, "itemIDToRemove", "")
 	tick = SAVE.loadVar(data, "tick", 0)
+	savedItemState = SAVE.loadVar(data, "savedItemState", "")

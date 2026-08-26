@@ -653,7 +653,7 @@ func getItemCategory():
 	return ItemCategory.Generic
 
 func isRemoved():
-	if(itemState == null):
+	if(!itemState):
 		return false
 	return itemState.isRemoved()
 
@@ -750,3 +750,78 @@ func applyDatapackEditVar(_id, _value):
 		restraintData.setLevel(_value)
 	if(_id == "aiWontResist"):
 		restraintData.aiWontResist = _value
+
+#addStartAction([firstItem], "Take off "+str(firstItem.getCasualName()), "Take off this item", theActivityScore)
+func getDisplaceActionsFinal(_context:Dictionary) -> Array:
+	if(isRemoved()):
+		return []
+	var _shouldIncludeDefault:bool = shouldIncludeDefaultTakeOffAction(_context)
+	
+	var result:Array = [
+		displaceAction("def_takeoff", "Take off "+str(getCasualName()), "Take off this item completely", 1.0),
+	] if _shouldIncludeDefault else []
+	
+	if(_shouldIncludeDefault):
+		if(itemState is ShirtAndShortsState):
+			if(!itemState.isShirtOpened()):
+				result.append(displaceAction("def_openShirt", "Open shirt", "Open the shirt, revealing the breasts"))
+			if(!itemState.areShortsPulledDown()):
+				result.append(displaceAction("def_pullShorts", "Pull shorts down", "Pull the shorts down, revealing the crotch"))
+		elif(itemState is BraState):
+			if(!itemState.isBraPulledUp()):
+				result.append(displaceAction("def_pullBra", "Pull "+itemState.casualName+" up", "Reveal the breasts!"))
+		elif(itemState is PantiesState):
+			if(!itemState.arePantiesPulledDown()):
+				result.append(displaceAction("def_pullPanties", "Pull "+itemState.casualName+" down", "Reveal the crotch!"))
+	
+	result.append_array(getDisplaceActions(_context))
+	
+	var totalScore:float = 0.0
+	for theEntry in result:
+		var theScore:float = theEntry[3]
+		if(theScore > 0.0):
+			totalScore += theScore
+	if(totalScore > 1.0): # Normalize the scores
+		for theEntry in result:
+			theEntry[3] /= totalScore
+	
+	return result
+
+func doDisplaceActionFinal(_id:String, _action:Array, _context:Dictionary) -> Dictionary:
+	if(_id == "def_takeoff"):
+#		if(_context.has("noUpdate")):
+#			itemState.removeNoAppearanceUpdate()
+#		else:
+		itemState.remove()
+		return {
+			text = "{<ACTOR>.You} {<ACTOR>.youVerb('take')} off {<TARGET>.yourHis} "+str(getCasualName())+".",
+		}
+	if(_id == "def_openShirt"):
+		itemState.openShirt()
+		return {text="{<ACTOR>.You} {<ACTOR>.youVerb('open')} {<TARGET>.yourHis} shirt.",}
+	if(_id == "def_pullShorts"):
+		itemState.pullDownShorts()
+		return {text="{<ACTOR>.You} {<ACTOR>.youVerb('pull')} down {<TARGET>.yourHis} shorts.",}
+	if(_id == "def_pullBra"):
+		itemState.pullBraUp()
+		return {text="{<ACTOR>.You} {<ACTOR>.youVerb('pull')} {<TARGET>.yourHis} "+itemState.getCasualName()+" up.",}
+	if(_id == "def_pullPanties"):
+		itemState.pullPantiesDown()
+		return {text="{<ACTOR>.You} {<ACTOR>.youVerb('pull')} {<TARGET>.yourHis} "+itemState.getCasualName()+" down.",}
+	
+	return doDisplaceAction(_id, _action, _context)
+
+
+func shouldIncludeDefaultTakeOffAction(_context:Dictionary) -> bool:
+	return true
+
+func displaceAction(_id:String, _name:String, _desc:String, _score:float = 1.0) -> Array:
+	return [_id, _name, _desc, _score]
+
+func getDisplaceActions(_context:Dictionary) -> Array:
+	return [
+		#displaceAction("takeoff", "Take off "+str(getCasualName()), "Take off this item", 1.0),
+	]
+
+func doDisplaceAction(_id:String, _action:Array, _context:Dictionary) -> Dictionary:
+	return {}

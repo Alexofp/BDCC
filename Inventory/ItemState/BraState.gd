@@ -46,6 +46,11 @@ func loadData(_data):
 	casualName = SAVE.loadVar(_data, "casualName", "bra")
 	clothesDamaged = SAVE.loadVar(_data, "clothesDamaged", false)
 
+func getChangeStr() -> String:
+	var theRes:String = "r" if removed else "n"
+	theRes += "u" if pulledUp else "d"
+	return theRes
+
 func coversBodyparts():
 	if(removed || pulledUp || clothesDamaged):
 		return {}

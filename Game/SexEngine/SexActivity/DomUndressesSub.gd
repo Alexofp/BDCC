@@ -1,6 +1,7 @@
 extends SexActivityBase
 
 var itemIDToRemove:String = ""
+var displaceAction:Array = []
 var tick:int = 0
 
 func _init():
@@ -53,31 +54,55 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 	if(_sexEngine.hasTag(_subInfo.charID, SexActivityTag.OrderedToUndress)):
 		return
 	
+	var theScore:float = getActivityScore(_sexEngine, _domInfo, _subInfo)
+	var theContext:Dictionary = {sexEngine=_sexEngine, sexActivity=self, actorInfo=_domInfo, targretInfo=_subInfo}
+	
 	var itemToUndress = getItemToRemove(_subInfo.getChar())
 	if(itemToUndress):
-		addStartAction([], getVisibleName(), getVisibleDesc(), getActivityScore(_sexEngine, _domInfo, _subInfo))
+		addStartAction([], getVisibleName(), getVisibleDesc(), theScore)
 	
-	if(_domInfo.getChar().isPlayer()):
-		var _inv:Inventory = sub.getInventory()
-		for slot in _inv.getEquippedItems():
-			addUndressButtonsForSlot(_inv, slot, handledItems)
+	#if(_domInfo.getChar().isPlayer()):
+	var _inv:Inventory = sub.getInventory()
+	for slot in _inv.getEquippedItems():
+		addUndressButtonsForSlot(_inv, slot, handledItems, theContext, theScore)
 	
-func addUndressButtonsForSlot(_inv:Inventory, _slot:String, _handled:Dictionary):
+func addUndressButtonsForSlot(_inv:Inventory, _slot:String, _handled:Dictionary, _context:Dictionary, _scoreMult:float):
 	var theItem = _inv.getEquippedItem(_slot)
 	if(!_handled.has(theItem) && _inv.canUndressSlotSexEngine(_slot)):
 		_handled[theItem] = true
-		addStartAction([theItem], "Take off "+str(theItem.getCasualName()), "Take off this item from the sub", 0.0, {A_CATEGORY: ["Undress", "Sub (specific)"]})
-		
+		addDisplaceActionsFor(theItem, _context, _scoreMult)
+		#addStartAction([theItem], "Take off "+str(theItem.getCasualName()), "Take off this item from the sub", 0.0, {A_CATEGORY: ["Undress", "Sub (specific)"]})
+
+func addDisplaceActionsFor(_item:ItemBase, _context:Dictionary, _scoreMult:float):
+	var theActions:Array = _item.getDisplaceActionsFinal(_context)
+	for theEntry in theActions:
+		addStartAction([_item, theEntry], theEntry[1], theEntry[2], theEntry[3]*_scoreMult, {A_CATEGORY: ["Undress", "Sub (specific)"]})
+
 func startActivity(_args):
+	if(_args.empty()):
+		displaceAction = ["def_takeoff", "", "", 1.0]
+		var itemToUndress = getItemToRemove(getSub())
+		if(itemToUndress == null):
+			endActivity()
+			return
+		var casualName:String = str(itemToUndress.getCasualName())
+		itemIDToRemove = itemToUndress.id
+		
+		addText("{dom.You} {dom.youVerb('reach', 'reaches')} to take off {sub.yourHis} <ITEM>.".replace("<ITEM>", casualName))
+		react(SexReaction.ForceUndress, [100, 100], [DOM_0, SUB_0], [casualName])
+		return
+	
 	#affectSub(getSubInfo().fetishScore({Fetish.Bodywritings: 1.0}, -0.25), 0.01, 0.0, -0.2, -0.02)
-	var itemToUndress = getItemToRemove(getSub()) if _args.empty() else _args[0]
-	if(itemToUndress == null):
+	var itemToUndress = _args[0]
+	displaceAction = _args[1] if _args.size() > 1 else []
+	if(!itemToUndress || displaceAction.empty()):
 		endActivity()
 		return
 	var casualName:String = str(itemToUndress.getCasualName())
 	itemIDToRemove = itemToUndress.id
 	
-	addText("{dom.You} {dom.youVerb('reach', 'reaches')} to take off {sub.yourHis} <ITEM>.".replace("<ITEM>", casualName))
+	var _isTakeOff:bool = (displaceAction[0] == "def_takeoff") # It's fineeeeeee
+	addText("{dom.You} {dom.youVerb('reach', 'reaches')} to "+ ("take off" if _isTakeOff else "displace") + " {sub.yourHis} <ITEM>.".replace("<ITEM>", casualName))
 	react(SexReaction.ForceUndress, [100, 100], [DOM_0, SUB_0], [casualName])
 	return
 
@@ -107,14 +132,22 @@ func init_processTurn():
 	if(tick > 1):
 		var theitem:ItemBase = getSub().getInventory().getEquippedItemByID(itemIDToRemove)
 		var itemState:ItemState = theitem.getItemState()
-		if(itemState == null):
+		if(!itemState):
 			getSub().getInventory().unequipItem(theitem)
-		else:
-			itemState.remove()
+			endActivity()
+			addText("{dom.You} {dom.youVerb('take')} off {sub.yourHis} "+str(theitem.getCasualName())+".")
+			return
 		
+		var theResult:Dictionary = theitem.doDisplaceActionFinal(displaceAction[0], displaceAction, {sexEngine=getSexType(), sexActivity=self, actorInfo=getDomInfo(), targretInfo=getSubInfo()})
+		#itemState.remove()
 		endActivity()
-		addText("{dom.You} {dom.youVerb('take')} off {sub.yourHis} "+str(theitem.getCasualName())+".")
-		
+		if(theResult.has("text")):
+			var theText:String = theResult["text"]
+			theText=theText.replace("<ACTOR>", getDomID()).replace("<TARGET>", getSubID())
+			addTextRaw(theText)
+		else:
+			addText("{dom.You} {dom.youVerb('take')} off {sub.yourHis} "+str(theitem.getCasualName())+".")
+
 func reactActivityEnd(_otheractivity):
 	if(checkRemoved()):
 		endActivity()
@@ -163,6 +196,7 @@ func saveData():
 	
 	data["itemIDToRemove"] = itemIDToRemove
 	data["tick"] = tick
+	data["displaceAction"] = displaceAction
 
 	return data
 	
@@ -171,3 +205,4 @@ func loadData(data):
 	
 	itemIDToRemove = SAVE.loadVar(data, "itemIDToRemove", "")
 	tick = SAVE.loadVar(data, "tick", 0)
+	displaceAction = SAVE.loadVar(data, "displaceAction", [])

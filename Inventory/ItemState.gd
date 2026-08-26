@@ -38,6 +38,9 @@ func saveData():
 func loadData(_data):
 	removed = SAVE.loadVar(_data, "removed", false)
 
+func getChangeStr() -> String:
+	return "r" if removed else "n"
+
 func blocksInventorySlots():
 	return []
 

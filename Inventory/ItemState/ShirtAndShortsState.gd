@@ -68,6 +68,12 @@ func loadData(_data):
 	if(!_data.has("noShirt")):
 		noShirt = SAVE.loadVar(_data, "noShirt", false)
 
+func getChangeStr() -> String:
+	var theRes:String = "r" if removed else "n"
+	theRes += "o" if shirtOpened else "c"
+	theRes += "d" if shortsPulledDown else "u"
+	return theRes
+
 func blocksInventorySlots():
 	var result = []
 	if(!shortsPulledDown && !clothesDamaged):

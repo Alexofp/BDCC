@@ -3,7 +3,7 @@ class_name PantiesState
 
 var pulledDown:bool = false
 var casualName:String = "panties"
-var canShiftAside:bool = true
+var canShiftAside:bool = true # unused
 
 var clothesDamaged:bool = false
 var canActuallyBeDamaged:bool = false
@@ -49,7 +49,6 @@ func saveData():
 	data["pulledDown"] = pulledDown
 	data["removed"] = removed
 	data["casualName"] = casualName
-	data["canShiftAside"] = canShiftAside
 	data["clothesDamaged"] = clothesDamaged
 
 	return data
@@ -59,8 +58,12 @@ func loadData(_data):
 	pulledDown = SAVE.loadVar(_data, "pulledDown", false)
 	removed = SAVE.loadVar(_data, "removed", false)
 	casualName = SAVE.loadVar(_data, "casualName", "panties")
-	canShiftAside = SAVE.loadVar(_data, "canShiftAside", true)
 	clothesDamaged = SAVE.loadVar(_data, "clothesDamaged", false)
+
+func getChangeStr() -> String:
+	var theRes:String = "r" if removed else "n"
+	theRes += "d" if pulledDown else "u"
+	return theRes
 
 func coversBodyparts():
 	if(removed || pulledDown || clothesDamaged):
