@@ -32,6 +32,12 @@ func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo:
 		return 0.3 + max(_domInfo.getAngerScore(), 0.0)
 	return 0.05 + max(_domInfo.getAngerScore(), 0.0)
 
+func getActivityScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
+	var theMult:float = 1.0
+	if(_subInfo.isFunctionallyNaked()):
+		theMult *= 0.1
+	return .getActivityScore(_sexEngine, _domInfo, _subInfo)*theMult
+
 func getTags(_indx:int) -> Array:
 	if(_indx == SUB_0):
 		return [SexActivityTag.BeingUndressed]
@@ -55,11 +61,13 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 		return
 	
 	var theScore:float = getActivityScore(_sexEngine, _domInfo, _subInfo)
+	if(_subInfo.isFunctionallyNaked()):
+		theScore *= 0.1
 	var theContext:Dictionary = {sexEngine=_sexEngine, sexActivity=self, actorInfo=_domInfo, targretInfo=_subInfo}
 	
 	var itemToUndress = getItemToRemove(_subInfo.getChar())
 	if(itemToUndress):
-		addStartAction([], getVisibleName(), getVisibleDesc(), theScore)
+		addStartAction([], getVisibleName(), getVisibleDesc(), 0.0)
 	
 	#if(_domInfo.getChar().isPlayer()):
 	var _inv:Inventory = sub.getInventory()

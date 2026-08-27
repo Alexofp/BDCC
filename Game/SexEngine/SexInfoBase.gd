@@ -13,6 +13,7 @@ var satisfaction:float = 0.0
 var frustration:float = 0.0
 var fetishGain:Dictionary = {}
 
+var functionallyNaked:bool = false # If vag/penis/anus are uncovered
 var justCame:bool = false
 
 func getSexEngine():
@@ -87,12 +88,33 @@ func initFromPersonality():
 	pass
 
 func processTurn():
+	var theChar:BaseCharacter = getChar()
 	tick += 1
-	lustFull += getChar().getLustLevel()
+	lustFull += theChar.getLustLevel()
 	
 	var revealAmount:int = getSexEngine().getRevealedPartsAmount(getCharID())
 	if(revealAmount > 0):
 		fetishAffect(Fetish.Exhibitionism, 0.05*revealAmount)
+
+	# Calculated once per turn rather than on demand
+	checkFunctionallyNaked()
+	
+func checkFunctionallyNaked():
+	var theChar:BaseCharacter = getChar()
+	if(!theChar):
+		return
+	functionallyNaked = true
+	if(theChar.getFirstItemThatCoversBodypart(BodypartSlot.Breasts)):
+		functionallyNaked = false
+	elif(theChar.hasPenis() && theChar.getFirstItemThatCoversBodypart(BodypartSlot.Penis)):
+		functionallyNaked = false
+	elif(theChar.hasVagina() && theChar.getFirstItemThatCoversBodypart(BodypartSlot.Vagina)):
+		functionallyNaked = false
+	elif(theChar.hasAnus() && theChar.getFirstItemThatCoversBodypart(BodypartSlot.Anus)):
+		functionallyNaked = false
+
+func isFunctionallyNaked() -> bool:
+	return functionallyNaked
 
 func resetJustCame():
 	justCame = false
@@ -543,3 +565,4 @@ func loadData(data):
 	satisfaction = SAVE.loadVar(data, "satisfaction", 0.0)
 	frustration = SAVE.loadVar(data, "frustration", 0.0)
 	fetishGain = SAVE.loadVar(data, "fetishGain", {})
+	checkFunctionallyNaked()

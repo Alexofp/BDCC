@@ -35,6 +35,8 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 	var handledItems:Dictionary = {}
 	
 	var theScore:float = getActivityScore(_sexEngine, _domInfo, _subInfo)
+	if(_domInfo.isFunctionallyNaked()):
+		theScore *= 0.1
 	var theContext:Dictionary = {sexEngine=_sexEngine, sexActivity=self, actorInfo=_domInfo, targretInfo=_domInfo}
 	
 	for bodypartToExpose in bodypartsToExpose:

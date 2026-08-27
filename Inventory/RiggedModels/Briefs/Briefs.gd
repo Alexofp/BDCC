@@ -16,9 +16,15 @@ func updateFromItem(_item):
 		return
 	var _state:PantiesState = _item.itemState
 	var _dam:bool = _state.clothesDamaged
-	bodywidepng.visible = !_state.pulledDown
-	legup_deformable.visible = bodywidepng.visible
-	legup_deformable_001.visible = bodywidepng.visible
+	bodywidepng.visible = !_state.arePantiesPulledDown()
+	#legup_deformable.visible = bodywidepng.visible
+	#legup_deformable_001.visible = bodywidepng.visible
+	var theMat1:ShaderMaterial = getShaderMatUnique(legup_deformable)
+	if(theMat1):
+		theMat1.set_shader_param("uv1_offset", Vector2(0.0, -0.15 if !bodywidepng.visible else 0.0))
+	var theMat2:ShaderMaterial = getShaderMatUnique(legup_deformable_001)
+	if(theMat2):
+		theMat2.set_shader_param("uv1_offset", Vector2(0.0, -0.15 if !bodywidepng.visible else 0.0))
 	
 	for theMesh in [bodywidepng, legup_deformable, legup_deformable_001]:
 		var theMat:ShaderMaterial = getShaderMatUnique(theMesh)
