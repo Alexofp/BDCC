@@ -9,6 +9,9 @@ var clientSatisfaction:float = 0.0
 var lastClientID:String = ""
 var clientApproached:bool = false
 var clientRequestedAskType:String = ""
+var clientCooldowns:Dictionary = {}
+
+var clientCooldownSeconds:int = 2*60*60
 
 func _init():
 	id = "Prostitution"
@@ -28,14 +31,14 @@ func init_text():
 
 func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "search"):
-		var pawnIDs = findProstitutionTargetsNearby([lastClientID])
+		var ignoreList:Array = []
+		for charID in clientCooldowns:
+			ignoreList.append(charID)
+		var pawnIDs:Array = findProstitutionTargetsNearby(ignoreList)
 		if(!pawnIDs.empty()):
 			var pawnID = RNG.pick(pawnIDs)
-			lastClientID = pawnID
-			doInvolvePawn("client", pawnID)
 			clientApproached = false
-			clientRequestedAskType = ""
-			setState("found_client", "main")
+			setClientToCharID(pawnID)
 			return
 		setState("", "main")
 	if(_id == "wait"):
@@ -492,11 +495,12 @@ func opposite_role_request_denied_do(_id:String, _args:Dictionary, _context:Dict
 func getInterruptActions(_pawn:CharacterPawn) -> Array:
 	var result:Array = []
 	if(getPawnCount() == 1):
+		var approachScore:float = -0.01 if(clientCooldowns.has(_pawn.charID)) else 0.5
 		result.append({
 			id = "approach",
 			name = "Approach",
 			desc = "See what they are offering..",
-			score = 0.5,
+			score = approachScore,
 			scoreType = "sexUse",
 			scoreRole = "main",
 			args = {},
@@ -505,10 +509,8 @@ func getInterruptActions(_pawn:CharacterPawn) -> Array:
 
 func doInterruptAction(_pawn:CharacterPawn, _id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "approach"):
-		doInvolvePawn("client", _pawn.charID)
 		clientApproached = true
-		clientRequestedAskType = ""
-		setState("found_client", "main")
+		setClientToCharID(_pawn.charID)
 
 
 func getAnimData() -> Array:
@@ -519,8 +521,25 @@ func getAnimData() -> Array:
 func isSlutDom():
 	return slutDom
 
+func setClientToCharID(charID:String) -> void:
+	lastClientID = charID
+	# let creatures be obsessed sometimes, as a treat
+	if(RNG.chance(95)):
+		clientCooldowns[charID] = clientCooldownSeconds
+	doInvolvePawn("client", charID)
+	clientRequestedAskType = ""
+	setState("found_client", "main")
+
 func processTime(_howMuch:int):
 	jobTime += _howMuch
+	if(clientCooldowns.empty() || _howMuch <= 0):
+		return
+	var newClientCooldowns:Dictionary = {}
+	for charID in clientCooldowns:
+		clientCooldowns[charID] -= _howMuch
+		if(clientCooldowns[charID] > 0):
+			newClientCooldowns[charID] = clientCooldowns[charID]
+	clientCooldowns = newClientCooldowns
 	
 func getActivityIconForRole(_role:String):
 	if(getPawnCount() == 1):
@@ -547,6 +566,7 @@ func saveData():
 	data["lastClientID"] = lastClientID
 	data["clientApproached"] = clientApproached
 	data["clientReqAskType"] = clientRequestedAskType
+	data["clientCooldowns"] = clientCooldowns
 	return data
 
 func loadData(_data):
@@ -561,4 +581,5 @@ func loadData(_data):
 	lastClientID = SAVE.loadVar(_data, "lastClientID", "")
 	clientApproached = SAVE.loadVar(_data, "clientApproached", false)
 	clientRequestedAskType = SAVE.loadVar(_data, "clientReqAskType", "")
+	clientCooldowns = SAVE.loadVar(_data, "clientCooldowns", {})
 
