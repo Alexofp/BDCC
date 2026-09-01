@@ -321,8 +321,8 @@ func loadCharacter(charID):
 	
 	if(ch.has_method("updateDoll")):
 		disconnectFromOld()
-		ch.updateDoll(self)
 		savedCharacterID = charID
+		ch.updateDoll(self)
 		var _ok = ch.connect("bodypart_changed", self, "onCharacterBodypartChanged")
 		
 func prepareCharacter(charID):
