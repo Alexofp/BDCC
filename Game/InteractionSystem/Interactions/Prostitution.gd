@@ -85,15 +85,16 @@ func found_client_text():
 	else:
 		addDisabledAction(ACTION_NAME_USUAL, ACTION_DESC_CLIENT_NOT_INTERESTED)
 	if(clientRequestedAskType in ["", "service"]):
-		if(roleCanStartSex("main") && hasRepLevelPC("main", RepStat.Whore, 4)):
-			addAction("service", ACTION_NAME_SERVICE_DOM, "You will be in charge. It takes more effort.. so you will be taking more credits", "sexDom", 1.0, 60, {})
+		var hasWhoreRepForServiceDom:bool = hasWhoreRepLevelPC_forAskType("service")
+		if(roleCanStartSex("main") && ((clientRequestedAskType == "service") || hasWhoreRepForServiceDom)):
+			addAction("service", ACTION_NAME_SERVICE_DOM, "You will be in charge. It takes more effort"+(".. so you will be taking more credits" if(hasWhoreRepForServiceDom) else " but your whore reputation is not high enough to demand more credits"), "sexDom", 1.0, 60, {})
 			haveAnyOptions = true
 		else:
 			addDisabledAction(ACTION_NAME_SERVICE_DOM, "You can't be a service dom with your restraints.." if !roleCanStartSex("main") else "Your whore reputation is not high enough for this..")
 	else:
 		addDisabledAction(ACTION_NAME_SERVICE_DOM, ACTION_DESC_CLIENT_NOT_INTERESTED)
 	if(clientRequestedAskType in ["", "usual"]):
-		if(roleCanStartSex("client") && hasRepLevelPC("main", RepStat.Whore, 8)):
+		if(roleCanStartSex("client") && hasWhoreRepLevelPC_forAskType("pricy")):
 			addAction("pricy_slut", ACTION_NAME_PRICY_SLUT, "Ask for a lot of credits to let them fuck you.. You will have to really satisfy them though..", "resist", 1.0, 60, {})
 			haveAnyOptions = true
 		else:
@@ -113,7 +114,9 @@ func found_client_do(_id:String, _args:Dictionary, _context:Dictionary):
 		setState("giving_offer", "client")
 	if(_id == "service"):
 		askType="service"
-		askCreds = getRolePawn("main").getProstitutionCreditsCost(getRolePawn("client"), 2.0, true)
+		var hasWhoreRepForServiceDom:bool = hasWhoreRepLevelPC_forAskType("service")
+		var creditsCostMult:float = 2.0 if(hasWhoreRepForServiceDom) else 1.0
+		askCreds = getRolePawn("main").getProstitutionCreditsCost(getRolePawn("client"), creditsCostMult, true)
 		slutDom = true
 		setState("giving_offer", "client")
 	if(_id == "pricy_slut"):
@@ -515,6 +518,13 @@ func getAnimData() -> Array:
 	if(getPawnCount() > 1):
 		return [StageScene.Duo, "stand", {pc="main", npc="client"}]
 	return [StageScene.Solo, "stand", {pc="main"}]
+
+func hasWhoreRepLevelPC_forAskType(_askType:String) -> bool:
+	if(_askType == "pricy"):
+		return hasRepLevelPC("main", RepStat.Whore, 8)
+	if(_askType == "service"):
+		return hasRepLevelPC("main", RepStat.Whore, 4)
+	return true
 
 func isSlutDom():
 	return slutDom
