@@ -29,6 +29,14 @@ static func getRightBracket(theType):
 	return ""
 
 static func getAll():
+	var r : Array = getAllDefault()
+	
+	for crotchblock in GlobalRegistry.getCrotchBlocks():
+		r.append(crotchblock)
+	
+	return r
+
+static func getAllDefault():
 	return [
 		"AlwaysTrue",
 		"AlwaysFalse",
@@ -266,7 +274,7 @@ static func createBlock(theID):
 		newBlockScene = GlobalRegistry.codeblocksCache[theID]
 	else:
 		var resourcePath = "res://Game/Datapacks/UI/CrotchCode/CodeBlocks/"+theID+".gd"
-		newBlockScene = load(resourcePath)
+		newBlockScene = GlobalRegistry.getCrotchBlocks()[theID] if GlobalRegistry.getCrotchBlocks().has(theID) else load(resourcePath)
 		if(newBlockScene != null):
 			GlobalRegistry.codeblocksCache[theID] = newBlockScene
 			
