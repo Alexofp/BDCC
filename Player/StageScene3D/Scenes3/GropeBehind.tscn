@@ -1,0 +1,363 @@
+[gd_scene load_steps=95 format=2]
+
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=3]
+[ext_resource path="res://Player/StageScene3D/Scenes3/GropeBehind.gd" type="Script" id=4]
+
+[sub_resource type="AnimationNodeAnimation" id=446]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=447]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=518]
+animation = "GropeBehindButt_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=519]
+animation = "GropeBehindFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=520]
+animation = "GropeBehindIdleNeck_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=521]
+animation = "GropeBehindIdle_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=522]
+animation = "GropeBehindOrgasm_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=523]
+animation = "GropeBehindRubFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=524]
+animation = "GropeBehindRub_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=525]
+animation = "GropeBehindStrokeFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=526]
+animation = "GropeBehindStroke_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=527]
+animation = "GropeBehind_1-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=528]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=529]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=530]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=531]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=532]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=533]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=534]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=535]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=536]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=537]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=538]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=539]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=540]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=541]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=542]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=543]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=544]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=545]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=546]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=547]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=548]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=549]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=550]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=551]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=552]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=553]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=554]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=555]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=556]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=557]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=558]
+states/GropeBehindButt_1-loop/node = SubResource( 518 )
+states/GropeBehindButt_1-loop/position = Vector2( 739, 49 )
+states/GropeBehindFast_1-loop/node = SubResource( 519 )
+states/GropeBehindFast_1-loop/position = Vector2( 251, 241 )
+states/GropeBehindIdleNeck_1-loop/node = SubResource( 520 )
+states/GropeBehindIdleNeck_1-loop/position = Vector2( 739, -29 )
+states/GropeBehindIdle_1-loop/node = SubResource( 521 )
+states/GropeBehindIdle_1-loop/position = Vector2( 427, 38 )
+states/GropeBehindOrgasm_1-loop/node = SubResource( 522 )
+states/GropeBehindOrgasm_1-loop/position = Vector2( 540, 391 )
+states/GropeBehindRubFast_1-loop/node = SubResource( 523 )
+states/GropeBehindRubFast_1-loop/position = Vector2( 886, 233 )
+states/GropeBehindRub_1-loop/node = SubResource( 524 )
+states/GropeBehindRub_1-loop/position = Vector2( 817, 160 )
+states/GropeBehindStrokeFast_1-loop/node = SubResource( 525 )
+states/GropeBehindStrokeFast_1-loop/position = Vector2( 560, 277 )
+states/GropeBehindStroke_1-loop/node = SubResource( 526 )
+states/GropeBehindStroke_1-loop/position = Vector2( 540, 197 )
+states/GropeBehind_1-loop/node = SubResource( 527 )
+states/GropeBehind_1-loop/position = Vector2( 263, 143 )
+transitions = [ "GropeBehindIdle_1-loop", "GropeBehind_1-loop", SubResource( 528 ), "GropeBehind_1-loop", "GropeBehindIdle_1-loop", SubResource( 529 ), "GropeBehind_1-loop", "GropeBehindFast_1-loop", SubResource( 530 ), "GropeBehindFast_1-loop", "GropeBehind_1-loop", SubResource( 531 ), "GropeBehindFast_1-loop", "GropeBehindOrgasm_1-loop", SubResource( 532 ), "GropeBehindOrgasm_1-loop", "GropeBehindFast_1-loop", SubResource( 533 ), "GropeBehindIdle_1-loop", "GropeBehindIdleNeck_1-loop", SubResource( 534 ), "GropeBehindIdleNeck_1-loop", "GropeBehindIdle_1-loop", SubResource( 535 ), "GropeBehindIdle_1-loop", "GropeBehindButt_1-loop", SubResource( 536 ), "GropeBehindButt_1-loop", "GropeBehindIdle_1-loop", SubResource( 537 ), "GropeBehindIdle_1-loop", "GropeBehindStroke_1-loop", SubResource( 538 ), "GropeBehindStroke_1-loop", "GropeBehindIdle_1-loop", SubResource( 539 ), "GropeBehindStroke_1-loop", "GropeBehindStrokeFast_1-loop", SubResource( 540 ), "GropeBehindStrokeFast_1-loop", "GropeBehindStroke_1-loop", SubResource( 541 ), "GropeBehindStrokeFast_1-loop", "GropeBehindOrgasm_1-loop", SubResource( 542 ), "GropeBehindOrgasm_1-loop", "GropeBehindStrokeFast_1-loop", SubResource( 543 ), "GropeBehindIdle_1-loop", "GropeBehindRub_1-loop", SubResource( 544 ), "GropeBehindRub_1-loop", "GropeBehindIdle_1-loop", SubResource( 545 ), "GropeBehindRub_1-loop", "GropeBehindRubFast_1-loop", SubResource( 546 ), "GropeBehindRubFast_1-loop", "GropeBehindRub_1-loop", SubResource( 547 ), "GropeBehindRubFast_1-loop", "GropeBehindOrgasm_1-loop", SubResource( 548 ), "GropeBehindOrgasm_1-loop", "GropeBehindRubFast_1-loop", SubResource( 549 ), "GropeBehindStrokeFast_1-loop", "GropeBehindRubFast_1-loop", SubResource( 550 ), "GropeBehindRubFast_1-loop", "GropeBehindStrokeFast_1-loop", SubResource( 551 ), "GropeBehindStroke_1-loop", "GropeBehindRub_1-loop", SubResource( 552 ), "GropeBehindRub_1-loop", "GropeBehindStroke_1-loop", SubResource( 553 ), "GropeBehind_1-loop", "GropeBehindStroke_1-loop", SubResource( 554 ), "GropeBehindStroke_1-loop", "GropeBehind_1-loop", SubResource( 555 ), "GropeBehindFast_1-loop", "GropeBehindStrokeFast_1-loop", SubResource( 556 ), "GropeBehindStrokeFast_1-loop", "GropeBehindFast_1-loop", SubResource( 557 ) ]
+start_node = "GropeBehindIdle_1-loop"
+graph_offset = Vector2( 60, -147 )
+
+[sub_resource type="AnimationNodeBlendTree" id=559]
+graph_offset = Vector2( -173.156, 18.0513 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 558 )
+nodes/StateMachine/position = Vector2( 220, 120 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=460]
+
+[sub_resource type="AnimationNodeAnimation" id=560]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=561]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=562]
+animation = "GropeBehindButt_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=563]
+animation = "GropeBehindFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=564]
+animation = "GropeBehindIdleNeck_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=565]
+animation = "GropeBehindIdle_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=566]
+animation = "GropeBehindOrgasm_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=567]
+animation = "GropeBehindRubFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=568]
+animation = "GropeBehindRub_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=569]
+animation = "GropeBehindStrokeFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=570]
+animation = "GropeBehindStroke_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=571]
+animation = "GropeBehind_2-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=572]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=573]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=574]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=575]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=576]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=577]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=578]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=579]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=580]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=581]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=582]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=583]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=584]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=585]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=586]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=587]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=588]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=589]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=590]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=591]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=592]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=593]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=594]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=595]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=596]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=597]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=598]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=599]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=600]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=601]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=602]
+states/GropeBehindButt_2-loop/node = SubResource( 562 )
+states/GropeBehindButt_2-loop/position = Vector2( 739, 49 )
+states/GropeBehindFast_2-loop/node = SubResource( 563 )
+states/GropeBehindFast_2-loop/position = Vector2( 251, 241 )
+states/GropeBehindIdleNeck_2-loop/node = SubResource( 564 )
+states/GropeBehindIdleNeck_2-loop/position = Vector2( 739, -29 )
+states/GropeBehindIdle_2-loop/node = SubResource( 565 )
+states/GropeBehindIdle_2-loop/position = Vector2( 427, 38 )
+states/GropeBehindOrgasm_2-loop/node = SubResource( 566 )
+states/GropeBehindOrgasm_2-loop/position = Vector2( 540, 391 )
+states/GropeBehindRubFast_2-loop/node = SubResource( 567 )
+states/GropeBehindRubFast_2-loop/position = Vector2( 885, 232 )
+states/GropeBehindRub_2-loop/node = SubResource( 568 )
+states/GropeBehindRub_2-loop/position = Vector2( 817, 160 )
+states/GropeBehindStrokeFast_2-loop/node = SubResource( 569 )
+states/GropeBehindStrokeFast_2-loop/position = Vector2( 560, 277 )
+states/GropeBehindStroke_2-loop/node = SubResource( 570 )
+states/GropeBehindStroke_2-loop/position = Vector2( 540, 197 )
+states/GropeBehind_2-loop/node = SubResource( 571 )
+states/GropeBehind_2-loop/position = Vector2( 263, 143 )
+transitions = [ "GropeBehindIdle_2-loop", "GropeBehind_2-loop", SubResource( 572 ), "GropeBehind_2-loop", "GropeBehindIdle_2-loop", SubResource( 573 ), "GropeBehind_2-loop", "GropeBehindFast_2-loop", SubResource( 574 ), "GropeBehindFast_2-loop", "GropeBehind_2-loop", SubResource( 575 ), "GropeBehindFast_2-loop", "GropeBehindOrgasm_2-loop", SubResource( 576 ), "GropeBehindOrgasm_2-loop", "GropeBehindFast_2-loop", SubResource( 577 ), "GropeBehindIdle_2-loop", "GropeBehindIdleNeck_2-loop", SubResource( 578 ), "GropeBehindIdleNeck_2-loop", "GropeBehindIdle_2-loop", SubResource( 579 ), "GropeBehindIdle_2-loop", "GropeBehindButt_2-loop", SubResource( 580 ), "GropeBehindButt_2-loop", "GropeBehindIdle_2-loop", SubResource( 581 ), "GropeBehindIdle_2-loop", "GropeBehindStroke_2-loop", SubResource( 582 ), "GropeBehindStroke_2-loop", "GropeBehindIdle_2-loop", SubResource( 583 ), "GropeBehindStroke_2-loop", "GropeBehindStrokeFast_2-loop", SubResource( 584 ), "GropeBehindStrokeFast_2-loop", "GropeBehindStroke_2-loop", SubResource( 585 ), "GropeBehindStrokeFast_2-loop", "GropeBehindOrgasm_2-loop", SubResource( 586 ), "GropeBehindOrgasm_2-loop", "GropeBehindStrokeFast_2-loop", SubResource( 587 ), "GropeBehindIdle_2-loop", "GropeBehindRub_2-loop", SubResource( 588 ), "GropeBehindRub_2-loop", "GropeBehindIdle_2-loop", SubResource( 589 ), "GropeBehindRub_2-loop", "GropeBehindRubFast_2-loop", SubResource( 590 ), "GropeBehindRubFast_2-loop", "GropeBehindRub_2-loop", SubResource( 591 ), "GropeBehindRubFast_2-loop", "GropeBehindOrgasm_2-loop", SubResource( 592 ), "GropeBehindOrgasm_2-loop", "GropeBehindRubFast_2-loop", SubResource( 593 ), "GropeBehindStrokeFast_2-loop", "GropeBehindRubFast_2-loop", SubResource( 594 ), "GropeBehindRubFast_2-loop", "GropeBehindStrokeFast_2-loop", SubResource( 595 ), "GropeBehindStroke_2-loop", "GropeBehindRub_2-loop", SubResource( 596 ), "GropeBehindRub_2-loop", "GropeBehindStroke_2-loop", SubResource( 597 ), "GropeBehind_2-loop", "GropeBehindStroke_2-loop", SubResource( 598 ), "GropeBehindStroke_2-loop", "GropeBehind_2-loop", SubResource( 599 ), "GropeBehindFast_2-loop", "GropeBehindStrokeFast_2-loop", SubResource( 600 ), "GropeBehindStrokeFast_2-loop", "GropeBehindFast_2-loop", SubResource( 601 ) ]
+start_node = "GropeBehindIdle_2-loop"
+graph_offset = Vector2( 43, -9 )
+
+[sub_resource type="AnimationNodeBlendTree" id=603]
+graph_offset = Vector2( -173.156, 18.0513 )
+nodes/Animation/node = SubResource( 560 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 561 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 602 )
+nodes/StateMachine/position = Vector2( 220, 120 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=479]
+
+[node name="GropeBehind" instance=ExtResource( 2 )]
+script = ExtResource( 4 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0133686, -0.411049, -1.77462 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Doll3D" parent="." index="1" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.867721, -0.120824, 0 )
+
+[node name="Doll3D2" parent="." index="2" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.867721, -0.120824, 0 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+tree_root = SubResource( 559 )
+anim_player = NodePath("../Doll3D/DollSkeleton3/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 460 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 603 )
+anim_player = NodePath("../Doll3D2/DollSkeleton3/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 479 )

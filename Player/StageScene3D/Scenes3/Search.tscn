@@ -1,0 +1,589 @@
+[gd_scene load_steps=155 format=2]
+
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=3]
+[ext_resource path="res://Player/StageScene3D/Scenes3/Search.gd" type="Script" id=4]
+
+[sub_resource type="AnimationNodeAnimation" id=446]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=447]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=606]
+animation = "SearchButt_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=607]
+animation = "SearchIdleToStand_1"
+
+[sub_resource type="AnimationNodeAnimation" id=608]
+animation = "SearchIdle_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=609]
+animation = "SearchLickFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=610]
+animation = "SearchLick_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=611]
+animation = "SearchRubFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=612]
+animation = "SearchRub_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=613]
+animation = "SearchSexFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=614]
+animation = "SearchSexInside_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=615]
+animation = "SearchSexTease_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=616]
+animation = "SearchSex_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=617]
+animation = "SearchStandBreasts_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=618]
+animation = "SearchStandIdle_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=619]
+animation = "SearchStandToIdle_1"
+
+[sub_resource type="AnimationNodeAnimation" id=620]
+animation = "SearchStand_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=621]
+animation = "SearchStrokeFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=622]
+animation = "SearchStroke_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=623]
+animation = "Search_1-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=624]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=625]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=626]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=627]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=628]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=629]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=630]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=631]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=632]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=633]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=634]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=635]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=636]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=637]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=638]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=639]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=640]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=641]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=642]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=643]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=644]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=645]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=646]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=647]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=648]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=649]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=650]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=651]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=652]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=653]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=654]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=655]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=656]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=657]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=658]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=659]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=660]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=661]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=662]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=663]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=664]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=665]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=666]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=667]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=668]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=669]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=670]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=671]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=672]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=673]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=674]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=675]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=603]
+states/SearchButt_1-loop/node = SubResource( 606 )
+states/SearchButt_1-loop/position = Vector2( -30, -46 )
+states/SearchIdleToStand_1/node = SubResource( 607 )
+states/SearchIdleToStand_1/position = Vector2( 665, -46 )
+states/SearchIdle_1-loop/node = SubResource( 608 )
+states/SearchIdle_1-loop/position = Vector2( 268, -76 )
+states/SearchLickFast_1-loop/node = SubResource( 609 )
+states/SearchLickFast_1-loop/position = Vector2( -186, 321 )
+states/SearchLick_1-loop/node = SubResource( 610 )
+states/SearchLick_1-loop/position = Vector2( -181, 236 )
+states/SearchRubFast_1-loop/node = SubResource( 611 )
+states/SearchRubFast_1-loop/position = Vector2( 326, 321 )
+states/SearchRub_1-loop/node = SubResource( 612 )
+states/SearchRub_1-loop/position = Vector2( 326, 229 )
+states/SearchSexFast_1-loop/node = SubResource( 613 )
+states/SearchSexFast_1-loop/position = Vector2( 1209, 364 )
+states/SearchSexInside_1-loop/node = SubResource( 614 )
+states/SearchSexInside_1-loop/position = Vector2( 1005, 252 )
+states/SearchSexTease_1-loop/node = SubResource( 615 )
+states/SearchSexTease_1-loop/position = Vector2( 1096, 82 )
+states/SearchSex_1-loop/node = SubResource( 616 )
+states/SearchSex_1-loop/position = Vector2( 1315, 199 )
+states/SearchStandBreasts_1-loop/node = SubResource( 617 )
+states/SearchStandBreasts_1-loop/position = Vector2( 632, 257 )
+states/SearchStandIdle_1-loop/node = SubResource( 618 )
+states/SearchStandIdle_1-loop/position = Vector2( 632, 162 )
+states/SearchStandToIdle_1/node = SubResource( 619 )
+states/SearchStandToIdle_1/position = Vector2( 529, 25 )
+states/SearchStand_1-loop/node = SubResource( 620 )
+states/SearchStand_1-loop/position = Vector2( 813, 55 )
+states/SearchStrokeFast_1-loop/node = SubResource( 621 )
+states/SearchStrokeFast_1-loop/position = Vector2( -343, 138 )
+states/SearchStroke_1-loop/node = SubResource( 622 )
+states/SearchStroke_1-loop/position = Vector2( -186, 67 )
+states/Search_1-loop/node = SubResource( 623 )
+states/Search_1-loop/position = Vector2( 423, 113 )
+transitions = [ "SearchIdle_1-loop", "SearchButt_1-loop", SubResource( 624 ), "SearchButt_1-loop", "SearchIdle_1-loop", SubResource( 625 ), "SearchIdle_1-loop", "Search_1-loop", SubResource( 626 ), "Search_1-loop", "SearchIdle_1-loop", SubResource( 627 ), "SearchIdle_1-loop", "SearchIdleToStand_1", SubResource( 628 ), "SearchStandToIdle_1", "SearchIdle_1-loop", SubResource( 629 ), "SearchButt_1-loop", "Search_1-loop", SubResource( 630 ), "Search_1-loop", "SearchButt_1-loop", SubResource( 631 ), "SearchIdleToStand_1", "SearchStandIdle_1-loop", SubResource( 632 ), "SearchStandIdle_1-loop", "SearchStandToIdle_1", SubResource( 633 ), "SearchStandBreasts_1-loop", "SearchStandIdle_1-loop", SubResource( 634 ), "SearchStandIdle_1-loop", "SearchStandBreasts_1-loop", SubResource( 635 ), "SearchStandIdle_1-loop", "SearchStand_1-loop", SubResource( 636 ), "SearchStand_1-loop", "SearchStandIdle_1-loop", SubResource( 637 ), "SearchStandIdle_1-loop", "SearchSexTease_1-loop", SubResource( 638 ), "SearchSexTease_1-loop", "SearchStandIdle_1-loop", SubResource( 639 ), "SearchSexTease_1-loop", "SearchSexInside_1-loop", SubResource( 640 ), "SearchSexInside_1-loop", "SearchSexTease_1-loop", SubResource( 641 ), "SearchSexInside_1-loop", "SearchSex_1-loop", SubResource( 642 ), "SearchSex_1-loop", "SearchSexInside_1-loop", SubResource( 643 ), "SearchSexTease_1-loop", "SearchSex_1-loop", SubResource( 644 ), "SearchSex_1-loop", "SearchSexTease_1-loop", SubResource( 645 ), "SearchSexInside_1-loop", "SearchSexFast_1-loop", SubResource( 646 ), "SearchSexFast_1-loop", "SearchSexInside_1-loop", SubResource( 647 ), "SearchSexFast_1-loop", "SearchSex_1-loop", SubResource( 648 ), "SearchSex_1-loop", "SearchSexFast_1-loop", SubResource( 649 ), "SearchSexFast_1-loop", "SearchSexTease_1-loop", SubResource( 650 ), "SearchSexTease_1-loop", "SearchSexFast_1-loop", SubResource( 651 ), "SearchIdle_1-loop", "SearchLick_1-loop", SubResource( 652 ), "SearchLick_1-loop", "SearchIdle_1-loop", SubResource( 653 ), "SearchLick_1-loop", "SearchLickFast_1-loop", SubResource( 654 ), "SearchLickFast_1-loop", "SearchLick_1-loop", SubResource( 655 ), "SearchIdle_1-loop", "SearchStroke_1-loop", SubResource( 656 ), "SearchStroke_1-loop", "SearchIdle_1-loop", SubResource( 657 ), "SearchStroke_1-loop", "SearchStrokeFast_1-loop", SubResource( 658 ), "SearchStrokeFast_1-loop", "SearchStroke_1-loop", SubResource( 659 ), "SearchIdle_1-loop", "SearchRub_1-loop", SubResource( 660 ), "SearchRub_1-loop", "SearchIdle_1-loop", SubResource( 661 ), "SearchRub_1-loop", "SearchRubFast_1-loop", SubResource( 662 ), "SearchRubFast_1-loop", "SearchRub_1-loop", SubResource( 663 ), "SearchStroke_1-loop", "SearchRub_1-loop", SubResource( 664 ), "SearchRub_1-loop", "SearchStroke_1-loop", SubResource( 665 ), "SearchStrokeFast_1-loop", "SearchRubFast_1-loop", SubResource( 666 ), "SearchRubFast_1-loop", "SearchStrokeFast_1-loop", SubResource( 667 ), "SearchLick_1-loop", "SearchStroke_1-loop", SubResource( 668 ), "SearchStroke_1-loop", "SearchLick_1-loop", SubResource( 669 ), "SearchLickFast_1-loop", "SearchStrokeFast_1-loop", SubResource( 670 ), "SearchStrokeFast_1-loop", "SearchLickFast_1-loop", SubResource( 671 ), "SearchLick_1-loop", "SearchRub_1-loop", SubResource( 672 ), "SearchRub_1-loop", "SearchLick_1-loop", SubResource( 673 ), "SearchLickFast_1-loop", "SearchRubFast_1-loop", SubResource( 674 ), "SearchRubFast_1-loop", "SearchLickFast_1-loop", SubResource( 675 ) ]
+start_node = "SearchIdle_1-loop"
+graph_offset = Vector2( 76, -54 )
+
+[sub_resource type="AnimationNodeBlendTree" id=676]
+graph_offset = Vector2( -173.156, 18.0513 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 603 )
+nodes/StateMachine/position = Vector2( 160, 120 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=460]
+
+[sub_resource type="AnimationNodeAnimation" id=677]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=678]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=679]
+animation = "SearchButt_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=680]
+animation = "SearchIdleToStand_2"
+
+[sub_resource type="AnimationNodeAnimation" id=681]
+animation = "SearchIdle_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=682]
+animation = "SearchLickFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=683]
+animation = "SearchLick_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=684]
+animation = "SearchRubFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=685]
+animation = "SearchRub_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=686]
+animation = "SearchSexFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=687]
+animation = "SearchSexInside_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=688]
+animation = "SearchSexTease_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=689]
+animation = "SearchSex_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=690]
+animation = "SearchStandBreasts_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=691]
+animation = "SearchStandIdle_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=692]
+animation = "SearchStandToIdle_2"
+
+[sub_resource type="AnimationNodeAnimation" id=693]
+animation = "SearchStand_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=694]
+animation = "SearchStrokeFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=695]
+animation = "SearchStroke_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=696]
+animation = "Search_2-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=697]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=698]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=699]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=700]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=701]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=702]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=703]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=704]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=705]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=706]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=707]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=708]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=709]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=710]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=711]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=712]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=713]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=714]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=715]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=716]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=717]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=718]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=719]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=720]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=721]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=722]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=723]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=724]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=725]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=726]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=727]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=728]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=729]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=730]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=731]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=732]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=733]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=734]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=735]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=736]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=737]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=738]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=739]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=740]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=741]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=742]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=743]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=744]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=745]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=746]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=747]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=748]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=749]
+states/SearchButt_2-loop/node = SubResource( 679 )
+states/SearchButt_2-loop/position = Vector2( -30, -46 )
+states/SearchIdleToStand_2/node = SubResource( 680 )
+states/SearchIdleToStand_2/position = Vector2( 665, -46 )
+states/SearchIdle_2-loop/node = SubResource( 681 )
+states/SearchIdle_2-loop/position = Vector2( 268, -76 )
+states/SearchLickFast_2-loop/node = SubResource( 682 )
+states/SearchLickFast_2-loop/position = Vector2( -186, 321 )
+states/SearchLick_2-loop/node = SubResource( 683 )
+states/SearchLick_2-loop/position = Vector2( -181, 236 )
+states/SearchRubFast_2-loop/node = SubResource( 684 )
+states/SearchRubFast_2-loop/position = Vector2( 326, 321 )
+states/SearchRub_2-loop/node = SubResource( 685 )
+states/SearchRub_2-loop/position = Vector2( 326, 229 )
+states/SearchSexFast_2-loop/node = SubResource( 686 )
+states/SearchSexFast_2-loop/position = Vector2( 1209, 364 )
+states/SearchSexInside_2-loop/node = SubResource( 687 )
+states/SearchSexInside_2-loop/position = Vector2( 1005, 252 )
+states/SearchSexTease_2-loop/node = SubResource( 688 )
+states/SearchSexTease_2-loop/position = Vector2( 1096, 82 )
+states/SearchSex_2-loop/node = SubResource( 689 )
+states/SearchSex_2-loop/position = Vector2( 1315, 199 )
+states/SearchStandBreasts_2-loop/node = SubResource( 690 )
+states/SearchStandBreasts_2-loop/position = Vector2( 632, 262 )
+states/SearchStandIdle_2-loop/node = SubResource( 691 )
+states/SearchStandIdle_2-loop/position = Vector2( 632, 162 )
+states/SearchStandToIdle_2/node = SubResource( 692 )
+states/SearchStandToIdle_2/position = Vector2( 529, 25 )
+states/SearchStand_2-loop/node = SubResource( 693 )
+states/SearchStand_2-loop/position = Vector2( 813, 55 )
+states/SearchStrokeFast_2-loop/node = SubResource( 694 )
+states/SearchStrokeFast_2-loop/position = Vector2( 40, 408 )
+states/SearchStroke_2-loop/node = SubResource( 695 )
+states/SearchStroke_2-loop/position = Vector2( -186, 67 )
+states/Search_2-loop/node = SubResource( 696 )
+states/Search_2-loop/position = Vector2( 444, 115 )
+transitions = [ "SearchIdle_2-loop", "SearchButt_2-loop", SubResource( 697 ), "SearchButt_2-loop", "SearchIdle_2-loop", SubResource( 698 ), "SearchIdle_2-loop", "Search_2-loop", SubResource( 699 ), "Search_2-loop", "SearchIdle_2-loop", SubResource( 700 ), "SearchIdle_2-loop", "SearchIdleToStand_2", SubResource( 701 ), "SearchStandToIdle_2", "SearchIdle_2-loop", SubResource( 702 ), "SearchButt_2-loop", "Search_2-loop", SubResource( 703 ), "Search_2-loop", "SearchButt_2-loop", SubResource( 704 ), "SearchIdleToStand_2", "SearchStandIdle_2-loop", SubResource( 705 ), "SearchStandIdle_2-loop", "SearchStandToIdle_2", SubResource( 706 ), "SearchStandBreasts_2-loop", "SearchStandIdle_2-loop", SubResource( 707 ), "SearchStandIdle_2-loop", "SearchStandBreasts_2-loop", SubResource( 708 ), "SearchStandIdle_2-loop", "SearchStand_2-loop", SubResource( 709 ), "SearchStand_2-loop", "SearchStandIdle_2-loop", SubResource( 710 ), "SearchStandIdle_2-loop", "SearchSexTease_2-loop", SubResource( 711 ), "SearchSexTease_2-loop", "SearchStandIdle_2-loop", SubResource( 712 ), "SearchSexTease_2-loop", "SearchSexInside_2-loop", SubResource( 713 ), "SearchSexInside_2-loop", "SearchSexTease_2-loop", SubResource( 714 ), "SearchSexInside_2-loop", "SearchSex_2-loop", SubResource( 715 ), "SearchSex_2-loop", "SearchSexInside_2-loop", SubResource( 716 ), "SearchSexTease_2-loop", "SearchSex_2-loop", SubResource( 717 ), "SearchSex_2-loop", "SearchSexTease_2-loop", SubResource( 718 ), "SearchSexInside_2-loop", "SearchSexFast_2-loop", SubResource( 719 ), "SearchSexFast_2-loop", "SearchSexInside_2-loop", SubResource( 720 ), "SearchSexFast_2-loop", "SearchSex_2-loop", SubResource( 721 ), "SearchSex_2-loop", "SearchSexFast_2-loop", SubResource( 722 ), "SearchSexFast_2-loop", "SearchSexTease_2-loop", SubResource( 723 ), "SearchSexTease_2-loop", "SearchSexFast_2-loop", SubResource( 724 ), "SearchIdle_2-loop", "SearchLick_2-loop", SubResource( 725 ), "SearchLick_2-loop", "SearchIdle_2-loop", SubResource( 726 ), "SearchLick_2-loop", "SearchLickFast_2-loop", SubResource( 727 ), "SearchLickFast_2-loop", "SearchLick_2-loop", SubResource( 728 ), "SearchIdle_2-loop", "SearchStroke_2-loop", SubResource( 729 ), "SearchStroke_2-loop", "SearchIdle_2-loop", SubResource( 730 ), "SearchStroke_2-loop", "SearchStrokeFast_2-loop", SubResource( 731 ), "SearchStrokeFast_2-loop", "SearchStroke_2-loop", SubResource( 732 ), "SearchIdle_2-loop", "SearchRub_2-loop", SubResource( 733 ), "SearchRub_2-loop", "SearchIdle_2-loop", SubResource( 734 ), "SearchRub_2-loop", "SearchRubFast_2-loop", SubResource( 735 ), "SearchRubFast_2-loop", "SearchRub_2-loop", SubResource( 736 ), "SearchStroke_2-loop", "SearchRub_2-loop", SubResource( 737 ), "SearchRub_2-loop", "SearchStroke_2-loop", SubResource( 738 ), "SearchStrokeFast_2-loop", "SearchRubFast_2-loop", SubResource( 739 ), "SearchRubFast_2-loop", "SearchStrokeFast_2-loop", SubResource( 740 ), "SearchLick_2-loop", "SearchStroke_2-loop", SubResource( 741 ), "SearchStroke_2-loop", "SearchLick_2-loop", SubResource( 742 ), "SearchLickFast_2-loop", "SearchStrokeFast_2-loop", SubResource( 743 ), "SearchStrokeFast_2-loop", "SearchLickFast_2-loop", SubResource( 744 ), "SearchLick_2-loop", "SearchRub_2-loop", SubResource( 745 ), "SearchRub_2-loop", "SearchLick_2-loop", SubResource( 746 ), "SearchLickFast_2-loop", "SearchRubFast_2-loop", SubResource( 747 ), "SearchRubFast_2-loop", "SearchLickFast_2-loop", SubResource( 748 ) ]
+start_node = "SearchIdle_2-loop"
+graph_offset = Vector2( -295, -150 )
+
+[sub_resource type="AnimationNodeBlendTree" id=750]
+graph_offset = Vector2( -173.156, 18.0513 )
+nodes/Animation/node = SubResource( 677 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 678 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 749 )
+nodes/StateMachine/position = Vector2( 160, 120 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=479]
+
+[node name="Search" instance=ExtResource( 2 )]
+script = ExtResource( 4 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0133686, -0.411049, -1.77462 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Sprite3D2" type="Sprite3D" parent="." index="1"]
+transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -2.98838, 4.38021, -1.99917 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Doll3D" parent="." index="2" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.73204, -0.120824, 0 )
+
+[node name="Doll3D2" parent="." index="3" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.73204, -0.120824, 0 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 676 )
+anim_player = NodePath("../Doll3D/DollSkeleton3/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 460 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="5"]
+tree_root = SubResource( 750 )
+anim_player = NodePath("../Doll3D2/DollSkeleton3/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 479 )

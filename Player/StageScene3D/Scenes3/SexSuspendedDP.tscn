@@ -1,0 +1,285 @@
+[gd_scene load_steps=68 format=2]
+
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=3]
+[ext_resource path="res://Player/StageScene3D/Scenes3/SexSuspendedDP.gd" type="Script" id=4]
+
+[sub_resource type="AnimationNodeAnimation" id=446]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=447]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=472]
+animation = "SuspendedDPFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=473]
+animation = "SuspendedDPInside_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=474]
+animation = "SuspendedDPTease_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=475]
+animation = "SuspendedDP_1-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=476]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=477]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=478]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=479]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=480]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=481]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=482]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=483]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=484]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=485]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=486]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=487]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=488]
+states/SuspendedDPFast_1-loop/node = SubResource( 472 )
+states/SuspendedDPFast_1-loop/position = Vector2( 483, 285 )
+states/SuspendedDPInside_1-loop/node = SubResource( 473 )
+states/SuspendedDPInside_1-loop/position = Vector2( 309, 193 )
+states/SuspendedDPTease_1-loop/node = SubResource( 474 )
+states/SuspendedDPTease_1-loop/position = Vector2( 491, 88 )
+states/SuspendedDP_1-loop/node = SubResource( 475 )
+states/SuspendedDP_1-loop/position = Vector2( 667, 178 )
+transitions = [ "SuspendedDPTease_1-loop", "SuspendedDPInside_1-loop", SubResource( 476 ), "SuspendedDPInside_1-loop", "SuspendedDPTease_1-loop", SubResource( 477 ), "SuspendedDPInside_1-loop", "SuspendedDPFast_1-loop", SubResource( 478 ), "SuspendedDPFast_1-loop", "SuspendedDPInside_1-loop", SubResource( 479 ), "SuspendedDPFast_1-loop", "SuspendedDP_1-loop", SubResource( 480 ), "SuspendedDP_1-loop", "SuspendedDPFast_1-loop", SubResource( 481 ), "SuspendedDPTease_1-loop", "SuspendedDP_1-loop", SubResource( 482 ), "SuspendedDP_1-loop", "SuspendedDPTease_1-loop", SubResource( 483 ), "SuspendedDPInside_1-loop", "SuspendedDP_1-loop", SubResource( 484 ), "SuspendedDP_1-loop", "SuspendedDPInside_1-loop", SubResource( 485 ), "SuspendedDPTease_1-loop", "SuspendedDPFast_1-loop", SubResource( 486 ), "SuspendedDPFast_1-loop", "SuspendedDPTease_1-loop", SubResource( 487 ) ]
+start_node = "SuspendedDPTease_1-loop"
+graph_offset = Vector2( -123, -2 )
+
+[sub_resource type="AnimationNodeBlendTree" id=489]
+graph_offset = Vector2( -189.156, -7.9487 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 488 )
+nodes/StateMachine/position = Vector2( 180, 120 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=456]
+
+[sub_resource type="AnimationNodeAnimation" id=490]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=491]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=492]
+animation = "SuspendedDPFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=493]
+animation = "SuspendedDPInside_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=494]
+animation = "SuspendedDPTease_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=495]
+animation = "SuspendedDP_2-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=496]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=497]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=498]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=499]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=500]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=501]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=502]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=503]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=504]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=505]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=506]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=507]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=508]
+states/SuspendedDPFast_2-loop/node = SubResource( 492 )
+states/SuspendedDPFast_2-loop/position = Vector2( 483, 285 )
+states/SuspendedDPInside_2-loop/node = SubResource( 493 )
+states/SuspendedDPInside_2-loop/position = Vector2( 309, 193 )
+states/SuspendedDPTease_2-loop/node = SubResource( 494 )
+states/SuspendedDPTease_2-loop/position = Vector2( 491, 88 )
+states/SuspendedDP_2-loop/node = SubResource( 495 )
+states/SuspendedDP_2-loop/position = Vector2( 667, 178 )
+transitions = [ "SuspendedDPTease_2-loop", "SuspendedDPInside_2-loop", SubResource( 496 ), "SuspendedDPInside_2-loop", "SuspendedDPTease_2-loop", SubResource( 497 ), "SuspendedDPInside_2-loop", "SuspendedDPFast_2-loop", SubResource( 498 ), "SuspendedDPFast_2-loop", "SuspendedDPInside_2-loop", SubResource( 499 ), "SuspendedDPFast_2-loop", "SuspendedDP_2-loop", SubResource( 500 ), "SuspendedDP_2-loop", "SuspendedDPFast_2-loop", SubResource( 501 ), "SuspendedDPTease_2-loop", "SuspendedDP_2-loop", SubResource( 502 ), "SuspendedDP_2-loop", "SuspendedDPTease_2-loop", SubResource( 503 ), "SuspendedDPInside_2-loop", "SuspendedDP_2-loop", SubResource( 504 ), "SuspendedDP_2-loop", "SuspendedDPInside_2-loop", SubResource( 505 ), "SuspendedDPTease_2-loop", "SuspendedDPFast_2-loop", SubResource( 506 ), "SuspendedDPFast_2-loop", "SuspendedDPTease_2-loop", SubResource( 507 ) ]
+start_node = "SuspendedDPTease_2-loop"
+graph_offset = Vector2( -123, -2 )
+
+[sub_resource type="AnimationNodeBlendTree" id=509]
+graph_offset = Vector2( -189.156, -7.9487 )
+nodes/Animation/node = SubResource( 490 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 491 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 508 )
+nodes/StateMachine/position = Vector2( 180, 120 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=462]
+
+[sub_resource type="AnimationNodeAnimation" id=510]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=511]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=512]
+animation = "SuspendedDPFast_3-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=513]
+animation = "SuspendedDPInside_3-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=514]
+animation = "SuspendedDPTease_3-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=515]
+animation = "SuspendedDP_3-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=516]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=517]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=518]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=519]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=520]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=521]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=522]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=523]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=524]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=525]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=526]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=527]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=528]
+states/SuspendedDPFast_3-loop/node = SubResource( 512 )
+states/SuspendedDPFast_3-loop/position = Vector2( 483, 285 )
+states/SuspendedDPInside_3-loop/node = SubResource( 513 )
+states/SuspendedDPInside_3-loop/position = Vector2( 309, 193 )
+states/SuspendedDPTease_3-loop/node = SubResource( 514 )
+states/SuspendedDPTease_3-loop/position = Vector2( 491, 88 )
+states/SuspendedDP_3-loop/node = SubResource( 515 )
+states/SuspendedDP_3-loop/position = Vector2( 667, 178 )
+transitions = [ "SuspendedDPTease_3-loop", "SuspendedDPInside_3-loop", SubResource( 516 ), "SuspendedDPInside_3-loop", "SuspendedDPTease_3-loop", SubResource( 517 ), "SuspendedDPInside_3-loop", "SuspendedDPFast_3-loop", SubResource( 518 ), "SuspendedDPFast_3-loop", "SuspendedDPInside_3-loop", SubResource( 519 ), "SuspendedDPFast_3-loop", "SuspendedDP_3-loop", SubResource( 520 ), "SuspendedDP_3-loop", "SuspendedDPFast_3-loop", SubResource( 521 ), "SuspendedDPTease_3-loop", "SuspendedDP_3-loop", SubResource( 522 ), "SuspendedDP_3-loop", "SuspendedDPTease_3-loop", SubResource( 523 ), "SuspendedDPInside_3-loop", "SuspendedDP_3-loop", SubResource( 524 ), "SuspendedDP_3-loop", "SuspendedDPInside_3-loop", SubResource( 525 ), "SuspendedDPTease_3-loop", "SuspendedDPFast_3-loop", SubResource( 526 ), "SuspendedDPFast_3-loop", "SuspendedDPTease_3-loop", SubResource( 527 ) ]
+start_node = "SuspendedDPTease_3-loop"
+graph_offset = Vector2( -123, -2 )
+
+[sub_resource type="AnimationNodeBlendTree" id=529]
+graph_offset = Vector2( -189.156, -7.9487 )
+nodes/Animation/node = SubResource( 510 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 511 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 528 )
+nodes/StateMachine/position = Vector2( 180, 120 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=471]
+
+[node name="SexSuspendedDP" instance=ExtResource( 2 )]
+script = ExtResource( 4 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.317465, -1.77462 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Doll3D" parent="." index="1" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.193066, -0.120824, 0 )
+
+[node name="Doll3D2" parent="." index="2" instance=ExtResource( 1 )]
+transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 0.193066, -0.120824, 0 )
+
+[node name="Doll3D3" parent="." index="3" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.193066, -0.120824, 0 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 489 )
+anim_player = NodePath("../Doll3D/DollSkeleton3/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 456 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="5"]
+tree_root = SubResource( 509 )
+anim_player = NodePath("../Doll3D2/DollSkeleton3/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 462 )
+
+[node name="AnimationTree3" type="AnimationTree" parent="." index="6"]
+tree_root = SubResource( 529 )
+anim_player = NodePath("../Doll3D3/DollSkeleton3/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 471 )

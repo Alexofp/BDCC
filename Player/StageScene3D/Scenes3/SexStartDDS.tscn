@@ -1,0 +1,142 @@
+[gd_scene load_steps=28 format=2]
+
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=3]
+[ext_resource path="res://Player/StageScene3D/Scenes3/SexStartDDS.gd" type="Script" id=4]
+
+[sub_resource type="AnimationNodeAnimation" id=446]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=447]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=463]
+animation = "ThreesomeStartDDSDef_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=452]
+animation = "ThreesomeStartDDS_1-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=464]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=465]
+
+[sub_resource type="AnimationNodeStateMachine" id=455]
+states/ThreesomeStartDDSDef_1-loop/node = SubResource( 463 )
+states/ThreesomeStartDDSDef_1-loop/position = Vector2( 308, 216 )
+states/ThreesomeStartDDS_1-loop/node = SubResource( 452 )
+states/ThreesomeStartDDS_1-loop/position = Vector2( 308, 138 )
+transitions = [ "ThreesomeStartDDS_1-loop", "ThreesomeStartDDSDef_1-loop", SubResource( 464 ), "ThreesomeStartDDSDef_1-loop", "ThreesomeStartDDS_1-loop", SubResource( 465 ) ]
+start_node = "ThreesomeStartDDS_1-loop"
+
+[sub_resource type="AnimationNodeBlendTree" id=448]
+graph_offset = Vector2( -192.156, -30.9487 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 455 )
+nodes/StateMachine/position = Vector2( 120, 120 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=456]
+
+[sub_resource type="AnimationNodeAnimation" id=457]
+animation = "ThreesomeStartDDS_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=458]
+animation = "ThreesomeStartDDS_2-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=459]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=460]
+
+[sub_resource type="AnimationNodeStateMachine" id=461]
+states/ThreesomeStartDDS_2-loop/node = SubResource( 458 )
+states/ThreesomeStartDDS_2-loop/position = Vector2( 436, 138 )
+"states/ThreesomeStartDDS_2-loop 2/node" = SubResource( 457 )
+"states/ThreesomeStartDDS_2-loop 2/position" = Vector2( 425, 224 )
+transitions = [ "ThreesomeStartDDS_2-loop", "ThreesomeStartDDS_2-loop 2", SubResource( 459 ), "ThreesomeStartDDS_2-loop 2", "ThreesomeStartDDS_2-loop", SubResource( 460 ) ]
+start_node = "ThreesomeStartDDS_2-loop"
+
+[sub_resource type="AnimationNodeBlendTree" id=449]
+graph_offset = Vector2( -189.156, 41.0513 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 461 )
+nodes/StateMachine/position = Vector2( 160, 140 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=462]
+
+[sub_resource type="AnimationNodeAnimation" id=466]
+animation = "ThreesomeStartDDS_3-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=467]
+animation = "ThreesomeStartDDS_3-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=468]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=469]
+
+[sub_resource type="AnimationNodeStateMachine" id=470]
+states/ThreesomeStartDDS_3-loop/node = SubResource( 467 )
+states/ThreesomeStartDDS_3-loop/position = Vector2( 392, 138 )
+"states/ThreesomeStartDDS_3-loop 2/node" = SubResource( 466 )
+"states/ThreesomeStartDDS_3-loop 2/position" = Vector2( 392, 219 )
+transitions = [ "ThreesomeStartDDS_3-loop", "ThreesomeStartDDS_3-loop 2", SubResource( 468 ), "ThreesomeStartDDS_3-loop 2", "ThreesomeStartDDS_3-loop", SubResource( 469 ) ]
+start_node = "ThreesomeStartDDS_3-loop"
+
+[sub_resource type="AnimationNodeBlendTree" id=450]
+graph_offset = Vector2( -188.156, 10.0513 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 470 )
+nodes/StateMachine/position = Vector2( 160, 140 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=471]
+
+[node name="SexStartDDS" instance=ExtResource( 2 )]
+script = ExtResource( 4 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.317465, -1.77462 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Doll3D" parent="." index="1" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0828437, -0.120824, 0 )
+
+[node name="Doll3D2" parent="." index="2" instance=ExtResource( 1 )]
+transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0828437, -0.120824, 0 )
+
+[node name="Doll3D3" parent="." index="3" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0828437, -0.120824, 0 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 448 )
+anim_player = NodePath("../Doll3D/DollSkeleton3/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 456 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="5"]
+tree_root = SubResource( 449 )
+anim_player = NodePath("../Doll3D2/DollSkeleton3/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 462 )
+
+[node name="AnimationTree3" type="AnimationTree" parent="." index="6"]
+tree_root = SubResource( 450 )
+anim_player = NodePath("../Doll3D3/DollSkeleton3/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 471 )

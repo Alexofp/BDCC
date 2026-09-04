@@ -50,3 +50,4 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.104177, 0.477503 )
 [editable path="Doll3D/DollSkeleton"]
 [editable path="Doll3D/DollSkeleton2"]
 [editable path="Doll3D/DollSkeleton3"]
+[editable path="Doll3D/DollSkeletonCombat"]
