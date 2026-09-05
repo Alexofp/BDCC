@@ -54,6 +54,7 @@ const POSE_LOTUS = "POSE_LOTUS"
 const POSE_COWGIRLAMAZON = "POSE_COWGIRLAMAZON"
 const POSE_STANDRIDE = "POSE_STANDRIDE"
 const POSE_COWGIRLCHOKE = "POSE_COWGIRLCHOKE"
+const POSE_STRADDLE = "POSE_STRADDLE"
 
 const PoseToName = {
 	POSE_DEFAULT: "Default",
@@ -64,6 +65,7 @@ const PoseToName = {
 	POSE_LOTUS: "Lotus",
 	POSE_STANDRIDE: "Standing",
 	POSE_COWGIRLAMAZON: "Cowgirl amazon",
+	POSE_STRADDLE: "Straddle",
 }
 const PoseToAnimName = {
 	POSE_DEFAULT: StageScene.SexCowgirl,
@@ -74,13 +76,14 @@ const PoseToAnimName = {
 	POSE_LOTUS: StageScene.SexLotus,
 	POSE_STANDRIDE: StageScene.SexStandRide,
 	POSE_COWGIRLAMAZON: StageScene.SexCowgirlAmazon,
+	POSE_STRADDLE: StageScene.SexCowgirlStraddle,
 }
 func getAvaiablePoses() -> Array:
 	if(currentPose == POSE_COWGIRLCHOKE):
 		return [POSE_COWGIRLCHOKE]
 	
 	if(getSexType() == SexType.DefaultSex):
-		var possible:= [POSE_COWGIRL, POSE_REVERSECOWGIRL, POSE_COWGIRLALT, POSE_LOTUS, POSE_COWGIRLAMAZON]
+		var possible:= [POSE_COWGIRL, POSE_REVERSECOWGIRL, POSE_COWGIRLALT, POSE_LOTUS, POSE_COWGIRLAMAZON, POSE_STRADDLE]
 		if(getSexEngine() != null && getSexEngine().hasWallsNearby()):
 			possible.append(POSE_STANDRIDE)
 		
@@ -185,6 +188,10 @@ func getStartTextForPose(thePose:String) -> String:
 		text = RNG.pick([
 			"{dom.You} {dom.youVerb('stradle')} {sub.you} and {dom.youVerb('rub')} {dom.yourHis} "+getUsedBodypartName()+" against {sub.yourHis} "+getDickName(RNG.pick(["dick", "penis", "cock", "member"]))+throughClothing+".",
 		])
+	elif(thePose == POSE_STRADDLE):
+		text = RNG.pick([
+			"{dom.You} {dom.youVerb('stradle')} {sub.you} and {dom.youVerb('rub')} {dom.yourHis} "+getUsedBodypartName()+" against {sub.yourHis} "+getDickName(RNG.pick(["dick", "penis", "cock", "member"]))+throughClothing+".",
+		])
 	elif(thePose == POSE_REVERSECOWGIRL):
 		text = RNG.pick([
 			"{dom.You} {dom.youVerb('stradle')} {sub.you} in a reverse cowgirl position and {dom.youVerb('rub')} {dom.yourHis} "+getUsedBodypartName()+" against {sub.yourHis} "+getDickName(RNG.pick(["dick", "penis", "cock", "member"]))+throughClothing+".",
@@ -216,6 +223,10 @@ func getSwitchPoseTextForPose(thePose:String) -> String:
 	if(thePose == POSE_COWGIRL):
 		text = RNG.pick([
 			"{dom.You} {dom.youVerb('stradle')} {sub.you} in cowgirl position, {sub.your} "+getDickName(RNG.pick(["dick", "penis", "cock", "member"]))+" is still inside {dom.yourHis} "+getUsedBodypartName()+"!",
+		])
+	elif(thePose == POSE_STRADDLE):
+		text = RNG.pick([
+			"{dom.You} {dom.youVerb('stradle')} {sub.you} in a dominant position, {sub.your} "+getDickName(RNG.pick(["dick", "penis", "cock", "member"]))+" is still inside {dom.yourHis} "+getUsedBodypartName()+"!",
 		])
 	elif(thePose == POSE_REVERSECOWGIRL):
 		text = RNG.pick([

@@ -84,6 +84,10 @@ func getPoseDescriptor() -> String:
 		return " pinned against a wall"
 	if(currentPose == POSE_WALLPRESS):
 		return " pinned against a wall"
+	if(currentPose == POSE_SEARCH):
+		return " pinned against a wall"
+	if(currentPose == POSE_SUSPENDED):
+		return " while suspended above the floor"
 	return " [color=red]FIX DESCRIPTOR[/color]"
 
 const POSE_DEFAULT = "POSE_DEFAULT"
@@ -95,10 +99,13 @@ const POSE_CHOKEFUCK = "POSE_CHOKEFUCK"
 const POSE_BEHIND = "POSE_BEHIND"
 const POSE_MATINGPRESS = "POSE_MATINGPRESS"
 const POSE_LOWDOGGY = "POSE_LOWDOGGY"
+const POSE_SUSPENDED = "POSE_SUSPENDED"
+
 const POSE_LEGRAISED = "POSE_LEGRAISED"
 const POSE_AGAINSTWALL = "POSE_AGAINSTWALL"
 const POSE_PINNEDWALL = "POSE_PINNEDWALL"
 const POSE_WALLPRESS = "POSE_WALLPRESS"
+const POSE_SEARCH = "POSE_SEARCH"
 
 
 const PoseToName = {
@@ -111,10 +118,12 @@ const PoseToName = {
 	POSE_BEHIND: "Behind",
 	POSE_MATINGPRESS: "Mating Press",
 	POSE_LOWDOGGY: "Low Doggy",
+	POSE_SUSPENDED: "Suspended",
 	POSE_LEGRAISED: "Raised leg",
 	POSE_AGAINSTWALL: "Against a wall",
 	POSE_PINNEDWALL: "Pinned into wall",
 	POSE_WALLPRESS: "Wall Press",
+	POSE_SEARCH: "Search",
 }
 const PoseToAnimName = {
 	POSE_DEFAULT: StageScene.SexAllFours,
@@ -126,11 +135,18 @@ const PoseToAnimName = {
 	POSE_BEHIND: StageScene.SexBehind,
 	POSE_MATINGPRESS: StageScene.SexMatingPress,
 	POSE_LOWDOGGY: StageScene.SexLowDoggy,
+	POSE_SUSPENDED: StageScene.SexSuspended,
 	POSE_LEGRAISED: StageScene.SexPawLick,
 	POSE_AGAINSTWALL: StageScene.SexStanding,
 	POSE_PINNEDWALL: StageScene.SexPinnedBehind,
 	POSE_WALLPRESS: StageScene.SexAgainstWall,
+	POSE_SEARCH: StageScene.SearchSex,
 }
+const PoseToShouldSwapForAnim = {
+	POSE_SUSPENDED: true,
+	POSE_SEARCH: true,
+}
+
 func getAvaiablePoses() -> Array:
 	if(currentPose == POSE_CHOKEFUCK):
 		return [POSE_CHOKEFUCK]
@@ -144,12 +160,13 @@ func getAvaiablePoses() -> Array:
 		
 			return possible
 		else:
-			var possible:= [POSE_ALLFOURS, POSE_STANDING, POSE_MISSONARY, POSE_FULLNELSON, POSE_BEHIND, POSE_MATINGPRESS, POSE_LEGRAISED, POSE_LOWDOGGY]
+			var possible:= [POSE_ALLFOURS, POSE_STANDING, POSE_MISSONARY, POSE_FULLNELSON, POSE_BEHIND, POSE_MATINGPRESS, POSE_LEGRAISED, POSE_LOWDOGGY, POSE_SUSPENDED]
 			
 			if(getSexEngine() != null && getSexEngine().hasWallsNearby()):
 				possible.append(POSE_AGAINSTWALL)
 				possible.append(POSE_PINNEDWALL)
 				possible.append(POSE_WALLPRESS)
+				possible.append(POSE_SEARCH)
 			
 			return possible
 	
@@ -285,6 +302,14 @@ func getStartTextForPose(thePose) -> String:
 		text = RNG.pick([
 			"{dom.You} {dom.youVerb('pin')} {sub.you} firmly against the wall, legs raised high, {sub.yourHis} hands reaching out to grab {dom.yourHis} shoulders. {dom.You} {dom.youVerb('press', 'presses')} {dom.yourHis} "+getDickName()+" against {sub.yourHis} "+getUsedBodypartName()+throughClothing,
 		])
+	elif(thePose == POSE_SUSPENDED):
+		text = RNG.pick([
+			"{dom.You} {dom.youVerb('grab')} {dom.youHim} and {dom.youVerb('raise', 'raises')} above the floor, {dom.yourHis} hands holding {sub.yourHis} body. {dom.YourHis} "+getDickName()+" is pressed against {sub.yourHis} "+getUsedBodypartName()+throughClothing,
+		])
+	elif(thePose == POSE_SEARCH):
+		text = RNG.pick([
+			"{dom.You} {dom.youVerb('pin')} {sub.you} against the wall, {sub.yourHis} hands instinctively reaching up to grab it for stability. {dom.You} {dom.youVerb('press', 'presses')} {dom.yourHis} "+getDickName()+" against {sub.yourHis} "+getUsedBodypartName()+throughClothing,
+		])
 	else:
 		text = RNG.pick([
 			"{dom.You} {dom.youVerb('position')} {dom.yourself} behind {sub.your} butt with {dom.yourHis} "+getDickName()+" out and {dom.youVerb('press', 'presses')} it against {sub.yourHis} "+getUsedBodypartName()+throughClothing,
@@ -336,6 +361,14 @@ func getSwitchPoseTextForPose(thePose:String) -> String:
 	elif(thePose == POSE_WALLPRESS):
 		text = RNG.pick([
 			"{dom.You} {dom.youVerb('pin')} {sub.you} firmly against the wall, legs raised high, {sub.yourHis} hands reaching out to grab {dom.yourHis} shoulders. {dom.YourHis} "+getDickName()+" is still inside {sub.yourHis} "+getUsedBodypartName()+"!",
+		])
+	elif(thePose == POSE_SUSPENDED):
+		text = RNG.pick([
+			"{dom.You} {dom.youVerb('grab')} {dom.youHim} and {dom.youVerb('raise', 'raises')} above the floor, {dom.yourHis} hands holding {sub.yourHis} body. {dom.YourHis} "+getDickName()+" is still inside {sub.yourHis} "+getUsedBodypartName()+"!",
+		])
+	elif(thePose == POSE_SEARCH):
+		text = RNG.pick([
+			"{dom.You} {dom.youVerb('pin')} {sub.you} against the wall, {sub.yourHis} hands instinctively reaching up to grab it for stability. {dom.YourHis} "+getDickName()+" is still inside {sub.yourHis} "+getUsedBodypartName()+"!",
 		])
 	else:
 		text = RNG.pick([
@@ -859,24 +892,31 @@ func getAnimation():
 	var shouldFlop = (getSub().hasBoundArms() || getSubInfo().isUnconscious()) && supportsFlop
 	var shouldUncon = getSubInfo().isUnconscious()
 	
+	var thePc:int = DOM_0
+	var theNpc:int = SUB_0
+	var shouldSwapChars:bool = PoseToShouldSwapForAnim.get(currentPose, false)
+	if(shouldSwapChars):
+		thePc = SUB_0
+		theNpc = DOM_0
+	
 	if(shouldFlop):
 		if(state in [""]):
-			return [animToPlay, "teaseflop", {pc=DOM_0, npc=SUB_0}]
+			return [animToPlay, "teaseflop", {pc=thePc, npc=theNpc}]
 		if(state in ["aftercumminginside", "knotting"]):
-			return [animToPlay, "insideflop", {pc=DOM_0, npc=SUB_0}]
+			return [animToPlay, "insideflop", {pc=thePc, npc=theNpc}]
 		if(getDomInfo().isCloseToCumming() || (isStraponSex() && getSubInfo().isCloseToCumming())):
-			return [animToPlay, "fastflop", {pc=DOM_0, npc=SUB_0}]
+			return [animToPlay, "fastflop", {pc=thePc, npc=theNpc}]
 			
-		return [animToPlay, "sexflop", {pc=DOM_0, npc=SUB_0}]
+		return [animToPlay, "sexflop", {pc=thePc, npc=theNpc}]
 	else:
 		if(state in [""]):
-			return [animToPlay, "tease", {pc=DOM_0, npc=SUB_0, uncon=shouldUncon}]
+			return [animToPlay, "tease", {pc=thePc, npc=theNpc, uncon=shouldUncon}]
 		if(state in ["aftercumminginside", "knotting"]):
-			return [animToPlay, "inside", {pc=DOM_0, npc=SUB_0, uncon=shouldUncon}]
+			return [animToPlay, "inside", {pc=thePc, npc=theNpc, uncon=shouldUncon}]
 		if(getDomInfo().isCloseToCumming() || (isStraponSex() && getSubInfo().isCloseToCumming())):
-			return [animToPlay, "fast", {pc=DOM_0, npc=SUB_0, uncon=shouldUncon}]
+			return [animToPlay, "fast", {pc=thePc, npc=theNpc, uncon=shouldUncon}]
 			
-		return [animToPlay, "sex", {pc=DOM_0, npc=SUB_0, uncon=shouldUncon}]
+		return [animToPlay, "sex", {pc=thePc, npc=theNpc, uncon=shouldUncon}]
 
 func getDomCondom():
 	return getDom().getWornCondom()

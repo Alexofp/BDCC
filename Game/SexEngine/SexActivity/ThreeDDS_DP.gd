@@ -1,6 +1,23 @@
 extends SexActivityBase
 
 var straponTimer:int = 0
+var currentPose:String = ""
+
+const POSE_DEFAULT = "POSE_DEFAULT"
+const POSE_SUSPENDED = "POSE_SUSPENDED"
+
+const PoseToName = {
+	POSE_DEFAULT: "Default",
+	POSE_SUSPENDED: "Suspended",
+}
+const PoseToAnimName = {
+	POSE_DEFAULT: StageScene.SexDP,
+	POSE_SUSPENDED: StageScene.SexSuspendedDP,
+}
+func getAvaiablePoses() -> Array:
+	if(getSexType() == SexType.DefaultSex):
+		return [POSE_DEFAULT, POSE_SUSPENDED]
+	return [POSE_DEFAULT]
 
 func _init():
 	id = "ThreeDDS_DP"
@@ -95,6 +112,7 @@ func isAllowedAsRole(_sexEngine, _indx:int, _sexInfo:SexInfoBase, skipTagsCheck:
 	return false
 
 func startActivity(_args):
+	currentPose = RNG.pick(getAvaiablePoses())
 	var otherDomID:String = getDomIDsThatSatisfyConditions(getSexEngine(), [COND_HasReachablePenisOrStrapon], 1, [getDomInfo().getCharID()])[0]
 	pullInDom(otherDomID)
 	
@@ -105,6 +123,7 @@ func startActivity(_args):
 	react(SexReaction.ThreesomeStart, [100.0, 100.0, 100.0], [DOM_0, SUB_0, DOM_1])
 
 func onSwitchFrom(_otherActivity, _args):
+	currentPose = RNG.pick(getAvaiablePoses())
 	pullInDom(_args[1])
 	
 	addText("{dom1.You} {dom1.youVerb('join')} and {dom1.youVerb('turn')} this sex into a double-penetration!")
@@ -172,6 +191,14 @@ func getActions(_indx:int):
 		if(state == "inside" && !checkActiveDomPC(_indx)):
 			addAction("fuckMore", getContinueSexScore(_indx, SUB_0, getDom0Hole() if _indx == DOM_0 else getDom1Hole())-getStopScore(), "Continue fucking", "Start fucking them again")
 			addAction("pullOut", getStopScore(), "Pull out", "Pull your member out")
+		
+		for pose in getAvaiablePoses():
+			if(pose == currentPose):
+				continue
+			var poseName = "error"
+			if(PoseToName.has(pose)):
+				poseName = PoseToName[pose]
+			addAction("switchpose", 0.0, poseName, "Change pose", {A_CATEGORY: ["Switch pose"], A_ARGS: [pose]})
 		
 		if(state == ""):
 			addAction("rub", 1.0 if !isReadyToPenetrate(_indx) else 0.4, "Rub", "Rub your cock against them", {A_PRIORITY: 4})
@@ -266,6 +293,12 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 	if(_id == "domcumstrapon"):
 		cumGeneric(_indx, _indx)
 		return
+	if(_id == "switchpose"):
+		var newPose:String = _action["args"][0]
+		var theID:String = getDomOrSubID(_indx)
+		addText("{"+theID+".You} {"+theID+".youVerb('switch', 'switches')} the pose!")
+		currentPose = newPose
+		return
 
 	if(_id == "pullaway"):
 		var successChance:float = getSubResistChance(30.0, 25.0)
@@ -336,13 +369,15 @@ func getDom1Fetish() -> String:
 	return Fetish.AnalSexGiving
 
 func getAnimation():
+	var theAnim:String = PoseToAnimName.get(currentPose, StageScene.SexDP)
+	
 	if(state == "inside"):
-		return [StageScene.SexDP, "inside", {pc=SUB_0, npc=DOM_0, npc2=DOM_1, npcBodyState={hard=true}, npc2BodyState={hard=true}}]
+		return [theAnim, "inside", {pc=SUB_0, npc=DOM_0, npc2=DOM_1, npcBodyState={hard=true}, npc2BodyState={hard=true}}]
 	if(state == "sex"):
 		if((isCloseToCumming(DOM_0) && isCloseToCumming(DOM_1)) || (isStrapon(DOM_0) && isStrapon(DOM_1) && isCloseToCumming(SUB_0))):
-			return [StageScene.SexDP, "fast", {pc=SUB_0, npc=DOM_0, npc2=DOM_1, npcBodyState={hard=true}, npc2BodyState={hard=true}}]
-		return [StageScene.SexDP, "sex", {pc=SUB_0, npc=DOM_0, npc2=DOM_1, npcBodyState={hard=true}, npc2BodyState={hard=true}}]
-	return [StageScene.SexDP, "tease", {pc=SUB_0, npc=DOM_0, npc2=DOM_1}]
+			return [theAnim, "fast", {pc=SUB_0, npc=DOM_0, npc2=DOM_1, npcBodyState={hard=true}, npc2BodyState={hard=true}}]
+		return [theAnim, "sex", {pc=SUB_0, npc=DOM_0, npc2=DOM_1, npcBodyState={hard=true}, npc2BodyState={hard=true}}]
+	return [theAnim, "tease", {pc=SUB_0, npc=DOM_0, npc2=DOM_1}]
 	#return [StageScene.Duo, "stand", {pc=SUB_0, npc=DOM_0, npcAction="stand"}]
 
 func getAnimationPriority():
@@ -355,6 +390,7 @@ func saveData():
 	var data = .saveData()
 	
 	data["straponTimer"] = straponTimer
+	data["currentPose"] = currentPose
 
 	return data
 	
@@ -362,3 +398,6 @@ func loadData(data):
 	.loadData(data)
 	
 	straponTimer = SAVE.loadVar(data, "straponTimer", 0)
+	currentPose = SAVE.loadVar(data, "currentPose", "")
+	if(currentPose.empty()):
+		currentPose = RNG.pick(getAvaiablePoses())

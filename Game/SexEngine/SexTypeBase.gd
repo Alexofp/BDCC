@@ -29,8 +29,8 @@ func isUnconscious(_charID:String) -> bool:
 
 func getDefaultAnimation():
 	var sexEngine = getSexEngine()
-	var theDomIDs:Array = sexEngine.getXFreeDomIDsForAnim(1)
-	var theSubIDs:Array = sexEngine.getXFreeSubIDsForAnim(1)
+	var theDomIDs:Array = sexEngine.getXFreeDomIDsForAnim(2)
+	var theSubIDs:Array = sexEngine.getXFreeSubIDsForAnim(2)
 	
 	if(theDomIDs.empty() && theSubIDs.empty()):
 		return null
@@ -40,6 +40,14 @@ func getDefaultAnimation():
 		return [StageScene.GivingBirth, "idle", {pc=theSubIDs[0]}]
 	if(theSubIDs.empty()):
 		return [StageScene.Solo, "stand", {pc=theDomIDs[0]}]
+	
+	if(theDomIDs.size() > 1):
+		if(isUnconscious(theSubIDs[0])):
+			return [StageScene.SexStartDDS, "defeated", {pc=theSubIDs[0], npc=theDomIDs[0], npc2=theDomIDs[1]}]
+		return [StageScene.SexStartDDS, "start", {pc=theSubIDs[0], npc=theDomIDs[0], npc2=theDomIDs[1]}]
+	
+	if(theSubIDs.size() > 1 && !isUnconscious(theSubIDs[0]) && !isUnconscious(theSubIDs[1])):
+		return [StageScene.SexStartDSS, "start", {pc=theDomIDs[0], npc=theSubIDs[0], npc2=theSubIDs[1]}]
 	
 	if(isUnconscious(theSubIDs[0])):
 		return [StageScene.SexStart, "defeated", {pc=theDomIDs[0], npc=theSubIDs[0]}]
