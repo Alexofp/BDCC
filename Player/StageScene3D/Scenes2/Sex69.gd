@@ -63,34 +63,55 @@ func playAnimation(animID, _args = {}):
 	
 	var state_machine = animationTree["parameters/StateMachine/playback"]
 	var state_machine2 = animationTree2["parameters/StateMachine/playback"]
-
+	
+	if(animID in ["MF", "MM", "MFfast", "MMfast", "MFinside", "MMinside"]):
+		doll2.clampPenisScale(0.95, 1.2)
+		if(doll.getState("mouth") in ["", null]):
+			doll.setTemporaryState("mouth", "open")
+	if(animID in ["FM", "MM", "FMfast", "MMfast", "FMinside", "MMinside"]):
+		doll.clampPenisScale(0.95, 1.2)
+		if(doll2.getState("mouth") in ["", null]):
+			doll2.setTemporaryState("mouth", "open")
+	
 	if(animID == "tease"):
 		state_machine.travel("Sex69Tease_1-loop")
 		state_machine2.travel("Sex69Tease_2-loop")
 	if(animID == "FM"):
 		state_machine.travel("Sex69_1-loop")
 		state_machine2.travel("Sex69_2-loop")
-		doll.clampPenisScale(0.95, 1.2)
-		if(doll2.getState("mouth") in ["", null]):
-			doll2.setTemporaryState("mouth", "open")
 	if(animID == "MF"):
 		state_machine.travel("Sex69MF_1-loop")
 		state_machine2.travel("Sex69MF_2-loop")
-		doll2.clampPenisScale(0.95, 1.2)
-		if(doll.getState("mouth") in ["", null]):
-			doll.setTemporaryState("mouth", "open")
 	if(animID == "FF"):
 		state_machine.travel("Sex69FF_1-loop")
 		state_machine2.travel("Sex69FF_2-loop")
 	if(animID == "MM"):
 		state_machine.travel("Sex69MM_1-loop")
 		state_machine2.travel("Sex69MM_2-loop")
-		doll.clampPenisScale(0.95, 1.2)
-		if(doll2.getState("mouth") in ["", null]):
-			doll2.setTemporaryState("mouth", "open")
-		doll2.clampPenisScale(0.95, 1.2)
-		if(doll.getState("mouth") in ["", null]):
-			doll.setTemporaryState("mouth", "open")
+	if(animID == "FMfast"):
+		state_machine.travel("Sex69Fast_1-loop")
+		state_machine2.travel("Sex69Fast_2-loop")
+	if(animID == "MFfast"):
+		state_machine.travel("Sex69MFFast_1-loop")
+		state_machine2.travel("Sex69MFFast_2-loop")
+	if(animID == "FFfast"):
+		state_machine.travel("Sex69FFFast_1-loop")
+		state_machine2.travel("Sex69FFFast_2-loop")
+	if(animID == "MMfast"):
+		state_machine.travel("Sex69MMFast_1-loop")
+		state_machine2.travel("Sex69MMFast_2-loop")
+	if(animID == "FMinside"):
+		state_machine.travel("Sex69Inside_1-loop")
+		state_machine2.travel("Sex69Inside_2-loop")
+	if(animID == "MFinside"):
+		state_machine.travel("Sex69MFInside_1-loop")
+		state_machine2.travel("Sex69MFInside_2-loop")
+	if(animID == "FFinside"):
+		state_machine.travel("Sex69FFInside_1-loop")
+		state_machine2.travel("Sex69FFInside_2-loop")
+	if(animID == "MMinside"):
+		state_machine.travel("Sex69MMInside_1-loop")
+		state_machine2.travel("Sex69MMInside_2-loop")
 
 
 
@@ -107,7 +128,7 @@ func canTransitionTo(_actionID, _args = []):
 	return true
 
 func getSupportedStates():
-	return ["tease", "FM", "MF", "FF", "MM"]
+	return ["tease", "FM", "MF", "FF", "MM", "FMfast", "MFfast", "FFfast", "MMfast", "FMinside", "MFinside", "FFinside", "MMinside"]
 
 func getVarNpcs():
 	return ["pc", "npc"]

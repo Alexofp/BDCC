@@ -408,6 +408,8 @@ func getAnimation():
 			aName += "M"
 		else:
 			aName += "F"
+		if(getDomInfo().isCloseToCumming() || getSubInfo().isCloseToCumming()):
+			aName += "fast"
 		
 		return [StageScene.Sex69, aName, {npc=DOM_0, pc=SUB_0, bodyState={hard=true}, npcBodyState={hard=true}}]
 	return [StageScene.Sex69, "tease", {npc=DOM_0, pc=SUB_0}]

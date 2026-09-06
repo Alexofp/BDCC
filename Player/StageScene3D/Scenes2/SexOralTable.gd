@@ -109,6 +109,9 @@ func playAnimation(animID, _args = {}):
 	if(animID == "grindfast"):
 		state_machine.travel("SexOralTableGrindFast_1-loop")
 		state_machine2.travel("SexOralTableGrindFast_2-loop")
+	if(animID == "lickinside"):
+		state_machine.travel("SexOralTableLickInside_1-loop")
+		state_machine2.travel("SexOralTableLickInside_2-loop")
 
 
 func canTransitionTo(_actionID, _args = []):
@@ -124,7 +127,7 @@ func canTransitionTo(_actionID, _args = []):
 	return true
 
 func getSupportedStates():
-	return ["tease", "suck", "suckfast", "suckinside", "stroke", "peemale", "peefem", "rub", "hover", "lick", "grind", "grindfast"]
+	return ["tease", "suck", "suckfast", "suckinside", "stroke", "peemale", "peefem", "rub", "hover", "lick", "grind", "grindfast", "lickinside"]
 
 func getVarNpcs():
 	return ["pc", "npc"]
