@@ -3130,6 +3130,7 @@ func calculateCombatAnimLens():
 
 func saveRegistryCache() -> Dictionary:
 	var data:Dictionary = {
+		version = getGameVersionString(),
 		pathToIDCache = pathToIDCache,
 		IDToPathCache = IDToPathCache,
 		sceneCreators = sceneCreators,
@@ -3139,6 +3140,8 @@ func saveRegistryCache() -> Dictionary:
 	return data
 
 func loadRegistryCache(_data:Dictionary):
+	if(!_data.has("version") || _data["version"] != getGameVersionString()):
+		return
 	pathToIDCache = SAVE.loadVar(_data, "pathToIDCache", {})
 	IDToPathCache = SAVE.loadVar(_data, "IDToPathCache", {})
 	sceneCreators = SAVE.loadVar(_data, "sceneCreators", {})
