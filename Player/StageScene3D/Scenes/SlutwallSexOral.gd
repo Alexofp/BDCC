@@ -62,18 +62,32 @@ func playAnimation(animID, _args = {}):
 	var state_machine = animationTree["parameters/StateMachine/playback"]
 	var state_machine2 = animationTree2["parameters/StateMachine/playback"]
 
+	if(animID in ["blowjob", "blowjobfast", "blowjobinside"]):
+		doll.clampPenisScale(1.0, 1.3)
+		if(doll2.getState("mouth") in ["", null]):
+			doll2.setTemporaryState("mouth", "open")
+
 	if(animID == "tease"):
 		state_machine.travel("SlutwallOralIdle_1-loop")
 		state_machine2.travel("SlutwallOralIdle_2-loop")
 	if(animID == "lick"):
 		state_machine.travel("SlutwallLick_1-loop")
 		state_machine2.travel("SlutwallLick_2-loop")
+	if(animID == "lickfast"):
+		state_machine.travel("SlutwallLickFast_1-loop")
+		state_machine2.travel("SlutwallLickFast_2-loop")
+	if(animID == "lickinside"):
+		state_machine.travel("SlutwallLickInside_1-loop")
+		state_machine2.travel("SlutwallLickInside_2-loop")
 	if(animID == "blowjob"):
 		state_machine.travel("SlutwallOral_1-loop")
 		state_machine2.travel("SlutwallOral_2-loop")
-		doll.clampPenisScale(1.0, 1.3)
-		if(doll2.getState("mouth") in ["", null]):
-			doll2.setTemporaryState("mouth", "open")
+	if(animID == "blowjobfast"):
+		state_machine.travel("SlutwallOralFast_1-loop")
+		state_machine2.travel("SlutwallOralFast_2-loop")
+	if(animID == "blowjobinside"):
+		state_machine.travel("SlutwallOralInside_1-loop")
+		state_machine2.travel("SlutwallOralInside_2-loop")
 	if(animID == "handjob"):
 		state_machine.travel("SlutwallHandjob_1-loop")
 		state_machine2.travel("SlutwallHandjob_2-loop")
@@ -93,7 +107,7 @@ func canTransitionTo(_actionID, _args = []):
 	return true
 
 func getSupportedStates():
-	return ["tease", "lick", "blowjob", "handjob"]
+	return ["tease", "lick", "lickfast", "lickinside", "blowjob", "blowjobfast", "blowjobinside", "handjob"]
 
 func getVarNpcs():
 	return ["pc", "npc"]

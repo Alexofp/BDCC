@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=79 format=2]
 
 [ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
@@ -15,8 +15,17 @@ filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:F
 [sub_resource type="AnimationNodeAnimation" id=179]
 animation = "PuppySexOralFast_1-loop"
 
+[sub_resource type="AnimationNodeAnimation" id=209]
+animation = "PuppySexOralGrindFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=210]
+animation = "PuppySexOralGrindInside_1-loop"
+
 [sub_resource type="AnimationNodeAnimation" id=180]
 animation = "PuppySexOralGrind_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=211]
+animation = "PuppySexOralInside_1-loop"
 
 [sub_resource type="AnimationNodeAnimation" id=181]
 animation = "PuppySexOralTease_1-loop"
@@ -42,18 +51,78 @@ xfade_time = 0.5
 [sub_resource type="AnimationNodeStateMachineTransition" id=188]
 xfade_time = 0.5
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=212]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=213]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=214]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=215]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=216]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=217]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=218]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=219]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=220]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=221]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=222]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=223]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=224]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=225]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=226]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=227]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=228]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=229]
+xfade_time = 0.5
+
 [sub_resource type="AnimationNodeStateMachine" id=189]
 states/PuppySexOralFast_1-loop/node = SubResource( 179 )
-states/PuppySexOralFast_1-loop/position = Vector2( 472, 218 )
+states/PuppySexOralFast_1-loop/position = Vector2( 329, 294 )
+states/PuppySexOralGrindFast_1-loop/node = SubResource( 209 )
+states/PuppySexOralGrindFast_1-loop/position = Vector2( 1065, 114 )
+states/PuppySexOralGrindInside_1-loop/node = SubResource( 210 )
+states/PuppySexOralGrindInside_1-loop/position = Vector2( 844, 205 )
 states/PuppySexOralGrind_1-loop/node = SubResource( 180 )
-states/PuppySexOralGrind_1-loop/position = Vector2( 784, 61 )
+states/PuppySexOralGrind_1-loop/position = Vector2( 851, 3 )
+states/PuppySexOralInside_1-loop/node = SubResource( 211 )
+states/PuppySexOralInside_1-loop/position = Vector2( 531, 226 )
 states/PuppySexOralTease_1-loop/node = SubResource( 181 )
 states/PuppySexOralTease_1-loop/position = Vector2( 472, 61 )
 states/PuppySexOral_1-loop/node = SubResource( 182 )
-states/PuppySexOral_1-loop/position = Vector2( 472, 136 )
-transitions = [ "PuppySexOralTease_1-loop", "PuppySexOral_1-loop", SubResource( 183 ), "PuppySexOral_1-loop", "PuppySexOralTease_1-loop", SubResource( 184 ), "PuppySexOral_1-loop", "PuppySexOralFast_1-loop", SubResource( 185 ), "PuppySexOralFast_1-loop", "PuppySexOral_1-loop", SubResource( 186 ), "PuppySexOralTease_1-loop", "PuppySexOralGrind_1-loop", SubResource( 187 ), "PuppySexOralGrind_1-loop", "PuppySexOralTease_1-loop", SubResource( 188 ) ]
+states/PuppySexOral_1-loop/position = Vector2( 259, 142 )
+transitions = [ "PuppySexOralTease_1-loop", "PuppySexOral_1-loop", SubResource( 183 ), "PuppySexOral_1-loop", "PuppySexOralTease_1-loop", SubResource( 184 ), "PuppySexOral_1-loop", "PuppySexOralFast_1-loop", SubResource( 185 ), "PuppySexOralFast_1-loop", "PuppySexOral_1-loop", SubResource( 186 ), "PuppySexOralTease_1-loop", "PuppySexOralGrind_1-loop", SubResource( 187 ), "PuppySexOralGrind_1-loop", "PuppySexOralTease_1-loop", SubResource( 188 ), "PuppySexOral_1-loop", "PuppySexOralInside_1-loop", SubResource( 212 ), "PuppySexOralInside_1-loop", "PuppySexOral_1-loop", SubResource( 213 ), "PuppySexOralFast_1-loop", "PuppySexOralInside_1-loop", SubResource( 214 ), "PuppySexOralInside_1-loop", "PuppySexOralFast_1-loop", SubResource( 215 ), "PuppySexOralTease_1-loop", "PuppySexOralInside_1-loop", SubResource( 216 ), "PuppySexOralInside_1-loop", "PuppySexOralTease_1-loop", SubResource( 217 ), "PuppySexOralTease_1-loop", "PuppySexOralFast_1-loop", SubResource( 218 ), "PuppySexOralFast_1-loop", "PuppySexOralTease_1-loop", SubResource( 219 ), "PuppySexOralGrindFast_1-loop", "PuppySexOralTease_1-loop", SubResource( 220 ), "PuppySexOralTease_1-loop", "PuppySexOralGrindFast_1-loop", SubResource( 221 ), "PuppySexOralTease_1-loop", "PuppySexOralGrindInside_1-loop", SubResource( 222 ), "PuppySexOralGrindInside_1-loop", "PuppySexOralTease_1-loop", SubResource( 223 ), "PuppySexOralGrindInside_1-loop", "PuppySexOralGrind_1-loop", SubResource( 224 ), "PuppySexOralGrind_1-loop", "PuppySexOralGrindInside_1-loop", SubResource( 225 ), "PuppySexOralGrind_1-loop", "PuppySexOralGrindFast_1-loop", SubResource( 226 ), "PuppySexOralGrindFast_1-loop", "PuppySexOralGrind_1-loop", SubResource( 227 ), "PuppySexOralGrindFast_1-loop", "PuppySexOralGrindInside_1-loop", SubResource( 228 ), "PuppySexOralGrindInside_1-loop", "PuppySexOralGrindFast_1-loop", SubResource( 229 ) ]
 start_node = "PuppySexOralTease_1-loop"
-graph_offset = Vector2( -90, -5 )
+graph_offset = Vector2( 95, -50 )
 
 [sub_resource type="AnimationNodeBlendTree" id=190]
 graph_offset = Vector2( -323.25, 110.278 )
@@ -64,7 +133,7 @@ nodes/CuffsBlend/position = Vector2( 440, 160 )
 nodes/StateMachine/node = SubResource( 189 )
 nodes/StateMachine/position = Vector2( 140, 140 )
 nodes/output/position = Vector2( 680, 180 )
-node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation" ]
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=191]
 
@@ -85,8 +154,17 @@ filters = [ "Doll3D/Skeleton:Foot.L", "Doll3D/Skeleton:Foot.R", "Doll3D/Skeleton
 [sub_resource type="AnimationNodeAnimation" id=197]
 animation = "PuppySexOralFast_2-loop"
 
+[sub_resource type="AnimationNodeAnimation" id=230]
+animation = "PuppySexOralGrindFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=231]
+animation = "PuppySexOralGrindInside_2-loop"
+
 [sub_resource type="AnimationNodeAnimation" id=198]
 animation = "PuppySexOralGrind_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=232]
+animation = "PuppySexOralInside_2-loop"
 
 [sub_resource type="AnimationNodeAnimation" id=199]
 animation = "PuppySexOralTease_2-loop"
@@ -112,18 +190,78 @@ xfade_time = 0.5
 [sub_resource type="AnimationNodeStateMachineTransition" id=206]
 xfade_time = 0.5
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=233]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=234]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=235]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=236]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=237]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=238]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=239]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=240]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=241]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=242]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=243]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=244]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=245]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=246]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=247]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=248]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=249]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=250]
+xfade_time = 0.5
+
 [sub_resource type="AnimationNodeStateMachine" id=207]
 states/PuppySexOralFast_2-loop/node = SubResource( 197 )
-states/PuppySexOralFast_2-loop/position = Vector2( 416, 251 )
+states/PuppySexOralFast_2-loop/position = Vector2( 95, 348 )
+states/PuppySexOralGrindFast_2-loop/node = SubResource( 230 )
+states/PuppySexOralGrindFast_2-loop/position = Vector2( 834, 270 )
+states/PuppySexOralGrindInside_2-loop/node = SubResource( 231 )
+states/PuppySexOralGrindInside_2-loop/position = Vector2( 1149, 205 )
 states/PuppySexOralGrind_2-loop/node = SubResource( 198 )
-states/PuppySexOralGrind_2-loop/position = Vector2( 723, 91 )
+states/PuppySexOralGrind_2-loop/position = Vector2( 938, 64 )
+states/PuppySexOralInside_2-loop/node = SubResource( 232 )
+states/PuppySexOralInside_2-loop/position = Vector2( 417, 281 )
 states/PuppySexOralTease_2-loop/node = SubResource( 199 )
 states/PuppySexOralTease_2-loop/position = Vector2( 424, 91 )
 states/PuppySexOral_2-loop/node = SubResource( 200 )
-states/PuppySexOral_2-loop/position = Vector2( 416, 167 )
-transitions = [ "PuppySexOralTease_2-loop", "PuppySexOralGrind_2-loop", SubResource( 201 ), "PuppySexOralGrind_2-loop", "PuppySexOralTease_2-loop", SubResource( 202 ), "PuppySexOralTease_2-loop", "PuppySexOral_2-loop", SubResource( 203 ), "PuppySexOral_2-loop", "PuppySexOralTease_2-loop", SubResource( 204 ), "PuppySexOral_2-loop", "PuppySexOralFast_2-loop", SubResource( 205 ), "PuppySexOralFast_2-loop", "PuppySexOral_2-loop", SubResource( 206 ) ]
+states/PuppySexOral_2-loop/position = Vector2( 115, 153 )
+transitions = [ "PuppySexOralTease_2-loop", "PuppySexOralGrind_2-loop", SubResource( 201 ), "PuppySexOralGrind_2-loop", "PuppySexOralTease_2-loop", SubResource( 202 ), "PuppySexOralTease_2-loop", "PuppySexOral_2-loop", SubResource( 203 ), "PuppySexOral_2-loop", "PuppySexOralTease_2-loop", SubResource( 204 ), "PuppySexOral_2-loop", "PuppySexOralFast_2-loop", SubResource( 205 ), "PuppySexOralFast_2-loop", "PuppySexOral_2-loop", SubResource( 206 ), "PuppySexOralTease_2-loop", "PuppySexOralInside_2-loop", SubResource( 233 ), "PuppySexOralInside_2-loop", "PuppySexOralTease_2-loop", SubResource( 234 ), "PuppySexOral_2-loop", "PuppySexOralInside_2-loop", SubResource( 235 ), "PuppySexOralInside_2-loop", "PuppySexOral_2-loop", SubResource( 236 ), "PuppySexOralInside_2-loop", "PuppySexOralFast_2-loop", SubResource( 237 ), "PuppySexOralFast_2-loop", "PuppySexOralInside_2-loop", SubResource( 238 ), "PuppySexOralFast_2-loop", "PuppySexOralTease_2-loop", SubResource( 239 ), "PuppySexOralTease_2-loop", "PuppySexOralFast_2-loop", SubResource( 240 ), "PuppySexOralTease_2-loop", "PuppySexOralGrindFast_2-loop", SubResource( 241 ), "PuppySexOralGrindFast_2-loop", "PuppySexOralTease_2-loop", SubResource( 242 ), "PuppySexOralGrind_2-loop", "PuppySexOralGrindFast_2-loop", SubResource( 243 ), "PuppySexOralGrindFast_2-loop", "PuppySexOralGrind_2-loop", SubResource( 244 ), "PuppySexOralGrindInside_2-loop", "PuppySexOralTease_2-loop", SubResource( 245 ), "PuppySexOralTease_2-loop", "PuppySexOralGrindInside_2-loop", SubResource( 246 ), "PuppySexOralGrind_2-loop", "PuppySexOralGrindInside_2-loop", SubResource( 247 ), "PuppySexOralGrindInside_2-loop", "PuppySexOralGrind_2-loop", SubResource( 248 ), "PuppySexOralGrindFast_2-loop", "PuppySexOralGrindInside_2-loop", SubResource( 249 ), "PuppySexOralGrindInside_2-loop", "PuppySexOralGrindFast_2-loop", SubResource( 250 ) ]
 start_node = "PuppySexOralTease_2-loop"
-graph_offset = Vector2( -53, 3 )
+graph_offset = Vector2( 81, 18 )
 
 [sub_resource type="AnimationNodeBlendTree" id=196]
 graph_offset = Vector2( -342.653, 20.7901 )
@@ -138,7 +276,7 @@ nodes/PuppyLegs/position = Vector2( 440, 80 )
 nodes/StateMachine/node = SubResource( 207 )
 nodes/StateMachine/position = Vector2( -20, 40 )
 nodes/output/position = Vector2( 660, 120 )
-node_connections = [ "output", 0, "PuppyLegs", "PuppyArms", 0, "StateMachine", "PuppyArms", 1, "Animation", "PuppyLegs", 0, "PuppyArms", "PuppyLegs", 1, "Animation 2" ]
+node_connections = [ "PuppyArms", 0, "StateMachine", "PuppyArms", 1, "Animation", "PuppyLegs", 0, "PuppyArms", "PuppyLegs", 1, "Animation 2", "output", 0, "PuppyLegs" ]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=208]
 

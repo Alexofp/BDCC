@@ -311,7 +311,7 @@ func getSubResistChance(baseChance:float, domAngerRemoval:float) -> float:
 func getAnimation():
 	if(getSexType() == SexType.StocksSex):
 		if(state == "inside"):
-			return [StageScene.StocksSpitroast, "tease", {pc=SUB_0, npc=DOM_0, npc2=DOM_1, npcBodyState={hard=true}, npc2BodyState={hard=true}}]
+			return [StageScene.StocksSpitroast, "inside", {pc=SUB_0, npc=DOM_0, npc2=DOM_1, npcBodyState={hard=true}, npc2BodyState={hard=true}}]
 		if(state == "sex"):
 			if((isCloseToCumming(DOM_0) && isCloseToCumming(DOM_1)) || (isStrapon(DOM_0) && isStrapon(DOM_1) && isCloseToCumming(SUB_0))):
 				return [StageScene.StocksSpitroast, "fast", {pc=SUB_0, npc=DOM_0, npc2=DOM_1, npcBodyState={hard=true}, npc2BodyState={hard=true}}]

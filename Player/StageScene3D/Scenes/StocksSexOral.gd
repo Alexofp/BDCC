@@ -69,6 +69,12 @@ func playAnimation(animID, _args = {}):
 	if(animID == "pussy"):
 		state_machine.travel("StocksSexPussy_1-loop")
 		state_machine2.travel("StocksSexPussy_3-loop")
+	if(animID == "pussyfast"):
+		state_machine.travel("StocksSexPussyFast_1-loop")
+		state_machine2.travel("StocksSexPussyFast_3-loop")
+	if(animID == "pussyinside"):
+		state_machine.travel("StocksSexPussyInside_1-loop")
+		state_machine2.travel("StocksSexPussyInside_3-loop")
 	if(animID == "sex"):
 		state_machine.travel("StocksSex_1-loop")
 		state_machine2.travel("StocksSex_3-loop")
@@ -78,6 +84,12 @@ func playAnimation(animID, _args = {}):
 	if(animID == "fast"):
 		state_machine.travel("StocksSexFast_1-loop")
 		state_machine2.travel("StocksSexFast_3-loop")
+		doll2.clampPenisScale(0.95, 1.1)
+		if(doll.getState("mouth") in ["", null]):
+			doll.setTemporaryState("mouth", "open")
+	if(animID == "inside"):
+		state_machine.travel("StocksSexInside_1-loop")
+		state_machine2.travel("StocksSexInside_3-loop")
 		doll2.clampPenisScale(0.95, 1.1)
 		if(doll.getState("mouth") in ["", null]):
 			doll.setTemporaryState("mouth", "open")
@@ -96,7 +108,7 @@ func canTransitionTo(_actionID, _args = []):
 	return true
 
 func getSupportedStates():
-	return ["tease", "pussy", "sex", "fast"]
+	return ["tease", "pussy", "pussyfast", "pussyinside", "sex", "fast", "inside"]
 
 func getVarNpcs():
 	return ["pc", "npc"]

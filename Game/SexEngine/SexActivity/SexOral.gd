@@ -588,6 +588,8 @@ func getAnimation():
 		if(state in ["", "askingtolick"]):
 			return [StageScene.PuppySexOral, "tease", {pc=DOM_0, npc=SUB_0}]
 		if(state in ["licking", "grinding"]):
+			if(getDomInfo().isCloseToCumming() || (isStraponSex() && getSubInfo().isCloseToCumming())):
+				return [StageScene.PuppySexOral, "grindfast", {pc=DOM_0, npc=SUB_0}]
 			return [StageScene.PuppySexOral, "grind", {pc=DOM_0, npc=SUB_0}]
 		if(state in ["blowjob", "deepthroat"]):
 			if(getDomInfo().isCloseToCumming() || (isStraponSex() && getSubInfo().isCloseToCumming())):
@@ -600,6 +602,8 @@ func getAnimation():
 		if(state in ["", "askingtolick"]):
 			return [StageScene.StocksSexOral, "tease", {npc=DOM_0, pc=SUB_0}]
 		if(state in ["licking", "grinding"]):
+			if(getDomInfo().isCloseToCumming()):
+				return [StageScene.StocksSexOral, "pussyfast", {npc=DOM_0, pc=SUB_0}]
 			return [StageScene.StocksSexOral, "pussy", {npc=DOM_0, pc=SUB_0}]
 		if(state in ["blowjob", "deepthroat"]):
 			if(getDomInfo().isCloseToCumming() || (isStraponSex() && getSubInfo().isCloseToCumming())):
