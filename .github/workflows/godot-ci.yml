@@ -71,27 +71,54 @@ jobs:
         uses: actions/checkout@v4
         with:
           lfs: true
+
       - name: Setup
         run: |
           mkdir -v -p ~/.local/share/godot/templates
           mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+
       - name: Web Build
         run: |
           mkdir -v -p build/web
           godot -v --export "HTML5" ./build/web/index.html
+
+      # ------------------------------------------------------------
+      # NEW STEPS: create .zip pack, patch index.html, remove .pck
+      # ------------------------------------------------------------
+      - name: Create ZIP pack and patch index.html
+        run: |
+          # Export the game as a .zip archive (much smaller)
+          godot -v --export-pack "HTML5" ./build/web/index.zip
+
+          # Get the actual size of index.zip in bytes
+          ZIP_SIZE=$(stat -c%s ./build/web/index.zip)
+
+          # Patch index.html:
+          #  - Insert "mainPack":"index.zip" at the start of GODOT_CONFIG
+          #  - Replace the index.pck filesize entry with index.zip and the correct size
+          sed -i \
+              -e 's/const GODOT_CONFIG = {/const GODOT_CONFIG = {"mainPack":"index.zip",/' \
+              -e "s/\"index\.pck\":[0-9]*/\"index.zip\":$ZIP_SIZE/g" \
+              ./build/web/index.html
+
+          # Remove the large .pck file – it will be replaced by the .zip
+          rm ./build/web/index.pck
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: bdcc-web
           path: build/web
+
       - name: Install rsync 📚
         run: |
           apt-get update && apt-get install -y rsync
+
       - name: Deploy to GitHub Pages 🚀
         uses: JamesIves/github-pages-deploy-action@releases/v4
         with:
-          branch: gh-pages # The branch the action should deploy to.
-          folder: ./build/web/ # The folder the action should deploy.
+          branch: gh-pages
+          folder: ./build/web/
 
   export-mac:
     name: Mac Export
