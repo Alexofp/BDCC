@@ -370,7 +370,7 @@ func about_to_shout_do(_id:String, _args:Dictionary, _context:Dictionary):
 		var ignoreList:Array = []
 		for charID in saverCooldowns:
 			ignoreList.append(charID)
-		if(!shoutForInterruptions("inmate", 4, 4, ignoreList, 0.5, "You notice "+getCharByRole("inmate").getName()+" wiggling their ass in the slutwall..")):
+		if(!shoutForInterruptions("inmate", 4, 4, 0.5, "You notice "+getCharByRole("inmate").getName()+" wiggling their ass in the slutwall..", ignoreList)):
 			setState("after_shout", "inmate")
 			checkSleep()
 

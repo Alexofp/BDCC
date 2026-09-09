@@ -335,7 +335,7 @@ func about_to_shout_do(_id:String, _args:Dictionary, _context:Dictionary):
 		var ignoreList:Array = []
 		for charID in saverCooldowns:
 			ignoreList.append(charID)
-		if(!shoutForInterruptions("inmate", 3, 2, ignoreList, 0.5, "You hear begging coming from "+getCharByRole("inmate").getName()+" who is stuck in stocks at the punishment platform..")):
+		if(!shoutForInterruptions("inmate", 3, 2, 0.5, "You hear begging coming from "+getCharByRole("inmate").getName()+" who is stuck in stocks at the punishment platform..", ignoreList)):
 			setState("after_shout", "inmate")
 			checkSleep()
 
