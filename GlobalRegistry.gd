@@ -324,6 +324,7 @@ var contentBoardEntries:Dictionary = {}
 var combatAnims:Dictionary = {}
 var combatAnimsApplier := CombatAnimApplier.new()
 var combatAnimLen:Dictionary = {}
+var crotchBlocks : Dictionary = {}
 
 var bodypartStorageNode
 
@@ -1165,6 +1166,22 @@ func getAttacks():
 
 func getPlayerAttackIDs():
 	return playerAttacksIDS
+
+func getCrotchBlocks() -> Dictionary:
+	return crotchBlocks
+
+func registerCrotchBlock(path:String) -> void:
+	if path in CrotchBlocks.getAllDefault():
+		Log.warning("Tried to replace default CrotchBlock, path '%s'" % path)
+		return
+	var resource = load(path)
+	if !resource:
+		Log.printerr("Error registering CrotchBlock at path '%s'" % path)
+		return
+	
+	var fname : String = path.get_file()
+	
+	crotchBlocks[fname.substr(0, fname.find_last("."))] = resource
 
 func registerStatusEffect(path: String):
 	var effect = load(path)
