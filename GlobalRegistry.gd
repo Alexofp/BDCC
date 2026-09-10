@@ -497,6 +497,85 @@ func loadCached(theType:String, theID:String):
 func newCached(theType:String, theID:String):
 	return loadCached(theType, theID).new()
 
+func saveRegistryCache() -> Dictionary:
+	var data:Dictionary = {
+		version = getGameVersionString(),
+		pathToIDCache = pathToIDCache,
+		IDToPathCache = IDToPathCache,
+		sceneCreators = sceneCreators,
+		stageScenesCachedStates = stageScenesCachedStates,
+	}
+	
+	return data
+
+func loadRegistryCache(_data:Dictionary):
+	if(!_data.has("version") || _data["version"] != getGameVersionString()):
+		return
+	pathToIDCache = SAVE.loadVar(_data, "pathToIDCache", {})
+	IDToPathCache = SAVE.loadVar(_data, "IDToPathCache", {})
+	sceneCreators = SAVE.loadVar(_data, "sceneCreators", {})
+	stageScenesCachedStates = SAVE.loadVar(_data, "stageScenesCachedStates", {})
+
+func resetRegistryCache(shouldSaveToFile:bool=false):
+	pathToIDCache = {}
+	IDToPathCache = {}
+	sceneCreators = {}
+	stageScenesCachedStates = {}
+	fillBaseCacheFields()
+	if(shouldSaveToFile):
+		saveRegistryCacheToFile(true)
+
+const cacheFilePath = "user://registryCache.json"
+
+func saveRegistryCacheToFile(forceSave:bool = false):
+	if(!isCacheEnabled() && !forceSave):
+		return
+	var data:Dictionary = saveRegistryCache()
+
+	var save_game = File.new()
+	save_game.open(cacheFilePath, File.WRITE)
+	save_game.store_line(var2str(data))
+	save_game.close()
+
+func loadRegistryCacheFromFile():
+	checkCacheEnabled()
+	if(Util.hasCommandLineArgument("-resetRegistryCache")): # We just don't load it
+		fillBaseCacheFields()
+		return
+	if(!isCacheEnabled()):
+		fillBaseCacheFields()
+		return
+	var save_game = File.new()
+	if not save_game.file_exists(cacheFilePath):
+		fillBaseCacheFields()
+		return
+	
+	save_game.open(cacheFilePath, File.READ)
+	var data = str2var(save_game.get_as_text())
+	if(data is Dictionary):
+		loadRegistryCache(data)
+	save_game.close()
+	fillBaseCacheFields()
+
+const loadLockPath = "user://loadlock.lockfile" # Game creates this file when it starts loading. Then deletes it when it finishes loading. If this file exists -> the game crashed during the previous loading
+
+func doesLoadLockFileExist() -> bool:
+	var f:File = File.new()
+	return f.file_exists(loadLockPath)
+
+func createLoadLockFile():
+	var file = File.new()
+	file.open(loadLockPath, File.WRITE)
+	#file.store_string(content)
+	file.close()
+
+func deleteLoadLockFile():
+	if(doesLoadLockFileExist()):
+		var d:Directory = Directory.new()
+		d.remove(loadLockPath)
+
+
+
 
 func _init():
 	gles2Mode = (OS.get_current_video_driver() == OS.VIDEO_DRIVER_GLES2)
@@ -865,26 +944,14 @@ func getGameVersionString():
 func getGameVersionStringNoSuffix():
 	return str(game_version_major)+"."+str(game_version_minor)+"."+str(game_version_revision)
 
-func isVersionCompatible(otherversion:String):
-	otherversion = otherversion.strip_edges()
-	
-	if(otherversion == "*"):
-		return true
-	if(otherversion == getGameVersionStringNoSuffix()):
-		return true
-	if(otherversion == getGameVersionString()):
-		return true
-	return false
+func isVersionCompatible(otherversion:String) -> bool:
+	return Util.isVersionCompatible(getGameVersionStringNoSuffix(), otherversion)
 
-func isVersionListHasCompatible(versionlist):
+func isVersionListHasCompatible(versionlist) -> bool:
 	if(!(versionlist is String)):
 		return false
 	
-	var splitted = versionlist.split(",", false)
-	for theversion in splitted:
-		if(isVersionCompatible(theversion)):
-			return true
-	return false
+	return isVersionCompatible(versionlist)
 
 func registerScene(path: String, creator = null):
 	if(hasCachedPath(CACHE_SCENE, path)):
@@ -3141,83 +3208,3 @@ func calculateCombatAnimLens():
 		combatAnimLen[theAnimName] = theAnimPlayer.get_animation(theAnimName).length
 	pass
 
-
-
-
-
-func saveRegistryCache() -> Dictionary:
-	var data:Dictionary = {
-		version = getGameVersionString(),
-		pathToIDCache = pathToIDCache,
-		IDToPathCache = IDToPathCache,
-		sceneCreators = sceneCreators,
-		stageScenesCachedStates = stageScenesCachedStates,
-	}
-	
-	return data
-
-func loadRegistryCache(_data:Dictionary):
-	if(!_data.has("version") || _data["version"] != getGameVersionString()):
-		return
-	pathToIDCache = SAVE.loadVar(_data, "pathToIDCache", {})
-	IDToPathCache = SAVE.loadVar(_data, "IDToPathCache", {})
-	sceneCreators = SAVE.loadVar(_data, "sceneCreators", {})
-	stageScenesCachedStates = SAVE.loadVar(_data, "stageScenesCachedStates", {})
-
-func resetRegistryCache(shouldSaveToFile:bool=false):
-	pathToIDCache = {}
-	IDToPathCache = {}
-	sceneCreators = {}
-	stageScenesCachedStates = {}
-	fillBaseCacheFields()
-	if(shouldSaveToFile):
-		saveRegistryCacheToFile(true)
-
-const cacheFilePath = "user://registryCache.json"
-
-func saveRegistryCacheToFile(forceSave:bool = false):
-	if(!isCacheEnabled() && !forceSave):
-		return
-	var data:Dictionary = saveRegistryCache()
-
-	var save_game = File.new()
-	save_game.open(cacheFilePath, File.WRITE)
-	save_game.store_line(var2str(data))
-	save_game.close()
-
-func loadRegistryCacheFromFile():
-	checkCacheEnabled()
-	if(Util.hasCommandLineArgument("-resetRegistryCache")): # We just don't load it
-		fillBaseCacheFields()
-		return
-	if(!isCacheEnabled()):
-		fillBaseCacheFields()
-		return
-	var save_game = File.new()
-	if not save_game.file_exists(cacheFilePath):
-		fillBaseCacheFields()
-		return
-	
-	save_game.open(cacheFilePath, File.READ)
-	var data = str2var(save_game.get_as_text())
-	if(data is Dictionary):
-		loadRegistryCache(data)
-	save_game.close()
-	fillBaseCacheFields()
-
-const loadLockPath = "user://loadlock.lockfile" # Game creates this file when it starts loading. Then deletes it when it finishes loading. If this file exists -> the game crashed during the previous loading
-
-func doesLoadLockFileExist() -> bool:
-	var f:File = File.new()
-	return f.file_exists(loadLockPath)
-
-func createLoadLockFile():
-	var file = File.new()
-	file.open(loadLockPath, File.WRITE)
-	#file.store_string(content)
-	file.close()
-
-func deleteLoadLockFile():
-	if(doesLoadLockFileExist()):
-		var d:Directory = Directory.new()
-		d.remove(loadLockPath)

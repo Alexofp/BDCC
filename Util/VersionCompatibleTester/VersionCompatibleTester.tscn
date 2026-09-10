@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Util/VersionCompatibleTester/VersionCompatibleTester.gd" type="Script" id=1]
+
+[node name="VersionCompatibleTester" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="OurLineEdit" type="LineEdit" parent="VBoxContainer"]
+margin_right = 1280.0
+margin_bottom = 24.0
+placeholder_text = "our version"
+
+[node name="InputLineEdit" type="LineEdit" parent="VBoxContainer"]
+margin_top = 28.0
+margin_right = 1280.0
+margin_bottom = 52.0
+placeholder_text = "input version"
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+margin_top = 56.0
+margin_right = 1280.0
+margin_bottom = 70.0
+
+[connection signal="text_changed" from="VBoxContainer/OurLineEdit" to="." method="_on_OurLineEdit_text_changed"]
+[connection signal="text_changed" from="VBoxContainer/InputLineEdit" to="." method="_on_InputLineEdit_text_changed"]
