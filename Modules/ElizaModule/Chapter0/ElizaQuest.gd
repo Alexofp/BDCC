@@ -54,7 +54,7 @@ func getProgress():
 		result.append("Eliza has offered you to meet after her shift ends, so you can rest and get to know each other a little better. Meet her in the medical lobby after 23:00 in order to progress the story.")
 	
 	if(s6DateHap):
-		result.append("Eliza needs your help to discover and test all the drugs. Unlock [b]all[/b] of the drugs and test at least [b]10[/b] of them. After that, you can approach her to see what happens..")
+		result.append("Eliza needs your help to discover and test all the drugs. Unlock [b]all[/b] of the drugs (You currently have "+str(GM.main.SCI.getUnlockedStrangePillsCount())+"/"+str(GM.main.SCI.getTotalStrangePillCount())+" drugs unlocked) and test at least [b]10[/b] of them (You have "+str(GM.main.SCI.getTestedStrangePillsCount())+"/10 tested). After that, you can approach her to see what happens..")
 	
 	if(s7hap):
 		result.append("Eliza decided to stay for now! You still have full access to her chemistry lab.")

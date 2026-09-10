@@ -24,7 +24,7 @@ func run(_triggerID, _args):
 			if(amountOfPillsUnlocked >= GM.main.SCI.getTotalStrangePillCount() && amountOfPillsTested >= 10):
 				addButton("Story..", "Tell Eliza that all of the drugs are unlocked now and most of them are tested.", "s7")
 			else:
-				addDisabledButton("Story..", "Unlock all of the pills and test at least 10 of them in order to finish Eliza's story.")
+				addDisabledButton("Story..", "Unlock all of the pills ("+str(GM.main.SCI.getUnlockedStrangePillsCount())+"/"+str(GM.main.SCI.getTotalStrangePillCount())+") and test at least 10 of them ("+str(GM.main.SCI.getTestedStrangePillsCount())+"/10) in order to finish Eliza's story.")
 				
 	else:
 		if(getFlag("ElizaModule.s6hap") && !getFlag("ElizaModule.s6DateHap")):
