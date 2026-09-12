@@ -22,7 +22,7 @@ func start():
 	char1FightScore *= char1FightScore
 	char2FightScore *= char2FightScore
 	var theChar1Chance:float = char1FightScore / (char1FightScore + char2FightScore)
-	saynn("{npc1.name}'s chance to win: "+str(Util.roundF(theChar1Chance*100.0, 1))+"%\n{npc2.name}'s chance to win: "+str(Util.roundF((1.0-theChar1Chance)*100.0, 1)))
+	saynn("{npc1.name}'s chance to win: "+str(Util.roundF(theChar1Chance*100.0, 1))+"%\n{npc2.name}'s chance to win: "+str(Util.roundF((1.0-theChar1Chance)*100.0, 1))+"%")
 	
 	addContinue("doFight")
 
