@@ -28,13 +28,13 @@ func _doAttack(_attacker, _receiver, _context = {}):
 		return genericDodgeMessage(_attacker, _receiver)
 
 	var texts = [
-		"{attacker.name} manages to land a few "+("strong punches" if !canScratch(_attacker) else "good scratches")+" on {receiver.name}",
+		"{attacker.name} manages to land a few "+("strong punches" if !canScratch(_attacker) else "good scratches")+" on {receiver.name}.",
 	]
 	var text = RNG.pick(texts)
 	
 	if(RNG.chance(50)):
 		if(canScratch(_attacker) && _receiver.addEffect(StatusEffect.Bleeding)):
-			text += "Sharp claws caused {receiver.him} to start [color=red]bleeding[/color]."
+			text += " Sharp claws caused {receiver.him} to start [color=red]bleeding[/color]."
 		
 	return {
 		text = text,

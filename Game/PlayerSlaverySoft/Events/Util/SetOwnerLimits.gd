@@ -16,7 +16,7 @@ func start():
 	
 		saynn("Your owner is listening.")
 		
-		saynn("You can pick as many as you want. The owner might not listen to all of them but {npc.he} {npc.isAre} guranteed to listen to at least 1 of them.")
+		saynn("You can pick as many as you want. The owner might not listen to all of them but {npc.he} {npc.isAre} guaranteed to listen to at least 1 of them.")
 	else:
 		saynn("List of limits:")
 	var theOwner = getOwner()

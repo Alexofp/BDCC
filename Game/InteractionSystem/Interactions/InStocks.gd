@@ -262,7 +262,7 @@ func refused_save_offered_self_text():
 	if(!getRoleChar("saver").isBlindfolded()):
 		responses.append_array([
 			"Good. Your butt looks better in the stocks~." if !slutwallMode else "Good. Your butt looks better in the slutwall~.",
-			"I do enjoy seeing you bent over like this.." if !slutwallMode else "I do enjoy seeing like this..",
+			"I do enjoy seeing you bent over like this.." if !slutwallMode else "I do enjoy seeing you like this..",
 		])
 	if(saverIsMean):
 		responses.append_array([
@@ -419,7 +419,7 @@ func getInterruptActions(_pawn:CharacterPawn) -> Array:
 		result.append({
 			id = "use",
 			name = "Use",
-			desc = "Use them while they are stuck in stocks",
+			desc = "Use them while they are stuck in "+stocksSlutwallText("stocks", "the slutwall"),
 			score = 1.0,
 			scoreType = "sexUse",
 			scoreRole = "inmate",
