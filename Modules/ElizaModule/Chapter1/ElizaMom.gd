@@ -17,6 +17,8 @@ func _init():
 	npcHasMenstrualCycle = true
 	
 func _getName():
+	if(GM.main && !GM.main.getFlag("ElizaModule.s4hap")):
+		return "A woman"
 	return "Scarlet Quinn"
 
 func getGender():
