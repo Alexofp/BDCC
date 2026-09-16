@@ -34,7 +34,7 @@ func _run():
 
 		saynn("[say=avy]We should have just broken the nerdy bitch first.[/say]")
 
-		saynn("[say=kait]Hindsight is twenty-twenty! We don't have much time.[/say]")
+		saynn("[say=kait]Hindsight is twenty-twenty! We don’t have much time. I’m gonna try to.. hack it open maybe. You find a working badge.[/say]")
 
 		saynn("Shower area.. surely there is someone there.")
 
