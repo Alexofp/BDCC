@@ -243,7 +243,7 @@ func _run():
 
 		saynn("You hear a confused muffled noise from the corner.")
 
-		saynn("[say=avy]Why the fuck would she agree to do that for.. hmm-.. Wait a second. You might be right. Let me handle this.[/say]")
+		saynn("[say=avy]Why the fuck would she agree to do that for.. hmm-.. Wait a second. You might be right. Let me do something.[/say]")
 
 		saynn("Avy starts walking towards the nurse. The girl almost got rid of her ropes too by now, her legs and arms are pretty much free.")
 
@@ -258,46 +258,257 @@ func _run():
 
 		saynn("Avy looks down at her with mean red eyes.")
 
-		saynn("[say=avy]Yes, if you do any of that, you're gonna ruin our plans. It'd be so-so terrible for us. But let me run it down for you, tell you what happens next.[/say]")
+		saynn("[say=avy]Yes, if you do any of that, you're gonna ruin our plans. It'd be so-so terrible for us. But let me tell you what would happen next.[/say]")
 
-		saynn("Avy tilts her head a bit.")
+		saynn("The nurse blinks.")
 
-		saynn("[say=avy]We're gonna enjoy our time in solitary. We're gonna think of so many things that we will want to do to you.. And then.. we're gonna be out.[/say]")
+		saynn("[say=avy]We're gonna enjoy our time in solitary. Lots of time to think there. With nothing better to do, we're gonna come up with so many things that we will want to do to you.. And then.. we're gonna be out.[/say]")
+
+		saynn("Avy tilts her head a bit, a cunning smile curls the tips of her lips.")
 
 		saynn("[say=avy]We're in the same small prison, you know. I know how you look. I can find you. You can't hide.[/say]")
 
+		saynn("The threatening notes in her voice get stronger. And then stronger yet.")
+
 		saynn("[say=avy]And then.. I guess I will start with small stuff. I will tear those cute whiskers off, you don't really need them. Could bite a chunk of your ear off. Your claws.. I could snap them in half. It's really painful. REALLY-really painful.[/say]")
+
+		saynn("The nurse winces just thinking about that.")
+
+		saynn("Kait glances at you and taps the side of her forehead.")
 
 		saynn("[say=avy]I guess I could torture your nipples. Your clit. Your cunt. Leave them all bleeding.[/say]")
 
+		saynn("The poor nurse looks terrified.. too terrified to resist. Tears begin running down her cheeks.")
+
 		saynn("[say=avy]And then.. I knotted cock, you know. Could dislocate your jaw. Could loosen up your pretty ass. We will see.[/say]")
 
-		saynn("Kait runs up to the foxy.")
+		saynn("Avy gropes the bulge on her shorts. Kait finally has enough of it. She runs up to the foxy.")
 
 		saynn("[say=kait]Avy, quit scaring the poor staffer to death. Go away.[/say]")
-
-		saynn("Kait shoves Avy off and straddles the nurse herself.")
 
 		addButton("Continue", "See what happens next", "kaits_turn")
 	if(state == "kaits_turn"):
 		playAnimation(StageScene.SexCowgirlAlt, "tease", {pc="nurse", npc="kait"})
-		saynn("[say=kait]I can't stop Avy from doing things to you if you fuck it up for us.[/say]")
+		saynn("Kait shoves Avy off and straddles the nurse herself. The snow leopard leans down, almost touching noses, her voice turning soft.")
 
-		saynn("[say=kait]But if you obey us this one time, good stuff is gonna happen. There is a big reward waiting for you~.[/say]")
+		saynn("[say=kait]Hey. Hey, look at me. Eyes on me, sweetheart.[/say]")
+
+		saynn("The nurse looks up at Kait with wet, pleading eyes. The leopard reaches out to brush her paw against the nurse's hair, gently.")
+
+		saynn("[say=kait]I can't stop Avy from doing things to you if you fuck it up for us. I mean I can try.. Anyway.[/say]")
+
+		saynn("Kait catches the nurse's chin and gently scritches it.")
+
+		saynn("[say=kait]Thing is.. if you obey us this one time, good stuff is gonna happen. There is a big reward waiting for you~.[/say]")
+
+		saynn("Kait's clawed digits follow the lines of the nurse's neck, making her shiver slightly and raise her chin. Kait leans in even closer to murmur into her ear.")
 
 		saynn("[say=kait]I can make you feel really-really good, you know..[/say]")
 
+		saynn("Her digits go further, sliding under the nurse's uniform, caressing the soft fur of her chest. The nurse gasps subtly, her back arching a bit. Kait's paw cups one of her breasts, digits circling the nipple until it stiffens.")
+
 		saynn("[say=kait]Your desires.. I could make them real.[/say]")
+
+		saynn("It seems to be working quite well. The nurse isn't looking terrified anymore.")
 
 		saynn("[say=kait]You'd also be receiving our protection. So? What do you think? Can you carry a little box for us for a few minutes?[/say]")
 
-		saynn("The scared nurse blinks many times.. but then nods once softly. Kait smiles.")
+		saynn("The scared nurse blinks many times.. but then nods once softly. Kait smiles and gives her a smooch on the forehead.")
 
-		saynn("[say=kait]Good girl~.[/say]")
+		saynn("[say=kait]Good girl~. I will tell that stupid Avy to fuck off.[/say]")
+
+		saynn("[say=avy]I heard that![/say]")
+
+		saynn("[say=kait]Good, means I don't have to repeat myself.[/say]")
 
 		saynn("Kait unties the rest of the ropes and takes the ballgag harness off of the nurse's head.")
 
 		saynn("Good inmate, bad inmate. They managed to execute it pretty well.")
+
+		addButton("Continue", "See what happens next", "kait_undoes_stuff")
+	if(state == "kait_undoes_stuff"):
+		playAnimation(StageScene.Duo, "stand", {npc="nurse"})
+		saynn("You and Kait help the nurse to get up.")
+
+		saynn("[say=pc]Alright. You all handle the crate. I gotta run back to the doctor and Ferri.[/say]")
+
+		saynn("Here is hoping they're still busy with each other..")
+
+		saynn("You see the nurse pick up the crate before you rush back to the milking room.")
+
+		saynn("[say=avy]Don't you dare drop it![/say]")
+
+		addButton("Continue", "See what happens next", "back_to_eliza")
+	if(state == "back_to_eliza"):
+		setCharacters([])
+		addCharacter("eliza")
+		addCharacter("ferri", ["naked"])
+		playAnimation(StageScene.MilkingStallDuo, "watchfast", {pc="ferri", npc="eliza", bodyState={naked=true, hard=true}})
+		aimCameraAndSetLocName("med_milkingroom")
+		saynn("You dash to the milking room as fast as you can.")
+
+		saynn("Being spotted is the last thing you want so you sneak back into the stall instead.")
+
+		saynn("You see a heavily-panting dracat and a happy-looking doctor in front of her, holding the half-full milk tank.")
+
+		saynn("[say=eliza]Hah~. Look at you. Gave me so much milk to use~. My coffee breaks are gonna be so much better now.[/say]")
+
+		saynn("[say=ferri]M-moo.. mhh-.. mo-oo..[/say]")
+
+		saynn("Ferri looks completely spaced out. Eliza pats her on the head.")
+
+		saynn("[say=eliza]Good moo.[/say]")
+
+		saynn("You clear your throat audibly.")
+
+		saynn("[say=eliza]Oh, right, the owner, I forgot you were here to be honest. Enjoyed the show~?[/say]")
+
+		saynn("[say=pc]Oh yeah. What a scene this was. Wow, so hot.[/say]")
+
+		saynn("Eliza chuckles.")
+
+		saynn("[say=eliza]I'm glad you liked it~. I didn't hear you if you said anything during it, I was.. in the flow state.. just like Ferri~.[/say]")
+
+		saynn("[say=pc]Yeah, I was just.. watching.[/say]")
+
+		saynn("Eliza nods and puts away the milk tank before proceeding to clean Ferri a bit and then unlock her.")
+
+		saynn("Poor dracat almost collapses but Eliza catches her.")
+
+		saynn("[say=ferri]Mew-w-w..[/say]")
+
+		saynn("[say=eliza]Aww. Maybe you need a few days in the padded room to get your bearings back~?[/say]")
+
+		saynn("Ferri just moans softly in response.")
+
+		saynn("[say=pc]I hope you didn't break my pet already.[/say]")
+
+		saynn("[say=eliza]Nahh, she will be fine~. Bring her in again sometime.[/say]")
+
+		addButton("Continue", "See what happens next", "ferri_leashed_again")
+	if(state == "ferri_leashed_again"):
+		addCharacter("ferri")
+		playAnimation(StageScene.Duo, "stand", {npc="ferri", npcBodyState={leashedBy="pc"}})
+		saynn("You approach Ferri and help her get dressed. Then you clip a leash to her collar.")
+
+		saynn("[say=pc]I think it's time for us to go.[/say]")
+
+		saynn("[say=eliza]Don't you want your payment~?[/say]")
+
+		saynn("[say=pc]Uh. Right. How much is it?[/say]")
+
+		saynn("[say=eliza]Well.. Ten credits. I will send them to your inmate account when I will fill in all that paperwork.[/say]")
+
+		saynn("You nod and proceed to head out.")
+
+		saynn("Eliza walks in front of you.")
+
+		addButton("Continue", "See what happens next", "eliza_runs_into_nurse")
+	if(state == "eliza_runs_into_nurse"):
+		aimCameraAndSetLocName("med_nearmilking")
+		addCharacter("nurse")
+		playAnimation(StageScene.Duo, "stand", {pc="eliza", npc="nurse"})
+		saynn("And of course.. Eliza just had to exit at exactly the right moment to run into the nurse that's carrying the crate to the exit.")
+
+		saynn("[say=eliza]Hey, you, stop right there.[/say]")
+
+		saynn("The nurse stops dead in her tracks.. and visibly swallows. She turns slowly, ears flattening against her head.. the crate wobbling in her arms.")
+
+		saynn("Down the corridor, you notice Avy and Kait hiding behind the corner. You direct a silent angry glare at them.. and see them shrug in return.")
+
+		saynn("[say=nurse]Um.. yes, Doctor Quinn?..[/say]")
+
+		saynn("Eliza puts on her strict eyes and approaches the nurse. She circles her, slowly and quietly, her tail swaying annoyed. She stops in front of the girl and tilts her head, watching carefully.")
+
+		saynn("[say=eliza]What is it that you're carrying?[/say]")
+
+		saynn("[say=nurse]Well.. just.. stuff?[/say]")
+
+		saynn("[say=eliza]Stuff, huh.[/say]")
+
+		saynn("Eliza leans in extremely close, looking the nurse into her eyes directly.")
+
+		saynn("[say=eliza]Are you really stealing supplies? Again?[/say]")
+
+		saynn("[say=nurse]No..[/say]")
+
+		saynn("[say=eliza]Yes, you are.[/say]")
+
+		saynn("The nurse's breath hitches, her pupils dilating. Eliza visibly licks her fangs while watching the poor girl.")
+
+		saynn("[say=eliza]You seem scared. Hm. Did someone threaten you to do this?[/say]")
+
+		saynn("It's probably best if you try to steer the conversation away.")
+
+		saynn("[say=pc]Give the poor nurse some rest, she doesn't get paid enough for this.[/say]")
+
+		saynn("Eliza doesn't even look at you, her paw shoots up.")
+
+		saynn("[say=eliza]Tshh-, I'm not letting it slide this time.[/say]")
+
+		saynn("She turns full attention back to the nurse, reaching out to cup the trembling feline's chin. Her thumb strokes along the jaw.. gentle but firm.")
+
+		saynn("[say=eliza]So. Please, cutie, tell me. What happened? Why are you shivering?[/say]")
+
+		saynn("[say=nurse]Well.. uhm..[/say]")
+
+		saynn("Eliza's other paw comes up, stroking the nurse's ear.")
+
+		saynn("[say=eliza]Yes? You can tell everything to me, I can protect you. But I gotta be able to trust you, you know?[/say]")
+
+		saynn("The nurse nods subtly. She is still holding that crate.. makes her quite helpless before the doctor.")
+
+		saynn("[say=eliza]Just.. tell me what happened, I won't be angry. But if you don't.. then I will be.[/say]")
+
+		saynn("[say=nurse]Uh.. hm.. ah..[/say]")
+
+		saynn("Eliza's claws come out slowly, now scritching her chin and ear, digging into the fur.")
+
+		saynn("[say=pc]Doctor, I really think..[/say]")
+
+		saynn("Eliza's clawed paw jumps to hold your mouth shut.")
+
+		saynn("[say=eliza]Shut up! Tell me already![/say]")
+
+		saynn("[say=nurse]I feel subby! From your voice.. that's why I'm.. like this..[/say]")
+
+		saynn("The words burst out of the nurse, high and desperate. Eliza blinks.")
+
+		saynn("[say=eliza]Oh? Really~? Wow. Right. Subby kitty.[/say]")
+
+		saynn("Eliza stares at the nurse for some time, her expression shifting, softening. A cute little smile returns to her.")
+
+		saynn("[say=eliza]Now everything makes so much more sense, haha. I didn't even realize~.[/say]")
+
+		saynn("She giggles.. and the nurse giggles too.. but way more nervously.")
+
+		saynn("[say=eliza]It still doesn't quite explain what you are doing with these.. hm..[/say]")
+
+		saynn("Eliza reads the label on the crate.. then peeks inside it. Her brow rises high.")
+
+		saynn("[say=eliza]Oh.. Right. I see. You're helping to dispose of old equipment. Finally, that stuff was there for weeks.[/say]")
+
+		saynn("[say=nurse]Yeah.. uh..[/say]")
+
+		saynn("Eliza sighs.")
+
+		saynn("[say=eliza]You know what? Do whatever you want with it. Dump it into space for all I care, I really hated that outdated kit. Good girl, helping to keep our storage room tidy.[/say]")
+
+		saynn("[say=nurse]..thank you.. Doctor Quinn..[/say]")
+
+		saynn("Eliza gives the nurse a soft smack on the butt.")
+
+		saynn("[say=nurse]Ah..[/say]")
+
+		saynn("[say=eliza]Run along now~. I got paperwork to do.[/say]")
+
+		saynn("[say=nurse]Yes, Doctor Quinn..[/say]")
+
+		saynn("The nurse hurries past, crate clutched to her chest.")
+
+		saynn("Eliza walks away too, leaving you all be.")
+
+		saynn("Kait and Avy come out of the hiding and help you walk the nurse to the hideout.")
 
 
 func _react(_action: String, _args):
@@ -317,5 +528,18 @@ func _react(_action: String, _args):
 		GM.pc.getInventory().addItem(GlobalRegistry.createItem("painkillers"))
 		GM.pc.getInventory().addItem(GlobalRegistry.createItem("painkillers"))
 		GM.pc.getInventory().addItem(GlobalRegistry.createItem("painkillers"))
+
+	if(_action == "avy_on_nurse"):
+		putOn("nurse", "ballgag")
+
+	if(_action == "kait_undoes_stuff"):
+		putOff("nurse", "ropeharness")
+		putOff("nurse", "ballgag")
+
+	if(_action == "back_to_eliza"):
+		processTime(3*60)
+
+	if(_action == "eliza_runs_into_nurse"):
+		processTime(3*60)
 
 	setState(_action)
