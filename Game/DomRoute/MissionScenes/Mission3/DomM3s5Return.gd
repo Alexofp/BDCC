@@ -510,6 +510,7 @@ func _run():
 
 		saynn("Kait and Avy come out of the hiding and help you walk the nurse to the hideout.")
 
+		addButton("Continue", "See what happens next", "start_hideout_scene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -541,5 +542,11 @@ func _react(_action: String, _args):
 
 	if(_action == "eliza_runs_into_nurse"):
 		processTime(3*60)
+
+	if(_action == "start_hideout_scene"):
+		processTime(5*60)
+		endScene()
+		runScene("DomM3s6Hideout")
+		return
 
 	setState(_action)
