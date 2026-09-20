@@ -12,7 +12,7 @@ func _run():
 		addCharacter("announcer")
 		aimCameraAndSetLocName("hideout_chill")
 		GM.pc.setLocation("hideout_chill")
-		saynn("The journey is uneventful. Of course the nurse gets quite surprised when you walk her down to the underground arena. She gets lots of looks from the inmates. No one is dumb enough to stop you though.")
+		saynn("The journey is uneventful. You don't want the nurse to know where the underground arena is so you blindfold her before that. She gets lots of looks from the inmates while walking through it, her ears picking up lots of noises.")
 
 		saynn("When you enter the hideout, you are met by the Announcer.")
 
@@ -20,7 +20,7 @@ func _run():
 
 		saynn("[say=kait]Yes, we had some unforeseen complications. But we got the lab supplies in the end. They came with this cutie~.[/say]")
 
-		saynn("The panting nurse carefully places the crate on the ground. She got quite tired so she planted her butt on the floor.")
+		saynn("The panting nurse carefully places the crate on the ground. She got quite tired so she planted her butt on the floor. Kait takes off her blindfold.")
 
 		saynn("[say=pc]Ferri? Still drool-y or are you coming back to us?[/say]")
 
@@ -254,6 +254,229 @@ func _run():
 		saynn("[say=nurse]That felt.. great.. ah..[/say]")
 
 		addButton("Continue", "See what happens next", "kait_menu")
+	if(state == "kait_tribs"):
+		playAnimation(StageScene.SexTribadism, "tease", {pc="kait", npc="nurse", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You let Kait do what she wants to do.")
+
+		saynn("Kait grins and grabs the nurse by the wrists, pulling her down onto the cold floor of the hideout. The nurse lets out a surprised squeak while Kait is already straddling her.")
+
+		saynn("[say=kait]Shh, just relax, let me do everything~.[/say]")
+
+		saynn("She leans down and licks the nurse's lips. Then she repositions herself a bit, sliding one leg under the nurse's.. interlocking them.. until their hips are pressed close. Their pussies are now inches apart, radiating heat.")
+
+		saynn("[say=nurse]Ah.. are you really gonna..[/say]")
+
+		saynn("[say=kait]And you're gonna love it~.[/say]")
+
+		saynn("Kait rocks her hips forward, just a little.. until their pussies kiss. The first touch is electric, making the nurse shiver and moan softly.")
+
+		saynn("[say=nurse]Ah..[/say]")
+
+		saynn("[say=kait]You're so wet. Did I do that?[/say]")
+
+		saynn("[say=nurse]Y-yes..[/say]")
+
+		addButton("Continue", "See what happens next", "kait_trib_action")
+	if(state == "kait_trib_action"):
+		playAnimation(StageScene.SexTribadism, "sex", {pc="kait", npc="nurse", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Kait grins and rolls her hips again.. proceeding to slowly grind pussies with the girl. Their clits brush, making the nurse shudder more. Kait keeps the pace slow at first.. just teasing.. letting the friction happen. Their juices mix, making the fur look all slick.")
+
+		saynn("[say=kait]You like that? Mhh..[/say]")
+
+		saynn("[say=nurse]Yes.. ah.. hah..[/say]")
+
+		saynn("The nurse's impressive breasts sway subtly each time Kait grinds into her. They both start moaning into the air, the snow leopard biting her lip while watching the girl.")
+
+		saynn("[say=nurse]Please.. faster..[/say]")
+
+		saynn("[say=kait]Since you asked so nicely.[/say]")
+
+		addButton("Continue", "See what happens next", "kait_trib_fast")
+	if(state == "kait_trib_fast"):
+		playAnimation(StageScene.SexTribadism, "fast", {pc="kait", npc="nurse", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Kait picks up the pace, her hips moving at a steady rhythm. The nurse's breathing becomes short, hot gasps. Her legs are trembling.. and yet.. she moves too, meeting Kait's thrusts, grinding her strawberry pussy against the leopard's.")
+
+		saynn("The wet sounds fill the space.. accompanied by the soft moans of the girls. Their bodies rock together, fur slick with sweat and juices. Kait leans forward a bit to grope the nurse's tits while driving her hips harder.")
+
+		saynn("[say=kait]That's it.. fuck.. You're gonna make me cum.[/say]")
+
+		saynn("[say=nurse]Me too.. I'm close..[/say]")
+
+		saynn("It doesn't take long before Kait's grinding gets all erratic. The nurse arches her back, crying out as her orgasm hits. Their pussies start visibly pulsing, still pressed tightly against each other, folds dancing with each other. Lots of hot moans escaping them both.")
+
+		saynn("[say=nurse]Ahh.. ah.h..[/say]")
+
+		saynn("A few seconds of pure ecstasy later.. they begin to slow down..")
+
+		addButton("Continue", "See what happens next", "kait_trib_after")
+	if(state == "kait_trib_after"):
+		playAnimation(StageScene.SexTribadism, "tease", {pc="kait", npc="nurse", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("And now, they just lie there, panting, tangled together.")
+
+		saynn("[say=kait]Good girl.. very good girl..[/say]")
+
+		saynn("[say=nurse]Mhh.. ah..[/say]")
+
+		saynn("The nurse looks a bit dazed.. but clearly satisfied. Kait has a sly grin on her face.")
+
+		saynn("They pull away from each other.. and then you surround the nurse again.")
+
+		addButton("Continue", "See what happens next", "kait_menu")
+	if(state == "kait_finger"):
+		playAnimation(StageScene.GropeBehind, "gropefast", {pc="nurse", npc="pc", bodyState={naked=true, hard=true}})
+		saynn("It's your time to have fun with the nurse.")
+
+		saynn("You pull her into your embrace, your hands already landing on her curvy forms and exploring them, giving her hips some caressing.")
+
+		saynn("[say=nurse]Ah.. w-wait..[/say]")
+
+		saynn("[say=pc]You will have to put some trust into me. And then it will feel good.[/say]")
+
+		saynn("Your palms cup her massive breasts from behind, fingers sinking into the fur. You give them a good squeeze, making the girl moan softly. Your digits search through the fur until they find her nipples.. already stiff. You pinch them and gently tug on them.")
+
+		saynn("[say=nurse]Nnhh-..[/say]")
+
+		saynn("Her back arches, brushing against your chest. You pinch her nips again, tugging harder. She gasps, her head falling back, finding your shoulder.")
+
+		saynn("[say=pc]You're going to be good for me. Right?[/say]")
+
+		saynn("[say=nurse]I.. I don't..[/say]")
+
+		saynn("Her breath catches, a soft moan escaping her.")
+
+		saynn("[say=pc]Right?[/say]")
+
+		saynn("[say=nurse]M-maybe..[/say]")
+
+		saynn("Maybe something else will convince her.")
+
+		addButton("Continue", "See what happens next", "kait_finger_rub")
+	if(state == "kait_finger_rub"):
+		playAnimation(StageScene.GropeBehind, "rub", {pc="nurse", npc="pc", bodyState={naked=true, hard=true}})
+		saynn("You release one of her breasts and let your hand slide down to her slit. She is wet.. soaked really. Her thighs tremble as you trace along her folds, spreading them open.")
+
+		saynn("[say=nurse]Ohh..[/say]")
+
+		saynn("[say=pc]You're dripping. Is this from Kait.. or is it because of me?[/say]")
+
+		saynn("[say=nurse]I.. I don't know..[/say]")
+
+		saynn("You circle her clit, playing with it, just enough to make her twitch. She is so hot down there, you can really feel the heat. The sweet scent too.. strawberries.")
+
+		saynn("[say=nurse]Nhh..[/say]")
+
+		saynn("You slide one finger inside her. She is tight, clenching around you immediately. You pump it slowly, feeling her walls grip you.. Then you pull out and drag your wet digit along her slit, spreading her juices.")
+
+		saynn("[say=nurse]Mhh.. please..[/say]")
+
+		saynn("[say=pc]Please what?[/say]")
+
+		saynn("[say=nurse]More..[/say]")
+
+		saynn("You add a second finger and start thrusting deeper. Her juices are coating your digits, making it easy to finger-fuck her. When you pull out, strings of them hang between your fingertips. You bring your hand up to her muzzle.")
+
+		saynn("[say=pc]Smell that? That's you.[/say]")
+
+		saynn("She inhales shakily, her cheeks burning.")
+
+		addButton("Continue", "See what happens next", "kait_finger_fast")
+	if(state == "kait_finger_fast"):
+		playAnimation(StageScene.GropeBehind, "rubfast", {pc="nurse", npc="pc", bodyState={naked=true, hard=true}})
+		saynn("You slide your fingers inside her again, harder this time. With how needy she is.. you can't help but to try to make her cum as fast as possible.")
+
+		saynn("The nurse's pussy starts making wet noises, her hips moving to meet your hand, her maw producing hot moans. You curl your digits, trying to hit that pleasure spot..")
+
+		saynn("[say=nurse]Ah.. ahh-.. F-fuck.. ahh..[/say]")
+
+		saynn("You work her faster, your palm meeting with her clit with every thrust. Her breasts bounce in your other hand.. while you still knead them. The nurse is panting heavily, her moans growing louder, faster.")
+
+		saynn("[say=nurse]I'm.. I'm gonna..[/say]")
+
+		saynn("[say=pc]Do it. Be a good girl for me.[/say]")
+
+		addButton("Continue", "See what happens next", "kait_finger_orgasm")
+	if(state == "kait_finger_orgasm"):
+		playAnimation(StageScene.GropeBehind, "orgasm", {pc="nurse", npc="pc", bodyState={naked=true, hard=true}})
+		saynn("You keep hammering away against her g-spot.. until she can't hold back anymore.")
+
+		saynn("[say=nurse]AH-![/say]")
+
+		saynn("She convulses in your arms, her pussy clamping down on your fingers as a gush of transparent fluids spray from her, splashing onto the floor, dripping down her thighs. And you keep rubbing her clit while she is doing it, extending the shower.")
+
+		saynn("[say=pc]Such a squirter.[/say]")
+
+		saynn("By the end of it, she is limp against you, gasping for air.")
+
+		saynn("[say=nurse]Haa.. ha.. ahh..[/say]")
+
+		saynn("You pull your fingers out.. and bring them to her mouth.")
+
+		saynn("[say=pc]Clean.[/say]")
+
+		saynn("She doesn't hesitate, her feline tongue lapping away at your digits, tasting herself, her eyes half-closed.. submission shining brightly in them.")
+
+		saynn("[say=nurse]Mmm..[/say]")
+
+		saynn("[say=pc]Good girl.[/say]")
+
+		saynn("You release her, letting her slide down to the floor. She sits there, pussy still dripping, chest heaving.")
+
+		saynn("Kait watches from nearby, a satisfied smirk on her face.")
+
+		addButton("Continue", "See what happens next", "kait_menu")
+	if(state == "kait_enough"):
+		playAnimation(StageScene.SexStartDDS, "start", {pc="nurse", npc="pc", npc2="kait"})
+		saynn("[say=pc]I think this is enough of a reward for her.[/say]")
+
+		saynn("[say=kait]Yeah? Did you like it, kitty?[/say]")
+
+		saynn("The nurse nods softly.")
+
+		saynn("[say=nurse]Y-yes..[/say]")
+
+		saynn("Kait leans close to her.")
+
+		saynn("[say=kait]Are you gonna talk about us to anyone?[/say]")
+
+		saynn("[say=nurse]N-no..[/say]")
+
+		saynn("[say=kait]Good.[/say]")
+
+		saynn("Kait gives her plenty of headpats.")
+
+		saynn("[say=kait]We're not bad people. We just want to.. do some chemistry stuff. It's a hobby.[/say]")
+
+		saynn("[say=nurse]Are you gonna.. blow up the space station?..[/say]")
+
+		saynn("[say=kait]Noooo. Of course not. Why would we do that?[/say]")
+
+		saynn("[say=nurse]Are you gonna make drugs?[/say]")
+
+		saynn("[say=kait]Uh.. probably not.[/say]")
+
+		saynn("[say=nurse]Then.. Why do you need it then?[/say]")
+
+		saynn("Kait's kind expression worsens a bit.")
+
+		saynn("[say=kait]That is.. not for you to ask. Alright? You were doing so well.[/say]")
+
+		saynn("[say=nurse]Yes.. sorry.. I will forget this ever happened..[/say]")
+
+		saynn("[say=kait]Wow. What a good girl! C'mon, let me help you.[/say]")
+
+		saynn("Kait helps dress the nurse up.. Then she looks at you.")
+
+		saynn("[say=kait]I will help her to get back to the prison grounds. I think this was fun~.[/say]")
+
+		saynn("[say=pc]Somehow, it worked out. Too close.[/say]")
+
+		saynn("[say=kait]Yeah.. Some unexpected things happened.[/say]")
+
+		saynn("And so Kait puts a blindfold on the nurse.. and then walks her out.")
+
+		saynn("Mission completed!")
+
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -261,6 +484,9 @@ func _react(_action: String, _args):
 		return
 
 	if(_action == "kait_licks"):
+		processTime(5*60)
+
+	if(_action == "kait_tribs"):
 		processTime(5*60)
 
 	if(_action == "kait_finger"):
