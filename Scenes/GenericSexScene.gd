@@ -111,9 +111,8 @@ func _run():
 			else:
 				addButton("LEAVE", "The sex has ended", "endthescene")
 
-		sexEngine.resetJustCame()
-
 func _react(_action: String, _args):
+	sexEngine.resetJustCame()
 	if(_action == "stopsex"):
 		sexEngine.endSex()
 		return
