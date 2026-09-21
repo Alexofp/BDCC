@@ -139,14 +139,6 @@ func _run():
 		saynn("And so the nurse undresses, revealing her.. hefty assets.")
 
 		addButton("Continue", "See what happens next", "kait_menu")
-	if(state == "avy_menu"):
-		playAnimation(StageScene.SexStartDDS, "start", {pc="nurse", npc="pc", npc2="avy", bodyState={naked=true}})
-		saynn("What do you want to do?")
-
-		addButton("Avy bullies", "Let Avy bully the nurse", "avy_bully")
-		addButton("Avy rails her", "Let Avy rail the nurse's pussy", "avy_rail")
-		addButton("Double penetration", "Double team the nurse! You fuck her pussy, Avy fucks her ass. Wear a strapon if you don't have a penis!", "avy_dp")
-		addButton("Enough", "Enough fun for today", "avy_enough")
 	if(state == "kait_menu"):
 		playAnimation(StageScene.SexStartDDS, "start", {pc="nurse", npc="pc", npc2="kait", bodyState={naked=true}})
 		saynn("What do you want to do?")
@@ -477,6 +469,218 @@ func _run():
 		saynn("Mission completed!")
 
 		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "do_break"):
+		playAnimation(StageScene.SexStartDDS, "start", {pc="nurse", npc="pc", npc2="nurse"})
+		removeCharacter("kait")
+		removeCharacter("announcer")
+		saynn("[say=pc]Can't be too safe, we have to break the nurse.[/say]")
+
+		saynn("[say=avy]And there you go. See? {pc.name} agrees with me. Go ahead and reward me with your whining, Kait.[/say]")
+
+		saynn("[say=kait]Your reward awaits you in the guard barracks, you should go there alone when you can. Have fun I guess.[/say]")
+
+		saynn("[say=announcer]I don't think there is anything I can say that would change your mind, Avy. Just don't kill her or we all will be in huge trouble.[/say]")
+
+		saynn("Kait and the announcer leave, leaving you and Avy near the shivering nurse.")
+
+		saynn("[say=avy]Lose the clothes, slut.[/say]")
+
+		saynn("[say=nurse]But..[/say]")
+
+		saynn("[say=avy]I can rip them off if you want. You're gonna have to walk back naked then.[/say]")
+
+		saynn("And so the nurse undresses, revealing her.. hefty assets.")
+
+		addButton("Continue", "See what happens next", "avy_menu")
+	if(state == "avy_menu"):
+		playAnimation(StageScene.SexStartDDS, "start", {pc="nurse", npc="pc", npc2="avy", bodyState={naked=true}})
+		saynn("What do you want to do?")
+
+		addButton("Avy bullies", "Let Avy bully the nurse", "avy_bully")
+		addButton("Avy rails her", "Let Avy rail the nurse's pussy", "avy_rail")
+		addButton("Double penetration", "Double team the nurse! You fuck her pussy, Avy fucks her ass. Wear a strapon if you don't have a penis!", "avy_dp")
+		addButton("Enough", "Enough fun for today", "avy_enough")
+	if(state == "avy_bully"):
+		playAnimation(StageScene.GropeBehind, "neck", {pc="nurse", npc="avy", bodyState={naked=true, hard=true}})
+		saynn("You let Avy do what she wants to do with the girl.")
+
+		saynn("[say=avy]Alright, come here.[/say]")
+
+		saynn("As soon as the nurse hears that, she tries to get up and run away. But Avy is quick to catch her by the ponytail and yank her back into her hands.")
+
+		saynn("[say=avy]Going somewhere? So soon?[/say]")
+
+		saynn("[say=nurse]Don't kill me, please![/say]")
+
+		saynn("[say=avy]Aw. Tugging on my heart strings. You heard the old man, I ain't gonna kill you. Just gonna roughen you up a little.[/say]")
+
+		saynn("Avy's hand lands on the girl's neck, constraining the flow of air partly. The nurse gasps and breathes deeply.")
+
+		saynn("[say=avy]After all, do I even look like an ice-cold murderer to you?[/say]")
+
+		saynn("The girl is stammering.. taking her time to answer.")
+
+		saynn("[say=nurse]N-no?[/say]")
+
+		saynn("Avy chuckles and bares her fangs, her muzzle hovering near the girl's cheek.")
+
+		saynn("[say=avy]Hah. Such a bad liar. That bitch Quinn is gonna read you like an open book.[/say]")
+
+		saynn("[say=nurse]I won't tell her anything! I swear![/say]")
+
+		saynn("[say=avy]You will say anything right now. And Quinn is gonna make you talk too, that sadistic bitch. We gotta raise your pain tolerance.[/say]")
+
+		saynn("Avy suddenly sinks her fangs into the girl's shoulder, piercing the skin, letting the blood flow.")
+
+		saynn("[say=nurse]AGhh! Please![/say]")
+
+		saynn("The girl tries to break free but only receives a tighter grip on her throat, one that steals a gasp.")
+
+		saynn("[say=avy]Funny taste. Strawberries. Makes me wanna take another bite.[/say]")
+
+		saynn("[say=nurse]NHh.. I w-will do anything.. please.. Whatever you say.. it hurts..[/say]")
+
+		saynn("[say=avy]One shoulder bite? This is nothing.[/say]")
+
+		saynn("Avy lets her claws dig into the girl's neck, threatening to break skin.")
+
+		saynn("[say=avy]You know what I like about claws? They leave such pretty marks. And they heal so slowly.[/say]")
+
+		saynn("[say=nurse]..You're a monster.[/say]")
+
+		saynn("[say=avy]Thanks.[/say]")
+
+		addButton("Continue", "See what happens next", "avy_bullies_chest")
+	if(state == "avy_bullies_chest"):
+		playAnimation(StageScene.GropeBehind, "grope", {pc="nurse", npc="avy", bodyState={naked=true, hard=true}})
+		saynn("Avy moves the clawed paw lower.. and suddenly digs the claws into her chest, dragging them along one of her breasts, leaving a scratch.")
+
+		saynn("[say=nurse]AHHghhh..[/say]")
+
+		saynn("The blood is fast to start coloring her fur red, like paint.")
+
+		saynn("[say=avy]Such huge tits you got there. Where are the nips though.[/say]")
+
+		saynn("Avy sinks both of her clawed paws into the girl's fur, squeezing her tits and trying to find something.")
+
+		saynn("[say=avy]Ohh. There they are. Mmh.. Let's see.[/say]")
+
+		saynn("[say=nurse]W-wait.. Ahh![/say]")
+
+		saynn("The foxy presses her claws against them, hard enough to break the skin, drawing blood. The nurse cries out, her chest arching, whole body shivering.")
+
+		saynn("[say=nurse]It.. h-hurts.. please..[/say]")
+
+		saynn("[say=avy]I can give you a choice. I can either do this or break some of your ribs instead. What do you say?[/say]")
+
+		saynn("Avy digs her claws more into the girl's nips, leaving her marks in the form of bleeding scratch lines on the areolas.")
+
+		saynn("[say=avy]Can't hear you. Speak louder, staffer.[/say]")
+
+		saynn("Foxy bares her fangs again, bringing her muzzle to the girl's neck, breathing warmly.")
+
+		saynn("[say=nurse]..this.. ghh.. T-This..[/say]")
+
+		saynn("[say=avy]See? I knew you had it in you. Little masochist whore.[/say]")
+
+		saynn("Avy pulls her claws away from the nipples.. just leave another scratch on her breasts instead.")
+
+		saynn("[say=nurse]Aghh..[/say]")
+
+		saynn("The nurse is looking more like an abstract art canvas now, dripping blood creating splotches of color in different places. Her eyes are struggling to focus on anything now, her legs getting visibly weaker.")
+
+		saynn("Better to intervene.")
+
+		saynn("[say=pc]She is losing blood. Wrap it up.[/say]")
+
+		saynn("[say=avy]She really tastes like strawberries, you should try it.[/say]")
+
+		saynn("You quickly go through the nurse's things and find some anti-bleeding patches. You throw them to Avy.")
+
+		saynn("[say=avy]Right. Let's set you down.[/say]")
+
+		addButton("Continue", "See what happens next", "avy_bully_chair")
+	if(state == "avy_bully_chair"):
+		playAnimation(StageScene.SexChair, "start", {pc="nurse", npc="avy", bodyState={naked=true, hard=true}})
+		saynn("Avy places the weak nurse on the chair and starts applying the patches over the wounds that she caused.")
+
+		saynn("[say=avy]Hold still. I'm being nice.[/say]")
+
+		saynn("[say=nurse]I.. I w-won't tell anyone..[/say]")
+
+		saynn("[say=avy]I know. I know. How are you gonna explain these to Quinn?[/say]")
+
+		saynn("Avy presses some of these patches over the girl's nipples. They look like pasties now!")
+
+		saynn("[say=nurse]I.. was clumsy.. nhh.. ow.. near a bush..[/say]")
+
+		saynn("[say=avy]Uh huh. And you think she will buy it?[/say]")
+
+		saynn("[say=nurse]I d-don't know..[/say]")
+
+		saynn("The foxy applies some patches to the shoulder too.. and then grabs the girl's ponytail to force eye contact.")
+
+		saynn("[say=avy]You're gonna tell her that you're a subby painslut. And that you had this done to you because you like it. You hear?[/say]")
+
+		saynn("[say=nurse]O-okay..[/say]")
+
+		saynn("Avy yanks on the hair.")
+
+		saynn("[say=avy]Who are you?[/say]")
+
+		saynn("[say=nurse]Ah.. I'm a slut for pain..[/say]")
+
+		saynn("[say=avy]Good. She will probably ask you to prove it. And so you're gonna obey her.[/say]")
+
+		saynn("The nurse nods softly.")
+
+		saynn("When Avy is done, you two surround the nurse again.")
+
+		addButton("Continue", "See what happens next", "avy_menu")
+	if(state == "avy_rail"):
+		playAnimation(StageScene.SexMatingPress, "fast", {pc="avy", npc="nurse", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You let Avy have some fun with the girl.")
+
+		saynn("The foxy nods.. approaches the nurse.. and pins her down to the floor.")
+
+		saynn("[say=nurse]Ah! W-wait![/say]")
+
+		saynn("[say=avy]Shut up.[/say]")
+
+		saynn("Avy guides her knotted cock between the girl's legs.. and drives her hips forward, burying her full length in one brutal thrust. The nurse cries out, her claws scratching against the floor.")
+
+		saynn("[say=nurse]T-too m-much![/say]")
+
+		saynn("The foxy pulls back and slams in again. And again. Her body keeps the nurse pinned to the floor while her cock keeps hammering away at her cunt, forcing out gasps.")
+
+		saynn("[say=avy]Fucking take it, whore.[/say]")
+
+		saynn("The wet slaps echo around the room. The nurse's legs are raised high, folded almost to her chest, keeping her completely exposed and helpless.")
+
+		saynn("[say=nurse]Ah.. ahh.. t-too.. too d-deep..[/say]")
+
+		saynn("Avy's foxy tail lashes behind her, her breaths coming out as hot growls. She is not stopping, not slowing. Her knot is already swelling, catching on the nurse's pussy folds with every thrust, stretching her wider each time.")
+
+		saynn("[say=nurse]I-it w-won't.. w-won't..[/say]")
+
+		addButton("Continue", "See what happens next", "avy_breed_cum")
+	if(state == "avy_breed_cum"):
+		playAnimation(StageScene.SexMatingPress, "inside", {pc="avy", npc="nurse", pcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Avy slams in one final time, forcing her entire length inside that cat, her knot included. The nurse's pussy stretches wide around that shaft, gripping it tightly..")
+
+		saynn("[say=nurse]AGHh-hhh-hh-..[/say]")
+
+		saynn("The foxy cums with a snarl, her balls tensing up, cock throbbing and pumping her with a huge load of seed, straight into her womb. Her paws hold the nurse still, pinned.. while her cock keeps filling her up.")
+
+		saynn("The nurse is trembling beneath her, completely spent, her eyes rolling up.")
+
+		saynn("[say=avy]There. Ghrr.. Fucking whore.[/say]")
+
+		saynn("She stays buried for a long moment, letting her knot keep everything sealed inside.. before finally pulling out with a wet pop. The nurse whimpers, her used slit gushing cum.")
+
+		saynn("That was fast.")
+
+		addButton("Continue", "See what happens next", "avy_menu")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -491,5 +695,18 @@ func _react(_action: String, _args):
 
 	if(_action == "kait_finger"):
 		processTime(5*60)
+
+	if(_action == "avy_bully"):
+		processTime(3*60)
+
+	if(_action == "avy_rail"):
+		processTime(3*60)
+
+	if(_action == "avy_dp"):
+		processTime(3*60)
+
+	if(_action == "avy_breed_cum"):
+		getCharacter("avy").fillBalls(1.0)
+		getCharacter("nurse").cummedInVaginaBy("avy")
 
 	setState(_action)
