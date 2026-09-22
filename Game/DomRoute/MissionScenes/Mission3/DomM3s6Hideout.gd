@@ -1,5 +1,9 @@
 extends SceneBase
 
+var usedStrapon = false
+var defStrapon = false
+var straponHasCum = false
+
 func _init():
 	sceneID = "DomM3s6Hideout"
 
@@ -500,6 +504,13 @@ func _run():
 		addButton("Avy rails her", "Let Avy rail the nurse's pussy", "avy_rail")
 		addButton("Double penetration", "Double team the nurse! You fuck her pussy, Avy fucks her ass. Wear a strapon if you don't have a penis!", "avy_dp")
 		addButton("Enough", "Enough fun for today", "avy_enough")
+	if(state == "avy_dp_choose_strapon"):
+		saynn("Pick which strapon you want to use!")
+
+		addButton("Default", "Use whatever strapon the hideout has lying around", "avy_dp_choose_strapon_def")
+		addStraponButtons()
+		if (false):
+			addButton("Nope", "You shouldn't see this", "avy_dp_choose_strapon_pick")
 	if(state == "avy_bully"):
 		playAnimation(StageScene.GropeBehind, "neck", {pc="nurse", npc="avy", bodyState={naked=true, hard=true}})
 		saynn("You let Avy do what she wants to do with the girl.")
@@ -681,6 +692,167 @@ func _run():
 		saynn("That was fast.")
 
 		addButton("Continue", "See what happens next", "avy_menu")
+	if(state == "avy_dp"):
+		playAnimation(StageScene.SexSuspended, "tease", {pc="nurse", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		if (!usedStrapon):
+			saynn("Time to have some fun with the nurse yourself. You expose your {pc.penis} and walk up to her.")
+
+		else:
+			saynn("Time to have some fun with the nurse yourself. You secure a strapon harness around your waist and walk up to her.")
+
+		saynn("[say=pc]Come here, little slut.[/say]")
+
+		saynn("The nurse tries to crawl away but you're quick enough to grab her and lift her off the floor.")
+
+		saynn("[say=nurse]Eek![/say]")
+
+		saynn("Both of your hands are on her.. so you have to move her whole body towards your "+str("hard cock" if !usedStrapon else "slick rubber shaft")+"!")
+
+		saynn("[say=avy]Mind if I join from the back?[/say]")
+
+		saynn("Now that you think about it.. The nurse is quite.. curvy.. her ass and her tits are pretty heavy, making it hard to hold her. Having help from Avy sounds perfect.")
+
+		saynn("[say=pc]Sounds good. She is a little heavy for me.[/say]")
+
+		addButton("Continue", "See what happens next", "avy_dp_avy")
+	if(state == "avy_dp_avy"):
+		playAnimation(StageScene.SexSuspendedDP, "tease", {pc="nurse", npc="pc", npc2="avy", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}, npc2BodyState={naked=true, hard=true}})
+		saynn("Avy grins and joins you, approaching the nurse from behind, trapping her between your bodies. The girl's hind paws are dangling above the floor, her legs spread for you.")
+
+		saynn("[say=nurse]W-what are you..[/say]")
+
+		saynn("[say=avy]You're gonna be our little toy now, slut.[/say]")
+
+		saynn("Avy's knotted cock already prods the girl's ass, the pointy tip pressed against her tight anal ring. At the same time, your "+str("cock" if !usedStrapon else "strapon")+" is pressing against her pussy entrance, catching some of the girl's pussy juices.")
+
+		saynn("[say=nurse]W-wait.. I can't t-take two..[/say]")
+
+		saynn("[say=pc]We didn't really ask your opinion.[/say]")
+
+		addButton("Continue", "See what happens next", "avy_dp_sex")
+	if(state == "avy_dp_sex"):
+		playAnimation(StageScene.SexSuspendedDP, "sex", {pc="nurse", npc="pc", npc2="avy", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}, npc2BodyState={naked=true, hard=true}})
+		saynn("Together, you and Avy push in!")
+
+		saynn("The nurse gasps and throws her head back, her body arching between you two. Her ass stretches around Avy's dick while her pussy is clenching around your "+str("shaft" if !usedStrapon else "toy")+". She is tight.. especially with two cocks inside her. The nurse's slick inner walls are practically trying to push you out.")
+
+		saynn("[say=avy]What a tight sextoy.[/say]")
+
+		saynn("[say=pc]Let's loosen her up then.[/say]")
+
+		saynn("You start moving. Slow, deep thrusts, letting the girl feel every inch. Avy matches the opposite of your rhythm, running her cock inside her ass as you pull back, making sure there is always at least one dick inside her"+str("" if !usedStrapon else ", rubber or otherwise")+". The nurse is suspended between you, completely helpless, her holes filled, body bouncing with each thrust.")
+
+		saynn("[say=nurse]Ah.. ahh.. tt-too much..[/say]")
+
+		saynn("[say=avy]You're just a cocksleeve. A fucktoy. Nothing more.[/say]")
+
+		addButton("Continue", "See what happens next", "avy_dp_fast")
+	if(state == "avy_dp_fast"):
+		playAnimation(StageScene.SexSuspendedDP, "fast", {pc="nurse", npc="pc", npc2="avy", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}, npc2BodyState={naked=true, hard=true}})
+		saynn("You pick up the pace, making the nurse's tits bounce a lot with each thrust. Her whining turns into quiet moans, her breathing gets deeper.")
+
+		saynn("[say=avy]Having both your holes fucked, what a staffer whore.[/say]")
+
+		saynn("[say=nurse]Ah.. ahh..[/say]")
+
+		saynn("Avy's claws dig into her hips, holding her steady, helping you pull her down onto your cocks. Eventually you synchronize, shoving your dicks inside her at the same time.")
+
+		saynn("[say=nurse]Ah.. AH.. Ahh-..[/say]")
+
+		saynn("Her pussy clenches around you, her ass struggling to swallow Avy's inflating knot. She is reaching her peak, her whole body tensing.")
+
+		saynn("[say=avy]The bitch is cumming.[/say]")
+
+		if (!usedStrapon):
+			saynn("Indeed, a broken moan tears from the nurse's throat as her inner walls start milking you both. Her body squirms uselessly, legs kicking, claws digging into your shoulders. She is scratching you.. but you're too close to care.")
+
+			saynn("[say=avy]Nhh.. Get ready for the fucking knot..[/say]")
+
+			saynn("Time to breed the slut.")
+
+			addButton("Cum inside", "See what happens next", "avy_dp_cum")
+		else:
+			saynn("Indeed, a broken moan tears from the nurse's throat as her inner walls start milking Avy's cock.. and your rubber toy. Her body squirms uselessly, legs kicking, claws digging into your shoulders. She is scratching you.. but you let it slide.")
+
+			saynn("[say=avy]Nhh.. Get ready for the fucking knot..[/say]")
+
+			saynn("Time to let the slut feel it.")
+
+			addButton("Shove it in", "See what happens next", "avy_dp_cum")
+	if(state == "avy_dp_cum"):
+		playAnimation(StageScene.SexSuspendedDP, "inside", {pc="nurse", npc="pc", npc2="avy", npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}, npc2BodyState={naked=true, hard=true}})
+		if (!usedStrapon):
+			saynn("When you can't hold back any longer, you slam it in deep, shoving your whole length inside her! The nurse lets out a loud noise, her body pinned between you. You cum together, pumping your hot seed down her pussy and ass, filling both holes at the same time. Avy snarls, her fat knot is stuck inside the girl's ass.")
+
+		else:
+			saynn("When Avy can't hold back any longer, you slam it in deep, shoving your whole rubber length inside her! The nurse lets out a loud noise, her body pinned between you. Avy cums soon after, pumping her hot seed down her ass while you're keeping her pussy hole filled at the same time. Avy snarls, her fat knot is stuck inside the girl's ass.")
+
+		saynn("The nurse is cumming too again, her poor body is squirming hard.. as much as two cocks can allow that. Despite the rough fucking, she is still clenching around you"+str("r strapon" if usedStrapon else "")+".")
+
+		saynn("[say=avy]Grrhh.. That's a good fucking cum dumpster.[/say]")
+
+		saynn("Both, you and Avy, are left panting, still with your cocks inside, pumping the rest of your load into her.")
+
+		saynn("The nurse hangs between you, her breathing becoming shallow, her eyes looking dazed.")
+
+		saynn("Time to pull out.")
+
+		addButton("Continue", "See what happens next", "avy_dp_pullout")
+	if(state == "avy_dp_pullout"):
+		playAnimation(StageScene.SexSuspendedDP, "tease", {pc="nurse", npc="pc", npc2="avy", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}, npc2BodyState={naked=true, hard=true}})
+		if (!usedStrapon):
+			saynn("Together, you pull out. Avy's knot popping free with a wet sound. Seed starts gushing from the nurse's holes.. both gaping and leaking.")
+
+		else:
+			saynn("Together, you pull out. Avy's knot popping free with a wet sound. Seed starts gushing from the nurse's asshole.. both her holes are gaping and leaking.")
+
+		saynn("[say=avy]Look at her. The bitch is fucked stupid.[/say]")
+
+		saynn("[say=nurse]Ahh..[/say]")
+
+		saynn("Slowly, you lower her to the floor. She.. is quite messy.. still trembling.")
+
+		saynn("She is still alive so that is all that matters.")
+
+		addButton("Continue", "See what happens next", "avy_menu_remstrapon")
+	if(state == "avy_enough"):
+		playAnimation(StageScene.SexStartDDS, "start", {pc="nurse", npc="pc", npc2="avy"})
+		saynn("[say=pc]I think she had enough.[/say]")
+
+		saynn("Avy approaches the cat.")
+
+		saynn("[say=avy]So. Gonna rat on us, cat?[/say]")
+
+		saynn("[say=nurse]Agh.. hh.. no..[/say]")
+
+		saynn("[say=avy]Good. Cause if you do..[/say]")
+
+		saynn("The nurse sighs.")
+
+		saynn("[say=nurse]I will probably.. be dead..[/say]")
+
+		saynn("Sounds a little too dramatic. But it has the right general idea.")
+
+		saynn("[say=avy]Such a smart slut. Maybe you won't be dead-dead. But you're gonna wish you were.[/say]")
+
+		saynn("[say=pc]Quit scaring the nurse.[/say]")
+
+		saynn("Avy rolls her eyes.")
+
+		saynn("[say=avy]Fine. I will throw the bitch out now. I hope that the blue slut is happy we got her the lab shit. Wasn't fucking easy.[/say]")
+
+		saynn("[say=pc]I'm sure she is happy with what we got.[/say]")
+
+		saynn("And so Avy waits until the nurse puts her stuff back on.. before blindfolding her and guiding her out.")
+
+		saynn("Mission completed!")
+
+		addButton("Continue", "See what happens next", "endthescene")
+func addStraponButtons():
+	var strapons = GM.pc.getStrapons()
+	for strapon in strapons:
+		addButton(strapon.getVisibleName(), strapon.getVisibleDescription(), "avy_dp_choose_strapon_pick", [strapon])
+
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -704,9 +876,63 @@ func _react(_action: String, _args):
 
 	if(_action == "avy_dp"):
 		processTime(3*60)
+		if(!GM.pc.hasReachablePenis()):
+			setState("avy_dp_choose_strapon")
+			return
+
+	if(_action == "avy_dp_choose_strapon_def"):
+		usedStrapon = true
+		defStrapon = true
+		putOn("pc", "StraponCanine")
+		setState("avy_dp")
+		return
+
+	if(_action == "avy_dp_choose_strapon_pick"):
+		usedStrapon = true
+		defStrapon = false
+		var strapon = _args[0]
+		GM.pc.getInventory().removeItem(strapon)
+		GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(strapon)
+		var theFluids = strapon.getFluids()
+		if(theFluids != null):
+			if(theFluids.hasFluidType("Cum")):
+				straponHasCum = true
+		setState("avy_dp")
+		return
 
 	if(_action == "avy_breed_cum"):
 		getCharacter("avy").fillBalls(1.0)
 		getCharacter("nurse").cummedInVaginaBy("avy")
 
+	if(_action == "avy_dp_cum"):
+		getCharacter("avy").fillBalls(1.0)
+		getCharacter("nurse").cummedInAnusBy("avy", FluidSource.Penis)
+		getCharacter("nurse").cummedInVaginaBy("pc", FluidSource.Penis if !usedStrapon else FluidSource.Strapon)
+		GM.pc.orgasmFrom("nurse")
+
+	if(_action == "avy_menu_remstrapon"):
+		if(usedStrapon):
+			if(defStrapon):
+				GM.pc.removeStrapon()
+			else:
+				GM.pc.unequipStrapon()
+		setState("avy_menu")
+		return
+
 	setState(_action)
+
+func saveData():
+	var data = .saveData()
+
+	data["usedStrapon"] = usedStrapon
+	data["defStrapon"] = defStrapon
+	data["straponHasCum"] = straponHasCum
+
+	return data
+
+func loadData(data):
+	.loadData(data)
+
+	usedStrapon = SAVE.loadVar(data, "usedStrapon", false)
+	defStrapon = SAVE.loadVar(data, "defStrapon", false)
+	straponHasCum = SAVE.loadVar(data, "straponHasCum", false)
