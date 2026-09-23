@@ -66,6 +66,7 @@ func _init():
 		InterestTopic.NoCock: Interest.Hates,
 		InterestTopic.HasCockOnly: Interest.Loves,
 	}
+	npcHasMenstrualCycle = true
 	
 func _getName():
 	return "Nurse"
@@ -97,12 +98,12 @@ func getFemininity() -> int:
 func createBodyparts():
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anthrobody"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anthroarms"))
-	#giveBodypartUnlessSame(GlobalRegistry.createBodypart("anus"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anus"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("digilegs"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felinehead"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("ponytailhair2"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felineears"))
-	#giveBodypartUnlessSame(GlobalRegistry.createBodypart("vagina"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("vagina"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felinetail"))
 	var breasts = GlobalRegistry.createBodypart("humanbreasts")
 	breasts.size = 8

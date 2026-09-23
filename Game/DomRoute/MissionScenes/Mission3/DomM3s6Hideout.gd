@@ -1,5 +1,8 @@
 extends SceneBase
 
+var did1 = false
+var did2 = false
+var did3 = false
 var usedStrapon = false
 var defStrapon = false
 var straponHasCum = false
@@ -147,10 +150,22 @@ func _run():
 		playAnimation(StageScene.SexStartDDS, "start", {pc="nurse", npc="pc", npc2="kait", bodyState={naked=true}})
 		saynn("What do you want to do?")
 
-		addButton("Kait licks", "Let Kait eat her out!", "kait_licks")
-		addButton("Kait tribs", "Let Kait rub pussies with the nurse!", "kait_tribs")
-		addButton("Finger her", "Pleasure the nurse yourself with your digits", "kait_finger")
-		addButton("Enough", "Enough fun for today", "kait_enough")
+		if (!did1):
+			addButton("Kait licks", "Let Kait eat her out!", "kait_licks")
+		else:
+			addDisabledButton("Kait licks", "You already did this!")
+		if (!did2):
+			addButton("Kait tribs", "Let Kait rub pussies with the nurse!", "kait_tribs")
+		else:
+			addDisabledButton("Kait tribs", "You already did this!")
+		if (!did3):
+			addButton("Finger her", "Pleasure the nurse yourself with your digits", "kait_finger")
+		else:
+			addDisabledButton("Finger her", "You already did this!")
+		if (did1 || did2 || did3):
+			addButton("Enough", "Enough fun for today", "kait_enough")
+		else:
+			addDisabledButton("Enough", "You need to do at least one thing with the nurse.")
 	if(state == "kait_licks"):
 		playAnimation(StageScene.Search, "breasts", {pc="nurse", npc="kait", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("You let Kait do what she wants to do.")
@@ -474,7 +489,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "do_break"):
-		playAnimation(StageScene.SexStartDDS, "start", {pc="nurse", npc="pc", npc2="nurse"})
+		playAnimation(StageScene.SexStartDDS, "start", {pc="nurse", npc="pc", npc2="avy"})
 		removeCharacter("kait")
 		removeCharacter("announcer")
 		saynn("[say=pc]Can't be too safe, we have to break the nurse.[/say]")
@@ -500,10 +515,22 @@ func _run():
 		playAnimation(StageScene.SexStartDDS, "start", {pc="nurse", npc="pc", npc2="avy", bodyState={naked=true}})
 		saynn("What do you want to do?")
 
-		addButton("Avy bullies", "Let Avy bully the nurse", "avy_bully")
-		addButton("Avy rails her", "Let Avy rail the nurse's pussy", "avy_rail")
-		addButton("Double penetration", "Double team the nurse! You fuck her pussy, Avy fucks her ass. Wear a strapon if you don't have a penis!", "avy_dp")
-		addButton("Enough", "Enough fun for today", "avy_enough")
+		if (!did1):
+			addButton("Avy bullies", "Let Avy bully the nurse", "avy_bully")
+		else:
+			addDisabledButton("Avy bullies", "You already did this!")
+		if (!did2):
+			addButton("Avy rails her", "Let Avy rail the nurse's pussy", "avy_rail")
+		else:
+			addDisabledButton("Avy rails her", "You already did this!")
+		if (!did3):
+			addButton("Double penetration", "Double team the nurse! You fuck her pussy, Avy fucks her ass. Wear a strapon if you don't have a penis!", "avy_dp")
+		else:
+			addDisabledButton("Double penetration", "You already did this!")
+		if (did1 || did2 || did3):
+			addButton("Enough", "Enough fun for today", "avy_enough")
+		else:
+			addDisabledButton("Enough", "You need to do at least one thing with the nurse")
 	if(state == "avy_dp_choose_strapon"):
 		saynn("Pick which strapon you want to use!")
 
@@ -859,26 +886,48 @@ func _react(_action: String, _args):
 		endScene()
 		return
 
+	if(_action == "do_reward"):
+		GM.main.MS.setDecision("nurse", "reward")
+
+	if(_action == "do_break"):
+		GM.main.MS.setDecision("nurse", "break")
+
+	if(_action == "do_let_go"):
+		GM.main.MS.setDecision("nurse", "letgo")
+		GM.main.MS.completeMission()
+
 	if(_action == "kait_licks"):
 		processTime(5*60)
+		did1 = true
 
 	if(_action == "kait_tribs"):
 		processTime(5*60)
+		did2 = true
 
 	if(_action == "kait_finger"):
 		processTime(5*60)
+		did3 = true
+
+	if(_action == "kait_enough"):
+		GM.main.MS.completeMission()
 
 	if(_action == "avy_bully"):
 		processTime(3*60)
+		did1 = true
 
 	if(_action == "avy_rail"):
 		processTime(3*60)
+		did2 = true
 
 	if(_action == "avy_dp"):
 		processTime(3*60)
+		did3 = true
 		if(!GM.pc.hasReachablePenis()):
 			setState("avy_dp_choose_strapon")
 			return
+
+	if(_action == "avy_enough"):
+		GM.main.MS.completeMission()
 
 	if(_action == "avy_dp_choose_strapon_def"):
 		usedStrapon = true
@@ -924,6 +973,9 @@ func _react(_action: String, _args):
 func saveData():
 	var data = .saveData()
 
+	data["did1"] = did1
+	data["did2"] = did2
+	data["did3"] = did3
 	data["usedStrapon"] = usedStrapon
 	data["defStrapon"] = defStrapon
 	data["straponHasCum"] = straponHasCum
@@ -933,6 +985,9 @@ func saveData():
 func loadData(data):
 	.loadData(data)
 
+	did1 = SAVE.loadVar(data, "did1", false)
+	did2 = SAVE.loadVar(data, "did2", false)
+	did3 = SAVE.loadVar(data, "did3", false)
 	usedStrapon = SAVE.loadVar(data, "usedStrapon", false)
 	defStrapon = SAVE.loadVar(data, "defStrapon", false)
 	straponHasCum = SAVE.loadVar(data, "straponHasCum", false)

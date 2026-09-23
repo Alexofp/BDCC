@@ -75,7 +75,7 @@ func _run():
 
 		saynn("You keep the nurse pinned while Kait starts working on her. The first loop goes around her wrists and elbows, pulling them together until they almost touch. She makes sure she got the cat's arms fully tied up.")
 
-		saynn("[say=nurses]Ah.. quit it![/say]")
+		saynn("[say=nurse]Ah.. quit it![/say]")
 
 		saynn("[say=kait]Oh, I'm just getting started.[/say]")
 

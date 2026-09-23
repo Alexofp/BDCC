@@ -25,7 +25,7 @@ func _run():
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "take_peek"):
 		aimCameraAndSetLocName("medical_shower")
-		addCharacter("elizaMom")
+		addCharacter("elizaMom", ["naked"])
 		GM.pc.setLocation("med_corridor7")
 		playAnimation(StageScene.Showering, "head", {pc="elizaMom", bodyState={naked=true, hard=true}})
 		saynn("You step further and peek into the shower stalls. Through the haze.. you make out a figure.")
@@ -321,18 +321,22 @@ func _react(_action: String, _args):
 
 	if(_action == "just_grab_badge"):
 		addMessage("Task updated!")
+		GM.main.MS.setFlag("scarlet", "nothing")
 
 	if(_action == "leave_after_saw"):
 		addMessage("Task updated!")
+		GM.main.MS.setFlag("scarlet", "nothingpeek")
 
 	if(_action == "embrace_scarlet"):
 		GM.pc.afterTakingAShower()
 
 	if(_action == "just_shower"):
 		processTime(5*60)
+		GM.main.MS.setFlag("scarlet", "shower")
 
 	if(_action == "finger_her"):
 		processTime(5*60)
+		GM.main.MS.setFlag("scarlet", "finger")
 
 	if(_action == "breed_her"):
 		processTime(5*60)
@@ -344,10 +348,12 @@ func _react(_action: String, _args):
 		processTime(3*60)
 		getCharacter("elizaMom").cummedInVaginaBy("pc")
 		GM.pc.orgasmFrom("elizaMom")
+		GM.main.MS.setFlag("scarlet", "fuck")
 
 	if(_action == "just_breed_pullout"):
 		processTime(3*60)
 		getCharacter("elizaMom").cummedOnBy("pc", FluidSource.Penis)
 		GM.pc.orgasmFrom("elizaMom")
+		GM.main.MS.setFlag("scarlet", "fuckpullout")
 
 	setState(_action)
