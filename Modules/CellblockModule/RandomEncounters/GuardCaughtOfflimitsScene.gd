@@ -426,11 +426,11 @@ func _react_scene_end(_tag, _result):
 			setState("if_won")
 			addExperienceToPlayer(30)
 			
-			if(GM.ES.triggerReact(Trigger.WonCaughtOffLimitsFight, [npcID, "guard"])):
+			if(GM.ES.triggerReact(Trigger.WonCaughtOffLimitsFight, [npcID, CharacterType.Guard])):
 				endScene()
 				return
 		else:
-			if(GM.ES.triggerReact(Trigger.LostCaughtOffLimitsFight, [npcID, "guard"])):
+			if(GM.ES.triggerReact(Trigger.LostCaughtOffLimitsFight, [npcID, CharacterType.Guard])):
 				endScene()
 				return
 			

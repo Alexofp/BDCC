@@ -80,6 +80,10 @@ func surrendered_text():
 	addAction("frisk", "Frisk", "Go easy on them and just frisk them", "punish", 1.0, 30, {})
 
 func surrendered_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(getCharByRole("inmate").isPlayer() && GM.ES.triggerReact(Trigger.LostOrSurrenderedToDynamicNPC, [getRoleID("guard"), getCharByRole("guard").getCharType(), true])):
+		stopMe()
+		return
+	
 	if(_id == "punish"):
 		startInteraction("PunishInteraction", {punisher=getRoleID("guard"), target=getRoleID("inmate")})
 	if(_id == "frisk"):
@@ -129,6 +133,10 @@ func guard_won_text():
 	addDefeatButtons("guard", "inmate")
 
 func guard_won_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(getCharByRole("inmate").isPlayer() && GM.ES.triggerReact(Trigger.LostOrSurrenderedToDynamicNPC, [getRoleID("guard"), getCharByRole("guard").getCharType(), false])):
+		stopMe()
+		return
+	
 	if(_id == "punish"):
 		startInteraction("PunishInteraction", {punisher=getRoleID("guard"), target=getRoleID("inmate")})
 	if(_id == "frisk"):

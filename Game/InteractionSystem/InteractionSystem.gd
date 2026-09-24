@@ -256,12 +256,16 @@ func getClosestInteraction() -> PawnInteractionBase:
 				result = interaction
 	return result
 
-func spawnPawn(charID, pawnTypeID:String=""):
+# GM.main.IS.spawnPawnWithTypeAt(CharacterType.Nurse, "loc")
+func spawnPawnWithTypeAt(_type:String, _loc:String):
+	return trySpawnPawnReturnPawn(_type, _loc)
+
+func spawnPawn(charID, pawnTypeID:String="", _loc:String=""):
 	if(charID == null):
-		return
+		return null
 	var character:BaseCharacter = GlobalRegistry.getCharacter(charID)
 	if(character == null):
-		return
+		return null
 	if(pawnTypeID == ""):
 		pawnTypeID = character.getCharType()
 	var pawnType:PawnTypeBase = GlobalRegistry.getPawnType(pawnTypeID)
@@ -275,6 +279,8 @@ func spawnPawn(charID, pawnTypeID:String=""):
 	
 	if(charID == "pc"):
 		newPawn.setLocation(GM.pc.getLocation())
+	elif(!_loc.empty()):
+		newPawn.setLocation(_loc)
 	else:
 		var newLoc:String = "main_punishment_spot"
 		
@@ -298,10 +304,10 @@ func spawnPawn(charID, pawnTypeID:String=""):
 	newPawn.onSpawn()
 	return newPawn
 
-func spawnPawnIfNeeded(charID, pawnTypeID:String=""):
+func spawnPawnIfNeeded(charID, pawnTypeID:String="", _loc:String = ""):
 	if(hasPawn(charID)):
 		return getPawn(charID)
-	return spawnPawn(charID, pawnTypeID)
+	return spawnPawn(charID, pawnTypeID, _loc)
 
 func deletePawn(charID):
 	if(charID == null):
@@ -606,29 +612,30 @@ func trySpawnSpecialRelationshipPawn() -> bool:
 	
 	return false
 
-func trySpawnPawn(specificPawnType = null):
+func trySpawnPawn(specificPawnType = null, _loc:String = ""):
+	return trySpawnPawnReturnPawn(specificPawnType, _loc) != null
+	
+func trySpawnPawnReturnPawn(specificPawnType = null, _loc:String = ""):
 	var randomPawnType = specificPawnType
 	if(randomPawnType == null):
 		randomPawnType = RNG.pickWeightedDict(pawnDistribution)
 		if(randomPawnType == null):
-			return false
+			return null
 	
 	var pawnType:PawnTypeBase = GlobalRegistry.getPawnType(randomPawnType)
 	if(pawnType == null || !pawnType.shouldSpawnPawns()):
-		return false
+		return null
 	
 	var pickedRandomCharID:String = pawnType.tryPickCharacterID()
 	if(pickedRandomCharID != ""):
-		spawnPawn(pickedRandomCharID, randomPawnType)
-		return true
+		return spawnPawn(pickedRandomCharID, randomPawnType, _loc)
 	
 	# Generating a new npc
 	var generatedRandomCharID:String = pawnType.generateCharacterID()
 	if(generatedRandomCharID != ""):
-		spawnPawn(generatedRandomCharID, randomPawnType)
-		return true
+		return spawnPawn(generatedRandomCharID, randomPawnType, _loc)
 	
-	return false
+	return null
 	
 func processAllPawnsNoInteractions(howManySeconds:int):
 	interactionsDisabled = true

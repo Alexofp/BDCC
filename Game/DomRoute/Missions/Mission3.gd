@@ -77,12 +77,17 @@ func onSceneStart(_sceneID:String, _args:Array):
 	if(_sceneID == "DomM3s2Lobby"):
 		setFlag("s1", true)
 		setMissionMarker("med_near_storage")
+		GM.main.IS.spawnPawnWithTypeAt(CharacterType.Nurse, "med_corridor5")
+		GM.main.IS.spawnPawnWithTypeAt(CharacterType.Nurse, "med_corridor_split2")
 	if(_sceneID == "DomM3s3StorageLocked"):
 		setFlag("s2", true)
 		setMissionMarker("med_nearshower")
+		GM.main.IS.spawnPawnWithTypeAt(CharacterType.Nurse, "med_corridor4")
 	if(_sceneID == "DomM3s4Shower"):
 		setFlag("s3", true)
 		setMissionMarker("med_near_storage")
+		GM.main.IS.spawnPawnWithTypeAt(CharacterType.Nurse, "med_corridor4")
+		GM.main.IS.spawnPawnWithTypeAt(CharacterType.Nurse, "med_corridor6")
 	if(_sceneID == "DomM3s5Return"):
 		clearMissionMarkers()
 	pass

@@ -59,6 +59,7 @@ func _run():
 			saynn("Well then. You look around. It looks more like a lobby, a few benches are placed near the white walls. You notice a few pictures there and there, all of them clearly drawn by someone young. There are two other doors, apart from the one that you walked in through.")
 
 		else:
+			var theMission3Out:String = GM.main.MS.getSpecificFlag("Mission3", "nurse", "")
 			saynn("You approach the nurse’s desk again, the same name placard of ’Minuette’ stands atop it. She drags her gaze away from the screen and looks at you.")
 
 			# (if player has the perk FertilityProudMom and didn't get an apple today)
@@ -67,7 +68,7 @@ func _run():
 				saynn("She pulls a fresh apple from under her desk somewhere and hands it off to you.")
 			
 			elif(GM.pc.isReadyToGiveBirth()):
-				saynn("[say=nurse]You look ready to drop, wanna get that over with?[/say]")
+				saynn("[say=nurse]You look ready. Let me know if you wanna do it.[/say]")
 			
 			elif(GM.pc.isHeavilyPregnant()):
 				saynn("[say=nurse]Came to give birth?[/say]")
@@ -76,7 +77,14 @@ func _run():
 			elif(GM.pc.isVisiblyPregnant()):
 				saynn("[say=nurse]If you want help with your pregnancy, let me know.[/say]")
 			
-			# (else)
+			#"letgo", "reward", "break"
+			elif(theMission3Out == "letgo"):
+				saynn("[say=nurse]Oh.. hi. Do you want something, inmate?[/say]")
+			elif(theMission3Out == "reward"):
+				saynn("[say=nurse]Oh.. hey there. Do you want something, maybe?..[/say]")
+			elif(theMission3Out == "break"):
+				saynn("[say=nurse]Oh.. H-hello..[/say]")
+				saynn("[say=pc]You should relax, kitty cat.[/say]")
 			else:
 				saynn("[say=nurse]Need something, inmate?[/say]")
 		

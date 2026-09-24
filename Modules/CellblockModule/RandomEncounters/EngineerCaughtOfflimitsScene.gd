@@ -344,11 +344,11 @@ func _react_scene_end(_tag, _result):
 		if(battlestate == "win"):
 			setState("if_won")
 			addExperienceToPlayer(30)
-			if(GM.ES.triggerReact(Trigger.WonCaughtOffLimitsFight, [npcID, "engineer"])):
+			if(GM.ES.triggerReact(Trigger.WonCaughtOffLimitsFight, [npcID, CharacterType.Engineer])):
 				endScene()
 				return
 		else:
-			if(GM.ES.triggerReact(Trigger.LostCaughtOffLimitsFight, [npcID, "engineer"])):
+			if(GM.ES.triggerReact(Trigger.LostCaughtOffLimitsFight, [npcID, CharacterType.Engineer])):
 				endScene()
 				return
 			setState("if_lost")
