@@ -49,4 +49,6 @@ func saveData():
 	pass
 
 func loadData(_data):
-	pass
+	if _data==null:
+		get_script().reload()
+		return
