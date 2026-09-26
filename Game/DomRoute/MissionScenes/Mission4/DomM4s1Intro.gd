@@ -1,7 +1,14 @@
 extends SceneBase
 
+var npcID = ""
+var lostNurseFight = false
+
 func _init():
 	sceneID = "DomM4s1Intro"
+
+func resolveCustomCharacterName(_charID):
+	if(_charID == "npc"):
+		return npcID
 
 func _run():
 	if(state == ""):
@@ -226,6 +233,142 @@ func _run():
 
 		saynn("Before the doors open.. Avy swiftly injects herself with something. Painkillers.. probably.")
 
+		addButton("Step out", "See what waits you outside", "step_out_to_eliza")
+	if(state == "step_out_to_eliza"):
+		aimCameraAndSetLocName("med_lobby_start")
+		addCharacter("eliza")
+		playAnimation(StageScene.Duo, "stand", {npc="eliza"})
+		saynn("The elevator doors open.. revealing the normal-looking medical lobby. You step out. The nurses are like busy bees, doing their tasks in the background, paying little attention to you.")
+
+		saynn("Behind the counter of the lobby sits Eliza Quinn. She is busy tapping away on her laptop.")
+
+		saynn("You speak firmly across the whole lobby.")
+
+		saynn("[say=pc]Where is she?[/say]")
+
+		saynn("All the nurses stop and look at you.")
+
+		saynn("Eliza leans to the side a bit, her ears and eyes peeking from behind her laptop. She raises a brow.")
+
+		saynn("[say=eliza]Hey there~. What can I..[/say]")
+
+		saynn("Avy cuts her off.")
+
+		saynn("[say=avy]You know exactly who we're talking about, you bitch whore. Talk.[/say]")
+
+		saynn("You hear a soft chuckle. Eliza closes the laptop, takes a sip from her personal coffee mug and then gets up.")
+
+		saynn("[say=eliza]Oh, you are talking about that cute snowy kitty~. An adorable little creature, isn't she?[/say]")
+
+		saynn("Her smugness makes your veins boil.")
+
+		saynn("[say=pc]What did you do to her?![/say]")
+
+		saynn("She smiles and playfully tilts her head left and right, eyes looking to the side, the tips of her ears lagging behind her wiggle.")
+
+		saynn("[say=eliza]She showed that she is unfit for normal prison life in her current.. mental.. state. So unfortunate, she really is a cute little kitty.[/say]")
+
+		saynn("So she did indeed grab Kait.")
+
+		saynn("[say=pc]What did you DO to her?![/say]")
+
+		saynn("[say=eliza]I can't disclose patient medical information I'm afraid~.[/say]")
+
+		saynn("Avy takes a bold step forward, clenching her fists.")
+
+		saynn("[say=avy]I've heard enough. Just gonna break you, little nerd slut.[/say]")
+
+		saynn("Avy growls and dashes forward, with intent to leap over the counter.")
+
+		saynn("But the doctor is faster than she looks..")
+
+		addButton("Continue", "See what happens next", "avy_gets_dazed_lobby")
+	if(state == "avy_gets_dazed_lobby"):
+		playAnimation(StageScene.Duo, "hurt", {pc="avy", npc="eliza", npcAction="throw"})
+		saynn("Doctor's paw snaps to her labcoat's pockets, producing a small glass vial. She hurls it at Avy's face.")
+
+		saynn("The vial shatters against the foxy's muzzle.")
+
+		saynn("A cloud of pale purple gas engulfs Avy. She crashes into the counter and gets knocked back, her eyes losing focus, her growl turning into a slurred whimper.")
+
+		saynn("While that is happening, Eliza snatches her coffee mug and runs towards the back exit.")
+
+		saynn("[say=eliza]Nurses! Get them![/say]")
+
+		saynn("Avy shakes her head, flailing wildly to push the purple cloud bits away.")
+
+		saynn("[say=avy]Fuck.. grrh.. I hate her so much.[/say]")
+
+		addButton("Continue", "See what happens next", "nurse_1_show")
+	if(state == "nurse_1_show"):
+		addCharacter(npcID)
+		playAnimation(StageScene.Duo, "stand", {npc=npcID})
+		saynn("The nurses drop what they're doing and surround you.")
+
+		saynn("[say=avy]Bring it on, whores.[/say]")
+
+		saynn("Time to fight back. You pick one of them and focus on {npc.him}.")
+
+		addButton("Fight", "Start the fight", "start_fight")
+	if(state == "nurse_fight_lost"):
+		playAnimation(StageScene.GivingBirth, "idle")
+		saynn("You've lost the fight..")
+
+		addButton("Continue", "See what happens next", "nurse_fight_won")
+	if(state == "nurse_fight_won"):
+		playAnimation(StageScene.Solo, "kick", {pc="avy"})
+		if (lostNurseFight):
+			saynn("You got defeated.. but Avy is still fighting.")
+
+		else:
+			saynn("After you're done with your nurse, you direct your attention towards Avy.")
+
+		saynn("One of the nurses raises a remote and points it at her. Moments later, Avy's hand is already wrapped around that nurse's neck.")
+
+		saynn("[say=avy]C'mon. Press it, little whore. Make my muscles tense up, see what happens.[/say]")
+
+		saynn("The shivering nurse decides to just drop the remote. That's when Avy throws them into a pair of other nurses, making them all collapse.")
+
+		saynn("Another nurse swings a shock baton at her head.. but Avy is swift enough to duck under it.. before kicking that staffer into a wall.")
+
+		saynn("[say=avy]Save your bones, stupid, quit fighting.[/say]")
+
+		saynn("A sneaky nurse tries to flank her and get behind. Avy spins, catches the weaponized hand.. and plants her knee into the nurse's gut, forcing all the air out.")
+
+		saynn("One of the nurses manages to shove the electrified tip of the stun baton into Avy's side!")
+
+		saynn("[say=avy]GRhh![/say]")
+
+		saynn("Growl echoes around the lobby as the electricity sends lots of blue little lightnings into the foxy's body.")
+
+		saynn("Avy is taking it. Tanking it. Her whole body freezes up still.. except for one of her arms that grabs the nurse's wrist and wrenches it behind their back.. until something cracks inside. The nurse yelps and collapses instantly.")
+
+		saynn("[say=avy]IS THIS WHAT YOU WANT, FUCKERS?![/say]")
+
+		saynn("Her voice sends a shockwave across the whole room. The rest of the nurses are quick to grab the wounded ones.. before proceeding to escape.")
+
+		if (lostNurseFight):
+			saynn("[say=avy]Not so quick.[/say]")
+
+			saynn("Avy runs up to one of the nurses and rips the badge off of their uniform.")
+
+			saynn("[say=avy]That's mine now. Get out of my sight.[/say]")
+
+			saynn("She then walks up to you and helps you to get up. Avy is still panting a bit.")
+
+			saynn("[say=avy]Wake up, samurai. We got a bitch to break.[/say]")
+
+		else:
+			saynn("[say=pc]Not so quick.[/say]")
+
+			saynn("You run up to one of the nurses and rip the badge off of their uniform.")
+
+			saynn("[say=pc]That's mine now. Get out of my sight.[/say]")
+
+			saynn("Avy walks up to you.")
+
+			saynn("[say=avy]Let's get inside.[/say]")
+
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -241,4 +384,38 @@ func _react(_action: String, _args):
 	if(_action == "go_medical"):
 		processTime(13*60)
 
+	if(_action == "nurse_1_show"):
+		npcID = NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Nurses, [], NurseGenerator.new(), {})
+
+	if(_action == "start_fight"):
+		runScene("FightScene", [npcID], "nurseFight")
+		return
+
 	setState(_action)
+
+func _react_scene_end(_tag, _result):
+	if(_tag == "nurseFight"):
+		processTime(10 * 60)
+		var battlestate = _result[0]
+		
+		if(battlestate == "win"):
+			setState("nurse_fight_won")
+			addExperienceToPlayer(20)
+		else:
+			lostNurseFight = true
+			setState("nurse_fight_lost")
+			addExperienceToPlayer(5)
+
+func saveData():
+	var data = .saveData()
+
+	data["npcID"] = npcID
+	data["lostNurseFight"] = lostNurseFight
+
+	return data
+
+func loadData(data):
+	.loadData(data)
+
+	npcID = SAVE.loadVar(data, "npcID", "")
+	lostNurseFight = SAVE.loadVar(data, "lostNurseFight", false)
