@@ -369,6 +369,18 @@ func _run():
 
 			saynn("[say=avy]Let's get inside.[/say]")
 
+		addButton("Continue", "See what happens next", "after_nurse_fight_inside")
+	if(state == "after_nurse_fight_inside"):
+		playAnimation(StageScene.Duo, "stand", {npc="avy"})
+		aimCameraAndSetLocName("med_staffonly_door1")
+		GM.pc.setLocation("med_nearlab")
+		saynn("You enter the familiar staff-only corridor. It's quiet here, so far.")
+
+		saynn("[say=pc]Alright, let's look for both, the doctor and Kait. Kait I care about more.[/say]")
+
+		saynn("[say=avy]Sure. But the bitch doctor is gonna get it too. Now it's personal.[/say]")
+
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -390,6 +402,13 @@ func _react(_action: String, _args):
 	if(_action == "start_fight"):
 		runScene("FightScene", [npcID], "nurseFight")
 		return
+
+	if(_action == "after_nurse_fight_inside"):
+		processTime(3*60)
+		if(lostNurseFight):
+			GM.pc.addPain(-100)
+			GM.pc.addStamina(100)
+		addMessage("Task updated!")
 
 	setState(_action)
 
