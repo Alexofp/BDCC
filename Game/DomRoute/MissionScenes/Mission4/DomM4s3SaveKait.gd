@@ -183,20 +183,139 @@ func _run():
 
 		saynn("Eliza puts the syringe away and just starts pulling on the leash hard, literally dragging the poor foxy across the floor, choking her a bit in the process.")
 
-		saynn("[say=eliza]You've beaten up all of my nurses.. ugh.. lazy girl.. so now I have to do everything myself, grr.[/say]")
+		saynn("[say=eliza]You've beaten up all of my nurses.. ugh.. heavy girl.. so now I have to do everything myself, grr.[/say]")
 
 		saynn("And so they get out of your.. extremely limited.. vision cone. Eliza is probably shoving Avy into the other padded room, about to close it.")
 
-		saynn("The hope is dying fast.")
+		saynn("[say=kait]Avy.. gonna take a nap~..[/say]")
 
-		saynn("Eliza and her tricks, she just about managed to come out as winner after everything.. she even managed to avoid having to fight you completely too.")
+		saynn("Eliza with her tricks.. she just about managed to come out as winner after everything.. she even managed to avoid having to fight you completely too.")
 
 		saynn("What a bitch.")
 
-		saynn("It seems.. all is lost now.")
+		saynn("It seems.. there is not much you can do.")
 
 		saynn("You're locked in a padded room. Avy is sharing your faith. And Kait is still acting silly in your hands. Ans.. isn't even aware of all of this.")
 
+		addButton("Continue", "See what happens next", "sudden_ferri")
+	if(state == "sudden_ferri"):
+		addCharacter("ferri")
+		playAnimation(StageScene.Solo, "stand", {pc="ferri"})
+		saynn("[say=ferri]Psst![/say]")
+
+		saynn("What?")
+
+		saynn("You look through the cell of the door.. and see the tips of someone's horns and tassels of their ears.")
+
+		saynn("It's Ferri! She is crouching near the door, whispering to you.")
+
+		saynn("[say=ferri]..are you in there?..[/say]")
+
+		saynn("[say=kait]Horny-y-y~.[/say]")
+
+		saynn("You cover Kait's mouth.. she licks your fingers.")
+
+		saynn("[say=pc]Tshh-.. yeah.. Eliza in the next one.. we need to get out somehow.[/say]")
+
+		saynn("[say=ferri]..I brought something.. step away from the door.. as far as you can. And.. cover your ears.[/say]")
+
+		saynn("Ferri then closes the door slit..")
+
+		saynn("What's her plan? Hard to tell.. but you listen to her.")
+
+		saynn("You move Kait into the corner of the padded room and cover her ears, bracing while also embracing.")
+
+		addButton("Continue", "See what happens next", "boom_happens")
+	if(state == "boom_happens"):
+		aimCameraAndSetLocName("medical_paddedcell_player")
+		playAnimation(StageScene.GivingBirth, "idle")
+		saynn("Not even a minute passes before.. BOOM!")
+
+		saynn("An explosion rocks the whole corridor.")
+
+		saynn("The door.. shakes in its frame, metal groaning, hinges snapping. Dust and debris blast through the seams, filling the padded room with smoke.")
+
+		saynn("Your ears ring.. a high, shape noise that drowns out anything else. Kait lets out a muffled squeak. You hold her tight, pressing both of you into the corner.")
+
+		saynn("The padded walls absorb some of the shockwave.. but the whole room still shakes. A light above you dies almost instantly.")
+
+		saynn("Then comes silence.. except for the ringing.")
+
+		saynn("You cough and wave your hands to try to get the dust out of the way. Through the smoke, you see the door. It's still standing.. but barely.")
+
+		addButton("Kick it!", "Kick the door", "kick_the_door")
+	if(state == "kick_the_door"):
+		playAnimation(StageScene.Solo, "kick")
+		saynn("One good kick.. and the door crashes down, causing more dust to float up.")
+
+		saynn("At least the air filtering outside seems to be still working..")
+
+		saynn("You grab Kait and start bringing her out into the corridor.")
+
+		addButton("Step out", "See what's happening outside", "ferri_gets_bullied")
+	if(state == "ferri_gets_bullied"):
+		aimCameraAndSetLocName("medical_near_pccell")
+		GM.pc.setLocation("medical_near_pccell")
+		playAnimation(StageScene.SexCowgirlChoke, "tease", {pc="ferri", npc="eliza"})
+		saynn("You set Kait on the floor, away from the blown door. There are little shards of glass everywhere.. probably what used to be beakers.")
+
+		saynn("[say=eliza]Do you realize what you DID, you silly thing?! Do you know what I'm gonna do to YOU for this?![/say]")
+
+		saynn("Eliza Quinn.. is straddling Ferri.. and choking her. Both of them are dirty from the dust.")
+
+		saynn("[say=ferri]S-sorry-y-y-.. hkhh..[/say]")
+
+		saynn("[say=eliza]No-no-no, you can't 'sorry' yourself out of this. YOU are gonna experience a world of PAIN. I'm gonna fucking TORTURE YOU.[/say]")
+
+		saynn("What a crazy bitch. Might as well interfere now.")
+
+		saynn("[say=pc]Day is not going well, doctor? Where are your manners?[/say]")
+
+		saynn("The feline stops choking the poor dracat.. and slowly rises up.")
+
+		addButton("Continue", "See what happens next", "about_to_fight_eliza")
+	if(state == "about_to_fight_eliza"):
+		playAnimation(StageScene.Duo, "stand", {npc="eliza"})
+		saynn("Eliza faces you, offering a very mean expression.")
+
+		saynn("[say=eliza]My day, huh.. My day was going perfectly fine. Until you came in and destroyed my medical wing.[/say]")
+
+		saynn("[say=pc]You didn't have to do this to Kait.[/say]")
+
+		saynn("The doctor rolls her eyes.")
+
+		saynn("[say=eliza]She deserved it.[/say]")
+
+		saynn("[say=pc]Sure. And so do you.[/say]")
+
+		saynn("Eliza tilts her head slightly, her tail wagging behind her in short bursts.")
+
+		saynn("[say=eliza]Huh.. So this is it then. You versus me.[/say]")
+
+		saynn("[say=pc]It seems so.[/say]")
+
+		saynn("She reaches into her pockets and pouches, producing some syringes and vials. Her eyes light up.")
+
+		saynn("[say=eliza]Fine. Let's do it then~.[/say]")
+
+		addButton("Fight", "Start the fight", "start_fight")
+	if(state == "eliza_fight_lost"):
+		playAnimation(StageScene.GivingBirth, "idle")
+		aimCameraAndSetLocName("medical_paddedcell_player")
+		saynn("You've lost the fight!")
+
+		saynn("Elize injects you with one of the drugs that she has.. and now nothing matters anymore. You feel nice and calm.")
+
+		saynn("You join Kait, Avy and Ferri in the non-destroyed padded room..")
+
+		saynn("And now you can just enjoy your time together.")
+
+		saynn("You failed to recruit Eliza Quinn. Looks like you will have to try it again some other time.")
+
+		saynn("Mission failed!")
+
+		addButton("Continue", "Stop the mission", "stopthemission")
+		addButton("Restart", "Try the mission again", "trymissionagain")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -210,4 +329,34 @@ func _react(_action: String, _args):
 	if(_action == "watch_start"):
 		processTime(3*60)
 
+	if(_action == "boom_happens"):
+		processTime(2*60)
+
+	if(_action == "start_fight"):
+		runScene("FightScene", ["eliza"], "elizaFight")
+		return
+
+	if(_action == "stopthemission"):
+		processTime(60*60*3)
+		endScene()
+		GM.pc.setLocation(GM.pc.getCellLocation())
+		GM.main.MS.failCurrentMission()
+
+	if(_action == "trymissionagain"):
+		endScene()
+		GM.main.MS.restartCurrentMission()
+		return
+
 	setState(_action)
+
+func _react_scene_end(_tag, _result):
+	if(_tag == "elizaFight"):
+		processTime(10 * 60)
+		var battlestate = _result[0]
+		
+		if(battlestate == "win"):
+			setState("eliza_fight_won")
+			addExperienceToPlayer(50)
+		else:
+			setState("eliza_fight_lost")
+			addExperienceToPlayer(5)
