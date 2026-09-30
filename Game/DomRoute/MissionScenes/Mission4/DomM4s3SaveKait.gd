@@ -16,7 +16,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "kait_reveal")
 	if(state == "kait_reveal"):
-		addCharacter("kait")
+		addCharacter("kait", ["naked"])
 		aimCameraAndSetLocName("medical_paddedcell_player")
 		playAnimation(StageScene.SexStart, "start", {pc="pc", npc="kait"})
 		saynn("There she is! There is Kait.")
@@ -308,7 +308,7 @@ func _run():
 
 		saynn("You join Kait, Avy and Ferri in the non-destroyed padded room..")
 
-		saynn("And now you can just enjoy your time together.")
+		saynn("And now you can just enjoy your time together, cuddling and resting on top of each other. So cute.")
 
 		saynn("You failed to recruit Eliza Quinn. Looks like you will have to try it again some other time.")
 
@@ -316,6 +316,275 @@ func _run():
 
 		addButton("Continue", "Stop the mission", "stopthemission")
 		addButton("Restart", "Try the mission again", "trymissionagain")
+	if(state == "eliza_fight_won"):
+		playAnimation(StageScene.SexFeetPlay, "pin", {npc="eliza"})
+		saynn("Eliza lost!")
+
+		saynn("She is left panting on the floor, unable to continue fighting.")
+
+		saynn("[say=eliza]Ugh.. crap..[/say]")
+
+		saynn("She is on her back, trying to move away from you, dragging her butt along the floor.")
+
+		saynn("It doesn't take long before you catch up with her and pin her in place.")
+
+		saynn("[say=pc]Going somewhere?[/say]")
+
+		if (getFlag("ElizaModule.s2hap", false)):
+			saynn("[say=eliza]Gh.. Screw you.. Giving you access to my lab was a mistake.[/say]")
+
+			saynn("[say=pc]I didn't need that lab. We got our own lab and our own chemist.[/say]")
+
+		else:
+			saynn("[say=eliza]Gh.. Screw you.. Using my lab against me is unfair..[/say]")
+
+			saynn("[say=pc]We didn't need your lab. We got our own lab and our own chemist.[/say]")
+
+		saynn("Speaking off.. You direct your attention towards Ferri. She is on the floor as well, recovering after Eliza's choking.")
+
+		saynn("[say=pc]You okay, Ferri?[/say]")
+
+		saynn("[say=ferri]I think so..[/say]")
+
+		saynn("She slowly gets up and walks up to you.")
+
+		saynn("[say=pc]I think both Avy and Kait got sedated. Is there something we can do?[/say]")
+
+		saynn("[say=ferri]Well.. I don't have anything that can help with that.. mow..[/say]")
+
+		saynn("[say=kait]Mow-w-w~.. Ferri so soft-t~.[/say]")
+
+		saynn("Ferri indeed wouldn't have anything on her.. You look at Eliza.")
+
+		saynn("[say=pc]What about her?[/say]")
+
+		saynn("[say=eliza]Hey, I will scratch![/say]")
+
+		saynn("[say=pc]And I will break your fingers if you do. C'mon, Ferri, search her.[/say]")
+
+		saynn("Eliza pouts and growls.. but lets Ferri's paws go through her pockets.")
+
+		saynn("[say=eliza]I really thought you were a good girl Ferri.[/say]")
+
+		saynn("[say=ferri]I am a good girl, for {pc.name}~. Ohh, what's this?[/say]")
+
+		saynn("Ferri finds a pill bottle with a label that says 'Anti-toxin'.")
+
+		saynn("[say=kait]Owo~.[/say]")
+
+		saynn("The dracat squints.. and makes Kait swallow a pill.")
+
+		addButton("Continue", "See what happens next", "kait_becomes_okay")
+	if(state == "kait_becomes_okay"):
+		playAnimation(StageScene.SexStart, "start", {pc="ferri", npc="kait"})
+		saynn("It only takes about a minute before Kait begins to.. turn her normal self.")
+
+		saynn("[say=kait]Ow.. my head..[/say]")
+
+		saynn("[say=ferri]You okay, miss?[/say]")
+
+		saynn("[say=kait]No I'm not. Why the fuck am I in a straitjacket.[/say]")
+
+		saynn("[say=eliza]It was for your own good, silly patient.[/say]")
+
+		saynn("You pin the feline harder into the floor. Ferri goes ahead and visits Avy's padded room to give her an injection as well.")
+
+		saynn("[say=kait]RIGHT. Fuck me. You were waiting for me! You knew I'd take the fucking bait! How?![/say]")
+
+		saynn("[say=eliza]You're not exactly hard to predict, you know.[/say]")
+
+		saynn("[say=kait]Bullshit! Did the nurse rat us out?[/say]")
+
+		saynn("[say=eliza]That cutie is bad at hiding emotions.[/say]")
+
+		saynn("[say=kait]Uh huh, I see. I fucking see it now.[/say]")
+
+		saynn("[say=pc]Relax, Kait. We got her.[/say]")
+
+		saynn("[say=eliza]And you only had to destroy half of the medical wing and beat up all my nurses! Great job![/say]")
+
+		saynn("[say=kait]She is not ours yet. But first, take this fucking thing off of me![/say]")
+
+		saynn("[say=avy]Why? I think you look perfect in it, Kait. I'd only lose the belt.[/say]")
+
+		saynn("Looks like Avy is back. She is stretching, her muscles still looking sore after what happened.")
+
+		saynn("[say=kait]Fuck you, Avy![/say]")
+
+		saynn("[say=avy]So rude. After everything I've done to save you.[/say]")
+
+		saynn("You go through Eliza's pockets yourself and find a key, labeled 'Kait'. Gives you an idea. You throw the key to Avy.")
+
+		saynn("[say=pc]Just unlock her. I think we have a better person for this straitjacket.[/say]")
+
+		saynn("[say=avy]Ohh. You might just be right.[/say]")
+
+		saynn("[say=eliza]Don't you dare![/say]")
+
+		saynn("Dare you will.")
+
+		addButton("Continue", "See what happens next", "eliza_gets_jacket")
+	if(state == "eliza_gets_jacket"):
+		playAnimation(StageScene.Duo, "stand", {npc="eliza", npcBodyState={leashedBy="pc"}})
+		saynn("After some time.. it's done.")
+
+		saynn("[say=pc]Fits perfectly.[/say]")
+
+		saynn("Both, the straitjacket and the chastity belt, are now on Eliza.. and even some kind of collar that Avy brought along. The feline tries to struggle.. but all the straps are secured tightly.. the doctor is only hugging herself harder. You clip a leash to her new collar.")
+
+		saynn("[say=eliza]Grr-r.. You don't understand what you're doing.[/say]")
+
+		saynn("[say=pc]Submit to us willingly. And maybe we won't have to do this then.[/say]")
+
+		saynn("She furrows her brows and flashes her fangs.")
+
+		saynn("[say=eliza]Never. You will never break me![/say]")
+
+		saynn("[say=pc]We will see how you will sing when we're done with you.[/say]")
+
+		saynn("You ask her to be blindfolded and gagged. Ferri grabs her clothes and stores them. You can't really do anything about the damage that you have caused.. but hopefully the engineers will take care of it.")
+
+		saynn("[say=kait]Do I have to walk around naked?! Where is my uniform?![/say]")
+
+		saynn("[say=avy]We don't have it, kitty cat. So I guess so, you just gotta engage your inner exhibitionist slut.[/say]")
+
+		saynn("[say=kait]I'm not a slut![/say]")
+
+		saynn("Kait growls.. and just covers herself with her paws and her fluffy tail. Good enough.")
+
+		saynn("Time to walk back to the hideout.")
+
+		addButton("Continue", "See what happens next", "back_lobby_show")
+	if(state == "back_lobby_show"):
+		aimCameraAndSetLocName("med_lobbyne")
+		playAnimation(StageScene.Duo, "walk", {pc="eliza", npcAction="walk", flipNPC=true, bodyState={leashedBy="pc"}})
+		saynn("You walk back to the medical lobby.. and meet zero resistance. Looks like all the nurses are indeed too scared to touch you now.")
+
+		saynn("Eliza keeps bumping into walls and then grumbling, such a silly cat.")
+
+		saynn("[say=pc]I thought you'd know your medical wing by now.[/say]")
+
+		saynn("You only hear growling back, her tail wagging annoyed.")
+
+		addButton("Hideout", "Bring the feline down to your place", "go_hideout")
+	if(state == "go_hideout"):
+		aimCameraAndSetLocName("hideout_breakroom")
+		GM.pc.setLocation("hideout_near_break_room")
+		playAnimation(StageScene.Duo, "stand", {npc="eliza", npcAction="kneel", npcBodyState={leashedBy="pc"}})
+		saynn("You parade Eliza down to your hideout! The journey is just as uneventful, nobody seems to want to mess with your group. You do get quite a few eyes on you though.")
+
+		saynn("The special little room is already waiting for Eliza. You bring her in and chain her to one of the pipes. The blindfold and the gag are now not needed so you take them off.")
+
+		saynn("[say=pc]This isn't exactly a padded room but it will do for you.[/say]")
+
+		saynn("[say=eliza]Really? Ugh.. so fucking dirty in here..[/say]")
+
+		saynn("She finds a spot for herself and drops her butt onto the floor, the chastity belt clanking loudly as she does it.")
+
+		saynn("[say=pc]Sit tight.[/say]")
+
+		saynn("[say=eliza]You are gonna regret it.[/say]")
+
+		saynn("[say=pc]And so you keep saying that.[/say]")
+
+		addButton("Continue", "See what happens next", "eliza_back_stepout")
+	if(state == "eliza_back_stepout"):
+		playAnimation(StageScene.Duo, "stand", {pc="avy", npc="kait", npcBodyState={naked=true}})
+		removeCharacter("eliza")
+		aimCameraAndSetLocName("hideout_near_break_room")
+		saynn("You step out.")
+
+		saynn("[say=kait]But I'm gonna go find a new uniform..[/say]")
+
+		saynn("Kait was about to leave.. but Avy catches her by the arm.")
+
+		saynn("[say=avy]I think you forgot something.[/say]")
+
+		saynn("[say=kait]Huh? I didn't?[/say]")
+
+		saynn("[say=avy]We saved your ass, you know.[/say]")
+
+		saynn("[say=kait]So? I would have done the same. Not for you maybe, you could use a therapy or two.[/say]")
+
+		saynn("[say=avy]Do you realize what we had to do to get you out? A little thanks would be nice.[/say]")
+
+		saynn("[say=kait]Huh? Is this a trick? Let me go get a fucking uniform, Avy.[/say]")
+
+		addButton("Let Kait go", "(Avy's obedience +) Tell Avy that Kait shouldn't thank us", "let_kait_just_go")
+		addButton("Agree with Avy", "(Kait's obedience +) A little thanks wouldn't hurt", "make_kait_say_thanks")
+	if(state == "let_kait_just_go"):
+		playAnimation(StageScene.Duo, "stand", {npc="avy"})
+		removeCharacter("kait")
+		saynn("[say=pc]Go get your uniform, Kait. Avy.[/say]")
+
+		saynn("Avy furrows her brows.. but she does let the snow leopard go.")
+
+		saynn("[say=avy]Really? You're spoiling her.[/say]")
+
+		saynn("[say=pc]Swallow your pride, Avy. She suffered through enough.[/say]")
+
+		saynn("[say=avy]She caused it herself, you know.[/say]")
+
+		saynn("[say=pc]She did what she thought was right. I'd probably do the same thing in her shoes.[/say]")
+
+		saynn("[say=avy]Ugh. You're just picking favourites now.[/say]")
+
+		saynn("[say=pc]We're a team, Avy. She would do the same for you.[/say]")
+
+		saynn("[say=avy]I ain't buying that. That slut hates me.[/say]")
+
+		saynn("[say=pc]Ever wondered why?[/say]")
+
+		saynn("Avy huffs.")
+
+		saynn("[say=avy]Sure. Whatever.[/say]")
+
+		saynn("[say=pc]Thank you, Avy. You helped me a lot. And Ferri, you saved the day, thank you.[/say]")
+
+		saynn("Ferri blushes softly.")
+
+		saynn("[say=ferri]It's okay.. mew.. I guess I will let you be.[/say]")
+
+		saynn("You nod.")
+
+		addButton("Continue", "See what happens next", "all_left_only_avy")
+	if(state == "make_kait_say_thanks"):
+		saynn("[say=pc]Kait. Swallow your pride. We had to blow the medical up to get you out. Well, Ferri had to. She saved the day.[/say]")
+
+		saynn("Ferri blushes softly.")
+
+		saynn("[say=kait]Fine.. Thanks, Ferri. You're a good girl.[/say]")
+
+		saynn("You and Avy both stare at her.. for a long time.")
+
+		saynn("[say=kait]Fine-e. Thank you, Ferri. Thank you, {pc.name}. Thank you.. Avy.. blrhrh-h..[/say]")
+
+		saynn("[say=avy]Cool. And now you should get on your knees and pleasure each one of us with your tongue.[/say]")
+
+		saynn("[say=kait]PFf-, I knew this was a trick. Fuck you, Avy![/say]")
+
+		saynn("[say=avy]I'm joking, you silly slut. Go get your shit.[/say]")
+
+		saynn("Kait leaves.")
+
+		saynn("[say=ferri]Do you need me?..[/say]")
+
+		saynn("[say=pc]No, you're free for now, Ferri. You did good. Really good.[/say]")
+
+		saynn("[say=ferri]Thanks.. mew..[/say]")
+
+		addButton("Continue", "See what happens next", "all_left_only_avy")
+	if(state == "all_left_only_avy"):
+		playAnimation(StageScene.Duo, "stand", {npc="avy"})
+		removeCharacter("ferri")
+		removeCharacter("kait")
+		saynn("Now it's only you and Avy.")
+
+		saynn("[say=pc]So. We gotta recruit Eliza now.[/say]")
+
+		saynn("[say=avy]Yeah, let's break this stupid bitch.[/say]")
+
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -346,6 +615,31 @@ func _react(_action: String, _args):
 		endScene()
 		GM.main.MS.restartCurrentMission()
 		return
+
+	if(_action == "kait_becomes_okay"):
+		processTime(2*60)
+		getCharacter("kait").getInventory().clearSlot(InventorySlot.Body)
+		putOn("kait", "LatexStraitjacket")
+
+	if(_action == "eliza_gets_jacket"):
+		processTime(3*60)
+		getCharacter("eliza").getInventory().clearSlot(InventorySlot.Body)
+		putOff("kait", "LatexStraitjacket")
+		putOn("eliza", "LatexStraitjacket")
+		putOn("eliza", "oldcollar")
+
+	if(_action == "back_lobby_show"):
+		processTime(5*60)
+		putOn("eliza", "blindfold")
+		putOn("eliza", "ballgag")
+
+	if(_action == "go_hideout"):
+		processTime(5*60)
+		putOff("eliza", "blindfold")
+		putOff("eliza", "ballgag")
+
+	if(_action == "eliza_back_stepout"):
+		getCharacter("kait").resetEquipment()
 
 	setState(_action)
 
