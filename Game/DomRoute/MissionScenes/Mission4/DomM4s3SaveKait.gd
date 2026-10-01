@@ -492,9 +492,9 @@ func _run():
 		playAnimation(StageScene.Duo, "stand", {pc="avy", npc="kait", npcBodyState={naked=true}})
 		removeCharacter("eliza")
 		aimCameraAndSetLocName("hideout_near_break_room")
-		saynn("You step out.")
+		saynn("After you're done with Eliza, you step out of her new cell.")
 
-		saynn("[say=kait]But I'm gonna go find a new uniform..[/say]")
+		saynn("[say=kait]Cool. I'm gonna go find a new uniform for myself.[/say]")
 
 		saynn("Kait was about to leave.. but Avy catches her by the arm.")
 
@@ -502,30 +502,38 @@ func _run():
 
 		saynn("[say=kait]Huh? I didn't?[/say]")
 
+		saynn("Kait tries to break free but Avy only tightens the grip.")
+
 		saynn("[say=avy]We saved your ass, you know.[/say]")
 
-		saynn("[say=kait]So? I would have done the same. Not for you maybe, you could use a therapy or two.[/say]")
+		saynn("[say=kait]So? I would have done the same. Not for you maybe, you could use a therapy or two, weirdo.[/say]")
 
-		saynn("[say=avy]Do you realize what we had to do to get you out? A little thanks would be nice.[/say]")
+		saynn("Avy sighs. Kait's tail wags behind her.")
+
+		saynn("[say=avy]Do you realize what we had to do to get you out? A little thanks would go a long way.[/say]")
 
 		saynn("[say=kait]Huh? Is this a trick? Let me go get a fucking uniform, Avy.[/say]")
 
 		addButton("Let Kait go", "(Avy's obedience +) Tell Avy that Kait shouldn't thank us", "let_kait_just_go")
-		addButton("Agree with Avy", "(Kait's obedience +) A little thanks wouldn't hurt", "make_kait_say_thanks")
+		addButton("Side with Avy", "(Kait's obedience +) A little thanks wouldn't hurt", "make_kait_say_thanks")
 	if(state == "let_kait_just_go"):
 		playAnimation(StageScene.Duo, "stand", {npc="avy"})
 		removeCharacter("kait")
-		saynn("[say=pc]Go get your uniform, Kait. Avy.[/say]")
+		saynn("[say=pc]Kait, go get your uniform. Avy.[/say]")
 
-		saynn("Avy furrows her brows.. but she does let the snow leopard go.")
+		saynn("Avy furrows her brows.. but she does let the snow leopard go. Kait swiftly makes herself gone.")
 
 		saynn("[say=avy]Really? You're spoiling her.[/say]")
 
 		saynn("[say=pc]Swallow your pride, Avy. She suffered through enough.[/say]")
 
+		saynn("The foxy crosses her arms. Ferri is still there, not quite sure what to do with Eliza's clothes. You point to one of the crates.")
+
 		saynn("[say=avy]She caused it herself, you know.[/say]")
 
 		saynn("[say=pc]She did what she thought was right. I'd probably do the same thing in her shoes.[/say]")
+
+		saynn("An annoyed noise followed by the roll of her eyes.")
 
 		saynn("[say=avy]Ugh. You're just picking favourites now.[/say]")
 
@@ -537,9 +545,13 @@ func _run():
 
 		saynn("Avy huffs.")
 
+		saynn("[say=pc]And she did save you once already, don't forget that.[/say]")
+
 		saynn("[say=avy]Sure. Whatever.[/say]")
 
-		saynn("[say=pc]Thank you, Avy. You helped me a lot. And Ferri, you saved the day, thank you.[/say]")
+		saynn("Avy is visibly annoyed. She doesn't really deserve it.")
+
+		saynn("[say=pc]I wanna thank you, Avy. You helped me a lot. And Ferri, you saved the day, thank you too.[/say]")
 
 		saynn("Ferri blushes softly.")
 
@@ -559,13 +571,15 @@ func _run():
 
 		saynn("[say=kait]Fine-e. Thank you, Ferri. Thank you, {pc.name}. Thank you.. Avy.. blrhrh-h..[/say]")
 
+		saynn("Avy has a cute little smug smile on her face.")
+
 		saynn("[say=avy]Cool. And now you should get on your knees and pleasure each one of us with your tongue.[/say]")
 
 		saynn("[say=kait]PFf-, I knew this was a trick. Fuck you, Avy![/say]")
 
 		saynn("[say=avy]I'm joking, you silly slut. Go get your shit.[/say]")
 
-		saynn("Kait leaves.")
+		saynn("Avy lets go of Kait's arm, allowing her to leave.")
 
 		saynn("[say=ferri]Do you need me?..[/say]")
 
@@ -640,6 +654,9 @@ func _react(_action: String, _args):
 
 	if(_action == "eliza_back_stepout"):
 		getCharacter("kait").resetEquipment()
+
+	if(_action == "all_left_only_avy"):
+		addMessage("Task updated!")
 
 	setState(_action)
 
