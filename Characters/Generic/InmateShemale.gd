@@ -5,13 +5,13 @@ func _init():
 	disableSerialization = true
 	
 func _getName():
-	return "Shemale inmate"
+	return "%s inmate" % NpcGender.getVisibleName(NpcGender.Shemale)
 
 func getGender():
 	return Gender.Androgynous
 	
 func getSmallDescription() -> String:
-	return "Generic shemale inmate"
+	return "Generic %s inmate" % NpcGender.getVisibleName(NpcGender.Shemale)
 
 func getSpecies():
 	return ["canine"]

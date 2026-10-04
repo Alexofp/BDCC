@@ -4,13 +4,13 @@ func _init():
 	id = "shemaleguard"
 	
 func _getName():
-	return "Shemale Guard"
+	return "%s Guard" % NpcGender.getVisibleName(NpcGender.Shemale)
 
 func getGender():
 	return Gender.Female
 	
 func getSmallDescription() -> String:
-	return "Generic shemale guard"
+	return "Generic %s guard" % NpcGender.getVisibleName(NpcGender.Shemale)
 
 func getSpecies():
 	return ["canine"]
