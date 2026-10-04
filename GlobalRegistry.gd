@@ -283,6 +283,7 @@ var sexGoals: Dictionary = {}
 var sexTypes: Dictionary = {}
 var sexReactionHandlersByID: Dictionary = {}
 var gameExtenders: Dictionary = {}
+var gameExtenderClasses: Dictionary = {}
 var computers: Dictionary = {}
 var fluids: Dictionary = {}
 var skins: Dictionary = {}
@@ -2286,6 +2287,7 @@ func registerGameExtender(path: String):
 	var object = loadedClass.new()
 	
 	gameExtenders[object.id] = object
+	gameExtenderClasses[object.id] = loadedClass
 
 func registerGameExtenderFolder(folder: String):
 	var scripts = getScriptsInFolder(folder)
@@ -2301,6 +2303,12 @@ func getGameExtender(id: String):
 
 func getGameExtenders():
 	return gameExtenders
+
+func recreateGameExtender(_id:String):
+	if(!gameExtenderClasses.has(_id)):
+		return
+	gameExtenders.erase(_id)
+	gameExtenders[_id] = gameExtenderClasses[_id].new()
 
 
 func registerLootTable(path: String):

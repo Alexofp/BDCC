@@ -262,6 +262,8 @@ func startNewGame():
 		scene.queue_free()
 	sceneStack = []
 	
+	GM.GES.recreateExtendersOnLoad()
+	
 	applyAllWorldEdits()
 	GM.world.addTransitions()
 	

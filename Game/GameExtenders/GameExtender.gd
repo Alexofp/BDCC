@@ -2,8 +2,14 @@ extends Reference
 class_name GameExtender
 
 var id = "error"
+var recreateExtenderOnLoad:bool = false # If true, the game extender is deleted and re-created when a new game is started or when a save is loaded
 
 func register(_GES:GameExtenderSystem):
+	pass
+
+# Gets called when a new game started or when a save is loaded (twice in that case)
+# Called even if recreateExtenderOnLoad is true
+func onNewGameOrLoadStart():
 	pass
 
 

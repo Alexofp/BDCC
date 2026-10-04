@@ -4,6 +4,7 @@ extends GameExtender
 
 func _init():
 	id = "TestExtender"
+	recreateExtenderOnLoad = true
 
 func register(_GES:GameExtenderSystem):
 	## Uncomment these lines to make this extender work
