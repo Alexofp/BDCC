@@ -23,7 +23,7 @@ func _run():
 
 		saynn("[say=eliza]Grrr-r..[/say]")
 
-		saynn("Her tail twitches with irritation. She struggles against the straitjacket, making the shiny material creak.")
+		saynn("Her tail wags annoyed. She struggles against the straitjacket, making the shiny material creak.")
 
 		saynn("[say=pc]"+str(ch1("...", "Relax, slut. I'm not gonna hurt you yet.", "What's the matter? Cat got your tongue?"))+"[/say]")
 
