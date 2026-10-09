@@ -30,7 +30,7 @@ func _init():
 	activityCategory = ["Fuck"]
 
 func getGoals():
-	if(currentPose == POSE_CHOKEFUCK):
+	if(currentPose == POSE_CHOKEFUCK || currentPose == POSE_CHOKESEX):
 		return {
 			SexGoal.ChokeSexVaginal: 1.0,
 			SexGoal.FuckVaginal: 1.0,
@@ -70,6 +70,8 @@ func getPoseDescriptor() -> String:
 		return " standing"
 	if(currentPose == POSE_CHOKEFUCK):
 		return " while also choking"
+	if(currentPose == POSE_CHOKESEX):
+		return " while also choking"
 	if(currentPose == POSE_BEHIND):
 		return " in a behind pose"
 	if(currentPose == POSE_MATINGPRESS):
@@ -96,6 +98,7 @@ const POSE_STANDING = "POSE_STANDING"
 const POSE_MISSONARY = "POSE_MISSONARY"
 const POSE_FULLNELSON = "POSE_FULLNELSON"
 const POSE_CHOKEFUCK = "POSE_CHOKEFUCK"
+const POSE_CHOKESEX = "POSE_CHOKESEX"
 const POSE_BEHIND = "POSE_BEHIND"
 const POSE_MATINGPRESS = "POSE_MATINGPRESS"
 const POSE_LOWDOGGY = "POSE_LOWDOGGY"
@@ -115,6 +118,7 @@ const PoseToName = {
 	POSE_MISSONARY: "Missonary",
 	POSE_FULLNELSON: "Full Nelson",
 	POSE_CHOKEFUCK: "Choke fuck",
+	POSE_CHOKESEX: "Choke missonary",
 	POSE_BEHIND: "Behind",
 	POSE_MATINGPRESS: "Mating Press",
 	POSE_LOWDOGGY: "Low Doggy",
@@ -132,6 +136,7 @@ const PoseToAnimName = {
 	POSE_MISSONARY: StageScene.SexMissionary,
 	POSE_FULLNELSON: StageScene.SexFullNelson,
 	POSE_CHOKEFUCK: StageScene.Choking,
+	POSE_CHOKESEX: StageScene.SexChoke,
 	POSE_BEHIND: StageScene.SexBehind,
 	POSE_MATINGPRESS: StageScene.SexMatingPress,
 	POSE_LOWDOGGY: StageScene.SexLowDoggy,
@@ -148,8 +153,8 @@ const PoseToShouldSwapForAnim = {
 }
 
 func getAvaiablePoses() -> Array:
-	if(currentPose == POSE_CHOKEFUCK):
-		return [POSE_CHOKEFUCK]
+	if(currentPose == POSE_CHOKEFUCK || currentPose == POSE_CHOKESEX):
+		return [POSE_CHOKEFUCK, POSE_CHOKESEX]
 	
 	if(getSexType() == SexType.DefaultSex):
 		if(getSubInfo().isUnconscious()):
@@ -310,6 +315,14 @@ func getStartTextForPose(thePose) -> String:
 		text = RNG.pick([
 			"{dom.You} {dom.youVerb('pin')} {sub.you} against the wall, {sub.yourHis} hands instinctively reaching up to grab it for stability. {dom.You} {dom.youVerb('press', 'presses')} {dom.yourHis} "+getDickName()+" against {sub.yourHis} "+getUsedBodypartName()+throughClothing,
 		])
+	elif(thePose == POSE_CHOKESEX):
+		text = RNG.pick([
+			"{dom.You} {dom.youVerb('pin')} {sub.your} body against the floor, positioning {dom.yourself} between {sub.yourHis} legs while also choking {sub.youHim}. {dom.You} {dom.youVerb('align')} {dom.yourHis} "+getDickName()+" against {sub.yourHis} "+getUsedBodypartName()+".",
+		])
+	elif(thePose == POSE_CHOKEFUCK):
+		text = RNG.pick([
+			"{dom.You} {dom.youVerb('grab')} {sub.your} throat and {dom.youVerb('press', 'presses')} {dom.yourHis} "+getDickName()+" against {sub.yourHis} "+getUsedBodypartName()+throughClothing,
+		])
 	else:
 		text = RNG.pick([
 			"{dom.You} {dom.youVerb('position')} {dom.yourself} behind {sub.your} butt with {dom.yourHis} "+getDickName()+" out and {dom.youVerb('press', 'presses')} it against {sub.yourHis} "+getUsedBodypartName()+throughClothing,
@@ -370,6 +383,14 @@ func getSwitchPoseTextForPose(thePose:String) -> String:
 		text = RNG.pick([
 			"{dom.You} {dom.youVerb('pin')} {sub.you} against the wall, {sub.yourHis} hands instinctively reaching up to grab it for stability. {dom.YourHis} "+getDickName()+" is still inside {sub.yourHis} "+getUsedBodypartName()+"!",
 		])
+	elif(thePose == POSE_CHOKESEX):
+		text = RNG.pick([
+			"{dom.You} {dom.youVerb('pin')} {sub.your} body against the floor, positioning {dom.yourself} between {sub.yourHis} legs while also choking {sub.youHim}. {dom.You} {dom.youVerb('align')} {dom.yourHis} "+getDickName()+" against {sub.yourHis} "+getUsedBodypartName()+".",
+		])
+	elif(thePose == POSE_CHOKEFUCK):
+		text = RNG.pick([
+			"{dom.You} {dom.youVerb('grab')} {sub.your} throat and {dom.youVerb('press', 'presses')} {dom.yourHis} "+getDickName()+" against {sub.yourHis} "+getUsedBodypartName()+".",
+		])
 	else:
 		text = RNG.pick([
 			"{dom.You} {dom.youVerb('position')} {dom.yourself} behind {sub.your} butt, {dom.yourHis} "+getDickName()+" is still inside {sub.yourHis} "+getUsedBodypartName()+"!",
@@ -384,12 +405,12 @@ func startActivity(_args):
 
 func onSwitchFrom(_otherActivity, _args):
 	if(_args != null && _args == ["choke"]):
-		currentPose = POSE_CHOKEFUCK
+		currentPose = RNG.pick([POSE_CHOKEFUCK, POSE_CHOKESEX])
 		return
 	currentPose = RNG.pick(getAvaiablePoses())
 
 func processTurn():
-	if(currentPose == POSE_CHOKEFUCK):
+	if(currentPose == POSE_CHOKEFUCK || currentPose == POSE_CHOKESEX):
 		choke(DOM_0, SUB_0, CHOKE_GENTLE)
 	
 func knotting_processTurn():
