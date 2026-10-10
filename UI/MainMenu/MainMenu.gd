@@ -131,7 +131,7 @@ func updateModuleButtons():
 		Log.error("Couldn't update the module buttons, the grid reference is missing!")
 		return
 	for theButton in moduleButtons:
-		theButton.queue_free()
+		theButton.free()
 	moduleButtons.clear()
 	
 	for theModuleID in GlobalRegistry.modules:
