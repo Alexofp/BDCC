@@ -131,6 +131,7 @@ func updateModuleButtons():
 		Log.error("Couldn't update the module buttons, the grid reference is missing!")
 		return
 	for theButton in moduleButtons:
+		theButton.myShortcutKey = "" # Free the key first
 		theButton.queue_free()
 	moduleButtons.clear()
 	
