@@ -179,7 +179,7 @@ func _react(_action: String, _args):
 
 	if(_action == "cum_inside"):
 		if(straponUsed):
-			getCharacter("rahi").cummedInVaginaBy("pc", FluidSource.Strapon)
+			getCharacter("eliza").cummedInVaginaBy("pc", FluidSource.Strapon)
 		else:
 			getCharacter("eliza").cummedInVaginaBy("pc", FluidSource.Penis)
 		GM.pc.orgasmFrom("eliza")
