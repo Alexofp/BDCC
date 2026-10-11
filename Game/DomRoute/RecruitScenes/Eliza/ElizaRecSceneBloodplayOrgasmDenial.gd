@@ -114,11 +114,21 @@ func _run():
 
 		saynn("Then you grab the tray of things and step out.")
 
-		addButton("Continue", "See what happens next", "endthescene")
+		addButton("Continue", "See what happens next", "endthescene_belt")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
+		return
+
+	if(_action == "belt_off"):
+		putOff("eliza", "LatexStraitjacket")
+		putOn("eliza", "LatexStraitjacketNoBelt")
+
+	if(_action == "endthescene_belt"):
+		endScene()
+		putOff("eliza", "LatexStraitjacketNoBelt")
+		putOn("eliza", "LatexStraitjacket")
 		return
 
 	setState(_action)

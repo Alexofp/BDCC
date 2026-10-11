@@ -134,6 +134,8 @@ func _react(_action: String, _args):
 	if(_action == "straight_to_sex"):
 		if(straponUsed):
 			recWearStrapon()
+		putOff("eliza", "LatexStraitjacket")
+		putOn("eliza", "LatexStraitjacketNoBelt")
 
 	if(_action == "cum_inside"):
 		if(straponUsed):
@@ -144,6 +146,8 @@ func _react(_action: String, _args):
 
 	if(_action == "endthescene"):
 		recRemoveStrapons()
+		putOff("eliza", "LatexStraitjacketNoBelt")
+		putOn("eliza", "LatexStraitjacket")
 		endScene()
 		return
 

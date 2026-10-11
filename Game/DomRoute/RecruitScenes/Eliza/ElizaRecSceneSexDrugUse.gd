@@ -177,6 +177,10 @@ func _react(_action: String, _args):
 		if(straponUsed):
 			recWearStrapon()
 
+	if(_action == "eliza_starts_riding"):
+		putOff("eliza", "LatexStraitjacket")
+		putOn("eliza", "LatexStraitjacketNoBelt")
+
 	if(_action == "cum_inside"):
 		if(straponUsed):
 			getCharacter("eliza").cummedInVaginaBy("pc", FluidSource.Strapon)
@@ -186,6 +190,8 @@ func _react(_action: String, _args):
 
 	if(_action == "endthescene"):
 		recRemoveStrapons()
+		putOff("eliza", "LatexStraitjacketNoBelt")
+		putOn("eliza", "LatexStraitjacket")
 		endScene()
 		return
 
