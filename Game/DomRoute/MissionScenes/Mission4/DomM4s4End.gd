@@ -154,6 +154,7 @@ func _react(_action: String, _args):
 	if(_action == "endthescene_reseteliza"):
 		endScene()
 		getCharacter("eliza").getInventory().clearSlot(InventorySlot.Body)
+		putOff("eliza", "oldcollar")
 		getCharacter("eliza").resetEquipment()
 		playAnimation(StageScene.Solo, "stand")
 		return
