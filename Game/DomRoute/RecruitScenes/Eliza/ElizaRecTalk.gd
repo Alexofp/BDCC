@@ -11,13 +11,15 @@ func _reactInit():
 	[3, 4, 5, 6, 7, 8, 9, 10],
 	]
 	getCharacter("eliza").getInventory().clearSlot(InventorySlot.Body)
+	getCharacter("eliza").getInventory().clearSlot(InventorySlot.UnderwearTop)
+	getCharacter("eliza").getInventory().clearSlot(InventorySlot.UnderwearBottom)
 	putOn("eliza", "LatexStraitjacket")
 	putOn("eliza", "oldcollar")
 
 func _run():
 	if(state == ""):
-		addCharacter("eliza")
-		playAnimation(StageScene.Duo, "stand", {npc="rahi", npcAction="sit"})
+		addCharacter("eliza", ["naked"])
+		playAnimation(StageScene.Duo, "sit", {npc="eliza"})
 		saynn("You enter the cell. Eliza is right where you left her, chained to the pipe above her, still wearing that straitjacket that makes her tits visible.")
 
 		saynn("There is a chair in the corner. You take a seat.")

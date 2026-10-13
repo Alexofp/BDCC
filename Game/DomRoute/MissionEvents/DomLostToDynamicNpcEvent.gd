@@ -13,6 +13,9 @@ func react(_triggerID, _args):
 	if(_charType == CharacterType.Nurse && GM.main.MS.isDoingMission("Mission3")):
 		runScene("DomM3LostNpcFight")
 		return true
+	if(_charType == CharacterType.Nurse && GM.main.MS.isDoingMission("Mission4")):
+		runScene("DomM4LostNpcFight")
+		return true
 	
 	return false
 

@@ -36,3 +36,4 @@ const UnconsciousPCGrabbed = "UnconsciousPCGrabbed"
 const WonCaughtOffLimitsFight = "WonCaughtOffLimitsFight" # args = [npcID, CharacterType.Guard/Nurse/Engineer]
 const LostCaughtOffLimitsFight = "LostCaughtOffLimitsFight" # args = [npcID, CharacterType.Guard/Nurse/Engineer]
 const LostOrSurrenderedToDynamicNPC = "LostOrSurrenderedToDynamicNPC" # args = [npcID, CharacterType.Guard/Nurse/Engineer]
+const CaughtOffLimitsByDynamicNPC = "CaughtOffLimitsByDynamicNPC" # args = [npcID, CharacterType.Guard/Nurse/Engineer]

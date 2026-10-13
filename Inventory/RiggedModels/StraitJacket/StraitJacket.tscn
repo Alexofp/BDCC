@@ -245,7 +245,7 @@ skin = SubResource( 17 )
 material/0 = SubResource( 18 )
 
 [node name="jacketarmspng" type="MeshInstance" parent="." index="1"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.072 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.08 )
 mesh = SubResource( 19 )
 skin = SubResource( 20 )
 material/0 = SubResource( 21 )

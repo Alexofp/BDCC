@@ -41,7 +41,9 @@ func init_text():
 
 	addAction("fight", "Fight!", "Protect yourself!", "fight", 1.0, 60, {})
 	addAction("surrender", "Surrender", "Maybe they won't be mean", "surrender", 1.0, 60, {})
-
+	if(getRolePawn("inmate").isPlayer()):
+		GM.ES.triggerRun(Trigger.CaughtOffLimitsByDynamicNPC, [getRoleID("guard"), getRolePawn("guard").getCharType()])
+	
 func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "fight"):
 		setState("about_to_fight", "guard")

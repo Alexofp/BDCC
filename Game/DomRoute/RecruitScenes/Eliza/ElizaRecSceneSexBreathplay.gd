@@ -10,6 +10,8 @@ func _init():
 
 func _reactInit():
 	getCharacter("eliza").getInventory().clearSlot(InventorySlot.Body)
+	getCharacter("eliza").getInventory().clearSlot(InventorySlot.UnderwearTop)
+	getCharacter("eliza").getInventory().clearSlot(InventorySlot.UnderwearBottom)
 	putOn("eliza", "LatexStraitjacket")
 	putOn("eliza", "oldcollar")
 

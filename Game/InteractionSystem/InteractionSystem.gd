@@ -260,6 +260,18 @@ func getClosestInteraction() -> PawnInteractionBase:
 func spawnPawnWithTypeAt(_type:String, _loc:String):
 	return trySpawnPawnReturnPawn(_type, _loc)
 
+func removePawnsWithType(_type:String, _allowReuse:bool = true):
+	var toRem:Array = []
+	for _charID in pawns:
+		var thePawn:CharacterPawn = pawns[_charID]
+		if(thePawn.getCharType() == _type):
+			toRem.append(_charID)
+	
+	for theCharID in toRem:
+		deletePawn(theCharID)
+		if(_allowReuse):
+			usedCharIDsToday.erase(theCharID)
+
 func spawnPawn(charID, pawnTypeID:String="", _loc:String=""):
 	if(charID == null):
 		return null

@@ -131,7 +131,8 @@ func _run():
 		saynn("[say=eliza]I know exactly what I'm doing~.[/say]")
 
 		playAnimation(StageScene.Combat, "", {pc="avy", npc="eliza", pcStance=getCharacter("avy").getCombatStance(), npcStance=getCharacter("eliza").getCombatStance(), attack=["shove",0,0,0, ""]})
-		playAnimation(StageScene.Combat, "", {pc="avy", npc="eliza", pcStance=getCharacter("avy").getCombatStance(), npcStance=getCharacter("eliza").getCombatStance(), attack=["WeaponSyringe",0,0,0, ""]})
+		playAnimation(StageScene.Combat, "", {pc="avy", npc="eliza", pcStance=getCharacter("avy").getCombatStance(), npcStance=getCharacter("eliza").getCombatStance(), attack=["WeaponSyringe",1,0,0, ""]})
+		#playAnimation(StageScene.Combat, "", {pc="avy", npc="eliza", pcStance=getCharacter("avy").getCombatStance(), npcStance=getCharacter("eliza").getCombatStance(), statusUpdate=[CombatAnimPlayer.ST_KNOCKEDDOWN, 0]})
 		saynn("Avy lurches forward and manages to catch the feline before slamming her back against the wall, pinning to it. Eliza winces while Avy already starts trying to undress the doctor, to get rid of her skirt and labcoat.")
 
 		saynn("That's when Eliza jabs a syringe into Avy's thigh.")
@@ -603,6 +604,7 @@ func _run():
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
+		GM.main.RCS.setCurrent("Eliza")
 		return
 
 	if(_action == "kait_reveal"):
@@ -638,6 +640,8 @@ func _react(_action: String, _args):
 	if(_action == "eliza_gets_jacket"):
 		processTime(3*60)
 		getCharacter("eliza").getInventory().clearSlot(InventorySlot.Body)
+		getCharacter("eliza").getInventory().clearSlot(InventorySlot.UnderwearTop)
+		getCharacter("eliza").getInventory().clearSlot(InventorySlot.UnderwearBottom)
 		putOff("kait", "LatexStraitjacket")
 		putOn("eliza", "LatexStraitjacket")
 		putOn("eliza", "oldcollar")
@@ -657,6 +661,12 @@ func _react(_action: String, _args):
 
 	if(_action == "all_left_only_avy"):
 		addMessage("Task updated!")
+	
+	if(_action == "let_kait_just_go"):
+		GM.main.MS.setDecision("kait", "letgo")
+
+	if(_action == "make_kait_say_thanks"):
+		GM.main.MS.setDecision("kait", "avy")
 
 	setState(_action)
 

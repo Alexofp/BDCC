@@ -186,7 +186,7 @@ func _run():
 
 		saynn("Avy shrugs expressively.")
 
-		saynn("[say=avy]No fucking clue. Stupid slut probably thought she could handle it alone.[/say]")
+		saynn("[say=avy]No fucking clue. Stupid slut probably thought she could capture her alone.[/say]")
 
 		saynn("That's.. not ideal. If Kait isn't here, Quinn might be the reason indeed.")
 
@@ -385,6 +385,12 @@ func _run():
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
+		GM.main.IS.removePawnsWithType(CharacterType.Nurse)
+		GM.main.IS.spawnPawnWithTypeAt(CharacterType.Nurse, "med_corridor6")
+		GM.main.IS.spawnPawnWithTypeAt(CharacterType.Nurse, "med_researchlab")
+		GM.main.IS.spawnPawnWithTypeAt(CharacterType.Nurse, "med_corridor7")
+		GM.main.IS.spawnPawnWithTypeAt(CharacterType.Nurse, "med_corridor2")
+		GM.main.IS.spawnPawnWithTypeAt(CharacterType.Nurse, "med_corridor_split2")
 		return
 
 	if(_action == "go_look_lab"):

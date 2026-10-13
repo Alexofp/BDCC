@@ -151,6 +151,9 @@ func _react(_action: String, _args):
 		endScene()
 		return
 
+	if(_action == "avy_eliza"):
+		GM.main.MS.completeMission()
+		
 	if(_action == "endthescene_reseteliza"):
 		endScene()
 		getCharacter("eliza").getInventory().clearSlot(InventorySlot.Body)
