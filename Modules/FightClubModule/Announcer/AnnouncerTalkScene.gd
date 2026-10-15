@@ -131,7 +131,7 @@ func _run():
 
 		saynn("He scratches the back of his head and smiles wider.")
 
-		saynn("[say=announcer]Nah, I’m not a radio person, baby. Thanks anyway.[/say]")
+		saynn("[say=announcer]Nah, I’m not a radio person. Thanks anyway.[/say]")
 
 		saynn("[say=pc]Who are you then? How did you end up here?[/say]")
 
