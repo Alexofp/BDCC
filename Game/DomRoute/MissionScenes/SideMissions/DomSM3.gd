@@ -26,6 +26,7 @@ func _run():
 		addButton("Follow", "Go hang out with Ans", "go_hangout")
 	if(state == "go_hangout"):
 		aimCameraAndSetLocName("yard_waterfall")
+		GM.pc.setLocation("yard_waterfall")
 		playAnimation(StageScene.Duo, "stand", {npc="announcer", npcAction="sit"})
 		saynn("You follow Ans out of the hideout and out of the hidden arena. He brings his mic-cane with him.")
 
@@ -99,6 +100,7 @@ func _run():
 		addButton("Captain", "Talk about the captain with him", "ask_captain")
 		addButton("Kait&Avy", "Talk about Kait and Avy", "ask_kait_avy")
 		addButton("Earth", "Ask him about the Earth", "ask_earth")
+		addButton("Enough", "Enough chat", "enough_chat")
 	if(state == "ask_captain"):
 		saynn("[say=pc]The captain, what do you think about him?[/say]")
 
@@ -190,11 +192,11 @@ func _run():
 
 		saynn("[say=pc]What happened?[/say]")
 
-		saynn("[say=announcer]Same old things. Wars happened, of course. The population was growing.. but the civilized world had only so much space in it. The upper cats didn't like the underdogs entering the arena.[/say]")
+		saynn("[say=announcer]Same old things. Wars happened, of course. The population was growing.. but the civilized world had only so much space in it. The upper cats didn't like the underdogs entering the global arena.[/say]")
 
 		saynn("[say=pc]The arena having no rules didn't help I assume.[/say]")
 
-		saynn("[say=announcer]Hah. Basically.. There must always be rich countries and poor countries. I think that's called harmony. Anyone who tried to mess with that balance was met with.. resistance.[/say]")
+		saynn("[say=announcer]Hah. The idea is.. There must always be rich countries and poor countries. I think that's called harmony. Anyone who tried to mess with that balance was met with.. resistance.[/say]")
 
 		saynn("You can feel some sarcasm in his words.")
 
@@ -268,7 +270,7 @@ func _run():
 
 		saynn("[say=pc]You're good.[/say]")
 
-		saynn("[say=announcer]Sometimes I get thoughts like that. Being part of your team helps. Can't help but to think that I'm being.. less than useful.. sometimes. It's eating me up inside.[/say]")
+		saynn("[say=announcer]Sometimes I get thoughts like that. Being part of something bigger helps. Can't help but to think that I'm being.. less than useful.. sometimes. It's eating me up inside.[/say]")
 
 		saynn("His voice has those little tones of vulnerability.")
 
@@ -277,10 +279,165 @@ func _run():
 		saynn("[say=announcer]Yeah? Right.[/say]")
 
 		addButton("Continue", "See what happens next", "talk_menu")
+	if(state == "enough_chat"):
+		playAnimation(StageScene.Duo, "stand", {npc="announcer", npcAction="sit"})
+		saynn("[say=pc]I think we had a nice chat.[/say]")
+
+		saynn("[say=announcer]It's good to be able to talk about things, share some experiences.[/say]")
+
+		saynn("You get up and stand by the bench. He still watches the waterfall, holding onto his cane.")
+
+		saynn("[say=gymbully3]Hey! You two![/say]")
+
+		saynn("Suddenly, a screechy female voice.")
+
+		addButton("Continue", "See what happens next", "bully_appears")
+	if(state == "bully_appears"):
+		addCharacter("gymbully3")
+		playAnimation(StageScene.Duo, "stand", {npc="gymbully3"})
+		saynn("You turn around and see a girl. The most notable things about her.. are her red colors, a band around her head.. and a shiv in her hand. She must be part of some gang.")
+
+		saynn("[say=gymbully3]Hai there, cuties. Found a little nest all for yourself? Ha. Ha. HAA.[/say]")
+
+		saynn("She has that crazy look in her eyes.. You notice a slight tremor in her hands.")
+
+		saynn("[say=pc]What's your problem?[/say]")
+
+		saynn("[say=gymbully3]Problems? What problems?! I have no problems! No drinking problems, no drug problems, no loose holes problems. NONE.[/say]")
+
+		saynn("What a crazy bitch.")
+
+		saynn("[say=pc]I see.[/say]")
+
+		saynn("[say=gymbully3]But I think you DO have a problem! Your inmate accounts are little TOO loaded. So wire me up, babies! Right the fuck now! Before I cut you to LITTLE STUPID PIECES![/say]")
+
+		saynn("She swipes her shiv across the air left and right.")
+
+		saynn("The girl is blocking the only exit.. unless you wanna try swimming upstream.")
+
+		saynn("Looks like it's a fight then.")
+
+		addButton("Continue", "See what happens next", "fake_fight")
+	if(state == "fake_fight"):
+		playAnimation(StageScene.Duo, "stand", {pc="announcer", npc="gymbully3"})
+		saynn("Suddenly the announcer steps between you two.")
+
+		saynn("[say=announcer]Let's.. maybe.. avoid any bloodshed. Can I know your name, girl?[/say]")
+
+		saynn("[say=gymbully3]Why do you need my name for? Just give me the fucking creds![/say]")
+
+		saynn("[say=announcer]I just wanna know the name of a person who is about to rob me. I'm Ans. Don't be shy, babe.[/say]")
+
+		saynn("He keeps the cane in front of him, firmly planted against the stone path.")
+
+		saynn("[say=gymbully3]Ans? The arena guy? Don't give a fuck! Cool cane, grandpa. Once I'm done, you will need more than a stupid cane, you will need a WHOLE ASS wheelchair![/say]")
+
+		saynn("[say=announcer]I would like to avoid that outcome. How much do you need?[/say]")
+
+		saynn("[say=gymbully3]Uh.. ALL of it? Give me everything you got![/say]")
+
+		saynn("[say=announcer]That sounds like you need a lot. May I ask, what do you need it for?[/say]")
+
+		saynn("[say=gymbully3]No, you may not! One more word and I SWEAR I will HURT you![/say]")
+
+		saynn("She growls and swipes the air more, the sharp edge making scary swooshing noises.")
+
+		saynn("[say=announcer]Maybe I can help you. Your hands are shaking, I can tell. Withdrawal symptom.[/say]")
+
+		saynn("[say=gymbully3]What?.. No! Fuck off![/say]")
+
+		saynn("She suddenly goes ahead and tries to cut Ans. But he is quick enough to block, the shiv making sparks as it scrapes against the guy's metal cane.")
+
+		saynn("[say=announcer]I can help you deal with that, make the pain go away. Let's just take a seat here and talk it through. You will feel much better.[/say]")
+
+		saynn("[say=gymbully3]JUST GIVE ME THE FUCKING CREDITS, ASSHOLE![/say]")
+
+		saynn("The girl snarls and kicks Ans, making him fall. You're quick to shove her back.")
+
+		saynn("[say=gymbully]Stop yelling or you will attract every guard of this stupid prison.[/say]")
+
+		saynn("A new voice.")
+
+		addButton("Continue", "See what happens next", "second_guy_joins")
+	if(state == "second_guy_joins"):
+		addCharacter("gymbully")
+		playAnimation(StageScene.Duo, "stand", {pc="gymbully", npc="gymbully3"})
+		saynn("A guy appears, wearing the same headband.")
+
+		saynn("[say=gymbully]What are you doing?[/say]")
+
+		saynn("[say=gymbully3]Just shanking these two bitches for credits, nothing much..[/say]")
+
+		saynn("He sees Ans, his eyes going wide.")
+
+		saynn("[say=gymbully]Do you realize who this is? This is the fucking announcer![/say]")
+
+		saynn("[say=gymbully3]So? They all bleed the same![/say]")
+
+		saynn("[say=gymbully]You dumb bitch. What do you think the arena guys will do to you? Touch him and the next day you will be DEAD. Get the fuck away from him.[/say]")
+
+		saynn("The guy catches the girl's hair.. and yanks on it, forcing her to follow.")
+
+		saynn("[say=gymbully3]Ow.. OWwie![/say]")
+
+		saynn("[say=gymbully]We're sorry for this.[/say]")
+
+		saynn("[say=announcer]Have a nice day.[/say]")
+
+		saynn("And so they leave you be.")
+
+		saynn("Ans is still on the ground so you quickly help him to get up.")
+
+		addButton("Continue", "See what happens next", "after_all")
+	if(state == "after_all"):
+		removeCharacter("gymbully")
+		removeCharacter("gymbully3")
+		playAnimation(StageScene.Duo, "stand", {npc="announcer"})
+		saynn("He swipes dirt from his clothes.")
+
+		saynn("[say=pc]You can't fix her, man. She's long gone.[/say]")
+
+		saynn("[say=announcer]I can't look at a suffering girl and not want to help her. That is my weakness.[/say]")
+
+		saynn("Something tells you that he would have handed her those credits.")
+
+		saynn("[say=pc]Can't help unless the person wants to be helped.[/say]")
+
+		saynn("[say=announcer]I'm glad I tried.[/say]")
+
+		saynn("He offers you a little smile.")
+
+		saynn("[say=announcer]My break is just about over. I will be going then. Keep it smooth.[/say]")
+
+		saynn("[say=pc]Take care.[/say]")
+
+		saynn("He nods.. and then heads off.")
+
+		saynn("Mission completed!")
+
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
 		return
+
+	if(_action == "go_hangout"):
+		processTime(5*60)
+
+	if(_action == "ask_captain"):
+		processTime(10*60)
+
+	if(_action == "ask_kait_avy"):
+		processTime(10*60)
+
+	if(_action == "ask_earth"):
+		processTime(10*60)
+
+	if(_action == "enough_chat"):
+		processTime(5*60)
+
+	if(_action == "after_all"):
+		GM.main.MS.completeMission()
 
 	setState(_action)
