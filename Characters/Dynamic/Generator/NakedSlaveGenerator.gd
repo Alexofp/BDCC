@@ -1,6 +1,9 @@
 extends InmateGenerator
 class_name NakedSlaveGenerator
 
+func pickedSpeciesType(_args = {}):
+	return CharacterType.Generic
+
 func pickSmallDescription(_character:DynamicCharacter, _args = {}):
 #	var thedesc = ""
 #	thedesc += Util.getSpeciesName(character.npcSpecies)

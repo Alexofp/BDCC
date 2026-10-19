@@ -173,6 +173,9 @@ func npcGenerationWeight():
 	return 1.0
 
 func canBeUsedForNPCType(_npcType):
+	# Example. Makes it so this species can not be used by this character type anymore
+	#if(_npcType == CharacterType.Guard):
+	#	return false
 	return true
 
 func getSkinType():

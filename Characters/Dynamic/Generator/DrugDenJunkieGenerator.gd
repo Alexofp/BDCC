@@ -1,6 +1,9 @@
 extends InmateGenerator
 class_name DrugDenJunkieGenerator
 
+func pickedSpeciesType(_args = {}):
+	return CharacterType.Inmate
+
 func getCurrentDrugDenLevel() -> int:
 	if(GM.main == null || GM.main.DrugDenRun == null):
 		return -1

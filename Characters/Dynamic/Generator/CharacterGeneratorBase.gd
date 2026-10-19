@@ -46,7 +46,7 @@ func pickNonStaticEquipment(_character:DynamicCharacter, _args = {}):
 	pass
 
 func pickedSpeciesType(_args = {}):
-	return "guard"
+	return CharacterType.Generic
 
 func pickSpecies(character:DynamicCharacter, _args = {}):
 	if(_args.has(NpcGen.Species)):

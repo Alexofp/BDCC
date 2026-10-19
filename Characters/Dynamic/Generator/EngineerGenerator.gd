@@ -1,6 +1,9 @@
 extends CharacterGeneratorBase
 class_name EngineerGenerator
 
+func pickedSpeciesType(_args = {}):
+	return CharacterType.Engineer
+
 func pickCharacterType(character:DynamicCharacter, _args = {}):
 	character.npcCharacterType = CharacterType.Engineer
 

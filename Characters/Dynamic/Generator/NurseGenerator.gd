@@ -1,6 +1,9 @@
 extends CharacterGeneratorBase
 class_name NurseGenerator
 
+func pickedSpeciesType(_args = {}):
+	return CharacterType.Nurse
+
 func pickCharacterType(character:DynamicCharacter, _args = {}):
 	character.npcCharacterType = CharacterType.Nurse
 

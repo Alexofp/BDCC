@@ -1,6 +1,9 @@
 extends CharacterGeneratorBase
 class_name InmateGenerator
 
+func pickedSpeciesType(_args = {}):
+	return CharacterType.Inmate
+
 func pickCharacterType(character:DynamicCharacter, _args = {}):
 	character.npcCharacterType = CharacterType.Inmate
 
