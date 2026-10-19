@@ -30,7 +30,7 @@ func _run():
 
 		saynn("The purple feline tilts her head slightly, her paws go behind her back, her back arching a bit, pushing her chest forward.")
 
-		saynn("[say=tavi]I see how it is. If we can't be friends, perhaps at least we can avoid being the enemies?[/say]")
+		saynn("[say=tavi]I see how it is. If we can't be friends, perhaps at least we can avoid being enemies?[/say]")
 
 		saynn("[say=avy]I still don't know what the fuck are you doing here, creepy cat.[/say]")
 

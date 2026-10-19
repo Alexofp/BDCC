@@ -66,7 +66,7 @@ func _run():
 
 		saynn("[say=avy]The fuck is he talking about. Is he talking about me?[/say]")
 
-		saynn("[say=kait]The world does not revolt around you, Avy.[/say]")
+		saynn("[say=kait]The world does not revolve around you, Avy.[/say]")
 
 		saynn("Risha seems to be getting quite bored, rolling her stun baton along the surface of the counter. It makes the other feline tap away on the metal with her claws with her free paw.")
 
@@ -99,7 +99,7 @@ func _run():
 
 		saynn("[say=kait]No? Obviously.. Duh. But we missed the chance to get the captain.[/say]")
 
-		saynn("Eliza catches your direct glance. Her brow raises as she looks at your group, corners of her mouth getting tighter. Seeing a bunch of inmates just sitting together.. her suspension is rising no doubt.")
+		saynn("Eliza catches your direct glance. Her brow raises as she looks at your group, corners of her mouth getting tighter. Seeing a bunch of inmates just sitting together.. her suspicion is rising no doubt.")
 
 		saynn("You gotta make a move. Any move.")
 

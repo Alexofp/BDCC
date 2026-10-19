@@ -134,7 +134,7 @@ func _run():
 
 		saynn("[say=pc]I will.[/say]")
 
-		saynn("You come closer and grab her by the collar, two of your digits sliding under it, making it feel even tighter. Ferri blinks and raises her chin higher instinctively, subtly shivers going up her spine.")
+		saynn("You come closer and grab her by the collar, two of your digits sliding under it, making it feel even tighter. Ferri blinks and raises her chin higher instinctively, subtle shivers going up her spine.")
 
 		saynn("You boop her on the snout and let go of her collar.")
 

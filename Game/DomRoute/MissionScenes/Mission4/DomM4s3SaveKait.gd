@@ -236,7 +236,7 @@ func _run():
 
 		saynn("The door.. shakes in its frame, metal groaning, hinges snapping. Dust and debris blast through the seams, filling the padded room with smoke.")
 
-		saynn("Your ears ring.. a high, shape noise that drowns out anything else. Kait lets out a muffled squeak. You hold her tight, pressing both of you into the corner.")
+		saynn("Your ears ring.. a high, sharp noise that drowns out anything else. Kait lets out a muffled squeak. You hold her tight, pressing both of you into the corner.")
 
 		saynn("The padded walls absorb some of the shockwave.. but the whole room still shakes. A light above you dies almost instantly.")
 
@@ -249,7 +249,7 @@ func _run():
 		playAnimation(StageScene.Solo, "kick")
 		saynn("One good kick.. and the door crashes down, causing more dust to float up.")
 
-		saynn("At least the air filtering outside seems to be still working..")
+		saynn("At least the air filtering outside seems to still be working..")
 
 		saynn("You grab Kait and start bringing her out into the corridor.")
 
