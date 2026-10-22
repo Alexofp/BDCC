@@ -115,6 +115,12 @@ func playAnimation(animID, _args = {}):
 	if(animID == "fast"):
 		state_machine.travel("SearchSexFast_1-loop")
 		state_machine2.travel("SearchSexFast_2-loop")
+	if(animID == "prod"):
+		state_machine.travel("SearchButtProd_1-loop")
+		state_machine2.travel("SearchButtProd_2-loop")
+	if(animID == "prodfast"):
+		state_machine.travel("SearchButtProdFast_1-loop")
+		state_machine2.travel("SearchButtProdFast_2-loop")
 		
 	#"stand", "breasts", "tease", "inside", "sex", "fast"
 	
@@ -131,7 +137,7 @@ func canTransitionTo(_actionID, _args = []):
 	return true
 
 func getSupportedStates():
-	return ["idle", "butt", "search", "stroke", "strokefast", "rub", "rubfast", "lick", "lickfast", "stand", "standidle", "breasts", "tease", "inside", "sex", "fast"]
+	return ["idle", "butt", "prod", "prodfast", "search", "stroke", "strokefast", "rub", "rubfast", "lick", "lickfast", "stand", "standidle", "breasts", "tease", "inside", "sex", "fast"]
 
 func getVarNpcs():
 	return ["pc", "npc"]

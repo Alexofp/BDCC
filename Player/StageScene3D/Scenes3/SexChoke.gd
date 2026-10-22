@@ -67,19 +67,35 @@ func playAnimation(animID, _args = {}):
 	
 	var state_machine = animationTree["parameters/StateMachine/playback"]
 	var state_machine2 = animationTree2["parameters/StateMachine/playback"]
-
-	if(animID == "tease"):
-		state_machine.travel("SexChokeTease_1-loop")
-		state_machine2.travel("SexChokeTease_2-loop")
-	if(animID == "inside"):
-		state_machine.travel("SexChokeInside_1-loop")
-		state_machine2.travel("SexChokeInside_2-loop")
-	if(animID == "sex"):
-		state_machine.travel("SexChoke_1-loop")
-		state_machine2.travel("SexChoke_2-loop")
-	if(animID == "fast"):
-		state_machine.travel("SexChokeFast_1-loop")
-		state_machine2.travel("SexChokeFast_2-loop")
+	
+	var _isUncon:bool = _args.get("uncon", false)
+	
+	if(!_isUncon):
+		if(animID == "tease"):
+			state_machine.travel("SexChokeTease_1-loop")
+			state_machine2.travel("SexChokeTease_2-loop")
+		if(animID == "inside"):
+			state_machine.travel("SexChokeInside_1-loop")
+			state_machine2.travel("SexChokeInside_2-loop")
+		if(animID == "sex"):
+			state_machine.travel("SexChoke_1-loop")
+			state_machine2.travel("SexChoke_2-loop")
+		if(animID == "fast"):
+			state_machine.travel("SexChokeFast_1-loop")
+			state_machine2.travel("SexChokeFast_2-loop")
+	else:
+		if(animID == "tease"):
+			state_machine.travel("SexChokeTease_1-loop 2")
+			state_machine2.travel("SexChokeTeaseUncon_2-loop")
+		if(animID == "inside"):
+			state_machine.travel("SexChokeInside_1-loop 2")
+			state_machine2.travel("SexChokeInsideUncon_2-loop")
+		if(animID == "sex"):
+			state_machine.travel("SexChoke_1-loop 2")
+			state_machine2.travel("SexChokeUncon_2-loop")
+		if(animID == "fast"):
+			state_machine.travel("SexChokeFast_1-loop 2")
+			state_machine2.travel("SexChokeFastUncon_2-loop")
 	
 func canTransitionTo(_actionID, _args = []):
 	var firstDoll = "pc"
@@ -98,3 +114,12 @@ func getSupportedStates():
 
 func getVarNpcs():
 	return ["pc", "npc"]
+
+func getVarOptions():
+	var options = .getVarOptions()
+	
+	options["uncon"] = {
+		type = "bool",
+	}
+	
+	return options

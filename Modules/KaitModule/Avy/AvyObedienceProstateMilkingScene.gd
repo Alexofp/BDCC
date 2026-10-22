@@ -170,7 +170,10 @@ func _run():
 		saynn("[say=pc]You can tell me to stop.[/say]")
 
 		saynn("She goes quiet.")
-
+		
+		addButton("Continue", "See what happens next", "start_prod_butt")
+	if(state == "start_prod_butt"):
+		playAnimation(StageScene.Search, "prod", {pc="avy", npc="pc", bodyState={naked=true}})
 		saynn("You reach around and find the tip of her cock, just barely visible from the sheath. You run your thumb over it, collecting a bit of clear pre. Avy shivers. You bring your slick thumb back to her tailhole.. and begin rubbing the pre around the tight anal ring.. gently.")
 
 		saynn("[say=avy]..grhh..[/say]")
@@ -216,6 +219,10 @@ func _run():
 		saynn("[say=avy]..oh fuck..[/say]")
 
 		saynn("Her hips are swaying instinctively, her rear paws are tippy-toeing, her anal star still trying to close around your digits.")
+
+		addButton("Continue", "See what happens next", "start_prod_butt_faster")
+	if(state == "start_prod_butt_faster"):
+		playAnimation(StageScene.Search, "prodfast", {pc="avy", npc="pc", bodyState={naked=true, hard=true}})
 
 		saynn("She is fully hard by now.. but you keep going, pushing on that pleasure button.. causing her shaft to twitch, a bead of her precum hanging from the tip.")
 

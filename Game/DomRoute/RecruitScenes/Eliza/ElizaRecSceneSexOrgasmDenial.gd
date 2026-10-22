@@ -68,7 +68,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "sex_faster")
 	if(state == "sex_faster"):
-		playAnimation(StageScene.SexChoke, "fast", {npc="eliza", bodyState={exposedCrotch=true,hard=true}})
+		playAnimation(StageScene.SexMatingPress, "fast", {npc="eliza", bodyState={exposedCrotch=true,hard=true}})
 		saynn("You speed up, railing her pussy slit harder, the wet sounds echoing in the small cell. All the onslaught starts forcing cute stifled moans out of Eliza, her inner walls shivering around you.")
 
 		saynn("[say=eliza]Ah.. ahh.. hh..[/say]")
@@ -85,7 +85,7 @@ func _run():
 
 		addButton("Deny her", "Deny Eliza the orgasm", "deny_eliza")
 	if(state == "deny_eliza"):
-		playAnimation(StageScene.SexChoke, "inside", {npc="eliza", bodyState={exposedCrotch=true,hard=true}, pcCum=!straponUsed, cum=!straponUsed})
+		playAnimation(StageScene.SexMatingPress, "inside", {npc="eliza", bodyState={exposedCrotch=true,hard=true}, pcCum=!straponUsed, cum=!straponUsed})
 		saynn("Suddenly, you stop, completely. Almost fully pulling, only leaving the"+str(" rubber" if straponUsed else "")+" tip inside.")
 
 		saynn("Eliza's whole body continues to stay sense, little moans are still escaping her from inertia. She looks up at you, her chest moving fast, a wild look in her eyes.")
