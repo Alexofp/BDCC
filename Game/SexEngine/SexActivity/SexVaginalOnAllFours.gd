@@ -154,6 +154,8 @@ const PoseToShouldSwapForAnim = {
 
 func getAvaiablePoses() -> Array:
 	if(currentPose == POSE_CHOKEFUCK || currentPose == POSE_CHOKESEX):
+		if(getSubInfo().isUnconscious()):
+			return [POSE_CHOKESEX]
 		return [POSE_CHOKEFUCK, POSE_CHOKESEX]
 	
 	if(getSexType() == SexType.DefaultSex):
@@ -424,6 +426,9 @@ func fucking_processTurn():
 	
 	if(currentPose == POSE_STANDING && getSubInfo().isUnconscious()):
 		currentPose = POSE_ALLFOURS
+		addText("Unable to continue standing, {sub.you} {sub.youVerb('fall')} to all fours!")
+	if(currentPose == POSE_CHOKEFUCK && getSubInfo().isUnconscious()):
+		currentPose = POSE_CHOKESEX
 		addText("Unable to continue standing, {sub.you} {sub.youVerb('fall')} to all fours!")
 	
 	doProcessFuckExtra(DOM_0, SUB_0, usedBodypart)
