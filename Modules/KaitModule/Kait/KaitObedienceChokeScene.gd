@@ -1,5 +1,9 @@
 extends SceneBase
 
+var usedStrapon = false
+var defStrapon = false
+var straponHasCum = false
+
 func _init():
 	sceneID = "KaitObedienceChokeScene"
 
@@ -92,12 +96,22 @@ func _run():
 			addButton("Pin her down", "Wear a strapon and pin Kait down to the floor!", "pin_pick_menu")
 		else:
 			addButton("Pin her down", "Pin Kait to the floor", "pin_her_down")
+	if(state == "pin_pick_menu"):
+		saynn("Pick which strapon you want to use against Kait!")
+
+		addButton("Default", "Use whatever strapon the hideout has lying around", "choose_strapon_def")
+		addStraponButtons()
+		if (false):
+			addButton("Nope", "You shouldn't see this", "choose_strapon_pick")
 	if(state == "pin_her_down"):
 		addCharacter("kait", ["naked"])
 		playAnimation(StageScene.SexChoke, "tease", {pc="pc", npc="kait", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		if (usedStrapon):
+			saynn("You quickly secure a strapon harness around your waist.. and then..")
+
 		saynn("You push Kait down to the cold floor, still choking her while your other hand pushes her leg up high, spreading her wide for you.")
 
-		saynn("Your {pc.penis} is pressed against her wet entrance already, kissing her slick folds. Kait stares up at you, her eyes wide, her chest moving up and down.")
+		saynn("Your "+str("{pc.penis}" if !usedStrapon else "rubber toy")+" is pressed against her wet entrance already, kissing her slick folds. Kait stares up at you, her eyes wide, her chest moving up and down.")
 
 		saynn("[say=kait]Is this.. all you got?..[/say]")
 
@@ -106,13 +120,13 @@ func _run():
 		addButton("Continue", "See what happens next", "start_sex")
 	if(state == "start_sex"):
 		playAnimation(StageScene.SexChoke, "sex", {pc="pc", npc="kait", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
-		saynn("You don't answer.. you just slam your cock inside her in one hard thrust, burying yourself to the base in her tight, wet pussy. Kait's eyes go wide, a strangled gasp escaping her lips as her back arches off the cold floor.")
+		saynn("You don't answer.. you just slam your"+str(" rubber" if usedStrapon else "")+" cock inside her in one hard thrust, burying yourself to the base in her tight, wet pussy. Kait's eyes go wide, a strangled gasp escaping her lips as her back arches off the cold floor.")
 
 		saynn("[say=kait]F-fuck..![/say]")
 
-		saynn("Her pussy clenches around you instantly, her slick walls gripping your shaft.. already trying to milk it.")
+		saynn("Her pussy clenches around you instantly, her slick walls gripping "+str("strapon's" if usedStrapon else "your")+" shaft.. already trying to milk it.")
 
-		saynn("You pull back slowly.. then ram in again. Harder this time. The wet sound of your cock stretching her open echoes through the room.")
+		saynn("You pull back slowly.. then ram in again. Harder this time. The wet sound of your "+str("cock" if !usedStrapon else "toy")+" stretching her open echoes through the room.")
 
 		saynn("[say=kait]Nngh.. ah..[/say]")
 
@@ -124,12 +138,12 @@ func _run():
 
 		saynn("[say=kait]I'm.. a fierce.. ah.. rebellious fighter..[/say]")
 
-		saynn("Kait's whole body shivers as the tip of your cock slams into her womb entrance with each thrust. What a fighter.")
+		saynn("Kait's whole body shivers as the tip of your"+str(" cock" if !usedStrapon else " strapon")+" slams into her womb entrance with each thrust. What a fighter.")
 
 		addButton("Faster", "Fuck her faster", "sex_faster")
 	if(state == "sex_faster"):
 		playAnimation(StageScene.SexChoke, "fast", {pc="pc", npc="kait", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
-		saynn("You increase the pace and tighten your grip further still, cutting off her air completely. Her eyes begin to roll back slightly, her pussy squeezing you so tight you almost see stars.")
+		saynn("You increase the pace and tighten your grip further still, cutting off her air completely. Her eyes begin to roll back slightly, her pussy squeezing you so tight"+str(" you almost see stars" if !usedStrapon else ", you have to put extra strength to push through")+".")
 
 		saynn("[say=kait]Mhh..-h..[/say]")
 
@@ -139,7 +153,11 @@ func _run():
 
 		saynn("Kait's mouth is open wide.. but no sound comes out. Her paws are just holding onto your wrist that's choking her.")
 
-		saynn("She cums.. silently. It feels so good.. her pussy is suddenly clenching, squeezing, milking your cock with every thrust. Her body is trembling, her big shaky eyes are half-shut.")
+		if (!usedStrapon):
+			saynn("She cums.. silently. It feels so good.. her pussy is suddenly clenching, squeezing, milking your cock with every thrust. Her body is trembling, her big shaky eyes are half-shut.")
+
+		else:
+			saynn("She cums.. silently. It feels nice.. her pussy is suddenly clenching, squeezing your rubber shaft. Her body is trembling, her big shaky eyes are half-shut.")
 
 		addButton("Let her breathe", "Let her breathe while you fuck her.. but just a bit", "let_breathe")
 		addButton("Choke hard", "(Unconscious sex) Keep choking her hard", "keep_choking")
@@ -155,19 +173,34 @@ func _run():
 
 		saynn("And yet, you keep going, ramming her cock deep inside her unconscious body, forcing her pussy to continue spasming around you.")
 
-		addButton("Cum inside", "Breed that cat", "keep_cum_inside")
+		if (!usedStrapon):
+			addButton("Cum inside", "Breed that cat", "keep_cum_inside")
+		else:
+			addButton("Ram it in", "Ram the whole toy in", "keep_cum_inside")
 	if(state == "keep_cum_inside"):
-		playAnimation(StageScene.SexChoke, "inside", {pc="pc", npc="kait", pcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}, uncon=true})
-		saynn("You drive in deep one final time and just let the orgasm take over. Your {pc.penis} starts pulsing inside Kait, pumping hot {pc.cum} deep into her pulsing pussy. Rope after rope floods her womb, filling her up, breeding her.")
+		playAnimation(StageScene.SexChoke, "inside", {pc="pc", npc="kait", pcCum=!usedStrapon, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}, uncon=true})
+		if (!usedStrapon):
+			saynn("You drive in deep one final time and just let the orgasm take over. Your {pc.penis} starts pulsing inside Kait, pumping hot {pc.cum} deep into her twitching pussy. Rope after rope floods her womb, filling her up, breeding her.")
 
-		saynn("[say=pc]Ngh..[/say]")
+			saynn("[say=pc]Ngh..[/say]")
 
-		saynn("You grunt.. and stay buried inside her.. feeling her inner walls twitch around your throbbing cock.")
+			saynn("You grunt.. and stay buried inside her.. feeling her inner walls twitch around your throbbing cock.")
+
+		else:
+			saynn("You drive in deep one final time and just let the rubber shaft stay inside her, extending her orgasm further. "+str("Kait's pussy is pulsing visibly around your toy." if !straponHasCum else "Your strapon suddenly starts throbbing inside Kait, pumping hot seed deep into her pulsing pussy. Rope after rope floods her womb, filling her up, breeding her.")+"")
+
+			saynn("[say=pc]Nice..[/say]")
+
+			saynn("But now it was time to let her breathe again.")
 
 		addButton("Pull out", "Pull out and try to bring Kait back to her senses", "keep_back_senses")
 	if(state == "keep_back_senses"):
 		playAnimation(StageScene.SexChoke, "tease", {pc="pc", npc="kait", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
-		saynn("Then you pull out. Your seed starts leaking from her well-fucked pussy, pooling on the floor beneath her. You release her neck and immediately reach for her face, gently tapping her cheek.")
+		if (!usedStrapon || straponHasCum):
+			saynn("Then you pull out. "+str("Your" if !straponHasCum else "The")+" seed starts leaking from her well-fucked pussy, pooling on the floor beneath her. You release her neck and immediately reach for her face, gently tapping her cheek.")
+
+		else:
+			saynn("Then you pull out. Her well-used pussy stays open for a bit.. before finally closing up. You release her neck and immediately reach for her face, gently tapping her cheek.")
 
 		saynn("[say=pc]Kait. Hey. Kait.[/say]")
 
@@ -196,7 +229,14 @@ func _run():
 
 		saynn("[say=kait]Shit.. That's.. kinda hot.[/say]")
 
-		saynn("She reaches her paw down to her pussy.. and quickly finds it stuffed full with your seed..")
+		if (!usedStrapon):
+			saynn("She reaches her paw down to her pussy.. and quickly finds it stuffed full with your seed..")
+
+		elif (straponHasCum):
+			saynn("She reaches her paw down to her pussy.. and quickly finds it stuffed full with seed..")
+
+		else:
+			saynn("She reaches her paw down to her pussy.. and quickly finds it soaked with her juices..")
 
 		saynn("[say=kait]Very hot..[/say]")
 
@@ -226,13 +266,24 @@ func _run():
 
 		saynn("Her paw reaches up for her throat, where your fingers were. Now there are visible bruises there under the fur.")
 
-		saynn("[say=kait]Oh.. still. I would have been fine.[/say]")
+		saynn("[say=kait]These are nothing! I would have been fine-e.[/say]")
 
 		saynn("[say=pc]I wanted you to remember it.[/say]")
 
-		saynn("Next, she reaches her paw down to her pussy.. and quickly finds it stuffed full with your seed..")
+		if (!usedStrapon):
+			saynn("Next, she reaches her paw down to her pussy.. and quickly finds it stuffed full with your seed..")
 
-		saynn("[say=kait]You really didn't hold back.. so much.. This is what I'm gonna remember~.[/say]")
+			saynn("[say=kait]You really didn't hold back.. so much.. This is what I'm gonna remember~.[/say]")
+
+		elif (straponHasCum):
+			saynn("Next, she reaches her paw down to her pussy.. and quickly finds it stuffed full with seed..")
+
+			saynn("[say=kait]That strapon had something in it apparently.. This is what I'm gonna remember~.[/say]")
+
+		else:
+			saynn("Next, she reaches her paw down to her pussy.. and quickly finds it soaked with her juices..")
+
+			saynn("[say=kait]You railed me hard.. This is what I'm gonna remember~.[/say]")
 
 		saynn("She leans into you, panting softly still.")
 
@@ -254,7 +305,11 @@ func _run():
 
 		saynn("[say=pc]I want you awake for this.[/say]")
 
-		saynn("Her pussy is still clenching around you in rhythmic waves while you keep thrusting, letting her feel every inch of your cock as it drags against her overstimulated walls.")
+		if (!usedStrapon):
+			saynn("Her pussy is still clenching around you in rhythmic waves while you keep thrusting, letting her feel every inch of your cock as it drags against her overstimulated walls.")
+
+		else:
+			saynn("Her pussy is still clenching around the rubber toy in rhythmic waves while you keep thrusting, letting her feel every inch of it as you push it against her overstimulated walls.")
 
 		saynn("[say=kait]Nngh.. mhh..[/say]")
 
@@ -264,23 +319,43 @@ func _run():
 
 		saynn("[say=kait]..never.. ah..[/say]")
 
-		saynn("You choke her hard again as your orgasm takes over..")
+		if (!usedStrapon):
+			saynn("You choke her hard again as your orgasm takes over..")
 
-		addButton("Cum inside", "Breed the cat!", "cum_in")
+			addButton("Cum inside", "Breed the cat!", "cum_in")
+		else:
+			saynn("You choke her hard again.. might as well force the whole toy in.")
+
+			addButton("Ram it in", "See what happens", "cum_in")
 	if(state == "cum_in"):
-		playAnimation(StageScene.SexChoke, "inside", {pc="pc", pcCum=true, npc="kait", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
-		saynn("You drive in deep one final time and just let the orgasm take over. Your {pc.penis} starts pulsing inside Kait, pumping hot {pc.cum} deep into her pulsing pussy. Rope after rope floods her womb, filling her up, breeding her.")
+		playAnimation(StageScene.SexChoke, "inside", {pc="pc", pcCum=!usedStrapon, npc="kait", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		if (!usedStrapon):
+			saynn("You drive in deep one final time and just let the orgasm take over. Your {pc.penis} starts pulsing inside Kait, pumping hot {pc.cum} deep into her pulsing pussy. Rope after rope floods her womb, filling her up, breeding her.")
 
-		saynn("[say=kait]Mmm.. f-fuck..[/say]")
+			saynn("[say=kait]Mmm.. f-fuck..[/say]")
 
-		saynn("She shivers as she feels the hot wave invading her. You grunt.. and stay buried inside her.. feeling her inner walls twitch around your throbbing cock.")
+			saynn("She shivers as she feels the hot wave invading her. You grunt.. and stay buried inside her.. feeling her inner walls twitch around your throbbing cock.")
 
-		saynn("The orgasm begins to fade..")
+			saynn("The orgasm begins to fade..")
 
-		addButton("Pull out", "Pull out and try to bring Kait back to her senses", "cum_pullout")
+		else:
+			saynn("You drive in deep one final time and just let the rubber shaft stay buried in! It extends Kait's orgasm, making her squirm harder under you.."+str("" if !straponHasCum else " And then.. your strapon suddenly starts throbbing inside her, pumping hot seed deep into her pulsing pussy. Rope after rope floods her womb, filling her up, breeding her.")+"")
+
+			saynn("[say=kait]Mmm.. f-fuck..[/say]")
+
+			saynn("Even when her orgasm begins to fade, she is still shivering a bit, her inner walls twitch around your strapon.")
+
+		addButton("Pull out", "It's time to pull out", "cum_pullout")
 	if(state == "cum_pullout"):
 		playAnimation(StageScene.SexChoke, "tease", {pc="pc", npc="kait", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
-		saynn("You slowly pull out, your cock sliding free with a wet sound. A mixture of your seed and her juices begin leaking from her well-used pussy, pooling on the floor.")
+		if (!usedStrapon):
+			saynn("You slowly pull out, your cock sliding free with a wet sound. A mixture of your seed and her juices begin leaking from her well-used pussy, pooling on the floor.")
+
+		elif (straponHasCum):
+			saynn("You slowly pull out, your toy sliding free with a wet sound. A mixture of seed and juices begin leaking from her well-used pussy, pooling on the floor.")
+
+		else:
+			saynn("You slowly pull out, your toy sliding free with a wet sound. The transparent juices are dripping from her well-used pussy, pooling on the floor.")
 
 		saynn("Kait just lies there for a moment, her chest heaving, staring up at the ceiling. Then she lets out a shaky laugh.. that turns into a cough.")
 
@@ -293,13 +368,68 @@ func _run():
 		saynn("[say=kait]I'm.. yeah.. I'm great.. That was.. fuck.[/say]")
 
 		addButton("Aftercare", "Pull her into some cuddles", "keep_aftecare")
+func addStraponButtons():
+	var strapons = GM.pc.getStrapons()
+	for strapon in strapons:
+		addButton(strapon.getVisibleName(), strapon.getVisibleDescription(), "choose_strapon_pick", [strapon])
+
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
 		return
 
+	if(_action == "choose_strapon_def"):
+		usedStrapon = true
+		defStrapon = true
+		putOn("pc", "StraponCanine")
+		setState("pin_her_down")
+		return
+
+	if(_action == "choose_strapon_pick"):
+		usedStrapon = true
+		defStrapon = false
+		var strapon = _args[0]
+		GM.pc.getInventory().removeItem(strapon)
+		GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(strapon)
+		var theFluids = strapon.getFluids()
+		if(theFluids != null):
+			if(theFluids.hasFluidType("Cum")):
+				straponHasCum = true
+		setState("pin_her_down")
+		return
+
 	if(_action == "sex_faster"):
 		processTime(5*60)
 
+	if(_action == "keep_cum_inside"):
+		getCharacter("kait").cummedInVaginaBy("pc", FluidSource.Penis if !usedStrapon else FluidSource.Strapon)
+		GM.pc.orgasmFrom("kait")
+
+	if(_action == "keep_aftecare"):
+		if(defStrapon):
+			GM.pc.removeStrapon()
+		elif(usedStrapon):
+			GM.pc.unequipStrapon()
+
+	if(_action == "cum_in"):
+		getCharacter("kait").cummedInVaginaBy("pc", FluidSource.Penis if !usedStrapon else FluidSource.Strapon)
+		GM.pc.orgasmFrom("kait")
+
 	setState(_action)
+
+func saveData():
+	var data = .saveData()
+
+	data["usedStrapon"] = usedStrapon
+	data["defStrapon"] = defStrapon
+	data["straponHasCum"] = straponHasCum
+
+	return data
+
+func loadData(data):
+	.loadData(data)
+
+	usedStrapon = SAVE.loadVar(data, "usedStrapon", false)
+	defStrapon = SAVE.loadVar(data, "defStrapon", false)
+	straponHasCum = SAVE.loadVar(data, "straponHasCum", false)
