@@ -256,7 +256,7 @@ func _run():
 
 		saynn("[say=avy]Here's the deal, pussycat. You're gonna do exactly what we say. No screaming. No running. No hero shit.[/say]")
 
-		saynn("Avy looks down at her with mean red eyes.")
+		saynn("Avy looks down at her with mean blue eyes.")
 
 		saynn("[say=avy]Yes, if you do any of that, you're gonna ruin our plans. It'd be so-so terrible for us. But let me tell you what would happen next.[/say]")
 

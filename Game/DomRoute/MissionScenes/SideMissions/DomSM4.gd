@@ -20,7 +20,7 @@ func _run():
 
 		saynn("[say=ferri]I'm not gonna do what you want![/say]")
 
-		saynn("Avy has Ferri backed against one of the crates. The foxy is taller, her red eyes shining bright, she is looming over the dracat. Ferri is standing her ground, her dragon tail wagging behind her annoyed.")
+		saynn("Avy has Ferri backed against one of the crates. The foxy is taller, her blue eyes shining bright, she is looming over the dracat. Ferri is standing her ground, her dragon tail wagging behind her annoyed.")
 
 		saynn("[say=pc]What is happening here?[/say]")
 

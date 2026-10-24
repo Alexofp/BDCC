@@ -82,7 +82,7 @@ func _run():
 
 		saynn("[say=announcer]What a twist. And here we have it! Make some noise for Avy, the best of the best![/say]")
 
-		saynn("While the crowd is busy cheering, Avy rips lilac's shorts into a few rags. She takes one and uses it as a makeshift bandage, wrapping around her bleeding wounds. Then she straddles the defeated girl again and uses the rest of the rags to tie lilac's hands together behind her back and then to gag her.")
+		saynn("While the crowd is busy cheering, Avy rips the lilac's shirt into a few rags. She takes one and uses it as a makeshift bandage, wrapping around her bleeding wounds. Then she straddles the defeated girl again and uses the rest of the rags to tie the lilac's hands together behind her back and then to gag her.")
 
 		saynn("The lilac tries to resist but one slap on the cheek calms her down, she lies still while the red starts pulling down her lilac shorts too, exposing the panties underneath. Avy roughly rips the panties off and throws them over the fence, for all the horny inmates to try and catch.")
 
@@ -132,7 +132,7 @@ func _run():
 
 		saynn("[say=avy]GAAH! F-FUCK![/say]")
 
-		saynn("Avy's red eyes go wide, her whole body seizes up, hands flying towards her crotch. The crowd's cheering turns into a mix of gasps, laughter and confused shouts.")
+		saynn("Avy's blue eyes go wide, her whole body seizes up, hands flying towards her crotch. The crowd's cheering turns into a mix of gasps, laughter and confused shouts.")
 
 		saynn("[say=announcer]Whoa! Even I felt that one.[/say]")
 

@@ -90,7 +90,7 @@ func _run():
 
 		saynn("You can leave.. or punish her first.. You don't have time for a whole intercouse but you don't have to do much to make that cat regret it.")
 
-		addButton("Just leave", "You don't have punish Risha", "just_leave")
+		addButton("Just leave", "You don't have to punish Risha", "just_leave")
 		addButton("E-Stim Penis", "(Rough) Put Risha's stun stick against her prickly stick and see what happens", "estim_pp")
 		addButton("E-Stim Vagina", "(Rough) Put Risha's stun stick into her pussy and see what happens", "estim_vag")
 	if(state == "just_leave"):

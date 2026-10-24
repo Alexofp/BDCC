@@ -49,7 +49,7 @@ func _run():
 
 		saynn("[say=pc]I trust you. The rest of the team.. maybe not so much. You might have to go through some.. procedures.[/say]")
 
-		saynn("Rahil rubs her snout, the last word making her space out for a second. But she soon regains focus.")
+		saynn("Rahi rubs her snout, the last word making her space out for a second. But she soon regains focus.")
 
 		saynn("[say=rahi]Procedures?[/say]")
 

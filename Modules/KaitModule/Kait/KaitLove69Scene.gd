@@ -14,7 +14,7 @@ func _run():
 
 		saynn("[say=kait]A bit, why?[/say]")
 
-		saynn("The snow leopard arches her back, stretching while making a cute noise. When she meets her gaze after that, a smile curls the corners of her lips.")
+		saynn("The snow leopard arches her back, stretching while making a cute noise. When she meets your gaze after that, a smile curls the corners of her lips.")
 
 		saynn("[say=pc]Maybe we could.. get to know each other a little better?[/say]")
 
@@ -115,7 +115,7 @@ func _run():
 		playAnimation(StageScene.Sleeping, "rub", {pc="pc", npc="kait", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("She was the first to break. Her body starts squirming as a muffled moan vibrates around your shaft, her pussy clamping down on your tongue hard.")
 
-		saynn("The feeling of her orgasm, combined with her mouth working on your cock so well was enough to push you over the edge. You groan, your hips bucking as you {pc.penis} starts shooting your load into her mouth! She takes it all, swallowing greedily, still licking and sucking until you are completely spent.")
+		saynn("The feeling of her orgasm, combined with her mouth working on your cock so well was enough to push you over the edge. You groan, your hips bucking as your {pc.penis} starts shooting your load into her mouth! She takes it all, swallowing greedily, still licking and sucking until you are completely spent.")
 
 		saynn("Finally, she releases your cock with a wet pop and rolls off, lying beside you on the floor.. still the opposite direction. She is panting a lot.. before chuckling.")
 

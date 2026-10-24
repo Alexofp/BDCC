@@ -365,7 +365,7 @@ func _run():
 
 		saynn("[say=ferri]Shouldn't have gotten so close to me, kitty.[/say]")
 
-		saynn("She doesn't waste and starts smacking her cuffs against the edge of the locker. Again and again.")
+		saynn("She doesn't waste time and starts smacking her cuffs against the edge of the locker. Again and again.")
 
 		addButton("Continue", "See what happens next", "ferri_frees_herself")
 	if(state == "ferri_frees_herself"):
@@ -457,7 +457,7 @@ func _run():
 		aimCameraAndSetLocName("hideout_near_break_room")
 		saynn("As you step out, you instantly run into Avy.")
 
-		saynn("[say=kait]Avy! Where the fuck where you?![/say]")
+		saynn("[say=kait]Avy! Where the fuck were you?![/say]")
 
 		saynn("[say=avy]I was looking for you, duh. I just had a sudden thing I had to attend to. Arena business.[/say]")
 

@@ -11,7 +11,7 @@ func _run():
 
 		saynn("Kait bounces eagerly.")
 
-		saynn("[say=kait]Out first heist, fuck yeah! I'm gonna go grab everyone.[/say]")
+		saynn("[say=kait]Our first heist, fuck yeah! I'm gonna go grab everyone.[/say]")
 
 		addButton("Continue", "See what happens next", "explain_stuff")
 	if(state == "explain_stuff"):

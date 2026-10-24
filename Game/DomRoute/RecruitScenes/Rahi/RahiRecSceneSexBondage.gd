@@ -71,7 +71,7 @@ func _run():
 
 		saynn("Her tail curls between her legs, the only part of her that wasn't made helpless.")
 
-		saynn("Almost done.. The last toy that you have is a little bullet vibrator. You strap the remote around her thigh and then use a piece of tape to attach the little pink egg directly onto her clit. As you turn the dial, the toy starts buzzing ever so audibly, making kitty sways her butt.")
+		saynn("Almost done.. The last toy that you have is a little bullet vibrator. You strap the remote around her thigh and then use a piece of tape to attach the little pink egg directly onto her clit. As you turn the dial, the toy starts buzzing ever so audibly, making kitty sway her butt.")
 
 		saynn("[say=rahi]Mhh-h.. mhhphh..[/say]")
 

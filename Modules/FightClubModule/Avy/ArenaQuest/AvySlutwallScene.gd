@@ -126,7 +126,7 @@ func _run():
 
 		saynn("But then she just starts walking away, probably to get her uniform.")
 
-		saynn("[say=pc]No even a thank you?[/say]")
+		saynn("[say=pc]Not even a thank you?[/say]")
 
 		saynn("[say=avy]Fuck you.[/say]")
 

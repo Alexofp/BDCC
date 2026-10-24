@@ -145,7 +145,7 @@ func _run():
 
 		saynn("Kait starts drawing little stick figures on the other side of the board. Below them she writes 'gangs'.")
 
-		saynn("[say=kait]Lastly, as the captain's influence over the prison will fall, other gangs will start to crop up, to try to fill the power vacuum. Some of them will probably share our goal. Others.. will go against us. Just something to keep in mind. Even inmates are out potential enemies. So.. don't share our plan.. don't tell anyone about what we're doing. Don't rat or there will be huge consequences, goes without saying.[/say]")
+		saynn("[say=kait]Lastly, as the captain's influence over the prison will fall, other gangs will start to crop up, to try to fill the power vacuum. Some of them will probably share our goal. Others.. will go against us. Just something to keep in mind. Even inmates are our potential enemies. So.. don't share our plan.. don't tell anyone about what we're doing. Don't rat or there will be huge consequences, goes without saying.[/say]")
 
 		saynn("Kait stares at Avy as she finishes saying her last sentence.")
 
