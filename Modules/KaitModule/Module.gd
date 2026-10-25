@@ -55,6 +55,8 @@ func _init():
 		
 		"res://Modules/KaitModule/Avy/AvyObedienceProstateMilkingScene.gd",
 		"res://Modules/KaitModule/Avy/AvyLovePenisPumpScene.gd",
+		"res://Modules/KaitModule/Kait/KaitObedienceChokeScene.gd",
+		"res://Modules/KaitModule/Kait/KaitLoveRideYouScene.gd",
 	]
 	characters = [
 	]
