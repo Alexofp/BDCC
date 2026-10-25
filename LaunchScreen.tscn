@@ -1,0 +1,472 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://UI/LaunchScreen/LaunchScreen.gd" type="Script" id=1]
+[ext_resource path="res://GlobalTheme.tres" type="Theme" id=2]
+[ext_resource path="res://Game/UI/Util/SmartScrollContainer.gd" type="Script" id=3]
+[ext_resource path="res://UI/LaunchScreen/LaunchModEntry.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Fonts/Titillium-Regular.otf" type="DynamicFontData" id=5]
+[ext_resource path="res://UI/ModBrowser/ModBrowser.tscn" type="PackedScene" id=6]
+[ext_resource path="res://UI/TroubleshootingScreen/TroubleshootingScreen.tscn" type="PackedScene" id=7]
+
+[sub_resource type="DynamicFont" id=3]
+size = 38
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 5 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0, 0, 0, 0.47451 )
+
+[node name="LaunchScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 2 )
+script = ExtResource( 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Control" type="Control" parent="VBoxContainer"]
+margin_right = 1280.0
+margin_bottom = 5.0
+rect_min_size = Vector2( 0, 5 )
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+margin_top = 9.0
+margin_right = 1280.0
+margin_bottom = 48.0
+custom_fonts/font = SubResource( 3 )
+text = "Modded BDCC Launcher"
+align = 1
+
+[node name="DebugButton" type="Button" parent="VBoxContainer/Label"]
+unique_name_in_owner = true
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -268.0
+margin_top = -5.0
+margin_right = -22.0
+margin_bottom = 41.0
+text = "TROUBLESHOOTING"
+
+[node name="CheckBrokenModsButton" type="Button" parent="VBoxContainer/Label"]
+unique_name_in_owner = true
+margin_left = 20.0
+margin_top = -5.0
+margin_right = 266.0
+margin_bottom = 41.0
+text = "Check online broken mods list"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 52.0
+margin_right = 1280.0
+margin_bottom = 720.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer"]
+margin_right = 425.0
+margin_bottom = 668.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 418.0
+margin_bottom = 661.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="orderhb" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+margin_right = 411.0
+margin_bottom = 30.0
+custom_constants/separation = 12
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/orderhb"]
+margin_top = 5.0
+margin_right = 89.0
+margin_bottom = 25.0
+text = "Mod order"
+align = 1
+
+[node name="SearchLineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/orderhb"]
+unique_name_in_owner = true
+margin_left = 101.0
+margin_right = 411.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+placeholder_text = "Search..."
+
+[node name="OptionButton" type="OptionButton" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+margin_top = 34.0
+margin_right = 411.0
+margin_bottom = 60.0
+
+[node name="ViewToggleContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+margin_top = 64.0
+margin_right = 411.0
+margin_bottom = 104.0
+
+[node name="CheckButton" type="CheckButton" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/ViewToggleContainer"]
+margin_right = 76.0
+margin_bottom = 40.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/ViewToggleContainer"]
+margin_left = 80.0
+margin_top = 10.0
+margin_right = 165.0
+margin_bottom = 30.0
+text = "Page view"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+margin_top = 108.0
+margin_right = 411.0
+margin_bottom = 624.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 3 )
+
+[node name="ModList" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/ScrollContainer"]
+margin_right = 411.0
+margin_bottom = 516.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="LaunchModEntry" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/ScrollContainer/ModList" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 411.0
+margin_bottom = 50.0
+
+[node name="Pagecontrols" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+margin_top = 628.0
+margin_right = 411.0
+margin_bottom = 654.0
+
+[node name="PrevButton" type="Button" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/Pagecontrols"]
+margin_right = 62.0
+margin_bottom = 26.0
+text = "<Prev"
+
+[node name="PageLabel" type="Label" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/Pagecontrols"]
+margin_left = 66.0
+margin_top = 3.0
+margin_right = 344.0
+margin_bottom = 23.0
+size_flags_horizontal = 3
+text = "Page 1/1"
+align = 1
+
+[node name="NextButton" type="Button" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/Pagecontrols"]
+margin_left = 348.0
+margin_right = 411.0
+margin_bottom = 26.0
+text = "Next>"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+margin_left = 429.0
+margin_right = 1280.0
+margin_bottom = 668.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_right = 851.0
+margin_bottom = 590.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 844.0
+margin_bottom = 583.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="WarningLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
+visible = false
+margin_right = 837.0
+margin_bottom = 21.0
+bbcode_enabled = true
+fit_content_height = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
+margin_right = 837.0
+margin_bottom = 271.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+
+[node name="HFlowContainer" type="HFlowContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
+margin_top = 275.0
+margin_right = 837.0
+margin_bottom = 301.0
+
+[node name="ModDisableButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer"]
+margin_right = 74.0
+margin_bottom = 26.0
+text = "Disable"
+
+[node name="MoveUpButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer"]
+margin_left = 78.0
+margin_right = 164.0
+margin_bottom = 26.0
+text = "Move up"
+
+[node name="MoveDownButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer"]
+margin_left = 168.0
+margin_right = 280.0
+margin_bottom = 26.0
+text = "Move down"
+
+[node name="DeleteModButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer"]
+margin_left = 284.0
+margin_right = 410.0
+margin_bottom = 26.0
+text = "DELETE MOD"
+
+[node name="ModFileList" type="ItemList" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
+margin_top = 305.0
+margin_right = 837.0
+margin_bottom = 576.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 594.0
+margin_right = 851.0
+margin_bottom = 644.0
+rect_min_size = Vector2( 0, 50 )
+
+[node name="Control" type="Control" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_right = 9.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+
+[node name="BuildPCKButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+margin_left = 13.0
+margin_right = 174.0
+margin_bottom = 50.0
+text = "Rebuild BDCC.pck"
+
+[node name="ResetGRCacheButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_left = 178.0
+margin_right = 319.0
+margin_bottom = 50.0
+text = "Reset GR cache"
+
+[node name="OpenModsFolder" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+margin_left = 323.0
+margin_right = 442.0
+margin_bottom = 50.0
+text = "Mods Folder"
+
+[node name="ModBrowserButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_left = 446.0
+margin_right = 572.0
+margin_bottom = 50.0
+text = "Mod Browser"
+
+[node name="NoModsButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_left = 576.0
+margin_right = 713.0
+margin_bottom = 50.0
+text = "Play (no mods)"
+
+[node name="WithModsButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_left = 717.0
+margin_right = 851.0
+margin_bottom = 50.0
+text = "Play (modded)"
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 648.0
+margin_right = 851.0
+margin_bottom = 668.0
+text = "If the game crashes on start, test without mods or press the TROUBLESHOOTING button"
+align = 1
+autowrap = true
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -233.0
+margin_top = -59.0
+margin_right = 233.0
+margin_bottom = 59.0
+dialog_autowrap = true
+
+[node name="ModBrowser" parent="." instance=ExtResource( 6 )]
+visible = false
+
+[node name="TroubleshootingScreen" parent="." instance=ExtResource( 7 )]
+unique_name_in_owner = true
+visible = false
+
+[node name="BuildingPCKPanelDark" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 4 )
+
+[node name="CenterContainer" type="Control" parent="BuildingPCKPanelDark"]
+margin_right = 1280.0
+margin_bottom = 720.0
+
+[node name="BuildingPCKPanel" type="PanelContainer" parent="BuildingPCKPanelDark/CenterContainer"]
+unique_name_in_owner = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -208.0
+margin_top = -78.0
+margin_right = 208.0
+margin_bottom = 78.0
+
+[node name="Label" type="Label" parent="BuildingPCKPanelDark/CenterContainer/BuildingPCKPanel"]
+margin_left = 7.0
+margin_top = 56.0
+margin_right = 409.0
+margin_bottom = 99.0
+text = "Building BDCC.pck
+Please wait.."
+align = 1
+
+[node name="BusyPanel" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 4 )
+
+[node name="CenterContainer" type="CenterContainer" parent="BusyPanel"]
+margin_right = 1280.0
+margin_bottom = 720.0
+
+[node name="PanelContainer" type="PanelContainer" parent="BusyPanel/CenterContainer"]
+margin_left = 490.0
+margin_top = 353.0
+margin_right = 790.0
+margin_bottom = 367.0
+rect_min_size = Vector2( 300, 0 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BusyPanel/CenterContainer/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 293.0
+margin_bottom = 58.0
+
+[node name="BusyLabel" type="RichTextLabel" parent="BusyPanel/CenterContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_right = 286.0
+margin_bottom = 21.0
+bbcode_enabled = true
+bbcode_text = "[center]Checking mods..[/center]"
+text = "Checking mods.."
+fit_content_height = true
+
+[node name="BusyCloseButton" type="Button" parent="BusyPanel/CenterContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_top = 25.0
+margin_right = 286.0
+margin_bottom = 51.0
+text = "OK"
+
+[node name="AndroidChooseFolderPanel" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 4 )
+
+[node name="CenterContainer" type="CenterContainer" parent="AndroidChooseFolderPanel"]
+margin_right = 1280.0
+margin_bottom = 720.0
+
+[node name="PanelContainer" type="PanelContainer" parent="AndroidChooseFolderPanel/CenterContainer"]
+margin_left = 490.0
+margin_top = 353.0
+margin_right = 790.0
+margin_bottom = 367.0
+rect_min_size = Vector2( 300, 0 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AndroidChooseFolderPanel/CenterContainer/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 293.0
+margin_bottom = 316.0
+
+[node name="BusyLabel" type="RichTextLabel" parent="AndroidChooseFolderPanel/CenterContainer/PanelContainer/VBoxContainer"]
+margin_right = 286.0
+margin_bottom = 147.0
+bbcode_enabled = true
+bbcode_text = "[center]Choose which folder to use to save/load mods and other files.
+
+If you're using an Android 16+ device, you should probably pick the last option
+[/center]"
+text = "Choose which folder to use to save/load mods and other files.
+
+If you're using an Android 16+ device, you should probably pick the last option
+"
+fit_content_height = true
+
+[node name="AndroidLoadDocuments" type="Button" parent="AndroidChooseFolderPanel/CenterContainer/PanelContainer/VBoxContainer"]
+margin_top = 151.0
+margin_right = 286.0
+margin_bottom = 201.0
+rect_min_size = Vector2( 0, 50 )
+text = "Documents folder (default)"
+
+[node name="AndroidLoadDownloads" type="Button" parent="AndroidChooseFolderPanel/CenterContainer/PanelContainer/VBoxContainer"]
+margin_top = 205.0
+margin_right = 286.0
+margin_bottom = 255.0
+rect_min_size = Vector2( 0, 50 )
+text = "Downloads folder"
+
+[node name="AndroidLoadData" type="Button" parent="AndroidChooseFolderPanel/CenterContainer/PanelContainer/VBoxContainer"]
+margin_top = 259.0
+margin_right = 286.0
+margin_bottom = 309.0
+rect_min_size = Vector2( 0, 50 )
+text = "data/org.rahimew.bdcc/files"
+
+[node name="HTTPRequestMods" type="HTTPRequest" parent="."]
+unique_name_in_owner = true
+
+[connection signal="pressed" from="VBoxContainer/Label/DebugButton" to="." method="_on_DebugButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/Label/CheckBrokenModsButton" to="." method="_on_CheckBrokenModsButton_pressed"]
+[connection signal="text_changed" from="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/orderhb/SearchLineEdit" to="." method="_on_search_text_changed"]
+[connection signal="item_selected" from="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/OptionButton" to="." method="_on_OptionButton_item_selected"]
+[connection signal="meta_clicked" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/WarningLabel" to="." method="_on_RichTextLabel_meta_clicked"]
+[connection signal="meta_clicked" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/RichTextLabel" to="." method="_on_RichTextLabel_meta_clicked"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/ModDisableButton" to="." method="_on_ModDisableButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/MoveUpButton" to="." method="_on_MoveUpButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/MoveDownButton" to="." method="_on_MoveDownButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/DeleteModButton" to="." method="_on_DeleteModButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/BuildPCKButton" to="." method="_on_TestButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/ResetGRCacheButton" to="." method="_on_ResetGRCacheButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/OpenModsFolder" to="." method="_on_OpenModsFolder_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/ModBrowserButton" to="." method="_on_ModBrowserButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/NoModsButton" to="." method="_on_NoModsButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/WithModsButton" to="." method="_on_WithModsButton_pressed"]
+[connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_ConfirmationDialog_confirmed"]
+[connection signal="closePressed" from="ModBrowser" to="." method="_on_ModBrowser_closePressed"]
+[connection signal="onClose" from="TroubleshootingScreen" to="." method="_on_TroubleshootingScreen_onClose"]
+[connection signal="meta_clicked" from="BusyPanel/CenterContainer/PanelContainer/VBoxContainer/BusyLabel" to="." method="_on_BusyLabel_meta_clicked"]
+[connection signal="pressed" from="BusyPanel/CenterContainer/PanelContainer/VBoxContainer/BusyCloseButton" to="." method="_on_BusyCloseButton_pressed"]
+[connection signal="pressed" from="AndroidChooseFolderPanel/CenterContainer/PanelContainer/VBoxContainer/AndroidLoadDocuments" to="." method="_on_AndroidLoadDocuments_pressed"]
+[connection signal="pressed" from="AndroidChooseFolderPanel/CenterContainer/PanelContainer/VBoxContainer/AndroidLoadDownloads" to="." method="_on_AndroidLoadDownloads_pressed"]
+[connection signal="pressed" from="AndroidChooseFolderPanel/CenterContainer/PanelContainer/VBoxContainer/AndroidLoadData" to="." method="_on_AndroidLoadData_pressed"]
+[connection signal="request_completed" from="HTTPRequestMods" to="." method="_on_HTTPRequestMods_request_completed"]

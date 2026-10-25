@@ -1,0 +1,789 @@
+extends Control
+
+onready var modDescriptionLabel = $VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/RichTextLabel
+onready var modVList = $VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/ScrollContainer/ModList
+onready var modFileList = $VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/ModFileList
+onready var modDisableButton = $VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/ModDisableButton
+onready var modCountLabel = $VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/orderhb/Label
+onready var sortOptionButton = $VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/OptionButton
+
+# --- NEW PAGINATION NODES ---
+onready var view_toggle = $VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/ViewToggleContainer/CheckButton
+onready var page_controls = $VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/Pagecontrols
+onready var prev_button = $VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/Pagecontrols/PrevButton
+onready var next_button = $VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/Pagecontrols/NextButton
+onready var page_label = $VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/Pagecontrols/PageLabel
+onready var scroll_container = $VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/ScrollContainer
+
+onready var build_pck_button = $"%BuildPCKButton"
+onready var open_mods_folder = $"%OpenModsFolder"
+onready var search_line_edit = $"%SearchLineEdit"
+onready var android_choose_folder_panel = $"%AndroidChooseFolderPanel"
+onready var building_pck_panel_dark = $"%BuildingPCKPanelDark"
+
+onready var debug_button = $"%DebugButton"
+onready var building_pck_panel = $"%BuildingPCKPanel"
+
+onready var troubleshooting_screen = $"%TroubleshootingScreen"
+
+var launchModEntryScene = preload("res://UI/LaunchScreen/LaunchModEntry.tscn")
+
+var currentModOrder:Array = []
+var selectedEntry = null
+var launchModEntries:Array = []
+
+export(Resource) var GlobalTheme
+
+const modOrderPath = "user://modOrder.json"
+const pckversionPath = "user://bdccpckversion.txt"
+const androidPickedModsFolderPath := "user://androidPickedModsFolderLock.txt"
+const androidBDCCPCKPath := "user://BDCC.pck"
+var foundBDCC:bool = false
+
+var startedPlaying:bool = false # Used to prevent the bug where you sometimes double-tap the play button on mobile
+
+var SHOW_THIS_SCREEN_ANYWAY:bool = false # DON'T FORGET TO CHANGE TO false BEFORE SHIPPING
+
+# --- PAGINATION VARIABLES ---
+var isPageView: bool = false
+var currentPage: int = 0
+var itemsPerPage: int = 9 # Change this to adjust how many mods show per page!
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	#randomize()
+	#var diag:DialogueParser = DialogueParser.new()
+	#print(diag.getLexems("Hello world. How;are|you. Hey, [[mean=fucker|bitch;kind=bro;person]]. Meow."))
+	#print(diag.processString("Hello,_[[asd]]meow", {kind=true,mean=true}, {BITCH=["bitch", "stupid-bitch", "stupid-stupid-bitch"]}))
+	troubleshooting_screen.visible = false
+	building_pck_panel.visible = true
+	building_pck_panel_dark.visible = false
+	android_choose_folder_panel.visible = false
+	
+	sortOptionButton.add_item("A-Z")
+	sortOptionButton.add_item("Z-A")
+	sortOptionButton.add_item("Newest")
+	sortOptionButton.add_item("Oldest")
+	
+	# Hook up the pagination UI automatically
+	view_toggle.connect("toggled", self, "_on_ViewSwitch_toggled")
+	prev_button.connect("pressed", self, "_on_PrevButton_pressed")
+	next_button.connect("pressed", self, "_on_NextButton_pressed")
+	page_controls.visible = false # Hidden by default since scroll is default
+	
+	if(GlobalTheme):
+		if(OS.has_touchscreen_ui_hint()):
+			var theThem:Theme = GlobalTheme
+			var theStyleBox := theThem.get_stylebox("scrollTouch", "VScrollBar")
+			theThem.set_stylebox("scroll", "VScrollBar", theStyleBox)
+			#theThem.rename_stylebox("scrollTouch", "scroll", "VScrollBar")
+	
+	if(OPTIONS.shouldShowModdedLauncher() && shouldShowPickModsFolderPanel()):
+		OS.request_permissions()
+		android_choose_folder_panel.visible = true
+	else:
+		doStart()
+
+
+func doStart():
+	var needsThePCKFile:bool = (OS.get_name() == "Android")
+	
+	var rawModList := GlobalRegistry.getRawModList()
+	if(GlobalRegistry.hasModSupport() && needsThePCKFile && (rawModList.size() > 0 || OPTIONS.shouldShowModdedLauncher())):
+		if(Util.readFile(pckversionPath) != GlobalRegistry.getGameVersionString() || !doesBDCCpckFileExist()):
+			yield(generateBDCCpckFile(), "completed")
+			rawModList = GlobalRegistry.getRawModList()
+
+	if(GlobalRegistry.doesLoadLockFileExist()): # Game crashed during loading last time
+		SHOW_THIS_SCREEN_ANYWAY = true
+		debug_button["custom_colors/font_color"] = Color.yellow
+	
+	if(OS.get_name() == "Android" || SHOW_THIS_SCREEN_ANYWAY):
+		build_pck_button.visible = true
+	else:
+		build_pck_button.visible = false
+	
+	if(OS.get_name() in ["Android", "HTML5"]):
+		open_mods_folder.visible = false
+	
+	if(!SHOW_THIS_SCREEN_ANYWAY && !OPTIONS.shouldShowModdedLauncher()):
+		if(!GlobalRegistry.hasModSupport() || rawModList.size() == 0):
+			#GlobalRegistry.registerEverything()
+			var _ok = get_tree().change_scene("res://UI/LoadingScreen.tscn")#"res://UI/MainMenu/MainMenu.tscn"
+
+	checkModOrderAndFillData(rawModList)
+
+func checkModOrderAndFillData(rawModList):
+	var loadedOrder:Array = loadOrderFromFile()
+	
+	var finalOrder:Array = []
+	var theFile = File.new()
+	for modEntry in loadedOrder:
+		if(!theFile.file_exists(modEntry["path"])):
+			continue
+		
+		finalOrder.append(modEntry)
+	
+	for modPath in rawModList:
+		var foundMod = false
+		for loadedModEntry in loadedOrder:
+			if(loadedModEntry["path"] == modPath):
+				foundMod = true
+				break
+		if(foundMod):
+			continue
+		
+		var modEntry = {
+			path = modPath,
+			name = modPath.get_file(),
+			disabled = false,
+		}
+		finalOrder.append(modEntry)
+	
+	currentModOrder = finalOrder
+	
+	ensureBDCCIsFirst()
+	updateModList()
+	updateSelectedEntry()
+	GlobalRegistry.tempCurrentModOrder = currentModOrder
+
+func saveOrderIntoFile(saveData):
+	var save_game = File.new()
+	save_game.open(modOrderPath, File.WRITE)
+	
+	var finalData = []
+	for modEntry in saveData:
+		finalData.append({
+			"path": modEntry["path"],
+			"disabled": modEntry["disabled"],
+		})
+	
+	save_game.store_line(JSON.print(finalData, "\t", true))
+	
+	save_game.close()
+
+func loadOrderFromFile() -> Array:
+	var save_game = File.new()
+	if not save_game.file_exists(modOrderPath):
+		print("LaunchScreen: No mod order is found")
+		return []
+	
+	save_game.open(modOrderPath, File.READ)
+	#var saveData = parse_json(save_game.get_as_text())
+	var jsonResult = JSON.parse(save_game.get_as_text())
+	if(jsonResult.error != OK):
+		Log.printerr("LaunchScreen: Error while loading the mod order file, the file is not a valid json")
+		return []
+	
+	var saveData = jsonResult.result
+	save_game.close()
+	
+	# Sanity checking
+	if(!(saveData is Array)):
+		return []
+	for modEntry in saveData:
+		if(!(modEntry is Dictionary)):
+			return []
+		if(!modEntry.has("path") || !modEntry.has("disabled")):
+			return []
+		if(!(modEntry["path"] is String) || !(modEntry["disabled"] is bool)):
+			return []
+			
+	var result:Array = []
+	for loadedModEntry in saveData:
+		var modEntry = {
+			path = loadedModEntry["path"],
+			name = loadedModEntry["path"].get_file(),
+			disabled = loadedModEntry["disabled"],
+		}
+		result.append(modEntry)
+	
+	return result
+
+func updateModList():
+	var theFilterText:String = search_line_edit.text.to_lower()
+	var hasFilterText:bool = !theFilterText.empty()
+	
+	launchModEntries.clear()
+	Util.delete_children(modVList)
+	
+	# Filter the mods first
+	var filteredMods = []
+	for modEntryIdx in range(currentModOrder.size()): # need the idx, save processing power (hopefully?)
+		var modEntry:Dictionary = currentModOrder[modEntryIdx]
+		var theSearchName:String = modEntry["name"].to_lower()
+		
+		if(hasFilterText && !(theFilterText in theSearchName)):
+			continue
+		filteredMods.append({"index": modEntryIdx, "entry": modEntry})
+	
+	var modsCount:int = filteredMods.size()
+	modCountLabel.text = "Mod order"+(" ("+str(modsCount)+")" if modsCount else "")
+	
+	# Calculate Pagination Bounds
+	var startIndex = 0
+	var endIndex = modsCount
+	
+	if isPageView:
+		var totalPages = max(1, ceil(float(modsCount) / float(itemsPerPage)))
+		if currentPage >= totalPages:
+			currentPage = totalPages - 1
+		if currentPage < 0:
+			currentPage = 0
+			
+		startIndex = currentPage * itemsPerPage
+		endIndex = min(startIndex + itemsPerPage, modsCount)
+		
+		page_label.text = "Page " + str(currentPage + 1) + " / " + str(totalPages)
+		prev_button.disabled = (currentPage == 0)
+		next_button.disabled = (currentPage == totalPages - 1)
+	
+	# Instantiate entries based on bounds
+	for i in range(startIndex, endIndex):
+		var item = filteredMods[i]
+		var modEntryIdx = item["index"]
+		var modEntry = item["entry"]
+		
+		var newEntry = launchModEntryScene.instance()
+		modVList.add_child(newEntry)
+		newEntry.entryIndex = modEntryIdx
+		newEntry.setModEntry(modEntry)
+		newEntry.connect("onSelected", self, "onModEntryClicked")
+		newEntry.connect("onDoubleClicked", self, "toggleModEntryDisabled")
+		newEntry.connect("onDragOntoAnotherEntry",self,"modEntryDroppedData")
+		launchModEntries.append(newEntry)
+	
+	updateModListSelection()
+
+# --- PAGINATION SIGNAL HANDLERS ---
+func _on_ViewSwitch_toggled(button_pressed):
+	isPageView = button_pressed
+	page_controls.visible = isPageView
+	currentPage = 0
+	
+	if isPageView:
+		scroll_container.scroll_vertical_enabled = false
+		scroll_container.scroll_horizontal_enabled = false
+	else:
+		scroll_container.scroll_vertical_enabled = true
+		scroll_container.scroll_horizontal_enabled = true
+		
+	updateModList()
+
+func _on_PrevButton_pressed():
+	if currentPage > 0:
+		currentPage -= 1
+		updateModList()
+
+func _on_NextButton_pressed():
+	currentPage += 1
+	updateModList()
+
+
+func updateModListSelection():
+	for theEntry in launchModEntries:
+		if(theEntry.storedEntry == selectedEntry):
+			theEntry.makeActive()
+		else:
+			theEntry.makeInactive()
+
+func modEntryDroppedData(ar:Array=[]):
+	if ar.size()!=2:
+		return
+	ar.sort()
+	
+	var entry1 = currentModOrder.pop_at(ar[1])
+	var entry2 = currentModOrder.pop_at(ar[0])
+	currentModOrder.insert(ar[0],entry1)
+	currentModOrder.insert(ar[1],entry2)
+		
+	ensureBDCCIsFirst()
+	updateModList()
+
+func _on_WithModsButton_pressed():
+	if(startedPlaying):
+		return
+	startedPlaying = true
+	saveOrderIntoFile(currentModOrder)
+	
+	GlobalRegistry.loadModOrder(currentModOrder)
+	GlobalRegistry.tempCurrentModOrder = []
+	var _ok = get_tree().change_scene("res://UI/LoadingScreen.tscn")#"res://UI/MainMenu/MainMenu.tscn"
+
+func _on_NoModsButton_pressed():
+	if(startedPlaying):
+		return
+	startedPlaying = true
+	saveOrderIntoFile(currentModOrder)
+	
+	GlobalRegistry.tempCurrentModOrder = []
+	var _ok = get_tree().change_scene("res://UI/LoadingScreen.tscn")#"res://UI/MainMenu/MainMenu.tscn"
+
+func onModEntryClicked(entry):
+	selectedEntry = entry
+	updateModListSelection()
+	updateSelectedEntry()
+
+func updateSelectedEntry():
+	if(selectedEntry == null):
+		modDescriptionLabel.bbcode_text = "No mod selected"
+		return
+	modDisableButton.text = "Enable" if(selectedEntry['disabled']) else "Disable"
+	
+	var desc:String = ""
+	
+	if(selectedEntry.has("broken") && selectedEntry["broken"]):
+		desc += "( This mod is reported to be broken or cause huge issues on this game version. It's best to disable/delete it. )\n\n"
+	
+	desc += "Mod name: "+selectedEntry["name"]+"\n"
+	desc += "Full path: "+selectedEntry["path"]+"\n"
+	
+	desc += "\n"
+	var jsonResult = tryToPopulateFilesList()
+	if(jsonResult is String):
+		desc += jsonResult
+	else:
+		desc += "Author: " + str(jsonResult["author"])+"\n"
+		if(!GlobalRegistry.isVersionListHasCompatible(str(jsonResult["gameversion"]))):
+			desc += "[color=red]Game version: " + str(jsonResult["gameversion"])+" (You are running version "+GlobalRegistry.getGameVersionString()+")[/color]\n"
+		else:
+			desc += "Game version: " + str(jsonResult["gameversion"])+"\n"
+		desc += "Mod version: " + str(jsonResult["modversion"])+"\n"
+		desc += "Description: " + str(jsonResult["description"])+"\n"
+
+	modDescriptionLabel.bbcode_text = desc
+
+func tryToPopulateFilesList():
+	modFileList.clear()
+	
+	if(selectedEntry == null):
+		return ""
+	var zipToLoad = selectedEntry["path"]
+	if(zipToLoad.get_file() == "BDCC.pck"):
+		if(OS.get_name() == "Android"):
+			return "This file is stored internally now and can be safely deleted."
+		return "This file is required for mods to function on Android version. On other platforms this file is Not required and will be disabled automatically"
+	
+	var gdunzip = GDUnzip.new()
+	
+	var loaded = gdunzip.load(zipToLoad)
+	
+	if(loaded && gdunzip.files != null):
+		for file in gdunzip.files:
+			modFileList.add_item(file)
+		
+		var jsonFile = zipToLoad.get_file().get_basename()+".json"
+		if(gdunzip.files.has(jsonFile)):
+			var uncompressed = gdunzip.uncompress(jsonFile)
+			if !uncompressed:
+				return "'"+str(jsonFile)+"' is wrong or corrupted"
+			else:
+				var stuff = uncompressed.get_string_from_utf8()
+				
+				var jsonResult = JSON.parse(stuff)
+				if(jsonResult.error != OK):
+					return "'"+str(jsonFile)+"' is wrong or corrupted"
+				
+				var jsonData = jsonResult.result
+				if(!(jsonData is Dictionary)):
+					return "'"+str(jsonFile)+"' is wrong or corrupted"
+				
+				var fieldsMustHave = ["author", "gameversion", "modversion", "description"]
+				for field in fieldsMustHave:
+					if(!jsonData.has(field)):
+						return "'"+str(jsonFile)+"' is missing one of the fields. Must have: "+str(fieldsMustHave)
+						
+				return jsonData
+		else:
+			return "No '"+str(jsonFile)+"' file provided inside the mod"
+	else:
+		Log.print('Failed loading zip file')
+		modFileList.add_item("Couldn't load any files")
+	return "Failed to load info"
+
+func toggleModEntryDisabled(entry:Dictionary=selectedEntry) -> void:
+	if(entry == null or entry["name"] == "BDCC.pck"):
+		return
+	
+	entry["disabled"] = !entry["disabled"]
+	updateModList()
+	updateSelectedEntry()
+
+func _on_ModDisableButton_pressed():
+	toggleModEntryDisabled(selectedEntry)
+
+
+func _on_MoveUpButton_pressed():
+	if(selectedEntry == null or selectedEntry["name"] == "BDCC.pck"):
+		return
+	
+	var currentIndex = currentModOrder.find(selectedEntry)
+	var newIndex = currentIndex - 1
+	if(newIndex < 0):
+		newIndex = 0
+	currentModOrder.remove(currentIndex)
+	currentModOrder.insert(newIndex, selectedEntry)
+	
+	ensureBDCCIsFirst()
+	updateModList()
+
+
+func _on_MoveDownButton_pressed():
+	if(selectedEntry == null or selectedEntry["name"] == "BDCC.pck"):
+		return
+	
+	var currentIndex = currentModOrder.find(selectedEntry)
+	var newIndex = currentIndex + 1
+	if(newIndex >= currentModOrder.size()):
+		newIndex = currentModOrder.size() - 1
+	currentModOrder.remove(currentIndex)
+	currentModOrder.insert(newIndex, selectedEntry)
+	
+	updateModList()
+
+func ensureBDCCIsFirst():
+	for _i in range(currentModOrder.size()):
+		if(currentModOrder[_i]["name"] == "BDCC.pck"):
+			var entry = currentModOrder[_i]
+			#if(OS.get_name() != "Android"):
+			entry["disabled"] = true
+			#else:
+			#	entry["disabled"] = false
+			
+			currentModOrder.remove(_i)
+			currentModOrder.insert(0, entry)
+			foundBDCC = true
+			return
+
+func _on_DeleteModButton_pressed():
+	if(selectedEntry == null):
+		return
+	
+	$ConfirmationDialog.visible = true
+	$ConfirmationDialog.dialog_text = "Remove mod?\n"+str(selectedEntry["path"])
+
+
+func _on_ConfirmationDialog_confirmed():
+	if(selectedEntry == null):
+		return
+	
+	var theFile = Directory.new()
+	theFile.remove(selectedEntry["path"])
+	currentModOrder.erase(selectedEntry)
+	selectedEntry = null
+	
+	updateModList()
+	updateSelectedEntry()
+
+
+func _on_RichTextLabel_meta_clicked(meta):
+	var _ok = Util.fixed_shell_open(meta)
+
+
+func _on_TestButton_pressed():
+	yield(generateBDCCpckFile(), "completed")
+	checkModOrderAndFillData(GlobalRegistry.getRawModList())
+
+func doesBDCCpckFileExist() -> bool:
+	var theF:File = File.new()
+	return theF.file_exists(androidBDCCPCKPath)
+
+func generateBDCCpckFile():
+	building_pck_panel_dark.visible = true
+	building_pck_panel.visible = true
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
+	var packer = PCKPacker.new()
+	
+	packer.pck_start(androidBDCCPCKPath)
+	
+	fillFolder(packer, "res://")
+	#packer.add_file("res://text.txt", "text.txt")
+	packer.flush()
+	
+	Util.writeFile(pckversionPath, GlobalRegistry.getGameVersionString())
+	#building_pck_panel.visible = false
+	building_pck_panel_dark.visible = false
+
+const ignorePaths = {
+	"res://.git": true,
+	"res://.github": true,
+	#"res://.import": true,
+	"res://AssetsSource": true,
+}
+
+func fillFolder(packer, folder):
+	var dir = Directory.new()
+	if dir.open(folder) == OK:
+		dir.list_dir_begin(true, false)
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				var full_path = folder.plus_file(file_name)
+				if(ignorePaths.has(full_path)):
+					#print("IGNORED "+full_path)
+					file_name = dir.get_next()
+					continue
+				
+				#var child1 = tree.create_item(root)
+				#child1.set_text(0, file_name)
+				#child1.collapsed = true
+				#child1.set_metadata(0, full_path)
+
+				#print("Found directory: " + file_name)
+				fillFolder(packer, full_path)
+				#if(child1.get_children() == null):
+				#	root.remove_child(child1)
+			else:
+				#if(file_name.get_extension() == "gd"):
+				var full_path:String = folder.plus_file(file_name)
+				packer.add_file(full_path, full_path)
+				#if(filter == "" || (filter in full_path)):
+				#	var child1 = tree.create_item(root)
+				#	child1.set_text(0, file_name)
+				#	child1.set_metadata(0, full_path)
+			file_name = dir.get_next()
+	else:
+		Log.printerr("An error occurred when trying to access the path "+folder)
+
+
+func _on_ModBrowserButton_pressed():
+	$VBoxContainer.visible = false
+	$ModBrowser.visible = true
+
+	saveOrderIntoFile(currentModOrder)
+
+func _on_ModBrowser_closePressed():
+	$VBoxContainer.visible = true
+	$ModBrowser.visible = false
+	
+	checkModOrderAndFillData(GlobalRegistry.getRawModList())
+
+
+func _on_OpenModsFolder_pressed():
+	var _ok = Util.fixed_shell_open(ProjectSettings.globalize_path("user://mods"))
+
+func _input(event):
+	if(event.is_action_pressed("ui_down")):
+		onModEntryClicked(currentModOrder[currentModOrder.find(selectedEntry)+1])
+		return
+	if(event.is_action_pressed("ui_up")):
+		onModEntryClicked(currentModOrder[currentModOrder.find(selectedEntry)-1])
+		return
+	if(event.is_action_pressed("ui_select")):
+		_on_ModDisableButton_pressed()
+		return
+	if(event.is_action_pressed("ui_left")):
+		_on_MoveUpButton_pressed()
+		return
+	if(event.is_action_pressed("ui_right")):
+		_on_MoveDownButton_pressed()
+		return
+
+
+func _on_ResetGRCacheButton_pressed():
+	GlobalRegistry.resetRegistryCache(true)
+	$VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/ResetGRCacheButton.disabled = true
+
+
+func _on_TroubleshootingScreen_onClose():
+	troubleshooting_screen.visible = false
+
+func _on_DebugButton_pressed():
+	troubleshooting_screen.visible = true
+
+func isOurVersionAffection(_modVersion:String) -> bool:
+	var theGameVersion:String = GlobalRegistry.getGameVersionStringNoSuffix()
+	
+	if(theGameVersion == _modVersion):
+		return true
+	
+	var theSplit:Array = _modVersion.split(".")
+	if(theSplit.size() != 3): #Bad version string
+		return false
+	
+	var modMajor:int = int(theSplit[0])
+	var modMinor:int = int(theSplit[1])
+	var modRevision:int = int(theSplit[2])
+	
+	if(GlobalRegistry.game_version_major < modMajor):
+		return false
+	if(GlobalRegistry.game_version_minor < modMinor):
+		return false
+	if(GlobalRegistry.game_version_revision < modRevision):
+		return false
+	return true
+
+func getFileSize(_path:String) -> int:
+	var file := File.new()
+	if(file.open(_path, File.READ) != OK):
+		return 0
+	var theSize := file.get_len()
+	file.close()
+	return theSize
+
+func checkBrokenModEntry(modEntry:Dictionary, brokenEntry:Dictionary) -> bool:
+	#var theName:String = modEntry["name"]
+	var thePath:String = modEntry["path"]
+
+	var theSinceField:String = brokenEntry["since"] if (brokenEntry.has("since") && (brokenEntry["since"] is String)) else ""
+	var theBadSizesField:Array = brokenEntry["badsizes"] if (brokenEntry.has("badsizes") && (brokenEntry["badsizes"] is Array)) else []
+	
+	var hasSinceVersion:bool = !theSinceField.empty()
+	var hasSizes:bool = !theBadSizesField.empty()
+	
+	if(hasSinceVersion && !isOurVersionAffection(theSinceField)):
+		return false
+	
+	if(hasSizes):
+		var ourModSize:int = getFileSize(thePath)
+		for theSize in theBadSizesField:
+			if(theSize == ourModSize):
+				return true
+		return false
+	
+	return true
+
+onready var busy_panel = $"%BusyPanel"
+onready var busy_label = $"%BusyLabel"
+onready var busy_close_button = $"%BusyCloseButton"
+onready var http_request_mods:HTTPRequest = $"%HTTPRequestMods"
+
+func setBusyPanel(_text:String, _canClose:bool = false):
+	if(_text.empty()):
+		busy_panel.visible = false
+		return
+	
+	busy_panel.visible = true
+	busy_label.bbcode_text = _text
+	busy_close_button.visible = _canClose
+
+func _on_CheckBrokenModsButton_pressed():
+	setBusyPanel("[center]Checking mods..[/center]")
+	
+	var error:int = http_request_mods.request("https://raw.githubusercontent.com/Alexofp/BDCCMods/main/outdated_mods.json")
+	if error != OK:
+		setBusyPanel("[center]An error occurred in the HTTP request.[/center]", true)
+		return
+	
+func _on_BusyCloseButton_pressed():
+	busy_panel.visible = false
+
+func _on_BusyLabel_meta_clicked(meta):
+	var _ok = Util.fixed_shell_open(meta)
+
+func _on_HTTPRequestMods_request_completed(_result: int, _response_code: int, _headers: PoolStringArray, _body: PoolByteArray):
+	if _result != HTTPRequest.RESULT_SUCCESS:
+		setBusyPanel("[center]Couldn't download a broken mods list from github.[/center]", true)
+		return
+	
+	var jsonResult = JSON.parse(_body.get_string_from_utf8())
+	if(jsonResult.error != OK):
+		setBusyPanel("[center]Failed to parse broken mods list from github.[/center]", true)
+		return
+	
+	var modsDataA = jsonResult.result
+	if(!(modsDataA is Dictionary)):
+		setBusyPanel("[center]Bad broken mod list.[/center]", true)
+		return
+	var modsData:Dictionary = modsDataA
+	#print(modsData)
+
+	var reportLink:String = modsData["report_link"] if modsData.has("report_link") else "https://github.com/Alexofp/BDCCMods/issues"
+	var _theModsList:Dictionary = modsData["mods"] if (modsData.has("mods") && (modsData["mods"] is Dictionary)) else {}
+	
+	var amBroken:int = 0
+	
+	for modEntry in currentModOrder:
+		var theName:String = modEntry["name"]
+		#var thePath:String = modEntry["path"]
+		
+#		if(true): # Uncomment to test how broken mods look
+#			modEntry["broken"] = true
+#			amBroken += 1
+#			continue
+		
+		if(!_theModsList.has(theName) || !(_theModsList[theName] is Dictionary)):
+			continue
+		
+		var theBrokenEntry:Dictionary = _theModsList[theName]
+		
+		if(checkBrokenModEntry(modEntry, theBrokenEntry)):
+			modEntry["broken"] = true
+			amBroken += 1
+		
+	setBusyPanel("FOUND "+str(amBroken)+" BROKEN MOD"+("S" if amBroken != 1 else "")+"\n\nIf you wanna report a broken mod, go here: [url="+reportLink+"]"+reportLink+"[/url]", true)
+	if(amBroken > 0):
+		updateModList()
+		updateSelectedEntry()
+	
+
+func getNodeWithEntry(modEntry={}):
+	for launchModEntry in modVList.get_children():
+		if launchModEntry.get("storedEntry")==modEntry:
+			return launchModEntry
+	return null
+
+func _on_search_text_changed(_new_text:String):
+	currentPage = 0 
+	updateModList()
+
+func shouldShowPickModsFolderPanel() -> bool:
+	if(true): # Not needed
+		return false
+	if(OS.get_name() != "Android"):
+		return false
+	
+	var theFile := File.new()
+	if(theFile.file_exists(androidPickedModsFolderPath)):
+		return false
+	return true
+	
+func _on_AndroidLoadDocuments_pressed():
+	setAndroidFolder(OPTIONS.ANDROID_SAVE_FOLDER_DOCUMENTS)
+
+func _on_AndroidLoadData_pressed():
+	setAndroidFolder(OPTIONS.ANDROID_SAVE_FOLDER_GAME_DATA)
+
+func _on_AndroidLoadDownloads_pressed():
+	setAndroidFolder(OPTIONS.ANDROID_SAVE_FOLDER_DOWNLOADS)
+
+func setAndroidFolder(_f:int):
+	OPTIONS.androidSaveFolder = _f
+	android_choose_folder_panel.visible = false
+	var theFile := File.new()
+	theFile.open(androidPickedModsFolderPath, File.WRITE)
+	theFile.store_string("6 7")
+	theFile.close()
+	doStart()
+
+
+func _on_OptionButton_item_selected(index):
+	if index == 0:
+		currentModOrder.sort_custom(self, "_sort_mods_a_z")
+	elif index == 1:
+		currentModOrder.sort_custom(self, "_sort_mods_z_a")
+	elif index == 2:
+		currentModOrder.sort_custom(self, "_sort_mods_newest")
+	elif index == 3:
+		currentModOrder.sort_custom(self, "_sort_mods_oldest")
+	
+	ensureBDCCIsFirst()
+	currentPage = 0
+	updateModList()
+
+func _sort_mods_a_z(a, b):
+	return a["name"].to_lower() < b["name"].to_lower()
+
+func _sort_mods_z_a(a, b):
+	return a["name"].to_lower() > b["name"].to_lower()
+
+func _sort_mods_newest(a, b):
+	var f = File.new()
+	return f.get_modified_time(a["path"]) > f.get_modified_time(b["path"])
+
+func _sort_mods_oldest(a, b):
+	var f = File.new()
+	return f.get_modified_time(a["path"]) < f.get_modified_time(b["path"])
