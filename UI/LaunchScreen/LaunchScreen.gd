@@ -5,6 +5,16 @@ onready var modVList = $VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer
 onready var modFileList = $VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/ModFileList
 onready var modDisableButton = $VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/ModDisableButton
 onready var modCountLabel = $VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/orderhb/Label
+onready var sortOptionButton = $VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/OptionButton
+
+# --- NEW PAGINATION NODES ---
+onready var view_toggle = $VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/ViewToggleContainer/CheckButton
+onready var page_controls = $VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/Pagecontrols
+onready var prev_button = $VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/Pagecontrols/PrevButton
+onready var next_button = $VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/Pagecontrols/NextButton
+onready var page_label = $VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/Pagecontrols/PageLabel
+onready var scroll_container = $VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/ScrollContainer
+
 onready var build_pck_button = $"%BuildPCKButton"
 onready var open_mods_folder = $"%OpenModsFolder"
 onready var search_line_edit = $"%SearchLineEdit"
@@ -34,6 +44,11 @@ var startedPlaying:bool = false # Used to prevent the bug where you sometimes do
 
 var SHOW_THIS_SCREEN_ANYWAY:bool = false # DON'T FORGET TO CHANGE TO false BEFORE SHIPPING
 
+# --- PAGINATION VARIABLES ---
+var isPageView: bool = false
+var currentPage: int = 0
+var itemsPerPage: int = 9 # Change this to adjust how many mods show per page!
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#randomize()
@@ -44,6 +59,17 @@ func _ready():
 	building_pck_panel.visible = true
 	building_pck_panel_dark.visible = false
 	android_choose_folder_panel.visible = false
+	
+	sortOptionButton.add_item("A-Z")
+	sortOptionButton.add_item("Z-A")
+	sortOptionButton.add_item("Newest")
+	sortOptionButton.add_item("Oldest")
+	
+	# Hook up the pagination UI automatically
+	view_toggle.connect("toggled", self, "_on_ViewSwitch_toggled")
+	prev_button.connect("pressed", self, "_on_PrevButton_pressed")
+	next_button.connect("pressed", self, "_on_NextButton_pressed")
+	page_controls.visible = false # Hidden by default since scroll is default
 	
 	if(GlobalTheme):
 		if(OS.has_touchscreen_ui_hint()):
@@ -180,15 +206,43 @@ func updateModList():
 	
 	launchModEntries.clear()
 	Util.delete_children(modVList)
-	var modsCount:int = currentModOrder.size()
-	modCountLabel.text = "Mod order"+(" ("+str(modsCount)+")" if modsCount else "")
-	for modEntryIdx in range(modsCount): # need the idx, save processing power (hopefully?)
+	
+	# Filter the mods first
+	var filteredMods = []
+	for modEntryIdx in range(currentModOrder.size()): # need the idx, save processing power (hopefully?)
 		var modEntry:Dictionary = currentModOrder[modEntryIdx]
-		var theModName:String = modEntry["name"]
-		var theSearchName:String = theModName.to_lower()
+		var theSearchName:String = modEntry["name"].to_lower()
 		
 		if(hasFilterText && !(theFilterText in theSearchName)):
 			continue
+		filteredMods.append({"index": modEntryIdx, "entry": modEntry})
+	
+	var modsCount:int = filteredMods.size()
+	modCountLabel.text = "Mod order"+(" ("+str(modsCount)+")" if modsCount else "")
+	
+	# Calculate Pagination Bounds
+	var startIndex = 0
+	var endIndex = modsCount
+	
+	if isPageView:
+		var totalPages = max(1, ceil(float(modsCount) / float(itemsPerPage)))
+		if currentPage >= totalPages:
+			currentPage = totalPages - 1
+		if currentPage < 0:
+			currentPage = 0
+			
+		startIndex = currentPage * itemsPerPage
+		endIndex = min(startIndex + itemsPerPage, modsCount)
+		
+		page_label.text = "Page " + str(currentPage + 1) + " / " + str(totalPages)
+		prev_button.disabled = (currentPage == 0)
+		next_button.disabled = (currentPage == totalPages - 1)
+	
+	# Instantiate entries based on bounds
+	for i in range(startIndex, endIndex):
+		var item = filteredMods[i]
+		var modEntryIdx = item["index"]
+		var modEntry = item["entry"]
 		
 		var newEntry = launchModEntryScene.instance()
 		modVList.add_child(newEntry)
@@ -200,6 +254,30 @@ func updateModList():
 		launchModEntries.append(newEntry)
 	
 	updateModListSelection()
+
+# --- PAGINATION SIGNAL HANDLERS ---
+func _on_ViewSwitch_toggled(button_pressed):
+	isPageView = button_pressed
+	page_controls.visible = isPageView
+	currentPage = 0
+	
+	if isPageView:
+		scroll_container.scroll_vertical_enabled = false
+		scroll_container.scroll_horizontal_enabled = false
+	else:
+		scroll_container.scroll_vertical_enabled = true
+		scroll_container.scroll_horizontal_enabled = true
+		
+	updateModList()
+
+func _on_PrevButton_pressed():
+	if currentPage > 0:
+		currentPage -= 1
+		updateModList()
+
+func _on_NextButton_pressed():
+	currentPage += 1
+	updateModList()
 
 
 func updateModListSelection():
@@ -649,6 +727,7 @@ func getNodeWithEntry(modEntry={}):
 	return null
 
 func _on_search_text_changed(_new_text:String):
+	currentPage = 0 
 	updateModList()
 
 func shouldShowPickModsFolderPanel() -> bool:
@@ -679,3 +758,32 @@ func setAndroidFolder(_f:int):
 	theFile.store_string("6 7")
 	theFile.close()
 	doStart()
+
+
+func _on_OptionButton_item_selected(index):
+	if index == 0:
+		currentModOrder.sort_custom(self, "_sort_mods_a_z")
+	elif index == 1:
+		currentModOrder.sort_custom(self, "_sort_mods_z_a")
+	elif index == 2:
+		currentModOrder.sort_custom(self, "_sort_mods_newest")
+	elif index == 3:
+		currentModOrder.sort_custom(self, "_sort_mods_oldest")
+	
+	ensureBDCCIsFirst()
+	currentPage = 0
+	updateModList()
+
+func _sort_mods_a_z(a, b):
+	return a["name"].to_lower() < b["name"].to_lower()
+
+func _sort_mods_z_a(a, b):
+	return a["name"].to_lower() > b["name"].to_lower()
+
+func _sort_mods_newest(a, b):
+	var f = File.new()
+	return f.get_modified_time(a["path"]) > f.get_modified_time(b["path"])
+
+func _sort_mods_oldest(a, b):
+	var f = File.new()
+	return f.get_modified_time(a["path"]) < f.get_modified_time(b["path"])
