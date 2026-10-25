@@ -271,7 +271,7 @@ func _run():
 
 		saynn("[say=pc]At this very moment, you are a whore. My whore. And you're going to do what I say.[/say]")
 
-		saynn("She escapes your chin grip.. so you grab a fistful of her hairs instead. She helps as you yank her head forward, forcing her face inches from your slit.")
+		saynn("She escapes your grip on her chin.. so you grab a fistful of her hair instead. It helps as you yank her head forward, forcing her face inches from your slit.")
 
 		saynn("[say=pc]If you want this to end, say it now.[/say]")
 
@@ -464,7 +464,7 @@ func _run():
 
 		saynn("[say=pc]At this very moment, you are a whore. My whore. And you're going to do what I say.[/say]")
 
-		saynn("She escapes your chin grip.. so you grab a fistful of her hairs instead. She helps as you yank her head forward, forcing her face inches from your cock.")
+		saynn("She escapes your grip on her chin.. so you grab a fistful of her hair instead. It helps as you yank her head forward, forcing her face inches from your cock.")
 
 		saynn("[say=pc]If you want this to end, say it now.[/say]")
 
@@ -585,7 +585,7 @@ func _run():
 
 		saynn("Kait approaches you two, slowly and quietly, her smug expression says it all. She bites her lip as she watches Avy choke.")
 
-		saynn("During the next resting period, you actually pull your hands away from Avy's head, letting her do everything by itself. Avy just keeps going, her tongue sliding along your shaft, her lips sucking on the tip.")
+		saynn("During the next resting period, you actually pull your hands away from Avy's head, letting her do everything by herself. Avy just keeps going, her tongue sliding along your shaft, her lips sucking on the tip.")
 
 		saynn("[say=pc]You're such a good little cockslut, Avy.[/say]")
 

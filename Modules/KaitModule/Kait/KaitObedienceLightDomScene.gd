@@ -183,11 +183,11 @@ func _run():
 
 		saynn("Kait is quick to part her lips. Her pink tongue rests against her bottom teeth, waiting.")
 
-		saynn("You slide two of your digits part her lips, letting them rest on her tongue.")
+		saynn("You slide two of your digits past her lips, letting them rest on her tongue.")
 
 		saynn("[say=pc]Suck.[/say]")
 
-		saynn("As you give that order, she closes her mouth around your digits and begins to do it. Her tongue swirls around her digits, making you feel its rough sandpaper-like texture. Quiet wet slurps escape her..")
+		saynn("As you give that order, she closes her mouth around your digits and begins to do it. Her tongue swirls around your digits, making you feel its rough sandpaper-like texture. Quiet wet slurps escape her..")
 
 		saynn("She is obeying, this cat. That's nice.")
 

@@ -315,7 +315,7 @@ func _run():
 
 		saynn("[say=eliza]Not so bad.[/say]")
 
-		saynn("Her digits are tracing the counters of each breast. Ferri's breathing goes shallow, her claws scraping against the metal bar. She bits her lip, trying to hold back the sounds.")
+		saynn("Her digits are tracing the counters of each breast. Ferri's breathing goes shallow, her claws scraping against the metal bar. She bites her lip, trying to hold back the sounds.")
 
 		saynn("[say=eliza]Let it out, cutie. No one is judging.[/say]")
 

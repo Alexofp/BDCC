@@ -29,7 +29,7 @@ func _run():
 
 		saynn("[say=kait]What do you need them for?[/say]")
 
-		saynn("A small smirk eliminates your face.")
+		saynn("A small smirk illuminates your face.")
 
 		saynn("[say=kait]Ohh..[/say]")
 
@@ -71,7 +71,7 @@ func _run():
 	if(state == "buttplug_stuff"):
 		addCharacter("kait", ["naked"])
 		playAnimation(StageScene.SexStealth, "rub", {pc="pc", npc="kait", npcBodyState={naked=true, hard=true}})
-		saynn("And so she is not standing completely naked before you. Her dark nipples are already a bit stiff, her pussy slit visible between her fluffy thighs. She puts her palms by her sides, rear paws are roughly at her shoulder-width.")
+		saynn("And so she is standing completely naked before you. Her dark nipples are already a bit stiff, her pussy slit visible between her fluffy thighs. She puts her palms by her sides, rear paws are roughly at her shoulder-width.")
 
 		saynn("[say=pc]Hands behind your back.[/say]")
 
