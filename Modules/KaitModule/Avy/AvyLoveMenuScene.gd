@@ -24,6 +24,10 @@ func _run():
 		if (avyLove >= 2):
 			addButton("Get fucked!", "(Love 2+) Let Avy fuck you raw!", "get_fucked")
 			addButton("Suck her off", "(Love 2+) Suck Avy's cock!", "oral_sex")
+		if (avyLove >= 3):
+			addButton("Penis pump", "(Love 3+) Put a penis pump on Avy's cock! A penis pump is required", "love_penispump")
+		else:
+			addDisabledButton("Love 3+", "Avy's love 3 or more required")
 	if(state == "never_mind"):
 		aimCameraAndSetLocName(GM.pc.getLocation())
 		saynn("[say=pc]I changed my mind.[/say]")
@@ -44,6 +48,10 @@ func _react(_action: String, _args):
 	if(_action == "oral_sex"):
 		endScene()
 		runScene("AvyLoveOralSexScene")
+
+	if(_action == "love_penispump"):
+		endScene()
+		runScene("AvyLovePenisPumpScene")
 
 	setState(_action)
 

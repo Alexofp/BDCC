@@ -92,7 +92,7 @@ func _run():
 
 		saynn("[say=kait]Mhh.. ..make me~..[/say]")
 
-		if (!GM.pc.hasReachablePenis):
+		if (!GM.pc.hasReachablePenis()):
 			addButton("Pin her down", "Wear a strapon and pin Kait down to the floor!", "pin_pick_menu")
 		else:
 			addButton("Pin her down", "Pin Kait to the floor", "pin_her_down")

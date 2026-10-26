@@ -31,6 +31,10 @@ func _run():
 		else:
 			if (avyObedience >= 2):
 				addButton("Oral sex", "(Obedience 2+) Dominate Avy further and make her serve as your cock sucker or a pussy licker", "oral_sex")
+			if (avyObedience >= 3):
+				addButton("Prostate milking", "(Obedience 3+) Play with Avy's butt and prostate!", "obey_prostatemilk")
+			else:
+				addDisabledButton("Obedience 3+", "Avy's obedience 3 or more required")
 	if(state == "never_mind"):
 		aimCameraAndSetLocName(GM.pc.getLocation())
 		saynn("[say=pc]I changed my mind.[/say]")
@@ -52,6 +56,10 @@ func _react(_action: String, _args):
 	if(_action == "oral_sex"):
 		endScene()
 		runScene("AvyObedienceOralScene")
+
+	if(_action == "obey_prostatemilk"):
+		endScene()
+		runScene("AvyObedienceProstateMilkingScene")
 
 	setState(_action)
 
