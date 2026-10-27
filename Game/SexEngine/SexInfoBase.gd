@@ -550,6 +550,7 @@ func saveData():
 		"satisfaction": satisfaction,
 		"frustration": frustration,
 		"fetishGain": fetishGain,
+		"justCame": justCame,
 	}
 
 	return data
@@ -565,4 +566,5 @@ func loadData(data):
 	satisfaction = SAVE.loadVar(data, "satisfaction", 0.0)
 	frustration = SAVE.loadVar(data, "frustration", 0.0)
 	fetishGain = SAVE.loadVar(data, "fetishGain", {})
+	justCame = SAVE.loadVar(data, "justCame", false)
 	checkFunctionallyNaked()

@@ -1462,7 +1462,7 @@ func playAnimation():
 	sexType.processAnimationArgs(theArgs)
 	
 	GM.main.playAnimation(animInfo[0], animInfo[1], theArgs)
-	resetJustCame()
+	#resetJustCame()
 
 func getStartActivityScore(activityID:String, domInfo, subInfo):
 	var newSexActivityRef = GlobalRegistry.getSexActivityReference(activityID)
