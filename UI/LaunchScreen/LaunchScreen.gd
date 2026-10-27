@@ -34,8 +34,12 @@ var startedPlaying:bool = false # Used to prevent the bug where you sometimes do
 
 var SHOW_THIS_SCREEN_ANYWAY:bool = false # DON'T FORGET TO CHANGE TO false BEFORE SHIPPING
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
+	var sort_dropdown = $VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/OptionButton
+	sort_dropdown.add_item("A-Z")
+	sort_dropdown.add_item("Z-A")
+	sort_dropdown.add_item("New")
+	sort_dropdown.add_item("Old")
 	#randomize()
 	#var diag:DialogueParser = DialogueParser.new()
 	#print(diag.getLexems("Hello world. How;are|you. Hey, [[mean=fucker|bitch;kind=bro;person]]. Meow."))
@@ -116,8 +120,10 @@ func checkModOrderAndFillData(rawModList):
 	
 	currentModOrder = finalOrder
 	
-	ensureBDCCIsFirst()
-	updateModList()
+	# Grab the dropdown and force the sorting function to run based on its current selection
+	var sort_dropdown = $VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/OptionButton
+	_on_OptionButton_item_selected(sort_dropdown.selected)
+	
 	updateSelectedEntry()
 	GlobalRegistry.tempCurrentModOrder = currentModOrder
 
@@ -679,3 +685,31 @@ func setAndroidFolder(_f:int):
 	theFile.store_string("6 7")
 	theFile.close()
 	doStart()
+
+func _on_OptionButton_item_selected(index):
+	match index:
+		0: # A-Z
+			currentModOrder.sort_custom(self, "_sort_by_name_az")
+		1: # Z-A
+			currentModOrder.sort_custom(self, "_sort_by_name_za")
+		2: # New (Most recently modified first)
+			currentModOrder.sort_custom(self, "_sort_by_date_new")
+		3: # Old (Oldest modified first)
+			currentModOrder.sort_custom(self, "_sort_by_date_old")
+	
+	ensureBDCCIsFirst()
+	updateModList()
+
+func _sort_by_name_az(a, b):
+	return a["name"].to_lower() < b["name"].to_lower()
+
+func _sort_by_name_za(a, b):
+	return a["name"].to_lower() > b["name"].to_lower()
+
+func _sort_by_date_new(a, b):
+	var file = File.new()
+	return file.get_modified_time(a["path"]) > file.get_modified_time(b["path"])
+
+func _sort_by_date_old(a, b):
+	var file = File.new()
+	return file.get_modified_time(a["path"]) < file.get_modified_time(b["path"])
