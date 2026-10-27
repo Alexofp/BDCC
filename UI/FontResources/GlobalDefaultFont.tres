@@ -3,7 +3,7 @@
 [sub_resource type="DynamicFontData" id=5]
 font_path = "res://Fonts/SourceCodePro/SourceCodePro-Regular.otf"
 
-[sub_resource type="DynamicFontData" id=3]
+[sub_resource type="DynamicFontData" id=6]
 font_path = "res://Fonts/DroidSansJapanese.woff2"
 
 [sub_resource type="DynamicFontData" id=4]
@@ -18,5 +18,5 @@ use_mipmaps = true
 use_filter = true
 font_data = SubResource( 2 )
 fallback/0 = SubResource( 5 )
-fallback/1 = SubResource( 3 )
+fallback/1 = SubResource( 6 )
 fallback/2 = SubResource( 4 )

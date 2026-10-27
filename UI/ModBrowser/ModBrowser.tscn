@@ -1,8 +1,12 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://UI/ModBrowser/ModBrowser.gd" type="Script" id=1]
 [ext_resource path="res://Game/UI/Util/SmartScrollContainer.gd" type="Script" id=2]
 [ext_resource path="res://Fonts/Titillium-Regular.otf" type="DynamicFontData" id=3]
+[ext_resource path="res://Fonts/Resources/BoldItalics20.tres" type="DynamicFont" id=4]
+[ext_resource path="res://Fonts/Resources/Normal20.tres" type="DynamicFont" id=5]
+[ext_resource path="res://Fonts/Resources/Bold20.tres" type="DynamicFont" id=6]
+[ext_resource path="res://Fonts/Resources/Italics20.tres" type="DynamicFont" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 38
@@ -180,6 +184,10 @@ margin_right = 837.0
 margin_bottom = 654.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_fonts/bold_italics_font = ExtResource( 4 )
+custom_fonts/italics_font = ExtResource( 7 )
+custom_fonts/bold_font = ExtResource( 6 )
+custom_fonts/normal_font = ExtResource( 5 )
 bbcode_enabled = true
 
 [node name="DownloadingContrainer" type="PanelContainer" parent="."]

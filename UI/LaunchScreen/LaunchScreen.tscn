@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://UI/LaunchScreen/LaunchScreen.gd" type="Script" id=1]
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=2]
@@ -7,6 +7,10 @@
 [ext_resource path="res://Fonts/Titillium-Regular.otf" type="DynamicFontData" id=5]
 [ext_resource path="res://UI/ModBrowser/ModBrowser.tscn" type="PackedScene" id=6]
 [ext_resource path="res://UI/TroubleshootingScreen/TroubleshootingScreen.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Fonts/Resources/BoldItalics20.tres" type="DynamicFont" id=8]
+[ext_resource path="res://Fonts/Resources/Normal20.tres" type="DynamicFont" id=9]
+[ext_resource path="res://Fonts/Resources/Bold20.tres" type="DynamicFont" id=10]
+[ext_resource path="res://Fonts/Resources/Italics20.tres" type="DynamicFont" id=11]
 
 [sub_resource type="DynamicFont" id=3]
 size = 38
@@ -14,7 +18,7 @@ outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 5 )
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=13]
 bg_color = Color( 0, 0, 0, 0.47451 )
 
 [node name="LaunchScreen" type="Control"]
@@ -154,6 +158,10 @@ margin_right = 837.0
 margin_bottom = 271.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_fonts/bold_italics_font = ExtResource( 8 )
+custom_fonts/italics_font = ExtResource( 11 )
+custom_fonts/bold_font = ExtResource( 10 )
+custom_fonts/normal_font = ExtResource( 9 )
 bbcode_enabled = true
 
 [node name="HFlowContainer" type="HFlowContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
@@ -271,7 +279,7 @@ unique_name_in_owner = true
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_styles/panel = SubResource( 4 )
+custom_styles/panel = SubResource( 13 )
 
 [node name="CenterContainer" type="Control" parent="BuildingPCKPanelDark"]
 margin_right = 1280.0
@@ -302,7 +310,7 @@ unique_name_in_owner = true
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_styles/panel = SubResource( 4 )
+custom_styles/panel = SubResource( 13 )
 
 [node name="CenterContainer" type="CenterContainer" parent="BusyPanel"]
 margin_right = 1280.0
@@ -342,7 +350,7 @@ unique_name_in_owner = true
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_styles/panel = SubResource( 4 )
+custom_styles/panel = SubResource( 13 )
 
 [node name="CenterContainer" type="CenterContainer" parent="AndroidChooseFolderPanel"]
 margin_right = 1280.0
