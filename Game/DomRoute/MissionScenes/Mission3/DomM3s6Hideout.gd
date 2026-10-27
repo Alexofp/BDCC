@@ -31,7 +31,7 @@ func _run():
 
 		saynn("[say=pc]Ferri? Still drool-y or are you coming back to us?[/say]")
 
-		saynn("[say=ferri]Yes.. I think so. I mean.. mew.. I'm okay. Mew.[/say]")
+		saynn("[say=ferri]Yes.. I think moo. I mean.. mew.. I'm okay. Mew.[/say]")
 
 		saynn("You unclip the leash from the dracat's collar.")
 

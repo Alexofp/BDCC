@@ -507,7 +507,7 @@ func _run():
 
 		saynn("[say=avy]We saved your ass, you know.[/say]")
 
-		saynn("[say=kait]So? I would have done the same. Not for you maybe, you could use a therapy or two, weirdo.[/say]")
+		saynn("[say=kait]So? I would have done the same. Not for you maybe, you could use a therapy or two.[/say]")
 
 		saynn("Avy sighs. Kait's tail wags behind her.")
 

@@ -98,7 +98,7 @@ func _run():
 
 		saynn("[say=pc]So?[/say]")
 
-		saynn("[say=ferri]AlphaCorp invaded my planet.. so I thought.. I might as well fight back.[/say]")
+		saynn("[say=ferri]AlphaCorp invaded my planet.. so I thought.. I might as well do something about it. Fight back..[/say]")
 
 		saynn("A classic.")
 

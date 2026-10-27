@@ -7,6 +7,10 @@ func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoom, "fight_neararena")
 	
 func run(_triggerID, _args):
+	if(GM.main.MS.isOnMission()):
+		addDisabledButton("Avy", "Can't do that while on a mission")
+		return
+	
 	saynn("Avy stands near the fences that make up the improvised arena.")
 	
 	if(!getFlag("FightClubModule.AnnouncerIntroduced")):

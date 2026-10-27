@@ -66,6 +66,8 @@ func canKidnapCharacterReason(character) -> Array:
 		return [false, "They are not prepared for this!"] # Shouldn't see this
 	if(!enslaveQuest.isEverythingCompleted()):
 		return [false, "They are not ready to be kidnapped"]
+	if(GM.main.MS.isOnMission()):
+		return [false, "You can't kidnap anyone while on a mission"]
 		
 	return [true]
 
@@ -81,6 +83,9 @@ func canStartEnslavingCharacterReason(character) -> Array:
 		return [false, "You can't do that with restraints on your arms.."]
 	if(!character.getInventory().hasEquippedItemWithTag(ItemTag.AllowsEnslaving)):
 		return [false, "They need to be wearing a collar for you to be able to enslave them"]
+	
+	if(GM.main.MS.isOnMission()):
+		return [false, "You can't ensalve anyone while on a mission"]
 	
 	return [true]
 

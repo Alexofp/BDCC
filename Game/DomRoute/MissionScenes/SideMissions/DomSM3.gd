@@ -201,12 +201,16 @@ func _run():
 		saynn("You can feel some sarcasm in his words.")
 
 		saynn("[say=pc]So what did the poor countries do?[/say]")
-
+		
+		saynn("Countries.. even the concept feels weird by now. There are no contries anymore. Only companies and corporations. And syndicates. And they all speak the same language. Language of credits.")
+		
 		saynn("[say=announcer]They tried to become rich. When that didn't work out, they just made others poor instead. Destroying is much easier than creating.[/say]")
 
 		saynn("[say=pc]That's one way to level the playing field. And how did they do that? Nukes?[/say]")
 
 		saynn("[say=announcer]A few nukes wouldn't change the status quo. But the world is full of smart people. Smart and evil people.[/say]")
+		
+		saynn("There are good people too, of course. People who didn't become evil yet.")
 
 		saynn("[say=announcer]Why nuke a town and kill a few million.. when you can nuke a little weak point and kill billions instead.[/say]")
 
@@ -230,7 +234,7 @@ func _run():
 
 		saynn("[say=pc]Mm? What does that mean?[/say]")
 
-		saynn("[say=announcer]Nobody has any. Not a single bill. Except for, maybe, the president.[/say]")
+		saynn("[say=announcer]Nobody has any. Not a single bill. Except for, maybe, a single guy.[/say]")
 
 		saynn("[say=pc]How am I able to buy something from a vendomat then?[/say]")
 
@@ -242,7 +246,7 @@ func _run():
 
 		saynn("[say=pc]Credits always seemed like normal money to me.[/say]")
 
-		saynn("[say=announcer]You had normal money before. But then you lost it all to the corporations. And so they had to do something about that. They created credits. A stable currency, completely made up of course. The problem is, you all still have your debts.[/say]")
+		saynn("[say=announcer]You had normal money before. But then the corporations took it all. People ended up with the opposite of money, debts. And so the corps had to do something about that. Credits was their answer. A stable currency, powered by these debts. It doens't make sense but that's how the world works.[/say]")
 
 		saynn("[say=pc]And so no matter how many credits we have, we're still corporate slaves then?[/say]")
 

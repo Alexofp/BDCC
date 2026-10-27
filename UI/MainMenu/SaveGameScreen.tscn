@@ -48,30 +48,31 @@ fit_content_height = true
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/ScrollVBox"]
 margin_top = 91.0
 margin_right = 1280.0
-margin_bottom = 121.0
+margin_bottom = 131.0
 
 [node name="SaveFileNameInput" type="LineEdit" parent="VBoxContainer/ScrollContainer/ScrollVBox/HBoxContainer"]
 margin_right = 500.0
-margin_bottom = 30.0
+margin_bottom = 40.0
 rect_min_size = Vector2( 500, 0 )
 size_flags_horizontal = 13
 size_flags_vertical = 3
 
 [node name="SaveButton" type="Button" parent="VBoxContainer/ScrollContainer/ScrollVBox/HBoxContainer"]
 margin_left = 504.0
-margin_right = 557.0
-margin_bottom = 30.0
+margin_right = 604.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 100, 40 )
 text = "Save"
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer/ScrollContainer/ScrollVBox"]
-margin_top = 125.0
+margin_top = 135.0
 margin_right = 1280.0
-margin_bottom = 129.0
+margin_bottom = 139.0
 
 [node name="SavesContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/ScrollVBox"]
-margin_top = 133.0
+margin_top = 143.0
 margin_right = 1280.0
-margin_bottom = 195.0
+margin_bottom = 205.0
 size_flags_horizontal = 3
 custom_constants/separation = 10
 
