@@ -237,6 +237,12 @@ func getAnimData() -> Array:
 		return [StageScene.Duo, "shove", {pc="inmate", npc="guard", npcAction="hurt"}]
 	if(getState() == "escorted_out"):
 		return [StageScene.Duo, "hurt", {pc="inmate", npc="guard", npcAction="shove"}]
+	if(getState() == "escorting_out"):
+		return [StageScene.Duo, "walk", {pc="inmate", npc="guard", npcAction="walk", flipNPC=true}]
+	if(getState() in ["about_to_frisk"]):
+		return [StageScene.Search, RNG.pick(["search", "stand"]), {pc="inmate", npc="guard"}]
+	if(getState() in ["frisk_failed", "frisked"]):
+		return [StageScene.Search, RNG.pick(["idle", "standidle"]), {pc="inmate", npc="guard"}]
 	return [StageScene.Duo, "stand", {pc="inmate", npc="guard"}]
 
 func startEscortOut():

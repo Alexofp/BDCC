@@ -88,10 +88,10 @@ func _run():
 		if (false):
 			addButton("Nope", "You shouldn't see this", "choose_strapon_pick")
 	if(state == "kait_on_lap"):
-		if (!usedStrapon):
-			playAnimation(StageScene.SexChair, "tease", {pc="pc", npc="kait", bodyState={showPenis=true,hard=true}, npcBodyState={naked=true}})
-		else:
-			playAnimation(StageScene.SexChair, "tease", {pc="pc", npc="kait", bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true}})
+		#if (!usedStrapon):
+		playAnimation(StageScene.SexChair, "tease", {pc="pc", npc="kait", bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true}})
+		#else:
+		#	playAnimation(StageScene.SexChair, "tease", {pc="pc", npc="kait", bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true}})
 		addCharacter("kait", ["naked"])
 		saynn("She swiftly drops her shorts and her shirt completely before stepping closer and straddling your lap.")
 
@@ -132,10 +132,10 @@ func _run():
 
 		addButton("Continue", "See what happens next", "kait_begins_riding")
 	if(state == "kait_begins_riding"):
-		if (!usedStrapon):
-			playAnimation(StageScene.SexChair, "sex", {pc="pc", npc="kait", bodyState={showPenis=true,hard=true}, npcBodyState={naked=true}})
-		else:
-			playAnimation(StageScene.SexChair, "sex", {pc="pc", npc="kait", bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true}})
+		#if (!usedStrapon):
+		playAnimation(StageScene.SexChair, "sex", {pc="pc", npc="kait", bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true}})
+		#else:
+		#	playAnimation(StageScene.SexChair, "sex", {pc="pc", npc="kait", bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true}})
 		saynn("She lifts herself up just enough, her paw reaching down to guide the tip of your "+str("cock" if !usedStrapon else "strapon")+" to her entrance. As soon as her folds catch "+str("your member" if !usedStrapon else "it")+", her eyes get locked on yours.")
 
 		saynn("[say=kait]Look at you.. you've gotten me"+str(" horny too" if !usedStrapon else " so horny")+"..[/say]")
@@ -162,10 +162,10 @@ func _run():
 
 		addButton("Continue", "See what happens next", "ride_faster")
 	if(state == "ride_faster"):
-		if (!usedStrapon):
-			playAnimation(StageScene.SexChair, "fast", {pc="pc", npc="kait", bodyState={showPenis=true,hard=true}, npcBodyState={naked=true}})
-		else:
-			playAnimation(StageScene.SexChair, "fast", {pc="pc", npc="kait", bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true}})
+		#if (!usedStrapon):
+		playAnimation(StageScene.SexChair, "fast", {pc="pc", npc="kait", bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true}})
+		#else:
+		#	playAnimation(StageScene.SexChair, "fast", {pc="pc", npc="kait", bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true}})
 		saynn("She begins to move faster, grinding away on your "+str("cock" if !usedStrapon else "toy")+", using her whole body to rock herself back and forth on it. Her quiet purring is turning into breathy little moans, her cheeks getting a red glow.")
 
 		saynn("[say=kait]Mhh.. ahh.. hh.. ah..[/say]")
@@ -188,9 +188,10 @@ func _run():
 		addButton("Continue", "See what happens next", "ride_cum")
 	if(state == "ride_cum"):
 		if (!usedStrapon):
-			playAnimation(StageScene.SexChair, "inside", {pc="pc", npc="kait", pcCum=true, bodyState={showPenis=true,hard=true}, npcBodyState={naked=true}})
+			playAnimation(StageScene.SexChair, "inside", {pc="pc", npc="kait", pcCum=true, bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true}})
 		else:
 			playAnimation(StageScene.SexChair, "inside", {pc="pc", npc="kait", pcCum=straponHasCum, bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true}})
+			#playAnimation(StageScene.SexChair, "inside", {pc="pc", npc="kait", pcCum=straponHasCum, bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true}})
 		saynn("She doesn't get to finish the sentence before an overwhelming sensation takes over. Her claws dig into your shoulders as her entire body tenses, back arching, mouth opening to produce a hot cry of love.")
 
 		saynn("[say=kait]Ahh-h-h..[/say]")
@@ -283,9 +284,13 @@ func _react(_action: String, _args):
 		endScene()
 		return
 
+	if(_action == "kait_on_lap"):
+		pullShortsDown("pc")
+
 	if(_action == "choose_strapon_def"):
 		usedStrapon = true
 		defStrapon = true
+		pullShortsDown("pc")
 		putOn("pc", "StraponCanine")
 		setState("kait_on_lap")
 		return
@@ -300,6 +305,7 @@ func _react(_action: String, _args):
 		if(theFluids != null):
 			if(theFluids.hasFluidType("Cum")):
 				straponHasCum = true
+		pullShortsDown("pc")
 		setState("kait_on_lap")
 		return
 
@@ -312,6 +318,7 @@ func _react(_action: String, _args):
 			GM.pc.removeStrapon()
 		elif(usedStrapon):
 			GM.pc.unequipStrapon()
+		fixUniform("pc")
 		endScene()
 		return
 

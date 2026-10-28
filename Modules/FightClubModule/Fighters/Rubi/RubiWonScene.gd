@@ -33,12 +33,13 @@ func _run():
 
 
 	if(state == "finger_him"):
-		playAnimation(StageScene.SexStanding, "tease", {
-			npc="rubi", pc="pc", 
-			npcCum=true,
-			bodyState={},
-			npcBodyState={exposedCrotch=true,hard=true},
-		})
+#		playAnimation(StageScene.SexStanding, "tease", {
+#			npc="rubi", pc="pc", 
+#			npcCum=true,
+#			bodyState={},
+#			npcBodyState={exposedCrotch=true,hard=true},
+#		})
+		playAnimation(StageScene.Search, "prodfast", {pc="rubi", npc="pc", pcCum=true, bodyState={naked=true, hard=true}})
 		
 		saynn("[say=pc]Yeah, I ain’t gonna just leave such cute slut wanting~[/say]")
 

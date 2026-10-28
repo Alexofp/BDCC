@@ -387,6 +387,56 @@ func isSpyingOnInteractionsWith(_charID:String):
 func supportsShowingPawns() -> bool:
 	return false
 
+func getItemState(_charID:String, _slot:String) -> ItemState:
+	var theCharacter := getCharacter(_charID)
+	if(!theCharacter):
+		return null
+	var theUniform:ItemBase = theCharacter.inventory.getEquippedItem(_slot)
+	if(!theUniform || !theUniform.itemState):
+		return null
+	return theUniform.itemState
+
+# Fixes pulled down shorts and opened shirt
+func fixUniform(_charID:String, _alsoUnderwear:bool = true):
+	var theStates:Array = [
+		getItemState(_charID, InventorySlot.Body),
+	]
+	if(_alsoUnderwear):
+		theStates.append(getItemState(_charID, InventorySlot.UnderwearBottom))
+		theStates.append(getItemState(_charID, InventorySlot.UnderwearTop))
+	for theState in theStates:
+		if(!theState):
+			continue
+		theState.resetState()
+	
+func pullShortsDown(_charID:String, _alsoPanties:bool = true):
+	if(_alsoPanties):
+		pullPantiesDown(_charID)
+	var theItemState: ItemState = getItemState(_charID, InventorySlot.Body)
+	if(!theItemState || !(theItemState is ShirtAndShortsState)):
+		return
+	theItemState.pullDownShorts()
+
+func openShirt(_charID:String, _alsoBra:bool = true):
+	if(_alsoBra):
+		pullBraUp(_charID)
+	var theItemState: ItemState = getItemState(_charID, InventorySlot.Body)
+	if(!theItemState || !(theItemState is ShirtAndShortsState)):
+		return
+	theItemState.openShirt()
+
+func pullPantiesDown(_charID:String):
+	var theItemState: ItemState = getItemState(_charID, InventorySlot.UnderwearBottom)
+	if(!theItemState || !(theItemState is PantiesState)):
+		return
+	theItemState.pullPantiesDown()
+
+func pullBraUp(_charID:String):
+	var theItemState: ItemState = getItemState(_charID, InventorySlot.UnderwearTop)
+	if(!theItemState || !(theItemState is BraState)):
+		return
+	theItemState.pullBraUp()
+
 # Just a quick function, spawns an item out of nowhere
 func putOn(_charID:String, _itemID:String):
 	var theCharacter := getCharacter(_charID)

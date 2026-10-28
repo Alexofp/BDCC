@@ -407,7 +407,9 @@ func _run():
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "let_nova_fun"):
 		setFlag("ArticaModule.nextReaction", "t1bully")
-		playAnimation(StageScene.SexStanding, "tease", {pc="nova", npc="artica", npcBodyState={naked=true, hard=true}})
+		#playAnimation(StageScene.SexStanding, "tease", {pc="nova", npc="artica", npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.Search, "breasts", {pc="artica", npc="nova", bodyState={naked=true, hard=true}})
+
 		addCharacter("artica", ["naked"])
 		saynn("You decide to stay and see how this scene will unravel itself. Maybe you will get a chance to get that plant that Artica needs..")
 

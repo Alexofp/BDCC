@@ -31,7 +31,7 @@ func _run():
 		addButton("Continue", "See what happens next", "in_hideout")
 	if(state == "in_hideout"):
 		aimCameraAndSetLocName("hideout_chill")
-		playAnimation(StageScene.GropeBehind, "idle", {pc="avy", npc="pc", bodyState={showPenis=true, hard=true}})
+		playAnimation(StageScene.GropeBehind, "idle", {pc="avy", npc="pc", bodyState={exposedCrotch=true, hard=true}})
 		saynn("You find a secluded spot and embrace the foxy, your hands pull her shorts down enough to expose her sheath.. her red cock is already half-hard. She is indeed horny for you. Good.")
 
 		saynn("[say=avy]Someone is eager.[/say]")
@@ -82,7 +82,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "put_toy_on")
 	if(state == "put_toy_on"):
-		playAnimation(StageScene.GropeBehind, "grope", {pc="avy", npc="pc", bodyState={showPenis=true, hard=true}})
+		playAnimation(StageScene.GropeBehind, "grope", {pc="avy", npc="pc", bodyState={exposedCrotch=true, hard=true}})
 		saynn("And so you embrace her again, expose her cock again, and begin securing the contraption on top of the shaft. One quick flick of the power switch.. and the thing sucks the air out, tightly securing itself on that red rocket.")
 
 		saynn("[say=pc]Nice and tight.[/say]")
@@ -143,7 +143,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "faster_stuff")
 	if(state == "faster_stuff"):
-		playAnimation(StageScene.GropeBehind, "gropefast", {pc="avy", npc="pc", bodyState={showPenis=true, hard=true}})
+		playAnimation(StageScene.GropeBehind, "gropefast", {pc="avy", npc="pc", bodyState={exposedCrotch=true, hard=true}})
 		saynn("You slide your hands up her sides, feeling the warmth of her body. Your fingers find the buttons on her shirt and undo them, one by one, revealing her breasts. Then, you cup them.")
 
 		saynn("[say=avy]Really?..[/say]")
@@ -210,7 +210,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "avy_cums")
 	if(state == "avy_cums"):
-		playAnimation(StageScene.GropeBehind, "orgasm", {pc="avy", npc="pc", bodyState={showPenis=true, hard=true}})
+		playAnimation(StageScene.GropeBehind, "orgasm", {pc="avy", npc="pc", bodyState={exposedCrotch=true, hard=true}})
 		saynn("She cums. Hard.")
 
 		saynn("[say=avy]Nnnghh-!..[/say]")
@@ -268,6 +268,9 @@ func _react(_action: String, _args):
 		endScene()
 		return
 
+	if(_action == "in_hideout"):
+		pullShortsDown("avy")
+
 	if(_action == "pick_pump"):
 		processTime(5*60)
 		var strapon = _args[0]
@@ -280,7 +283,7 @@ func _react(_action: String, _args):
 
 	if(_action == "put_toy_on"):
 		processTime(10*60)
-		var pump = getCharacter("avy").getInventory().getItemByUniqueID(pumpID)
+		var pump = getCharacter("pc").getInventory().getItemByUniqueID(pumpID)
 		GM.pc.getInventory().removeItem(pump)
 		getCharacter("avy").getInventory().forceEquipStoreOtherUnlessRestraint(pump)
 
@@ -294,6 +297,7 @@ func _react(_action: String, _args):
 			var _howMuchSeed = getCharacter("avy").getBodypart(BodypartSlot.Penis).getFluids().transferTo(pump, 1.0)
 
 	if(_action == "take_pump_back"):
+		fixUniform("avy")
 		var pump = getCharacter("avy").getInventory().getItemByUniqueID(pumpID)
 		if(pump != null):
 			getCharacter("avy").getInventory().removeEquippedItem(pump)

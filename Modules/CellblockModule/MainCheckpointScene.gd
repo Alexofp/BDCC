@@ -75,8 +75,8 @@ func _run():
 		addButton("Continue", "Oh well", "leaveandendthescene")
 
 	if(state == "get_frisked"):
-		playAnimation(StageScene.SexStanding, "tease", {
-			pc="cp_guard",npc="pc",
+		playAnimation(StageScene.Search, "search", {
+			npc="cp_guard",pc="pc",
 			bodyState={},
 			npcBodyState={},
 		})

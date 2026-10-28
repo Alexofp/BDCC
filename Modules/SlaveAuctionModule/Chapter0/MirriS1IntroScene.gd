@@ -45,7 +45,8 @@ func _run():
 		addButton("Obey", "You're not carrying anything bad anyway", "do_obey")
 		addButton("Attack", "You're not letting her touch you", "do_attack")
 	if(state == "do_obey"):
-		playAnimation(StageScene.SexStanding, "tease", {npc="pc", pc="mirri"})
+		#playAnimation(StageScene.SexStanding, "tease", {npc="pc", pc="mirri"})
+		playAnimation(StageScene.Search, "stand", {pc="pc", npc="mirri"})
 		saynn("As soon as you turn your head towards the wall, the guard is fast to approach and grab your wrists, positioning them high above your head, your digits holding onto the cold concrete. She then kicks your ankles until you spread your legs wider for her.")
 
 		saynn("[say=mirri]Are you always this slow? Fucking sloth.[/say]")

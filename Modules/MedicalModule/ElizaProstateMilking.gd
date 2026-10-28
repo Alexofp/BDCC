@@ -72,9 +72,10 @@ func _run():
 		addButton("Get milked", "Let’s do this", "get_milked")
 
 	if(state == "get_milked"):
-		playAnimation(StageScene.SexStanding, "tease", {pc="eliza", npc="pc",
-			npcBodyState={exposedCrotch=true,hard=true}
-		})
+#		playAnimation(StageScene.SexStanding, "tease", {pc="eliza", npc="pc",
+#			npcBodyState={exposedCrotch=true,hard=true}
+#		})
+		playAnimation(StageScene.Search, "prod", {pc="pc", npc="eliza", bodyState={naked=true, hard=true}})
 		
 		saynn("You look back and nod softly. Eliza smiles back as she pulls out a little glass dildo, it seems to be slightly curved up, its tip has a sphere shape and it also features a convenient handle.")
 
@@ -105,6 +106,8 @@ func _run():
 		addButton("Give in completely", "Be an obedient little bull for Eliza", "give_in_completely")
 
 	if(state == "give_in_completely"):
+		playAnimation(StageScene.Search, "prodfast", {pc="pc", npc="eliza", pcCum=true, bodyState={naked=true, hard=true}})
+		
 		saynn("Your little prostate becomes hard as a rock and the doctor feels it, she doesn’t offer you any escapes now. Your {pc.cock} throbs and pulsates, you feel more of those warm pleasure waves taking over your body, making you dizzy. Eliza suddenly puts her free hand just above your collar, she grabs your neck and pulls you up slightly, her digits apply a bit of pleasure, you can only notice her cunning smile as she keeps milking you.")
 
 		saynn("[say=eliza]Are you a submissive little slut.[/say]")

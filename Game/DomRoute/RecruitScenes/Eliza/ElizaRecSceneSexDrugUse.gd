@@ -78,7 +78,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "eliza_straddles_you")
 	if(state == "eliza_straddles_you"):
-		playAnimation(StageScene.SexChair, "tease", {pc="pc", npc="eliza", bodyState={showPenis=true, hard=true}})
+		playAnimation(StageScene.SexChair, "tease", {pc="pc", npc="eliza", bodyState={exposedCrotch=true, hard=true}})
 		saynn("She walks up to you and straddles your lap, her bulky belt now resting on your legs. Even through the metal you can feel the heat radiating from her.")
 
 		if (!straponUsed):
@@ -99,7 +99,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "eliza_starts_riding")
 	if(state == "eliza_starts_riding"):
-		playAnimation(StageScene.SexChair, "sex", {pc="pc", npc="eliza", bodyState={showPenis=true, hard=true}})
+		playAnimation(StageScene.SexChair, "sex", {pc="pc", npc="eliza", bodyState={exposedCrotch=true, hard=true}})
 		saynn("The moment Eliza is free, she moves. She swiftly gets up.. and positions herself right above your "+str("cock" if !straponUsed else "strapon's tip")+".. before straddling you again! With a single, fluid motion, she impales herself on your"+str(" rubber" if straponUsed else "")+" shaft.")
 
 		saynn("[say=eliza]Oh.. fuck.. yes~..[/say]")
@@ -118,7 +118,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "eliza_rides_faster")
 	if(state == "eliza_rides_faster"):
-		playAnimation(StageScene.SexChair, "fast", {pc="pc", npc="eliza", bodyState={showPenis=true, hard=true}})
+		playAnimation(StageScene.SexChair, "fast", {pc="pc", npc="eliza", bodyState={exposedCrotch=true, hard=true}})
 		saynn("She increases her pace, her hips grinding you hard. The sound of her wet pussy taking your "+str("cock" if !straponUsed else "strapon")+" fills the small cell. Her tail finds your ankle and curls tightly around it. "+str("You can feel your cock exploring every inch of her sex, the tip kissing her natural barricade constantly." if !straponUsed else "The friction feels good for you too.. Your strapon exploring every inch of her sex, the tip kissing her natural barricade constantly.")+"")
 
 		saynn("[say=eliza]I'm.. I'm going to cum.. Hah.. ahh~..[/say]")
@@ -139,7 +139,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "cum_inside")
 	if(state == "cum_inside"):
-		playAnimation(StageScene.SexChair, "inside", {pc="pc", pcCum=!straponUsed, cum=!straponUsed, npc="eliza", bodyState={showPenis=true, hard=true}})
+		playAnimation(StageScene.SexChair, "inside", {pc="pc", pcCum=!straponUsed, cum=!straponUsed, npc="eliza", bodyState={exposedCrotch=true, hard=true}})
 		if (!straponUsed):
 			saynn("And so as soon you feel the point of no return.. you grip her hips and slam her down onto your cock, forcing the whole length inside.")
 
@@ -176,6 +176,7 @@ func _react(_action: String, _args):
 		return
 
 	if(_action == "eliza_straddles_you"):
+		pullShortsDown("pc")
 		if(straponUsed):
 			recWearStrapon()
 
@@ -191,6 +192,7 @@ func _react(_action: String, _args):
 		GM.pc.orgasmFrom("eliza")
 
 	if(_action == "endthescene"):
+		fixUniform("pc")
 		recRemoveStrapons()
 		putOff("eliza", "LatexStraitjacketNoBelt")
 		putOn("eliza", "LatexStraitjacket")

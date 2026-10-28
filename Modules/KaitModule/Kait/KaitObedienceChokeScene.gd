@@ -257,47 +257,6 @@ func _run():
 		saynn("After some cuddling, it was time to stop..")
 
 		addButton("Continue", "See what happens next", "endthescene")
-		playAnimation(StageScene.Cuddling, "cuddle", {npc="kait", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
-		saynn("You pull Kait into a warm embrace, helping her to recover.")
-
-		saynn("[say=kait]Hah.. you went soft on me.[/say]")
-
-		saynn("[say=pc]Did I? Check your neck.[/say]")
-
-		saynn("Her paw reaches up for her throat, where your fingers were. Now there are visible bruises there under the fur.")
-
-		saynn("[say=kait]These are nothing! I would have been fine-e.[/say]")
-
-		saynn("[say=pc]I wanted you to remember it.[/say]")
-
-		if (!usedStrapon):
-			saynn("Next, she reaches her paw down to her pussy.. and quickly finds it stuffed full with your seed..")
-
-			saynn("[say=kait]You really didn't hold back.. so much.. This is what I'm gonna remember~.[/say]")
-
-		elif (straponHasCum):
-			saynn("Next, she reaches her paw down to her pussy.. and quickly finds it stuffed full with seed..")
-
-			saynn("[say=kait]That strapon had something in it apparently.. This is what I'm gonna remember~.[/say]")
-
-		else:
-			saynn("Next, she reaches her paw down to her pussy.. and quickly finds it soaked with her juices..")
-
-			saynn("[say=kait]You railed me hard.. This is what I'm gonna remember~.[/say]")
-
-		saynn("She leans into you, panting softly still.")
-
-		saynn("You hold her, her body slowly relaxing against yours.")
-
-		saynn("[say=kait]One more~?[/say]")
-
-		saynn("You chuckle and give her a pat.")
-
-		saynn("[say=pc]You're impossible, Kait.[/say]")
-
-		saynn("After some cuddling, it was time to stop..")
-
-		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "let_breathe"):
 		saynn("After so much choking, you decide to loosen your grip on her throat, just enough to let a thin stream of air through. Kait gasps, her chest heaving as she sucks in the precious oxygen. Her eyes open wide again, focusing on you.")
 
@@ -367,7 +326,49 @@ func _run():
 
 		saynn("[say=kait]I'm.. yeah.. I'm great.. That was.. fuck.[/say]")
 
-		addButton("Aftercare", "Pull her into some cuddles", "keep_aftecare")
+		addButton("Aftercare", "Pull her into some cuddles", "breathe_aftecare")
+	if(state == "breathe_aftecare"):
+		playAnimation(StageScene.Cuddling, "cuddle", {npc="kait", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You pull Kait into a warm embrace, helping her to recover.")
+
+		saynn("[say=kait]Hah.. you went soft on me.[/say]")
+
+		saynn("[say=pc]Did I? Check your neck.[/say]")
+
+		saynn("Her paw reaches up for her throat, where your fingers were. Now there are visible bruises there under the fur.")
+
+		saynn("[say=kait]These are nothing! I would have been fine-e.[/say]")
+
+		saynn("[say=pc]I wanted you to remember it.[/say]")
+
+		if (!usedStrapon):
+			saynn("Next, she reaches her paw down to her pussy.. and quickly finds it stuffed full with your seed..")
+
+			saynn("[say=kait]You really didn't hold back.. so much.. This is what I'm gonna remember~.[/say]")
+
+		elif (straponHasCum):
+			saynn("Next, she reaches her paw down to her pussy.. and quickly finds it stuffed full with seed..")
+
+			saynn("[say=kait]That strapon had something in it apparently.. This is what I'm gonna remember~.[/say]")
+
+		else:
+			saynn("Next, she reaches her paw down to her pussy.. and quickly finds it soaked with her juices..")
+
+			saynn("[say=kait]You railed me hard.. This is what I'm gonna remember~.[/say]")
+
+		saynn("She leans into you, panting softly still.")
+
+		saynn("You hold her, her body slowly relaxing against yours.")
+
+		saynn("[say=kait]One more~?[/say]")
+
+		saynn("You chuckle and give her a pat.")
+
+		saynn("[say=pc]You're impossible, Kait.[/say]")
+
+		saynn("After some cuddling, it was time to stop..")
+
+		addButton("Continue", "See what happens next", "endthescene")
 func addStraponButtons():
 	var strapons = GM.pc.getStrapons()
 	for strapon in strapons:
@@ -415,6 +416,12 @@ func _react(_action: String, _args):
 	if(_action == "cum_in"):
 		getCharacter("kait").cummedInVaginaBy("pc", FluidSource.Penis if !usedStrapon else FluidSource.Strapon)
 		GM.pc.orgasmFrom("kait")
+
+	if(_action == "breathe_aftecare"):
+		if(defStrapon):
+			GM.pc.removeStrapon()
+		elif(usedStrapon):
+			GM.pc.unequipStrapon()
 
 	setState(_action)
 
