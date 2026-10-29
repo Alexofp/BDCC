@@ -35,7 +35,7 @@ var startedPlaying:bool = false # Used to prevent the bug where you sometimes do
 var SHOW_THIS_SCREEN_ANYWAY:bool = false # DON'T FORGET TO CHANGE TO false BEFORE SHIPPING
 
 func _ready():
-	var sort_dropdown = $VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/OptionButton
+	sort_dropdown.add_item("Load order")
 	sort_dropdown.add_item("A-Z")
 	sort_dropdown.add_item("Z-A")
 	sort_dropdown.add_item("New")
@@ -120,10 +120,10 @@ func checkModOrderAndFillData(rawModList):
 	
 	currentModOrder = finalOrder
 	
-	# Grab the dropdown and force the sorting function to run based on its current selection
-	var sort_dropdown = $VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/OptionButton
-	_on_OptionButton_item_selected(sort_dropdown.selected)
-	
+	# The view sorting (A-Z etc.) is applied in updateModList() and never touches the load order
+	ensureBDCCIsFirst()
+	updateModList()
+
 	updateSelectedEntry()
 	GlobalRegistry.tempCurrentModOrder = currentModOrder
 
@@ -188,7 +188,13 @@ func updateModList():
 	Util.delete_children(modVList)
 	var modsCount:int = currentModOrder.size()
 	modCountLabel.text = "Mod order"+(" ("+str(modsCount)+")" if modsCount else "")
-	for modEntryIdx in range(modsCount): # need the idx, save processing power (hopefully?)
+
+	var isLoadOrder:bool = isLoadOrderView()
+	for theButton in [moveUpButton, moveDownButton]:
+		theButton.disabled = !isLoadOrder
+		theButton.hint_tooltip = "" if isLoadOrder else "Switch the view to 'Load order' to change the load order"
+
+	for modEntryIdx in getViewIndices(): # need the idx, save processing power (hopefully?)
 		var modEntry:Dictionary = currentModOrder[modEntryIdx]
 		var theModName:String = modEntry["name"]
 		var theSearchName:String = theModName.to_lower()
@@ -216,7 +222,7 @@ func updateModListSelection():
 			theEntry.makeInactive()
 
 func modEntryDroppedData(ar:Array=[]):
-	if ar.size()!=2:
+	if ar.size()!=2 || !isLoadOrderView():
 		return
 	ar.sort()
 	
@@ -342,7 +348,7 @@ func _on_ModDisableButton_pressed():
 
 
 func _on_MoveUpButton_pressed():
-	if(selectedEntry == null or selectedEntry["name"] == "BDCC.pck"):
+	if(selectedEntry == null or selectedEntry["name"] == "BDCC.pck" or !isLoadOrderView()):
 		return
 	
 	var currentIndex = currentModOrder.find(selectedEntry)
@@ -357,7 +363,7 @@ func _on_MoveUpButton_pressed():
 
 
 func _on_MoveDownButton_pressed():
-	if(selectedEntry == null or selectedEntry["name"] == "BDCC.pck"):
+	if(selectedEntry == null or selectedEntry["name"] == "BDCC.pck" or !isLoadOrderView()):
 		return
 	
 	var currentIndex = currentModOrder.find(selectedEntry)
@@ -495,10 +501,10 @@ func _on_OpenModsFolder_pressed():
 
 func _input(event):
 	if(event.is_action_pressed("ui_down")):
-		onModEntryClicked(currentModOrder[currentModOrder.find(selectedEntry)+1])
+		selectNeighbourEntry(1)
 		return
 	if(event.is_action_pressed("ui_up")):
-		onModEntryClicked(currentModOrder[currentModOrder.find(selectedEntry)-1])
+		selectNeighbourEntry(-1)
 		return
 	if(event.is_action_pressed("ui_select")):
 		_on_ModDisableButton_pressed()
@@ -686,30 +692,52 @@ func setAndroidFolder(_f:int):
 	theFile.close()
 	doStart()
 
-func _on_OptionButton_item_selected(index):
-	match index:
-		0: # A-Z
-			currentModOrder.sort_custom(self, "_sort_by_name_az")
-		1: # Z-A
-			currentModOrder.sort_custom(self, "_sort_by_name_za")
-		2: # New (Most recently modified first)
-			currentModOrder.sort_custom(self, "_sort_by_date_new")
-		3: # Old (Oldest modified first)
-			currentModOrder.sort_custom(self, "_sort_by_date_old")
-	
-	ensureBDCCIsFirst()
+onready var sort_dropdown = $VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/OptionButton
+onready var moveUpButton = $VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/MoveUpButton
+onready var moveDownButton = $VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/MoveDownButton
+
+# The dropdown only changes how the list is shown, the load order (currentModOrder) stays as it is
+func _on_OptionButton_item_selected(_index):
 	updateModList()
 
+func isLoadOrderView() -> bool:
+	return sort_dropdown.selected <= 0
+
+# Indices into currentModOrder, in the order they should be shown
+func getViewIndices() -> Array:
+	var result:Array = range(currentModOrder.size())
+	match sort_dropdown.selected:
+		1: # A-Z
+			result.sort_custom(self, "_sort_by_name_az")
+		2: # Z-A
+			result.sort_custom(self, "_sort_by_name_za")
+		3: # New (Most recently modified first)
+			result.sort_custom(self, "_sort_by_date_new")
+		4: # Old (Oldest modified first)
+			result.sort_custom(self, "_sort_by_date_old")
+	return result
+
+func selectNeighbourEntry(_offset:int):
+	if(launchModEntries.empty()):
+		return
+	var currentIndex:int = -1
+	for _i in range(launchModEntries.size()):
+		if(launchModEntries[_i].storedEntry == selectedEntry):
+			currentIndex = _i
+			break
+	var newIndex:int = int(clamp(currentIndex + _offset, 0, launchModEntries.size() - 1))
+	onModEntryClicked(launchModEntries[newIndex].storedEntry)
+
 func _sort_by_name_az(a, b):
-	return a["name"].to_lower() < b["name"].to_lower()
+	return currentModOrder[a]["name"].to_lower() < currentModOrder[b]["name"].to_lower()
 
 func _sort_by_name_za(a, b):
-	return a["name"].to_lower() > b["name"].to_lower()
+	return currentModOrder[a]["name"].to_lower() > currentModOrder[b]["name"].to_lower()
 
 func _sort_by_date_new(a, b):
 	var file = File.new()
-	return file.get_modified_time(a["path"]) > file.get_modified_time(b["path"])
+	return file.get_modified_time(currentModOrder[a]["path"]) > file.get_modified_time(currentModOrder[b]["path"])
 
 func _sort_by_date_old(a, b):
 	var file = File.new()
-	return file.get_modified_time(a["path"]) < file.get_modified_time(b["path"])
+	return file.get_modified_time(currentModOrder[a]["path"]) < file.get_modified_time(currentModOrder[b]["path"])

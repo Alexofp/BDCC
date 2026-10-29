@@ -18,6 +18,8 @@ func updateEntry():
 		return
 	var theTextColor:Color = Color.white
 	label.text = storedEntry["name"]
+	if(entryIndex >= 0): # Position in the load order, stays the same in sorted views
+		label.text = str(entryIndex + 1)+". "+label.text
 	if(storedEntry.has("broken") && storedEntry["broken"]):
 		label.text = "(BROKEN) "+label.text
 		theTextColor = Color.red
