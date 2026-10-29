@@ -345,7 +345,6 @@ var isInitialized:bool = false
 
 # Mod conflict checker (see Util/ModConflictChecker.gd)
 const ModConflictChecker = preload("res://Util/ModConflictChecker.gd")
-var modCheckLoadedOrder:Array = []
 var modCheckIDSources:Dictionary = {}
 var modCheckIssues:Array = []
 
@@ -376,7 +375,7 @@ func modCheckAfterLoad():
 			modCheckIssues.append({type="missingDoll", kind="bodypart", id=str(bodypartID), path=thePath, info=partScene})
 			Log.printerr("Mod check: bodypart '"+str(bodypartID)+"' wants doll scene "+partScene+" which doesn't exist")
 	
-	Util.writeFile(ModConflictChecker.RUNTIME_REPORT_PATH, ModConflictChecker.makeRuntimeReport(modCheckIssues, modCheckLoadedOrder))
+	Util.writeFile(ModConflictChecker.RUNTIME_REPORT_PATH, ModConflictChecker.makeRuntimeReport(modCheckIssues))
 	if(!modCheckIssues.empty()):
 		Log.warning("Mod check found "+str(modCheckIssues.size())+" problem(s), see "+ProjectSettings.globalize_path(ModConflictChecker.RUNTIME_REPORT_PATH))
 
@@ -447,7 +446,6 @@ func checkModSupport():
 const androidBDCCPCKPath := "user://BDCC.pck"
 
 func loadModOrder(theModOrder:Array):
-	modCheckLoadedOrder = theModOrder.duplicate(true)
 	if(theModOrder.size() > 0 && OS.get_name() == "Android"):
 		var theFile := File.new()
 		if(theFile.file_exists(androidBDCCPCKPath)):
@@ -1164,6 +1162,8 @@ func createStaticCharacter(charID:String):
 
 func registerAttack(path: String):
 	var attack = load(path)
+	if(!modCheckCanInstance(attack, "attack", path)):
+		return
 	var attackObject = attack.new()
 	modCheckTrackID("attack", attackObject.id, path)
 	attacks[attackObject.id] = attackObject
@@ -1204,6 +1204,8 @@ func getPlayerAttackIDs():
 
 func registerStatusEffect(path: String):
 	var effect = load(path)
+	if(!modCheckCanInstance(effect, "statusEffect", path)):
+		return
 	var effectObject = effect.new()
 	modCheckTrackID("statusEffect", effectObject.id, path)
 	statusEffects[effectObject.id] = effect
@@ -1387,6 +1389,8 @@ func getItemRefs():
 
 func registerInventorySlot(path: String):
 	var slot = load(path)
+	if(!modCheckCanInstance(slot, "inventorySlot", path)):
+		return
 	var slotObj = slot.new()
 	modCheckTrackID("inventorySlot", slotObj.id, path)
 	inventorySlots[slotObj.id] = slotObj
@@ -1440,6 +1444,8 @@ func hasCustomBodypartSlot(_slot:String) -> bool:
 
 func registerBuff(path: String):
 	var item = load(path)
+	if(!modCheckCanInstance(item, "buff", path)):
+		return
 	var itemObject = item.new()
 	modCheckTrackID("buff", itemObject.id, path)
 	buffs[itemObject.id] = item
@@ -1474,6 +1480,8 @@ func getBuffClasses():
 
 func registerEvent(path: String):
 	var item = load(path)
+	if(!modCheckCanInstance(item, "event", path)):
+		return
 	var itemObject = item.new()
 	modCheckTrackID("event", itemObject.id, path)
 	events[itemObject.id] = itemObject
@@ -2067,6 +2075,8 @@ func getRegularWorldEdits():
 
 func registerSexActivity(path: String):
 	var sexActivity = load(path)
+	if(!modCheckCanInstance(sexActivity, "sexActivity", path)):
+		return
 	var sexActivityObject = sexActivity.new()
 	
 	modCheckTrackID("sexActivity", sexActivityObject.id, path)
@@ -2374,6 +2384,8 @@ func getSexTypes():
 
 func registerSkin(path: String, authorOverride = ""):
 	var loadedClass = load(path)
+	if(!modCheckCanInstance(loadedClass, "skin", path)):
+		return
 	var object = loadedClass.new()
 	
 	if(authorOverride != ""):
@@ -2432,6 +2444,8 @@ func findCustomSkins():
 
 func registerPartSkin(path: String, authorOverride = ""):
 	var loadedClass = load(path)
+	if(!modCheckCanInstance(loadedClass, "partSkin", path)):
+		return
 	var object = loadedClass.new()
 	
 	if(authorOverride != ""):
