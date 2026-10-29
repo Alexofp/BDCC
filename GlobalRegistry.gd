@@ -343,6 +343,43 @@ var tempCurrentModOrder:Array = []
 
 var isInitialized:bool = false
 
+# Mod conflict checker (see Util/ModConflictChecker.gd)
+const ModConflictChecker = preload("res://Util/ModConflictChecker.gd")
+var modCheckLoadedOrder:Array = []
+var modCheckIDSources:Dictionary = {}
+var modCheckIssues:Array = []
+
+func modCheckTrackID(kind:String, id, path:String):
+	if(!modCheckIDSources.has(kind)):
+		modCheckIDSources[kind] = {}
+	var theSources:Dictionary = modCheckIDSources[kind]
+	if(theSources.has(id) && theSources[id] != path):
+		modCheckIssues.append({type="id", kind=kind, id=str(id), old=theSources[id], new=path})
+		Log.warning("Mod check: "+kind+" '"+str(id)+"' from "+str(theSources[id])+" was replaced by "+path)
+	theSources[id] = path
+
+func modCheckCanInstance(theScript, kind:String, path:String) -> bool:
+	if(theScript != null && (!(theScript is Script) || theScript.can_instance())):
+		return true
+	modCheckIssues.append({type="broken", kind=kind, path=path})
+	Log.printerr("Mod check: "+kind+" script failed to load, skipping it: "+path)
+	return false
+
+func modCheckAfterLoad():
+	for bodypartID in bodyparts:
+		var bodypart = bodyparts[bodypartID]
+		var partScene = bodypart.getDoll3DScene()
+		if(!(partScene is String) || partScene == ""):
+			continue
+		if(!ResourceLoader.exists(partScene)):
+			var thePath:String = bodypart.get_script().resource_path if bodypart.get_script() != null else ""
+			modCheckIssues.append({type="missingDoll", kind="bodypart", id=str(bodypartID), path=thePath, info=partScene})
+			Log.printerr("Mod check: bodypart '"+str(bodypartID)+"' wants doll scene "+partScene+" which doesn't exist")
+	
+	Util.writeFile(ModConflictChecker.RUNTIME_REPORT_PATH, ModConflictChecker.makeRuntimeReport(modCheckIssues, modCheckLoadedOrder))
+	if(!modCheckIssues.empty()):
+		Log.warning("Mod check found "+str(modCheckIssues.size())+" problem(s), see "+ProjectSettings.globalize_path(ModConflictChecker.RUNTIME_REPORT_PATH))
+
 func hasModSupport() -> bool:
 	return modsSupport
 
@@ -410,6 +447,7 @@ func checkModSupport():
 const androidBDCCPCKPath := "user://BDCC.pck"
 
 func loadModOrder(theModOrder:Array):
+	modCheckLoadedOrder = theModOrder.duplicate(true)
 	if(theModOrder.size() > 0 && OS.get_name() == "Android"):
 		var theFile := File.new()
 		if(theFile.file_exists(androidBDCCPCKPath)):
@@ -824,6 +862,7 @@ func registerEverything():
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	postInitModules()
+	modCheckAfterLoad()
 	
 	saveRegistryCacheToFile()
 	
@@ -970,9 +1009,12 @@ func registerSceneFolderDeep(folder: String):
 
 func registerBodypart(path: String, _authorOverride:String = ""):
 	var bodypart = load(path)
+	if(!modCheckCanInstance(bodypart, "bodypart", path)):
+		return
 	var bodypartObject = bodypart.new()
 	if(!_authorOverride.empty()):
 		bodypartObject.author = _authorOverride
+	modCheckTrackID("bodypart", bodypartObject.id, path)
 	bodyparts[bodypartObject.id] = bodypartObject
 	bodypartStorageNode.add_child(bodypartObject)
 
@@ -1123,6 +1165,7 @@ func createStaticCharacter(charID:String):
 func registerAttack(path: String):
 	var attack = load(path)
 	var attackObject = attack.new()
+	modCheckTrackID("attack", attackObject.id, path)
 	attacks[attackObject.id] = attackObject
 	if(attackObject.isPlayerAttack):
 		playerAttacksIDS.append(attackObject.id)
@@ -1162,6 +1205,7 @@ func getPlayerAttackIDs():
 func registerStatusEffect(path: String):
 	var effect = load(path)
 	var effectObject = effect.new()
+	modCheckTrackID("statusEffect", effectObject.id, path)
 	statusEffects[effectObject.id] = effect
 	statusEffectsRefs[effectObject.id] = effectObject
 	if(effectObject.alwaysCheckedForPlayer):
@@ -1234,7 +1278,10 @@ func sortPlayerAttacks():
 
 func registerSpecies(path: String):
 	var species = load(path)
+	if(!modCheckCanInstance(species, "species", path)):
+		return
 	var speciesObject = species.new()
+	modCheckTrackID("species", speciesObject.id, path)
 	allSpecies[speciesObject.id] = speciesObject
 
 func registerSpeciesFolder(folder: String):
@@ -1274,7 +1321,10 @@ func getAllSpecies():
 
 func registerItem(path: String):
 	var item = load(path)
+	if(!modCheckCanInstance(item, "item", path)):
+		return
 	var itemObject = item.new()
+	modCheckTrackID("item", itemObject.id, path)
 	items[itemObject.id] = item
 	itemsRefs[itemObject.id] = itemObject
 	for tag in itemObject.getTags():
@@ -1338,6 +1388,7 @@ func getItemRefs():
 func registerInventorySlot(path: String):
 	var slot = load(path)
 	var slotObj = slot.new()
+	modCheckTrackID("inventorySlot", slotObj.id, path)
 	inventorySlots[slotObj.id] = slotObj
 
 func registerInventorySlotFolder(folder: String):
@@ -1361,7 +1412,10 @@ func hasCustomInventorySlot(_slot:String) -> bool:
 
 func registerBodypartSlot(path: String):
 	var slot = load(path)
+	if(!modCheckCanInstance(slot, "bodypartSlot", path)):
+		return
 	var slotObj = slot.new()
+	modCheckTrackID("bodypartSlot", slotObj.id, path)
 	bodypartSlots[slotObj.id] = slotObj
 
 func registerBodypartSlotFolder(folder: String):
@@ -1387,6 +1441,7 @@ func hasCustomBodypartSlot(_slot:String) -> bool:
 func registerBuff(path: String):
 	var item = load(path)
 	var itemObject = item.new()
+	modCheckTrackID("buff", itemObject.id, path)
 	buffs[itemObject.id] = item
 
 func registerBuffFolder(folder: String):
@@ -1420,6 +1475,7 @@ func getBuffClasses():
 func registerEvent(path: String):
 	var item = load(path)
 	var itemObject = item.new()
+	modCheckTrackID("event", itemObject.id, path)
 	events[itemObject.id] = itemObject
 
 func registerEventFolder(folder: String):
@@ -1568,7 +1624,10 @@ func getSkills():
 
 func registerPerk(path: String):
 	var item = load(path)
+	if(!modCheckCanInstance(item, "perk", path)):
+		return
 	var itemObject = item.new()
+	modCheckTrackID("perk", itemObject.id, path)
 	perks[itemObject.id] = item
 	perksObjects[itemObject.id] = itemObject
 	var skillGroup = itemObject.getSkillGroup()
@@ -2010,6 +2069,7 @@ func registerSexActivity(path: String):
 	var sexActivity = load(path)
 	var sexActivityObject = sexActivity.new()
 	
+	modCheckTrackID("sexActivity", sexActivityObject.id, path)
 	sexActivities[sexActivityObject.id] = sexActivity
 	sexActivitiesReferences[sexActivityObject.id] = sexActivityObject
 
@@ -2318,6 +2378,7 @@ func registerSkin(path: String, authorOverride = ""):
 	
 	if(authorOverride != ""):
 		object.author = authorOverride
+	modCheckTrackID("skin", object.id, path)
 	skins[object.id] = object
 
 func registerSkinsFolder(folder: String, authorOverride = ""):
@@ -2375,6 +2436,7 @@ func registerPartSkin(path: String, authorOverride = ""):
 	
 	if(authorOverride != ""):
 		object.author = authorOverride
+	modCheckTrackID("partSkin", str(object.partID)+"/"+str(object.id), path)
 	if(!partSkins.has(object.partID)):
 		partSkins[object.partID] = {}
 	partSkins[object.partID][object.id] = object

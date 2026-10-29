@@ -34,6 +34,15 @@ rect_min_size = Vector2( 0, 50 )
 size_flags_vertical = 3
 text = "DEBUG INFO"
 
+[node name="ModConflictsButton" type="Button" parent="MainHBox/CenterContainer/VBoxContainer"]
+margin_top = 54.0
+margin_right = 149.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_vertical = 3
+hint_tooltip = "Find mods that overwrite each other or the game's files (e.g. missing body parts)"
+text = "Check mod conflicts"
+
 [node name="ViewLogsButton" type="Button" parent="MainHBox/CenterContainer/VBoxContainer"]
 margin_top = 54.0
 margin_right = 149.0
@@ -294,6 +303,7 @@ rect_min_size = Vector2( 0, 40 )
 text = "OK"
 
 [connection signal="pressed" from="MainHBox/CenterContainer/VBoxContainer/DebugInfoButton" to="." method="_on_DebugInfoButton_pressed"]
+[connection signal="pressed" from="MainHBox/CenterContainer/VBoxContainer/ModConflictsButton" to="." method="_on_ModConflictsButton_pressed"]
 [connection signal="pressed" from="MainHBox/CenterContainer/VBoxContainer/ViewLogsButton" to="." method="_on_ViewLogsButton_pressed"]
 [connection signal="pressed" from="MainHBox/CenterContainer/VBoxContainer/ManageFilesButton" to="." method="_on_ManageFilesButton_pressed"]
 [connection signal="pressed" from="MainHBox/CenterContainer/VBoxContainer/ResetRenderButton" to="." method="_on_ResetRenderButton_pressed"]

@@ -236,3 +236,67 @@ func loadFromTempList(_ar:Array) -> Array:
 		result.append(entry["name"])
 	
 	return result
+
+const ModConflictChecker = preload("res://Util/ModConflictChecker.gd")
+var modConflictsPanel:PanelContainer
+var modConflictsLabel:RichTextLabel
+
+func _on_ModConflictsButton_pressed():
+	if(modConflictsPanel == null):
+		createModConflictsPanel()
+	modConflictsLabel.bbcode_text = "Checking mods.."
+	modConflictsPanel.visible = true
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
+	modConflictsLabel.bbcode_text = ModConflictChecker.makeStaticReport(getModOrderForConflictCheck())
+	modConflictsLabel.scroll_to_line(0)
+
+# Launcher: the order that is being edited right now. Main menu: the saved order
+func getModOrderForConflictCheck() -> Array:
+	if(!GlobalRegistry.tempCurrentModOrder.empty()):
+		return GlobalRegistry.tempCurrentModOrder
+	var result:Array = []
+	var jsonResult = JSON.parse(Util.readFile("user://modOrder.json"))
+	if(jsonResult.error != OK || !(jsonResult.result is Array)):
+		return result
+	for modEntry in jsonResult.result:
+		if(!(modEntry is Dictionary) || !modEntry.has("path")):
+			continue
+		result.append({
+			path = modEntry["path"],
+			name = str(modEntry["path"]).get_file(),
+			disabled = modEntry["disabled"] if modEntry.has("disabled") else false,
+		})
+	return result
+
+func createModConflictsPanel():
+	modConflictsPanel = PanelContainer.new()
+	modConflictsPanel.set_anchors_and_margins_preset(Control.PRESET_WIDE)
+	add_child(modConflictsPanel)
+	
+	var theVBox := VBoxContainer.new()
+	modConflictsPanel.add_child(theVBox)
+	
+	modConflictsLabel = RichTextLabel.new()
+	modConflictsLabel.bbcode_enabled = true
+	modConflictsLabel.selection_enabled = true
+	modConflictsLabel.size_flags_vertical = SIZE_EXPAND_FILL
+	theVBox.add_child(modConflictsLabel)
+	
+	var openReportButton := Button.new()
+	openReportButton.text = "Open last game start report"
+	openReportButton.rect_min_size = Vector2(0, 50)
+	var _ok = openReportButton.connect("pressed", self, "_on_ModConflictsOpenReport_pressed")
+	theVBox.add_child(openReportButton)
+	var closeButton := Button.new()
+	closeButton.text = "Close"
+	closeButton.rect_min_size = Vector2(0, 50)
+	_ok = closeButton.connect("pressed", self, "_on_ModConflictsClose_pressed")
+	theVBox.add_child(closeButton)
+
+func _on_ModConflictsOpenReport_pressed():
+	if(File.new().file_exists(ModConflictChecker.RUNTIME_REPORT_PATH)):
+		var _ok = Util.fixed_shell_open(ProjectSettings.globalize_path(ModConflictChecker.RUNTIME_REPORT_PATH))
+
+func _on_ModConflictsClose_pressed():
+	modConflictsPanel.visible = false
