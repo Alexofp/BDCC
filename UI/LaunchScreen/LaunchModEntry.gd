@@ -4,6 +4,8 @@ onready var label:Label = $HBoxContainer/Label
 
 var storedEntry = null
 var entryIndex:int = -1
+var loadPosition:int = -1 # Counts only the enabled mods, -1 = not loaded
+var canDrag:bool = true
 
 signal onDragOntoAnotherEntry(ar)
 signal onSelected(modEntry)
@@ -18,8 +20,8 @@ func updateEntry():
 		return
 	var theTextColor:Color = Color.white
 	label.text = storedEntry["name"]
-	if(entryIndex >= 0): # Position in the load order, stays the same in sorted views
-		label.text = str(entryIndex + 1)+". "+label.text
+	if(loadPosition >= 0): # Position in the load order, stays the same in sorted views
+		label.text = str(loadPosition + 1)+". "+label.text
 	if(storedEntry.has("broken") && storedEntry["broken"]):
 		label.text = "(BROKEN) "+label.text
 		theTextColor = Color.red
@@ -42,7 +44,7 @@ func _notification(what):
 		drop_data(rect_position,get_viewport().gui_get_drag_data())
 
 func get_drag_data(_position):
-	if !storedEntry or !Rect2(Vector2.ZERO,rect_size).has_point(_position) or get_viewport().gui_get_drag_data():
+	if !canDrag or !storedEntry or !Rect2(Vector2.ZERO,rect_size).has_point(_position) or get_viewport().gui_get_drag_data():
 		return
 	var data = {"entry":storedEntry,"origin":self}
 	set_drag_preview(getPreview())

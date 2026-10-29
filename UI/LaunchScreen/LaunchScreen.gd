@@ -194,6 +194,13 @@ func updateModList():
 		theButton.disabled = !isLoadOrder
 		theButton.hint_tooltip = "" if isLoadOrder else "Switch the view to 'Load order' to change the load order"
 
+	# Only enabled mods get loaded, so only they get a load position
+	var loadPositions:Dictionary = {}
+	for modEntryIdx in range(modsCount):
+		var modEntry:Dictionary = currentModOrder[modEntryIdx]
+		if(!modEntry["disabled"] && modEntry["name"] != "BDCC.pck"):
+			loadPositions[modEntryIdx] = loadPositions.size()
+
 	for modEntryIdx in getViewIndices(): # need the idx, save processing power (hopefully?)
 		var modEntry:Dictionary = currentModOrder[modEntryIdx]
 		var theModName:String = modEntry["name"]
@@ -205,6 +212,8 @@ func updateModList():
 		var newEntry = launchModEntryScene.instance()
 		modVList.add_child(newEntry)
 		newEntry.entryIndex = modEntryIdx
+		newEntry.loadPosition = loadPositions.get(modEntryIdx, -1)
+		newEntry.canDrag = isLoadOrder
 		newEntry.setModEntry(modEntry)
 		newEntry.connect("onSelected", self, "onModEntryClicked")
 		newEntry.connect("onDoubleClicked", self, "toggleModEntryDisabled")
@@ -706,6 +715,11 @@ func isLoadOrderView() -> bool:
 # Indices into currentModOrder, in the order they should be shown
 func getViewIndices() -> Array:
 	var result:Array = range(currentModOrder.size())
+	if(sort_dropdown.selected in [3, 4]): # Read every modified time once instead of in each comparison
+		var file = File.new()
+		sortModifiedTimes.clear()
+		for modEntry in currentModOrder:
+			sortModifiedTimes.append(file.get_modified_time(modEntry["path"]))
 	match sort_dropdown.selected:
 		1: # A-Z
 			result.sort_custom(self, "_sort_by_name_az")
@@ -734,10 +748,9 @@ func _sort_by_name_az(a, b):
 func _sort_by_name_za(a, b):
 	return currentModOrder[a]["name"].to_lower() > currentModOrder[b]["name"].to_lower()
 
+var sortModifiedTimes:Array = []
 func _sort_by_date_new(a, b):
-	var file = File.new()
-	return file.get_modified_time(currentModOrder[a]["path"]) > file.get_modified_time(currentModOrder[b]["path"])
+	return sortModifiedTimes[a] > sortModifiedTimes[b]
 
 func _sort_by_date_old(a, b):
-	var file = File.new()
-	return file.get_modified_time(currentModOrder[a]["path"]) < file.get_modified_time(currentModOrder[b]["path"])
+	return sortModifiedTimes[a] < sortModifiedTimes[b]
