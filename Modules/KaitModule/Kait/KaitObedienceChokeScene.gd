@@ -397,6 +397,7 @@ func _react(_action: String, _args):
 		if(theFluids != null):
 			if(theFluids.hasFluidType("Cum")):
 				straponHasCum = true
+				setFlag("KaitModule.gotKaitPregMaybe", true)
 		setState("pin_her_down")
 		return
 

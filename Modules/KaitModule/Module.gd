@@ -18,6 +18,11 @@ func getFlags():
 		
 		"kaitApproach": flag(FlagType.Text), # What Kait will say when you approach her. Will reset after
 		"avyApproach": flag(FlagType.Text), # What Avy will say when you approach her. Will reset after
+		
+		"gotKaitPregMaybe": flag(FlagType.Bool), # Did the player use a cum-loaded strapon while fucking Kait. Means that they could be responsible
+		"kaitGaveBirths": flag(FlagType.Number), # How many times did Kait give birth
+		"ftphap": flag(FlagType.Bool), # First time pregnant scene happened
+		"ftpembrace": flag(FlagType.Bool), # First time pregnant scene did pc embrace
 	}
 
 func _init():
@@ -57,6 +62,8 @@ func _init():
 		"res://Modules/KaitModule/Avy/AvyLovePenisPumpScene.gd",
 		"res://Modules/KaitModule/Kait/KaitObedienceChokeScene.gd",
 		"res://Modules/KaitModule/Kait/KaitLoveRideYouScene.gd",
+		
+		"res://Modules/KaitModule/Kait/Preg/KaitFirstTimePregnantScene.gd",
 	]
 	characters = [
 	]

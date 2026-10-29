@@ -305,6 +305,7 @@ func _react(_action: String, _args):
 		if(theFluids != null):
 			if(theFluids.hasFluidType("Cum")):
 				straponHasCum = true
+				setFlag("KaitModule.gotKaitPregMaybe", true)
 		pullShortsDown("pc")
 		setState("kait_on_lap")
 		return
