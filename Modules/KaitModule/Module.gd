@@ -21,6 +21,7 @@ func getFlags():
 		
 		"gotKaitPregMaybe": flag(FlagType.Bool), # Did the player use a cum-loaded strapon while fucking Kait. Means that they could be responsible
 		"kaitGaveBirths": flag(FlagType.Number), # How many times did Kait give birth
+		"kaitDidCuddle": flag(FlagType.Bool), # Did we cuddle with Kait during this pregnancy. Resets when she gets prego again
 		"ftphap": flag(FlagType.Bool), # First time pregnant scene happened
 		"ftpembrace": flag(FlagType.Bool), # First time pregnant scene did pc embrace
 	}
@@ -64,6 +65,7 @@ func _init():
 		"res://Modules/KaitModule/Kait/KaitLoveRideYouScene.gd",
 		
 		"res://Modules/KaitModule/Kait/Preg/KaitFirstTimePregnantScene.gd",
+		"res://Modules/KaitModule/Kait/Preg/KaitPregCuddleScene.gd",
 	]
 	characters = [
 	]
