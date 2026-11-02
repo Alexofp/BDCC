@@ -184,45 +184,223 @@ func _run():
 
 		saynn("Inside, a nurse is standing behind a desk. When she sees you two, she is quick to get up and approach you.")
 
-		if (theMission3Out != ""):
-			saynn("[say=nurse]Oh.. it's..[/say]")
+		if (howManyBirths <= 0):
+			if (theMission3Out != ""):
+				saynn("[say=nurse]Oh.. it's..[/say]")
 
-			saynn("She clearly recognized you.")
+				saynn("She clearly recognized you.")
 
-			saynn("[say=kait]I know, it's us. C'mon, help me.. before I give birth right here.[/say]")
+				saynn("[say=kait]I know, it's us. C'mon, help me.. before I give birth right here.[/say]")
 
-			saynn("[say=nurse]Right.. of course. Let's get everything prepared.[/say]")
+				saynn("[say=nurse]Right.. of course. Let's get everything prepared.[/say]")
 
-			saynn("The nurse helps Kait to get inside, past some staff-only doors. She stops you though.")
+				saynn("The nurse helps Kait to get inside, past some staff-only doors. She stops you though.")
 
-			saynn("[say=nurse]You can't enter, sorry..[/say]")
+				saynn("[say=nurse]You can't enter, sorry..[/say]")
+
+			else:
+				saynn("[say=nurse]Inmate? Came to give birth?[/say]")
+
+				saynn("[say=kait]No.. just wanted to play dominoes with someone..[/say]")
+
+				saynn("The nurse squints.")
+
+				saynn("[say=kait]Of course I fucking wanna give birth! What else does it look like..[/say]")
+
+				saynn("[say=nurse]Right. Let's get everything prepared.[/say]")
+
+				saynn("The nurse helps Kait to get inside, past some staff-only doors. She stops you though.")
+
+				saynn("[say=nurse]You can't enter.[/say]")
+
+			saynn("Fair enough. You will have to wait. Kait's head peeks out.")
+
+			saynn("[say=kait]You will wait for me?..[/say]")
+
+			saynn("[say=pc]Of course, Kait. Stay strong.[/say]")
+
+			saynn("[say=kait]Hah.. easy to say.. ow..[/say]")
+
+			saynn("The nurse is quick to help Kait.")
+
+			saynn("And you.. you take a seat on some bench in here and just wait.")
+
+		elif (howManyBirths == 1):
+			if (theMission3Out != ""):
+				saynn("[say=nurse]Miss Kait? Second time already?[/say]")
+
+				saynn("She clearly recognized her.")
+
+				saynn("[say=kait]Yeah-yeah-yeah, just help me.. I'd rather not give birth on your desk.[/say]")
+
+				saynn("[say=nurse]Right.. of course. Let's get everything prepared.[/say]")
+
+				saynn("The nurse helps Kait to get inside, past some staff-only doors. She stops you though.")
+
+				saynn("[say=nurse]You can't enter, sorry..[/say]")
+
+			else:
+				saynn("[say=nurse]Inmate? Came to give birth again?[/say]")
+
+				saynn("[say=kait]Yeah, there are still some left after the first time..[/say]")
+
+				saynn("The nurse squints.")
+
+				saynn("[say=kait]I'm fucking with you, it's a new litter! Help me already.[/say]")
+
+				saynn("[say=nurse]Right. Let's get everything prepared.[/say]")
+
+				saynn("The nurse helps Kait to get inside, past some staff-only doors. She stops you though.")
+
+				saynn("[say=nurse]You can't enter.[/say]")
+
+			saynn("Fair enough. You will have to wait. Kait's head peeks out.")
+
+			saynn("[say=kait]You will wait for me?..[/say]")
+
+			saynn("[say=pc]Of course, Kait. You can do this.[/say]")
+
+			saynn("[say=kait]Hah.. hopefully it's gonna go easier now.. ow.. it's happening..[/say]")
+
+			saynn("The nurse is quick to help Kait and pull her away.")
+
+			saynn("And you.. you take a seat on some bench in here and just wait.")
+
+		elif (howManyBirths == 2):
+			if (theMission3Out != ""):
+				saynn("[say=nurse]Miss Kait? Oh wow, you're a fast breeder.[/say]")
+
+				saynn("She clearly recognized her.")
+
+				saynn("[say=kait]Thanks.. I will take that as a compliment. Now help me with this belly?[/say]")
+
+				saynn("[say=nurse]Right.. of course. Let's get everything prepared.[/say]")
+
+				saynn("The nurse helps Kait to get inside, past some staff-only doors. She stops you though.")
+
+				saynn("[say=nurse]You can't enter, sorry..[/say]")
+
+			else:
+				saynn("[say=nurse]Inmate? I recognize you from the last two times.[/say]")
+
+				saynn("[say=kait]Yeah, just can't get enough of it, keep coming back. Do you have a cock by any chance?[/say]")
+
+				saynn("The nurse squints.")
+
+				saynn("[say=kait]I'm fucking with you.. not literally. Help me already.[/say]")
+
+				saynn("[say=nurse]Right. Let's get everything prepared.[/say]")
+
+				saynn("The nurse helps Kait to get inside, past some staff-only doors. She stops you though.")
+
+				saynn("[say=nurse]You can't enter.[/say]")
+
+			saynn("Fair enough. You will have to wait. Kait's head peeks out.")
+
+			saynn("[say=kait]You will wait for me?..[/say]")
+
+			saynn("[say=pc]Of course, Kait. But I'm pretty sure you've got this.[/say]")
+
+			saynn("[say=kait]Yeah.. this is one thing I'm good at apparently..[/say]")
+
+			saynn("The nurse is quick to pull Kait away.")
+
+			saynn("And you.. you take a seat on some bench in here and just wait.")
+
+		elif (howManyBirths == 3):
+			if (theMission3Out != ""):
+				saynn("[say=nurse]Miss Kait? You are one of our best breeders. Was wondering when you'd return.[/say]")
+
+				saynn("She clearly recognized her.")
+
+				saynn("[say=kait]It's not a fast process, you know! Getting knocked up takes a while.[/say]")
+
+				saynn("[say=nurse]Right.. of course. I've prepared everything already.[/say]")
+
+				saynn("The nurse helps Kait to get inside, past some staff-only doors. She stops you though.")
+
+				saynn("[say=nurse]You can't enter, sorry..[/say]")
+
+			else:
+				saynn("[say=nurse]Welcome. Came with another pregnancy?[/say]")
+
+				saynn("[say=kait]Wow, don't make me feel ashamed. I'm more than just a breeding bitch.. wait.. I'm not a bitch.[/say]")
+
+				saynn("The nurse squints.")
+
+				saynn("[say=kait]Don't just stand there. Help me already.[/say]")
+
+				saynn("[say=nurse]Right. I've prepared everything already.[/say]")
+
+				saynn("The nurse helps Kait to get inside, past some staff-only doors. She stops you though.")
+
+				saynn("[say=nurse]You can't enter.[/say]")
+
+			saynn("Fair enough. You will have to wait. Kait's head peeks out.")
+
+			saynn("[say=kait]I'm about to be a mother again! How many times was it?[/say]")
+
+			saynn("[say=pc]Don't worry about it, Kait. Just focus on your body.[/say]")
+
+			saynn("[say=kait]Yeah.. it feels good actually..[/say]")
+
+			saynn("The nurse is quick to pull Kait away.")
+
+			saynn("And you.. you take a seat on some bench in here and just wait.")
+
+		elif (howManyBirths == 4):
+			if (theMission3Out != ""):
+				saynn("[say=nurse]Welcome, Miss Kait. Come inside, I've already prepared everything.[/say]")
+
+				saynn("She clearly recognized her.")
+
+				saynn("[say=kait]Come inside? Shouldn't you at least offer me dinner first~?[/say]")
+
+				saynn("[say=nurse]Maybe after. Please follow me.[/say]")
+
+				saynn("The nurse helps Kait to get inside, past some staff-only doors. She stops you though.")
+
+				saynn("[say=nurse]You can't enter, sorry..[/say]")
+
+			else:
+				saynn("[say=nurse]Welcome, inmate. Come inside, I've already prepared everything.[/say]")
+
+				saynn("[say=kait]Come inside? Shouldn't you at least offer me dinner first~?[/say]")
+
+				saynn("The nurse squints.")
+
+				saynn("[say=kait]I'm fucking with you! C'mon, let's get this bread.[/say]")
+
+				saynn("[say=nurse]Right. Sure. Follow me.[/say]")
+
+				saynn("The nurse helps Kait to get inside, past some staff-only doors. She stops you though.")
+
+				saynn("[say=nurse]You can't enter.[/say]")
+
+			saynn("Fair enough. You will have to wait. Kait's head peeks out.")
+
+			saynn("[say=kait]I'm about to be a mother again! How many times was it?[/say]")
+
+			saynn("[say=pc]Don't worry about it, Kait. Just focus on your body.[/say]")
+
+			saynn("[say=kait]Yeah.. it feels great actually..[/say]")
+
+			saynn("The nurse is quick to pull Kait away.")
+
+			saynn("And you.. you take a seat on some bench in here and just wait.")
 
 		else:
-			saynn("[say=nurse]Inmate? Came to give birth?[/say]")
+			if (theMission3Out != ""):
+				saynn("[say=nurse]Miss Kait? Always a pleasure. Everything is ready.[/say]")
 
-			saynn("[say=kait]No.. just wanted to play dominoes with someone..[/say]")
+				saynn("She recognized her. Not surprising, Kait has been here many times by now.")
 
-			saynn("The nurse squints.")
+			else:
+				saynn("[say=nurse]Welcome. Everything is ready for you, inmate.[/say]")
 
-			saynn("[say=kait]Of course I fucking wanna give birth! What else does it look like..[/say]")
+				saynn("Such a nice service.")
 
-			saynn("[say=nurse]Right. Let's get everything prepared.[/say]")
-
-			saynn("The nurse helps Kait to get inside, past some staff-only doors. She stops you though.")
-
-			saynn("[say=nurse]You can't enter.[/say]")
-
-		saynn("Fair enough. You will have to wait. Kait's head peeks out.")
-
-		saynn("[say=kait]You will wait for me?..[/say]")
-
-		saynn("[say=pc]Of course, Kait. Stay strong.[/say]")
-
-		saynn("[say=kait]Hah.. easy to say.. ow..[/say]")
-
-		saynn("The nurse is quick to help Kait.")
-
-		saynn("And you.. you take a seat on some bench in here and just wait.")
+			saynn("The nurse helps Kait to get inside, past some staff-only doors. You know it well that you're not allowed to follow so you stay in the nursery lobby and just wait.")
 
 		addButton("Wait", "See what happens next", "do_birth")
 	if(state == "do_birth"):
@@ -242,29 +420,175 @@ func _run():
 
 		saynn("Finally, the staff-only doors open!")
 
-		saynn("Kait steps out, the same nurse is helping her. Kait's big round belly is gone. She is exhausted.. but she is also beaming!")
+		if (howManyBirths <= 0):
+			saynn("Kait steps out, the same nurse is helping her. Kait's big round belly is gone. She is exhausted.. but she is also beaming!")
 
-		saynn("When she sees you, she rushes to hug you.")
+			saynn("When she sees you, she rushes to hug you.")
 
-		saynn("[say=pc]Easy, Kait. How did it go?[/say]")
+			saynn("[say=pc]Easy, Kait. How did it go?[/say]")
 
-		saynn("[say=kait]Hah. I did it![/say]")
+			saynn("[say=kait]Hah. I did it![/say]")
 
-		saynn("She purrs a lot, nuzzling your face.")
+			saynn("She purrs a lot, nuzzling your face.")
 
-		saynn("[say=kait]I'm a mom now! A very tired mom..[/say]")
+			saynn("[say=kait]I'm a mom now! A very tired mom..[/say]")
 
-		saynn("[say=pc]Good job, Kait.[/say]")
+			saynn("[say=pc]Good job, Kait.[/say]")
 
-		if (bornChildAmount == 1):
-			saynn("[say=kait]They only allowed me a few minutes with my kid.. I saw my spots on their fur![/say]")
+			if (bornChildAmount == 1):
+				saynn("[say=kait]They only allowed me a few minutes with my kid.. I saw my spots on their fur![/say]")
+
+			else:
+				saynn("[say=kait]They only allowed me a few minutes with my kids.. I saw my spots on their fur![/say]")
+
+			saynn("Well, at least she got some time with them.")
+
+			saynn("You chat a little more about the whole process. But then it was time to go back.")
+
+		elif (howManyBirths == 1):
+			saynn("Kait steps out, the same nurse is helping her. Kait's big round belly is gone. She is exhausted.. but she is also beaming!")
+
+			saynn("When she sees you, she smiles.")
+
+			saynn("[say=kait]You didn't leave me.[/say]")
+
+			saynn("[say=pc]Why would I?[/say]")
+
+			saynn("She rushes to you and goes for a hug.")
+
+			saynn("[say=kait]My second time being a mother! Does that mean I'm a grand mother?[/say]")
+
+			saynn("[say=pc]No, you silly.[/say]")
+
+			saynn("[say=kait]Hah. Sorry, my brain is scrambled after whatever they injected me with.[/say]")
+
+			saynn("She chuckles softly.")
+
+			if (bornChildAmount == 1):
+				saynn("[say=kait]They let me hold my kid for a bit. So cute to see my exact spots on my child~.[/say]")
+
+			else:
+				saynn("[say=kait]They let me hold my kids for a bit. So cute to see my exact spots on my offspring~.[/say]")
+
+			saynn("You give her a pat.")
+
+			saynn("[say=kait]It doesn't get old. Seeing them. Holding them.[/say]")
+
+			saynn("[say=pc]Cherish those memories.[/say]")
+
+			saynn("[say=kait]Yeah..[/say]")
+
+			saynn("She pushes off you gently, stretching her arms.")
+
+			saynn("[say=kait]Come on. Let's go back. I need to chill. And eat something. And chill more.[/say]")
+
+		elif (howManyBirths == 2):
+			saynn("Kait steps out, the same nurse is helping her. Kait's big round belly is gone. She is exhausted.. but she is also beaming!")
+
+			saynn("When she sees you, she goes in for a hug, already purring.")
+
+			saynn("[say=kait]I'm a mom! For the.. third time.. I think![/say]")
+
+			saynn("[say=pc]Good job, Kait. Proud of you.[/say]")
+
+			saynn("You wrap your hands around her and embrace her.")
+
+			if (bornChildAmount == 1):
+				saynn("[say=kait]They let me hold my kid for a bit. They had my eyes! I saw it![/say]")
+
+			else:
+				saynn("[say=kait]They let me hold my kids for a bit. It's so nice, some of them have my eyes.. some have my snout.. some share my fur colors..[/say]")
+
+			saynn("You give her a pat.")
+
+			saynn("[say=kait]It doesn't get old. Seeing them. Holding them.[/say]")
+
+			saynn("[say=pc]Cherish those memories.[/say]")
+
+			saynn("[say=kait]I should..[/say]")
+
+			saynn("She pushes off you gently, stretching her arms.")
+
+			saynn("[say=kait]Come on. Let's go back now.[/say]")
+
+		elif (howManyBirths == 3):
+			saynn("Kait steps out, the same nurse is helping her. Kait's big round belly is gone. She is exhausted.. but she is also beaming!")
+
+			saynn("When she sees you, she goes in for a hug, already purring.")
+
+			saynn("[say=kait]I'm a mom! Kait is a mother yet again![/say]")
+
+			saynn("[say=pc]Good job, Kait. Proud of you.[/say]")
+
+			saynn("You wrap your hands around her and embrace her.")
+
+			if (bornChildAmount == 1):
+				saynn("[say=kait]They let me hold my kid for a bit. They had my eyes! I saw it![/say]")
+
+			else:
+				saynn("[say=kait]They let me hold my kids for a bit. It's so nice, some of them have my eyes.. some have my snout.. some share my fur colors..[/say]")
+
+			saynn("You give her a pat.")
+
+			saynn("[say=kait]It doesn't get old. I love seeing and holding them.[/say]")
+
+			saynn("[say=pc]Cherish those memories.[/say]")
+
+			saynn("[say=kait]Or I can get pregnant to experience it all again~.[/say]")
+
+			saynn("She pushes off you gently, stretching her arms.")
+
+			saynn("[say=kait]Come on. Let's go back now.[/say]")
+
+		elif (howManyBirths == 4):
+			saynn("Kait steps out, the same nurse is helping her. Kait's big round belly is gone. She is exhausted.. but she is also beaming! She is holding something.")
+
+			saynn("When she sees you, she goes in for a hug, already purring.")
+
+			saynn("[say=kait]I'm such a good mom, the nurse even gave me an apple![/say]")
+
+			saynn("[say=pc]Nice. Proud of you.[/say]")
+
+			saynn("You wrap your hands around her and embrace her.")
+
+			if (bornChildAmount == 1):
+				saynn("[say=kait]They let me hold my kid for a bit. It doesn't get old. I love seeing and holding them.[/say]")
+
+			else:
+				saynn("[say=kait]They let me hold my kids for a bit. It doesn't get old. I love seeing and holding them.[/say]")
+
+			saynn("You give her a pat.")
+
+			saynn("[say=pc]Cherish those memories.[/say]")
+
+			saynn("[say=kait]Or I can get pregnant to experience it all again~.[/say]")
+
+			saynn("She pushes off you gently, stretching her arms.")
+
+			saynn("[say=kait]Come on. Let's go back now.[/say]")
 
 		else:
-			saynn("[say=kait]They only allowed me a few minutes with my kids.. I saw my spots on their fur![/say]")
+			saynn("Kait steps out, no longer pregnant. She looks happy.")
 
-		saynn("Well, at least she got some time with them.")
+			saynn("When she sees you, she goes in for a hug, already purring.")
 
-		saynn("You chat a little more about the whole process. But then it was time to go back.")
+			saynn("[say=kait]Now I'm ready to be bred again~.[/say]")
+
+			saynn("You wrap your hands around her and embrace her.")
+
+			if (bornChildAmount == 1):
+				saynn("[say=kait]They let me hold my kid for a bit. It doesn't get old. I love seeing and holding them.[/say]")
+
+			else:
+				saynn("[say=kait]They let me hold my kids for a bit. It doesn't get old. I love seeing and holding them.[/say]")
+
+			saynn("You give her a pat, she nuzzles your face.")
+
+			saynn("[say=pc]Good. If you're feeling okay, we can go back now.[/say]")
+
+			saynn("She stretches and nods.")
+
+			saynn("[say=kait]Sure. I feel great~.[/say]")
 
 		addButton("Continue", "See what happens next", "endthescene")
 
