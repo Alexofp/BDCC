@@ -69,6 +69,8 @@ func _init():
 		"res://Modules/KaitModule/Kait/Preg/KaitPregCuddleScene.gd",
 		"res://Modules/KaitModule/Kait/Preg/KaitHelpGiveBirthScene.gd",
 		"res://Modules/KaitModule/Kait/Preg/KaitPregMilkPumpsScene.gd",
+		"res://Modules/KaitModule/Kait/Preg/KaitPregBreastfeedOnScene.gd",
+		"res://Modules/KaitModule/Kait/Preg/KaitPregMenuScene.gd",
 	]
 	characters = [
 	]
