@@ -825,3 +825,11 @@ func getDisplaceActions(_context:Dictionary) -> Array:
 
 func doDisplaceAction(_id:String, _action:Array, _context:Dictionary) -> Dictionary:
 	return {}
+
+func canFeedToNPC(_char) -> bool:
+	return hasTag(ItemTag.SexEngineDrug) && !hasTag(ItemTag.TFItem)
+
+func doFeedToNpc(_char) -> Dictionary:
+	if(!_char):
+		return {}
+	return useInSex(_char)

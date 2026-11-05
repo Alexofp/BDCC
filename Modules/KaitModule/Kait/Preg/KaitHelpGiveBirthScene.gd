@@ -178,7 +178,7 @@ func _run():
 	if(state == "in_medical"):
 		aimCameraAndSetLocName("medical_nursery")
 		var theMission3Out:String = GM.main.MS.getSpecificFlag("Mission3", "nurse", "")
-		addCharacter("nursery")
+		addCharacter("nurse")
 		playAnimation(StageScene.Duo, "stand", {pc="kait", npc="nurse"})
 		saynn("The elevator doors slide open with a screech, revealing the bright lobby of the medical wing. You avoid the counters and go straight for the nursery.")
 

@@ -63,6 +63,7 @@ func _run():
 				addDisabledButton("Wait..", "Nothing will happen if you do this. Can try to make Artica horny to encourage her to explore the station")
 		if (getFlag("ArticaModule.LQArticaGotDreamCatcher") || getFlag("ArticaModule.LQArticaGotBrainwashed")):
 			addButton("Memories", "Replay one of the old lewd scenes", "replay_menu")
+			addButton("Feed something", "Feed something to Artica", "feedmenu")
 		addButton("Leave", "Time to go", "endthescene")
 		if (getFlag("ArticaModule.TentaclesPcHasFlower") && !getFlag("ArticaModule.TentaclesArticaHasFlower")):
 			addButton("Flower!", "Give Artica the flower that she is looking for", "do_give_flower")
@@ -809,6 +810,10 @@ func _react(_action: String, _args):
 	if(_action == "do_dirtylanguage"):
 		processTime(2*60)
 		getModule("ArticaModule").makeLusty()
+
+	if(_action == "feedmenu"):
+		runScene("FeedSomethingScene", ["artica"])
+		return
 
 	setState(_action)
 

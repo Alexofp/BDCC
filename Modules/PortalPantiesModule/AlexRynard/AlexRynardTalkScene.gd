@@ -25,6 +25,8 @@ func _run():
 		addButton("Appearance", "Look at the foxy", "appearance")
 		if(GlobalRegistry.getItemIDsByTagSlow(ItemTag.SoldByAlexRynard).size() > 0):
 			addButton("Buy", "See what you can buy from Alex", "buyscene")
+		if(getFlag("AlexRynardModule.ch2FinalSceneHappened", false)):
+			addButton("Feed something", "Feed something to Alex", "feedmenu")
 		addButton("Leave", "That was enough talking", "endthescene")
 		GM.ES.triggerRun(Trigger.TalkingToNPC, ["alexrynard"])
 		
@@ -135,5 +137,10 @@ func _react(_action: String, _args):
 	if(_action == "pregnancytalk"):
 		endScene()
 		runScene("AlexPregTalkSceneAPE")
+		
+	if(_action == "feedmenu"):
+		runScene("FeedSomethingScene", ["alexrynard"])
+		return
+		
 	setState(_action)
 

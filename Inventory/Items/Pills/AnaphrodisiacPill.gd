@@ -58,6 +58,9 @@ func getTags():
 		ItemTag.SexEngineDrug,
 		]
 
+func canFeedToNPC(_char) -> bool:
+	return false
+
 func getBuyAmount():
 	return 1
 

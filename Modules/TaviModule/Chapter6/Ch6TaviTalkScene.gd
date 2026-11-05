@@ -53,6 +53,7 @@ func _run():
 			addButton("Activities", "See what you can do with Tavi", "activities_menu")
 		
 		
+		addButton("Feed something", "Feed something to Tavi", "feedmenu")
 		addButton("Leave", "Enough talking", "endthescene")
 		
 	if(state == "activities_menu"):
@@ -131,6 +132,10 @@ func _react(_action: String, _args):
 	if(_action == "start_final_attack"):
 		runScene("Ch7s2bTaviScene")
 		endScene()
+		return
+
+	if(_action == "feedmenu"):
+		runScene("FeedSomethingScene", ["tavi"])
 		return
 
 	setState(_action)

@@ -64,6 +64,9 @@ func getTags():
 		ItemTag.SexEngineDrug,
 		]
 
+func canFeedToNPC(_char) -> bool:
+	return false # No reason to
+
 func getSexEngineInfo(_sexEngine, _domInfo, _subInfo):
 	#var sub:BaseCharacter = _subInfo.getChar()
 	#var dom:BaseCharacter = _domInfo.getChar()

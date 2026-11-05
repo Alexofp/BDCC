@@ -18,7 +18,7 @@ func _run():
 
 		saynn("You invite Kait to follow you.")
 
-		if (howManyBirths > 5):
+		if (howManyBirths > 4):
 			saynn("Kait gave birth "+str(howManyBirths)+" times. Which scene variation do you want to see?")
 
 			addButton("First time", "The first time Kait got pregnant", "0")
@@ -413,14 +413,15 @@ func _react(_action: String, _args):
 		return
 
 	if(_action == "pick_cuddle"):
-		if(howManyBirths >= 5):
-			setState("5")
+		if(howManyBirths >= 4):
+			setState("4")
 		elif(howManyBirths <= 0):
 			setState("0")
 		else:
 			setState(str(int(howManyBirths)))
 		processTime(30*60)
 		setFlag("KaitModule.kaitDidCuddle", true)
+		return
 
 	setState(_action)
 

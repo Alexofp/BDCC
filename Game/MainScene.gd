@@ -130,7 +130,7 @@ func getCharacters():
 func getDynamicCharacters():
 	return dynamicCharacters
 
-func addDynamicCharacter(character, printDebug = true):
+func addDynamicCharacter(character, printDebug = false):
 	if(!(character.isDynamicCharacter())):
 		assert(false, "addDynamicCharacter() Received a non-dynamic character")
 		
@@ -146,7 +146,7 @@ func addDynamicCharacter(character, printDebug = true):
 	if(printDebug):
 		Log.print("addDynamicCharacter(): Adding "+str(newCharID)+" character "+Util.getStackFunction())
 		
-func removeDynamicCharacter(characterID, printDebug = true):
+func removeDynamicCharacter(characterID, printDebug = false):
 	if(!(characterID is String)):
 		characterID = characterID.getID()
 	

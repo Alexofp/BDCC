@@ -28,6 +28,7 @@ func _run():
 
 		addButton("Chat", "Ask her a few things", "chat_menu")
 		addButton("Sex", "See what lewd things you could do together", "sex_menu")
+		addButton("Feed something", "Feed something to Kidlat", "feedmenu")
 		addButton("Leave", "Time to go", "endthescene")
 		GM.ES.triggerRun(Trigger.TalkingToNPC, ["kidlat"])
 	if(state == "chat_menu"):
@@ -2166,6 +2167,10 @@ func _react(_action: String, _args):
 		processTime(5*60)
 		getCharacter("kidlat").bodypartTransferFluidsTo(BodypartSlot.Vagina, "pc", BodypartSlot.Head, 0.6, 20.0)
 		GM.pc.cummedInMouthBy("kidlat", FluidSource.Vagina, 0.4)
+
+	if(_action == "feedmenu"):
+		runScene("FeedSomethingScene", ["kidlat"])
+		return
 
 	setState(_action)
 

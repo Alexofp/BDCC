@@ -17,6 +17,9 @@ func run(_triggerID, _args):
 		addButton("Sex", "See what lewd stuff you can do with Avy", "lovemenu")
 	if(theObedience >= 2):
 		addButton("Dominate", "See how you can dominate this dickgirl", "obeymenu")
+	
+	if(theLove >= 4 || theObedience >= 4):
+		addButton("Feed something", "Feed something to Avy", "feedmenu")
 
 func getPriority():
 	return 33
@@ -28,4 +31,7 @@ func onButton(_method, _args):
 	if(_method == "obeymenu"):
 		GM.main.endCurrentScene()
 		runScene("AvyObedienceMenuScene")
+	if(_method == "feedmenu"):
+		GM.main.endCurrentScene()
+		runScene("FeedSomethingScene", ["avy"])
 

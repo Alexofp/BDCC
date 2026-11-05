@@ -63,6 +63,9 @@ func getTags():
 		ItemTag.Illegal,
 	]
 
+func canFeedToNPC(_char) -> bool:
+	return false
+
 func getBuyAmount():
 	return 1
 

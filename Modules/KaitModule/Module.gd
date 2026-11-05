@@ -82,6 +82,7 @@ func _init():
 		"res://Modules/KaitModule/Chapter1/DomCh1RahiRecEvent.gd",
 		"res://Modules/KaitModule/Hideout/HideoutFunctionsEvent.gd",
 		"res://Modules/KaitModule/Avy/AvyLoveObedienceEvent.gd",
+		"res://Modules/KaitModule/Kait/Preg/KaitFirstTimePregnantEvent.gd",
 	]
 	quests = [
 		"res://Modules/KaitModule/Chapter0/DomRouteIntroQuest.gd",

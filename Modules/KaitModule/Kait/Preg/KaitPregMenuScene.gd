@@ -8,7 +8,13 @@ func _run():
 		addCharacter("kait")
 		playAnimation(StageScene.Duo, "stand", {npc="kait"})
 		aimCameraAndSetLocName(GM.pc.getLocation())
-		saynn("What do you want to do with the pregnant Kait?")
+		
+		var _isPreg:bool = getCharacter("kait").isVisiblyPregnant()
+		
+		if(_isPreg):
+			saynn("What do you want to do with the pregnant Kait?")
+		else:
+			saynn("What do you want to do with the lactating Kait?")
 
 		var amGiveBirth:int = getFlag("KaitModule.kaitGaveBirths", 0)
 		if (amGiveBirth == 1):
@@ -16,15 +22,16 @@ func _run():
 
 		else:
 			saynn("Kait gave birth a total of "+str(amGiveBirth)+" times.")
-
-		if (!getFlag("KaitModule.kaitDidCuddle", false)):
-			addButton("Cuddle", "Cuddle with pregnant Kait and talk about her", "do_cuddle")
-		else:
-			addDisabledButton("Cuddle", "You already cuddled with Kait during this pregnancy. This option will become available during her next one.")
-		if (getCharacter("kait").isHeavilyPregnant()):
-			addButton("Help give birth", "Bring Kait to the nursery where she can give birth", "do_help_givebirth")
-		else:
-			addDisabledButton("Help give birth", "Kait's pregnancy hasn't progressed far enough yet. Wait for the last trimester.")
+		
+		if(_isPreg):
+			if (!getFlag("KaitModule.kaitDidCuddle", false)):
+				addButton("Cuddle", "Cuddle with pregnant Kait and talk about her", "do_cuddle")
+			else:
+				addDisabledButton("Cuddle", "You already cuddled with Kait during this pregnancy. This option will become available during her next one.")
+			if (getCharacter("kait").isHeavilyPregnant()):
+				addButton("Help give birth", "Bring Kait to the nursery where she can give birth", "do_help_givebirth")
+			else:
+				addDisabledButton("Help give birth", "Kait's pregnancy hasn't progressed far enough yet. Wait for the last trimester.")
 		if (amGiveBirth >= 1):
 			if (getCharacter("kait").canBeMilked() && !getCharacter("kait").hasSoreNipples()):
 				addButton("Milk her", "Milk Kait with breast pumps or with your hands!", "do_milk_kait")

@@ -105,6 +105,8 @@ func _run():
 				addDisabledButton("Enslave", "Jacki's kindness, corruption and lust must be at 100%")
 		else:
 			addButton("Memories", "Replay some of the scenes", "memories_menu")
+		if(lust >= 1.0 || corruption >= 1.0):
+			addButton("Feed something", "Feed something to Jacki", "feedmenu")
 		addButton("Leave", "Never mind", "endthescene")
 	if(state == "memories_menu"):
 		saynn("Pick which scene you wanna see again.")
@@ -4474,6 +4476,10 @@ func _react(_action: String, _args):
 	if(_action == "do_enslave_strapon_knot"):
 		GM.pc.orgasmFrom("jacki")
 		GM.pc.addSkillExperience(Skill.SexSlave, 50)
+
+	if(_action == "feedmenu"):
+		runScene("FeedSomethingScene", ["jacki"])
+		return
 
 	setState(_action)
 

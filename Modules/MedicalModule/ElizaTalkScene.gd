@@ -72,6 +72,7 @@ func _run():
 			
 		if(getModule("ElizaModule").canSexEliza()):
 			addButton("Sex!", "Have some fun with Eliza", "start_sex_menu")
+			addButton("Feed something", "Feed something to Eliza", "feedmenu")
 			
 		addButton("Leave", "Do something else", "endthescene")
 		GM.ES.triggerRun(Trigger.TalkingToNPC, ["eliza"])
@@ -631,6 +632,10 @@ func _react(_action: String, _args):
 	
 	if(_action == "openTFMenu"):
 		runScene("ElizaTFHerScene")
+		return
+	
+	if(_action == "feedmenu"):
+		runScene("FeedSomethingScene", ["eliza"])
 		return
 	
 	setState(_action)

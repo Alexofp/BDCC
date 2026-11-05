@@ -40,6 +40,8 @@ func _run():
 				saynn("[b]Next rank will be the last. Make sure you are ready as you won't be able to go back.[/b]")
 
 			addButton("Next rank!", "Progress the story further", "do_next_rank")
+		if(mirriRank >= 6):
+			addButton("Feed something", "Feed something to Mirri", "feedmenu")
 		addButton("Leave", "Enough talking", "endthescene")
 		GM.ES.triggerRun(Trigger.TalkingToNPC, ["mirri"])
 	if(state == "bidders_info"):
@@ -3148,6 +3150,10 @@ func _react(_action: String, _args):
 
 	if(_action == "dom_spank_fist_shove"):
 		processTime(5*60)
+
+	if(_action == "feedmenu"):
+		runScene("FeedSomethingScene", ["mirri"])
+		return
 
 	setState(_action)
 

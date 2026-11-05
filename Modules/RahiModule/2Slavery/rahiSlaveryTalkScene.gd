@@ -219,6 +219,8 @@ func _run():
 			addDisabledButton("Punish", "Rahi is too tired")
 			addDisabledButton("Activities", "Rahi is too tired")
 		addButton("Relationship", "See where your relationship is headed", "relationship")
+		if(currentStage >= 5):
+			addButton("Feed something", "Feed something to Rahi", "feedmenu")
 		addButton("Leave", "Enough talking", "endthescene")
 		
 		GM.ES.triggerRun(Trigger.TalkingToNPC, ["rahiSlavery"])
@@ -505,6 +507,10 @@ func _react(_action: String, _args):
 		GM.pc.getInventory().addItem(GlobalRegistry.createItem("PortalPanties"))
 		setFlag("RahiModule.wearingPortalPanties", false)
 		getCharacter("rahi").getInventory().removeItemFromSlot(InventorySlot.UnderwearBottom)
+
+	if(_action == "feedmenu"):
+		runScene("FeedSomethingScene", ["rahi"])
+		return
 
 	setState(_action)
 

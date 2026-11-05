@@ -33,6 +33,15 @@ func _run():
 			addButton("Dominate", "See what you can order Kait to do", "dom_menu")
 		else:
 			addDisabledButton("Dominate", "Kait's obedience must be above 2")
+		var _isPreg:bool = getCharacter("kait").isVisiblyPregnant()
+		if(_isPreg):
+			addButton("Pregnancy", "See what you can do with a pregnant Kait", "preg_menu")
+		elif(getFlag("KaitModule.kaitGaveBirths", 0) > 0 && getCharacter("kait").canBeMilked()):
+			addButton("Lactation", "See what you can do with a milky Kait", "preg_menu")
+		elif(getFlag("KaitModule.kaitGaveBirths", 0) > 0):
+			addDisabledButton("Pregnancy", "Kait isn't pregnant so you can't do these interactions.")
+		if(kaitLove >= 4 || kaitObedience >= 4):
+			addButton("Feed something", "Feed something to Kait", "feedmenu")
 		GM.ES.triggerRun(Trigger.TalkingToNPC, ["kait"])
 		addButton("Leave", "Enough chatting", "endthescene")
 	if(state == "sex_menu"):
@@ -284,6 +293,10 @@ func _react(_action: String, _args):
 		endScene()
 		return
 
+	if(_action == "feedmenu"):
+		runScene("FeedSomethingScene", ["kait"])
+		return
+
 	if(_action == "sex_69"):
 		endScene()
 		runScene("KaitLove69Scene")
@@ -311,6 +324,11 @@ func _react(_action: String, _args):
 	if(_action == "obey_chokesex"):
 		endScene()
 		runScene("KaitObedienceChokeScene")
+		return
+
+	if(_action == "preg_menu"):
+		endScene()
+		runScene("KaitPregMenuScene")
 		return
 
 	setState(_action)

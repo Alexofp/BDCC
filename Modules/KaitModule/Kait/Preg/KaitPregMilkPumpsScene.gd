@@ -13,7 +13,7 @@ func _run():
 		saynn("Pick which breast pump do you want to use.. If any.")
 
 		addButton("Cancel", "You changed your mind", "endthescene")
-		addButton("None", "No pump is gonna be used", "do_pick_nobreastpump")
+		addButton("Use hands", "No pump is gonna be used", "do_pick_nobreastpump")
 		addPumpButtons("do_pick_breastpump")
 		if (false):
 			addButton("Nope", "You shouldn't see this", "do_pick_breastpump")
@@ -41,8 +41,8 @@ func _run():
 
 		addButton("Continue", "See what happens next", "do_put_pump_on")
 	if(state == "do_put_pump_on"):
-		addCharacter("kait", ["naked"])
-		playAnimation(StageScene.BreastGroping, "tease", {pc="pc", npc="kait", npcBodyState={naked=true, hard=true}})
+		#addCharacter("kait", ["naked"])
+		playAnimation(StageScene.BreastGroping, "tease", {pc="pc", npc="kait", npcBodyState={hard=true}})
 		saynn("She slowly undoes some buttons and opens her shirt, exposing her swollen breasts. They are heavy and full, resting on her huge belly. Her dark nipples are looking perky and shiny. Perfect.")
 
 		saynn("Gently, you cup one of her breasts in your hand, making her inhale softly. You place the first pump's cup over her nipple, making sure it's holding on by itself. Then you do the same for the other. She is watching you, her breathing getting a little faster.")
@@ -107,7 +107,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene_getbackpump")
 	if(state == "milk_no_pump"):
-		playAnimation(StageScene.GropeBehind, "idle", {pc="pc", npc="kait"})
+		playAnimation(StageScene.GropeBehind, "idle", {pc="kait", npc="pc"})
 		saynn("You give Kait a quick full-body glance.")
 
 		saynn("Her shirt is really tight.. her pregnant belly is what's mostly doing it.. but her relatively bigger breasts also don't help.")
@@ -124,8 +124,8 @@ func _run():
 
 		addButton("Continue", "See what happens next", "grope_floor")
 	if(state == "grope_floor"):
-		addCharacter("kait", ["naked"])
-		playAnimation(StageScene.BreastGroping, "tease", {pc="pc", npc="kait", npcBodyState={naked=true, hard=true}})
+		#addCharacter("kait", ["naked"])
+		playAnimation(StageScene.BreastGroping, "tease", {pc="pc", npc="kait", npcBodyState={hard=true}})
 		saynn("Once you have revealed her chest, you help her to gradually kneel on the floor, her back still against your chest. Better than risking her legs giving up.")
 
 		saynn("Once you are done with the shirt, you wrap your arms around her, your hands coming to rest on her swollen breasts. They feel warm and soft under your palms. Kait lets out a soft sigh.")
@@ -146,7 +146,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "do_grope_breasts")
 	if(state == "do_grope_breasts"):
-		playAnimation(StageScene.BreastGroping, "grope", {pc="pc", npc="kait", npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.BreastGroping, "grope", {pc="pc", npc="kait", npcBodyState={hard=true}})
 		saynn("You stop gently caressing her chest and instead start to actually grope them, your fingers kneading the soft breasts, sinking into the fur a bit. Kait instantly lets out a little gasp, pressing her back against you.")
 
 		saynn("[say=kait]Ohh.. yes.. like that..[/say]")
@@ -197,6 +197,7 @@ func addPumpButtons(go_id):
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
+		fixUniform("kait")
 		endScene()
 		return
 
@@ -208,13 +209,24 @@ func _react(_action: String, _args):
 	if(_action == "do_pick_breastpump"):
 		var pump = _args[0]
 		breastPumpID = pump.getUniqueID()
-		GM.pc.getInventory().removeItem(pump)
-		getCharacter("kait").getInventory().forceEquipRemoveOther(pump)
+		#GM.pc.getInventory().removeItem(pump)
+		#getCharacter("kait").getInventory().forceEquipRemoveOther(pump)
 		setState("do_milk")
 		return
 
 	if(_action == "do_put_pump_on"):
 		processTime(15*60)
+		openShirt("kait")
+		var pump = GM.pc.getInventory().getItemByUniqueID(breastPumpID)
+		if(pump):
+			GM.pc.getInventory().removeItem(pump)
+			getCharacter("kait").getInventory().forceEquipRemoveOther(pump)
+
+	if(_action == "grope_floor"):
+		openShirt("kait")
+
+	if(_action == "grope_after"):
+		fixUniform("kait")
 
 	if(_action == "do_actually_milk_pumps"):
 		var pump = getCharacter("kait").getInventory().getItemByUniqueID(breastPumpID)
@@ -226,6 +238,7 @@ func _react(_action: String, _args):
 		getCharacter("kait").updateAppearance()
 
 	if(_action == "endthescene_getbackpump"):
+		fixUniform("kait")
 		var pump = getCharacter("kait").getInventory().getItemByUniqueID(breastPumpID)
 		getCharacter("kait").getInventory().removeEquippedItem(pump)
 		GM.pc.getInventory().addItem(pump)

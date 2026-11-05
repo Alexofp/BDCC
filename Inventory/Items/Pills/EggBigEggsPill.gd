@@ -64,6 +64,9 @@ func getTags():
 		#ItemTag.TFItem,
 		]
 
+func canFeedToNPC(_char) -> bool:
+	return false # Or it would get weird
+
 func getBuyAmount():
 	return 1
 
