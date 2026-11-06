@@ -1754,12 +1754,13 @@ func getWritingsData() -> Dictionary:
 		return getEffect(StatusEffect.HasBodyWritings).getDollData()
 	return {}
 
+const fieldsToCheckSkin = ["skin", "r", "g", "b"]
 func softUpdateDoll(doll: Doll3D):
 	doll.writingsData = getWritingsData()
 	
 	var skinData = {}
 	var bodySkinData = getSkinData()
-	var fieldsToCheckSkin = ["skin", "r", "g", "b"]
+	#var fieldsToCheckSkin = ["skin", "r", "g", "b"]
 	for bodypartSlot in bodyparts:
 		var bodypart = getBodypart(bodypartSlot)
 		if(bodypart == null):
@@ -1784,7 +1785,7 @@ func softUpdateDoll(doll: Doll3D):
 			doll.setCumColor(Color.white)
 	else:
 		doll.setCumAmount(0)
-	doll.updateMaterials()
+	doll.call_deferred("updateMaterials")
 	
 	doll.setArmsCuffed(false)
 	doll.setLegsCuffed(false)
