@@ -2453,3 +2453,21 @@ func isEventBusy(_checkID:String) -> bool:
 	if(checkData == null):
 		return false
 	return true
+
+func calculateNpcsWithPortalPanties() -> Array:
+	var result:Array = []
+	if(GM.pc.isWearingPortalPantiesOrPortalCage()):
+		result.append(GM.pc)
+	var staticChars = GM.main.getCharacters()
+	for charID in staticChars:
+		var character:Character = staticChars[charID]
+		if(character.isWearingPortalPantiesOrPortalCage() || character.isWearingInvisiblePortalPanties()):
+			character.updateNonBattleEffects()
+			result.append(character)
+	var dynamicChars = GM.main.getDynamicCharacters()
+	for charID in dynamicChars:
+		var character:Character = dynamicChars[charID]
+		if(character.isWearingPortalPantiesOrPortalCage() || character.isWearingInvisiblePortalPanties()):
+			character.updateNonBattleEffects()
+			result.append(character)
+	return result

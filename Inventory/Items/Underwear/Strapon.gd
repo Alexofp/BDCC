@@ -81,8 +81,8 @@ func getStraponPleasureForDom():
 func onSexEnd():
 	destroyMe()
 
-func getPutOnScene():
-	return "StraponPutOnScene"
+#func getPutOnScene():
+#	return "StraponPutOnScene"
 
 func getCasualName():
 	return "strapon"

@@ -7,7 +7,7 @@ var fallbackFluids:Fluids
 
 func _init():
 	id = "StraponAdvanced"
-	clothesColor = Color(0.69, 0.08, 0.08)
+	clothesColor = Color.white
 	fallbackFluids = Fluids.new()
 	fallbackFluids.setCapacity(0.0)
 
@@ -46,10 +46,10 @@ func getCasualName():
 
 func getLewdStraponName() -> String:
 	# Get these from the original penis?
-	return RNG.pick(["feeldoe strapon", "double-edged strapon", "knotted strapon", "rubber canine cock"])
+	return RNG.pick(["advanced strapon"])
 
 func getPrice():
-	return 30
+	return 35
 
 func generateFluids():
 	fluids = Fluids.new()
@@ -100,12 +100,15 @@ func getStraponTraits() -> Dictionary:
 		PartTrait.PenisKnot: true,
 	}
 
+func canDye():
+	return false
+
 func getPenisBodypart():
 	if(penisID.empty()):
 		fluids = fallbackFluids
 		return null
 	var theChar:BaseCharacter = GlobalRegistry.getCharacter(penisID)
-	if(!theChar):
+	if(!theChar || !theChar.canUsePenisThroughPortal()):
 		penisID = ""
 		fluids = fallbackFluids
 		return null
@@ -143,6 +146,18 @@ func updateDoll(doll: Doll3D):
 	else:
 		doll.setPenisScale(1.0)
 		doll.setBallsScale(1.0)
+
+func getTags():
+	if(GM.main != null && GM.main.SCI != null && GM.main.SCI.hasUpgrade("advStrapon")):
+		return [
+			ItemTag.Strapon,
+			ItemTag.SoldByMedicalVendomat,
+			ItemTag.AdvancedStrapon,
+			]
+	return [
+		ItemTag.Strapon,
+		ItemTag.AdvancedStrapon,
+		]
 
 func saveData():
 	var theData:Dictionary = .saveData()

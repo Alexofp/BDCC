@@ -26,25 +26,13 @@ func resolveCustomCharacterName(_charID):
 		return secondPortalCharID
 
 func charCanUsePenis(character):
-	if(character.isWearingPortalPanties()):
-		return (character.hasPenis() && !character.isWearingChastityCage() && !character.hasReachablePenis())
-	if(character.isWearingInvisiblePortalPanties()):
-		return character.hasPenis() && !character.isWearingChastityCage() && character.getPortalSexHoleAvailable(BodypartSlot.Penis)
-	return false
+	return character.canUsePenisThroughPortal()
 
 func charCanUseVagina(character):
-	if(character.isWearingPortalPanties()):
-		return (character.hasVagina())
-	if(character.isWearingInvisiblePortalPanties()):
-		return character.hasVagina() && character.getPortalSexHoleAvailable(BodypartSlot.Vagina)
-	return false
+	return character.canUseVaginaThroughPortal()
 
 func charCanUseAnus(character):
-	if(character.isWearingPortalPanties()):
-		return (character.hasAnus())
-	if(character.isWearingInvisiblePortalPanties()):
-		return character.hasAnus() && character.getPortalSexHoleAvailable(BodypartSlot.Anus)
-	return false
+	return character.canUseAnusThroughPortal()
 
 func sayCharacterTable():
 	var tableText = "[table=5][cell]ID[/cell][cell]Name[/cell][cell]Penis[/cell][cell]Vagina[/cell][cell]Anus[/cell]"
@@ -1467,26 +1455,7 @@ func isPCPortal():
 	return portalCharID == "pc"
 
 func getNpcsWithPortalPanties():
-	var result = []
-	
-	if(GM.pc.isWearingPortalPanties()):
-		result.append(GM.pc)
-	
-	var staticChars = GM.main.getCharacters()
-	for charID in staticChars:
-		var character:Character = staticChars[charID]
-		if(character.isWearingPortalPanties() || character.isWearingInvisiblePortalPanties()):
-			character.updateNonBattleEffects()
-			result.append(character)
-	
-	var dynamicChars = GM.main.getDynamicCharacters()
-	for charID in dynamicChars:
-		var character:Character = dynamicChars[charID]
-		if(character.isWearingPortalPanties() || character.isWearingInvisiblePortalPanties()):
-			character.updateNonBattleEffects()
-			result.append(character)
-	
-	return result
+	return GM.main.calculateNpcsWithPortalPanties()
 
 func saveData():
 	var data = .saveData()

@@ -311,6 +311,12 @@ var upgradesInfo:Dictionary = {
 		cost = 50,
 		requiredUpgrades = ["advBreastPump", "advPenisPump"],
 	},
+	"advStrapon": {
+		name = "Bluespace strapon",
+		desc = "Unlocks an advanced strapon and a portal chastity cage! The advanced strapon has a portal ring on it that allows it to 'project' any penis that is available in the bluespace. Keep in mind that these are highly unstable.",
+		cost = 50,
+		requiredUpgrades = ["bluespaceStash", "advPenisPump"],
+	},
 	
 	"tanksUpgrade4": {
 		name = "Tanks capacity 4",

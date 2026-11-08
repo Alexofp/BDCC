@@ -2736,6 +2736,9 @@ func getStrapons():
 func isWearingStrapon():
 	return getWornStrapon() != null
 
+func isWearingAdvancedStrapon() -> bool:
+	return isWearingStrapon() && getWornStrapon().hasTag(ItemTag.AdvancedStrapon)
+
 func isWearingLoadedStrapon():
 	var theStrapon = getWornStrapon()
 	if(theStrapon == null):
@@ -3131,6 +3134,41 @@ func isWearingPortalPanties():
 		var item = getInventory().getEquippedItem(InventorySlot.UnderwearBottom)
 		if(item.hasTag(ItemTag.PortalPanties)):
 			return true
+	return false
+
+func isWearingPortalCage() -> bool:
+	if(getInventory().hasSlotEquipped(InventorySlot.Penis)):
+		var item = getInventory().getEquippedItem(InventorySlot.Penis)
+		if(item.hasTag(ItemTag.PortalCage)):
+			return true
+	return false
+
+func isWearingPortalPantiesOrPortalCage() -> bool:
+	if(isWearingPortalPanties() || isWearingPortalCage()):
+		return true
+	return false
+
+func canUsePenisThroughPortal() -> bool:
+	if(isWearingPortalCage()):
+		return true
+	if(isWearingPortalPanties()):
+		return (hasPenis() && !isWearingChastityCage() && !hasReachablePenis())
+	if(isWearingInvisiblePortalPanties()):
+		return hasPenis() && !isWearingChastityCage() && getPortalSexHoleAvailable(BodypartSlot.Penis)
+	return false
+
+func canUseVaginaThroughPortal() -> bool:
+	if(isWearingPortalPanties()):
+		return (hasVagina())
+	if(isWearingInvisiblePortalPanties()):
+		return hasVagina() && getPortalSexHoleAvailable(BodypartSlot.Vagina)
+	return false
+
+func canUseAnusThroughPortal() -> bool:
+	if(isWearingPortalPanties()):
+		return (hasAnus())
+	if(isWearingInvisiblePortalPanties()):
+		return hasAnus() && getPortalSexHoleAvailable(BodypartSlot.Anus)
 	return false
 
 func orgasmFrom(_characterID: String):

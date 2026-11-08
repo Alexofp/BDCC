@@ -256,26 +256,7 @@ func getOrgasmHandlePriority(_indx:int) -> int:
 	return -1
 
 func calculateNpcsWithPortalPanties() -> Array:
-	var result:Array = []
-	
-	if(GM.pc.isWearingPortalPanties()):
-		result.append(GM.pc)
-	
-	var staticChars = GM.main.getCharacters()
-	for charID in staticChars:
-		var character:Character = staticChars[charID]
-		if(character.isWearingPortalPanties() || character.isWearingInvisiblePortalPanties()):
-			character.updateNonBattleEffects()
-			result.append(character)
-	
-	var dynamicChars = GM.main.getDynamicCharacters()
-	for charID in dynamicChars:
-		var character:Character = dynamicChars[charID]
-		if(character.isWearingPortalPanties() || character.isWearingInvisiblePortalPanties()):
-			character.updateNonBattleEffects()
-			result.append(character)
-	
-	return result
+	return GM.main.calculateNpcsWithPortalPanties()
 
 func getNpcsWithPortalPanties() -> Array:
 	if(!shouldCalculateNpcsWithPortalPanties):
@@ -285,18 +266,10 @@ func getNpcsWithPortalPanties() -> Array:
 	return npcsWithPortalPanties
 
 func charCanUseVagina(character) -> bool:
-	if(character.isWearingPortalPanties()):
-		return (character.hasVagina())
-	if(character.isWearingInvisiblePortalPanties()):
-		return character.hasVagina() && character.getPortalSexHoleAvailable(BodypartSlot.Vagina)
-	return false
+	return character.canUseVaginaThroughPortal()
 
 func charCanUseAnus(character) -> bool:
-	if(character.isWearingPortalPanties()):
-		return (character.hasAnus())
-	if(character.isWearingInvisiblePortalPanties()):
-		return character.hasAnus() && character.getPortalSexHoleAvailable(BodypartSlot.Anus)
-	return false
+	return character.canUseAnusThroughPortal()
 
 func charCanUse(character, slot:String) -> bool:
 	if(slot == S_VAGINA):
