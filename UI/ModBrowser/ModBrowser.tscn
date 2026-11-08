@@ -218,45 +218,57 @@ margin_bottom = 40.0
 rect_min_size = Vector2( 0, 40 )
 text = "Download mod + dependencies"
 
-[node name="PreviewDownloadingImage" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
-unique_name_in_owner = true
-visible = false
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
 margin_top = 44.0
 margin_right = 837.0
-margin_bottom = 246.0
+margin_bottom = 654.0
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer"]
+margin_right = 837.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+
+[node name="PreviewDownloadingImage" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+margin_right = 837.0
+margin_bottom = 150.0
+rect_min_size = Vector2( 0, 150 )
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.5
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PreviewDownloadingImage"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer/VBoxContainer/PreviewDownloadingImage"]
 margin_left = 7.0
-margin_top = 94.0
+margin_top = 68.0
 margin_right = 830.0
-margin_bottom = 108.0
+margin_bottom = 82.0
 text = "Loading preview image.."
 align = 1
 
-[node name="PreviewTextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
+[node name="PreviewTextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer/VBoxContainer"]
 unique_name_in_owner = true
 visible = false
-margin_top = 44.0
+margin_top = 154.0
 margin_right = 837.0
-margin_bottom = 246.0
+margin_bottom = 304.0
+rect_min_size = Vector2( 0, 150 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.5
 expand = true
 stretch_mode = 6
 
-[node name="OpenFullButton" type="TextureButton" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PreviewTextureRect"]
+[node name="OpenFullButton" type="TextureButton" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer/VBoxContainer/PreviewTextureRect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
-margin_top = 44.0
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
 margin_right = 837.0
-margin_bottom = 654.0
+margin_bottom = 21.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/bold_italics_font = ExtResource( 4 )
@@ -264,6 +276,7 @@ custom_fonts/italics_font = ExtResource( 7 )
 custom_fonts/bold_font = ExtResource( 6 )
 custom_fonts/normal_font = ExtResource( 5 )
 bbcode_enabled = true
+fit_content_height = true
 
 [node name="DownloadingContrainer" type="PanelContainer" parent="."]
 visible = false
@@ -387,8 +400,8 @@ text = "Cancel"
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/NextPageButton" to="." method="_on_NextPageButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/DownloadModButton" to="." method="_on_DownloadModButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/DownloadModAndReqsButton" to="." method="_on_DownloadModAndReqsButton_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PreviewTextureRect/OpenFullButton" to="." method="_on_OpenFullButton_pressed"]
-[connection signal="meta_clicked" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/RichTextLabel" to="." method="_on_RichTextLabel_meta_clicked"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer/VBoxContainer/PreviewTextureRect/OpenFullButton" to="." method="_on_OpenFullButton_pressed"]
+[connection signal="meta_clicked" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer/VBoxContainer/RichTextLabel" to="." method="_on_RichTextLabel_meta_clicked"]
 [connection signal="pressed" from="FullTextureRect/CloseFullButton" to="." method="_on_CloseFullButton_pressed"]
 [connection signal="pressed" from="DownloadModsWarningPanelContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DownloadAnywayButton" to="." method="_on_DownloadAnywayButton_pressed"]
 [connection signal="pressed" from="DownloadModsWarningPanelContainer/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/DownloadNoDeleteButton" to="." method="_on_DownloadNoDeleteButton_pressed"]

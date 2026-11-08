@@ -6,7 +6,7 @@ var modEntryScene = preload("res://UI/ModBrowser/ModBrowserEntry.tscn")
 onready var modSearch = $VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/ModSearch
 onready var modListScrollContainer = $VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/ScrollContainer
 onready var modList = $"%ModList"
-onready var modDescriptionLabel = $VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/RichTextLabel
+onready var modDescriptionLabel = $"%RichTextLabel"
 onready var downloadingContainer = $DownloadingContrainer
 onready var messageDialog = $MessageDialog
 onready var ai_option_button:OptionButton = $"%AIOptionButton"
@@ -27,6 +27,7 @@ const MAX_MODS_PER_PAGE:int = 50
 onready var page_selector_option_button = $"%PageSelectorOptionButton"
 
 var idToMod:Dictionary = {} # dict[id, ModEntry]
+var nameToMod:Dictionary = {} # dict[name, ModEntry]
 var modIDUsedByMods:Dictionary = {} # dict[id, Array[ModEntry]]
 var categoryToMods:Dictionary = {} # dict[categoryName, Array[ModEntry]]
 var categories:Array = []
@@ -37,6 +38,7 @@ var visualModEntries:Array = []
 
 var viewModsByAuthorUriPrefix:String = "view_mods_by:"
 const ViewModByIDUriPreview = "select_ID:"
+const ViewModByNameUriPreview = "select_NAME:"
 var sortType:String = "newest" #newest, oldest, name
 var searchQuery:String = ""
 var downloadedMods:bool = false
@@ -74,6 +76,7 @@ func resetMods():
 	allMods.clear()
 	modCountByAuthor.clear()
 	idToMod.clear()
+	nameToMod.clear()
 	categoryToMods.clear()
 	categories.clear()
 	modIDUsedByMods.clear()
@@ -179,6 +182,7 @@ func _on_HTTPRequest_request_completed(result, _response_code, _headers, body):
 		allMods.append(newModEntry)
 		if(!newModEntry.id.empty()):
 			idToMod[newModEntry.id] = newModEntry
+		nameToMod[newModEntry.name] = newModEntry
 		for theCategory in newModEntry.categories:
 			if(!categoryToMods.has(theCategory)):
 				categoryToMods[theCategory] = [newModEntry]
@@ -233,6 +237,13 @@ func readSafeArrayOfStrings(_entry:Dictionary, _name:String, _def:Array = []) ->
 		result.append(theThing)
 	return result
 
+func findModByIDOrName(_idOrName:String) -> ModEntry:
+	if(idToMod.has(_idOrName)):
+		return idToMod[_idOrName]
+	if(nameToMod.has(_idOrName)):
+		return nameToMod[_idOrName]
+	return null
+
 func updatePickedModEntry():
 	for visualModEntry in visualModEntries:
 		if(visualModEntry.storedEntry == pickedModEntry):
@@ -255,28 +266,35 @@ func updatePickedModEntry():
 				text += "Game version: Any\n"
 			else:
 				text += "Game version: " + str(pickedModEntry.gameversion)+"\n"
+		if(!pickedModEntry.categories.empty()):
+			if(pickedModEntry.categories.size() == 1):
+				text += "Category: "+str(Util.join(pickedModEntry.categories, ", ")+"\n")
+			else:
+				text += "Categories: "+str(Util.join(pickedModEntry.categories, ", ")+"\n")
 		text += "Filename: "+str(pickedModEntry.download.get_file())+"\n"
 		if(!pickedModEntry.reqs.empty()):
 			var _i:int = 1
 			text += "Mod dependencies:\n"
 			for theModID in pickedModEntry.reqs:
-				if(!idToMod.has(theModID)):
+				var theFind:ModEntry = findModByIDOrName(theModID)
+				if(!theFind):
 					text += str(_i)+") Unknown (id="+theModID+")\n"
 				else:
-					var theReqMod:ModEntry = idToMod[theModID]
-					text += str(_i)+") [color=#BBCCFF][url="+ViewModByIDUriPreview+theModID+"]"+theReqMod.name+"[/url][/color]\n"
-				_i += 1
-		if(!pickedModEntry.id.empty() && modIDUsedByMods.has(pickedModEntry.id)):
-			var _i:int = 1
-			text += "This mod is a requirement for these mods:\n"
-			for theReqMod in modIDUsedByMods[pickedModEntry.id]:
-				text += str(_i)+") [color=#BBCCFF][url="+ViewModByIDUriPreview+theReqMod.id+"]"+theReqMod.name+"[/url][/color]\n"
+					var theReqMod:ModEntry = theFind
+					text += str(_i)+") [color=#BBCCFF][url="+ViewModByNameUriPreview+theReqMod.name+"]"+theReqMod.name+"[/url][/color]\n"
 				_i += 1
 		if(pickedModEntry.hasAI):
 			text += "[center][b]Most likely contains AI-created art or code[/b][/center]\n"
 		
 		text += "\n"
 		text += str(pickedModEntry.description)
+		
+		if(!pickedModEntry.id.empty() && modIDUsedByMods.has(pickedModEntry.id)):
+			var _i:int = 1
+			text += "\n\nThis mod is a requirement for these mods:\n"
+			for theReqMod in modIDUsedByMods[pickedModEntry.id]:
+				text += str(_i)+") [color=#BBCCFF][url="+ViewModByNameUriPreview+theReqMod.name+"]"+theReqMod.name+"[/url][/color]\n"
+				_i += 1
 		
 		modDescriptionLabel.bbcode_text = text
 	
@@ -344,9 +362,9 @@ func _on_DownloadModAndReqsButton_pressed():
 		wereChecked[theMod] = true
 		
 		for theID in theMod.reqs:
-			if(!idToMod.has(theID)):
+			var theReqMod:ModEntry = findModByIDOrName(theID)
+			if(!theReqMod):
 				continue
-			var theReqMod:ModEntry = idToMod[theID]
 			if(wereChecked.has(theReqMod)):
 				continue
 			toCheck.append(theReqMod)
@@ -503,6 +521,13 @@ func _on_RichTextLabel_meta_clicked(meta):
 		if(!idToMod.has(theModID)):
 			return
 		pickedModEntry = idToMod[theModID]
+		updatePickedModEntry()
+		return
+	if(meta.begins_with(ViewModByNameUriPreview)):
+		var theModName:String = meta.trim_prefix(ViewModByNameUriPreview)
+		if(!nameToMod.has(theModName)):
+			return
+		pickedModEntry = nameToMod[theModName]
 		updatePickedModEntry()
 		return
 	var _ok = Util.fixed_shell_open(meta)
