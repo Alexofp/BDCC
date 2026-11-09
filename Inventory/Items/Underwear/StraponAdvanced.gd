@@ -2,7 +2,7 @@ extends "res://Inventory/Items/Underwear/Strapon.gd"
 
 # The whole thing is a glorious hack. Admire it
 
-var penisID:String = "nova"
+var penisID:String = ""
 var fallbackFluids:Fluids
 
 func _init():
@@ -21,7 +21,7 @@ func getVisibleName():
 	return "Strapon (advanced)"
 	
 func getDescription():
-	var text:String = "Just don't ask about how the 'Transfer fluids' feature works"
+	var text:String = "Has a portal ring on its front that can project any cock available in the bluespace! Projects a solid hologram dildo by default.\n\nDon't ask about how the 'Transfer fluids' feature works, this strapon defies any logic."
 
 	return text
 
@@ -45,8 +45,10 @@ func getCasualName():
 	return "advanced strapon"
 
 func getLewdStraponName() -> String:
-	# Get these from the original penis?
-	return RNG.pick(["advanced strapon"])
+	var thePenis = getPenisBodypart()
+	if(thePenis):
+		return thePenis.getLewdAdjective()+" strapon"
+	return RNG.pick(["hologram strapon"])
 
 func getPrice():
 	return 35
@@ -75,7 +77,7 @@ func setPenisTarget(_charID:String):
 	updateWearerAppearance()
 
 func getInventoryImage():
-	return "res://Images/Items/strapons/feeldoe.png"
+	return "res://Images/Items/strapons/advanced.png"
 
 func getInventoryImageColor():
 	return clothesColor
@@ -95,7 +97,10 @@ func getPossibleActions():
 	]
 
 func getStraponTraits() -> Dictionary:
-	# GET THESE FROM THE ORIGINAL PENIS
+	var thePenis = getPenisBodypart()
+	if(thePenis):
+		var theTraits = thePenis.getTraits()
+		return theTraits if theTraits != null else {}
 	return {
 		PartTrait.PenisKnot: true,
 	}
@@ -167,6 +172,6 @@ func saveData():
 func loadData(_data):
 	.loadData(_data)
 	
-	penisID = SAVE.loadVar(_data, "penisID", "nova")
+	penisID = SAVE.loadVar(_data, "penisID", "")
 	penisID = ""
 	call_deferred("checkFluids") # Ehhhh but we have to run this function after all characters were loaded

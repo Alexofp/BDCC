@@ -205,6 +205,7 @@ func getActions(_indx:int):
 		
 		if(state in ["inside", "sex"]):
 			addEggStuffButton(DOM_0, domFocus, getCurrentHole())
+			addTriggerStraponAction(DOM_0)
 		
 		if(state == "inside"):
 			addAction("fuckMore", getContinueSexScore(_indx, domFocus, getCurrentHole())-getStopScore(), "Continue fucking", "Start fucking them again")
@@ -239,6 +240,9 @@ func getActions(_indx:int):
 func doAction(_indx:int, _id:String, _action:Dictionary):
 	if(_id == "stuffegg"):
 		doStuffEggInto(DOM_0, domFocus, getCurrentHole())
+	if(_id == "triggerStrapon"):
+		triggerStrapon(_indx, domFocus, getCurrentHole())
+		return
 	if(_id == "switch"):
 		
 		if(domFocus == SUB_0):

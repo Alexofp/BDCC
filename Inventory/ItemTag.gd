@@ -47,6 +47,7 @@ enum {
 	TFItem,
 	PortalCage,
 	AdvancedStrapon,
+	StraponUsedByNPC,
 	
 	ITEMTAGCOUNT,
 }
@@ -97,6 +98,7 @@ const tagNames = [
 	"TFItem",
 	"PortalCage",
 	"AdvancedStrapon",
+	"StraponUsedByNPC",
 ]
 
 static func nameToTag(tagName):

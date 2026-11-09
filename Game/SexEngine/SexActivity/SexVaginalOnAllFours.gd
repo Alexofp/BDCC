@@ -451,8 +451,9 @@ func getActions(_indx:int):
 				addAction("switchhole", switchholeScore, "Switch hole", "Switch to the sub's "+RNG.pick(otherHoleNames))
 			addAction("stop", getStopScore(), "Stop fuck", "Stop fucking")
 		
-		if(state in ["fucking", "inside"]):
+		if(state in ["fucking", "inside", "knotting"]):
 			addEggStuffButton(DOM_0, SUB_0, usedBodypart)
+			addTriggerStraponAction(DOM_0)
 		if(state in ["fucking"]):
 			addAction("slowdown", getPauseSexScore(DOM_0, SUB_0, usedBodypart), "Slow down", "Stop fucking for a second..", {A_PRIORITY: 1})
 			
@@ -563,6 +564,10 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			addText(getStartTextForPose(newPose))
 		currentPose = newPose
 		return
+	if(_id == "triggerStrapon"):
+		if(triggerStrapon(_indx, SUB_0, usedBodypart)):
+			satisfyGoals()
+		return
 	if(_id == "subcumDom"):
 		var straponText:String = ""
 		if(isStraponSex()):
@@ -570,7 +575,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			
 			var strapon = getDom().getWornStrapon()
 			if(strapon.getFluids() != null && !strapon.getFluids().isEmpty()):
-				getSub().cummedInBodypartByAdvanced(usedBodypart, getDomID())
+				getSub().cummedInBodypartByAdvanced(usedBodypart, getDomID(), {}, FluidSource.Strapon)
 				straponText="{dom.Your} strapon gets squeezed by {sub.your} "+RNG.pick(usedBodypartNames)+" enough for it to suddenly [b]release its contents inside {sub.youHim}[/b]!"
 			
 		getSub().cumOnFloor(getDomID())

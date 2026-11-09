@@ -192,6 +192,7 @@ func getActions(_indx:int):
 		
 		if(isDom0 && (state == "inside" || state == "sex")):
 			addEggStuffButton(DOM_0, SUB_0, usedBodypart)
+			addTriggerStraponAction(DOM_0)
 		
 		if(state == "inside" && !checkActiveDomPC(_indx)):
 			var fuckMoreScore:float = 0.0
@@ -227,6 +228,9 @@ func getActions(_indx:int):
 			if(isStrapon(DOM_0) && isReadyToCumHandled(SUB_0)):
 				addAction("subcum", 1.0, "Cum!", "You're about to cum!", {A_PRIORITY: 1001})
 func doAction(_indx:int, _id:String, _action:Dictionary):
+	if(_id == "triggerStrapon"):
+		triggerStrapon(_indx, SUB_0, usedBodypart)
+		return
 	if(_id == "stuffegg"):
 		doStuffEggInto(DOM_0, SUB_0, usedBodypart)
 	if(_id == "switch"):

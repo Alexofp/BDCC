@@ -7,7 +7,7 @@ func _init():
 	
 	activityName = "Strapon target"
 	activityDesc = "Select which penis to use in your advanced strapon!"
-	activityCategory = ["Wear"]
+	activityCategory = []
 
 func getGoals():
 	return {

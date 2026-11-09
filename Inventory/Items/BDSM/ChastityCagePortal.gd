@@ -44,6 +44,7 @@ func isRestraint():
 func generateRestraintData():
 	restraintData = RestraintChastityCage.new()
 	restraintData.setLevel(5)
+	restraintData.aiWontResist = true # More fun this way
 	
 func getForcedOnMessage(isPlayer = true):
 	if(isPlayer):
@@ -70,4 +71,4 @@ func isImportant():
 	return true
 
 func getInventoryImage():
-	return "res://Images/Items/bdsm/flatcage.png"
+	return "res://Images/Items/bdsm/PortalCage.png"
