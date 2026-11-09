@@ -204,16 +204,32 @@ size_flags_vertical = 3
 margin_right = 837.0
 margin_bottom = 40.0
 
+[node name="BackButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer"]
+unique_name_in_owner = true
+margin_right = 28.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+text = " < "
+
+[node name="ForwardButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer"]
+unique_name_in_owner = true
+margin_left = 32.0
+margin_right = 60.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+text = " > "
+
 [node name="DownloadModButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer"]
-margin_right = 108.0
+margin_left = 64.0
+margin_right = 172.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 0, 40 )
 text = "Download mod"
 
 [node name="DownloadModAndReqsButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer"]
 unique_name_in_owner = true
-margin_left = 112.0
-margin_right = 326.0
+margin_left = 176.0
+margin_right = 390.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 0, 40 )
 text = "Download mod + dependencies"
@@ -398,6 +414,8 @@ text = "Cancel"
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/PrevPageButton" to="." method="_on_PrevPageButton_pressed"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/PageSelectorOptionButton" to="." method="_on_PageSelectorOptionButton_item_selected"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/NextPageButton" to="." method="_on_NextPageButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/ForwardButton" to="." method="_on_ForwardButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/DownloadModButton" to="." method="_on_DownloadModButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/DownloadModAndReqsButton" to="." method="_on_DownloadModAndReqsButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer/VBoxContainer/PreviewTextureRect/OpenFullButton" to="." method="_on_OpenFullButton_pressed"]

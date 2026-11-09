@@ -26,6 +26,9 @@ var page:int = 0
 const MAX_MODS_PER_PAGE:int = 50
 onready var page_selector_option_button = $"%PageSelectorOptionButton"
 
+onready var back_button = $"%BackButton"
+onready var forward_button = $"%ForwardButton"
+
 var idToMod:Dictionary = {} # dict[id, ModEntry]
 var nameToMod:Dictionary = {} # dict[name, ModEntry]
 var modIDUsedByMods:Dictionary = {} # dict[id, Array[ModEntry]]
@@ -42,6 +45,9 @@ const ViewModByNameUriPreview = "select_NAME:"
 var sortType:String = "newest" #newest, oldest, name
 var searchQuery:String = ""
 var downloadedMods:bool = false
+
+var backQueue:Array
+var forwardQueue:Array
 
 const AIFILTER_HIDE:int = 0
 const AIFILTER_SHOW:int = 1
@@ -80,7 +86,10 @@ func resetMods():
 	categoryToMods.clear()
 	categories.clear()
 	modIDUsedByMods.clear()
+	backQueue.clear()
+	forwardQueue.clear()
 	updateCurrentPreview()
+	updateBackForward()
 
 func resetModListScroll() -> void:
 	modListScrollContainer.set_deferred("scroll_vertical", 0)
@@ -197,7 +206,7 @@ func _on_HTTPRequest_request_completed(result, _response_code, _headers, body):
 					modIDUsedByMods[theReqID].append(newModEntry)
 	
 	sortType = "newest"
-	allMods.sort_custom(self, "sort_newest")
+	sortAll("sort_newest")
 	updateModList()
 	
 	category_option_button.clear()
@@ -302,8 +311,7 @@ func updatePickedModEntry():
 	updateCurrentPreview()
 
 func onModEntrySelected(theModEntry):
-	pickedModEntry = theModEntry
-	updatePickedModEntry()
+	setSelectedEntry(theModEntry)
 
 func incrementModCountForAuthors(authorsData) -> void:
 	for authorName in authorsData.authors:
@@ -486,21 +494,26 @@ static func sort_oldest(a, b):
 		return true
 	return false
 
+func sortAll(_method:String):
+	allMods.sort_custom(self, _method)
+	for theCat in categoryToMods:
+		categoryToMods[theCat].sort_custom(self, _method)
+
 func _on_SortNameButton_pressed():
 	sortType = "name"
-	allMods.sort_custom(self, "sort_name")
+	sortAll("sort_name")
 	updateModList()
 
 
 func _on_SortNewestFirstButton_pressed():
 	sortType = "newest"
-	allMods.sort_custom(self, "sort_newest")
+	sortAll("sort_newest")
 	updateModList()
 
 
 func _on_SortOldestFirstButton_pressed():
 	sortType = "oldest"
-	allMods.sort_custom(self, "sort_oldest")
+	sortAll("sort_oldest")
 	updateModList()
 
 func _on_CloseButton_pressed():
@@ -520,15 +533,13 @@ func _on_RichTextLabel_meta_clicked(meta):
 		var theModID:String = meta.trim_prefix(ViewModByIDUriPreview)
 		if(!idToMod.has(theModID)):
 			return
-		pickedModEntry = idToMod[theModID]
-		updatePickedModEntry()
+		setSelectedEntry(idToMod[theModID])
 		return
 	if(meta.begins_with(ViewModByNameUriPreview)):
 		var theModName:String = meta.trim_prefix(ViewModByNameUriPreview)
 		if(!nameToMod.has(theModName)):
 			return
-		pickedModEntry = nameToMod[theModName]
-		updatePickedModEntry()
+		setSelectedEntry(nameToMod[theModName])
 		return
 	var _ok = Util.fixed_shell_open(meta)
 
@@ -708,3 +719,44 @@ func _on_NextPageButton_pressed():
 func _on_PageSelectorOptionButton_item_selected(index:int):
 	page = index
 	updateModList()
+
+func _on_BackButton_pressed():
+	goBack()
+
+func _on_ForwardButton_pressed():
+	goForward()
+
+func updateBackForward():
+	back_button.disabled = backQueue.empty()
+	forward_button.disabled = forwardQueue.empty()
+
+func pushBack(_mod:ModEntry, clearForward:bool = true):
+	if(backQueue.empty() || backQueue.back() != _mod):
+		backQueue.append(_mod)
+		if(clearForward):
+			forwardQueue.clear()
+	updateBackForward()
+
+func setSelectedEntry(_modEntry:ModEntry, _addOldToBackQueue:bool = true):
+	if(_addOldToBackQueue && pickedModEntry):
+		pushBack(pickedModEntry)
+	pickedModEntry = _modEntry
+	updatePickedModEntry()
+
+func goBack():
+	if(backQueue.empty()):
+		return
+	if(pickedModEntry):
+		forwardQueue.append(pickedModEntry)
+	setSelectedEntry(backQueue.back(), false)
+	backQueue.pop_back()
+	updateBackForward()
+
+func goForward():
+	if(forwardQueue.empty()):
+		return
+	if(pickedModEntry):
+		backQueue.append(pickedModEntry)
+	setSelectedEntry(forwardQueue.back(), false)
+	forwardQueue.pop_back()
+	updateBackForward()
