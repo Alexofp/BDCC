@@ -351,6 +351,8 @@ func pushToButtplugOutputQueue(_key:String, _payload:Dictionary):
 	requestQueue[_key] = _payload
 
 func scanForToys():
+	if(connectionStatus == STATUS_DISCONNECTED):
+		connectToServer()
 	if(connectionStatus >= STATUS_CONNECTED):
 		scanForDevices()
 		sendToButtplugIO("RequestDeviceList")

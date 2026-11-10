@@ -75,8 +75,8 @@ func getActions() -> Array:
 	return [["rescan", "Rescan for toys"]]
 
 func doAction(_id:String):
-	if(!isEnabledActually()):
-		return
+	#if(!isEnabledActually()):
+	#	return
 	if(_id == "rescan"):
 		scanForToys()
 
