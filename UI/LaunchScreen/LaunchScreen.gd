@@ -324,7 +324,7 @@ func tryToPopulateFilesList():
 	return "Failed to load info"
 
 func toggleModEntryDisabled(entry:Dictionary=selectedEntry) -> void:
-	if(entry == null or entry["name"] == "BDCC.pck"):
+	if(!entry || entry["name"] == "BDCC.pck"):
 		return
 	
 	entry["disabled"] = !entry["disabled"]
@@ -332,6 +332,8 @@ func toggleModEntryDisabled(entry:Dictionary=selectedEntry) -> void:
 	updateSelectedEntry()
 
 func _on_ModDisableButton_pressed():
+	if(!selectedEntry):
+		return
 	toggleModEntryDisabled(selectedEntry)
 
 
@@ -487,22 +489,22 @@ func _on_ModBrowser_closePressed():
 func _on_OpenModsFolder_pressed():
 	var _ok = Util.fixed_shell_open(ProjectSettings.globalize_path("user://mods"))
 
-func _input(event):
-	if(event.is_action_pressed("ui_down")):
-		onModEntryClicked(currentModOrder[currentModOrder.find(selectedEntry)+1])
-		return
-	if(event.is_action_pressed("ui_up")):
-		onModEntryClicked(currentModOrder[currentModOrder.find(selectedEntry)-1])
-		return
-	if(event.is_action_pressed("ui_select")):
-		_on_ModDisableButton_pressed()
-		return
-	if(event.is_action_pressed("ui_left")):
-		_on_MoveUpButton_pressed()
-		return
-	if(event.is_action_pressed("ui_right")):
-		_on_MoveDownButton_pressed()
-		return
+#func _unhandled_key_input(event):
+#	if(event.is_action_pressed("ui_down")):
+#		onModEntryClicked(currentModOrder[currentModOrder.find(selectedEntry)+1])
+#		return
+#	if(event.is_action_pressed("ui_up")):
+#		onModEntryClicked(currentModOrder[currentModOrder.find(selectedEntry)-1])
+#		return
+#	if(event.is_action_pressed("ui_select")):
+#		_on_ModDisableButton_pressed()
+#		return
+#	if(event.is_action_pressed("ui_left")):
+#		_on_MoveUpButton_pressed()
+#		return
+#	if(event.is_action_pressed("ui_right")):
+#		_on_MoveDownButton_pressed()
+#		return
 
 
 func _on_ResetGRCacheButton_pressed():
