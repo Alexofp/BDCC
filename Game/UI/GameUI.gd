@@ -165,6 +165,7 @@ func queueUpdate():
 	yield(get_tree(), "idle_frame")
 	buttonsNeedUpdating = false
 	updateButtons()
+	updateExtraButtons()
 
 func clearExtraButtons():
 	extraOptions.clear()
@@ -543,9 +544,52 @@ func recreateWorld():
 func _on_RollbackButton_pressed():
 	emit_signal("on_rollback_button")
 
-var savedOriginalText = ""
-var savedTranslatedText = ""
-var currentTranslationTask = 0
+var savedOriginalUIState:Array = []
+var savedTranslatedUIState:Array = []
+
+func saveUIState() -> Array:
+	var buttonNamesAndDescs:Array = []
+	for optionID in options:
+		buttonNamesAndDescs.append(options[optionID][1])
+		buttonNamesAndDescs.append(options[optionID][2])
+	var extraButtonNamesAndDescs:Array = []
+	for optionID in extraOptions:
+		extraButtonNamesAndDescs.append(extraOptions[optionID][1])
+		extraButtonNamesAndDescs.append(extraOptions[optionID][2])
+	
+	return [
+		textOutput.bbcode_text,
+		buttonNamesAndDescs,
+		extraButtonNamesAndDescs,
+	]
+
+func applyUIState(_state:Array):
+	if(_state.size() < 3):
+		return
+	textOutput.bbcode_text = _state[0]
+	if(true):
+		var buttonNamesAndDescs:Array = _state[1]
+		var theAm:int = buttonNamesAndDescs.size()
+		var _i:int = 0
+		for optionID in options:
+			if((_i+1) >= theAm):
+				break
+			options[optionID][1] = buttonNamesAndDescs[_i]
+			options[optionID][2] = buttonNamesAndDescs[_i+1]
+			_i += 2
+	if(true):
+		var buttonNamesAndDescs:Array = _state[2]
+		var theAm:int = buttonNamesAndDescs.size()
+		var _i:int = 0
+		for optionID in extraOptions:
+			if((_i+1) >= theAm):
+				break
+			extraOptions[optionID][1] = buttonNamesAndDescs[_i]
+			extraOptions[optionID][2] = buttonNamesAndDescs[_i+1]
+			_i += 2
+	queueUpdate()
+
+var currentTranslationTask:int = 0
 onready var translateStatusLabel = $"%TranslateStatusLabel"
 onready var showOriginalCheckbox = $"%ShowOriginalCheckbox"
 onready var manualTranslateButton = $"%ManualTranslateButton"
@@ -556,6 +600,8 @@ func translateText(manualButton = false):
 			manualTranslateButton.visible = true
 			return
 		
+		savedOriginalUIState = saveUIState()
+		
 		var toTranslateFinal:Dictionary = {}
 		
 		#var buttonsTexts:Array = []
@@ -563,14 +609,14 @@ func translateText(manualButton = false):
 			for optionID in options:
 				toTranslateFinal[str(optionID)+"_text"] = options[optionID][1]
 				toTranslateFinal[str(optionID)+"_desc"] = options[optionID][2]
+			for optionID in extraOptions:
+				toTranslateFinal[str(optionID)+"_text_extra"] = extraOptions[optionID][1]
+				toTranslateFinal[str(optionID)+"_desc_extra"] = extraOptions[optionID][2]
 				
-				#buttonsTexts.append("[[BTN_"+str(optionID)+"_TEXT]] "+options[optionID][1])
-				#buttonsTexts.append("[[BTN_"+str(optionID)+"_DESC]] "+options[optionID][2].replace("\n", "^"))
 		
 		translateStatusLabel.text = "Translating.."
 		currentTranslationTask += 1
 		var rememberedTask = currentTranslationTask
-		savedOriginalText = textOutput.bbcode_text
 		
 		var toTranslate:String = textOutput.bbcode_text if AutoTranslation.shouldKeepBBTags else textOutput.text
 		#if(buttonsTexts.size() > 0):
@@ -589,35 +635,32 @@ func translateText(manualButton = false):
 		if(!(result is Dictionary)):
 			translateStatusLabel.text = "Failed to translate"
 		else:
-			var theText:String = result.get("text", savedOriginalText)
+			var theText:String = result["text"] if result.has("text") else textOutput.bbcode_text
 			
 			for optionID in options:
-				options[optionID][1] = result.get(str(optionID)+"_text", "???")
-				options[optionID][2] = result.get(str(optionID)+"_desc", "???")
-				#toTranslateFinal[str(optionID)+"_text"] = options[optionID][1]
-				#toTranslateFinal[str(optionID)+"_desc"] = options[optionID][2]
+				options[optionID][1] = result.get(str(optionID)+"_text", options[optionID][1])
+				options[optionID][2] = result.get(str(optionID)+"_desc", options[optionID][2])
+			for optionID in extraOptions:
+				extraOptions[optionID][1] = result.get(str(optionID)+"_text_extra", extraOptions[optionID][1])
+				extraOptions[optionID][2] = result.get(str(optionID)+"_desc_extra", extraOptions[optionID][2])
+			textOutput.bbcode_text = theText
+			
+			savedTranslatedUIState = saveUIState()
 			
 			queueUpdate()
 			
-			savedTranslatedText = theText
-			if(!showOriginalCheckbox.pressed):
-				textOutput.bbcode_text = theText
+			if(showOriginalCheckbox.pressed):
+				applyUIState(savedOriginalUIState)
+				#textOutput.bbcode_text = theText
 			translateStatusLabel.text = AutoTranslation.statusText
-			#if(AutoTranslation.hadToUseFallback):
-			#	translateStatusLabel.text = "Used fallback translator"
-				#yield(get_tree().create_timer(2.0), "timeout")
-				#if(translateStatusLabel != null && translateStatusLabel.text == "Used fallback translator"):
-				#	translateStatusLabel.text = ""
-			#else:
-			#	translateStatusLabel.text = ""
 				
 			showOriginalCheckbox.disabled = false
 
 func _on_ShowOriginalCheckbox_pressed():
 	if(showOriginalCheckbox.pressed):
-		textOutput.bbcode_text = savedOriginalText
+		applyUIState(savedOriginalUIState)
 	else:
-		textOutput.bbcode_text = savedTranslatedText
+		applyUIState(savedTranslatedUIState)
 	queueUpdate()
 
 
