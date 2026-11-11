@@ -190,6 +190,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "bring_rahi_to_medical")
 	if(state == "bring_rahi_to_medical"):
+		removeCharacter("cp_guard")
 		removeCharacter("rahi")
 		addCharacter("eliza")
 		playAnimation(StageScene.Duo, "stand", {npc="eliza"})
@@ -342,6 +343,7 @@ func _run():
 		addButton("Continue", "See what happens next", "rahi_is_alive")
 	if(state == "rahi_is_alive"):
 		addCharacter("rahi")
+		removeCharacter("cp_guard")
 		playAnimation(StageScene.Duo, "stand", {npc="rahi", npcAction="sit"})
 		saynn("Finally, the doors open, revealing Rahi, a barely standing one but Rahi nonetheless.")
 
