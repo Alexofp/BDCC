@@ -508,7 +508,7 @@ func _run():
 
 		saynn("[say=captain]Great little helper you got there.[/say]")
 
-		saynn("[say=alexrynard]Yeah, {pc.he} offered to do some work for free. I give {pc.him} a very limited range of tasks. And I control each {pc.his} step.[/say]")
+		saynn("[say=alexrynard]Yeah, {pc.he} offered to do some work for free. I give {pc.him} a very limited range of tasks. And I control {pc.his} every step.[/say]")
 
 		saynn("Captain pats Alex on the back and then takes a seat. Your seat.")
 

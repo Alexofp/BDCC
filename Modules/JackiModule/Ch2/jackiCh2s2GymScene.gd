@@ -1333,7 +1333,7 @@ func _run():
 
 		saynn("Doctor grabs a penlight and shines it into the wolfie's eyes, testing her reflexes. Then she checks the girl's fangs to make sure they're not too sharp. She quickly trims her claws too.")
 
-		saynn("[say=eliza]Mhm. Now.. I have runned out of Spacecillin pills so an injection will have to do.[/say]")
+		saynn("[say=eliza]Mhm. Now.. I have ran out of Spacecillin pills so an injection will have to do.[/say]")
 
 		saynn("[say=jacki]Huh?[/say]")
 
@@ -2401,7 +2401,7 @@ func _run():
 		elif (soundScore <= 3):
 			saynn("Jacki's little needy hole is a bit trained by now, allowing you to slide the dildo-shaped rod inside with relative ease. Still, this hole wasn't really designed to be stretched so stretching it will take some time.")
 
-			saynn("?els")
+		else:
 
 			saynn("Jacki's little needy pisshole is quite stretchy by now so sliding the dildo-shaped rod inside was quite easy, her urethra is just begging to be stretched wide.")
 

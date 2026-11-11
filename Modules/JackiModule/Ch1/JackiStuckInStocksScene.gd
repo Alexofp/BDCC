@@ -22,7 +22,7 @@ func _run():
 
 		saynn("You decide that now would be a good time to approach. An inmate is forcibly bent forward with their legs spread wide with a metal bar that connects the cuffs on their ankles. Their head and arms are forced into locked metal stocks, rendering the inmate pretty much helpless.")
 
-		saynn("She is that clumsy inmate that has runned into you on that long ago! You take a better look. She is a girl, clearly a wolf. Dark fur with a gray belly and some brown accents. You also spot some white details like her palms, the digi feet as well as the tip of her tail. On her head there is a careful ponytail with the tips of her hair being bright red. She is spotting an inmate uniform with orange trim, designating this particular inmate to be from a general pop block.")
+		saynn("She is that clumsy inmate that has ran into you not that long ago! You take a better look. She is a girl, clearly a wolf. Dark fur with a gray belly and some brown accents. You also spot some white details like her palms, the digi feet as well as the tip of her tail. On her head there is a careful ponytail with the tips of her hair being bright red. She is spotting an inmate uniform with orange trim, designating this particular inmate to be from a general pop block.")
 
 		saynn("Standing beside her is one of the guards, a cat. She seems to be making sure the inmate wolfy is locked tight.")
 

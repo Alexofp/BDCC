@@ -249,7 +249,7 @@ func offer_accepted_do(_id:String, _args:Dictionary, _context:Dictionary):
 		setState("about_to_sex", "main")
 	if(_id == "scam"):
 		setState("slut_scam", "client")
-		affectAffection("client", "main", -0.15)
+		#affectAffection("client", "main", -0.15)
 		sendSocialEvent("main", "client", SocialEventType.GotScammed)
 
 
@@ -450,6 +450,7 @@ func slut_scam_text():
 
 func slut_scam_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "pay"):
+		affectAffection("client", "main", -0.15)
 		askCreds += 5
 		if(getRolePawn("client").isPlayer()):
 			GM.pc.addCredits(-5)
@@ -459,8 +460,10 @@ func slut_scam_do(_id:String, _args:Dictionary, _context:Dictionary):
 		
 		sendSlaveryActivityEvent("main", "slutPaid", {credits=5})
 	if(_id == "leave"):
+		affectAffection("client", "main", -0.15)
 		setState("client_leaving_grumbly", "client")
 	if(_id == "demand_creds_back"):
+		affectAffection("client", "main", -0.15)
 		setState("client_demands_credits", "main")
 
 
