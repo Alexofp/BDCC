@@ -77,6 +77,15 @@ func unClampValue(_theVal:float, _theBorder:float) -> float:
 		_theVal = -_theBorder
 	return _theVal
 
+func addResistanceIfPlayer(_index:int, _am:float = 0.3):
+	if(getDomOrSubID(_index) != "pc"):
+		return
+	var theInfo:SexInfoBase = getDomOrSubInfo(_index)
+	if(!theInfo):
+		return
+	if(theInfo is SexSubInfo):
+		theInfo.addResistance(_am)
+
 func exposeToFetish(_indxTarget:int, _fetishID:String, _intensity:int, _indxExposer:int):
 	var info1:SexInfoBase = getDomOrSubInfo(_indxTarget)
 	

@@ -502,6 +502,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			addText("{sub.You} {sub.youVerb('try', 'tries')} to bite {dom.you} but {dom.youHe} {dom.youHeVerb('avoid')} it!")
 			return
 	if(_id == "pullaway"):
+		addResistanceIfPlayer(_indx)
 		var successChance:float = getSubResistChance(30.0, 25.0)
 		if(RNG.chance(successChance)):
 			getDomInfo().addAnger(0.3)

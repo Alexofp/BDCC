@@ -115,6 +115,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		addText("The tentacles stop cuddling {sub.you}.")
 
 	if(_id == "pullaway"):
+		addResistanceIfPlayer(_indx)
 		var successChance:float = getResistChance(SUB_0, DOM_0, RESIST_ORAL_FOCUS, 30.0, 25.0)
 		if(RNG.chance(successChance)):
 			addText("{sub.You} {sub.youVerb('pull')} away from {dom.you}.")

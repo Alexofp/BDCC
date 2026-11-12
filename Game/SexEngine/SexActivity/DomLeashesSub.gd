@@ -87,6 +87,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		return 
 
 	if(_id == "pullaway"):
+		addResistanceIfPlayer(_indx)
 		var successChance:float = getSubResistChance(90.0, 40.0)
 		if(RNG.chance(successChance)):
 			addText("{sub.You} {sub.youVerb('resist')} and {sub.youVerb('manage')} to avoid getting leashed by {dom.you}!")

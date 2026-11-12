@@ -415,6 +415,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		#talkText(DOM_0, "Wrong!")
 		return
 	if(_id == "pullaway"):
+		addResistanceIfPlayer(_indx)
 		var text:String = ""
 		var successChance = getSubResistChance(30.0, 25.0)
 		if(RNG.chance(successChance)):

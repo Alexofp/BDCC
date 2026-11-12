@@ -155,6 +155,8 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		canJustContinue = true
 		return
 	if(_id == "pullaway"):
+		addResistanceIfPlayer(_indx)
+		addResistanceIfPlayer(_indx)
 		var successChance:float = getSubResistChance(30.0, 25.0)
 		if(RNG.chance(successChance)):
 			addText("{sub.You} {sub.youVerb('pull')} away from {dom.you}.")
