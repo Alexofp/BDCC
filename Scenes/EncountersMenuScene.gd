@@ -7,6 +7,9 @@ var pickedGenderToChange = ""
 var pickedSpeciesToChange = ""
 var pickedGoalIDToChange = ""
 var pickedTFIDToChange = ""
+###
+var pickedTopicToChange = ""
+###
 var npclistScene = preload("res://UI/NpcList/NpcList.tscn") 
 var page:int = -1
 
@@ -94,6 +97,9 @@ func _run():
 		addButton("Dynamic personality", "Change the way your personality changes after sex", "togglePersonalityChange")
 		addButton("Threesomes (sub)", "Toggle the ability for extra doms to join the sex when you are a sub", "toggleThreesomesSub")
 		addButton("My fetishes", "Menu that allows you to see and change your fetishes", "fetishmenu")
+		###
+		addButton("My lust topics", "Menu that allows you set what the player character finds attractive", "lustTopicmenu")
+		###
 		addButton("My personality", "Menu that allows you to see and change your personality", "personalitymenu")
 		addButton("Genders", "Pick the chances of the genders of the encountered npcs", "gendersmenu")
 		addButton("Species", "Pick the chances of the species of the encountered npcs", "speciesmenu")
@@ -288,9 +294,43 @@ func _run():
 		for encounterPoolID in encounterPools:
 			addButton(CharacterPool.getVisibleName(encounterPoolID), "Pick this occupation", "occupationmenupool", [encounterPoolID])
 
+	###
+	if(state == "lustTopicmenu"):
+		var myTopics:LustInterests = GM.pc.getLustInterests()
+		saynn("Having an interest for something means your character is turned on by seeing this while getting teased by an opponent.")
+		addButton("Go back", "Go back a menu", "")
+		
+		sayn("Your interests:")
+#		var _dummy = GlobalRegistry.getLustTopicObjects()
+		for each in GlobalRegistry.getLustTopicObjects():
+			for topicID in each.handles_ids:
+				var topic = GlobalRegistry.getLustTopic(topicID)
+#				var topicValue:float = myTopics.interests.get_or_add(topicID, 0.0)
+				var topicValue:float = myTopics.getInterestValue(topicID)
+				var fetishColor = FetishInterest.getColorString(topicValue)
+				var topicInterestText = FetishInterest.getVisibleName(topicValue)
+				sayn(topic.getVisibleName(topicID)+": "+"[color="+fetishColor+"]"+topicInterestText+"[/color]")
+				addButton(topic.getChatName(topicID), "Change how much you enjoy this fetish", "changeTopic", [topicID])
+			
+	if(state == "changeTopic"):
+		var theInterests = GM.pc.getLustInterests()
+		var topic = GlobalRegistry.getLustTopic(pickedTopicToChange)
+		if(topic != null):
+			var textvalue = theInterests.interests[pickedTopicToChange]
+			saynn("Your current value for '"+topic.getVisibleName(pickedTopicToChange)+"' fetish is "+"[color="+Interest.getColorString(textvalue)+"]"+textvalue+"[/color]")
+			
+			saynn("Pick your new value for this interest:")
+			
+			for topicInterest in Interest.getAll():
+				addButton(Interest.getVisibleName(topicInterest), "Change to this", "changeTopicinterest", [topicInterest])
+			
+			
+		addButton("Back", "Don't change anything", "lustTopicmenu")
+	###
+	
 	if(state == "fetishmenu"):
 		var fetishHolder = GM.pc.getFetishHolder()
-		saynn("Having a fetish for something means you will get more lust doing this activity during sex.")
+		saynn("Having an interest for something means you will get more lust doing this activity during sex.")
 		addButton("Go back", "Go back a menu", "")
 		
 		sayn("Your fetishes:")
@@ -409,6 +449,20 @@ func _react(_action: String, _args):
 		var personality: Personality = GM.pc.getPersonality()
 		personality.addStat(pickedPersonalityStat, _args[0])
 		return
+		
+	###
+	if(_action == "changeTopic"):
+		pickedTopicToChange = _args[0]
+
+	if(_action == "changeTopicinterest"):
+		var theInterests = GM.pc.getLustInterests()
+		var topic = GlobalRegistry.getLustTopic(pickedTopicToChange)
+		if(topic != null):
+			theInterests.addInterest(pickedTopicToChange, _args[0])
+			theInterests.playerKnows[pickedTopicToChange] = _args[0]
+		setState("lustTopicmenu")
+		return
+	###
 	
 	if(_action == "changeinterest"):
 		var fetishHolder = GM.pc.getFetishHolder()
@@ -491,6 +545,9 @@ func saveData():
 	data["pickedGenderToChange"] = pickedGenderToChange
 	data["pickedSpeciesToChange"] = pickedSpeciesToChange
 	data["pickedGoalIDToChange"] = pickedGoalIDToChange
+	###
+	data["pickedTopicToChange"] = pickedTopicToChange
+	###
 	data["pickedTFIDToChange"] = pickedTFIDToChange
 
 	return data
@@ -504,4 +561,7 @@ func loadData(data):
 	pickedGenderToChange = SAVE.loadVar(data, "pickedGenderToChange", "")
 	pickedSpeciesToChange = SAVE.loadVar(data, "pickedSpeciesToChange", "")
 	pickedGoalIDToChange = SAVE.loadVar(data, "pickedGoalIDToChange", "")
+	###
+	pickedTopicToChange = SAVE.loadVar(data, "pickedTopicToChange", "")
+	###
 	pickedTFIDToChange = SAVE.loadVar(data, "pickedTFIDToChange", "")
