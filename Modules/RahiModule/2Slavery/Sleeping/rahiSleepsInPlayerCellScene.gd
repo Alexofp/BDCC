@@ -44,7 +44,7 @@ func _run():
 
 		saynn("Rahi slowly lowers herself, moaning as she lets your member to spread her folds and stretch her soft inner walls, filling her up. After that, she just begins to slowly ride you, bouncing up and down on your dick.")
 
-		saynn("You still try to pretend.. but it's hard.. you squirm ever so slightly under her while producing some quiet moans. All the while bites her lip and rides you faster while trying to hide her panting. You feel yourself getting close.. and Rahi seems to feel that too.")
+		saynn("You still try to pretend.. but it's hard.. you squirm ever so slightly under her while producing some quiet moans. All the while she bites her lip and rides you faster while trying to hide her panting. You feel yourself getting close.. and Rahi seems to feel that too.")
 
 		if (condomBroke):
 			saynn("She feels it really well in fact.. at some point the low-quality condom on your dick has [b]broken[/b], which means that Rahi is in fact riding you raw.. As you produce a loud groan, Rahi brings herself down on your {pc.penis} as deep as her pussy allows. And she stays there.. obediently letting you fill her womb up with your sticky hot {pc.cum}.. not even knowing about that..")
@@ -56,7 +56,7 @@ func _run():
 			saynn("After that she just sprints out of the cell, seed leaking out of her used hole in the process..")
 
 		else:
-			saynn("Luckily, the condom managed to endure all the fucking. As you produce a loud groan, Rahi brings herself down on your {pc.penis} as deep as her pussy allows. And she obediently stays there.. while you stuff the condom inside her with your hot stick {pc.cum}..")
+			saynn("Luckily, the condom managed to endure all the fucking. As you produce a loud groan, Rahi brings herself down on your {pc.penis} as deep as her pussy allows. And she obediently stays there.. while you stuff the condom inside her with your hot sticky {pc.cum}..")
 
 			saynn("After she recovers, Rahi slowly raises herself and carefully ties up the condom.. before flopping on you. You put your hand on her and pull her closer for snuggles.")
 

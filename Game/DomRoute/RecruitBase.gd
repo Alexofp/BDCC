@@ -156,7 +156,8 @@ func getResultsForChoices(_choices:Array) -> Array:
 	for theChoiceID in _choices:
 		var ourChoice:Dictionary = choices[_i]
 		var theOptions:Array = ourChoice["options"]
-		if(theChoiceID is int):
+		if((theChoiceID is int) || (theChoiceID is float)):
+			theChoiceID = int(theChoiceID)
 			var theOptionEntry:Array = theOptions[theChoiceID]
 			var theRes:int = theOptionEntry[3]
 			result.append(theRes)
@@ -177,7 +178,8 @@ func getResultsAndNamesForChoices(_choices:Array) -> Array:
 	for theChoiceID in _choices:
 		var ourChoice:Dictionary = choices[_i]
 		var theOptions:Array = ourChoice["options"]
-		if(theChoiceID is int):
+		if((theChoiceID is int) || (theChoiceID is float)):
+			theChoiceID = int(theChoiceID)
 			var theOptionEntry:Array = theOptions[theChoiceID]
 			var theRes:int = theOptionEntry[3]
 			result.append([theRes, theOptionEntry[1]])
