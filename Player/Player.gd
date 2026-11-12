@@ -35,6 +35,7 @@ var dynamicPersonality: bool = false
 
 func _init():
 	initialDodgeChance = 0.05 # Player has a small chance to dodge anything
+	Log.print("[LustierCombat] Overrode res://Player/Player.gd")
 
 func _ready():
 	#GM.pc = self
@@ -454,6 +455,9 @@ func saveData():
 	
 	data["fetishHolder"] = fetishHolder.saveData()
 	data["personality"] = personality.saveData()
+	###
+	data["lustInterests"] = lustInterests.saveDataDynamicNpc() # saveData = save what player knows about this character; saveDataDynamicNpc = save the data about this character
+	###
 	data["reputation"] = reputation.saveData()
 	data["tfHolder"] = tfHolder.saveData()
 
@@ -515,6 +519,9 @@ func loadData(data):
 	
 	fetishHolder.loadData(SAVE.loadVar(data, "fetishHolder", {}))
 	personality.loadData(SAVE.loadVar(data, "personality", {}))
+	###
+	lustInterests.loadDataDynamicNpc(SAVE.loadVar(data, "lustInterests", {}))
+	###
 	reputation.loadData(SAVE.loadVar(data, "reputation", {}))
 	tfHolder.loadData(SAVE.loadVar(data, "tfHolder", {}))
 

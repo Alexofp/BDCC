@@ -16,6 +16,9 @@ var enemyAIStrategy: AIStrategyBase
 var restraintIdsForcedByPC = []
 var enemySurrendered = false
 var lastPlayerAttackData = null
+###
+var lastEnemyLustActionData = {}
+###
 var restraintsPickedCategory = ""
 
 func _init():
@@ -237,10 +240,14 @@ func _run():
 			
 	if(state == "playerMustDodge"):
 		var attack: Attack = GlobalRegistry.getAttack(savedAIAttackID)
-		
 		setEnemyAsAttacker()
+		
 		if(GM.pc.isBlindfolded() && !GM.pc.canHandleBlindness() && !attack.canSeeAnticipationTextWhenBlind()):
 			saynn(GM.ui.processString(attack.canBlindAnticipationText(enemyCharacter, GM.pc)))
+		###
+		elif( lastEnemyLustActionData.has("text") && attack == null):
+			saynn(GM.ui.processString("{attacker.name} is about to tease you!"))
+		###
 		else:
 			saynn(GM.ui.processString(attack.getAnticipationText(enemyCharacter, GM.pc)))
 		addButton("Do nothing", "You don't counter the attack in any way", "dodge_donothing")
@@ -457,23 +464,41 @@ func _react(_action: String, _args):
 				onPCWin()
 				return
 		
-		var attack: Attack = GlobalRegistry.getAttack(savedAIAttackID)
+		###
+		var attack = GlobalRegistry.getAttack(savedAIAttackID)
+		if(attack == null):
+			attack = GlobalRegistry.getLustAction(savedAIAttackID)
+		###
 		if(attack == null):
 			assert(false, "Bad attack: "+savedAIAttackID)
 			
 		setEnemyAsAttacker()
-		
-		var result = attack.doAttack(enemyCharacter, GM.pc)
-		result["text"] = GM.ui.processString(result["text"])
-		
-		playAnimation(StageScene.Duo, result["receiverAnimation"], {npc=enemyID, npcAction=result["attackerAnimation"]})
-		
+		###
+		var result = {}
+		if(lastEnemyLustActionData.has("text")):
+			var damage = GM.pc.receiveDamage(DamageType.Lust, int(round(lastEnemyLustActionData["theDamage"])))
+			result["text"] = lastEnemyLustActionData["text"]
+			result["text"] += "\n\n"
+			result["text"] += GM.pc.getName()+" received [color="+DamageType.getColorString(DamageType.Lust)+"]"+str(damage)+" "+DamageType.getBattleName(DamageType.Lust)+"[/color] "
+			result["text"] += ". "+GM.pc.lustDamageReaction(damage, enemyCharacter)
+			if(GM.pc.fightingState == "defocus"):
+				result["text"] += ", {pc.heShe} was able to defocus and reduce the lust damage!\n"
+			if(lastEnemyLustActionData.has("anim")):
+				playAnimation(StageScene.Duo, "Standing-loop", {npc=enemyID, npcAction=result["anim"]})
+		else:
+			result = attack.doAttack(enemyCharacter, GM.pc)
+			result["text"] = GM.ui.processString(result["text"])
+			playAnimation(StageScene.Duo, result["receiverAnimation"], {npc=enemyID, npcAction=result["attackerAnimation"]})
+		###
 		whatEnemyDid += result["text"]
 		savedAIAttackID = ""
 		
 		GM.pc.setFightingStateNormal()
 		
 		afterTurnChecks()
+		###
+		lastEnemyLustActionData = {}
+		###
 		return
 	
 	if(_action == "submit"):
@@ -771,13 +796,67 @@ func aiTurn():
 			
 			var result = attack.doAttack(enemyCharacter, GM.pc)
 			result["text"] = GM.ui.processString(result["text"])
-				
+
 			playAnimation(StageScene.Duo, result["receiverAnimation"], {npc=enemyID, npcAction=result["attackerAnimation"]})
 			
 			enemyText += result["text"]
 		else:
 			savedAIAttackID = attackID
 			setState("playerMustDodge")
+	
+	###
+	elif(actionType == "lust"):
+		var attackID: String = actionData["attackID"]
+		var _action:LustAction = GlobalRegistry.getLustAction(attackID)
+		
+		if(_action == null):
+			Log.printerr("Bad attack "+str(attackID))
+			attackID = "error"
+			_action = GlobalRegistry.getLustAction(attackID)
+		
+		var result = enemyAIStrategy.tempLustCombatState.doAction({"id":attackID, })
+		if(result.has("lust")):
+			enemyCharacter.addLust(result["lust"])
+		if("lustInterests" in result):
+			var actionLustInterests = result["lustInterests"]
+			
+			var lustInterests: LustInterests = GM.pc.getLustInterests()
+			var compensateForPlayerWhoDidntSetAnyInterests = true
+			if(lustInterests.interests.empty()):
+				result["text"] = "Error player has no lust interest topics"
+				return result["text"]
+			for topic in lustInterests.interests.keys():
+				if(not lustInterests.interests[topic] == Interest.Neutral):
+					compensateForPlayerWhoDidntSetAnyInterests = false
+			
+			var teaseData = lustInterests.reactLustAction(enemyCharacter, actionLustInterests, 0)
+			#var damageMult = teaseData["value"]
+			var positiveDamage = teaseData["positiveValue"]
+			var negativeDamage = teaseData["negativeValue"]
+			
+			var DamageMult = enemyCharacter.getDamageMultiplier(DamageType.Lust) + 1.0
+			var damageBalanceMod = negativeDamage/DamageMult + positiveDamage*DamageMult
+			if(damageBalanceMod > 0.0):
+				damageBalanceMod = pow(damageBalanceMod, 0.7)
+			if(damageBalanceMod < 0.0):
+				damageBalanceMod = 0 # npc doesn't have the player abilities to manage lust, so for game balance they can't do negative damage
+			var theDamage = damageBalanceMod*10.0*RNG.randf_range(0.9, 1.1)
+			
+			theDamage *= 2.0 # adjust this for game balance
+			
+			if(compensateForPlayerWhoDidntSetAnyInterests):
+				theDamage *= RNG.randf_range(0.9, 1.5) # if all topics are neutral, throw some more random on top to approximate the effect of likes and dislikes
+
+			savedAIAttackID = attackID
+			result["text"] = GM.ui.processString(result["text"])
+			lastEnemyLustActionData = result
+			lastEnemyLustActionData["theDamage"] = theDamage
+			enemyText += "{attacker.name} uses a lust attack!\n\n" # debug
+			setState("playerMustDodge")
+			
+		
+	###
+	
 	elif(actionType == "wait"):
 		enemyText += "{attacker.name} decided to wait"
 	elif(actionType == "stunned"):
