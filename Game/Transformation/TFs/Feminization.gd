@@ -109,7 +109,7 @@ func getPossibleSteps(_char:BaseCharacter) -> Array:
 			goodBreastSize = BreastsSize.C
 		if(_char.getThickness() >= 80):
 			goodBreastSize = BreastsSize.D
-		var currentBreastSize:int = _char.getBreastsSize()
+		var currentBreastSize:int = _char.getBreastsBaseSize()
 		
 		if(currentBreastSize < goodBreastSize):
 			result.append("incbreasts")

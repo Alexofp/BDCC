@@ -57,7 +57,7 @@ func doProgress(_context:Dictionary) -> Dictionary:
 	if(removedBreasts):
 		return {}
 	var theChar:BaseCharacter = getChar()
-	var breastSize:int = theChar.getBreastsSize()
+	var breastSize:int = theChar.getBreastsBaseSize()
 	if(breastSize == BreastsSize.A):
 		removedBreasts = true
 	var toRemove:int = 1

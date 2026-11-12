@@ -34,7 +34,7 @@ func getPillFluidsRequired() -> Dictionary:
 	}
 
 func isPossibleFor(_char) -> bool:
-	if(_char.getBreastsSize() <= BreastsSize.FLAT):
+	if(_char.getBreastsBaseSize() <= BreastsSize.FLAT):
 		return false
 	return true
 
@@ -66,7 +66,7 @@ func getPillOptions() -> Dictionary:
 	}
 
 func canTransformFurther() -> bool:
-	if(getChar().getBreastsSize() <= BreastsSize.FLAT):
+	if(getChar().getBreastsBaseSize() <= BreastsSize.FLAT):
 		return false
 	return .canTransformFurther()
 	

@@ -90,7 +90,7 @@ func getPossibleSteps(_char:BaseCharacter) -> Array:
 		if(fem > 70 && charHasMaleBreasts(_char) && !switchedbreasts):
 			result.append("switchbreasts")
 		var goodBreastSize:int = BreastsSize.A
-		var currentBreastSize:int = _char.getBreastsSize()
+		var currentBreastSize:int = _char.getBreastsBaseSize()
 		
 		if(currentBreastSize < goodBreastSize):
 			result.append("incbreasts")

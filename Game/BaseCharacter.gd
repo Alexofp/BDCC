@@ -818,6 +818,11 @@ func getBreastsSize() -> int:
 		return BreastsSize.FOREVER_FLAT
 	return getBodypart(BodypartSlot.Breasts).getSize()
 
+func getBreastsBaseSize() -> int:
+	if(!hasBodypart(BodypartSlot.Breasts)):
+		return BreastsSize.FOREVER_FLAT
+	return getBodypart(BodypartSlot.Breasts).getBaseSize()
+
 func getFluidType(fluidSource):
 	var theCustomType:String = getCustomFluidType(fluidSource)
 	if(theCustomType != ""):

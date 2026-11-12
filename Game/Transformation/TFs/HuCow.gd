@@ -76,7 +76,7 @@ func getPossibleSteps(_char:BaseCharacter) -> Array:
 		if(thick > 70 && charHasMaleBreasts(_char) && !switchedbreasts):
 			result.append("switchbreasts")
 		var goodBreastSize:int = BreastsSize.M
-		var currentBreastSize:int = _char.getBreastsSize()
+		var currentBreastSize:int = _char.getBreastsBaseSize()
 		
 		if(currentBreastSize < goodBreastSize):
 			result.append("incbreasts")
@@ -141,7 +141,7 @@ func doProgress(_context:Dictionary) -> Dictionary:
 			nipStageInc = true
 			theChar.increaseBodypartSensitivity(BodypartSlot.Breasts, 0.2*nipsStage)
 		
-		var breastSize:int = getChar().getBreastsSize()
+		var breastSize:int = getChar().getBreastsBaseSize()
 		
 		var sizesToAdd:int = 1
 		if(breastSize < BreastsSize.C):
