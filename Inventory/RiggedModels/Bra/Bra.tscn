@@ -8,9 +8,9 @@
 [ext_resource path="res://Player/Player3D/Parts/PartState.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Inventory/RiggedModels/Bra/Bra.gd" type="Script" id=7]
 [ext_resource path="res://Player/Player3D/Skins/ClothingShader.gdshader" type="Shader" id=8]
-[ext_resource path="res://AssetsSource/items/Uniform/red.png" type="Texture" id=9]
 [ext_resource path="res://Inventory/RiggedModels/Bra/BraDamageMask.png" type="Texture" id=10]
 [ext_resource path="res://Inventory/RiggedModels/Bra/BraBraDamageMask.png" type="Texture" id=11]
+[ext_resource path="res://Inventory/RiggedModels/InmateUniform/Textures/red.png" type="Texture" id=12]
 
 [sub_resource type="SpatialMaterial" id=15]
 resource_name = "bodywide.png"
@@ -134,7 +134,7 @@ shader_param/color_b = Color( 0, 0, 1, 1 )
 shader_param/damage = 0.0
 shader_param/damage_color = Color( 0, 0, 0, 1 )
 shader_param/texture_albedo = ExtResource( 2 )
-shader_param/texture_colormask = ExtResource( 9 )
+shader_param/texture_colormask = ExtResource( 12 )
 shader_param/texture_damage = ExtResource( 11 )
 
 [sub_resource type="SpatialMaterial" id=47]
@@ -260,7 +260,7 @@ shader_param/color_b = Color( 0, 0, 1, 1 )
 shader_param/damage = 0.0
 shader_param/damage_color = Color( 0, 0, 0, 1 )
 shader_param/texture_albedo = ExtResource( 3 )
-shader_param/texture_colormask = ExtResource( 9 )
+shader_param/texture_colormask = ExtResource( 12 )
 shader_param/texture_damage = ExtResource( 10 )
 
 [node name="Bra" instance=ExtResource( 5 )]
