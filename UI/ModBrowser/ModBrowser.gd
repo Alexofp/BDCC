@@ -25,6 +25,7 @@ onready var next_page_button = $"%NextPageButton"
 var page:int = 0
 const MAX_MODS_PER_PAGE:int = 50
 onready var page_selector_option_button = $"%PageSelectorOptionButton"
+onready var fav_button = $"%FavButton"
 
 onready var back_button = $"%BackButton"
 onready var forward_button = $"%ForwardButton"
@@ -38,11 +39,13 @@ var allMods:Array = []
 var modCountByAuthor:Dictionary = {}
 var pickedModEntry:ModEntry
 var visualModEntries:Array = []
+var favorites:Dictionary = {} # Dict[mod name string, true]
+var favoriteModEntries:Array = [] # Array[ModEntry]
 
 var viewModsByAuthorUriPrefix:String = "view_mods_by:"
 const ViewModByIDUriPreview = "select_ID:"
 const ViewModByNameUriPreview = "select_NAME:"
-var sortType:String = "newest" #newest, oldest, name
+var sortType:String = "sort_newest"
 var searchQuery:String = ""
 var downloadedMods:bool = false
 
@@ -57,6 +60,8 @@ var aiFilter:int = AIFILTER_HIDE
 var categoryFilter:String = ""
 
 signal closePressed
+
+const FAVORITES_PATH:String = "user://FavMods.json"
 
 func _ready():
 	ai_option_button.add_item("Hide AI")
@@ -88,6 +93,7 @@ func resetMods():
 	modIDUsedByMods.clear()
 	backQueue.clear()
 	forwardQueue.clear()
+	
 	updateCurrentPreview()
 	updateBackForward()
 
@@ -96,8 +102,11 @@ func resetModListScroll() -> void:
 
 func updateModList():
 	var theMods:Array = allMods
-	if(!categoryFilter.empty() && categoryToMods.has(categoryFilter)):
-		theMods = categoryToMods[categoryFilter]
+	if(!categoryFilter.empty()):
+		if(categoryFilter == "-favs-"):
+			theMods = favoriteModEntries
+		elif(categoryToMods.has(categoryFilter)):
+			theMods = categoryToMods[categoryFilter]
 	
 	var filteredMods:Array = getSearchQueryFilteredMods(theMods)
 	filteredMods = filterModsByAIFilter(filteredMods)
@@ -205,14 +214,17 @@ func _on_HTTPRequest_request_completed(result, _response_code, _headers, body):
 				else:
 					modIDUsedByMods[theReqID].append(newModEntry)
 	
-	sortType = "newest"
+	sortType = "sort_newest"
 	sortAll("sort_newest")
 	updateModList()
 	
+	loadFavMods()
+	
 	category_option_button.clear()
 	category_option_button.add_item("All categories")
+	category_option_button.add_item("Favorites")
 	category_option_button.select(0)
-	var _ii:int = 1
+	var _ii:int = 2
 	for theCat in categories:
 		category_option_button.add_item(theCat)
 		if(theCat == categoryFilter):
@@ -309,6 +321,7 @@ func updatePickedModEntry():
 	
 	download_mod_and_reqs_button.visible = !pickedModEntry.reqs.empty() if pickedModEntry else false
 	updateCurrentPreview()
+	updateFavButton()
 
 func onModEntrySelected(theModEntry):
 	setSelectedEntry(theModEntry)
@@ -498,21 +511,22 @@ func sortAll(_method:String):
 	allMods.sort_custom(self, _method)
 	for theCat in categoryToMods:
 		categoryToMods[theCat].sort_custom(self, _method)
+	favoriteModEntries.sort_custom(self, _method)
 
 func _on_SortNameButton_pressed():
-	sortType = "name"
+	sortType = "sort_name"
 	sortAll("sort_name")
 	updateModList()
 
 
 func _on_SortNewestFirstButton_pressed():
-	sortType = "newest"
+	sortType = "sort_newest"
 	sortAll("sort_newest")
 	updateModList()
 
 
 func _on_SortOldestFirstButton_pressed():
-	sortType = "oldest"
+	sortType = "sort_oldest"
 	sortAll("sort_oldest")
 	updateModList()
 
@@ -655,14 +669,14 @@ func _on_HTTPRequestPreview_request_completed(result, _response_code, _headers, 
 		var error = image.load_png_from_buffer(body)
 		if error != OK:
 			Log.printerr("Mod browser failed to load up a preview image (not a png?)")
-			return
+			#return
 	elif(theExt.to_lower() in ["jpg", "jpeg"]):
 		var error = image.load_jpg_from_buffer(body)
 		if error != OK:
 			Log.printerr("Mod browser failed to load up a preview image (not a jpg?)")
-			return
-	else:
-		return
+			#return
+	#else:
+	#	return
 	
 	var texture := ImageTexture.new()
 	texture.create_from_image(image)
@@ -688,10 +702,12 @@ func _on_FilterOptionButton_item_selected(_index:int):
 		_on_SortNameButton_pressed()
 
 func _on_CategoryOptionButton_item_selected(_index:int):
-	if(_index <= 0 || (_index-1)>=categories.size()):
+	if(_index <= 0 || (_index-2)>=categories.size()):
 		categoryFilter = ""
+	elif(_index == 1):
+		categoryFilter = "-favs-"
 	else:
-		categoryFilter = categories[_index-1] # Zero index = All categories
+		categoryFilter = categories[_index-2] # Zero index = All categories
 	updateModList()
 
 func _on_DownloadCancelButton_pressed():
@@ -760,3 +776,94 @@ func goForward():
 	setSelectedEntry(forwardQueue.back(), false)
 	forwardQueue.pop_back()
 	updateBackForward()
+
+func _on_FavButton_pressed():
+	toggleCurrentFavStatus()
+
+func saveFavMods():
+	Util.writeFile(FAVORITES_PATH, JSON.print(favorites.keys(), "\t"))
+
+func loadFavMods():
+	favorites.clear()
+	favoriteModEntries.clear()
+	
+	var theText:String = Util.readFile(FAVORITES_PATH)
+	if(theText.empty()):
+		return
+	
+	var theJson:JSONParseResult = JSON.parse(theText)
+	if(!theJson || theJson.error != OK):
+		return
+	var theRes = theJson.result
+	
+	if(!(theRes is Array)):
+		return
+	
+	for theModName in theRes:
+		if(!(theModName is String)):
+			continue
+		favorites[theModName] = true
+		if(idToMod.has(theModName)):
+			var theModEntry:ModEntry = idToMod[theModName]
+			favoriteModEntries.append(theModEntry)
+		elif(nameToMod.has(theModName)):
+			var theModEntry:ModEntry = nameToMod[theModName]
+			favoriteModEntries.append(theModEntry)
+	
+	favoriteModEntries.sort_custom(self, sortType)
+
+const FAV_COLOR:Color = Color.red
+func updateFavButton():
+	if(!pickedModEntry || !hasAsFav(pickedModEntry)):
+		fav_button.remove_color_override("font_color")
+		fav_button.remove_color_override("icon_color_pressed")
+		fav_button.remove_color_override("font_color_disabled")
+		fav_button.remove_color_override("font_color_focus")
+		fav_button.remove_color_override("font_color_hover_pressed")
+		return
+	fav_button.add_color_override("font_color", FAV_COLOR)
+	fav_button.add_color_override("icon_color_pressed", FAV_COLOR)
+	fav_button.add_color_override("font_color_disabled", FAV_COLOR)
+	fav_button.add_color_override("font_color_focus", FAV_COLOR)
+	fav_button.add_color_override("font_color_hover_pressed", FAV_COLOR)
+
+func addCurrentToFavs():
+	if(!pickedModEntry):
+		return
+	if(hasAsFav(pickedModEntry)):
+		return
+	var theIdOrName:String = (pickedModEntry.name if pickedModEntry.id.empty() else pickedModEntry.id)
+	favorites[theIdOrName] = true
+	favoriteModEntries.append(pickedModEntry)
+	favoriteModEntries.sort_custom(self, sortType)
+	if(categoryFilter == "-favs-"):
+		updateModList()
+	updateFavButton()
+	saveFavMods()
+
+func removeCurrentFromFavs():
+	if(!pickedModEntry):
+		return
+	if(!hasAsFav(pickedModEntry)):
+		return
+	favorites.erase(pickedModEntry.id)
+	favorites.erase(pickedModEntry.name)
+	favoriteModEntries.erase(pickedModEntry)
+	# No need to sort
+	if(categoryFilter == "-favs-"):
+		updateModList()
+	updateFavButton()
+	saveFavMods()
+
+func toggleCurrentFavStatus():
+	if(!pickedModEntry):
+		return
+	if(hasAsFav(pickedModEntry)):
+		removeCurrentFromFavs()
+	else:
+		addCurrentToFavs()
+
+func hasAsFav(_modEntry:ModEntry) -> bool:
+	if((!_modEntry.id.empty() && favorites.has(_modEntry.id)) || favorites.has(_modEntry.name)):
+		return true
+	return false

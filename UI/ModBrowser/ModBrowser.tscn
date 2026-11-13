@@ -234,6 +234,14 @@ margin_bottom = 40.0
 rect_min_size = Vector2( 0, 40 )
 text = "Download mod + dependencies"
 
+[node name="FavButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer"]
+unique_name_in_owner = true
+margin_left = 394.0
+margin_right = 422.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+text = "<3"
+
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
 margin_top = 44.0
 margin_right = 837.0
@@ -418,6 +426,7 @@ text = "Cancel"
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/ForwardButton" to="." method="_on_ForwardButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/DownloadModButton" to="." method="_on_DownloadModButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/DownloadModAndReqsButton" to="." method="_on_DownloadModAndReqsButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/FavButton" to="." method="_on_FavButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer/VBoxContainer/PreviewTextureRect/OpenFullButton" to="." method="_on_OpenFullButton_pressed"]
 [connection signal="meta_clicked" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/ScrollContainer/VBoxContainer/RichTextLabel" to="." method="_on_RichTextLabel_meta_clicked"]
 [connection signal="pressed" from="FullTextureRect/CloseFullButton" to="." method="_on_CloseFullButton_pressed"]
