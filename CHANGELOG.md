@@ -5,6 +5,41 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## [0.4.0] - 2026-11-13
+### Added
+- New missions for the Dominant main route. 2 new story missions, 2 side missions, 4 lewd reward scenes, 1 new recruit. Each mission takes me forever to write but I think these turned out great :3. Lots of tension, lots of action, lots of lewd stuff.
+- [Combat animations overhaul](https://github.com/user-attachments/assets/8da53902-f82f-4b36-9adf-457a78c1f529)! The fighting scene got updated with a lot of new animations and idle stances. Normal attacks, lust attacks, bondage attack, most of the attacks now have cool animations. Collapsing is now actually represented! The moment of impact now matches with the getting-hit/blocking animation much better. Some characters have unique fighting idle stances. You can choose your stance too.
+- [Inmate uniforms and underwear now have 'opened' states](https://github.com/user-attachments/assets/a0eae35e-bd61-4e77-98d1-f7c3d9499d81). Lust attacks that displace your clothing now actually do it visibly! You can also now 'displace' your clothing during the procedural sex too. Clothed sex is possible, yes.
+- Kait got some pregnancy content.
+- Mod browser got a HUGE facelift. Categories, support for dependencies, automatic deletion of old versions, visible previews, ai mods toggle (ai mods are hidden by default), favorites, paging. Downloading mods has never been easier.
+- New sex anims. 2 normal sex, 1 cowgirl sex, 1 choking-sex, 1 dp threesome. Threesomes now show all 3 characters when no sex activity is happening. 69 sex has a fast version now. A few of the old sex anims got improved a bit.
+- Some static characters now allow you to feed them certain drugs (heat/breeder/etc) if you progress through their content enough.
+- Shirt can be toggled-off for the inmate uniform. Chastity belt can be toggled-off for the straitjacket.
+- [Advanced strapon](https://github.com/user-attachments/assets/a23924b9-377e-4a66-a069-9d9175581965)! It's a new unlockable (in the lab) strapon that can 'project' any penis that is available in the bluespace. If you put portal panties on someone, you can use their penis in this strapon basically. Has a lot of jank. It still works like a strapon but it does cum using the target's cum. I've also added [Portal Chastity Cage](https://github.com/user-attachments/assets/4609df75-30da-49be-97be-46444a3e5ba2). It works like portal panties but only covers the penis. Perfect for when you want to fuck someone using their own dick x3
+- Searching-against-a-wall now has a unique animation. It's used any time your character gets searched. New story scenes have new sex anims too.
+
+### Changed
+- You can now trigger strapons to 'cum' at any point during the procedural sex.
+- Resisting (as a player) now raises your character's resistance.
+- Eliza's final stage of her quest now explains better what you need to do.
+
+### Fixed
+- Auto-translated buttons now go back to their original text when you press 'show original', not just the scene text.
+- TF pills that affect breast size now use your 'base' breast size rather than the 'final' one when checking if they should do something.
+- Fixed some crashes and typos.
+
+### Contributions
+- [Add ability to view all mods of an author](https://github.com/Alexofp/BDCC/pull/354) (by keerifox)
+- [Allow offering self when refusing help getting out of stocks/slutwall, avoid getting same savers or sex work clients](https://github.com/Alexofp/BDCC/pull/356) (by keerifox)
+- [Switch 2 lines to add the ability for part3D to reference their doll's character](https://github.com/Alexofp/BDCC/pull/359) (by Selinoccino)
+- [Moddable codeblocks](https://github.com/Alexofp/BDCC/pull/360) (by Selinoccino)
+- [Allow player to service dom without reputation, if sex work client explicitly asked for it](https://github.com/Alexofp/BDCC/pull/362) (by keerifox)
+- [Tiny fixes](https://github.com/Alexofp/BDCC/pull/365) (by keerifox)
+- [Ability to re-create game extenders on load/new-game](https://github.com/Alexofp/BDCC/pull/364) (by Selinoccino)
+- [Make 2 generic npcs respect gender display options](https://github.com/Alexofp/BDCC/pull/368) (by Selinoccino)
+- [Fix modded menu buttons shortcuts](https://github.com/Alexofp/BDCC/pull/370) (by Selinoccino)
+- [Relocate SexEngine.resetJustCame() call so that it isn't reset before SexActivities can access it](https://github.com/Alexofp/BDCC/pull/366) (by Mindstormsman)
+
 ## [0.3.0] - 2026-07-30
 ### Added
 - First missions of the new Main Route! Begin your quest of overthrowing the captain, together with Kait (and others). This route is gonna be tailored specifically towards dominant players.
@@ -758,7 +793,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Turn-based fighting
 - Initial player customization
 
-[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.3.0...main
+[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.4.0...main
+[0.4.0]: https://github.com/Alexofp/BDCC/compare/0.3.0...0.4.0
 [0.3.0]: https://github.com/Alexofp/BDCC/compare/0.2.0...0.3.0
 [0.2.0]: https://github.com/Alexofp/BDCC/compare/0.1.12...0.2.0
 [0.1.12]: https://github.com/Alexofp/BDCC/compare/0.1.11...0.1.12
