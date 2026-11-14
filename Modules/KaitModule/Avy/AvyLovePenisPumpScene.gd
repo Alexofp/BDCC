@@ -152,7 +152,7 @@ func _run():
 
 		saynn("[say=avy]Grr-r..[/say]")
 
-		saynn("Avy's nipples feel incredibly stiff. You just gently play with them, rubbing and tugging. While you do that, her breathing gets faster. The ring keeps sliding down to her base.. then back up.. causing her hips to jerky forward involuntarily.")
+		saynn("Avy's nipples feel incredibly stiff. You just gently play with them, rubbing and tugging. While you do that, her breathing gets faster. The ring keeps sliding down to her base.. then back up.. causing her hips to jerk forward involuntarily.")
 
 		saynn("[say=avy]Nngh..[/say]")
 

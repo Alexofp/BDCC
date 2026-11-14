@@ -233,10 +233,10 @@ func _run():
 				saynn("She slumps forward and puts her arms around you, her body is still shivering from the incoming waves of ecstasy rocking through her, sending little aftershocks, making her twitch around your rubber toy. Her breath comes in short, warm pants against your lips as you embrace her..")
 
 		if (!usedStrapon):
-			saynn("She doesn't move to get off.. just saying there.. impaled on you. As her orgasm begins to fade.. so does yours. A low, contented purr returns.. rumbling in her chest.")
+			saynn("She doesn't move to get off.. just staying there.. impaled on you. As her orgasm begins to fade.. so does yours. A low, contented purr returns.. rumbling in her chest.")
 
 		else:
-			saynn("She doesn't move to get off.. just saying there.. impaled on you. Her orgasm begins to fade gradually. A low, contented purr returns.. rumbling in her chest.")
+			saynn("She doesn't move to get off.. just staying there.. impaled on you. Her orgasm begins to fade gradually. A low, contented purr returns.. rumbling in her chest.")
 
 		saynn("[say=kait]Ha.. hah..[/say]")
 

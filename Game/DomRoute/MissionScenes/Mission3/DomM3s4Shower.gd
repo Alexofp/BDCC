@@ -297,7 +297,7 @@ func _run():
 
 		saynn("Her breathing comes in short, erratic gasps.")
 
-		saynn("There is no time aftercare.. so you let the water clean your cock.. before you step out.")
+		saynn("There is no time for aftercare.. so you let the water clean your cock.. before you step out.")
 
 		addButton("Continue", "See what happens next", "after_sex_grab_badge")
 	if(state == "just_breed_pullout"):
@@ -310,7 +310,7 @@ func _run():
 
 		saynn("She slumps against the wall, her legs finally giving out.")
 
-		saynn("There is no time aftercare.. so you let the water clean your cock.. before you step out.")
+		saynn("There is no time for aftercare.. so you let the water clean your cock.. before you step out.")
 
 		addButton("Continue", "See what happens next", "after_sex_grab_badge")
 

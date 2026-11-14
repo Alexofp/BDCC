@@ -311,7 +311,7 @@ func getStartTextForPose(thePose) -> String:
 		])
 	elif(thePose == POSE_SUSPENDED):
 		text = RNG.pick([
-			"{dom.You} {dom.youVerb('grab')} {dom.youHim} and {dom.youVerb('raise', 'raises')} above the floor, {dom.yourHis} hands holding {sub.yourHis} body. {dom.YourHis} "+getDickName()+" is pressed against {sub.yourHis} "+getUsedBodypartName()+throughClothing,
+			"{dom.You} {dom.youVerb('grab')} {sub.youHim} and {dom.youVerb('raise', 'raises')} above the floor, {dom.yourHis} hands holding {sub.yourHis} body. {dom.YourHis} "+getDickName()+" is pressed against {sub.yourHis} "+getUsedBodypartName()+throughClothing,
 		])
 	elif(thePose == POSE_SEARCH):
 		text = RNG.pick([
@@ -379,7 +379,7 @@ func getSwitchPoseTextForPose(thePose:String) -> String:
 		])
 	elif(thePose == POSE_SUSPENDED):
 		text = RNG.pick([
-			"{dom.You} {dom.youVerb('grab')} {dom.youHim} and {dom.youVerb('raise', 'raises')} above the floor, {dom.yourHis} hands holding {sub.yourHis} body. {dom.YourHis} "+getDickName()+" is still inside {sub.yourHis} "+getUsedBodypartName()+"!",
+			"{dom.You} {dom.youVerb('grab')} {sub.youHim} and {dom.youVerb('raise', 'raises')} above the floor, {dom.yourHis} hands holding {sub.yourHis} body. {dom.YourHis} "+getDickName()+" is still inside {sub.yourHis} "+getUsedBodypartName()+"!",
 		])
 	elif(thePose == POSE_SEARCH):
 		text = RNG.pick([

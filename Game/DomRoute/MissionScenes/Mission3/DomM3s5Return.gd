@@ -280,7 +280,7 @@ func _run():
 
 		saynn("The poor nurse looks terrified.. too terrified to resist. Tears begin running down her cheeks.")
 
-		saynn("[say=avy]And then.. I knotted cock, you know. Could dislocate your jaw. Could loosen up your pretty ass. We will see.[/say]")
+		saynn("[say=avy]And then.. I have a knotted cock, you know. Could dislocate your jaw. Could loosen up your pretty ass. We will see.[/say]")
 
 		saynn("Avy gropes the bulge on her shorts. Kait finally has enough of it. She runs up to the foxy.")
 

@@ -206,7 +206,7 @@ func _run():
 
 		saynn("What?")
 
-		saynn("You look through the cell of the door.. and see the tips of someone's horns and tassels of their ears.")
+		saynn("You look through the little slit window of the door.. and see the tips of someone's horns and tassels of their ears.")
 
 		saynn("It's Ferri! She is crouching near the door, whispering to you.")
 

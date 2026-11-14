@@ -87,7 +87,7 @@ func _run():
 
 		saynn("You slide the shirt off her shoulders, letting it fall to the floor. Avy doesn't seem to cover herself, her perky red nips now exposed to the cold air.")
 
-		saynn("Next, you hands rich for the band of her shorts. You pull them down slowly, past her hips, down her legs.. until they land onto the floor.")
+		saynn("Next, your hands reach for the band of her shorts. You pull them down slowly, past her hips, down her legs.. until they land onto the floor.")
 
 		saynn("Her sheath is visible now, the tip of her cock just barely peeking out.")
 
@@ -138,11 +138,11 @@ func _run():
 
 		saynn("[say=pc]I want you to keep your hands on the wall. No matter what.[/say]")
 
-		saynn("[say=avy]And if I do?[/say]")
+		saynn("[say=avy]And if I don't?[/say]")
 
-		saynn("[say=pc]See it as a challenge. If you do, you will lose.[/say]")
+		saynn("[say=pc]See it as a challenge. If you don't, you will lose.[/say]")
 
-		saynn("[say=avy]And what are you gonna do?[/say]")
+		saynn("[say=avy]What are you gonna do?[/say]")
 
 		saynn("You know that she won't agree to what you wanna do with her.. not easily.")
 
@@ -325,7 +325,7 @@ func _run():
 
 		saynn("[say=pc]I just want you to lick it. Taste yourself.[/say]")
 
-		saynn("[say=avy]I'm not a fucking cumslut.. Put that shit way..[/say]")
+		saynn("[say=avy]I'm not a fucking cumslut.. Put that shit away..[/say]")
 
 		saynn("[say=pc]I'm not ordering you because you're a cumslut. I'm asking you because I want you to. A single lick. You're not gonna die from a single lick.[/say]")
 

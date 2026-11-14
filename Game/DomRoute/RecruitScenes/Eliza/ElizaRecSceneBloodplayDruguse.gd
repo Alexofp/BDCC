@@ -119,7 +119,7 @@ func _run():
 		playAnimation(StageScene.Beg, "beg", {pc="eliza", npc="pc"})
 		saynn("You drop the glass and begin treating her wounds. You clean and bandage the cuts on her neck, her breasts, her thighs.")
 
-		saynn("Eliza shows you which of her drugs are best against bloodloss.. and you so you inject her with that.. It's some kind of blood-volume expander and a coagulant.")
+		saynn("Eliza shows you which of her drugs are best against bloodloss.. and so you inject her with that.. It's some kind of blood-volume expander and a coagulant.")
 
 		saynn("Her breathing steadies.")
 
