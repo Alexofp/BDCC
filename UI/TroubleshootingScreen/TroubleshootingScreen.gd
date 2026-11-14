@@ -163,7 +163,7 @@ func _on_DeleteFileButton_pressed():
 func _on_ExportFileButton_pressed():
 	if(selectedManageFile == ""):
 		return
-	var externalDir:String = Util.getAndroidSaveFolder()#OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
+	var externalDir:String = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS) if OS.get_name() != "Android" else Util.getAndroidSaveFolder()
 	var finalDir:String = externalDir.plus_file(selectedManageFile.get_file())
 	var d:Directory = Directory.new()
 	if(!d.file_exists(selectedManageFile)):
