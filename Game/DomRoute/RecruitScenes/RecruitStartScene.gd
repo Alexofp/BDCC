@@ -123,7 +123,7 @@ func _run():
 			_ei += 1
 		
 		if(areChoicesFilled()):
-			var theCanStart:Array = _recruit.isCombinationPossibleFinal(getChoicesIDs(), getExtraWithIDs())
+			var theCanStart:Array = _recruit.isCombinationPossibleFinal(getChoicesIDs(), extra)
 			if(theCanStart[0]):
 				addButtonAt(9, "START", "Execute the plan!", "readyToDoPlan")
 			else:

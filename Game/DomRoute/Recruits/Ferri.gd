@@ -64,7 +64,7 @@ func getExtraChoices(_choices:Array, _extrasRaw:Dictionary) -> Array:
 				options = variantsList,
 			})
 		
-		if(strapCheck && _extrasRaw.get("variant", "") == "strapon"):
+		if(strapCheck && int(_extrasRaw.get("variant", -1)) == 0):
 			result.append({
 					id = "strapon",
 					name = "Strapon",
