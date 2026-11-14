@@ -35,6 +35,8 @@ func waitRollbackerThread():
 func pushRollbackState():
 	if(!OPTIONS.isRollbackEnabled()):
 		return
+	if(SAVE.isCurrentlyAutosaving()): # Doing this while autosaving might bork stuff
+		return
 		
 	currentChoice += 1
 	if(currentChoice < OPTIONS.getRollbackSaveEveryXChoices()):

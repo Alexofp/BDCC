@@ -246,18 +246,22 @@ func makeQuickSave():
 func loadQuickSave():
 	loadGame("user://saves/quicksave.save")
 
-var isAutoSaving = false
+func isCurrentlyAutosaving() -> bool:
+	return isAutoSaving
+
+var isAutoSaving:bool = false
 func triggerAutosave():
 	if(isAutoSaving):
 		return
 	if(!OPTIONS.shouldAutosave()):
 		return
 	isAutoSaving = true
-	# Apparently autosaves can crash the game if they happen during rollback thread stuff
-	GM.main.rollbacker.waitRollbackerThread()
-		
+
 	# To make sure we're not in a middle of calculating something
 	yield(get_tree().create_timer(0.1), "timeout")
+	
+	# Apparently autosaves can crash the game if they happen during rollback thread stuff
+	GM.main.rollbacker.waitRollbackerThread()
 	if(GM.main == null || GM.pc == null):
 		isAutoSaving = false
 		return
