@@ -72,7 +72,7 @@ func startActivity(_args):
 		theCondom.destroyMe()
 		getSexEngine().saveCondomToLootIfPerk(theCondom)
 		
-		addText("{dom.You} {dom.youVerb('pull')} off a used condom from {sub.yourHis} {dom.penisShort} and {dom.youVerb('dispose')} of it.")
+		addText("{dom.You} {dom.youVerb('pull')} off a used condom from {dom.yourHis} {dom.penisShort} and {dom.youVerb('dispose')} of it.")
 		return
 	if(_args[0] == "subrem"):
 		endActivity()
