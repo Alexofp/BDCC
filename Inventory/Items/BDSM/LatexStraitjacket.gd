@@ -107,3 +107,15 @@ func useInCombat(_attacker, _receiver):
 		updateWearerAppearance()
 	
 	return text
+
+func saveData():
+	var data = .saveData()
+
+	data["chastity"] = chastity
+
+	return data
+
+func loadData(data):
+	.loadData(data)
+
+	chastity = SAVE.loadVar(data, "chastity", true)
