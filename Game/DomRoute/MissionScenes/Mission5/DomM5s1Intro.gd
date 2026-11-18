@@ -9,56 +9,78 @@ func _run():
 		addCharacter("kait")
 		addCharacter("avy")
 		addCharacter("announcer")
-		saynn("The core of your team gathers around the mission board.")
+		saynn("The core of your team gathers around the mission board. The lighting is still quite dim but it's enough to read it. Avy leans against one of the walls, watching Kait. Ans taps his mic-cane against the floor with a patient rhythm.")
 
 		saynn("[say=avy]So what's the next step of your genius plan, cat?[/say]")
 
+		saynn("Kait furrows her brows.. then turns to the board. Her fluffy tail flicks behind her.")
+
 		saynn("[say=kait]Hold onto your panties. Let me think..[/say]")
+
+		saynn("Avy snorts.")
 
 		saynn("[say=avy]What panties.[/say]")
 
-		saynn("Time passes. Awkward silence starts to settle in.")
+		saynn("Time passes. Kait is still staring at the board, a lonely sigh escapes her. Awkward silence starts to settle in. Avy shifts her weight, her tail swishing lazily.")
 
 		saynn("[say=avy]Did that nerd doctor take away your last braincell? What did she do to you, anyway?[/say]")
 
+		saynn("Kait's fur stands on ends for a second.")
+
 		saynn("[say=kait]Shut up, she didn't do nothing. I'm fine! I know what we have to do.[/say]")
 
-		saynn("She turns towards you all.")
+		saynn("She turns towards you all and straightens her posture.")
 
 		saynn("[say=kait]We have control over the medical wing now, correct?[/say]")
 
-		saynn("[say=announcer]Me and Eliza had a chat. She understands our mission. She will give out orders to the nurses if we need her to.[/say]")
+		saynn("Ans nods.")
+
+		saynn("[say=announcer]Me and Eliza had a chat. I think she understands our mission and will do what we need her to do.[/say]")
 
 		saynn("[say=kait]Good. Thanks. Then.. now..[/say]")
 
-		saynn("You look at the board. There is an obvious next target.")
+		saynn("She is still struggling it seems. You look at the board. There is an obvious next target.")
 
 		saynn("[say=pc]Collars?[/say]")
 
-		saynn("[say=kait]Yes! We gotta do something about the collars next.[/say]")
+		saynn("Kait's ears perk up.")
+
+		saynn("[say=kait]Hm.. Sure. Yeah. We gotta do something about the collars next. Good idea.[/say]")
+
+		saynn("Avy pushes off the wall.")
 
 		saynn("[say=avy]About fucking time.[/say]")
 
 		saynn("Kait taps on the stolen staff records.")
 
-		saynn("[say=kait]Alex Rynard. We need to find him. And then we need to break him.[/say]")
+		saynn("[say=kait]Alex Rynard. We need to find him. And then we need to make him take off our collars.[/say]")
+
+		saynn("The dark foxy cracks her knuckles.")
 
 		saynn("[say=avy]Leave that to me. I can break him in half.[/say]")
 
-		saynn("[say=kait]No, Avy. We need him alive so he can take off our collars.[/say]")
+		saynn("[say=kait]No, Avy. If he is dead, he can't help us.[/say]")
 
-		saynn("[say=avy]He will be fine. He can take some damage.[/say]")
+		saynn("Avy shrugs.")
+
+		saynn("[say=avy]He will be fine. I'm sure he can take some damage.[/say]")
 
 		saynn("[say=kait]No damage.[/say]")
 
 		addButton("Continue", "See what happens next", "ans_talks")
 	if(state == "ans_talks"):
 		playAnimation(StageScene.Duo, "stand", {npc="announcer", pc="kait"})
+		saynn("Ans clears his throat, gaining the attention of everyone.")
+
 		saynn("[say=announcer]Alex is always down in the workshop, working on his prototypes. How about we try a different approach this time?[/say]")
 
 		saynn("[say=kait]Different approach?[/say]")
 
+		saynn("Ans tilts his head slightly, a small smile shines on his face.")
+
 		saynn("[say=announcer]I can try to convince him. Use words rather than punches.[/say]")
+
+		saynn("Kait shakes her head immediately.")
 
 		saynn("[say=kait]It won't work. You will just blow our cover.[/say]")
 
@@ -66,7 +88,11 @@ func _run():
 
 		saynn("[say=kait]Too risky.[/say]")
 
+		saynn("Ans approaches Kait, leaning on his cane.")
+
 		saynn("[say=announcer]We're already playing a very risky game. Your last operations didn't exactly go as planned. Give me a chance to shine, babe?[/say]")
+
+		saynn("Kait taps her claws against her uniform. She gives you and Avy a quick look.. Avy responds with an uncaring shrug. You do the same. Finally, after some time, she lets out a frustrated breath.")
 
 		saynn("[say=kait]..fine. But we will be near.[/say]")
 
@@ -74,7 +100,9 @@ func _run():
 
 		saynn("It is decided. Time to move.")
 
-		saynn("Kait is the fastest, she zooms out of the room.")
+		saynn("Kait is the fastest, she zooms out of the room. The sound of her rapid footsteps fades quickly. Avy watches that.. and then sighs.")
+
+		saynn("[say=avy]She is gonna get us all killed one day.[/say]")
 
 		addButton("Continue", "See what happens next", "endthescene")
 
