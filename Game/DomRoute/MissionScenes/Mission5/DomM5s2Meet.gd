@@ -408,7 +408,8 @@ func _run():
 
 		addButton("Continue", "See what happens next", "sudden_risha")
 	if(state == "sudden_risha"):
-		aimCameraAndSetLocName("mining_elevator")
+		aimCameraAndSetLocName("mining_nearentrance")
+		GM.pc.setLocation("mining_nearentrance")
 		addCharacter("risha")
 		playAnimation(StageScene.Duo, "dodge", {npc="risha", npcAction="kick"})
 		saynn("When the bulky heavy doors screech open.. you're met with a wide knee kick! You manage to avoid it at the last moment.")
@@ -419,23 +420,257 @@ func _run():
 
 		saynn("[say=pc]You tucked your captain in and decided to come back for more?[/say]")
 
+		saynn("She chuckles.")
+
 		saynn("[say=risha]Captain went soft on you for whatever reason. I won't.[/say]")
 
 		saynn("[say=pc]Maybe he likes me.[/say]")
+
+		saynn("Risha spits to the side.")
 
 		saynn("[say=risha]I like sluts too. The way their cries turn into moans after enough pounding.[/say]")
 
 		saynn("[say=pc]Is that why you signed up for this job? Fucking sluts is all you care about?[/say]")
 
+		saynn("She smiles.")
+
 		saynn("[say=risha]It had some other benefits too. But smashing sluts won me over.[/say]")
 
 		saynn("[say=pc]Shame if someone would turn you into one.[/say]")
+
+		saynn("She grabs her stun baton and readies herself.")
 
 		saynn("[say=risha]Ha. You fucking wish. Bring it on, whore.[/say]")
 
 		saynn("Looks like it's a fight!")
 
 		addButton("Fight", "Start the fight!", "do_start_fight")
+	if(state == "lost_fight"):
+		playAnimation(StageScene.GivingBirth, "idle")
+		saynn("You lost the fight. Welp, what a shame.")
+
+		saynn("Risha spends the next ten minutes bullying you. She pokes you with her stun baton a few times and also steps on you, allowing your face to meet with the cold, dirty floor.")
+
+		saynn("But after that.. It looks like you are free to go. She got the anger out of her system.. while also damaging your self esteem in the process.")
+
+		saynn("Oh well. Not the end of the world.")
+
+		addButton("Get up", "Do get up", "lost_getup")
+	if(state == "lost_getup"):
+		playAnimation(StageScene.Solo, "stand")
+		saynn("You get up and swipe the dirt off of yourself and your outfit.")
+
+		saynn("Probably best if you rest your bruises off.. Kait and Avy can wait.")
+
+		saynn("Mission completed!")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "won_fight"):
+		playAnimation(StageScene.Duo, "stand", {npc="risha", npcAction="defeat"})
+		saynn("You won! Risha hits the floor, defeated.")
+
+		saynn("[say=risha]Not again! Ugh..[/say]")
+
+		saynn("Her weapon rolls off to the side. She tries to reach for it.. but fails to do so.")
+
+		saynn("You crouch near, catching eye contact with the bitchy lynx.")
+
+		saynn("[say=pc]Maybe you like losing? Is that why you came back for me?[/say]")
+
+		saynn("[say=risha]I am the Alpha of this prison. Fuck you.[/say]")
+
+		saynn("[say=pc]But if I won, that means that I'm the Alpha now?[/say]")
+
+		saynn("[say=risha]Um.. No.[/say]")
+
+		saynn("She tilts her head and looks to the side, realizing the errors of her ways.")
+
+		saynn("[say=pc]But I totally am.[/say]")
+
+		saynn("[say=risha]Fuck you, that's not how it works![/say]")
+
+		addButton("Leave", "Leave Risha be", "do_leave")
+		addButton("Degrade", "Force Risha to act like a puppy", "do_degrade")
+		addButton("BJ", "Make Risha blow you!", "do_bj")
+		addButton("Pussylick", "Make Risha eat you out!", "do_lick")
+	if(state == "do_leave"):
+		playAnimation(StageScene.Duo, "stand", {npc="risha"})
+		saynn("As fun as it might be to torture her.. you have bigger fish to fry.")
+
+		saynn("[say=pc]Get up, Alpha.[/say]")
+
+		saynn("She gets up on all fours.. and starts crawling towards her weapon. You approach it faster and pick it up.")
+
+		saynn("[say=risha]Hey! Give me my pain stick back.[/say]")
+
+		saynn("[say=pc]It's your gift to me.[/say]")
+
+		saynn("You make it spark to show that you know how to use it.")
+
+		saynn("[say=risha]What? You fucker.[/say]")
+
+		saynn("[say=pc]Now get the fuck out of my sight, Risha.[/say]")
+
+		saynn("[say=risha]This ain't over, you know.[/say]")
+
+		saynn("[say=pc]It sure ain't. Gonna beat your ass again the next time I see you.[/say]")
+
+		saynn("She growls.. but makes herself leave in the end.")
+
+		addButton("Continue", "See what happens next", "alone_missionend")
+	if(state == "alone_missionend"):
+		removeCharacter("risha")
+		playAnimation(StageScene.Solo, "stand")
+		aimCameraAndSetLocName("mining_nearentrance")
+		GM.pc.setLocation("mining_nearentrance")
+		saynn("You won. Good. Hopefully Risha learned her lesson.")
+
+		saynn("Probably best if you rest your bruises off before you go after Alex Rynard.. Kait and Avy can wait.")
+
+		saynn("Mission completed!")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "do_degrade"):
+		aimCameraAndSetLocName("mining_taviroom")
+		addCharacter("risha", ["naked"])
+		playAnimation(StageScene.SybianOral, "idle", {pc="risha", npc="pc", bodyState={naked=true}})
+		saynn("You grab Risha's stun baton and drag her heavy ass out of sight. It takes some time.. but you manage to rip off her armored plates and unzip her undersuit.")
+
+		saynn("You're left panting after it all.. but at least Risha is now naked, on her knees before you.")
+
+		saynn("[say=risha]Is that all you're got?[/say]")
+
+		saynn("[say=pc]Now comes the fun part.[/say]")
+
+		saynn("You press a button on the stun baton that makes it do scary blue sparks.")
+
+		saynn("[say=pc]I want you to start barking.[/say]")
+
+		saynn("She stares at you, her muzzle wrinkles.")
+
+		saynn("[say=risha]What?[/say]")
+
+		saynn("[say=pc]You heard me. Bark.[/say]")
+
+		saynn("She frowns hard, her red eyes glaring at you.")
+
+		saynn("[say=risha]I'm a lynx, you fucking freak. I don't fucking bark.[/say]")
+
+		saynn("You press the baton against her thigh. The shock makes her yelp, her body jerking.")
+
+		saynn("[say=risha]Ow! Fucker![/say]")
+
+		saynn("She tries to catch the next attack.. but she only ends up shocking her paws. The electricity is making her hiss and grit her teeth, her whole body spasming in a derpy way.")
+
+		saynn("[say=risha]Fuck! Okay, okay![/say]")
+
+		saynn("She takes a breath.. and growls at you, showing her sharp fangs.")
+
+		saynn("[say=pc]I'm waiting. Risha, you are not getting out of this without at least one bark.[/say]")
+
+		saynn("She growls and then looks away.")
+
+		saynn("[say=risha]..woof.[/say]")
+
+		saynn("[say=pc]Louder.[/say]")
+
+		saynn("[say=risha]FUCK YOU![/say]")
+
+		saynn("You smack her huge tits with the baton, sending them to jiggle.. and also making Risha arch her back, a painful cry rushing out of her spasming lungs.")
+
+		saynn("[say=risha]AGHHh..[/say]")
+
+		saynn("[say=pc]I can keep going.[/say]")
+
+		saynn("She is the one who is breathing heavily now, her growling is not so enthusiastic anymore.")
+
+		saynn("[say=risha]Screw you.. woof.[/say]")
+
+		saynn("[say=pc]What was that?[/say]")
+
+		saynn("She grits her teeth more.")
+
+		saynn("[say=risha]Woof![/say]")
+
+		saynn("[say=pc]That's better. Now give me your paw. I wanna see a cute puppy.[/say]")
+
+		saynn("She squints.")
+
+		saynn("[say=risha]You can't be serious.[/say]")
+
+		saynn("You raise the baton. Risha flinches instantly. Then slowly, reluctantly, she lifts one hand. You shake it for a moment.")
+
+		saynn("[say=pc]Good girl.[/say]")
+
+		saynn("You give her a soft pat on the head. She takes it.")
+
+		saynn("[say=risha]Really? I'm the best girl actually.[/say]")
+
+		saynn("[say=pc]Best subby bitch, sure.[/say]")
+
+		saynn("[say=risha]Nu huh. I'm Alpha.[/say]")
+
+		saynn("[say=pc]Wag your tail for me, Alpha.[/say]")
+
+		saynn("She glares at you again.")
+
+		saynn("[say=risha]I don't have a tail to wag, you stupid. It's short, look at it![/say]")
+
+		saynn("She indeed has a short tail.. but that's none of your problems. You poke her tits with the baton again, sending a painful impulse through them. Risha yelps, her whole body twitching.")
+
+		saynn("[say=risha]Grrh.. fine..[/say]")
+
+		addButton("Continue", "See what happens next", "risha_does_silly_beg")
+	if(state == "risha_does_silly_beg"):
+		playAnimation(StageScene.Beg, "beg", {pc="risha", npc="pc", bodyState={naked=true, hard=true}})
+		saynn("Risha starts wiggling her whole rear end, her short tail twitching back and forth. She is clumsy.. but still kinda cute.")
+
+		saynn("[say=pc]Keep going. Bark.[/say]")
+
+		saynn("[say=risha]Woof..[/say]")
+
+		saynn("She keeps wiggling, her face gaining a red glow. Her cock is poking out of its sheath, despite everything. Or maybe it's because of everything.")
+
+		saynn("[say=risha]This is stupid. You're stupid.[/say]")
+
+		saynn("[say=pc]And yet you're doing it. Show me your puppy paws. Beg.[/say]")
+
+		saynn("Spawning the sparks near her tits is enough for her to raise her paws and continue wiggling her rear.")
+
+		saynn("[say=risha]..woof.. arf..[/say]")
+
+		saynn("She looks at you with her most mean eyes possible. And yet she is doing the most silly thing possible. Cute.")
+
+		addButton("Pat her", "Give her a pat", "silly_give_pat")
+	if(state == "silly_give_pat"):
+		playAnimation(StageScene.Beg, "pat", {pc="risha", npc="pc", bodyState={naked=true, hard=true}})
+		saynn("You reach out and pat her more. Much more this time. She flinches at first.. but then slowly relaxes into it. Her breathing calms down a bit.. her barbed cock is fully hard, a bead of pre hanging off of it.")
+
+		saynn("[say=pc]Good. Good little bitch. So eager.[/say]")
+
+		saynn("[say=risha]I hate you so much. Don't you dare tell anyone.[/say]")
+
+		saynn("[say=pc]Maybe if you behave.[/say]")
+
+		saynn("She growls.")
+
+		saynn("You keep petting her. Risha's short tail wiggles again.")
+
+		saynn("Enough silly stuff. You learn closer to her ear.")
+
+		saynn("[say=pc]I'm keeping the stun baton. Now go the fuck away.[/say]")
+
+		saynn("[say=risha]Really? Ugh..[/say]")
+
+		saynn("She looks down at her sheath.")
+
+		saynn("[say=pc]Your boner is not my problem. Scramble.[/say]")
+
+		saynn("She picks up her armor pieces and the undersuit.. before leaving you be.")
+
+		saynn("Finally, some peace.")
+
+		addButton("Continue", "See what happens next", "alone_missionend")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -451,4 +686,39 @@ func _react(_action: String, _args):
 	if(_action == "they_leave"):
 		processTime(120)
 
+	if(_action == "do_start_fight"):
+		runScene("FightScene", ["risha", "secondDomFight"], "rishaFight")
+		return
+
+	if(_action == "lost_getup"):
+		GM.main.MS.completeMission()
+
+	if(_action == "do_leave"):
+		addMessage("You got Risha's stunstick!")
+		var theStunBaton = GlobalRegistry.createItem("StunBaton")
+		theStunBaton.charges = 10 # yooo, special stun baton
+		GM.pc.getInventory().addItem(theStunBaton)
+
+	if(_action == "alone_missionend"):
+		GM.main.MS.completeMission()
+
+	if(_action == "silly_give_pat"):
+		addMessage("You got Risha's stunstick!")
+		var theStunBaton = GlobalRegistry.createItem("StunBaton")
+		theStunBaton.charges = 10 # yooo, special stun baton
+		GM.pc.getInventory().addItem(theStunBaton)
+
 	setState(_action)
+
+func _react_scene_end(_tag, _result):
+	if(_tag == "rishaFight"):
+		processTime(10 * 60)
+		var battlestate = _result[0]
+		
+		if(battlestate == "win"):
+			setState("won_fight")
+			addExperienceToPlayer(50)
+		else:
+			setState("lost_fight")
+			addExperienceToPlayer(5)
+			processTime(60*10)
