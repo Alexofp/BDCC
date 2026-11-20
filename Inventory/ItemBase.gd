@@ -811,6 +811,16 @@ func doDisplaceActionFinal(_id:String, _action:Array, _context:Dictionary) -> Di
 	
 	return doDisplaceAction(_id, _action, _context)
 
+func canUndressThrough(_cover: ItemBase) -> bool:
+	if(getClothingSlot() == InventorySlot.UnderwearTop && _cover.itemState is ShirtAndShortsState):
+		if (_cover.itemState.isShirtOpened()):
+			return true
+
+	if(getClothingSlot() == InventorySlot.UnderwearBottom && _cover.itemState is ShirtAndShortsState):
+		if (_cover.itemState.areShortsPulledDown()):
+			return true
+
+	return false
 
 func shouldIncludeDefaultTakeOffAction(_context:Dictionary) -> bool:
 	return true
