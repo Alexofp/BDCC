@@ -657,6 +657,14 @@ func getChangeableOptions():
 					"tab": TAB_DISPLAY,
 				},
 				{
+					"name": "Depth Prepass",
+					"description": "Turn this off if the dolls have weird transparency issues. Disabling this will introduce z-fighting in some animations.",
+					"id": "depthPrepass",
+					"type": "checkbox",
+					"value": ProjectSettings.get_setting("rendering/quality/depth_prepass/enable"),
+					"tab": TAB_DISPLAY,
+				},
+				{
 					"name": "Skin shaders",
 					"description": "Turn this off if your game is lagging/crashing. Will disable all skins.",
 					"id": "advancedShadersEnabled",
@@ -1239,6 +1247,9 @@ func applyOption(categoryID, optionID, value):
 			myProjectSettings.save()
 		if(optionID == "softwareSkinning"):
 			myProjectSettings.setForceSoftwareSkinning(value)
+			myProjectSettings.save()
+		if(optionID == "depthPrepass"):
+			myProjectSettings.depthPrepass = value
 			myProjectSettings.save()
 		if(optionID == "advancedShadersEnabled"):
 			advancedShadersEnabled = value

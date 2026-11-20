@@ -5,8 +5,9 @@ class_name MyProjectSettings
 
 const settingsPath = "user://override.cfg"
 
-var driverName = "GLES3"
-var forceSoftwareSkinning = false
+var driverName:String = "GLES3"
+var forceSoftwareSkinning:bool = false
+var depthPrepass:bool = true
 
 func setDriverName(newDriverName:String):
 	if(!(newDriverName in ["GLES2", "GLES3"])):
@@ -20,6 +21,7 @@ func setForceSoftwareSkinning(newForce:bool):
 func _init():
 	driverName = ProjectSettings.get_setting("rendering/quality/driver/driver_name")
 	forceSoftwareSkinning = ProjectSettings.get_setting("rendering/quality/skinning/force_software_skinning")
+	depthPrepass = ProjectSettings.get_setting("rendering/quality/depth_prepass/enable")
 	
 func save():
 	var text = "config_version=4\n"
@@ -29,6 +31,10 @@ func save():
 		text += "quality/skinning/force_software_skinning=true\n"
 	else:
 		text += "quality/skinning/force_software_skinning=false\n"
+	if(depthPrepass):
+		text += "quality/depth_prepass/enable=true\n"
+	else:
+		text += "quality/depth_prepass/enable=false\n"
 	
 	var file = File.new()
 	file.open(settingsPath, file.WRITE_READ)
