@@ -822,7 +822,7 @@ func canUndressSlotSexEngine(_slot:String, _handled:Dictionary={}) -> bool:
 	var theChain := InventorySlot.getUndressChainForSlot(_slot)
 	for theRequiredSlot in theChain:
 		var item = getEquippedItem(theRequiredSlot)
-		if(!item || item.isRemoved()):
+		if(!item || item.isRemoved() || theItem.canUndressThrough(item)):
 			continue
 		return false
 
