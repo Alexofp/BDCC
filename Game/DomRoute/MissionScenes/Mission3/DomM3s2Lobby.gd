@@ -289,7 +289,7 @@ func _run():
 		addButton("Continue", "See what happens next", "ferri_in_stall")
 	if(state == "ferri_in_stall"):
 		playAnimation(StageScene.MilkingStallDuo, "start", {pc="ferri", npc="eliza", bodyState={naked=true, hard=true}})
-		saynn("Ferri steps behind a simple metal frame. She hesitates a little, her tail leashing behind her.")
+		saynn("Ferri steps behind a simple metal frame. She hesitates a little, her tail lashing behind her.")
 
 		saynn("[say=eliza]Don't be shy. You were all talk a moment ago. Step in and give me your paws.[/say]")
 

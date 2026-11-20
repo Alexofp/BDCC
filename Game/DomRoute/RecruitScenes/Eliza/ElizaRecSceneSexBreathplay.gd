@@ -129,10 +129,6 @@ func _run():
 		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
-	if(_action == "endthescene"):
-		endScene()
-		return
-
 	if(_action == "straight_to_sex"):
 		if(straponUsed):
 			recWearStrapon()

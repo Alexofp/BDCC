@@ -171,10 +171,6 @@ func _run():
 		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
-	if(_action == "endthescene"):
-		endScene()
-		return
-
 	if(_action == "eliza_straddles_you"):
 		pullShortsDown("pc")
 		if(straponUsed):
