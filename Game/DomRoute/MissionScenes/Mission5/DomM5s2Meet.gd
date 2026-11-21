@@ -491,8 +491,8 @@ func _run():
 
 		addButton("Leave", "Leave Risha be", "do_leave")
 		addButton("Degrade", "Force Risha to act like a puppy", "do_degrade")
-		addButton("BJ", "Make Risha blow you!", "do_bj")
-		addButton("Pussylick", "Make Risha eat you out!", "do_lick")
+		addButtonWithChecks("BJ", "Make Risha blow you!", "do_bj", [], [[ButtonChecks.HasReachablePenis]])
+		addButtonWithChecks("Pussylick", "Make Risha eat you out!", "do_lick", [], [[ButtonChecks.HasReachableVagina]])
 	if(state == "do_leave"):
 		playAnimation(StageScene.Duo, "stand", {npc="risha"})
 		saynn("As fun as it might be to torture her.. you have bigger fish to fry.")
@@ -533,7 +533,7 @@ func _run():
 	if(state == "do_degrade"):
 		aimCameraAndSetLocName("mining_taviroom")
 		addCharacter("risha", ["naked"])
-		playAnimation(StageScene.SybianOral, "idle", {pc="risha", npc="pc", bodyState={naked=true}})
+		playAnimation(StageScene.SybianOral, "idle", {pc="risha", npc="pc", nosybian=true, bodyState={naked=true}})
 		saynn("You grab Risha's stun baton and drag her heavy ass out of sight. It takes some time.. but you manage to rip off her armored plates and unzip her undersuit.")
 
 		saynn("You're left panting after it all.. but at least Risha is now naked, on her knees before you.")
@@ -671,6 +671,115 @@ func _run():
 		saynn("Finally, some peace.")
 
 		addButton("Continue", "See what happens next", "alone_missionend")
+	if(state == "do_bj"):
+		aimCameraAndSetLocName("mining_taviroom")
+		addCharacter("risha", ["naked"])
+		playAnimation(StageScene.SybianOral, "idle", {pc="risha", npc="pc", nosybian=true, bodyState={naked=true}})
+		saynn("You know just the thing that you can do with this bitch.")
+
+		saynn("To start, you drag her heavy ass off to the side, away from any random passers. You pull her armored plates off and unzip her undersuit, leaving her naked on the floor.")
+
+		saynn("[say=risha]If you do anything stupid, you're gonna regret it.[/say]")
+
+		saynn("[say=pc]I wasn't the one who did a stupid thing. You came back.[/say]")
+
+		saynn("You go through her things real quick. A ring gag.. perfect. You grab it.. as well as some chains and cuffs.")
+
+		saynn("There are some crates here. They're filled with rocks and ore it seems.. impossible to move.. exactly what you need right now.")
+
+		addButton("Crate", "Cuff Risha to one of the crates", "bj_make_helpless")
+	if(state == "bj_make_helpless"):
+		playAnimation(StageScene.SexOralTable, "tease", {pc="pc", npc="risha", bodyState={exposedCrotch=true, hard=true}, npcBodyState={naked=true}})
+		saynn("It takes some time.. Risha is fucking heavy.. but you manage to pull her onto one of the crates. You grab her wrists and ankle.. and cuff them to the crate's many handles. The crate is big enough to support her body, only her head is hanging off of it.")
+
+		saynn("She will obviously bite.. so you shove a ring gag into her mouth before she gets a chance to do so.")
+
+		saynn("[say=risha]Fucking bitch![/say]")
+
+		saynn("Then you expose your half-hard {pc.penis} and approach her. The shadow of your member shoots a shadow onto her mean face. She can see what you're gonna do, she growls and tries to bite.. but the metal ring doesn't give.")
+
+		saynn("[say=pc]So fierce.[/say]")
+
+		saynn("She glares from under you. So you give her a slap with your cock. Lovingly. The sudden fleshy impact confuses her for a second.")
+
+		saynn("[say=pc]But still just a slut.[/say]")
+
+		addButton("Continue", "See what happens next", "bj_in")
+	if(state == "bj_in"):
+		playAnimation(StageScene.SexOralTable, "suckinside", {pc="pc", npc="risha", bodyState={exposedCrotch=true, hard=true}, npcBodyState={naked=true}})
+		saynn("You step closer, guiding your cock to her mouth. She tries to pull her head back but there is only so much she can do with all the chains and cuffs that are holding her. Her red eyes are burning with hate.")
+
+		saynn("[say=pc]Fine. Alpha slut then.[/say]")
+
+		saynn("You push in, letting the shaft of your member slide along her barbed tongue, the tip quickly meeting with the back of her mouth and going down her throat. She gags immediately, her throat clenching around you, tight and hot. Makes you groan.")
+
+		saynn("[say=risha]Mmmphhh-![/say]")
+
+		saynn("The crate cracks as she struggles, using her raw strength, trying to break free. But she only makes the cuffs dig into her wrists more. You pull back just enough to let her breathe, a thin string of saliva already connecting her lips to your cock.")
+
+		saynn("[say=pc]That was just a start.[/say]")
+
+		saynn("You push in again, deeper this time. Her gag reflex gets triggered hard. Her whole body jerks, her throat convulses around you. More saliva drips from the corners of her mouth this time, running down her face. You don't stop, you keep pushing until your crotch is pressed firmly against her snout.")
+
+		saynn("She gags more.. violently. Her eyes start to water, her claws scraping against the crate. You hold her there for a moment, feeling her throat work, trying to push you out.")
+
+		saynn("[say=pc]Fuck. What a tight bitch.[/say]")
+
+		saynn("[say=risha]Mmmhhghh-..[/say]")
+
+		addButton("Continue", "See what happens next", "bj_sex")
+	if(state == "bj_sex"):
+		playAnimation(StageScene.SexOralTable, "suck", {pc="pc", npc="risha", bodyState={exposedCrotch=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You pull back.. then thrust in again. The ring keeps her mouth open, giving you a perfect hole to use. You continue the rhythm, gradually speeding up. Each thrust makes her choke or gag, her throat making wet noises.")
+
+		saynn("By now.. her own cock is out now. The barbed shaft is fully hard, poking out of its sheath, a bead of pre hanging from the tip.")
+
+		saynn("[say=pc]Getting hard from this. You really are a slut.[/say]")
+
+		saynn("Risha can only glare up at you, around your cock, her eyes still getting watery. She still tries to pull her head away.. so you put your hands around her neck to prevent that, keeping her still for you as you ravage this wet, tight throat.")
+
+		addButton("Continue", "See what happens next", "bj_fast")
+	if(state == "bj_fast"):
+		playAnimation(StageScene.SexOralTable, "suckfast", {pc="pc", npc="risha", bodyState={exposedCrotch=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You speed up, fucking her throat harder. Her gag reflex is still triggering each time you ram it inside her, the bitch has zero control of it.. and it feels so good. You get a better grip on her neck and start really fucking her face.")
+
+		saynn("[say=risha]Glk-.. glk-.. glk-..[/say]")
+
+		saynn("Saliva is dripping everywhere, pooling beneath her head. She is a mess. A choking, gagging, drooling mess. Her cock is twitching with each your thrust. Your orgasm is approaching you fast..")
+
+		saynn("[say=pc]Almost there. You gonna swallow, Alpha slut?[/say]")
+
+		saynn("She tries to shake her head.")
+
+		saynn("[say=pc]That's a yes. Got it.[/say]")
+
+		addButton("Throatpie", "Cum down her throat", "bj_cum")
+	if(state == "bj_cum"):
+		playAnimation(StageScene.SexOralTable, "suckinside", {pc="pc", npc="risha", bodyState={exposedCrotch=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You thrust in deep one last time.. and stay there, letting Risha's clenching throat walls push you over the edge. You groan as your balls tense up, your {pc.penis} pulsing inside her.. before shooting thick strings of {pc.cum} straight down her mouth.")
+
+		saynn("[say=pc]Swallow. Every drop.[/say]")
+
+		saynn("Risha doesn't really have a choice. Her body is jerking.. but you don't pull out, keeping yourself buried, forcing her to take it. She gags around you, some seed finds its way back soon, shooting out of her nosestrills, adding to the mess.")
+
+		saynn("You keep your cock there until you're done.. until you're sure she's taken all of it. By now, she begins to black out too.. good enough point to stop.")
+
+		addButton("Continue", "See what happens next", "bj_after")
+	if(state == "bj_after"):
+		playAnimation(StageScene.SexOralTable, "tease", {pc="pc", npc="risha", bodyState={exposedCrotch=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("So you pull out. Slowly. A thick string of saliva and {pc.cum} stretches from Risha's lips to your tip. She instantly starts coughing, gasping, her chest rising and falling fast.")
+
+		saynn("[say=pc]You're a bad cock sucker. But I've had my fun with you.[/say]")
+
+		saynn("She glares.. but can't do anything against you wiping your cock on her cheek, smearing the mess into her fur.")
+
+		saynn("Then you step back. Her cock is still mega hard, neglected, bobbing in the air. She is still chained to the crate, naked, messy. Might as well just leave her like that.")
+
+		saynn("[say=pc]Someone will find you. I'm sure.[/say]")
+
+		saynn("She growls and starts thrashing against the cuffs. You turn and walk away.")
+
+		addButton("Continue", "See what happens next", "endthescene_rem_ringag")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -707,6 +816,20 @@ func _react(_action: String, _args):
 		var theStunBaton = GlobalRegistry.createItem("StunBaton")
 		theStunBaton.charges = 10 # yooo, special stun baton
 		GM.pc.getInventory().addItem(theStunBaton)
+
+	if(_action == "bj_make_helpless"):
+		processTime(5*60)
+		putOn("risha", "ringgag")
+		pullShortsDown("pc")
+
+	if(_action == "bj_cum"):
+		getCharacter("risha").cummedInMouthBy("pc")
+		GM.pc.orgasmFrom("risha")
+
+	if(_action == "endthescene_rem_ringag"):
+		putOff("risha", "ringgag")
+		endScene()
+		return
 
 	setState(_action)
 
