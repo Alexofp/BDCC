@@ -34,8 +34,8 @@ const DEFAULT_EXTRA_SLOTS:Array = [
 ]
 
 const DEFAULT_UNDRESS_CHAINS:Dictionary = {
-	UnderwearTop: [Torso, Body],
-	UnderwearBottom: [Torso, Body],
+	UnderwearTop: [Body],
+	UnderwearBottom: [Body],
 	Mouth: [Eyes],
 	Hands: [Wrists],
 }
