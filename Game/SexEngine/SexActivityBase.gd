@@ -1649,7 +1649,7 @@ func doCumBJDom(isDeepthroat:bool = false):
 
 func doCumBJFacialsDom():
 	var text:String = RNG.pick([
-		"{dom.You} {dom.youVerb('pull')} {dom.yourHis} cock out and [b]cums all over {sub.your} face[/b]!",
+		"{dom.You} {dom.youVerb('pull')} {dom.yourHis} cock out and [b]{dom.youVerb('cum')} all over {sub.your} face[/b]!",
 		"{dom.You} {dom.youVerb('pull')} out, [b]cumming all over {sub.your} face[/b]!",
 	])
 	
