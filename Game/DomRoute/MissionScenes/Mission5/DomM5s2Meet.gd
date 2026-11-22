@@ -492,7 +492,7 @@ func _run():
 		addButton("Leave", "Leave Risha be", "do_leave")
 		addButton("Degrade", "Force Risha to act like a puppy", "do_degrade")
 		addButtonWithChecks("BJ", "Make Risha blow you!", "do_bj", [], [[ButtonChecks.HasReachablePenis]])
-		addButtonWithChecks("Pussylick", "Make Risha eat you out!", "do_lick", [], [[ButtonChecks.HasReachableVagina]])
+		addButtonWithChecks("Pussy lick", "Make Risha eat you out!", "do_lick", [], [[ButtonChecks.HasReachableVagina]])
 	if(state == "do_leave"):
 		playAnimation(StageScene.Duo, "stand", {npc="risha"})
 		saynn("As fun as it might be to torture her.. you have bigger fish to fry.")
@@ -696,7 +696,7 @@ func _run():
 
 		saynn("[say=risha]Fucking bitch![/say]")
 
-		saynn("Then you expose your half-hard {pc.penis} and approach her. The shadow of your member shoots a shadow onto her mean face. She can see what you're gonna do, she growls and tries to bite.. but the metal ring doesn't give.")
+		saynn("Then you expose your half-hard {pc.penis} and approach her. The volume of your member shoots a shadow onto her mean face. She can see what you're gonna do, she growls and tries to bite.. but the metal ring doesn't give.")
 
 		saynn("[say=pc]So fierce.[/say]")
 
@@ -779,7 +779,138 @@ func _run():
 
 		saynn("She growls and starts thrashing against the cuffs. You turn and walk away.")
 
-		addButton("Continue", "See what happens next", "endthescene_rem_ringag")
+		addButton("Continue", "See what happens next", "missionend_rem_ringag")
+	if(state == "do_lick"):
+		aimCameraAndSetLocName("mining_taviroom")
+		addCharacter("risha", ["naked"])
+		playAnimation(StageScene.SybianOral, "idle", {pc="risha", npc="pc", nosybian=true, bodyState={naked=true}})
+		saynn("You know just the thing that you can do with this bitch.")
+
+		saynn("To start, you drag her heavy ass off to the side, away from any random passers. You pull her armored plates off and unzip her undersuit, leaving her naked on the floor.")
+
+		saynn("[say=risha]If you do anything stupid, you're gonna regret it.[/say]")
+
+		saynn("[say=pc]I wasn't the one who did a stupid thing. You came back.[/say]")
+
+		saynn("You go through her things real quick. A ring gag.. perfect. You grab it.. as well as some chains and cuffs.")
+
+		saynn("There are some crates here. They're filled with rocks and ore it seems.. impossible to move.. exactly what you need right now.")
+
+		addButton("Crate", "Cuff Risha to one of the crates", "lick_make_helpless")
+	if(state == "lick_make_helpless"):
+		playAnimation(StageScene.SexOralTable, "tease", {pc="pc", npc="risha", bodyState={exposedCrotch=true, hard=true}, npcBodyState={naked=true}})
+		saynn("It takes some time.. Risha is fucking heavy.. but you manage to pull her onto one of the crates. You grab her wrists and ankle.. and cuff them to the crate's many handles. The crate is big enough to support her body, only her head is hanging off of it.")
+
+		saynn("She will obviously bite.. so you shove a ring gag into her mouth before she gets a chance to do so.")
+
+		saynn("[say=risha]Fucking bitch![/say]")
+
+		saynn("Then you expose your {pc.pussyStretch} puss and approach her. There is nothing to block the over-head light that makes Risha squint. She can tell what you're gonna do, she growls and tries to bite.. but the metal ring doesn't give.")
+
+		saynn("[say=pc]So fierce.[/say]")
+
+		saynn("She glares from under you. A sudden slap lands on her cheek. Love tap. It confuses her for a second.")
+
+		saynn("[say=pc]But still just a slut.[/say]")
+
+		addButton("Continue", "See what happens next", "lick_hover")
+	if(state == "lick_hover"):
+		playAnimation(StageScene.SexOralTable, "rub", {pc="pc", npc="risha", bodyState={exposedCrotch=true, hard=true}, npcBodyState={naked=true}})
+		saynn("You hover your pussy just above her face, close enough that she can feel the heat.. and the scent.")
+
+		saynn("Risha's nostrils twitch, growling keeps escaping her throat.")
+
+		saynn("[say=pc]I want you to see this..[/say]")
+
+		saynn("You reach down and spread your slit with two fingers.. exposing your sensitive lips and clit to her eyes. Then, you start rubbing slow circles around the pleasure mound, your breathing getting deeper. You quickly get wet down there..")
+
+		saynn("You chuckle softly when a single drop of your arousal drops on risha's face, making her nose wrinkle. She tries to shake it off.. but there is more wet arousal dripping onto her fur soon after.")
+
+		saynn("[say=pc]What's wrong, Alpha? You're gonna lick me, right~?[/say]")
+
+		saynn("She snarls.")
+
+		saynn("It's not like she has a choice.")
+
+		addButton("Continue", "See what happens next", "lick_do")
+	if(state == "lick_do"):
+		playAnimation(StageScene.SexOralTable, "grind", {pc="pc", npc="risha", bodyState={exposedCrotch=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You lower yourself onto that warm growly seat, your wet lips finding hers, blocking most of her air. She instantly tries to pull away.. but your thighs keep her trapped in place, face shoved into your sex.")
+
+		saynn("She can still breathe.. a bit.. her breathing is coming out as short, frustrated huffs.")
+
+		saynn("[say=pc]Come on, bitch, lick. If you get me off, then I will get off. You can tell me how illegal this is later.[/say]")
+
+		saynn("Risha refuses still. She wants it the hard way then.")
+
+		saynn("You start moving your hips, back and forth, slow at first, grinding your slit against her face. First thing that you feel.. is that your pussy lips start catching onto her many piercings. Feels kinda nice actually, the cold metal provides contrast.")
+
+		saynn("[say=risha]MHghh-..[/say]")
+
+		saynn("You keep the pace stady.. feeling a warm sensation spreading through you. Little moans start leaving your chest as your pussy is smearing your juices across her muzzle. You can feel the shape of her snout.. the lines of her cheeks.")
+
+		saynn("[say=risha]Mhhgh..[/say]")
+
+		saynn("Risha makes another muffled sound.. probably trying to say something mean. It only means that you have to keep her more busy.")
+
+		saynn("[say=pc]You wouldn't be in danger of drowning if you'd just obey, slut~.[/say]")
+
+		saynn("You lean forward, placing both hands around her throat. Not squeezing much.. your pussy is already restricting her airflow enough.. it's just to make her full even less in control. You do feel her pulse under your palms.. you also notice her cock getting hard. What a horny bitch.")
+
+		addButton("Continue", "See what happens next", "lick_fast")
+	if(state == "lick_fast"):
+		playAnimation(StageScene.SexOralTable, "grindfast", {pc="pc", npc="risha", bodyState={exposedCrotch=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You grind her face even faster, chasing the pleasure. The friction from her piercings feels too good.. you're moaning louder.")
+
+		saynn("[say=pc]Ah.. hah..[/say]")
+
+		saynn("Risha is trying to get more air.. but you're not making it easy for her. Every time she inhales, you grind down a little harder.")
+
+		saynn("[say=pc]Such a good little bitch..[/say]")
+
+		saynn("She growls.. but much weaker this time. Her cock is fully hard, the barbed shaft standing tall, twitching and leaking pre.. completely ignored by you.")
+
+		saynn("In the meantime.. you're getting close actually. Your thighs are shaking, your breaths turning into short gasps. You feel the pressure building, those piercings hitting your clit just right.")
+
+		saynn("[say=pc]I'm gonna cum.. and you're gonna swallow it all.. or drown.. ah..[/say]")
+
+		saynn("Your hips move fast and desperate, one of your hands returns back to your crotch, rubbing your clit frantically.")
+
+		saynn("Doesn't take long..")
+
+		addButton("Continue", "See what happens next", "lick_cum")
+	if(state == "lick_cum"):
+		playAnimation(StageScene.SexOralTable, "lick", {pc="pc", npc="risha", pcCum=true, bodyState={exposedCrotch=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Orgasm hits you hard. Your back arches, your head falls back for a moment.. a loud pleasure cry tearing from your throat. Your thighs lock hard around Risha's head.. as your clenching pussy suddenly squirts, forcing out a stream of transparent juices.")
+
+		saynn("Risha starts to gag moments later, her eyes going wide. Some of it she swallows.. the rest overflows and gets caught by her fur.")
+
+		saynn("[say=pc]Ahh.. mhh~.. f-fuck~.[/say]")
+
+		saynn("More and more pleasure waves wash over you, making your body shiver. You bite your lip and look down at the poor messy lynx's body. Her cock is still hard, throbbing.. but staying neglected.")
+
+		saynn("You're left panting hard. Your legs are shaky, pussy still pulsing with aftershocks even when your orgasm starts to fade.")
+
+		addButton("Continue", "See what happens next", "lick_after")
+	if(state == "lick_after"):
+		playAnimation(StageScene.SexOralTable, "hover", {pc="pc", npc="risha", bodyState={exposedCrotch=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You finally pull back, looking at Risha's face. She is a wet mess. Her fur is soaked, marked with your scent. The ring still keeps her mouth open, her tongue hidden inside.")
+
+		saynn("[say=pc]You tried to deny me. But you failed, whore.[/say]")
+
+		saynn("You grab her by the head harness and wipe your pussy against her cheek, cleaning yourself off on her like she is a towel. She shudders, a muffled sound of protest escaping her.")
+
+		saynn("[say=risha]Fucking bitch..[/say]")
+
+		saynn("[say=pc]Thanks for that, really needed it.[/say]")
+
+		saynn("She is still chained to the crate, naked, messy. Might as well just leave her like that.")
+
+		saynn("[say=pc]Someone will find you. I'm sure.[/say]")
+
+		saynn("She growls and starts thrashing against the cuffs. You turn and walk away.")
+
+		addButton("Continue", "See what happens next", "missionend_rem_ringag")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -826,10 +957,22 @@ func _react(_action: String, _args):
 		getCharacter("risha").cummedInMouthBy("pc")
 		GM.pc.orgasmFrom("risha")
 
-	if(_action == "endthescene_rem_ringag"):
+	if(_action == "missionend_rem_ringag"):
 		putOff("risha", "ringgag")
-		endScene()
+		fixUniform("pc")
+		GM.main.MS.completeMission()
+		setState("alone_missionend")
 		return
+
+	if(_action == "lick_make_helpless"):
+		processTime(5*60)
+		putOn("risha", "ringgag")
+		pullShortsDown("pc")
+
+	if(_action == "lick_cum"):
+		getCharacter("risha").cummedInMouthBy("pc", FluidSource.Vagina, 0.6)
+		getCharacter("risha").cummedOnBy("pc", FluidSource.Vagina, 0.4)
+		GM.pc.orgasmFrom("risha")
 
 	setState(_action)
 
