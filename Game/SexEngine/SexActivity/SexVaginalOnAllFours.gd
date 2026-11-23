@@ -429,7 +429,7 @@ func fucking_processTurn():
 		addText("Unable to continue standing, {sub.you} {sub.youVerb('fall')} to all fours!")
 	if(currentPose == POSE_CHOKEFUCK && getSubInfo().isUnconscious()):
 		currentPose = POSE_CHOKESEX
-		addText("Unable to continue standing, {sub.you} {sub.youVerb('fall')} on your spine!")
+		addText("Unable to continue standing, {sub.you} {sub.youVerb('fall')} on {sub.yourHis} spine!")
 	
 	doProcessFuckExtra(DOM_0, SUB_0, usedBodypart)
 	
