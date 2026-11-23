@@ -23,11 +23,11 @@ func _run():
 
 		saynn("Time passes. Kait is still staring at the board, a lonely sigh escapes her. Awkward silence starts to settle in. Avy shifts her weight, her tail swishing lazily.")
 
-		saynn("[say=avy]Did that nerd doctor take away your last braincell? What did she do to you, anyway?[/say]")
+		saynn("[say=avy]Did that nerd doctor take away your last braincell? Or are you dreaming about being in a straitjacket again? We still have it somewhere.[/say]")
 
 		saynn("Kait's fur stands on ends for a second.")
 
-		saynn("[say=kait]Shut up, she didn't do nothing. I'm fine! I know what we have to do.[/say]")
+		saynn("[say=kait]Save it. I know what we have to do.[/say]")
 
 		saynn("She turns towards you all and straightens her posture.")
 
@@ -35,7 +35,7 @@ func _run():
 
 		saynn("Ans nods.")
 
-		saynn("[say=announcer]Me and Eliza had a chat. I think she understands our mission and will do what we need her to do.[/say]")
+		saynn("[say=announcer]Me and Eliza had a chat. She will obey and pass on our orders.[/say]")
 
 		saynn("[say=kait]Good. Thanks. Then.. now..[/say]")
 
@@ -72,25 +72,29 @@ func _run():
 		playAnimation(StageScene.Duo, "stand", {npc="announcer", pc="kait"})
 		saynn("Ans clears his throat, gaining the attention of everyone.")
 
-		saynn("[say=announcer]Alex is always down in the workshop, working on his prototypes. How about we try a different approach this time?[/say]")
+		saynn("[say=announcer]Alex is always down in the workshop, working on his prototypes.[/say]")
+
+		saynn("[say=kait]Perfect. Let's pay him a visit.[/say]")
+
+		saynn("[say=announcer]How about we try a different approach this time?[/say]")
 
 		saynn("[say=kait]Different approach?[/say]")
 
 		saynn("Ans tilts his head slightly, a small smile shines on his face.")
 
-		saynn("[say=announcer]I can try to convince him. Use words rather than punches.[/say]")
+		saynn("[say=announcer]I can try to convince him. Talk to him.[/say]")
 
 		saynn("Kait shakes her head immediately.")
 
 		saynn("[say=kait]It won't work. You will just blow our cover.[/say]")
 
-		saynn("[say=announcer]I will be careful.[/say]")
+		saynn("[say=announcer]Depends on how I spin it. I have my ways with words.[/say]")
 
-		saynn("[say=kait]Too risky.[/say]")
+		saynn("[say=kait]I think that's still too risky.[/say]")
 
 		saynn("Ans approaches Kait, leaning on his cane.")
 
-		saynn("[say=announcer]We're already playing a very risky game. Your last operations didn't exactly go as planned. Give me a chance to shine, babe?[/say]")
+		saynn("[say=announcer]We're already playing a very risky game. Talking is my one thing. Give me a chance to shine, babe?[/say]")
 
 		saynn("Kait taps her claws against her uniform. She gives you and Avy a quick look.. Avy responds with an uncaring shrug. You do the same. Finally, after some time, she lets out a frustrated breath.")
 

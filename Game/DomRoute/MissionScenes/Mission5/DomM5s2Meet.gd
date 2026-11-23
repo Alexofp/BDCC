@@ -1,5 +1,7 @@
 extends SceneBase
 
+var didSayRisha = false
+
 func _init():
 	sceneID = "DomM5s2Meet"
 
@@ -33,7 +35,88 @@ func _run():
 
 		saynn("[say=kait]I'm sure she had something to do with the ambush in the first place. I can feel it.[/say]")
 
-		saynn("[say=pc]Don't be weird, Kait.[/say]")
+		addButton("Agree", "Maybe Kait is right", "kait_agree")
+		addButton("Disagree", "Kait is definitely wrong", "kait_disagree")
+	if(state == "kait_agree"):
+		var _kaitLove:int = GM.main.MS.getKaitLove()
+		var _kaitObedience:int = GM.main.MS.getKaitObedience()
+		saynn("[say=pc]Maybe you're right. She does act strange sometimes.[/say]")
+
+		if (_kaitLove >= 3):
+			saynn("[say=kait]I feel like we were made for each other sometimes~.[/say]")
+
+			saynn("[say=pc]Huh? Why?[/say]")
+
+			saynn("She gives you a quick smooch on the cheek.")
+
+			saynn("[say=kait]We always agree on stuff! That's why I like you so much~.[/say]")
+
+		elif (_kaitObedience >= 3):
+			saynn("[say=kait]You really think so?[/say]")
+
+			saynn("[say=pc]Yeah? Why?[/say]")
+
+			saynn("[say=kait]Just.. Makes me feel better when you say that I'm right.. Means that I'm not insane.[/say]")
+
+			saynn("You give her a pat on the head. She purrs.")
+
+			saynn("[say=pc]You're not insane, Kait.[/say]")
+
+		else:
+			saynn("[say=kait]Sometimes? She is crazy all the freaking time! Total bitch.[/say]")
+
+			saynn("[say=pc]Some people be like that.[/say]")
+
+		saynn("Ans and Avy both catch up with you. Looks like they were talking about something. Just like you.")
+
+		saynn("[say=kait]Finally![/say]")
+
+		saynn("[say=avy]What's the hold up? Move your butts![/say]")
+
+		saynn("Might as well stick together then.")
+
+		addButton("Continue", "See what happens next", "walk_to_elevator")
+	if(state == "kait_disagree"):
+		var _kaitLove:int = GM.main.MS.getKaitLove()
+		var _kaitObedience:int = GM.main.MS.getKaitObedience()
+		saynn("[say=pc]Don't be weird, Kait. You wouldn't be here if not for Avy.[/say]")
+
+		if (_kaitObedience >= 3):
+			saynn("She sighs and stays silent for a few seconds.")
+
+			saynn("[say=kait]Do you think that I'm going crazy?[/say]")
+
+			saynn("[say=pc]No. You're being careful. I appreciate that.[/say]")
+
+			saynn("[say=kait]Yeah.. I guess.. Thank you. I just.. I really dislike her for some reason.[/say]")
+
+			saynn("[say=pc]I'm sure there are many reasons. Let's put them aside for a bit.[/say]")
+
+			saynn("You give her a pat. She purrs and nuzzles your hand.")
+
+		elif (_kaitLove >= 3):
+			saynn("She pouts.")
+
+			saynn("[say=kait]Listen. I like you. But some of your takes are quite questionable, you know![/say]")
+
+			saynn("You shrug.")
+
+			saynn("[say=pc]What do you want me to do?[/say]")
+
+			saynn("[say=kait]Change your mind! Right now![/say]")
+
+			saynn("Better not to argue with her..")
+
+			saynn("[say=pc]Alright, done. Avy is bad.[/say]")
+
+			saynn("[say=kait]Hehe, much better~.[/say]")
+
+		else:
+			saynn("[say=kait]Yeah, you're right. I wouldn't be here. I'd be outside already![/say]")
+
+			saynn("You sigh.")
+
+			saynn("[say=pc]Not what I meant.[/say]")
 
 		saynn("Ans and Avy both catch up with you. Looks like they were talking about something. Just like you.")
 
@@ -126,6 +209,62 @@ func _run():
 
 		addButton("Got lost", "Say that you got lost", "cap_say_got_lost")
 		addButton("A way out", "Say that you were looking for a way out of this prison", "cap_say_way_out")
+		if (GM.main.MS.getSpecificFlag("Mission1", "risha", "") in ["pp", "vag"]):
+			addButton("Risha", "Say that you were looking for someone to bully and Risha was perfect for that", "cap_say_risha")
+	if(state == "cap_say_risha"):
+		playAnimation(StageScene.Duo, "stand", {npc="captain"})
+		saynn("[say=pc]I was looking for someone to bully. The guards down here are weak as fuck.[/say]")
+
+		saynn("The captain raises a brow.")
+
+		saynn("[say=captain]Oh yeah? And did you find someone?[/say]")
+
+		saynn("[say=risha]That's not fucking important![/say]")
+
+		saynn("[say=pc]Yeah, in fact..[/say]")
+
+		saynn("Risha cuts you off. She gets in front of you and the captain.")
+
+		saynn("[say=risha]Shut the fuck up, inmate. Shush.[/say]")
+
+		saynn("[say=captain]Risha. Stand by my side please.[/say]")
+
+		saynn("[say=risha]Grr.. {pc.He} {pc.isAre} full of shit.[/say]")
+
+		saynn("[say=captain]Up for me to decide, isn't it?[/say]")
+
+		saynn("Risha returns to her spot, her mean eyes drilling you. Her moving lips are silently telling you to.. choose your next words carefully.")
+
+		saynn("[say=captain]So? Humour me. Who was the unlucky one?[/say]")
+
+		if (GM.main.MS.getSpecificFlag("Mission1", "risha", "") == "pp"):
+			saynn("[say=pc]The one that is standing beside you. Risha. I put a stun baton against her cock. Got her screaming loudly.[/say]")
+
+		else:
+			saynn("[say=pc]The one that is standing beside you. Risha. I put a stun baton against her pussy slit. Got her screaming loudly.[/say]")
+
+		saynn("Risha crosses her arms and huffs.")
+
+		saynn("[say=risha]Fuck you! Bullshit! I don't have any burns, I can prove![/say]")
+
+		saynn("The captain chuckles.")
+
+		saynn("[say=captain]Keep your pants on, Risha. I trust you that our doctors here work pretty well.[/say]")
+
+		saynn("Risha's snout is wrinkling hard.. but all she can do.. is look angry at you.")
+
+		saynn("[say=captain]Keep our guards on their toes. Just know.. The bigger the crime, the bigger the punishment. Don't forget that.[/say]")
+
+		saynn("[say=risha]Really? What if they were looking for a way out? Why do you just let {pc.him} go?[/say]")
+
+		saynn("[say=captain]Simple. There is no way out. There is nothing {pc.he} can do to escape.[/say]")
+
+		saynn("That answer seems to satisfy Risha enough. She calms down a bit.")
+
+		saynn("They just leave after that. The captain steps into the elevator, and Risha follows, shooting one last glare over her shoulder. The doors slide shut.")
+
+		didSayRisha = true
+		addButton("Continue", "See what happens next", "after_cap")
 	if(state == "cap_say_got_lost"):
 		playAnimation(StageScene.Duo, "stand", {npc="captain"})
 		saynn("[say=pc]I've got lost.[/say]")
@@ -207,7 +346,11 @@ func _run():
 		removeCharacter("captain")
 		removeCharacter("risha")
 		playAnimation(StageScene.Duo, "stand", {pc="kait", npc="announcer"})
-		saynn("[say=kait]What the fuck was that?[/say]")
+		if (didSayRisha):
+			saynn("[say=kait]Stun baton against a.. ooh.. remind me not to mess with you. But yeah.. also.. what the fuck was that?[/say]")
+
+		else:
+			saynn("[say=kait]What the fuck was that?[/say]")
 
 		saynn("Kait's tail wags behind her, annoyed. She paces near the elevator doors back and forth.")
 
@@ -917,8 +1060,23 @@ func _react(_action: String, _args):
 		endScene()
 		return
 
+	if(_action == "kait_agree"):
+		GM.main.MS.setFlag("agreeKait", "yes")
+
+	if(_action == "kait_disagree"):
+		GM.main.MS.setFlag("agreeKait", "no")
+
 	if(_action == "walk_to_elevator"):
 		processTime(5*60)
+
+	if(_action == "cap_say_got_lost"):
+		GM.main.MS.setFlag("rishaAns", "lost")
+
+	if(_action == "cap_say_way_out"):
+		GM.main.MS.setFlag("rishaAns", "wayout")
+
+	if(_action == "cap_say_risha"):
+		GM.main.MS.setFlag("rishaAns", "risha")
 
 	if(_action == "ans_back_after_fail"):
 		processTime(5*60)
@@ -931,13 +1089,24 @@ func _react(_action: String, _args):
 		return
 
 	if(_action == "lost_getup"):
+		GM.main.MS.setFlag("rishaOut", "lost")
 		GM.main.MS.completeMission()
 
 	if(_action == "do_leave"):
+		GM.main.MS.setFlag("rishaOut", "leave")
 		addMessage("You got Risha's stunstick!")
 		var theStunBaton = GlobalRegistry.createItem("StunBaton")
 		theStunBaton.charges = 10 # yooo, special stun baton
 		GM.pc.getInventory().addItem(theStunBaton)
+
+	if(_action == "do_degrade"):
+		GM.main.MS.setFlag("rishaOut", "degrade")
+
+	if(_action == "do_bj"):
+		GM.main.MS.setFlag("rishaOut", "bj")
+
+	if(_action == "do_lick"):
+		GM.main.MS.setFlag("rishaOut", "lick")
 
 	if(_action == "alone_missionend"):
 		GM.main.MS.completeMission()
@@ -988,3 +1157,15 @@ func _react_scene_end(_tag, _result):
 			setState("lost_fight")
 			addExperienceToPlayer(5)
 			processTime(60*10)
+
+func saveData():
+	var data = .saveData()
+
+	data["didSayRisha"] = didSayRisha
+
+	return data
+
+func loadData(data):
+	.loadData(data)
+
+	didSayRisha = SAVE.loadVar(data, "didSayRisha", false)
