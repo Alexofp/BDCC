@@ -126,7 +126,7 @@ func addDrugButtons(possibleDrugsInfo:Array, _sexEngine: SexEngine, _domInfo: Se
 		if((_isCanApply || !dom.isOralBlocked()) && (!drugInfo.has("canUseOnDom") || drugInfo["canUseOnDom"])):
 			var useonselfScore:float = max(drugInfo["scoreOnSelf"], 0.0) * drugFetishScore
 			addStartAction(["useonself", itemID, _isCanApply, item], drugInfo["name"], desc, useonselfScore, {A_CATEGORY: getCategory()+["Self" if !_isCanApply else "Apply self"]+drugSubcategory})
-		if((_isCanApply || !sub.isOralBlocked()) && (!drugInfo.has("canUseOnSub") || drugInfo["canUseOnSub"])):
+		if((_isCanApply || isDrugAdministrationRouteAvailable(_sexEngine, sub)) && (!drugInfo.has("canUseOnSub") || drugInfo["canUseOnSub"])):
 			var mayOfferToSub:bool = _subInfo.canDoActions() && (_sexEngine.getSexTypeID() != SexType.SlutwallSex) && !_isCanApply
 
 			if(mayOfferToSub):
@@ -495,6 +495,12 @@ func generatePillVariants(theItemID:String):
 			var newTFID:String = TFUtil.generateTFIDForAPill(pillVariants)
 			if(newTFID != ""):
 				pillVariants.append(newTFID)
+
+func isDrugAdministrationRouteAvailable(_sexEngine: SexEngine, _sub:BaseCharacter) -> bool:
+	if(_sexEngine.getSexTypeID() == SexType.SlutwallSex):
+		return _sub.hasReachableAnus()
+
+	return !_sub.isOralBlocked()
 
 func saveData():
 	var data = .saveData()

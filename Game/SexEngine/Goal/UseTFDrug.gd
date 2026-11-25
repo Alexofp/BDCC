@@ -7,7 +7,7 @@ func getVisibleName():
 	return "Use transformative drug"
 
 func isPossible(_sexEngine, _domInfo, _subInfo, _data):
-	if(_sexEngine.disableTFPills || _subInfo.getChar().isOralBlocked()):
+	if(_sexEngine.disableTFPills || !isDrugAdministrationRouteAvailable(_sexEngine, _subInfo.getChar())):
 		return false
 	if(_subInfo.isUnconscious() && !OPTIONS.isContentEnabled(ContentType.ForcedPermanentTFs)):
 		return false
@@ -53,3 +53,9 @@ func getBegDomFetishes() -> Dictionary:
 	return {
 		Fetish.TFGiving: 1.0,
 	}
+
+func isDrugAdministrationRouteAvailable(_sexEngine: SexEngine, _sub:BaseCharacter) -> bool:
+	if(_sexEngine.getSexTypeID() == SexType.SlutwallSex):
+		return _sub.hasReachableAnus()
+
+	return !_sub.isOralBlocked()
