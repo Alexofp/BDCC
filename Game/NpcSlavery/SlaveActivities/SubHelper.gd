@@ -133,7 +133,7 @@ func getNotBusySlaves():
 		var npcSlavery:NpcSlave = otherSlave.getNpcSlavery()
 		if(npcSlavery == null):
 			continue
-		if(npcSlavery.isDoingActivity()):
+		if(npcSlavery.isBusyWithActivity()):
 			continue
 		result.append(otherSlave)
 	return result

@@ -1113,8 +1113,11 @@ func getPerfectIdleMessage():
 	
 	return bestMessage
 
-func isDoingActivity():
+func isDoingActivity() -> bool:
 	return activity != null
+
+func isBusyWithActivity() -> bool:
+	return activity != null && activity.preventsNormalInteractions()
 
 func getActivityID() -> String:
 	if(activity == null):
