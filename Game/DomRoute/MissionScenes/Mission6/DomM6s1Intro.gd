@@ -306,7 +306,7 @@ func _run():
 
 		saynn("[say=pc]You're not exactly leaving us many options.[/say]")
 
-		saynn("[say=alexrynard]I see. Let me just finish this repair. And then I will go with you.[/say]")
+		saynn("[say=alexrynard]I know. Let me just finish this repair. And then I will go with you.[/say]")
 
 		saynn("Repair of the datapad? He'd be able to use it to call for help then.")
 
@@ -320,6 +320,207 @@ func _run():
 
 		saynn("When she does that, Alex suddenly stabs the device with a screwdriver.")
 
+		saynn("The battery bursts..")
+
+		addButton("Continue", "See what happens next", "kait_battery_boom")
+	if(state == "kait_battery_boom"):
+		removeCharacter("alexrynard")
+		playAnimation(StageScene.Duo, "hurt", {npc="kait", npcAction="defeat"})
+		saynn("The world becomes a pure, blinding white. You throw your arm over your gaze. Kait yelps and does the same, stumbling back and collapsing in the process. Rahi is the unlucky one, forced to endure the full energy of the flash on her closed eyes.")
+
+		saynn("You hear fast steps rushing away, followed by the noises of electricity and Ferri's sharp cry.")
+
+		saynn("[say=ferri]Ahh![/say]")
+
+		saynn("All this happens in only a few seconds.")
+
+		saynn("[say=kait]Motherf-.. ugh..[/say]")
+
+		saynn("By the time your vision clears, Alex is gone. Ferri is on the floor, panting and holding onto her collar. On the workbench is the exploded datapad. Its battery has left a huge dark splotch on the flat surface.")
+
+		saynn("Kait blinks rapidly, rubbing her eyes.")
+
+		saynn("[say=pc]Everyone okay?[/say]")
+
+		saynn("[say=kait]I'm.. fine. Fuck, my head..[/say]")
+
+		saynn("You look at Ferri.")
+
+		saynn("[say=ferri]He.. shocked me.. and ran deep into the engineering bay.[/say]")
+
+		saynn("The brown feline doesn't answer. You see her eyes watering.")
+
+		saynn("[say=pc]Rahi?[/say]")
+
+		saynn("[say=rahi]Her eyes.. they hurt..[/say]")
+
+		saynn("Shit. Your head is throbbing too.. but probably not as bad as hers.")
+
+		saynn("[say=pc]Kait? Can you stand?[/say]")
+
+		saynn("[say=kait]Yeah.. I'm ready to fuck this guy up..[/say]")
+
+		saynn("You help Kait to get up. She instantly holds onto her head again.")
+
+		saynn("[say=kait]Ow.. I'm fine..[/say]")
+
+		saynn("Doesn't seem so. Better to grab the reins now.")
+
+		saynn("[say=pc]No, you're not. You're gonna grab Rahi and get both of your butts to Eliza so she can help you two. Got it?[/say]")
+
+		saynn("[say=kait]I can still..[/say]")
+
+		saynn("[say=pc]Kait. There is no time for this. Shut up and do what I say.[/say]")
+
+		saynn("[say=kait]..okay.[/say]")
+
+		saynn("The only problem.. Rahi is still cuffed to the chair.")
+
+		addButton("Help Rahi", "Try to get Rahi uncuffed", "kait_help_rahi")
+	if(state == "kait_help_rahi"):
+		playAnimation(StageScene.Duo, "stand", {npc="rahi", npcAction="sit"})
+		saynn("You approach Rahi's chair and look at her cuffs. The chain between her wrists runs around one of the bars that holds the chair's back. It's possible to just hold the chair up and walk.. but not in Rahi's current state.")
+
+		saynn("[say=pc]We need to take those cuffs off.[/say]")
+
+		saynn("[say=ferri]I brought.. thermite.[/say]")
+
+		saynn("Ferri is trying to get up.. but her body is still too sore after the unscheduled cardio session. She is holding a bigger bag with some kind of gray powder.. and a smaller one with brown stuff.")
+
+		saynn("[say=pc]I can do it.[/say]")
+
+		saynn("You run to Ferri and fetch it.")
+
+		saynn("[say=ferri]Pour some of the gray stuff onto the chain.. just the chain! Then add a pinch of the brown stuff to start the reaction.[/say]")
+
+		saynn("Seems easy enough.")
+
+		saynn("You return to Rahi. She is still blinking a lot, the whites of her eyes looking red.")
+
+		saynn("[say=rahi]Ow-w..[/say]")
+
+		saynn("[say=pc]Hold on, kitten.[/say]")
+
+		saynn("You follow the instructions, sprinkling the gray powder directly onto the chain that connects Rahi's wrists. Then you throw a pinch of the brown one.. and watch as the chain lights up!")
+
+		saynn("Whatever it is.. it starts generating a lot of heat.. so much that the chain links start glowing. And soon enough, they start turning liquid, melting!")
+
+		addButton("Continue", "See what happens next", "kait_rahi_free")
+	if(state == "kait_rahi_free"):
+		playAnimation(StageScene.Duo, "stand", {pc="kait", npc="rahi"})
+		saynn("Now that Rahi is free, Kait helps her to get up.")
+
+		saynn("[say=kait]Alright, kitty, let's go to the doctor.[/say]")
+
+		saynn("[say=rahi]Meow-w..[/say]")
+
+		saynn("Together, they head for the exit. Hopefully they can find help fast enough.")
+
+		saynn("Ferri seems to be fine by now. She gets up and approaches you.")
+
+		saynn("[say=ferri]What are we gonna do?[/say]")
+
+		saynn("There is only one thing.")
+
+		saynn("[say=pc]We go after him.[/say]")
+
+		saynn("First task.. getting into the staff-only area.")
+
+		addButton("Continue", "See what happens", "door_bolted")
+	if(state == "door_bolted"):
+		removeCharacter("rahi")
+		removeCharacter("kait")
+		removeCharacter("avy")
+		aimCameraAndSetLocName("eng_bay_corridor")
+		var _hasAccess:bool = (GM.QS.isCompleted("Ch2AlexQuest") || getFlag("AlexRynardModule.ch2CanEnterEngineering", false))
+		saynn("Together with Ferri, you approach the staff-only door. Its lights are shining bright red.")
+
+		if (_hasAccess):
+			saynn("You know the password to open it.. but once you enter it, the door just beeps angrily at you.")
+
+		else:
+			saynn("When you try to type anything on its access panel, the door just beeps angrily at you.")
+
+		saynn("[say=ferri]It seems to be bolted shut.. Locked physically..[/say]")
+
+		saynn("Alex Rynard has barricaded himself inside his little castle. With no way to get to him. Not without the special tools..")
+
+		saynn("Wait. Ferri is your special tool. You hand her the bag with the thermite.")
+
+		saynn("[say=pc]Can you use it to melt through the door?[/say]")
+
+		saynn("Ferri blinks and looks at you like you're insane.")
+
+		saynn("[say=ferri]Are you serious?[/say]")
+
+		saynn("The guy has caused so much trouble for you already. Your single glance is enough to let Ferri know the answer.")
+
+		saynn("[say=ferri]Mew.. I can probably make a hole with what we have. Won't be enough to fit through.. and you probably don't want to be crawling through molten metal..[/say]")
+
+		saynn("[say=pc]So this is it then?[/say]")
+
+		saynn("She shrugs.")
+
+		saynn("[say=ferri]I did bring the same stuff that I used to blow up the mental ward door.. but this one seems more secure.[/say]")
+
+		saynn("The door is strong.. sure.. but what about the wall?")
+
+		saynn("[say=pc]Can it get us through some concrete?[/say]")
+
+		saynn("[say=ferri]Maybe.[/say]")
+
+		saynn("You grab her by the collar and pull her back into the workshop.")
+
+		addButton("Continue", "See what happens next", "ferri_prepares_boom")
+	if(state == "ferri_prepares_boom"):
+		aimCameraAndSetLocName("eng_workshop")
+		saynn("Inside the workshop, you show Ferri the west wall.")
+
+		saynn("[say=pc]Here. Blow this one up.[/say]")
+
+		saynn("[say=ferri]What if there is open space behind it.. mow..[/say]")
+
+		saynn("[say=pc]I have a good feeling, Ferri. Just do it.[/say]")
+
+		saynn("Having nothing to say against your order, Ferri decides to do it.")
+
+		saynn("She starts by first sprinkling some thermite roughly into the center of the wall. When she ignites it, the thermite lights up, making a small hole. Indeed, there is some room behind this wall.")
+
+		saynn("[say=ferri]Okay.. This is gonna make a boom.. So we will have to hide behind something.[/say]")
+
+		saynn("You get yourself behind the furthest-most workbench. It seems to be sturdy enough to withstand anything.")
+
+		saynn("Ferri places two vials inside the burning-hot hole.. and quickly rushes to you, hiding behind the same workbench.")
+
+		saynn("Seconds later..")
+
+		saynn("BOOM!")
+
+		saynn("Whatever it is, it sure did its thing. The whole room is shaking as all of the debris is falling down. The explosion spawns a thick cloud of smoke that obscures the result.")
+
+		saynn("You keep hiding for some time, making sure nothing is gonna kill you.")
+
+		saynn("Then, you carefully peek your head out above the bench.")
+
+		saynn("[say=pc]This probably alerted half of the station.[/say]")
+
+		saynn("When the smoke clears.. you can see an entering. Not big enough to walk through.. but surely big enough to crawl through.")
+
+		saynn("[say=pc]You did well. Let's go![/say]")
+
+		addButton("Continue", "See what happens next", "crawl_through_hole")
+	if(state == "crawl_through_hole"):
+		aimCameraAndSetLocName("eng_breakroom")
+		GM.pc.setLocation("eng_bay_nearbreakroom")
+		saynn("You and Ferri crawl through the new opening.. and end up in some kind of staff break room.. or at least it was one. The explosion has turned this space into a mess. Broken sofa, destroyed TV, sparking vending machine.")
+
+		saynn("[say=ferri]They're gonna be very angry at us..[/say]")
+
+		saynn("[say=pc]They can rebuild it. They're engineers, that's what they live for.[/say]")
+
+		saynn("For you, it was time to find Alex Rynard.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -334,5 +535,14 @@ func _react(_action: String, _args):
 
 	if(_action == "sed_avy_leave"):
 		processTime(5*60)
+
+	if(_action == "kait_help_rahi"):
+		processTime(5*60)
+
+	if(_action == "kait_rahi_free"):
+		putOff("rahi", "inmatewristcuffs")
+
+	if(_action == "crawl_through_hole"):
+		addMessage("Task updated!")
 
 	setState(_action)
