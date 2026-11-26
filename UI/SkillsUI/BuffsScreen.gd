@@ -29,8 +29,11 @@ func updateBuffsText():
 				newtext += buff.getVisibleDescriptionColored()+"\n"
 			newtext += "\n"
 
-	var perks = GM.pc.getSkillsHolder().getPerks()
+	var skillsHolder:SkillsHolder = GM.pc.getSkillsHolder()
+	var perks = skillsHolder.getPerks()
 	for perkID in perks:
+		if(skillsHolder.isPerkDisabled(perkID)):
+			continue
 		var perk = perks[perkID]
 		var perkBuffs = perk.getBuffs()
 	
