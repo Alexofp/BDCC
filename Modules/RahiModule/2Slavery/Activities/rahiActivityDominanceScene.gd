@@ -1705,7 +1705,7 @@ func _run():
 
 		saynn("Instead of listening to you, Rahi smiles and turns away.")
 
-		saynn("[say=rahi]Look at her pet! {pc.He} is so obedient and well-trained![/say]")
+		saynn("[say=rahi]Look at her pet! {pc.He} {pc.isAre} so obedient and well-trained![/say]")
 
 		saynn("She was loud enough for everyone to hear. All the while kitty keeps tugging down on the leash.. you finally submit, slowly lowering yourself to all fours.")
 

@@ -146,7 +146,7 @@ func _run():
 
 		saynn("Eliza chuckles and pats Rahi on the head.")
 
-		saynn("[say=eliza]It’s great that you asked, kitty. But you shouldn’t. Just take what you want from {pc.him}. Enjoy yourself, please~. It will be very obvious when {pc.he} likes it, trust me~.[/say]")
+		saynn("[say=eliza]It’s great that you asked, kitty. But you shouldn’t. Just take what you want from {pc.him}. Enjoy yourself, please~. It will be very obvious when {pc.he} {pc.verb('like')} it, trust me~.[/say]")
 
 		saynn("After that Eliza just takes a seat and lets Rahi act on her own.")
 

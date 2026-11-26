@@ -99,7 +99,7 @@ func _run():
 
 		saynn("Avy stands tall, radiating an aura of confidence and power. Her face doesn't show much emotion, only her eyes are piercing through you. The audience seems to love her, some are cheering her to win.")
 
-		saynn("[say=announcer]And in the left corner. We have {pc.name}, one of the most promising warriors that we had in a while. {pc.He} started at the complete bottom of the champion list and managed to climb the ranks until {pc.he} is here! What do you think, will {pc.he} be able to take away Avy's Grand Champion rank or will {pc.he} end up just as another tally mark in Avy's book?[/say]")
+		saynn("[say=announcer]And in the left corner. We have {pc.name}, one of the most promising warriors that we had in a while. {pc.He} started at the complete bottom of the champion list and managed to climb the ranks until {pc.he} {pc.isAre} here! What do you think, will {pc.he} be able to take away Avy's Grand Champion rank or will {pc.he} end up just as another tally mark in Avy's book?[/say]")
 
 		saynn("A loud murmur of anticipation swipes through the audience, everyone seems to be curious to see the clash between you and Avy. Or maybe they're just waiting for another loser to get fucked..")
 

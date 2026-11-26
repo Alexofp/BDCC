@@ -232,7 +232,7 @@ func _run():
 		else:
 			saynn("They don’t even want to cover with your arms anymore, you are eagerly letting everyone see you and your used dripping tailhole.")
 
-		saynn("[sayMale]Fuck yeah, {pc.he} is slipping into heat. The pill was mine, I fuck {pc.him} first![/sayMale]")
+		saynn("[sayMale]Fuck yeah, {pc.he} {pc.isAre} slipping into heat. The pill was mine, I fuck {pc.him} first![/sayMale]")
 
 		# (if has pussy)
 		if(GM.pc.hasVagina()):
@@ -302,7 +302,7 @@ func _run():
 
 			saynn("A buffed-up dickgirl positions herself behind you and lowers herself to the knees, her knotted cock has ribs along its length. She presses a hand into your back and guides her cock down your tailhole. Your {pc.analStretch} star clenches but that only makes the moment when she forces her shaft inside more intense. You cry out a louder noise as two inmates start using both your holes at the same time, double penetrating you.")
 
-			saynn("[sayFemale]Oh yeah, {pc.he} is much tighter like this. Take it, slut.[/sayFemale]")
+			saynn("[sayFemale]Oh yeah, {pc.he} {pc.isAre} much tighter like this. Take it, slut.[/sayFemale]")
 
 			# (if has cock)
 			if(GM.pc.isWearingChastityCage()):
@@ -318,7 +318,7 @@ func _run():
 
 			saynn("A buffed-up dickgirl positions herself behind you and lowers herself to the knees, her knotted cock has ribs along its length. She presses a hand into your back and guides her cock between your buttcheeks, trying to shove it into the occupied hole. Your {pc.analStretch} star clenches harder, the discomfort feeling quickly rises but bit by bit your butt gives in until the moment when she forces her shaft inside fully. You cry out a louder noise as two cocks are stretching your anal at the same time, double penetrating you.")
 
-			saynn("[sayFemale]Oh yeah, {pc.he} is much tighter like this. Take it, slut.[/sayFemale]")
+			saynn("[sayFemale]Oh yeah, {pc.he} {pc.isAre} much tighter like this. Take it, slut.[/sayFemale]")
 
 			# (if has cock)
 			if(GM.pc.isWearingChastityCage()):
