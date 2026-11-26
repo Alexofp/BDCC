@@ -12,6 +12,7 @@ var turnsLastStim:int = 0 # How many turns since last stimulation
 var satisfaction:float = 0.0
 var frustration:float = 0.0
 var fetishGain:Dictionary = {}
+var equippedAtStart:Dictionary = {}
 
 var functionallyNaked:bool = false # If vag/penis/anus are uncovered
 var justCame:bool = false
@@ -25,7 +26,15 @@ func initInfo(theCharID, sexengine):
 	charID = theCharID
 	sexEngineRef = weakref(sexengine)
 	initFromPersonality()
-	
+
+	var character = getChar()
+	if(character != null):
+		var equippedItems:Dictionary = character.getInventory().getEquippedItems()
+		for slot in equippedItems:
+			var item = equippedItems[slot]
+			if(item.getItemCategory() in [ItemCategory.Clothes, ItemCategory.Underwear]):
+				equippedAtStart[slot] = item.getUniqueID()
+
 func getChar() -> BaseCharacter:
 	if(charID == null || charID == ""):
 		return null
@@ -538,6 +547,19 @@ func doFetishChangeCalculation() -> Dictionary:
 func shouldFullyObey() -> bool:
 	return false
 
+func checkReEquipClothing() -> void:
+	# When clothing is "removed" during sex, it stays equipped and a flag is set to mark it as removed.
+	# However, if another item (Latex Straitjacket, Breast Pump, etc.) is equipped in the same slot, the item is actually unequipped.
+	# After recovering items during sex, check to see if any clothing any characters started with but no longer have equipped is still in their inventory and the slot is empty.
+	var character = getChar()
+	if(character == null):
+		return
+	var inventory:Inventory = character.getInventory()
+	for slot in equippedAtStart:
+		var uniqueID:String = equippedAtStart[slot]
+		if(!inventory.hasSlotEquipped(slot) && inventory.hasItemWithUniqueID(uniqueID)):
+			inventory.equipItem(inventory.getItemByUniqueID(uniqueID))
+
 func saveData():
 	var data = {
 		"charID": charID,
@@ -550,6 +572,7 @@ func saveData():
 		"satisfaction": satisfaction,
 		"frustration": frustration,
 		"fetishGain": fetishGain,
+		"equippedAtStart": equippedAtStart,
 		"justCame": justCame,
 	}
 
@@ -566,5 +589,6 @@ func loadData(data):
 	satisfaction = SAVE.loadVar(data, "satisfaction", 0.0)
 	frustration = SAVE.loadVar(data, "frustration", 0.0)
 	fetishGain = SAVE.loadVar(data, "fetishGain", {})
+	equippedAtStart = SAVE.loadVar(data, "equippedAtStart", {})
 	justCame = SAVE.loadVar(data, "justCame", false)
 	checkFunctionallyNaked()
