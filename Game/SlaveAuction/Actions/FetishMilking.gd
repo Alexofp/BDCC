@@ -9,7 +9,7 @@ func getButtonDesc() -> String:
 func onAct(_char:BaseCharacter, _auction, _slaveTraits:Dictionary):
 	if(_char.hasNonFlatBreasts() && _char.hasPenis()):
 		sayPresenter(RNG.pick([
-			"Now this one, {slave.heShe} has a particular fondness for being milked. Whether it’s those {slave.breasts} or the seed from {slave.his} {slave.penis}, {slave.he} loves every second of it.",
+			"Now this one, {slave.heShe} {slave.hasHave} a particular fondness for being milked. Whether it’s those {slave.breasts} or the seed from {slave.his} {slave.penis}, {slave.he} loves every second of it.",
 			"Whether it’s milking those swollen breasts or drawing out every last drop from {slave.his} {slave.penis}, this one’s body aches to be drained!",
 			"{slave.His} whole purpose? To be milked dry. Whether it’s {slave.his} seed or milk, {slave.he} needs that sensation!",
 			"This one is a double delight, ladies and gentlemen. Why? Well, let’s just say you’ll never run out of fresh seed and milk. {slave.He} loves being milked!",
@@ -29,7 +29,7 @@ func onAct(_char:BaseCharacter, _auction, _slaveTraits:Dictionary):
 	else:
 		sayPresenter(RNG.pick([
 			"Ever wanted a slave who’s just begging to be milked? This one gets off on the act itself, no encouragement needed!",
-			"Now this one, {slave.heShe} has a particular fondness for being milked. {slave.He} loves every second of it!",
+			"Now this one, {slave.heShe} {slave.hasHave} a particular fondness for being milked. {slave.He} loves every second of it!",
 			"{slave.His} whole purpose? To be milked dry! {slave.He} needs that sensation! But will you give it to {slave.him}?",
 			"This one lives for the feeling of being milked. {slave.HisHer} {slave.breasts} are full, and they ache for release. Squeeze them dry, and {slave.he} won’t be able to stop moaning for more.",
 			"If you’ve ever wanted a slave who needs to be milked, look no further. These {slave.breasts} aren’t just for show - they’re meant to be drained, and {slave.he} loves every second of it.",

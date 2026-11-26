@@ -77,7 +77,7 @@ func getNegativeReaction(_char:BaseCharacter, _slaveTraits:Dictionary) -> String
 			'Loose asshole? Ugh. That’s not what I’m looking for in a slave.',
 			'I’ll pass on this one.',
 			'Loose asshole? No.',
-			'Doesn’t sound like {slave.he} has any grip left. Not my thing.',
+			'Doesn’t sound like {slave.he} {slave.hasHave} any grip left. Not my thing.',
 			'An asshole that’s seen so much action? Nah, I’m out.',
 		])
 	
