@@ -40,3 +40,6 @@ func onEventSkipped(_npcSlavery:NpcSlave):
 	GM.main.addLogMessage("Oh no, anyway", "Looks like one of your slaves has managed to escape. Maybe you can try to track them down")
 	GM.pc.getReputation().addRep(RepStat.Alpha, -3.0)
 	GM.main.RS.sendSocialEvent("pc", slaveID, SocialEventType.EscapedSlavery)
+
+func isSlaveAbsentAtStart():
+	return true

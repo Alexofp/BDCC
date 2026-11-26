@@ -83,7 +83,7 @@ func _run():
 					else:
 						saynn("{npc.He} {npc.isAre} wearing "+str(restraintAmount)+" restraint"+("s" if restraintAmount != 1 else "")+" which helps remind {npc.him} of {npc.his} place.")
 			
-			saynn("{npc.name} "+npcSlavery.getRewardBalanceString())
+			saynn("{npc.name} "+npcSlavery.getRewardBalanceString() + ".")
 		
 		if(getFlag("NpcSlaveryModule.debugSlaveInfo", false)):
 			sayn("[b]DEBUG INFO:[/b]")

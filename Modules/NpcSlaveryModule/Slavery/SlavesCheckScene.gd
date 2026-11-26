@@ -9,27 +9,100 @@ func _init():
 func resolveCustomCharacterName(_charID):
 	if(_charID == "npc"):
 		return savedCharID
-	
+
 func _run():
 	if(state == ""):
 		playAnimation(StageScene.Solo, "stand")
-		
+
 		if(getFlag("SlaveAuctionModule.s1hap")):
 			addButtonAt(13, "Blacktail Market", "Place where you can sell your slaves", "go_market")
 		addButtonAt(14, "CLOSE", "Enough interactions", "endthescene")
-		
-		saynn("Who do you want to check on?")
-		
+
 		var slaves = GM.main.getDynamicCharacterIDsFromPool(CharacterPool.Slaves)
-		
+		var veryAngry := []
+		var uncomfortableAndShouldTalkTo := []
+		var expectingRewardOrPunishment := []
+		var readyForTraining := []
+		var readyToLevelUp := []
+
 		for charID in slaves:
 			var character:DynamicCharacter = getCharacter(charID)
 			var npcSlavery:NpcSlave = character.getNpcSlavery()
 			if(npcSlavery == null):
 				continue
-			
+
+			var absent:bool = false
+			if(npcSlavery.hasRandomEventToTrigger()):
+				var randomEvent:SlaveEventBase = GlobalRegistry.getSlaveEvent(npcSlavery.randomEventWillHappenID)
+				if(randomEvent != null):
+					if(randomEvent.isSlaveAbsentAtStart()):
+						absent = true
+					else:
+						var eventMessage = randomEvent.getSlavesCheckMessage(npcSlavery)
+						if(eventMessage != null):
+							saynn(eventMessage)
+
+			if(npcSlavery.isBusyWithActivity()):
+				absent = true
+
+			if(!absent):
+				if(npcSlavery.isMindBroken()):
+					pass
+				elif(npcSlavery.isResistingSuperActively()):
+					veryAngry.append(charID)
+				else:
+					if(npcSlavery.rewardBalance != 0):
+						expectingRewardOrPunishment.append(charID)
+					if(npcSlavery.getDespair() > 0.6):
+						uncomfortableAndShouldTalkTo.append(charID)
+					elif(npcSlavery.getNeediness() >= 10.0):
+						uncomfortableAndShouldTalkTo.append(charID)
+					if(!npcSlavery.isReadyToBeLeveledUp() && (npcSlavery.canLearnNewSkillAndHasAvailable() || (npcSlavery.getCurrentSpecializationLevel() < 15 && npcSlavery.getTiredEffect() < 0.5))):
+						readyForTraining.append(charID)
+				if(npcSlavery.isReadyToBeLeveledUp()):
+					readyToLevelUp.append(charID)
+
 			addButton(("(!) " if npcSlavery.hasRandomEventToTrigger() else "")+character.getName(), character.getSmallDescription(), "do_check", [character])
-	
+
+		if(!veryAngry.empty()):
+			if(veryAngry.size() == 1):
+				saynn("{" + veryAngry[0] + ".name} is fuming with rage!");
+			else:
+				for i in veryAngry.size():
+					veryAngry[i] = "{" + veryAngry[i] + ".name}"
+				saynn(Util.humanReadableList(veryAngry) + " are fuming with rage!")
+
+		if(!uncomfortableAndShouldTalkTo.empty()):
+			if(uncomfortableAndShouldTalkTo.size() == 1):
+				saynn("{" + uncomfortableAndShouldTalkTo[0] + ".name} looks uncomfortable. You should talk to {" + uncomfortableAndShouldTalkTo[0] + ".himHer} and see what's wrong.");
+			else:
+				for i in uncomfortableAndShouldTalkTo.size():
+					uncomfortableAndShouldTalkTo[i] = "{" + uncomfortableAndShouldTalkTo[i] + ".name}"
+				saynn(Util.humanReadableList(uncomfortableAndShouldTalkTo) + " look uncomfortable. You should talk to them and see what's wrong.")
+
+		if(!expectingRewardOrPunishment.empty()):
+			if(expectingRewardOrPunishment.size() == 1):
+				saynn("{" + expectingRewardOrPunishment[0] + ".name} looks like {" + expectingRewardOrPunishment[0] + ".heShe} {" + expectingRewardOrPunishment[0] + ".isAre} expecting you to do something to {" + expectingRewardOrPunishment[0] + ".himHer}.");
+			else:
+				for i in expectingRewardOrPunishment.size():
+					expectingRewardOrPunishment[i] = "{" + expectingRewardOrPunishment[i] + ".name}"
+				saynn(Util.humanReadableList(expectingRewardOrPunishment) + " look like they are expecting you to do something.")
+
+		if(!readyForTraining.empty()):
+			if(readyForTraining.size() == 1):
+				saynn("{" + readyForTraining[0] + ".name} is ready for more training.");
+			else:
+				for i in readyForTraining.size():
+					readyForTraining[i] = "{" + readyForTraining[i] + ".name}"
+				saynn(Util.humanReadableList(readyForTraining) + " are ready for more training.")
+
+		if(!readyToLevelUp.empty()):
+			for i in readyToLevelUp.size():
+				readyToLevelUp[i] = "{" + readyToLevelUp[i] + ".name}"
+			saynn(Util.humanReadableList(readyToLevelUp) + " can be levelled up!")
+
+		saynn("Who do you want to check on?")
+
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
