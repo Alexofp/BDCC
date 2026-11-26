@@ -28,6 +28,9 @@ func preventsNormalInteractions():
 func shouldTriggerEventsOnTalk():
 	return !preventsNormalInteractions()
 
+func shouldResumeAfterInterruption():
+	return false
+
 func getActivityText():
 	return "{npc.name} is doing something!"
 

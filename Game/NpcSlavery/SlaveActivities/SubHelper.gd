@@ -12,6 +12,9 @@ func _init():
 func getVisibleName():
 	return "Slave helper"
 
+func shouldResumeAfterInterruption():
+	return true
+
 func getActivityText():
 	if(currentHelpingTask != ""):
 		var otherSlave:BaseCharacter = GlobalRegistry.getCharacter(currentTargetID)
