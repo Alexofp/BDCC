@@ -167,9 +167,9 @@ anchor_bottom = 1.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="StartMenu/CenterContainer"]
 margin_left = 500.0
-margin_top = 326.0
+margin_top = 317.0
 margin_right = 779.0
-margin_bottom = 394.0
+margin_bottom = 403.0
 
 [node name="Label" type="Label" parent="StartMenu/CenterContainer/VBoxContainer"]
 margin_right = 279.0
@@ -182,6 +182,13 @@ margin_right = 279.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 0, 50 )
 text = "Begin"
+
+[node name="Label2" type="Label" parent="StartMenu/CenterContainer/VBoxContainer"]
+margin_top = 72.0
+margin_right = 279.0
+margin_bottom = 86.0
+text = "or press Space or Enter"
+align = 1
 
 [connection signal="gui_input" from="ClickStealer" to="." method="_on_ClickAtTheRightTime_gui_input"]
 [connection signal="pressed" from="StartMenu/CenterContainer/VBoxContainer/Button" to="." method="_on_Button_pressed"]
