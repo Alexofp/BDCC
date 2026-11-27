@@ -8,15 +8,19 @@ func _run():
 		playAnimation(StageScene.Duo, "stand", {npc="avy", pc="kait"})
 		addCharacter("kait")
 		addCharacter("avy")
+		saynn("Kait and Avy are both here.")
+
 		saynn("[say=kait]Alright. Is everyone ready? We're going to make a proper introduction to our future friendly engineer today and ask for a few favors.[/say]")
 
 		saynn("[say=avy]Been born ready.[/say]")
 
-		saynn("Kait looks at you. You respond with a nod.")
+		saynn("Kait looks at you. No point in stopping now so you respond with a nod.")
 
 		saynn("[say=kait]Let's stick together. We're gonna grab Rahi and Ferri on the way there. The more of us are near him, the better.[/say]")
 
-		saynn("[say=avy]The higher the risk we all get caught. What are you gonna do about other engineers near him?[/say]")
+		saynn("[say=avy]The higher the risk we all get caught. What are you gonna do about his friends?[/say]")
+
+		saynn("Kait smiles.")
 
 		saynn("[say=kait]I have a plan.[/say]")
 
@@ -64,7 +68,7 @@ func _run():
 		playAnimation(StageScene.Duo, "defeat", {pc="rahi", npc="alexrynard"})
 		saynn("Rahi walks past Alex's workbench.. and then trips on its corner!")
 
-		saynn("She flails her arms.. and flops onto the floor with a soft thud. A painful noise leaves her maw.")
+		saynn("She flails her arms.. and flops onto the floor with a soft thud. A painful noise escapes her muzzle.")
 
 		saynn("[say=rahi]Ouch.. ow..[/say]")
 
@@ -82,7 +86,7 @@ func _run():
 
 		saynn("Alex looks down at her, his face expression nothing but neutral.")
 
-		saynn("[say=alexrynard]Only one paw? Good. Can still crawl to the medbay then.[/say]")
+		saynn("[say=alexrynard]Only one paw? Okay. Still have enough to crawl to the medbay.[/say]")
 
 		saynn("Rahi hears that.. and huffs.")
 
@@ -155,11 +159,11 @@ func _run():
 
 		saynn("Rahi notices the motion behind Alex.. she finally sees Avy.")
 
-		saynn("[say=rahi]..um.. she wanted to see what games it had..[/say]")
+		saynn("[say=rahi]..um.. she wanted to check what games it had..[/say]")
 
 		saynn("Alex sighs.")
 
-		saynn("[say=alexrynard]Looking at you, I almost believe you.[/say]")
+		saynn("[say=alexrynard]Right. I almost believe you.[/say]")
 
 		saynn("Avy shows herself holding an invisible stick.. before snapping it in half.")
 
@@ -171,7 +175,7 @@ func _run():
 
 		saynn("The feline swallows audibly.")
 
-		saynn("[say=rahi]Well.. she wanted to get into trouble..[/say]")
+		saynn("[say=rahi]Well.. she wanted to get into trouble.. Getting punished is fun..[/say]")
 
 		saynn("[say=alexrynard]Really? You're a silly cat. I know how to punish you then. By not punishing you.[/say]")
 
@@ -208,19 +212,27 @@ func _run():
 
 		saynn("[say=kait]Avy. Go to the medical block and tell Eliza to call all available engineers to the medical wing. To repair the damage that you did to the mental ward or whatever.[/say]")
 
+		saynn("Avy instantly frowns and crosses her arms.")
+
 		saynn("[say=avy]What? Why me? Tell the blue cat to do it.[/say]")
+
+		saynn("Ferri pouts.")
 
 		saynn("[say=ferri]Mow..[/say]")
 
 		saynn("[say=kait]Ferri is too.. sensitive to Eliza's presence. So you have to do it, don't go against the plan.[/say]")
 
+		saynn("Avy is unyielding.")
+
 		saynn("[say=avy]Go tell her yourself then! This engi is gonna crumble when I put my hands on him. But he will laugh when he sees you, the doormat.[/say]")
 
-		saynn("[say=kait]He is just a guy, I can seduce him easily. One sway of my hips and he will do what I want.[/say]")
+		saynn("[say=kait]He is just a guy, I can seduce him easily. One hip sway and he will do what I want.[/say]")
+
+		saynn("Avy rolls her eyes.")
 
 		saynn("[say=avy]Uh huh. Sure he will.[/say]")
 
-		saynn("[say=kait]He looks sad. He will cling to any pussy he can![/say]")
+		saynn("[say=kait]He looks lonely. He will cling to any pussy he can![/say]")
 
 		saynn("[say=avy]He will see right through you. Intimidation is the only way.[/say]")
 
@@ -230,10 +242,199 @@ func _run():
 
 		addButton("Seduction", "(Kait's love +) Try to seduce the foxy", "do_seduce")
 		addButton("Intimidation", "(Avy's love +) Try to threaten the foxy", "do_threaten")
+	if(state == "do_threaten"):
+		saynn("[say=pc]The guy is probably immune to seduction, Kait. We have to go with the rough approach.[/say]")
+
+		saynn("[say=avy]Finally, someone with a lick of sense.[/say]")
+
+		saynn("[say=kait]Fine, better I do it anyway.[/say]")
+
+		saynn("Kait runs off, towards the elevator.")
+
+		addButton("Continue", "See what happens next", "sed_kait_leave")
+	if(state == "sed_kait_leave"):
+		removeCharacter("kait")
+		playAnimation(StageScene.Duo, "stand", {npc="avy"})
+		saynn("A few minutes later.. The engineers begin to pour out of the workshop. You don't want to get in their way so you stay in the shadows.")
+
+		saynn("[say=avy]Yeah, keep moving your legs, sloths..[/say]")
+
+		saynn("You peek inside.. the room is almost mostly. Alex is still repairing his datapad, not paying any attention to his surroundings. Rahi is sitting near him, cuffed to the chair.")
+
+		saynn("[say=avy]No smart shit. We approach the guy and put some pressure on him.[/say]")
+
+		saynn("[say=pc]Ferri, stay near the entrance. Just in case.[/say]")
+
+		saynn("[say=ferri]Got it.[/say]")
+
+		saynn("Avy clenches her fists.")
+
+		saynn("[say=avy]If he reaches for the shock remote, hit first. He can't drop all of us.[/say]")
+
+		saynn("Time to do this.")
+
+		addButton("Continue", "See what happens next", "avy_tries_to_threaten")
+	if(state == "avy_tries_to_threaten"):
+		addCharacter("alexrynard")
+		addCharacter("rahi")
+		playAnimation(StageScene.Duo, "stand", {pc="avy", npc="alexrynard"})
+		aimCameraAndSetLocName("eng_workshop")
+		saynn("Either of you don't bother being subtle. You walk into the workshop like you own the place, your eyes locking onto the fox. Ferri stays near the exit, just like she was told.")
+
+		var _didThisAlready:bool = getFlag("AlexRynardModule.ch2GotRektHappened", false)
+		saynn("Alex looks up from his datapad. Seeing you two makes him tense up a little. He looks around too.. noticing the empty workshop.")
+
+		saynn("[say=avy]Hey, foxy.[/say]")
+
+		saynn("She stops right in front of his workbench, leaning on it with one paw.")
+
+		saynn("[say=alexrynard]Came to shank me?[/say]")
+
+		saynn("Avy tilts her head to the side a bit and puts on a mean smile.")
+
+		saynn("[say=pc]You're a guy who knows how our collars work.[/say]")
+
+		saynn("Alex glances at you.. then back to Avy.")
+
+		saynn("[say=alexrynard]I see. The old guy is with you too I reckon. And this cat.. Makes sense.[/say]")
+
+		saynn("Avy's grin widens.")
+
+		saynn("[say=avy]There are many of us. Just disable our collars and we won't have any problems. Simple.[/say]")
+
+		saynn("She cracks her knuckles.")
+
+		saynn("[say=alexrynard]Hm. You tried a kind approach with me. But now you're just gonna beat me into submission.[/say]")
+
+		saynn("[say=avy]You're a smart foxy. Except we're not gonna beat you. We're gonna break you. There's a difference.[/say]")
+
+		saynn("She leans in closer, her voice dropping to a growl. Alex hand starts reaching for the remote.")
+
+		saynn("[say=alexrynard]You're making a mistake.[/say]")
+
+		saynn("[say=avy]I've broken bigger guys than you. Wanna see how that goes? Your remote won't save you~.[/say]")
+
+		saynn("Alex stops reaching for the remote. He lowers his chin.. looking down at the broken datapad in front of him. Avy chuckles.")
+
+		saynn("[say=avy]Aw. At least resist a little. Don't be so spineless. Throw a punch, c'mon.[/say]")
+
+		saynn("[say=alexrynard]Can I finish the repair?[/say]")
+
+		saynn("If he repairs that datapad, he will be able to call for help.")
+
+		saynn("[say=pc]No. That can wait.[/say]")
+
+		saynn("Suddenly, Alex grabs a screwdriver and stabs the datapad's battery.")
+
+		saynn("It bursts..")
+
+		addButton("Continue", "See what happens next", "avy_battery_boom")
+	if(state == "avy_battery_boom"):
+		removeCharacter("alexrynard")
+		playAnimation(StageScene.Duo, "hurt", {npc="avy", npcAction="hurt"})
+		saynn("The world becomes a pure, blinding white. You throw your arm over your gaze. Avy yelps and does the same, stumbling back. Rahi is the unlucky one, forced to endure the full energy of the flash on her closed eyes.")
+
+		saynn("You hear fast steps rushing away, followed by the noises of electricity and Ferri's sharp cry.")
+
+		saynn("[say=ferri]Ahh![/say]")
+
+		saynn("All this happens in only a few seconds.")
+
+		saynn("[say=avy]Fucker.. ugh..[/say]")
+
+		saynn("By the time your vision clears, Alex is gone. Ferri is on the floor, panting and holding onto her collar. On the workbench is the exploded datapad. Its battery has left a huge dark splotch on the flat surface.")
+
+		saynn("Avy growls, rubbing her eyes.")
+
+		saynn("[say=pc]Everyone okay?[/say]")
+
+		saynn("[say=avy]I'm fine.. Where is he?![/say]")
+
+		saynn("You look at Ferri.")
+
+		saynn("[say=ferri]He.. shocked me.. and ran deep into the engineering bay.[/say]")
+
+		saynn("The brown feline doesn't answer. You see her eyes watering.")
+
+		saynn("[say=pc]Rahi?[/say]")
+
+		saynn("[say=rahi]Her eyes.. they hurt..[/say]")
+
+		saynn("Shit. Your head is throbbing too.. but probably not as bad as hers.")
+
+		saynn("[say=pc]Avy? Get Rahi to the doctor. Now.[/say]")
+
+		saynn("Avy rubs her eyes.")
+
+		saynn("[say=avy]What about..[/say]")
+
+		saynn("[say=pc]I will deal with him.[/say]")
+
+		saynn("[say=avy]Alright. Shit.[/say]")
+
+		saynn("The only problem.. Rahi is still cuffed to the chair.")
+
+		addButton("Help Rahi", "Try to get Rahi uncuffed", "avy_help_rahi")
+	if(state == "avy_help_rahi"):
+		playAnimation(StageScene.Duo, "stand", {npc="rahi", npcAction="sit"})
+		saynn("You approach Rahi's chair and look at her cuffs. The chain between her wrists runs around one of the bars that holds the chair's back. It's possible to just hold the chair up and walk.. but not in Rahi's current state.")
+
+		saynn("[say=pc]We need to take those cuffs off.[/say]")
+
+		saynn("[say=ferri]I brought.. thermite.[/say]")
+
+		saynn("Ferri is trying to get up.. but her body is still too sore after the unscheduled cardio session. She is holding a bigger bag with some kind of gray powder.. and a smaller one with brown stuff.")
+
+		saynn("[say=pc]I can do it.[/say]")
+
+		saynn("You run to Ferri and fetch it.")
+
+		saynn("[say=ferri]Pour some of the gray stuff onto the chain.. just the chain! Then add a pinch of the brown stuff to start the reaction.[/say]")
+
+		saynn("Seems easy enough.")
+
+		saynn("You return to Rahi. She is still blinking a lot, the whites of her eyes looking red.")
+
+		saynn("[say=rahi]Ow-w..[/say]")
+
+		saynn("[say=pc]Hold on, kitten.[/say]")
+
+		saynn("You follow the instructions, sprinkling the gray powder directly onto the chain that connects Rahi's wrists. Then you throw a pinch of the brown one.. and watch as the chain lights up!")
+
+		saynn("Whatever it is.. it starts generating a lot of heat.. so much that the chain links start glowing. And soon enough, they start turning liquid, melting!")
+
+		addButton("Continue", "See what happens next", "avy_rahi_free")
+	if(state == "avy_rahi_free"):
+		playAnimation(StageScene.SexStart, "start", {npc="avy", pc="rahi"})
+		saynn("Now that Rahi is free, Avy picks her up into a fireman's carry, pulling the feline onto her shoulder.")
+
+		saynn("[say=avy]Hold tight to me.[/say]")
+
+		saynn("Rahi grabs onto the dark foxy.")
+
+		saynn("[say=rahi]Meow-w..[/say]")
+
+		saynn("Together, they head for the exit. Hopefully they can find help fast enough. Avy stops for a second and looks at you.")
+
+		saynn("[say=avy]Make him regret it.[/say]")
+
+		saynn("You nod.")
+
+		saynn("Ferri seems to be fine by now. She gets up and approaches you.")
+
+		saynn("[say=ferri]What are we gonna do?[/say]")
+
+		saynn("There is only one thing.")
+
+		saynn("[say=pc]We go after him.[/say]")
+
+		saynn("First task.. getting into the staff-only area.")
+
+		addButton("Continue", "See what happens", "door_bolted")
 	if(state == "do_seduce"):
 		saynn("[say=pc]I like your plan, Kait. Seduction might just work.[/say]")
 
-		saynn("[say=kait]Ha! See, Avy? Now move your butt.[/say]")
+		saynn("[say=kait]You heard {pc.him}. Now move your butt![/say]")
 
 		saynn("[say=avy]Pff, whatever. I will be back.[/say]")
 
@@ -252,6 +453,8 @@ func _run():
 		saynn("[say=kait]Let me do the talking. Ferri, stay near the entrance. Just in case.[/say]")
 
 		saynn("[say=ferri]Got it.[/say]")
+
+		saynn("Kait unbuttons the top button on her shirt, exposing more of her cleavage. Not very impressive cleavage.. but still.")
 
 		saynn("[say=kait]Worst case, we just beat him up together and drag him off to the hideout.[/say]")
 
@@ -277,7 +480,7 @@ func _run():
 
 		saynn("She reaches out, a single claw tracing along the edge of his workbench.")
 
-		saynn("[say=kait]Oh yeah? She is cuffed, so kinky~. Can I be cuffed to the chair too~?[/say]")
+		saynn("[say=kait]Oh yeah? She is cuffed, so kinky~. Can I be cuffed too~?[/say]")
 
 		saynn("[say=rahi]Meow..[/say]")
 
@@ -301,6 +504,8 @@ func _run():
 		saynn("You quickly approach the foxy, surrounding him. He's still holding his tools, but they won't help him now.")
 
 		saynn("[say=pc]There are many of us. Maybe you should just submit already.[/say]")
+
+		saynn("Alex takes a short glance at you, his expression barely changing.")
 
 		saynn("[say=alexrynard]Hm. You tried every approach with me. And now you're just gonna beat me into submission.[/say]")
 
@@ -370,6 +575,8 @@ func _run():
 
 		saynn("[say=kait]I can still..[/say]")
 
+		saynn("Now is not the time to play heroes.")
+
 		saynn("[say=pc]Kait. There is no time for this. Shut up and do what I say.[/say]")
 
 		saynn("[say=kait]..okay.[/say]")
@@ -410,7 +617,9 @@ func _run():
 		playAnimation(StageScene.Duo, "stand", {pc="kait", npc="rahi"})
 		saynn("Now that Rahi is free, Kait helps her to get up.")
 
-		saynn("[say=kait]Alright, kitty, let's go to the doctor.[/say]")
+		saynn("[say=kait]Alright, kitty, let's go to the doctor. Just hold onto me.[/say]")
+
+		saynn("Rahi grabs onto the snow leopard.")
 
 		saynn("[say=rahi]Meow-w..[/say]")
 
@@ -441,7 +650,7 @@ func _run():
 		else:
 			saynn("When you try to type anything on its access panel, the door just beeps angrily at you.")
 
-		saynn("[say=ferri]It seems to be bolted shut.. Locked physically..[/say]")
+		saynn("It seems to be bolted shut..")
 
 		saynn("Alex Rynard has barricaded himself inside his little castle. With no way to get to him. Not without the special tools..")
 
@@ -467,7 +676,7 @@ func _run():
 
 		saynn("[say=pc]Can it get us through some concrete?[/say]")
 
-		saynn("[say=ferri]Maybe.[/say]")
+		saynn("[say=ferri]..maybe.[/say]")
 
 		saynn("You grab her by the collar and pull her back into the workshop.")
 
@@ -480,9 +689,9 @@ func _run():
 
 		saynn("[say=ferri]What if there is open space behind it.. mow..[/say]")
 
-		saynn("[say=pc]I have a good feeling, Ferri. Just do it.[/say]")
+		saynn("[say=pc]I have a good feeling about it, Ferri. Just do it.[/say]")
 
-		saynn("Having nothing to say against your order, Ferri decides to do it.")
+		saynn("Having nothing to say against your order, Ferri decides to begin the preparations.")
 
 		saynn("She starts by first sprinkling some thermite roughly into the center of the wall. When she ignites it, the thermite lights up, making a small hole. Indeed, there is some room behind this wall.")
 
@@ -496,7 +705,7 @@ func _run():
 
 		saynn("BOOM!")
 
-		saynn("Whatever it is, it sure did its thing. The whole room is shaking as all of the debris is falling down. The explosion spawns a thick cloud of smoke that obscures the result.")
+		saynn("Whatever it is, it sure did its thing. The whole room is shaking as all of the concrete chunks are still falling down. The explosion spawns a thick cloud of smoke that obscures the result.")
 
 		saynn("You keep hiding for some time, making sure nothing is gonna kill you.")
 
@@ -512,7 +721,7 @@ func _run():
 	if(state == "crawl_through_hole"):
 		aimCameraAndSetLocName("eng_breakroom")
 		GM.pc.setLocation("eng_bay_nearbreakroom")
-		saynn("You and Ferri crawl through the new opening.. and end up in some kind of staff break room.. or at least it was one. The explosion has turned this space into a mess. Broken sofa, destroyed TV, sparking vending machine.")
+		saynn("You and Ferri crawl through the new opening.. and end up in some kind of staff break room.. or at least it was one. The explosion has turned this space into a mess. Broken sofa, destroyed TV, sparking vending machine.. There are chunks of concrete scattered everywhere.")
 
 		saynn("[say=ferri]They're gonna be very angry at us..[/say]")
 
@@ -532,6 +741,15 @@ func _react(_action: String, _args):
 
 	if(_action == "rahi_cuffed_to_chair"):
 		putOn("rahi", "inmatewristcuffs")
+
+	if(_action == "sed_kait_leave"):
+		processTime(5*60)
+
+	if(_action == "avy_help_rahi"):
+		processTime(5*60)
+
+	if(_action == "avy_rahi_free"):
+		putOff("rahi", "inmatewristcuffs")
 
 	if(_action == "sed_avy_leave"):
 		processTime(5*60)
