@@ -65,7 +65,7 @@ func loadData(_data):
 	clothesDamaged = SAVE.loadVar(_data, "clothesDamaged", false)
 	halfDamage = SAVE.loadVar(_data, "halfDamage", false)
 	superDamage = SAVE.loadVar(_data, "superDamage", false)
-	if(!_data.has("noShirt")):
+	if(_data.has("noShirt")):
 		noShirt = SAVE.loadVar(_data, "noShirt", false)
 
 func getChangeStr() -> String:
