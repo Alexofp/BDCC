@@ -2415,7 +2415,7 @@ func hasVirileFluidsIn(bodypartSlot:String) -> bool:
 	if(!hasBodypart(bodypartSlot)):
 		return false
 	var bodypart = getBodypart(bodypartSlot)
-	var theFluids = bodypart
+	var theFluids = bodypart.getFluids()
 	if(!theFluids):
 		return false
 	return theFluids.hasVirileFluids()
