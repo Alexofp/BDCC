@@ -26,7 +26,7 @@ func getEffectName():
 	return "Muzzled"
 
 func getEffectDesc():
-	return "You have a dog muzzle on your face!"
+	return "You have a dog muzzle on your face!" + getSmartLockDescriptionSuffix([Buff.MuzzleBuff])
 
 func getEffectImage():
 	return "res://Images/StatusEffects/muzzle.png"

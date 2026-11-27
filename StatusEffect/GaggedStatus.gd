@@ -26,7 +26,7 @@ func getEffectName():
 	return "Gagged"
 
 func getEffectDesc():
-	return "Something in your mouth prevents you from biting and also garbles your speech"
+	return "Something in your mouth prevents you from biting and also garbles your speech." + getSmartLockDescriptionSuffix([Buff.GagBuff, Buff.RingGagBuff])
 
 func getEffectImage():
 	return "res://Images/StatusEffects/gag.png"

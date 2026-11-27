@@ -26,7 +26,7 @@ func getEffectName():
 	return "Blocked hands"
 
 func getEffectDesc():
-	return "You can't use your hands. You can still punch but most tasks that require you to use your fingers are impossible"
+	return "You can't use your hands. You can still punch but most tasks that require you to use your fingers are impossible." + getSmartLockDescriptionSuffix([Buff.BlockedHandsBuff])
 
 func getEffectImage():
 	return "res://Images/StatusEffects/mittens.png"

@@ -26,7 +26,7 @@ func getEffectName():
 	return "Bound arms"
 
 func getEffectDesc():
-	return "Your arms are bound together. You can't use them for combat but you can still do most tasks that require them"
+	return "Your arms are bound together. You can't use them for combat but you can still do most tasks that require them." + getSmartLockDescriptionSuffix([Buff.RestrainedArmsBuff])
 
 func getEffectImage():
 	return "res://Images/StatusEffects/handcuffed.png"

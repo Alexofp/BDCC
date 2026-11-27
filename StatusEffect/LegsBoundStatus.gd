@@ -26,7 +26,7 @@ func getEffectName():
 	return "Bound legs"
 
 func getEffectDesc():
-	return "Your legs are bound. You can still walk but it's harder to dodge attacks"
+	return "Your legs are bound. You can still walk but it's harder to dodge attacks." + getSmartLockDescriptionSuffix([Buff.RestrainedLegsBuff])
 
 func getEffectImage():
 	return "res://Images/StatusEffects/manacles.png"
