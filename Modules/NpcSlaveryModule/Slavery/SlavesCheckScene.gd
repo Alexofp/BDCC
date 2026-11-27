@@ -44,6 +44,8 @@ func _run():
 
 			if(npcSlavery.isBusyWithActivity()):
 				absent = true
+			elif(GM.main.IS.hasPawn(charID)):
+				absent = true
 
 			if(!absent):
 				if(npcSlavery.isMindBroken()):
