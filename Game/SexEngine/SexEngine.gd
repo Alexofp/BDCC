@@ -1197,6 +1197,12 @@ func keepItemsAfterSex(onlyAlwaysKept:bool = false):
 				newPCTracked.append(trackedItem)
 				
 		trackedItems["pc"] = newPCTracked
+	for domID in doms:
+		var domInfo = doms[domID]
+		domInfo.checkReEquipClothing()
+	for subID in subs:
+		var subInfo = subs[subID]
+		subInfo.checkReEquipClothing()
 
 func generateSexResult() -> SexEngineResult:
 	var theResult := SexEngineResult.new()
