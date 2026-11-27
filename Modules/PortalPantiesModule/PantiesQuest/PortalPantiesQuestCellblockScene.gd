@@ -78,7 +78,7 @@ func _run():
 
 		saynn("The lilac gets even more suspicious of you and gets everyone’s attention.")
 
-		saynn("[sayMale]Hey-y, look at {pc.him}! It’s like {pc.he} feels whatever you’re doing to these toys![/sayMale]")
+		saynn("[sayMale]Hey-y, look at {pc.him}! It’s like {pc.he} {pc.verb('feel')} whatever you’re doing to these toys![/sayMale]")
 
 		saynn("Such a smartass, why did he do that. But it worked, the crowd turns towards you and suddenly realizes that you feel the teasing.")
 
@@ -428,7 +428,7 @@ func _run():
 
 			saynn("Your holes get tight around the intruding cocks, a few moments later you hear some manly grunts and then feel your womb and butt getting stuffed with virile seed!")
 
-			saynn("[sayMale]Fuck, {pc.he} is good.[/sayMale]")
+			saynn("[sayMale]Fuck, {pc.he} {pc.isAre} good.[/sayMale]")
 
 		# (if NO pussy)
 		else:
@@ -454,7 +454,7 @@ func _run():
 
 			saynn("Your fuckhole gets tight around the intruding cock, a few moments later you hear some manly grunts and then feel your butt getting stuffed with virile seed!")
 
-			saynn("[sayMale]Fuck, {pc.he} is good.[/sayMale]")
+			saynn("[sayMale]Fuck, {pc.he} {pc.isAre} good.[/sayMale]")
 
 		addButton("Continue", "Fun times!", "continue3")
 

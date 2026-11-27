@@ -599,7 +599,7 @@ func getText(_id:String, _args:Dictionary):
 		return [
 			"No. {pc.He} {pc.isAre} mine.",
 			"I'll handle {pc.him} myself. {pc.He} {pc.isAre} my property.",
-			"No. Keep your hands off. {pc.He} belongs to me.",
+			"No. Keep your hands off. {pc.He} {pc.verb('belong')} to me.",
 			"Don't interfere. {pc.He} {pc.isAre} under my control.",
 			"No. {pc.He} {pc.isAre} mine to deal with.",
 			"I won't share {npc.him}. {pc.He} {pc.isAre} mine.",
@@ -1150,11 +1150,11 @@ func getText(_id:String, _args:Dictionary):
 		]
 	if(_id == "SoftSlaveryPunishStocksAsk"):
 		return [
-			"Is {pc.he} free to use?",
+			"{pc.IsAre} {pc.he} free to use?",
 			"This one available for a quick fuck?",
 			"Is your whore open for fucking?",
 			"Mind if I use your fucktoy?",
-			"Your slave looks like {pc.he} needs some attention. Can I?",
+			"Your slave looks like {pc.he} {pc.verb('need')} some attention. Can I?",
 			"Can I have a turn with your slave?",
 			"This slave available for use?",
 		]

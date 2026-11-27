@@ -578,7 +578,7 @@ func _run():
 
 		saynn("[say=pc]Nghh.. f-fuck.. hh..[/say]")
 
-		saynn("[sayFemale]Oh wow, {pc.he} keeps going![/sayFemale]")
+		saynn("[sayFemale]Oh wow, {pc.he} {pc.verb('keep')} going![/sayFemale]")
 
 		saynn("[sayMale]Give up already, you're making people wait.[/sayMale]")
 

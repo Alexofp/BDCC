@@ -1122,11 +1122,11 @@ func getText(_id:String, _args:Dictionary):
 		]
 	if(_id == "SoftSlaveryPunishStocksAsk"):
 		return [
-			"Is {pc.he} available for use?",
+			"{pc.IsAre} {pc.he} available for use?",
 			"Um.. is this one free to use?",
 			"Could I.. use your slave?",
 			"Would you mind if I used your slave?",
-			"Your slave looks like {pc.he} needs attention.. may I?",
+			"Your slave looks like {pc.he} {pc.verb('need')} attention.. may I?",
 			"Could I have a turn with your slave?",
 			"Is your slave available?",
 		]

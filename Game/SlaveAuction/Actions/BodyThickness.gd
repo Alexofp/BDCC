@@ -35,8 +35,8 @@ func onAct(_char:BaseCharacter, _auction, _slaveTraits:Dictionary):
 		sayPresenter(RNG.pick([
 			"Now this one’s built to be enjoyed — a body with all the right curves in all the right places.",
 			"Full, thick, and ready for anything, {slave.he} offers more than enough to keep you satisfied.",
-			"{slave.He} has a body that demands attention, thick and perfect for indulgence.",
-			"Love something to hold onto? {slave.He} has the curves that will leave you wanting more.",
+			"{slave.He} {slave.hasHave} a body that demands attention, thick and perfect for indulgence.",
+			"Love something to hold onto? {slave.He} {slave.hasHave} the curves that will leave you wanting more.",
 			"Thick thighs, full hips - {slave.he} was made to be enjoyed by those with appetites for more.",
 			"This one has a lot to offer, both to the eye and the touch. For those who like their toys thick, {slave.he} {slave.isAre} perfect.",
 		]))

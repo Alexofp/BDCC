@@ -1668,7 +1668,7 @@ func getText(_id:String, _args:Dictionary):
 			"Just teaching this inmate some fucking manners.",
 			"I'm administering some much-needed humiliation to this disobedient inmate.",
 			"Standard procedure for putting a disobedient inmate back in line.",
-			"Just reminding this inmate what {pc.he} is good for.",
+			"Just reminding this inmate what {pc.he} {pc.isAre} good for.",
 		]
 	if(_id == "SoftSlaveryParadeGuardPunish2"):
 		return [

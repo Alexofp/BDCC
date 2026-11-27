@@ -128,7 +128,7 @@ func _run():
 		playAnimation(StageScene.Duo, "stand", {pc="mirri", npc="luxe", npcAction="stand"})
 		saynn("Luxe rises from his throne, moving away from his desk with slow, deliberate steps. His imposing figure looms closer to Mirri, though his piercing, ice-cold stare is directed at you.")
 
-		saynn("[say=luxe]Am I? As much I see, {pc.he} deserves to be number one in that list as much as you do. If not more.[/say]")
+		saynn("[say=luxe]Am I? As much I see, {pc.he} {pc.verb('deserve')} to be number one in that list as much as you do. If not more.[/say]")
 
 		saynn("Mirri glares at you, her frown deepening, her tail swishing from irritation.")
 

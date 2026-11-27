@@ -1149,7 +1149,7 @@ func _run():
 
 		saynn("Eliza decides to bring herself back into the conversation.")
 
-		saynn("[say=eliza]{pc.He} doesn't have access to all the equipment..[/say]")
+		saynn("[say=eliza]{pc.He} {pc.doesnt} have access to all the equipment..[/say]")
 
 		saynn("[say=elizaMom]But who does?[/say]")
 
@@ -2015,7 +2015,7 @@ func _run():
 
 		saynn("Your throat is blocked too.. making you lose oxygen fast.. the world begins to look all rainbow-y..")
 
-		saynn("[say=elizaMom]Let's pull out before {pc.he} blacks out.[/say]")
+		saynn("[say=elizaMom]Let's pull out before {pc.he} {pc.verb('black')} out.[/say]")
 
 		saynn("[say=eliza]Yes, mom. One.. two..[/say]")
 

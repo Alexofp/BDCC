@@ -46,15 +46,15 @@ func _run():
 
 		# (if kind)
 		if(taviIsKind()):
-			saynn("[say=tavi]Forget that. Why is {pc.he} here?[/say]")
+			saynn("[say=tavi]Forget that. Why {pc.isAre} {pc.he} here?[/say]")
 
 		# (else)
 		else:
-			saynn("[say=tavi]Forget that. What is {pc.he} doing here?[/say]")
+			saynn("[say=tavi]Forget that. What {pc.isAre} {pc.he} doing here?[/say]")
 
 		saynn("[say=eliza]You two know each other?[/say]")
 
-		saynn("[say=tavi]Perhaps? Saw them once or twice. Can I get uncuffed yet?[/say]")
+		saynn("[say=tavi]Perhaps? Saw {pc.him} once or twice. Can I get uncuffed yet?[/say]")
 
 		saynn("Tavi seems to pretend to not know you very well and you decide to play along. Eliza holds Tavi on a short leash. The tall cat is not happy about that obviously but lets Eliza guide her into the middle of the room.")
 

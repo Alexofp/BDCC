@@ -122,7 +122,7 @@ func _run():
 	if(state == "suck_her_off_too"):
 		saynn("You quickly swallow the rest of what you had in your mouth before proceeding to stick out your tongue again and licking the fresh knotted cock. This girl is much less patient though, when you try to tease her by just rubbing your cheek against the shaft, she grabs you and guides her member directly towards your mouthhole, the tip spreads open your lips and slides inside. And she doesn’t stop there, she lets her cock gradually sink in deeper and eventually hit the back wall of your mouth. She then angles herself in a way that would make her cock curve and start stretching your used throat even more. She shoves her cock so deep that your lips kiss her knot.")
 
-		saynn("[say=shemaleguard]There we go~.. Look at this cock sucker, {pc.he} does it so well.[/say]")
+		saynn("[say=shemaleguard]There we go~.. Look at this cock sucker, {pc.he} {pc.does} it so well.[/say]")
 
 		saynn("After she pulls her paws away from your head, you pick up where she left, proceeding to suck her knotted cock, sliding your lips across its length. You begin to get used to this, not even noticing all the wet noises that you make while your throat gets violated.")
 

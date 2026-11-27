@@ -125,7 +125,7 @@ func _run():
 		
 		saynn("The officer sighs and unholsters his energy gun. You, seeing him do that, don’t waste your time and try to punch him but before you can get close, you’re blocked by the tall figure that shoves you away.")
 		
-		saynn("[say=risha]Hey, captain. Let me have some fun with this one, {pc.he} seems to be too eager. I won’t kill, promise, only break a little.[/say]")
+		saynn("[say=risha]Hey, captain. Let me have some fun with this one, {pc.he} {pc.verb('seem')} to be too eager. I won’t kill, promise, only break a little.[/say]")
 		
 		saynn("You growl and get into the combat stance")
 		
@@ -167,7 +167,7 @@ func _run():
 	if(state == "getgagged"):
 		saynn("He then stands up and gestures the guard")
 		
-		saynn("[say=captain]Looks like {pc.he} {pc.youVerb('need')} some help to get up.[/say]")
+		saynn("[say=captain]Looks like {pc.he} {pc.verb('need')} some help to get up.[/say]")
 		
 		saynn("The guard obeys and drags you to the bin where she forcibly undresses you and then shoves you into the shower room")
 		

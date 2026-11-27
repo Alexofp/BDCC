@@ -124,7 +124,7 @@ func getForms() -> Dictionary:
 		
 		"SoftSlaveryPunishStocks": form("Follow or I will break your legs and pull you along the floor.", {main=CHAR, target=CHAR}, "main", "target"),
 		"SoftSlaveryPunishStocksLock": form("I'm sick of you. Gonna find someone else to use you.", {main=CHAR, target=CHAR}, "main", "target"),
-		"SoftSlaveryPunishStocksAsk": form("Is {pc.he} free to use?", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryPunishStocksAsk": form("{pc.IsAre} {pc.he} free to use?", {main=CHAR, target=CHAR}, "main", "target"),
 		"SoftSlaveryPunishStocksAskNope": form("Nope. <CREDITS> credits and you can do whatever you want with {pc.him}.", {main=CHAR, target=CHAR}, "main", "target"),
 		"SoftSlaveryPunishStocksAskNoBuy": form("What if I don't wanna pay?", {main=CHAR, target=CHAR}, "main", "target"),
 		"SoftSlaveryPunishStocksAskNoBuy2": form("Go away then.", {main=CHAR, target=CHAR}, "main", "target"),

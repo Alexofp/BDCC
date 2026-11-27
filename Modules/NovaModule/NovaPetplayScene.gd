@@ -234,9 +234,9 @@ func _run():
 		if(isPuppy):
 			saynn("You show your teeth and growl at the unknown hand, showing that you’re not gonna be petted by some strangers. The inmate pulls her hand away, of course.")
 
-			saynn("[sayFemale]Wow, {pc.he} is a bad pup.[/sayFemale]")
+			saynn("[sayFemale]Wow, {pc.he} {pc.isAre} a bad pup.[/sayFemale]")
 
-			saynn("[say=nova]Huh. Yes, {pc.he} needs to be punished for that.[/say]")
+			saynn("[say=nova]Huh. Yes, {pc.he} {pc.verb('need')} to be punished for that.[/say]")
 
 			saynn("Nova yanks you back a few steps and pushes you down so she can deliver a few powerful spanks to your naked {pc.masc} ass. You begin to whine and whimper as you’re getting punished in front of everyone.")
 
@@ -250,9 +250,9 @@ func _run():
 		if(!isPuppy):
 			saynn("You show your fangs and hiss at the unknown hand, you bend your back upwards, showing that you’re not gonna be petted by some strangers. The inmate pulls her hand away, of course.")
 
-			saynn("[sayFemale]Wow, {pc.he} is a bad kitty.[/sayFemale]")
+			saynn("[sayFemale]Wow, {pc.he} {pc.isAre} a bad kitty.[/sayFemale]")
 
-			saynn("[say=nova]Huh. Yes, {pc.he} needs to be punished for that.[/say]")
+			saynn("[say=nova]Huh. Yes, {pc.he} {pc.verb('need')} to be punished for that.[/say]")
 
 			saynn("Nova yanks you back a few steps and pushes you down so she can deliver a few powerful spanks to your naked {pc.masc} ass. You begin to whine and whimper as you’re getting punished in front of everyone.")
 

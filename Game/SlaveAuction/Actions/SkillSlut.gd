@@ -15,7 +15,7 @@ func getButtonDesc() -> String:
 func onAct(_char:BaseCharacter, _auction, _slaveTraits:Dictionary):
 	sayPresenter(RNG.pick([
 		"This one is no stranger to the pleasures of the flesh. {slave.He} {slave.isAre} a well-trained slut, ready to satisfy all your desires!",
-		"With proper training, {slave.he} has mastered the art of pleasure. A true slut in every sense of the word.",
+		"With proper training, {slave.he} {slave.hasHave} mastered the art of pleasure. A true slut in every sense of the word.",
 		"Those hips? Those lips? They’ve been trained to please. And trust me, {slave.he} knows exactly how to please others.",
 		"This slave was trained to perfection. Every moan, every touch, carefully honed. This slut will serve you well in every intimate way.",
 		"Looking for a slave who’s been trained to pleasure? You’re looking at the perfect candidate. {slave.He} knows exactly how to please others.",
