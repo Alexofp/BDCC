@@ -23,7 +23,7 @@ func _init():
 	activityDesc = "Fuck their ass!"
 	
 func getGoals():
-	if(currentPose == POSE_CHOKEFUCK):
+	if(currentPose in [POSE_CHOKEFUCK, POSE_CHOKESEX]):
 		return {
 			SexGoal.ChokeSexAnal: 1.0,
 			SexGoal.FuckAnal: 1.0,

@@ -30,7 +30,7 @@ func _init():
 	activityCategory = ["Fuck"]
 
 func getGoals():
-	if(currentPose == POSE_CHOKEFUCK || currentPose == POSE_CHOKESEX):
+	if(currentPose in [POSE_CHOKEFUCK, POSE_CHOKESEX]):
 		return {
 			SexGoal.ChokeSexVaginal: 1.0,
 			SexGoal.FuckVaginal: 1.0,
@@ -429,7 +429,7 @@ func fucking_processTurn():
 		addText("Unable to continue standing, {sub.you} {sub.youVerb('fall')} to all fours!")
 	if(currentPose == POSE_CHOKEFUCK && getSubInfo().isUnconscious()):
 		currentPose = POSE_CHOKESEX
-		addText("Unable to continue standing, {sub.you} {sub.youVerb('fall')} to all fours!")
+		addText("Unable to continue standing, {sub.you} {sub.youVerb('fall')} on {sub.yourHis} spine!")
 	
 	doProcessFuckExtra(DOM_0, SUB_0, usedBodypart)
 	
