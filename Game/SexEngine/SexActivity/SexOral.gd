@@ -158,6 +158,10 @@ func getActions(_indx:int):
 			var forcedeepthroatScore:float = fetish(DOM_0, Fetish.OralSexReceiving, -0.4) / 6.0
 			addAction("forcedeepthroat", forcedeepthroatScore, "Force to deepthroat", "Make that slut deepthroat you")
 		if(state in ["blowjobcameinside"]):
+			if(getDomInfo().isReadyToPenetrate()):
+				var ACTION_CONTINUE_NAME:String = "Continue fucking" if(isForce) else "Order to continue"
+				var ACTION_CONTINUE_DESC:String = "Continue fucking their mouth" if(isForce) else "Order them to continue sucking you off"
+				addAction("bjcontinueafterinside", getContinueSexScore(DOM_0, SUB_0, BodypartSlot.Head) - getStopScore(), ACTION_CONTINUE_NAME, ACTION_CONTINUE_DESC)
 			addAction("bjpulloutafterinside", 1.0, "Pull out", "Pull your cock out")
 		if(state in ["blowjob", "deepthroat"]):
 			addEggStuffButton(DOM_0, SUB_0, BodypartSlot.Head)
@@ -309,6 +313,23 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		satisfyGoals()
 		doCumBJDom(state == "deepthroat")
 		applyTallymarkIfNeeded(BodypartSlot.Head)
+		return
+	if(_id == "bjcontinueafterinside"):
+		state = "blowjob"
+		if(isForce):
+			var text:String = RNG.pick([
+				"{dom.You} eagerly {dom.youVerb('continue')} thrusting past {sub.your} lips, barely sparing {sub.youHim} any time to catch a breath.",
+				"{dom.You} {dom.youVerb('keep')} on desperately fucking {sub.your} mouth, showing no interest in stopping now.",
+				("{dom.You} {dom.youDo} not wish to stop there, continuing making good use of "+RNG.pick(["{sub.you}", "{sub.your} lips", "{sub.your} mouth", "{sub.your} muzzle"])+"."),
+			])
+			addText(text)
+		else:
+			var text:String = RNG.pick([
+				"{dom.You} {dom.youVerb('order')} {sub.you} to keep sucking.",
+				"{dom.You} {dom.youVerb('play')} with {sub.your} head possessively, making it clear {dom.youHe} only {dom.youHeVerb('wish', 'wishes')} for more..",
+				"{dom.You} {dom.youVerb('pull')} {sub.your} head away from {dom.yourHis} "+getDickName()+", only to shove it back in deep, clearly craving for more.",
+			])
+			addText(text)
 		return
 	if(_id == "bjpulloutafterinside"):
 		state = ""

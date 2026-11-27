@@ -176,6 +176,8 @@ func getActions(_indx:int):
 		if(getState() == "blowjob"):
 			addEggStuffReceiveButton(DOM_0, SUB_0, BodypartSlot.Head)
 		if(getState() in ["blowjobcameinside"]):
+			if(getSubInfo().isReadyToPenetrate()):
+				addAction("bjcontinueafterinside", getContinueSexScore(SUB_0, DOM_0, BodypartSlot.Head) - getStopScore(), "Continue blowjob", "Keep sucking their cock")
 			addAction("bjpulloutafterinside", 1.0, "Pull out", "Pull your head away from their cock")
 		
 		if(getState() in ["subabouttocum", "subabouttocumcock", "subabouttocumHandjob"] || ((getState() in ["licking", "tonguefucking", "lickingcock", "blowjob", "handjob"]) && getSubInfo().isReadyToCum() && !getSubInfo().canDoActions())):
@@ -330,6 +332,17 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			getSubInfo().cum()
 			setState("blowjobcameinside")
 		
+		addText(text)
+		return
+	if(_id == "bjcontinueafterinside"):
+		setState("blowjob")
+		var sub_cock:String = RNG.pick(["cock", "dick", "shaft"])
+		var text:String = RNG.pick([
+			"{dom.You} {dom.youVerb('continue')} eagerly sucking {sub.your} "+sub_cock+". {sub.YoureTheyre} all {dom.yoursHis} to please.",
+			"{dom.You} {dom.youVerb('wish', 'wishes')} to taste more of {sub.your} "+sub_cock+", not letting {sub.youHim} go just yet.",
+			("{dom.You} {dom.youHavent} had enough "+RNG.pick(["playing with", "pleasuring", "tasting"])+" {sub.your} "+sub_cock+"."),
+			"{dom.You} {dom.youVerb('think')} to {dom.yourself} that {sub.you} {sub.youVerb('deserve')} more than that~.",
+		])
 		addText(text)
 		return
 	if(_id == "bjpulloutafterinside"):
