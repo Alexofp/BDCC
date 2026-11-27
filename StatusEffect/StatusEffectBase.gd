@@ -151,3 +151,20 @@ func contextGetEnemy(_context:Dictionary):
 	if(theEnemyID.empty()):
 		return null
 	return GlobalRegistry.getCharacter(theEnemyID)
+
+func getSmartLockDescriptionSuffix(_buffs:Array) -> String:
+	if(character == null):
+		return ""
+	var inventory:Inventory = character.getInventory()
+	var items:Array = []
+	for buff in _buffs:
+		for item in inventory.getEquippedItemsWithBuff(buff):
+			if(!items.has(item)):
+				items.append(item)
+	var description:String = ""
+	for item in items:
+		if(!item.isRestraint() || !item.getRestraintData().hasSmartLock()):
+			continue
+		var smartLock:SmartLockBase = item.getRestraintData().getSmartLock()
+		description += "\n\n" + smartLock.getUnlockDescription()
+	return description

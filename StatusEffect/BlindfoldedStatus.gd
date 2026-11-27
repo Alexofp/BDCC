@@ -27,9 +27,9 @@ func getEffectName():
 
 func getEffectDesc():
 	if(character.hasPerk(Perk.BDSMBlindfold)):
-		return "You're blind but not entirely helpless"
+		return "You're blind but not entirely helpless." + getSmartLockDescriptionSuffix([Buff.BlindfoldBuff])
 	
-	return "You can't see. Hitting anything will be very hard"
+	return "You can't see. Hitting anything will be very hard." + getSmartLockDescriptionSuffix([Buff.BlindfoldBuff])
 
 func getEffectImage():
 	return "res://Images/StatusEffects/blind.png"
