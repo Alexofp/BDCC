@@ -12,6 +12,9 @@ func _init():
 func getVisibleName():
 	return "Slave helper"
 
+func shouldResumeAfterInterruption():
+	return true
+
 func getActivityText():
 	if(currentHelpingTask != ""):
 		var otherSlave:BaseCharacter = GlobalRegistry.getCharacter(currentTargetID)
@@ -19,12 +22,20 @@ func getActivityText():
 			return "{npc.name} is busy with a slave."
 		return "{npc.name} is busy with "+otherSlave.getName()+"."
 	
+	var cantWorkReason := ""
+	if(getSlave().isActivelyResisting()):
+		cantWorkReason = " {npc.HeShe} refuses work right now."
+	elif(getChar().isVisiblyPregnant()):
+		cantWorkReason = " {npc.HeShe} is too pregnant to work right now."
+	elif(getSlave().getWorkEfficiency() <= 0.25):
+		cantWorkReason = " {npc.HeShe} is too tired work any more right now."
+	
 	if(willWashSlaves && willHelpGiveBirth):
-		return "This sub will automatically wash other slaves and bring pregnant ones to the nursery"
+		return "This sub will automatically wash other slaves and bring pregnant ones to the nursery." + cantWorkReason
 	if(willHelpGiveBirth):
-		return "This sub will automatically bring pregnant slaves to the nursery"
+		return "This sub will automatically bring pregnant slaves to the nursery." + cantWorkReason
 	if(willWashSlaves):
-		return "This sub will automatically wash other slaves"
+		return "This sub will automatically wash other slaves." + cantWorkReason
 	return "{npc.name} is being a slave helper!"
 
 
@@ -130,7 +141,7 @@ func getNotBusySlaves():
 		var npcSlavery:NpcSlave = otherSlave.getNpcSlavery()
 		if(npcSlavery == null):
 			continue
-		if(npcSlavery.isDoingActivity()):
+		if(npcSlavery.isBusyWithActivity()):
 			continue
 		result.append(otherSlave)
 	return result

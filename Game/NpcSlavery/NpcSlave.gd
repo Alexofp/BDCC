@@ -8,6 +8,7 @@ var slaveSpecializations = {
 }
 
 var activity
+var returnToActivity
 
 var slaveLevel:int = 0
 var slaveExperience:int = 0
@@ -1112,8 +1113,11 @@ func getPerfectIdleMessage():
 	
 	return bestMessage
 
-func isDoingActivity():
+func isDoingActivity() -> bool:
 	return activity != null
+
+func isBusyWithActivity() -> bool:
+	return activity != null && activity.preventsNormalInteractions()
 
 func getActivityID() -> String:
 	if(activity == null):
@@ -1126,15 +1130,29 @@ func getActivity():
 func stopActivity():
 	if(activity != null):
 		activity.onEnd()
-	activity = null
+	activity = returnToActivity
+	returnToActivity = null
 
 func startActivity(activID, args = []):
 	if(isDoingActivity()):
-		stopActivity()
+		if(activity.shouldResumeAfterInterruption()):
+			returnToActivity = activity
+			activity = null
+		else:
+			stopActivity()
+			if(activity != null):
+				returnToActivity = activity
+				activity = null
+
 	var newActivity = GlobalRegistry.createSlaveActivity(activID)
 	if(newActivity == null):
-		return null
+		activity = returnToActivity
+		returnToActivity = null
+		return activity
 	newActivity.slavery = weakref(self)
+	if(newActivity.shouldResumeAfterInterruption() && returnToActivity != null):
+		returnToActivity.onEnd()
+		returnToActivity = null
 	newActivity.onStart(args)
 	activity = newActivity
 	return activity
@@ -1258,6 +1276,13 @@ func saveData():
 		data["activity_id"] = activity.id
 		data["activity_data"] = activity.saveData()
 	
+	if(returnToActivity == null):
+		data["activity2_id"] = ""
+		data["activity2_data"] = {}
+	else:
+		data["activity2_id"] = returnToActivity.id
+		data["activity2_data"] = returnToActivity.saveData()
+	
 	var tasksData = []
 	for task in levelupTasks:
 		var taskData = {
@@ -1316,6 +1341,17 @@ func loadData(data):
 			#newActivity.onStart(args)
 			activity = newActivity
 			newActivity.loadData(SAVE.loadVar(data, "activity_data", {}))
+	
+	var theActivity2ID = SAVE.loadVar(data, "activity2_id", "")
+	if(theActivity2ID == null || theActivity2ID == ""):
+		returnToActivity = null
+	else:
+		var newActivity = GlobalRegistry.createSlaveActivity(theActivity2ID)
+		if(newActivity != null):
+			newActivity.slavery = weakref(self)
+			#newActivity.onStart(args)
+			returnToActivity = newActivity
+			newActivity.loadData(SAVE.loadVar(data, "activity2_data", {}))
 	
 	levelupTasks = []
 	var tasksData = SAVE.loadVar(data, "levelupTasks", [])

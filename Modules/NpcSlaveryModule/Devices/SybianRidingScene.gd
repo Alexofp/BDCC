@@ -408,7 +408,7 @@ func _react(_action: String, _args):
 			if(theChar == null || !theChar.isSlaveToPlayer()):
 				continue
 			var npcSlavery:NpcSlave = theChar.getNpcSlavery()
-			if(npcSlavery.isDoingActivity()):
+			if(npcSlavery.isBusyWithActivity()):
 				continue
 			if(npcSlavery.isActivelyResisting() || npcSlavery.isMindBroken()):
 				continue

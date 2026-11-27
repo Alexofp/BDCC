@@ -122,8 +122,8 @@ func fitsAsExtraSlaveAdvanced(_role, _charID):
 		for slaveType in theRequiredSkills:
 			if(npcSlave.getSlaveSkill(slaveType) < theRequiredSkills[slaveType]):
 				return [false, "Skill requirements aren't met"]
-	if(npcSlave.isDoingActivity()):
-		return [false, "Skill is busy doing something"]
+	if(npcSlave.isBusyWithActivity()):
+		return [false, "Slave is busy doing something"]
 	
 	return [true]
 

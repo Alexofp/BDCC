@@ -49,3 +49,7 @@ func runEvent(_npcSlavery:NpcSlave):
 
 func getAnimInfo(_npcSlavery:NpcSlave):
 	return [StageScene.Hug, "hug", {npc=_npcSlavery.getChar().getID()}]
+
+func getSlavesCheckMessage(_npcSlavery:NpcSlave):
+	var charID:String = _npcSlavery.getChar().getID()
+	return "{" + charID + ".name} looks like {" + charID + ".heShe} {" + charID + ".hasHave} something to say to you."

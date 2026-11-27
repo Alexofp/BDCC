@@ -43,3 +43,9 @@ func getAnimInfo(_npcSlavery:NpcSlave):
 
 func getCooldown(_npcSlavery:NpcSlave):
 	return 0
+
+func isSlaveAbsentAtStart():
+	return false
+
+func getSlavesCheckMessage(_npcSlavery:NpcSlave):
+	return null

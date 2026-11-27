@@ -245,7 +245,7 @@ func addSlaveButtons():
 		var npcSlavery:NpcSlave = character.getNpcSlavery()
 		if(npcSlavery == null):
 			continue
-		if(npcSlavery.isDoingActivity()):
+		if(npcSlavery.isBusyWithActivity()):
 			addDisabledButton(character.getName(), "This slave is currently busy")
 			continue
 		addButton(character.getName(), character.getSmallDescription(), "pick_slave", [charID])

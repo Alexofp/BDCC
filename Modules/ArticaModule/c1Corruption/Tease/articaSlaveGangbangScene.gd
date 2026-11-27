@@ -450,7 +450,7 @@ func addSlaveButtons():
 		if(npcSlave.isMindBroken()):
 			notFit[slaveID] = "A mindbroken slave can't do this"
 			continue
-		if(npcSlave.isDoingActivity()):
+		if(npcSlave.isBusyWithActivity()):
 			notFit[slaveID] = "This slave is busy with something already"
 			continue
 		if(pickedSlaves.has(slaveID)):

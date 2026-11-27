@@ -52,7 +52,7 @@ func _run():
 		var npcSlave:NpcSlave = npc.getNpcSlavery()
 		var puppySkill = npcSlave.getSlaveSkill(SlaveType.Pet)
 		if(puppySkill < 15):
-			var howMuchNeeded = 2 + int(sqrt(puppySkill+1)*1.5)
+			var howMuchNeeded = 1 + int(sqrt(puppySkill+1)*1.5)
 			
 			saynn("Your pet gets puppy points each time you satisfy {npc.his} pet need. Get at least "+str(howMuchNeeded)+" puppy points to raise {npc.his} pet skill.")
 		

@@ -31,3 +31,7 @@ func runEvent(_npcSlavery:NpcSlave):
 
 func getAnimInfo(_npcSlavery:NpcSlave):
 	return [StageScene.Duo, "stand", {npc=_npcSlavery.getChar().getID(), npcAction="stand"}]
+
+func getSlavesCheckMessage(_npcSlavery:NpcSlave):
+	var charID:String = _npcSlavery.getChar().getID()
+	return "Something is very wrong with {" + charID + ".name}."
