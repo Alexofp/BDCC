@@ -55,9 +55,9 @@ func _run():
 						expectingRewardOrPunishment.append(charID)
 					if(npcSlavery.getDespair() > 0.6):
 						uncomfortableAndShouldTalkTo.append(charID)
-					elif(npcSlavery.getNeediness() >= 10.0):
+					elif(npcSlavery.getNeediness() >= 25.0):
 						uncomfortableAndShouldTalkTo.append(charID)
-					if(!npcSlavery.isReadyToBeLeveledUp() && (npcSlavery.canLearnNewSkillAndHasAvailable() || (npcSlavery.getCurrentSpecializationLevel() < 15 && npcSlavery.getTiredEffect() < 0.5))):
+					if(!npcSlavery.isReadyToBeLeveledUp() && ((npcSlavery.canLearnNewSkillAndHasAvailable() || npcSlavery.getCurrentSpecializationLevel() < 15) && npcSlavery.getTiredEffect() < 0.5)):
 						readyForTraining.append(charID)
 				if(npcSlavery.isReadyToBeLeveledUp()):
 					readyToLevelUp.append(charID)
