@@ -126,13 +126,15 @@ func addDrugButtons(possibleDrugsInfo:Array, _sexEngine: SexEngine, _domInfo: Se
 		if((_isCanApply || !dom.isOralBlocked()) && (!drugInfo.has("canUseOnDom") || drugInfo["canUseOnDom"])):
 			var useonselfScore:float = max(drugInfo["scoreOnSelf"], 0.0) * drugFetishScore
 			addStartAction(["useonself", itemID, _isCanApply, item], drugInfo["name"], desc, useonselfScore, {A_CATEGORY: getCategory()+["Self" if !_isCanApply else "Apply self"]+drugSubcategory})
-		if((_isCanApply || !sub.isOralBlocked()) && (!drugInfo.has("canUseOnSub") || drugInfo["canUseOnSub"])):
-			if(_subInfo.canDoActions() && _sexEngine.getSexTypeID() != SexType.SlutwallSex && !_isCanApply):
+		if((_isCanApply || isDrugAdministrationRouteAvailable(_sexEngine, sub)) && (!drugInfo.has("canUseOnSub") || drugInfo["canUseOnSub"])):
+			var mayOfferToSub:bool = _subInfo.canDoActions() && (_sexEngine.getSexTypeID() != SexType.SlutwallSex) && !_isCanApply
+
+			if(mayOfferToSub):
 				var offertosubScore:float = max(drugInfo["scoreOnSub"], 0.0)*(1.0 - _domInfo.getAngerScore()) * drugFetishScore
 				#print("OFFER TO SUB: "+itemID+": " +str(offertosubScore))
 				addStartAction(["offertosub", itemID, _isCanApply, item], drugInfo["name"], desc, offertosubScore, {A_CATEGORY: getCategory()+["Offer to sub"]+drugSubcategory})
 			
-			var forcetosubScore:float = max(drugInfo["scoreOnSub"], 0.0)*(_domInfo.getAngerScore() if !_isCanApply else 1.0) * drugFetishScore
+			var forcetosubScore:float = max(drugInfo["scoreOnSub"], 0.0)*(_domInfo.getAngerScore() if mayOfferToSub else 1.0) * drugFetishScore
 			#print("FORCE ON SUB: "+itemID+": " +str(forcetosubScore))
 			addStartAction(["forcetosub", itemID, _isCanApply, item], drugInfo["name"], desc, forcetosubScore, {A_CATEGORY: getCategory()+["Force on sub" if !_isCanApply else "Apply on sub"]+drugSubcategory})
 
@@ -493,6 +495,12 @@ func generatePillVariants(theItemID:String):
 			var newTFID:String = TFUtil.generateTFIDForAPill(pillVariants)
 			if(newTFID != ""):
 				pillVariants.append(newTFID)
+
+func isDrugAdministrationRouteAvailable(_sexEngine: SexEngine, _sub:BaseCharacter) -> bool:
+	if(_sexEngine.getSexTypeID() == SexType.SlutwallSex):
+		return _sub.hasReachableAnus()
+
+	return !_sub.isOralBlocked()
 
 func saveData():
 	var data = .saveData()
