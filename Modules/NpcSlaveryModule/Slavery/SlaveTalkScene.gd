@@ -75,13 +75,19 @@ func _run():
 			if(npcSlavery.getWorkEfficiency() < 0.2):
 				saynn("{npc.name} looks very tired.")
 			
-			if(npcSlavery.getObedience() < 0.9 && npc.getInventory().hasRemovableRestraints()):
+			if(npc.getInventory().hasRemovableRestraints()):
 				var restraintAmount = npc.getInventory().getEquppedRemovableRestraints().size()
 				if(restraintAmount > 0):
-					if(npcSlavery.getAwareness() < 0.8):
-						saynn("{npc.He} {npc.isAre} wearing "+str(restraintAmount)+" restraint"+("s" if restraintAmount != 1 else "")+" which will help {npc.him} understand {npc.his} place.")
+					if(npcSlavery.getObedience() < 0.9):
+						if(npcSlavery.getAwareness() < 0.8):
+							saynn("{npc.He} {npc.isAre} wearing "+str(restraintAmount)+" restraint"+("s" if restraintAmount != 1 else "")+" which will help {npc.him} understand {npc.his} place.")
+						else:
+							saynn("{npc.He} {npc.isAre} wearing "+str(restraintAmount)+" restraint"+("s" if restraintAmount != 1 else "")+" which helps remind {npc.him} of {npc.his} place.")
 					else:
-						saynn("{npc.He} {npc.isAre} wearing "+str(restraintAmount)+" restraint"+("s" if restraintAmount != 1 else "")+" which helps remind {npc.him} of {npc.his} place.")
+						saynn("{npc.He} {npc.isAre} wearing "+str(restraintAmount)+" restraint"+("s" if restraintAmount != 1 else "")+".")
+			
+			if(npc.canRepairClothes()):
+				saynn("{npc.His} clothes are torn.")
 			
 			saynn("{npc.name} "+npcSlavery.getRewardBalanceString() + ".")
 		

@@ -90,7 +90,7 @@ func _run():
 					expectingRewardOrPunishment[i] = "{" + expectingRewardOrPunishment[i] + ".name}"
 				saynn(Util.humanReadableList(expectingRewardOrPunishment) + " look like they are expecting you to do something.")
 
-		if(!readyForTraining.empty()):
+		if(!readyForTraining.empty() && !GM.main.isVeryLate()):
 			if(readyForTraining.size() == 1):
 				saynn("{" + readyForTraining[0] + ".name} is ready for more training.");
 			else:
