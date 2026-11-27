@@ -29,7 +29,7 @@ func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: Sex
 
 func getTags(_indx:int) -> Array:
 	if(_indx == DOM_0):
-		if(getState() in ["blowjob", "lickingcock", "licking", "grinding", "tonguefucking"]):
+		if(getState() in ["blowjob", "blowjobcameinside", "lickingcock", "licking", "grinding", "tonguefucking"]):
 			return [SexActivityTag.MouthUsed, SexActivityTag.HavingSex]
 		return [SexActivityTag.HavingSex]
 	if(_indx == SUB_0):
@@ -43,7 +43,7 @@ func getCheckTagsSub() -> Array:
 	return [SexActivityTag.OrderedToDoSomething, SexActivityTag.HavingSex, SexActivityTag.PenisUsed, SexActivityTag.VaginaUsed]
 
 func isActivityImpossibleShouldStop() -> bool:
-	if(getState() in ["blowjob", "lickingcock"]):
+	if(getState() in ["blowjob", "blowjobcameinside", "lickingcock"]):
 		if(!getSub().hasReachablePenis() && !getSub().isWearingStrapon()):
 			return true
 	if(getState() in ["licking", "grinding"]):
@@ -151,10 +151,11 @@ func tonguefucking_processTurn():
 	
 func getActions(_indx:int):
 	if(_indx == DOM_0):
-		if(getSub().hasPenis()):
-			addAction("cupballs", 0.2, "Cup balls", "Play with the their balls a bit")
-		if(getSub().hasVagina()):
-			addAction("rubclit", 0.2, "Rub clit", "Play with the their clit a bit")
+		if(!(state in ["blowjobcameinside"])):
+			if(getSub().hasPenis()):
+				addAction("cupballs", 0.2, "Cup balls", "Play with the their balls a bit")
+			if(getSub().hasVagina()):
+				addAction("rubclit", 0.2, "Rub clit", "Play with the their clit a bit")
 		if(getState() == ""):
 			if(getSub().hasReachablePenis()):
 				addAction("startcocklick", 1.0, "Lick cock", "Start licking their cock")
@@ -174,13 +175,18 @@ func getActions(_indx:int):
 		
 		if(getState() == "blowjob"):
 			addEggStuffReceiveButton(DOM_0, SUB_0, BodypartSlot.Head)
+		if(getState() in ["blowjobcameinside"]):
+			if(getSubInfo().isReadyToPenetrate()):
+				addAction("bjcontinueafterinside", getContinueSexScore(SUB_0, DOM_0, BodypartSlot.Head) - getStopScore(), "Continue blowjob", "Keep sucking their cock")
+			addAction("bjpulloutafterinside", 1.0, "Pull out", "Pull your head away from their cock")
 		
 		if(getState() in ["subabouttocum", "subabouttocumcock", "subabouttocumHandjob"] || ((getState() in ["licking", "tonguefucking", "lickingcock", "blowjob", "handjob"]) && getSubInfo().isReadyToCum() && !getSubInfo().canDoActions())):
 			addAction("letsubcuminside", 1.0, "Inside", "Let the sub cum inside your mouth", {A_PRIORITY: 1001})
 			addAction("letsubcumoutside", 1.0, "Facial", "Let the sub cum on you", {A_PRIORITY: 1001})
 			addAction("makesubcumavoidmess", 1.0, "Avoid mess", "Let the sub cum but avoid getting messy", {A_PRIORITY: 1001})
 		
-		addAction("stop", getStopScore(), "Stop oral", "Stop the oral sex activity")
+		if(!(state in ["blowjobcameinside"])):
+			addAction("stop", getStopScore(), "Stop oral", "Stop the oral sex activity")
 	
 	if(_indx == SUB_0):
 		addAction("pullaway", getResistScore(SUB_0), "Pull away", "Try to pull away", {A_CHANCE: getResistChance(SUB_0, DOM_0, RESIST_ORAL_FOCUS, 30.0, 25.0)})
@@ -294,6 +300,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			])
 			getDom().cummedInMouthBy(getSubID(), FluidSource.Vagina)
 			getSubInfo().cum()
+			setState("")
 		else:
 			text = RNG.pick([
 				"{dom.You} {dom.youVerb('hold')} {dom.yourHis} lips wrapped around {sub.yourHis} "+RNG.pick(["cock", "dick", "shaft"])+" as it starts throbbing and [b]stuffing {dom.your} mouth with "+RNG.pick(["cum", "seed", "semen"])+"[/b]."
@@ -316,15 +323,33 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 					])
 					getSub().cumInItem(condom)
 					getSubInfo().cum()
-					setState("")
+					setState("blowjobcameinside")
 					
 					addText(text)
 					return
 			
 			getDom().cummedInMouthByAdvanced(getSubID(), {condomBroke=condomBroke}, FluidSource.Penis)
 			getSubInfo().cum()
+			setState("blowjobcameinside")
 		
+		addText(text)
+		return
+	if(_id == "bjcontinueafterinside"):
+		setState("blowjob")
+		var sub_cock:String = RNG.pick(["cock", "dick", "shaft"])
+		var text:String = RNG.pick([
+			"{dom.You} {dom.youVerb('continue')} eagerly sucking {sub.your} "+sub_cock+". {sub.YoureTheyre} all {dom.yoursHis} to please.",
+			"{dom.You} {dom.youVerb('wish', 'wishes')} to taste more of {sub.your} "+sub_cock+", not letting {sub.youHim} go just yet.",
+			("{dom.You} {dom.youHavent} had enough "+RNG.pick(["playing with", "pleasuring", "tasting"])+" {sub.your} "+sub_cock+"."),
+			"{dom.You} {dom.youVerb('think')} to {dom.yourself} that {sub.you} {sub.youVerb('deserve')} more than that~.",
+		])
+		addText(text)
+		return
+	if(_id == "bjpulloutafterinside"):
 		setState("")
+		var text:String = RNG.pick([
+			"{dom.You} {dom.youVerb('pull')} {dom.yourHis} head away from {sub.your} "+RNG.pick(["cock", "dick", "shaft"])+".",
+		])
 		addText(text)
 		return
 	if(_id == "cupballs"):
@@ -528,7 +553,9 @@ func getAnimation():
 				return [StageScene.SlutwallSexOral, "lickfast", {pc=SUB_0, npc=DOM_0}]
 			return [StageScene.SlutwallSexOral, "lick", {pc=SUB_0, npc=DOM_0}]
 		
-		if(getState() in ["blowjob", "subabouttocumcock"]):
+		if(getState() in ["blowjob", "blowjobcameinside", "subabouttocumcock"]):
+			if(getState() == "blowjobcameinside"):
+				return [StageScene.SlutwallSexOral, "blowjobinside", {pc=SUB_0, npc=DOM_0}]
 			if(getSubInfo().isCloseToCumming()):
 				return [StageScene.SlutwallSexOral, "blowjobfast", {pc=SUB_0, npc=DOM_0}]
 			return [StageScene.SlutwallSexOral, "blowjob", {pc=SUB_0, npc=DOM_0}]
@@ -551,7 +578,9 @@ func getAnimation():
 			return [StageScene.SexOral, "lickfast", {pc=SUB_0, npc=DOM_0}]
 		return [StageScene.SexOral, "lick", {pc=SUB_0, npc=DOM_0}]
 	
-	if(getState() in ["blowjob", "subabouttocumcock"]):
+	if(getState() in ["blowjob", "blowjobcameinside", "subabouttocumcock"]):
+		if(getState() == "blowjobcameinside"):
+			return [StageScene.SexOral, "inside", {pc=SUB_0, npc=DOM_0}]
 		if(getSubInfo().isCloseToCumming()):
 			return [StageScene.SexOral, "fast", {pc=SUB_0, npc=DOM_0}]
 		return [StageScene.SexOral, "sex", {pc=SUB_0, npc=DOM_0}]

@@ -37,7 +37,7 @@ func getTags(_indx:int) -> Array:
 		return [SexActivityTag.PenisUsed, SexActivityTag.VaginaUsed, SexActivityTag.HavingSex]
 	if(_indx == SUB_0):
 		var thetags:Array = [SexActivityTag.PreventsSubViolence, SexActivityTag.PreventsSubTeasing, SexActivityTag.HavingSex]
-		if(state in ["blowjob", "deepthroat", "licking", "grinding"]):
+		if(state in ["blowjob", "blowjobcameinside", "deepthroat", "licking", "grinding"]):
 			thetags.append(SexActivityTag.MouthUsed)
 		return thetags
 	return []
@@ -157,6 +157,12 @@ func getActions(_indx:int):
 		if(state in ["blowjob"]):
 			var forcedeepthroatScore:float = fetish(DOM_0, Fetish.OralSexReceiving, -0.4) / 6.0
 			addAction("forcedeepthroat", forcedeepthroatScore, "Force to deepthroat", "Make that slut deepthroat you")
+		if(state in ["blowjobcameinside"]):
+			if(getDomInfo().isReadyToPenetrate()):
+				var ACTION_CONTINUE_NAME:String = "Continue fucking" if(isForce) else "Order to continue"
+				var ACTION_CONTINUE_DESC:String = "Continue fucking their mouth" if(isForce) else "Order them to continue sucking you off"
+				addAction("bjcontinueafterinside", getContinueSexScore(DOM_0, SUB_0, BodypartSlot.Head) - getStopScore(), ACTION_CONTINUE_NAME, ACTION_CONTINUE_DESC)
+			addAction("bjpulloutafterinside", 1.0, "Pull out", "Pull your cock out")
 		if(state in ["blowjob", "deepthroat"]):
 			addEggStuffButton(DOM_0, SUB_0, BodypartSlot.Head)
 			addTriggerStraponAction(DOM_0)
@@ -177,7 +183,8 @@ func getActions(_indx:int):
 			if(isReadyToCumHandled(DOM_0)):
 				addAction("pussycum", 1.0, "Cum!", "Cum all over the sub", {A_PRIORITY: 1001})
 			
-		addAction("stop", getStopScore(), "Stop oral", "Stop the oral sex activity")
+		if(!(state in ["blowjobcameinside"])):
+			addAction("stop", getStopScore(), "Stop oral", "Stop the oral sex activity")
 
 	if(_indx == SUB_0):
 		if(state in ["askingtosuck"]):
@@ -190,7 +197,7 @@ func getActions(_indx:int):
 			addAction("startlicking", startlickingScore, "Lick pussy", "Obey their orders and start licking them out")
 			addAction("refusetolick", getResistScore(SUB_0), "Refuse to lick", "You're not gonna lick their pussy")
 
-		if(state in ["", "blowjob", "askingtosuck", "licking", "askingtolick", "grinding"]):
+		if(state in ["", "blowjob", "blowjobcameinside", "askingtosuck", "licking", "askingtolick", "grinding"]):
 			if(!getSub().isBitingBlocked()):
 				addAction("bite", getResistScore(SUB_0)/4.0, "Bite", "Bite them! Will be very painful", {A_CHANCE: getSubBiteChance(50.0, 30.0)})
 			addAction("pullaway", getResistScore(SUB_0), "Pull away", "Try to pull away", {A_CHANCE: getSubResistChance(30.0, 25.0)})
@@ -302,10 +309,34 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			react(SexReaction.TryForceSuckPenis)
 			return
 	if(_id == "bjcuminside"):
-		state = ""
+		state = "blowjobcameinside"
 		satisfyGoals()
 		doCumBJDom(state == "deepthroat")
 		applyTallymarkIfNeeded(BodypartSlot.Head)
+		return
+	if(_id == "bjcontinueafterinside"):
+		state = "blowjob"
+		if(isForce):
+			var text:String = RNG.pick([
+				"{dom.You} eagerly {dom.youVerb('continue')} thrusting past {sub.your} lips, barely sparing {sub.youHim} any time to catch a breath.",
+				"{dom.You} {dom.youVerb('keep')} on desperately fucking {sub.your} mouth, showing no interest in stopping now.",
+				("{dom.You} {dom.youDo} not wish to stop there, continuing making good use of "+RNG.pick(["{sub.you}", "{sub.your} lips", "{sub.your} mouth", "{sub.your} muzzle"])+"."),
+			])
+			addText(text)
+		else:
+			var text:String = RNG.pick([
+				"{dom.You} {dom.youVerb('order')} {sub.you} to keep sucking.",
+				"{dom.You} {dom.youVerb('play')} with {sub.your} head possessively, making it clear {dom.youHe} only {dom.youHeVerb('wish', 'wishes')} for more..",
+				"{dom.You} {dom.youVerb('pull')} {sub.your} head away from {dom.yourHis} "+getDickName()+", only to shove it back in deep, clearly craving for more.",
+			])
+			addText(text)
+		return
+	if(_id == "bjpulloutafterinside"):
+		state = ""
+		var text:String = RNG.pick([
+			"{dom.You} {dom.youVerb('pull')} {dom.yourHis} "+getDickName()+" out of {sub.your} mouth.",
+		])
+		addText(text)
 		return
 	if(_id == "bjpullout"):
 		satisfyGoals()
@@ -484,7 +515,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		addText(text)
 		return
 	if(_id == "bite"):
-		if(isStraponSex() && (state in ["blowjob", "deepthroat"])):
+		if(isStraponSex() && (state in ["blowjob", "blowjobcameinside", "deepthroat"])):
 			addText("{sub.You} {sub.youVerb('bite')} down on {dom.your} strapon. It doesn't have much effect on it..")
 			return
 		
@@ -506,7 +537,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		var successChance:float = getSubResistChance(30.0, 25.0)
 		if(RNG.chance(successChance)):
 			getDomInfo().addAnger(0.3)
-			if(state in ["blowjob", "licking", "deepthroat"]):
+			if(state in ["blowjob", "blowjobcameinside", "licking", "deepthroat"]):
 				state = ""
 			else:
 				endActivity()
@@ -576,7 +607,7 @@ func getSubResistChance(baseChance:float, domAngerRemoval:float) -> float:
 	return max(theChance, 5.0)
 
 func getSubBiteChance(baseChance:float, domAngerRemoval:float) -> float:
-	if(state in ["blowjob", "licking"]):
+	if(state in ["blowjob", "blowjobcameinside", "licking"]):
 		return 100.0
 	var theChance = baseChance - getDomInfo().getAngerScore()*domAngerRemoval
 	if(getSub().hasBlockedHands()):
@@ -596,7 +627,9 @@ func getAnimation():
 			if(getDomInfo().isCloseToCumming() || (isStraponSex() && getSubInfo().isCloseToCumming())):
 				return [StageScene.PuppySexOral, "grindfast", {pc=DOM_0, npc=SUB_0}]
 			return [StageScene.PuppySexOral, "grind", {pc=DOM_0, npc=SUB_0}]
-		if(state in ["blowjob", "deepthroat"]):
+		if(state in ["blowjob", "blowjobcameinside", "deepthroat"]):
+			if(state == "blowjobcameinside"):
+				return [StageScene.PuppySexOral, "inside", {pc=DOM_0, npc=SUB_0}]
 			if(getDomInfo().isCloseToCumming() || (isStraponSex() && getSubInfo().isCloseToCumming())):
 				return [StageScene.PuppySexOral, "fast", {pc=DOM_0, npc=SUB_0}]
 			return [StageScene.PuppySexOral, "sex", {pc=DOM_0, npc=SUB_0}]
@@ -610,14 +643,21 @@ func getAnimation():
 			if(getDomInfo().isCloseToCumming()):
 				return [StageScene.StocksSexOral, "pussyfast", {npc=DOM_0, pc=SUB_0}]
 			return [StageScene.StocksSexOral, "pussy", {npc=DOM_0, pc=SUB_0}]
-		if(state in ["blowjob", "deepthroat"]):
+		if(state in ["blowjob", "blowjobcameinside", "deepthroat"]):
+			if(state == "blowjobcameinside"):
+				return [StageScene.StocksSexOral, "inside", {npc=DOM_0, pc=SUB_0}]
 			if(getDomInfo().isCloseToCumming() || (isStraponSex() && getSubInfo().isCloseToCumming())):
 				return [StageScene.StocksSexOral, "fast", {npc=DOM_0, pc=SUB_0}]
 			return [StageScene.StocksSexOral, "sex", {npc=DOM_0, pc=SUB_0}]
 			
 		return [StageScene.StocksSexOral, "tease", {npc=DOM_0, pc=SUB_0}]
 	
-	if(state in ["", "askingtolick"]):
+	if(state in [""]):
+		if(isForce):
+			return [StageScene.SexOralForced, "tease", {pc=DOM_0, npc=SUB_0}]
+		return [StageScene.SexOral, "start", {pc=DOM_0, npc=SUB_0}]
+	
+	if(state in ["askingtolick"]):
 		return [StageScene.SexOral, "start", {pc=DOM_0, npc=SUB_0}]
 	
 	if(state in ["licking"]):
@@ -633,11 +673,15 @@ func getAnimation():
 			return [StageScene.SexOralForced, "lickfast", {pc=DOM_0, npc=SUB_0}]
 		return [StageScene.SexOralForced, "lick", {pc=DOM_0, npc=SUB_0}]
 	
-	if(state in ["blowjob", "deepthroat"]):
+	if(state in ["blowjob", "blowjobcameinside", "deepthroat"]):
 		if(isForce):
+			if(state == "blowjobcameinside"):
+				return [StageScene.SexOralForced, "suckinside", {pc=DOM_0, npc=SUB_0}]
 			if(getDomInfo().isCloseToCumming() || state == "deepthroat"):
 				return [StageScene.SexOralForced, "suckfast", {pc=DOM_0, npc=SUB_0}]
 			return [StageScene.SexOralForced, "suck", {pc=DOM_0, npc=SUB_0}]
+		if(state == "blowjobcameinside"):
+			return [StageScene.SexOral, "inside", {pc=DOM_0, npc=SUB_0}]
 		if(getDomInfo().isCloseToCumming() || state == "deepthroat"):
 			return [StageScene.SexOral, "fast", {pc=DOM_0, npc=SUB_0}]
 		return [StageScene.SexOral, "sex", {pc=DOM_0, npc=SUB_0}]
@@ -649,7 +693,7 @@ func isActivityImpossibleShouldStop() -> bool:
 	if(state in ["askingtolick", "licking", "grinding"]):
 		if(!getDom().hasReachableVagina()):
 			return true
-	if(state in ["askingtosuck", "blowjob", "deepthroat"]):
+	if(state in ["askingtosuck", "blowjob", "blowjobcameinside", "deepthroat"]):
 		if(!getDom().hasReachablePenis() && !getDom().isWearingStrapon()):
 			return true
 	
